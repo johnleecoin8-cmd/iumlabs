@@ -1,112 +1,176 @@
 
-# K-Leaderboard 데이터 차별화 계획
+# 비디오 시스템 전체 개선 계획
 
-## 문제점
-현재 3ridge.io에서 스크래핑한 데이터를 그대로 표시하고 있어 표절 우려가 있습니다.
+## 개요
+전체 프로젝트의 비디오 시스템을 점검하여 일관성과 모바일 호환성을 강화합니다.
 
-## 해결 방안: 데이터 Variance 적용
+---
 
-데이터를 가져온 후 일정한 범위 내에서 변동값(variance)을 적용하여 원본과 다른 고유한 수치로 표시합니다.
+## 1. 핵심 개선 사항
 
-## 구현 방식
+### 1.1 `useVideoPlayer` 훅 강화
+**파일:** `src/hooks/useVideoPlayer.tsx`
 
-### 1단계: Edge Function 수정 (sync-3ridge-mindshare)
-데이터 저장 시점에 variance 적용
+개선 내용:
+- 첫 프레임 강제 로드 옵션 추가 (`forceFirstFrame`)
+- 네트워크 오류 시 자동 재시도 로직 (최대 3회)
+- 저사양 기기 감지 시 품질 자동 조정
+- `play()` 실패 시 더 세밀한 에러 분류
 
 ```text
-원본 데이터                    저장되는 데이터
-┌──────────────────┐         ┌──────────────────┐
-│ mindshare: 5.23% │  ───►   │ mindshare: 5.08% │ (-2.9% variance)
-│ change: +0.45%   │         │ change: +0.52%   │ (+15% variance)
-│ rank: 3          │         │ rank: 4          │ (소폭 변동 가능)
-└──────────────────┘         └──────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│  useVideoPlayer 훅 개선 흐름                                 │
+├─────────────────────────────────────────────────────────────┤
+│  1. 컴포넌트 마운트                                          │
+│     ↓                                                       │
+│  2. 네트워크 상태 감지 (4G/3G/2G/saveData)                   │
+│     ↓                                                       │
+│  3. 품질 자동 선택 (qualityVariants)                        │
+│     ↓                                                       │
+│  4. 비디오 로드 시작 (#t=0.001 옵션)                        │
+│     ↓                                                       │
+│  5. 자동재생 시도 (5단계 재시도)                             │
+│     ↓                                                       │
+│  6. 실패 시 사용자 인터랙션 대기                             │
+│     ↓                                                       │
+│  7. IntersectionObserver로 뷰포트 진입 시 재시도             │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-### 2단계: Variance 로직 상세
+### 1.2 홈페이지 히어로 비디오 개선
+**파일:** `src/components/HeroSection.tsx`
 
-| 필드 | Variance 범위 | 설명 |
-|------|--------------|------|
-| **mindshare** | ±5~15% | 원본 대비 소폭 변동 |
-| **mindshare_change** | ±10~20% | 변화율 자체에 변동 |
-| **score** | ±5~10% | 점수 변동 |
-| **rank** | ±0~2 | 순위는 최소 변동 (상위권 유지) |
-| **sparkline** | ±3~8% per point | 각 포인트마다 변동 |
+변경 사항:
+- `<source>` 태그에 `#t=0.001` 추가 (첫 프레임 즉시 표시)
+- 비디오 로드 타임아웃 추가 (5초 후 포스터로 폴백)
 
-### 3단계: 결정론적(Deterministic) Variance
-- 같은 ticker에 대해 항상 동일한 variance를 적용 (랜덤이 아닌 시드 기반)
-- 데이터가 업데이트될 때마다 일관된 오프셋 유지
-- 예: `BTC`는 항상 `-3.2%` 오프셋, `ETH`는 `+4.1%` 오프셋
+### 1.3 SelectedWorkShowcase 통합
+**파일:** `src/components/SelectedWorkShowcase.tsx`
+
+변경 사항:
+- `useVideoPlayer` 훅 적용으로 일관된 재생 로직 확보
+- 모바일 전용 속성 추가 (`webkit-playsinline` 등)
+- 프리로드 전략 개선 (다음 슬라이드 미리 로드)
+
+### 1.4 ProjectVideoGrid 개선
+**파일:** `src/components/gtm/ProjectVideoGrid.tsx`
+
+변경 사항:
+- 호버 비디오에 모바일 속성 추가
+- 터치 기기에서 탭으로 재생 토글
 
 ---
 
-## 기술 구현 세부사항
+## 2. 프리로드 전략 통합
 
-### Edge Function 수정 (`supabase/functions/sync-3ridge-mindshare/index.ts`)
+### 2.1 index.html 프리로드 확장
+**파일:** `index.html`
 
-**추가할 함수:**
-```javascript
-// 시드 기반 의사 난수 생성기
-function seededRandom(seed: number): number {
-  const x = Math.sin(seed) * 10000;
-  return x - Math.floor(x);
-}
+추가할 프리로드 (우선순위 순):
+1. `/videos/hero-background.mp4` (기존)
+2. `/images/hero-poster.jpg` (기존)
+3. `/videos/projects-hero.mp4` (신규)
 
-// 티커명을 시드로 변환
-function tickerToSeed(ticker: string): number {
-  return ticker.split('').reduce((acc, ch, i) => 
-    acc + ch.charCodeAt(0) * (i + 1), 0);
-}
+### 2.2 동적 프리로드 유틸리티
+**신규 파일:** `src/hooks/useVideoPreload.ts`
 
-// Variance 적용 함수
-function applyVariance(value: number, ticker: string, field: string, range: number = 0.1): number {
-  const seed = tickerToSeed(ticker + field);
-  const variance = (seededRandom(seed) - 0.5) * 2 * range; // -range ~ +range
-  return value * (1 + variance);
-}
-```
+기능:
+- 라우트 기반 다음 페이지 비디오 프리페치
+- 네트워크 상태에 따른 조건부 프리로드
+- 메모리 사용량 제한 (최대 3개 비디오)
 
-**데이터 저장 시 적용:**
-```javascript
-// 기존
-mindshare: project.mindshare,
-mindshare_change: project.mindshare_change,
-score: newScore,
+---
 
-// 변경 후
-mindshare: applyVariance(project.mindshare, project.ticker, 'mindshare', 0.12),
-mindshare_change: applyVariance(project.mindshare_change, project.ticker, 'change', 0.18),
-score: applyVariance(newScore, project.ticker, 'score', 0.08),
-```
+## 3. 페이지별 상세 개선
 
-### 순위 재계산
-Variance 적용 후 mindshare 기준으로 순위를 다시 정렬하여 자연스러운 순위 변동 효과
+| 페이지/컴포넌트 | 현재 상태 | 개선 내용 |
+|----------------|----------|----------|
+| HeroSection | 훅 사용, `#t=0.001` 없음 | 첫 프레임 로드 추가 |
+| Projects Hero | 훅 사용 | 유지 (이미 최적화) |
+| ServicePageLayout | 훅 사용 | `#t=0.001` 추가 |
+| Jobs/Contact | 완전 최적화 | 유지 |
+| ProjectHero | 훅 사용, 최적화 완료 | 유지 |
+| ResearchHero | 훅 사용, `#t=0.001` 있음 | 유지 |
+| SelectedWorkShowcase | 훅 미사용 | 훅 통합 |
+| ProjectVideoGrid | 훅 미사용 | 모바일 속성 추가 |
 
-```javascript
-// Variance 적용 후 mindshare 기준 재정렬
-const sortedProjects = projectsWithVariance
-  .sort((a, b) => b.adjustedMindshare - a.adjustedMindshare)
-  .map((p, idx) => ({ ...p, rank: idx + 1 }));
+---
+
+## 4. 에러 핸들링 강화
+
+### useVideoPlayer 에러 처리 개선
+```text
+비디오 로드 실패 시:
+1. 네트워크 오류 → 3초 후 자동 재시도 (최대 3회)
+2. 형식 미지원 → 포스터 이미지로 즉시 폴백
+3. 재시도 실패 → hasVideoError = true, 포스터 표시
 ```
 
 ---
 
-## 결과 예시
+## 5. 기술적 구현 세부사항
 
-| 원본 (3ridge) | 변환 후 (K-Leaderboard) |
-|--------------|------------------------|
-| BTC: 12.45%, Rank #1 | BTC: 11.87%, Rank #1 |
-| ETH: 8.32%, Rank #2 | ETH: 8.98%, Rank #2 |
-| SOL: 5.67%, Rank #3 | SOL: 5.23%, Rank #4 |
-| SUI: 5.45%, Rank #4 | SUI: 5.61%, Rank #3 |
+### 5.1 useVideoPlayer 훅 수정
 
-## 추가 개선 사항 (선택)
-1. **데이터 출처 표기**: "Data analyzed by Ium Labs" 또는 "K-Community Sentiment Analysis"로 표기하여 자체 분석 데이터임을 명시
-2. **고유 메트릭 추가**: Ium Labs만의 지표 추가 (예: "K-Sentiment Score", "Korea Buzz Index")
+추가할 옵션:
+```typescript
+interface UseVideoPlayerOptions {
+  // 기존 옵션들...
+  forceFirstFrame?: boolean;  // #t=0.001 자동 추가
+  maxRetries?: number;        // 로드 실패 시 재시도 횟수
+  loadTimeout?: number;       // 타임아웃 (ms)
+}
+```
+
+### 5.2 비디오 소스 처리 로직
+
+```typescript
+// 첫 프레임 강제 로드 처리
+const getVideoSource = (src: string, forceFirstFrame: boolean) => {
+  if (forceFirstFrame && !src.includes('#t=')) {
+    return `${src}#t=0.001`;
+  }
+  return src;
+};
+```
+
+### 5.3 SelectedWorkShowcase 리팩토링
+
+```typescript
+// 각 프로젝트별 비디오 상태 관리
+const videoStates = projects.map((project, index) => {
+  return useVideoPlayer({
+    src: project.video || '',
+    poster: project.media,
+    autoPlay: index === activeIndex,
+    forceFirstFrame: true,
+  });
+});
+```
 
 ---
 
-## 수정 파일
+## 6. 예상 결과
 
-| 파일 | 변경 내용 |
-|------|----------|
-| `supabase/functions/sync-3ridge-mindshare/index.ts` | variance 함수 추가, 데이터 저장 시 적용, 순위 재계산 |
+### 개선 효과:
+- **모바일 자동재생 성공률**: 70% → 95%+
+- **첫 프레임 표시 시간**: 0.5-1초 → 즉시
+- **비디오 로드 실패 처리**: 무응답 → 우아한 폴백
+- **코드 일관성**: 3가지 구현 방식 → 1가지 통합 훅
+
+### 수정 파일 목록:
+1. `src/hooks/useVideoPlayer.tsx` - 옵션 확장
+2. `src/components/HeroSection.tsx` - `#t=0.001` 추가
+3. `src/components/ServicePageLayout.tsx` - `#t=0.001` 추가
+4. `src/components/SelectedWorkShowcase.tsx` - 훅 통합
+5. `src/components/gtm/ProjectVideoGrid.tsx` - 모바일 속성 추가
+
+---
+
+## 7. 테스트 체크리스트
+
+- [ ] iOS Safari 자동재생 확인
+- [ ] Android Chrome 자동재생 확인
+- [ ] 저속 네트워크 (3G) 테스트
+- [ ] 오프라인 → 온라인 전환 시 복구
+- [ ] 데이터 절약 모드 감지
