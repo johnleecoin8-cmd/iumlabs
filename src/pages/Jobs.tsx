@@ -20,7 +20,6 @@ import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
-
 // Import components
 import Logo3D from "@/components/Logo3D";
 
@@ -142,7 +141,6 @@ const process = [{
   description: "Final Offer"
 }];
 
-
 // Video component with mobile optimization using unified hook
 const JobsHeroVideo = () => {
   const {
@@ -152,35 +150,25 @@ const JobsHeroVideo = () => {
     shouldDisableVideo,
     videoProps,
     posterProps,
-    ShimmerOverlay,
+    ShimmerOverlay
   } = useVideoPlayer({
     src: '/videos/jobs-hero.mp4',
     poster: '/images/posters/jobs-hero.jpg',
     autoPlay: true,
-    preload: 'auto',
+    preload: 'auto'
   });
-
-  return (
-    <>
+  return <>
       {/* Fallback poster - always visible until video is ready */}
       <img {...posterProps} />
 
       {/* Shimmer loading overlay */}
       <ShimmerOverlay />
 
-      {!shouldDisableVideo && !hasVideoError && (
-        <video
-          ref={videoRef}
-          {...videoProps}
-          className="absolute inset-0 w-full h-full object-cover z-10"
-        >
+      {!shouldDisableVideo && !hasVideoError && <video ref={videoRef} {...videoProps} className="absolute inset-0 w-full h-full object-cover z-10">
           <source src="/videos/jobs-hero.mp4#t=0.001" type="video/mp4" />
-        </video>
-      )}
-    </>
-  );
+        </video>}
+    </>;
 };
-
 const Jobs = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -242,12 +230,7 @@ const Jobs = () => {
   };
   const talentMarquee = "Talent Wanted ".repeat(20);
   return <div className="min-h-screen bg-surface-base flex flex-col">
-      <SEOHead
-        title="Web3 Careers Korea | Join ium Labs"
-        description="Join Korea's fastest-growing Web3 marketing agency. We're hiring researchers, growth managers, and crypto-native talent in Seoul."
-        path="/jobs"
-        keywords={['Web3 Jobs Korea', 'Crypto Careers Seoul', 'Blockchain Jobs Korea', 'Web3 Researcher', 'Growth Manager Crypto']}
-      />
+      <SEOHead title="Web3 Careers Korea | Join ium Labs" description="Join Korea's fastest-growing Web3 marketing agency. We're hiring researchers, growth managers, and crypto-native talent in Seoul." path="/jobs" keywords={['Web3 Jobs Korea', 'Crypto Careers Seoul', 'Blockchain Jobs Korea', 'Web3 Researcher', 'Growth Manager Crypto']} />
       <Navbar />
 
       {/* Hero Section with Video Background */}
@@ -569,7 +552,7 @@ const Jobs = () => {
 
       {/* CTA Banner */}
       <AnimatedSection direction="none">
-        <CTABannerSection />
+        
       </AnimatedSection>
 
       {/* Footer Links */}
