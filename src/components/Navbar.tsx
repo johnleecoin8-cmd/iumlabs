@@ -144,9 +144,9 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Content - no scrollbar */}
-          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-hidden">
-            <div className="h-full grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 content-center">
+          {/* Content - scrollable on mobile */}
+          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-y-auto overflow-x-hidden">
+            <div className="min-h-full grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 content-start md:content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
                 <span
