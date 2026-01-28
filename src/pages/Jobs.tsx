@@ -155,7 +155,7 @@ const JobsHeroVideo = () => {
     ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/jobs-hero.mp4',
-    poster: '/images/hero-poster.jpg',
+    poster: '/images/posters/jobs-hero.jpg',
     autoPlay: true,
     preload: 'auto',
   });
