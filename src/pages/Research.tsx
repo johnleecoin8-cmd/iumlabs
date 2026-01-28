@@ -127,7 +127,7 @@ const Research = () => {
       <Navbar />
       
       {/* Hero Section - Homepage Style */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
+      <main className="bg-[#0A0A0A]">
         <ResearchHeroSection />
       </main>
 

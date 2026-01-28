@@ -713,9 +713,9 @@ const Projects = () => {
       <Navbar />
       
       {/* Hero Section - Homepage Style */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-background" id="hero">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
-          <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+      <main className="bg-background" id="hero">
+        <div className="overflow-hidden">
+          <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
             {/* Background Layer - Video with poster fallback */}
             <div className="absolute inset-0 overflow-hidden">
               {/* Poster image shown while video loads */}
