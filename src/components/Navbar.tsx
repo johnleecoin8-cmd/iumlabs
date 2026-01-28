@@ -165,7 +165,7 @@ const Navbar = () => {
                         <div key={link.to}>
                           <button
                             onClick={() => setServicesOpen(!servicesOpen)}
-                            className={`w-full flex items-center justify-between text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] ${
+                            className={`w-full flex items-center justify-between text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[36px] sm:min-h-[40px] md:min-h-[48px] ${
                               isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                             }`}
                             style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
@@ -200,7 +200,7 @@ const Navbar = () => {
                                       <Link
                                         to={item.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="block text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors duration-200 py-1.5"
+                                        className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
                                       >
                                         {item.name}
                                       </Link>
@@ -219,7 +219,7 @@ const Navbar = () => {
                         <Link
                           to={link.to}
                           onClick={() => setIsMenuOpen(false)}
-                          className={`block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] flex items-center ${
+                          className={`block text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[36px] sm:min-h-[40px] md:min-h-[48px] flex items-center ${
                             isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                           }`}
                           style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
