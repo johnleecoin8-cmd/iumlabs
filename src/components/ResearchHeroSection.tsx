@@ -1,4 +1,4 @@
-import { ChevronDown, Calendar, BookOpen, FileText, TrendingUp, Lightbulb } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -30,12 +30,6 @@ const stats = [
   { value: 34, label: "Expert Contributors", suffix: "+" },
 ];
 
-const categoryPills = [
-  { icon: TrendingUp, label: "Market Insights" },
-  { icon: FileText, label: "DeFi" },
-  { icon: Lightbulb, label: "Strategy" },
-  { icon: BookOpen, label: "Analysis" },
-];
 
 const ResearchHeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -152,24 +146,6 @@ const ResearchHeroSection = () => {
             Explore our comprehensive <span className="text-white font-medium">market analysis</span> and <span className="text-white font-medium">data-driven insights</span> to stay ahead in the rapidly evolving Web3 landscape.
           </motion.p>
 
-          {/* Category Pills */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-3 mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          >
-            {categoryPills.map((pill, index) => (
-              <motion.div
-                key={index}
-                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-white/70 text-sm hover:bg-white/10 hover:border-white/20 transition-all duration-300 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-              >
-                <pill.icon className="w-4 h-4" />
-                <span>{pill.label}</span>
-              </motion.div>
-            ))}
-          </motion.div>
 
           {/* CTA Button */}
           <motion.button
@@ -207,26 +183,6 @@ const ResearchHeroSection = () => {
         </div>
       </div>
 
-      {/* Bottom Category Marquee */}
-      <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
-        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
-          <span className="number-badge">01</span>
-        </div>
-
-        <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
-          {[...categoryPills, ...categoryPills, ...categoryPills].map((pill, index) => (
-            <div 
-              key={index} 
-              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
-            >
-              <pill.icon className="h-4 w-4 sm:h-5 sm:w-5 text-white/60" />
-              <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
-                {pill.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </div>
 
       {/* Enhanced Scroll Indicator - Bottom Right */}
       <motion.div 
