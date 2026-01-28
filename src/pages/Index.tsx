@@ -3,7 +3,7 @@ import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
-import AnnouncementBar from "@/components/AnnouncementBar";
+
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
@@ -221,7 +221,7 @@ const ProcessBillboardOverlay = () => {
 const Index = () => {
   return <div className="min-h-screen bg-surface-base">
       <SEOHead title="ium Labs | Korea Web3 Marketing & GTM Agency" description="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea." path="/" keywords={['Korea Web3 Marketing', 'Korean Crypto Marketing', 'Web3 GTM Korea', 'Blockchain Marketing Korea']} />
-      <AnnouncementBar />
+      
       <Navbar />
       
       {/* Hero - Full Bleed */}
