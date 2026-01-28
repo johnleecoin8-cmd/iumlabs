@@ -715,7 +715,7 @@ const Projects = () => {
       {/* Hero Section - Homepage Style */}
       <main className="bg-background" id="hero">
         <div className="overflow-hidden">
-          <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+          <div className="relative min-h-[80vh] flex flex-col justify-between overflow-hidden">
             {/* Background Layer - Video with poster fallback */}
             <div className="absolute inset-0 overflow-hidden">
               {/* Poster image shown while video loads */}
