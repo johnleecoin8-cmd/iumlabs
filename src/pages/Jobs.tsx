@@ -551,9 +551,6 @@ const Jobs = () => {
       </section>
 
       {/* CTA Banner */}
-      <AnimatedSection direction="none">
-        
-      </AnimatedSection>
 
       {/* Footer Links */}
       <FooterLinksSection />
