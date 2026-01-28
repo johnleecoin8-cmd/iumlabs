@@ -341,22 +341,22 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
-                <h1 className="font-sans text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
+                <h1 className="font-sans text-display-hero text-white mb-4 sm:mb-6">
                   We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
               
               <AnimatedSection delay={200}>
-                <p className="text-sm sm:text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4">
+                <p className="text-body-base sm:text-body-lg text-white/60 max-w-2xl mx-auto mb-6 sm:mb-8 leading-relaxed px-4">
                   한국 Web3 시장의 미래를 함께 만들 뛰어난 인재를 찾습니다.<br />
                   Your next chapter starts here.
                 </p>
               </AnimatedSection>
               
               <AnimatedSection delay={300}>
-                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-5 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white/90 transition-colors active:scale-95 min-h-[44px]">
+                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 sm:px-8 sm:py-4 rounded-full font-medium text-sm hover:bg-white/90 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 active:scale-[0.97] min-h-[48px]">
                   Explore Opportunities
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <ArrowRight className="w-4 h-4" />
                 </a>
               </AnimatedSection>
             </div>
@@ -551,9 +551,7 @@ const Jobs = () => {
       </section>
 
       {/* CTA Banner */}
-      <AnimatedSection direction="none">
-        
-      </AnimatedSection>
+      <CTABannerSection />
 
       {/* Footer Links */}
       <FooterLinksSection />

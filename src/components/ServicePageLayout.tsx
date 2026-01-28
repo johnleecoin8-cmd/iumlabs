@@ -119,7 +119,7 @@ interface ServicePageLayoutProps {
   currentSlug: string;
 }
 
-// Stat Item Component with Count-Up Animation
+// Stat Item Component with Count-Up Animation - Standardized
 const StatItem = ({ 
   value, 
   label, 
@@ -149,7 +149,7 @@ const StatItem = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-xl sm:text-xl md:text-3xl font-bold text-white mb-1 sm:mb-1">
+      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
       <div className="text-[10px] sm:text-xs text-white/50 font-light leading-tight">
@@ -323,9 +323,9 @@ const ServicePageLayout = ({
                 <span className="text-[11px] sm:text-sm" style={{ color: accentColor }}>{serviceName}</span>
               </motion.div>
 
-              {/* Main Headline */}
+              {/* Main Headline - Standardized */}
               <motion.h1 
-                className="font-sans text-[1.75rem] leading-[1.15] sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] mb-3 sm:mb-6"
+                className="font-sans text-display-hero mb-4 sm:mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -335,9 +335,9 @@ const ServicePageLayout = ({
                 <span style={{ color: accentColor }}>{serviceSubtitle}</span>
               </motion.h1>
 
-              {/* Description */}
+              {/* Description - Standardized */}
               <motion.p 
-                className="text-[13px] leading-relaxed sm:text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-4 sm:mb-6 font-light tracking-wide px-1"
+                className="text-body-base sm:text-body-lg text-white/60 max-w-3xl mx-auto mb-6 sm:mb-8 font-light tracking-wide leading-relaxed px-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -345,18 +345,18 @@ const ServicePageLayout = ({
                 {serviceDescription}
               </motion.p>
 
-              {/* CTA Button */}
+              {/* CTA Button - Standardized */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <CalendlyButton 
-                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[46px]"
+                  className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[48px]"
                   style={{ backgroundColor: accentColor, color: '#fff' }}
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-4 h-4 sm:w-4 sm:h-4" />
+                  <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>
                 </CalendlyButton>
               </motion.div>
