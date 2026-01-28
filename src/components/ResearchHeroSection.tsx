@@ -55,10 +55,10 @@ const clientLogos = [
 ];
 
 const stats = [
-  { value: 50, label: "Blog Posts", suffix: "+" },
-  { value: 127, label: "Projects Analyzed", suffix: "+" },
-  { value: 8, label: "Market Sectors", suffix: "" },
-  { value: 34, label: "Expert Contributors", suffix: "+" },
+  { value: 6, label: "Blog Posts", suffix: "" },
+  { value: 350, label: "Social Impressions", suffix: "K" },
+  { value: 11, label: "Quoted", suffix: "" },
+  { value: 4, label: "Researcher", suffix: "+" },
 ];
 
 const ResearchHeroSection = () => {
