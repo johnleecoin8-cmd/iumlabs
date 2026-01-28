@@ -56,7 +56,7 @@ const ResearchHeroSection = () => {
   }, []);
 
   return (
-    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+    <div className="relative min-h-[80vh] flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Fallback poster - always visible until video is ready */}
