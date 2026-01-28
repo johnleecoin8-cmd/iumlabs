@@ -130,9 +130,9 @@ const ResearchHeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Standardized */}
+          {/* Main Headline */}
           <motion.h1 
-            className="font-sans text-display-hero mb-4 sm:mb-6 mt-4 sm:mt-8"
+            className="font-sans text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -142,9 +142,9 @@ const ResearchHeroSection = () => {
             <span className="text-white">Data-Driven Blog</span>
           </motion.h1>
 
-          {/* Subtext - Standardized */}
+          {/* Subtext */}
           <motion.p 
-            className="text-body-base sm:text-body-lg text-white/60 max-w-2xl mx-auto mb-6 sm:mb-8 font-light leading-relaxed"
+            className="text-body-lg text-white/60 max-w-2xl mx-auto mb-8 font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -154,7 +154,7 @@ const ResearchHeroSection = () => {
 
           {/* Category Pills */}
           <motion.div 
-            className="flex flex-wrap justify-center gap-3 mb-6 sm:mb-8"
+            className="flex flex-wrap justify-center gap-3 mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -171,10 +171,10 @@ const ResearchHeroSection = () => {
             ))}
           </motion.div>
 
-          {/* CTA Button - Standardized */}
+          {/* CTA Button */}
           <motion.button
             onClick={() => document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[48px]"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}

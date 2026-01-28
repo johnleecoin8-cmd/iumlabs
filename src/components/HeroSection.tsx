@@ -248,23 +248,23 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Premium Display Typography - Standardized */}
-          <h1 className="font-sans text-display-hero mb-4 sm:mb-6 mt-4 sm:mt-8">
-            <span className="text-white leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
+          {/* Main Headline - Premium Display Typography - Mobile optimized */}
+          <h1 className="font-sans text-[1.4rem] sm:text-[2.5rem] md:text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
+            <span className="text-white font-sans leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
           </h1>
 
-          {/* Subtext - Enhanced readability - Standardized */}
-          <p className="text-body-base sm:text-body-lg text-white/70 max-w-4xl mx-auto mb-6 sm:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
+          {/* Subtext - Enhanced readability - Mobile optimized */}
+          <p className="text-xs sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
             Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
-          {/* CTA Button - Standardized sizing */}
+          {/* CTA Button - Enhanced - Mobile optimized */}
           <a 
             href="/contact#contact-form" 
-            className="group primary-cta-dark inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 font-medium text-sm rounded-full active:scale-[0.98] min-h-[48px] border border-white/30 hover:shadow-lg hover:shadow-white/10 hover:-translate-y-0.5 transition-all duration-300"
+            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30"
             onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
-            <Send className="w-4 h-4" />
+            <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Get Your Free Proposal</span>
           </a>
           

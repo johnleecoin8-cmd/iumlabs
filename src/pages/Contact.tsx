@@ -215,22 +215,22 @@ const Contact = () => {
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
-              {/* Main Headline - Standardized */}
-              <h1 className="font-sans text-display-hero mb-4 sm:mb-6">
+              {/* Main Headline */}
+              <h1 className="font-sans text-display-hero font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
                 <span className="text-white">Let's Build</span>
                 <br />
                 <span className="text-white/90">Something </span>
                 <span className="text-white">Great Together</span>
               </h1>
 
-              {/* Subtext - Standardized */}
-              <p className="text-body-base sm:text-body-lg text-white/60 max-w-2xl mx-auto mb-6 sm:mb-8 font-light tracking-wide leading-relaxed">
+              {/* Subtext */}
+              <p className="text-body-lg text-white/60 max-w-2xl mx-auto mb-6 font-light tracking-wide leading-relaxed">
                 Tell us about your project and we'll explain how we can help you <span className="text-white font-medium">succeed in Korea</span>.
               </p>
 
-              {/* CTA Button - Standardized */}
+              {/* CTA Button */}
               <div>
-                <CalendlyButton className="group relative inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[48px]">
+                <CalendlyButton className="group relative inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[44px]">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>
