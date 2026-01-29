@@ -3,11 +3,12 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
+import PageIntro from "@/components/PageIntro";
 import Index from "./pages/Index";
 
 import Projects from "./pages/Projects";
@@ -188,6 +189,36 @@ const AppRoutes = () => {
   );
 };
 
+// Main App component with intro handling
+const AppContent = () => {
+  const location = useLocation();
+  const [showIntro, setShowIntro] = useState(() => {
+    // Only show intro on first visit in session and on home page
+    if (typeof window === 'undefined') return false;
+    const hasSeenIntro = sessionStorage.getItem('ium_intro_seen');
+    return !hasSeenIntro && window.location.pathname === '/';
+  });
+
+  const handleIntroComplete = useCallback(() => {
+    sessionStorage.setItem('ium_intro_seen', 'true');
+    setShowIntro(false);
+  }, []);
+
+  return (
+    <>
+      {showIntro && <PageIntro onComplete={handleIntroComplete} />}
+      <ScrollToTop />
+      <div className="flex w-full">
+        <Sidebar />
+        <div className="flex-1 min-w-0 pb-16 lg:pb-0">
+          <AppRoutes />
+        </div>
+        <MobileBottomNav />
+      </div>
+    </>
+  );
+};
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -196,14 +227,7 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <SidebarProvider>
-            <ScrollToTop />
-            <div className="flex w-full">
-              <Sidebar />
-              <div className="flex-1 min-w-0 pb-16 lg:pb-0">
-                <AppRoutes />
-              </div>
-              <MobileBottomNav />
-            </div>
+            <AppContent />
           </SidebarProvider>
         </BrowserRouter>
       </TooltipProvider>
