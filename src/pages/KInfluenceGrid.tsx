@@ -4,7 +4,7 @@ import { useHypeProjects } from '@/hooks/useHypeProjects';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import HypeGalaxyMap from '@/components/mindshare/HypeGalaxyMap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
-import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
+
 import Navbar from '@/components/Navbar';
 import { Search, X, Clock, LayoutGrid, Sparkles } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
@@ -100,7 +100,7 @@ const KInfluenceGrid = () => {
     image: "/og-image.png"
   });
   
-  const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
+  
   const [searchQuery, setSearchQuery] = useState('');
   const [viewMode, setViewMode] = useState<ViewMode>('treemap');
   
@@ -110,9 +110,8 @@ const KInfluenceGrid = () => {
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
-    // Filter by token status and search query
+    // Filter by search query
     const filtered = projects.filter(p => {
-      if (tokenStatus !== 'all' && p.token_status !== tokenStatus) return false;
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         return p.ticker.toLowerCase().includes(query) || 
@@ -173,7 +172,7 @@ const KInfluenceGrid = () => {
       ...p,
       isTrending: sortedByTrending.includes(p.ticker),
     }));
-  }, [projects, tokenStatus, searchQuery]);
+  }, [projects, searchQuery]);
 
   // Dynamic stats calculation
   const stats = useMemo(() => {
@@ -300,8 +299,6 @@ const KInfluenceGrid = () => {
                   )}
                 </div>
 
-                {/* Token status filter - always visible */}
-                <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
               </div>
             </div>
 
