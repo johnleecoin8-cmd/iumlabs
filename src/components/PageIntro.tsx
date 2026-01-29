@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import introBridge from '@/assets/intro/intro-bridge.png';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -8,7 +7,7 @@ interface PageIntroProps {
 const MIN_DISPLAY_TIME = 2500;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
-  const [phase, setPhase] = useState<'loading' | 'expand' | 'done'>('loading');
+  const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
   const videoLoaded = useRef(false);
@@ -19,25 +18,23 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
     
     setTimeout(() => {
-      setPhase('expand');
+      setPhase('whiteout');
       setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 600);
+      }, 800);
     }, remaining);
   }, [startTime, onComplete]);
 
-  // Progress counter animation - waits at 95% until video is ready
+  // Progress counter animation
   useEffect(() => {
     progressInterval.current = setInterval(() => {
       setProgress(prev => {
-        // If not loaded, slow crawl up to 95% max
         if (!videoLoaded.current) {
           const next = prev + 1.5;
-          return next >= 95 ? 95 : next; // Cap at 95% until video ready
+          return next >= 95 ? 95 : next;
         }
         
-        // Video loaded - sprint to 100%
         const next = prev + 10;
         if (next >= 100) {
           if (progressInterval.current) {
@@ -89,47 +86,35 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
   if (phase === 'done') return null;
 
-  // Calculate clipPath for center-outward reveal
-  const revealPercent = Math.max(0, 50 - progress / 2);
-
   return (
-    <div
-      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-background transition-all duration-700 ${
-        phase === 'expand' ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
-      }`}
-    >
-      {/* Bridge logo with center-outward reveal + overlaid counter */}
-      <div className="relative w-64 h-64 sm:w-80 sm:h-80">
-        {/* Subtle glow behind */}
-        <div 
-          className="absolute inset-0 blur-[60px] opacity-20"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 70%)',
-          }}
-        />
-        
-        {/* Bridge logo with clipPath reveal */}
-        <div 
-          className="absolute inset-0 transition-[clip-path] duration-100 ease-linear"
-          style={{ 
-            clipPath: `inset(0 ${revealPercent}% 0 ${revealPercent}%)` 
-          }}
-        >
-          <img 
-            src={introBridge} 
-            alt="Ium Labs Bridge" 
-            className="w-full h-full object-contain"
-          />
-        </div>
-
-        {/* Centered 3-digit counter overlaid on logo */}
-        <div className="absolute inset-0 flex items-center justify-center">
+    <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-background">
+      {/* White overlay that expands on complete */}
+      <div 
+        className={`absolute inset-0 bg-white transition-opacity duration-700 ${
+          phase === 'whiteout' ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+      
+      {/* Content - fades out during whiteout */}
+      <div className={`relative z-10 flex flex-col items-center transition-opacity duration-500 ${
+        phase === 'whiteout' ? 'opacity-0' : 'opacity-100'
+      }`}>
+        {/* Counter */}
+        <div className="mb-8">
           <span 
-            className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground tabular-nums"
+            className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-foreground tabular-nums"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
             {String(Math.floor(progress)).padStart(3, '0')}
           </span>
+        </div>
+
+        {/* Progress bar */}
+        <div className="w-48 sm:w-64 md:w-80 h-[2px] bg-border/30 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-foreground rounded-full transition-all duration-100 ease-linear"
+            style={{ width: `${progress}%` }}
+          />
         </div>
       </div>
     </div>
