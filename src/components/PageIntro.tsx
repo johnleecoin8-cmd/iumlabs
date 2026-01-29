@@ -1,14 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import logo from '@/assets/logo.png';
+import introBridge from '@/assets/intro/intro-bridge.png';
 
 interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 2500; // Minimum 2.5 seconds
+const MIN_DISPLAY_TIME = 2500;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
-  const [phase, setPhase] = useState<'loading' | 'logo' | 'expand' | 'done'>('loading');
+  const [phase, setPhase] = useState<'loading' | 'expand' | 'done'>('loading');
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
   const videoLoaded = useRef(false);
@@ -19,17 +19,11 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
     
     setTimeout(() => {
-      // Show logo phase
-      setPhase('logo');
-      
-      // After logo animation, expand and complete
+      setPhase('expand');
       setTimeout(() => {
-        setPhase('expand');
-        setTimeout(() => {
-          setPhase('done');
-          onComplete();
-        }, 600);
-      }, 800);
+        setPhase('done');
+        onComplete();
+      }, 600);
     }, remaining);
   }, [startTime, onComplete]);
 
@@ -37,7 +31,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   useEffect(() => {
     progressInterval.current = setInterval(() => {
       setProgress(prev => {
-        // Speed up or slow down based on video loading
         const increment = videoLoaded.current ? 8 : 2;
         const next = prev + increment;
         
@@ -78,7 +71,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     video.addEventListener('loadedmetadata', handleVideoReady);
     video.addEventListener('canplay', handleVideoReady);
     
-    // Fallback: force complete after max time
     const maxTimer = setTimeout(() => {
       videoLoaded.current = true;
     }, 4000);
@@ -92,63 +84,47 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
   if (phase === 'done') return null;
 
+  // Calculate clipPath for center-outward reveal
+  const revealPercent = Math.max(0, 50 - progress / 2);
+
   return (
     <div
       className={`fixed inset-0 z-[10002] flex items-center justify-center bg-background transition-all duration-700 ${
         phase === 'expand' ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
       }`}
     >
-      {/* Loading phase - center progress bar + bottom-left counter */}
-      <div 
-        className={`absolute inset-0 transition-opacity duration-500 ${
-          phase === 'loading' ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* Center horizontal progress bar */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="relative w-40 sm:w-48 h-4 sm:h-5 bg-muted/40 rounded-sm overflow-hidden">
-            {/* Progress fill - left to right */}
-            <div 
-              className="absolute inset-y-0 left-0 bg-foreground rounded-sm transition-all duration-100 ease-linear"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+      {/* Bridge logo with center-outward reveal + overlaid counter */}
+      <div className="relative w-64 h-64 sm:w-80 sm:h-80">
+        {/* Subtle glow behind */}
+        <div 
+          className="absolute inset-0 blur-[60px] opacity-20"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--foreground)) 0%, transparent 70%)',
+          }}
+        />
+        
+        {/* Bridge logo with clipPath reveal */}
+        <div 
+          className="absolute inset-0 transition-[clip-path] duration-100 ease-linear"
+          style={{ 
+            clipPath: `inset(0 ${revealPercent}% 0 ${revealPercent}%)` 
+          }}
+        >
+          <img 
+            src={introBridge} 
+            alt="Ium Labs Bridge" 
+            className="w-full h-full object-contain"
+          />
         </div>
 
-        {/* Bottom left counter - 3 digits */}
-        <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-12">
+        {/* Centered 3-digit counter overlaid on logo */}
+        <div className="absolute inset-0 flex items-center justify-center">
           <span 
-            className="text-6xl sm:text-8xl font-bold tracking-tighter text-foreground tabular-nums"
+            className="text-5xl sm:text-7xl font-bold tracking-tight text-foreground tabular-nums"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
             {String(Math.floor(progress)).padStart(3, '0')}
           </span>
-        </div>
-      </div>
-
-      {/* Logo phase */}
-      <div 
-        className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
-          phase === 'logo' || phase === 'expand' 
-            ? 'opacity-100 scale-100' 
-            : 'opacity-0 scale-75 pointer-events-none'
-        }`}
-      >
-        {/* Glow effect behind logo */}
-        <div 
-          className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full blur-[100px] opacity-30"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
-          }}
-        />
-        
-        {/* Logo */}
-        <div className="relative w-40 h-40 sm:w-56 sm:h-56 animate-intro-scale-in">
-          <img 
-            src={logo} 
-            alt="ium Labs" 
-            className="w-full h-full object-contain brightness-0 invert drop-shadow-[0_0_40px_hsl(var(--foreground)_/_0.35)]"
-          />
         </div>
       </div>
     </div>
