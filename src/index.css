@@ -1385,21 +1385,55 @@ video {
 }
 
 .animate-loading-bar {
-  animation: loading-bar 1.8s ease-out forwards;
+  animation: loading-bar 2.5s ease-out forwards;
 }
 
-/* Logo pulse for intro */
+/* Logo pulse for intro - enhanced */
 @keyframes intro-logo-pulse {
   0%, 100% {
-    opacity: 0.7;
+    opacity: 0.85;
     transform: scale(1);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
   }
   50% {
     opacity: 1;
-    transform: scale(1.1);
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4));
   }
 }
 
 .animate-intro-pulse {
-  animation: intro-logo-pulse 1s ease-in-out infinite;
+  animation: intro-logo-pulse 2s ease-in-out infinite;
+}
+
+/* Logo scale in animation */
+@keyframes intro-scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-intro-scale-in {
+  animation: intro-scale-in 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Glow breathing animation */
+@keyframes glow-breathe {
+  0%, 100% {
+    opacity: 0.4;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.animate-glow-breathe {
+  animation: glow-breathe 3s ease-in-out infinite;
 }
