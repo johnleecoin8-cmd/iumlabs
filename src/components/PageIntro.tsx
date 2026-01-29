@@ -1,134 +1,120 @@
-import { useState, useEffect } from 'react';
-import { brand, intro } from '@/config/content';
+import { useState, useEffect, useCallback } from 'react';
+import logo from '@/assets/logo.png';
 
 interface PageIntroProps {
   onComplete: () => void;
 }
 
+const MIN_DISPLAY_TIME = 2000; // Minimum 2 seconds
+
 const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [phase, setPhase] = useState<'logo' | 'expand' | 'done'>('logo');
+  const [startTime] = useState(() => Date.now());
+
+  const handleComplete = useCallback(() => {
+    const elapsed = Date.now() - startTime;
+    const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
+    
+    setTimeout(() => {
+      setPhase('expand');
+      
+      // After expand animation, mark as done
+      setTimeout(() => {
+        setPhase('done');
+        onComplete();
+      }, 600);
+    }, remaining);
+  }, [startTime, onComplete]);
 
   useEffect(() => {
-    // Logo animation phase
-    const logoTimer = setTimeout(() => {
-      setPhase('expand');
-    }, 1200);
+    // Preload the hero video
+    const video = document.createElement('video');
+    video.src = '/videos/hero-background.mp4#t=0.001';
+    video.preload = 'metadata';
+    
+    const handleVideoReady = () => {
+      handleComplete();
+    };
 
-    // Expand and fade out phase
-    const expandTimer = setTimeout(() => {
-      setPhase('done');
-      onComplete();
-    }, 2000);
+    video.addEventListener('loadedmetadata', handleVideoReady);
+    video.addEventListener('canplay', handleVideoReady);
+    
+    // Fallback: complete after max time regardless
+    const maxTimer = setTimeout(() => {
+      handleComplete();
+    }, 3500);
 
     return () => {
-      clearTimeout(logoTimer);
-      clearTimeout(expandTimer);
+      video.removeEventListener('loadedmetadata', handleVideoReady);
+      video.removeEventListener('canplay', handleVideoReady);
+      clearTimeout(maxTimer);
     };
-  }, [onComplete]);
+  }, [handleComplete]);
 
   if (phase === 'done') return null;
 
   return (
     <div
-      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-background transition-all duration-700 ${
-        phase === 'expand' ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-background transition-all duration-500 ${
+        phase === 'expand' ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
       }`}
     >
-      {/* Animated background gradients */}
+      {/* Subtle gradient background */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className={`absolute w-[600px] h-[600px] rounded-full blur-[120px] transition-all duration-1000 ${
-            phase === 'logo' ? 'opacity-60 scale-100' : 'opacity-0 scale-150'
+          className={`absolute w-[500px] h-[500px] rounded-full blur-[150px] transition-all duration-700 ${
+            phase === 'logo' ? 'opacity-30' : 'opacity-0'
           }`}
           style={{
-            background: 'radial-gradient(circle, hsl(var(--gradient-purple)) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
           }}
         />
-        <div 
-          className={`absolute w-[400px] h-[400px] rounded-full blur-[100px] transition-all duration-1000 delay-100 ${
-            phase === 'logo' ? 'opacity-40 scale-100' : 'opacity-0 scale-150'
-          }`}
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--gradient-pink)) 0%, transparent 70%)',
-            top: '40%',
-            left: '60%',
-            transform: 'translate(-50%, -50%)',
-          }}
-        />
       </div>
 
-      {/* Logo/Text animation */}
+      {/* Logo animation */}
       <div className="relative z-10">
         <div 
           className={`flex flex-col items-center transition-all duration-500 ${
-            phase === 'logo' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+            phase === 'logo' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-8'
           }`}
         >
-          {/* Animated logo lines */}
+          {/* Brand logo */}
           <div className="relative w-20 h-20 mb-6">
-            <svg viewBox="0 0 80 80" className="w-full h-full">
-              {/* Animated circle */}
-              <circle
-                cx="40"
-                cy="40"
-                r="35"
-                fill="none"
-                stroke="url(#gradient)"
-                strokeWidth="2"
-                strokeDasharray="220"
-                strokeDashoffset="220"
-                className="animate-draw-circle"
-              />
-              {/* Inner elements */}
-              <path
-                d="M30 40 L40 50 L55 30"
-                fill="none"
-                stroke="url(#gradient)"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray="50"
-                strokeDashoffset="50"
-                className="animate-draw-check"
-              />
-              <defs>
-                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(var(--gradient-purple))" />
-                  <stop offset="50%" stopColor="hsl(var(--gradient-pink))" />
-                  <stop offset="100%" stopColor="hsl(var(--gradient-orange))" />
-                </linearGradient>
-              </defs>
-            </svg>
+            <img 
+              src={logo} 
+              alt="ium Labs" 
+              className="w-full h-full object-contain brightness-0 invert animate-intro-pulse"
+            />
           </div>
           
-          {/* Brand text with stagger */}
-          <div className="flex gap-1 text-3xl font-bold">
-            {brand.name.split('').map((char, i) => (
+          {/* Brand name with staggered animation */}
+          <div className="flex gap-0.5 text-3xl font-bold tracking-tight">
+            {'ium Labs'.split('').map((char, i) => (
               <span
                 key={i}
                 className="inline-block animate-letter-pop"
-                style={{ animationDelay: `${i * 50}ms` }}
+                style={{ animationDelay: `${300 + i * 50}ms` }}
               >
-                {char}
+                {char === ' ' ? '\u00A0' : char}
               </span>
             ))}
           </div>
           
           {/* Tagline */}
-          <p className="text-muted-foreground mt-2 animate-fade-up delay-500">
-            {intro.tagline}
+          <p className="text-muted-foreground text-sm mt-3 animate-fade-up">
+            Web3 Marketing Agency
           </p>
         </div>
       </div>
 
       {/* Loading bar */}
       <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-48">
-        <div className="h-0.5 bg-border rounded-full overflow-hidden">
+        <div className="h-0.5 bg-border/50 rounded-full overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-primary via-accent to-primary rounded-full animate-loading-bar"
+            className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full animate-loading-bar"
           />
         </div>
       </div>
