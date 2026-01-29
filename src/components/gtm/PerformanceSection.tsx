@@ -290,8 +290,17 @@ const ProjectCard = ({
           overflow-hidden
         `}
       >
-        {/* Subtle hover overlay */}
-        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        {/* Project background image - appears on hover */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            backgroundImage: `url(${project.bgImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        {/* Dark overlay on hover for readability */}
+        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Content wrapper */}
         <div className="relative z-10">
@@ -324,15 +333,15 @@ const ProjectCard = ({
           <div className={`text-2xl md:text-4xl font-bold font-mono ${colors.text}`}>
             {project.metric.prefix || ''}{project.metric.value}{project.metric.suffix}
           </div>
-          <div className="text-[10px] md:text-sm text-muted-foreground font-mono uppercase tracking-wider">
+          <div className="text-[10px] md:text-sm text-muted-foreground font-mono uppercase tracking-wider group-hover:text-white/70 transition-colors">
             {project.metric.label}
           </div>
         </div>
 
         {/* Strategy Label */}
         <div className="mb-2 md:mb-4">
-          <div className="text-[8px] md:text-xs text-muted-foreground mb-0.5 md:mb-1">STRATEGY</div>
-          <div className="text-[10px] md:text-sm text-foreground font-medium">
+          <div className="text-[8px] md:text-xs text-muted-foreground mb-0.5 md:mb-1 group-hover:text-white/50 transition-colors">STRATEGY</div>
+          <div className="text-[10px] md:text-sm text-foreground font-medium group-hover:text-white transition-colors">
             {project.strategy}
           </div>
         </div>
@@ -340,10 +349,10 @@ const ProjectCard = ({
         {/* Progress Bar */}
         <div className="space-y-1">
           <div className="flex items-center justify-between text-[10px] font-mono">
-            <span className="text-muted-foreground">EXECUTION</span>
+            <span className="text-muted-foreground group-hover:text-white/50 transition-colors">EXECUTION</span>
             <span className={colors.text}>{project.progress}%</span>
           </div>
-          <div className="h-1 bg-border/30 rounded-full overflow-hidden">
+          <div className="h-1 bg-border/30 group-hover:bg-white/20 rounded-full overflow-hidden transition-colors">
             <div
               className={`h-full ${colors.progress} rounded-full`}
               style={{ width: `${project.progress}%` }}
