@@ -1,55 +1,94 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import logo from '@/assets/logo.png';
 
 interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 2000; // Minimum 2 seconds
+const MIN_DISPLAY_TIME = 2500; // Minimum 2.5 seconds
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
-  const [phase, setPhase] = useState<'logo' | 'expand' | 'done'>('logo');
+  const [phase, setPhase] = useState<'loading' | 'logo' | 'expand' | 'done'>('loading');
+  const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
+  const videoLoaded = useRef(false);
+  const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
   const handleComplete = useCallback(() => {
     const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
     
     setTimeout(() => {
-      setPhase('expand');
+      // Show logo phase
+      setPhase('logo');
       
-      // After expand animation, mark as done
+      // After logo animation, expand and complete
       setTimeout(() => {
-        setPhase('done');
-        onComplete();
-      }, 600);
+        setPhase('expand');
+        setTimeout(() => {
+          setPhase('done');
+          onComplete();
+        }, 600);
+      }, 800);
     }, remaining);
   }, [startTime, onComplete]);
 
+  // Progress counter animation
   useEffect(() => {
-    // Preload the hero video
+    progressInterval.current = setInterval(() => {
+      setProgress(prev => {
+        // Speed up or slow down based on video loading
+        const increment = videoLoaded.current ? 8 : 2;
+        const next = prev + increment;
+        
+        if (next >= 100) {
+          if (progressInterval.current) {
+            clearInterval(progressInterval.current);
+          }
+          return 100;
+        }
+        return next;
+      });
+    }, 50);
+
+    return () => {
+      if (progressInterval.current) {
+        clearInterval(progressInterval.current);
+      }
+    };
+  }, []);
+
+  // When progress hits 100, trigger completion
+  useEffect(() => {
+    if (progress >= 100) {
+      handleComplete();
+    }
+  }, [progress, handleComplete]);
+
+  // Preload hero video
+  useEffect(() => {
     const video = document.createElement('video');
     video.src = '/videos/hero-background.mp4#t=0.001';
     video.preload = 'metadata';
     
     const handleVideoReady = () => {
-      handleComplete();
+      videoLoaded.current = true;
     };
 
     video.addEventListener('loadedmetadata', handleVideoReady);
     video.addEventListener('canplay', handleVideoReady);
     
-    // Fallback: complete after max time regardless
+    // Fallback: force complete after max time
     const maxTimer = setTimeout(() => {
-      handleComplete();
-    }, 3500);
+      videoLoaded.current = true;
+    }, 4000);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleVideoReady);
       video.removeEventListener('canplay', handleVideoReady);
       clearTimeout(maxTimer);
     };
-  }, [handleComplete]);
+  }, []);
 
   if (phase === 'done') return null;
 
@@ -59,81 +98,56 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
         phase === 'expand' ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
       }`}
     >
-      {/* Noise texture overlay */}
+      {/* Loading phase - progress bar centered */}
       <div 
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-      />
-
-      {/* Primary glow - center */}
-      <div 
-        className={`absolute w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] rounded-full blur-[120px] sm:blur-[150px] animate-glow-breathe ${
-          phase === 'logo' ? 'opacity-50' : 'opacity-0'
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+          phase === 'loading' ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
-        style={{
-          background: 'radial-gradient(circle, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.5) 40%, transparent 70%)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
-
-      {/* Secondary glow - ambient */}
-      <div 
-        className={`absolute w-[800px] h-[800px] sm:w-[1000px] sm:h-[1000px] rounded-full blur-[200px] transition-opacity duration-700 ${
-          phase === 'logo' ? 'opacity-20' : 'opacity-0'
-        }`}
-        style={{
-          background: 'radial-gradient(circle, hsl(217 91% 60% / 0.3) 0%, transparent 60%)',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      />
-
-      {/* Logo animation */}
-      <div className="relative z-10">
-        <div 
-          className={`flex flex-col items-center transition-all duration-600 ${
-            phase === 'logo' ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-12'
-          }`}
-        >
-          {/* Brand logo - larger with glow */}
-          <div className="relative w-32 h-32 sm:w-40 sm:h-40 mb-8 animate-intro-scale-in">
-            <img 
-              src={logo} 
-              alt="ium Labs" 
-              className="w-full h-full object-contain brightness-0 invert animate-intro-pulse drop-shadow-[0_0_30px_rgba(255,255,255,0.3)]"
+      >
+        {/* Center progress bar */}
+        <div className="w-48 sm:w-64">
+          <div className="h-1 sm:h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-white rounded-full transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
             />
           </div>
-          
-          {/* Brand name with staggered animation - larger */}
-          <div className="flex gap-1 text-4xl sm:text-5xl font-bold tracking-tight">
-            {'ium Labs'.split('').map((char, i) => (
-              <span
-                key={i}
-                className="inline-block animate-letter-pop"
-                style={{ animationDelay: `${400 + i * 60}ms` }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </span>
-            ))}
-          </div>
-          
-          {/* Tagline - enhanced */}
-          <p className="text-muted-foreground text-base sm:text-lg mt-4 animate-fade-up tracking-wide">
-            Web3 Marketing Agency
-          </p>
+        </div>
+
+        {/* Bottom left counter */}
+        <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-12">
+          <span 
+            className="text-6xl sm:text-8xl font-bold tracking-tighter text-white tabular-nums"
+            style={{ fontFeatureSettings: '"tnum"' }}
+          >
+            {String(Math.floor(progress)).padStart(2, '0')}
+          </span>
+          <span className="text-2xl sm:text-3xl font-bold text-white/60 ml-1">%</span>
         </div>
       </div>
 
-      {/* Loading bar - refined */}
-      <div className="absolute bottom-16 sm:bottom-20 left-1/2 -translate-x-1/2 w-40 sm:w-56">
-        <div className="h-[2px] bg-border/30 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-primary via-primary to-primary/60 rounded-full animate-loading-bar"
+      {/* Logo phase - bridge logo appears */}
+      <div 
+        className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
+          phase === 'logo' || phase === 'expand' 
+            ? 'opacity-100 scale-100' 
+            : 'opacity-0 scale-75 pointer-events-none'
+        }`}
+      >
+        {/* Glow effect behind logo */}
+        <div 
+          className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] rounded-full blur-[100px] opacity-30"
+          style={{
+            background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
+          }}
+        />
+        
+        {/* Bridge logo */}
+        <div className="relative w-40 h-40 sm:w-56 sm:h-56 animate-intro-scale-in">
+          <img 
+            src={logo} 
+            alt="ium Labs" 
+            className="w-full h-full object-contain brightness-0 invert drop-shadow-[0_0_40px_rgba(255,255,255,0.4)]"
           />
         </div>
       </div>
