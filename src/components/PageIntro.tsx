@@ -27,13 +27,18 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, remaining);
   }, [startTime, onComplete]);
 
-  // Progress counter animation
+  // Progress counter animation - waits at 95% until video is ready
   useEffect(() => {
     progressInterval.current = setInterval(() => {
       setProgress(prev => {
-        const increment = videoLoaded.current ? 8 : 2;
-        const next = prev + increment;
+        // If not loaded, slow crawl up to 95% max
+        if (!videoLoaded.current) {
+          const next = prev + 1.5;
+          return next >= 95 ? 95 : next; // Cap at 95% until video ready
+        }
         
+        // Video loaded - sprint to 100%
+        const next = prev + 10;
         if (next >= 100) {
           if (progressInterval.current) {
             clearInterval(progressInterval.current);
