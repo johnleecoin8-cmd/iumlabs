@@ -105,9 +105,9 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
           phase === 'loading' ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Center logo reveal (replaces the white rectangular progress bar) */}
+        {/* Center logo reveal with overlapping counter */}
         <div className="flex flex-col items-center justify-center">
-          <div className="relative w-40 h-40 sm:w-56 sm:h-56">
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64">
             {/* Glow */}
             <div
               className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] sm:w-[640px] sm:h-[640px] rounded-full blur-[120px] opacity-30 animate-glow-breathe"
@@ -124,11 +124,11 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
               className="absolute inset-0 w-full h-full object-contain opacity-15"
             />
 
-            {/* Reveal layer */}
+            {/* Reveal layer - center spread (left and right from center) */}
             <div
               className="absolute inset-0 overflow-hidden"
               style={{
-                clipPath: `inset(${Math.max(0, 100 - progress)}% 0 0 0)`,
+                clipPath: `inset(0 ${Math.max(0, 50 - progress / 2)}% 0 ${Math.max(0, 50 - progress / 2)}%)`,
                 transition: 'clip-path 90ms linear',
               }}
             >
@@ -138,12 +138,14 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
                 className="w-full h-full object-contain"
               />
             </div>
-          </div>
 
-          {/* Center counter */}
-          <div className="mt-6 text-3xl sm:text-4xl font-semibold tracking-tight tabular-nums text-foreground">
-            {String(Math.floor(progress)).padStart(2, '0')}
-            <span className="ml-1 text-xl sm:text-2xl font-semibold text-muted-foreground">%</span>
+            {/* Centered counter overlapping the logo */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-5xl sm:text-7xl font-bold tracking-tighter tabular-nums text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
+                {String(Math.floor(progress)).padStart(2, '0')}
+                <span className="text-2xl sm:text-3xl font-semibold text-muted-foreground ml-0.5">%</span>
+              </div>
+            </div>
           </div>
         </div>
 
