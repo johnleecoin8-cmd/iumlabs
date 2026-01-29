@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import logo from '@/assets/logo.png';
-import introBridge from '@/assets/intro/intro-bridge.png';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -99,61 +98,35 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
         phase === 'expand' ? 'opacity-0 scale-110' : 'opacity-100 scale-100'
       }`}
     >
-      {/* Loading phase */}
+      {/* Loading phase - center progress bar + bottom-left counter */}
       <div 
-        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-500 ${
+        className={`absolute inset-0 transition-opacity duration-500 ${
           phase === 'loading' ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Center bridge logo reveal - no counter overlay */}
-        <div className="flex flex-col items-center justify-center">
-          <div className="relative w-56 h-56 sm:w-72 sm:h-72">
-            {/* Glow */}
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] sm:w-[640px] sm:h-[640px] rounded-full blur-[120px] opacity-40 animate-glow-breathe"
-              style={{
-                background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
-              }}
+        {/* Center horizontal progress bar */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="relative w-40 sm:w-48 h-4 sm:h-5 bg-muted/40 rounded-sm overflow-hidden">
+            {/* Progress fill - left to right */}
+            <div 
+              className="absolute inset-y-0 left-0 bg-foreground rounded-sm transition-all duration-100 ease-linear"
+              style={{ width: `${progress}%` }}
             />
-
-            {/* Base silhouette */}
-            <img
-              src={introBridge}
-              alt=""
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-contain opacity-15"
-            />
-
-            {/* Reveal layer - center spread (left and right from center) */}
-            <div
-              className="absolute inset-0 overflow-hidden"
-              style={{
-                clipPath: `inset(0 ${Math.max(0, 50 - progress / 2)}% 0 ${Math.max(0, 50 - progress / 2)}%)`,
-                transition: 'clip-path 90ms linear',
-              }}
-            >
-              <img
-                src={introBridge}
-                alt="ium Labs"
-                className="w-full h-full object-contain"
-              />
-            </div>
           </div>
         </div>
 
-        {/* Bottom left counter */}
+        {/* Bottom left counter - 3 digits */}
         <div className="absolute bottom-12 sm:bottom-16 left-8 sm:left-12">
           <span 
             className="text-6xl sm:text-8xl font-bold tracking-tighter text-foreground tabular-nums"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
-            {String(Math.floor(progress)).padStart(2, '0')}
+            {String(Math.floor(progress)).padStart(3, '0')}
           </span>
-          <span className="text-2xl sm:text-3xl font-bold text-muted-foreground ml-1">%</span>
         </div>
       </div>
 
-      {/* Logo phase - bridge logo appears */}
+      {/* Logo phase */}
       <div 
         className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ${
           phase === 'logo' || phase === 'expand' 
@@ -169,7 +142,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
           }}
         />
         
-        {/* Bridge logo */}
+        {/* Logo */}
         <div className="relative w-40 h-40 sm:w-56 sm:h-56 animate-intro-scale-in">
           <img 
             src={logo} 
