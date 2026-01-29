@@ -118,12 +118,7 @@ const Research = () => {
     }
   };
   return <div className="min-h-screen bg-[#0A0A0A]">
-      <SEOHead
-        title="Korean Crypto Blog & Web3 Market Insights | ium Labs"
-        description="Data-driven crypto and Web3 insights for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects."
-        path="/blog"
-        keywords={['Web3 Blog', 'Crypto Market Analysis', 'Korea Web3 Trends', 'Blockchain Insights', 'RWA Korea', 'DeFi Trends 2026', 'Korean Crypto Regulation', 'DePIN Korea', 'AI Agents Crypto']}
-      />
+      <SEOHead title="Korean Crypto Blog & Web3 Market Insights | ium Labs" description="Data-driven crypto and Web3 insights for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects." path="/blog" keywords={['Web3 Blog', 'Crypto Market Analysis', 'Korea Web3 Trends', 'Blockchain Insights', 'RWA Korea', 'DeFi Trends 2026', 'Korean Crypto Regulation', 'DePIN Korea', 'AI Agents Crypto']} />
       <Navbar />
       
       {/* Hero Section - Homepage Style */}
@@ -349,7 +344,7 @@ const Research = () => {
       </section>
 
       <ContactFormSection />
-      <CTABannerSection />
+      
       <FooterLinksSection />
       <Footer />
       <FloatingContactButton />
