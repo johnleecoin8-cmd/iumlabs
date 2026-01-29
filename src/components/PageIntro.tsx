@@ -105,12 +105,12 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
           phase === 'loading' ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Center logo reveal with overlapping counter */}
+        {/* Center bridge logo reveal - no counter overlay */}
         <div className="flex flex-col items-center justify-center">
-          <div className="relative w-48 h-48 sm:w-64 sm:h-64">
+          <div className="relative w-56 h-56 sm:w-72 sm:h-72">
             {/* Glow */}
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] sm:w-[640px] sm:h-[640px] rounded-full blur-[120px] opacity-30 animate-glow-breathe"
+              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] sm:w-[640px] sm:h-[640px] rounded-full blur-[120px] opacity-40 animate-glow-breathe"
               style={{
                 background: 'radial-gradient(circle, hsl(var(--primary)) 0%, transparent 70%)',
               }}
@@ -137,14 +137,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
                 alt="ium Labs"
                 className="w-full h-full object-contain"
               />
-            </div>
-
-            {/* Centered counter overlapping the logo */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-5xl sm:text-7xl font-bold tracking-tighter tabular-nums text-foreground drop-shadow-[0_2px_20px_rgba(0,0,0,0.5)]">
-                {String(Math.floor(progress)).padStart(2, '0')}
-                <span className="text-2xl sm:text-3xl font-semibold text-muted-foreground ml-0.5">%</span>
-              </div>
             </div>
           </div>
         </div>
