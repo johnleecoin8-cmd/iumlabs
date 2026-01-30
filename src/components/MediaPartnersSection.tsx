@@ -11,7 +11,6 @@ const mediaLogos = [
   { name: "Cointelegraph", logo: cointelegraphLogo },
   { name: "CoinDesk", logo: coindeskLogo },
   { name: "Consensys", logo: consensysLogo },
-  { name: "TokenPost", logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg" },
   { name: "Coinness", logo: coinnessLogo },
   { name: "Bloomingbit", logo: bloomingbitLogo },
   { name: "The Economist", logo: economistLogo },
