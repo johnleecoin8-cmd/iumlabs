@@ -179,6 +179,20 @@ const telegramKOLs = [
   { name: "베이지컬리", handle: "@basixally", followers: "15K+", expertise: "BTC", platform: "telegram" },
   { name: "젠티(Jenti)", handle: "@jenti_defi", followers: "18K+", expertise: "DeFi", platform: "telegram" },
   { name: "치코의 택배상자", handle: "@chikointhebox", followers: "15K+", expertise: "에어드랍", platform: "telegram" },
+  // 추가 텔레그램 KOLs
+  { name: "판테라의 ICO", handle: "@panteraico", followers: "Top", expertise: "ICO/IDO", platform: "telegram" },
+  { name: "세나 리서치", handle: "@researchsena", followers: "50K+", expertise: "리서치", platform: "telegram" },
+  { name: "비연세 학사 과정", handle: "@bityonsei", followers: "40K+", expertise: "시황분석", platform: "telegram" },
+  { name: "치과아저씨의 투자 스케일링", handle: "@teamyonseident", followers: "25K+", expertise: "가치투자", platform: "telegram" },
+  { name: "흑우냠냠의 흑우농장", handle: "@c0wfarm", followers: "35K+", expertise: "에어드랍", platform: "telegram" },
+  { name: "크립토마카세", handle: "@cryptomacase", followers: "30K+", expertise: "온체인", platform: "telegram" },
+  { name: "SB Crypto", handle: "@web3subin", followers: "25K+", expertise: "Web3", platform: "telegram" },
+  { name: "SEALCRYPTO ONCHAIN", handle: "@sealcryptocvd", followers: "35K+", expertise: "온체인", platform: "telegram" },
+  { name: "돌비콩의 코인정복", handle: "@dolbikong", followers: "25K+", expertise: "뉴스", platform: "telegram" },
+  { name: "노스트라다무스 관점방", handle: "@nostradamousbtc", followers: "40K+", expertise: "TA", platform: "telegram" },
+  { name: "Joshua 득", handle: "@joshuadeukkor", followers: "35K+", expertise: "Macro", platform: "telegram" },
+  { name: "사스케의 차트 조각들", handle: "@sasukechart", followers: "20K+", expertise: "TA", platform: "telegram" },
+  { name: "뀨's 데일리 WEB3", handle: "@ggyuweb3", followers: "25K+", expertise: "Web3", platform: "telegram" },
 ];
 
 // Combined KOL list
