@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from "react";
-import { Star, Users, TrendingUp, Target, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Star, Users, TrendingUp, Target, Sparkles } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
+import KOLNetworkGraph from "@/components/influencer/KOLNetworkGraph";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -101,15 +102,6 @@ const faqItems: FAQItem[] = [
   },
 ];
 
-// Featured KOLs for carousel
-const featuredKOLs = [
-  { name: "Pentoshi", handle: "@Pentosh1", followers: "680K", expertise: "Trading", bio: "Crypto trader & investor. Top 10 most followed on CT." },
-  { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes", bio: "Memecoin connoisseur. Culture analyst." },
-  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA", bio: "Technical analyst. Chart wizard." },
-  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi", bio: "DeFi strategist. Yield optimizer." },
-  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi", bio: "DeFi power user. Protocol architect." },
-];
-
 // Full KOL Grid - X (Twitter) KOLs
 const twitterKOLs = [
   { name: "Coinboy", handle: "@coinboy717", followers: "50K", expertise: "Trading", platform: "x" },
@@ -198,7 +190,6 @@ const cryptoKOLs = [...twitterKOLs, ...telegramKOLs];
 
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [featuredIndex, setFeaturedIndex] = useState(0);
   const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
   usePageMeta({
@@ -298,82 +289,14 @@ const InfluencerService = () => {
 
           <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              {/* Featured KOLs Carousel */}
-              <div className="mb-12">
-                <div className="flex items-center justify-between mb-5">
-                  <h3 className="text-white/60 text-xs uppercase tracking-wider">Featured Creators</h3>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setFeaturedIndex(prev => prev === 0 ? featuredKOLs.length - 1 : prev - 1)}
-                      className="p-2 rounded-full border border-white/20 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all"
-                    >
-                      <ChevronLeft className="w-4 h-4 text-white/60" />
-                    </button>
-                    <button
-                      onClick={() => setFeaturedIndex(prev => (prev + 1) % featuredKOLs.length)}
-                      className="p-2 rounded-full border border-white/20 hover:border-amber-500/50 hover:bg-amber-500/10 transition-all"
-                    >
-                      <ChevronRight className="w-4 h-4 text-white/60" />
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="relative overflow-hidden">
-                  <a
-                    key={featuredIndex}
-                    href={`https://x.com/${featuredKOLs[featuredIndex].handle.replace('@', '')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-6 p-6 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300 block"
-                  >
-                    <div 
-                      className="w-20 h-20 rounded-full overflow-hidden border-2 flex-shrink-0"
-                      style={{ borderColor: ACCENT_COLOR }}
-                    >
-                      <img 
-                        src={`https://unavatar.io/twitter/${featuredKOLs[featuredIndex].handle.replace('@', '')}`}
-                        alt={featuredKOLs[featuredIndex].name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(featuredKOLs[featuredIndex].name)}&backgroundColor=0a0a0a`;
-                        }}
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2.5 mb-1.5">
-                        <h4 className="text-white font-bold text-lg">{featuredKOLs[featuredIndex].name}</h4>
-                        <span className="text-amber-400 text-xs">{featuredKOLs[featuredIndex].handle}</span>
-                        <span 
-                          className="text-xs px-2 py-1 rounded-full"
-                          style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
-                        >
-                          {featuredKOLs[featuredIndex].expertise}
-                        </span>
-                      </div>
-                      <p className="text-white/60 mb-2">{featuredKOLs[featuredIndex].bio}</p>
-                      <p className="text-white/40 text-sm">{featuredKOLs[featuredIndex].followers} followers</p>
-                    </div>
-                  </a>
-                  
-                  {/* Pagination dots */}
-                  <div className="flex justify-center gap-2 mt-4">
-                    {featuredKOLs.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setFeaturedIndex(idx)}
-                        className={`w-2 h-2 rounded-full transition-all ${
-                          featuredIndex === idx 
-                            ? 'w-6 bg-amber-500' 
-                            : 'bg-white/30 hover:bg-white/50'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
+              {/* Network Graph */}
+              <KOLNetworkGraph 
+                kols={cryptoKOLs}
+                accentColor={ACCENT_COLOR}
+              />
 
               {/* Sound Wave Canvas */}
-              <div className="relative h-16 mb-8">
+              <div className="relative h-16 mt-8 mb-8">
                 <canvas 
                   ref={canvasRef}
                   className="absolute inset-0 w-full h-full opacity-60"
