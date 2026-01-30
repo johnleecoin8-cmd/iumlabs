@@ -6,6 +6,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
+import Globe3D from "@/components/influencer/Globe3D";
 import KOLNetworkGraph from "@/components/influencer/KOLNetworkGraph";
 
 const ACCENT_COLOR = "#F59E0B";
@@ -190,7 +191,7 @@ const cryptoKOLs = [...twitterKOLs, ...telegramKOLs];
 
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
+  const { isMobile, shouldDisableHeavyAnimations, shouldDisable3D } = useMobileOptimization();
 
   usePageMeta({
     title: "Korea's Elite KOL Network & Web3 Influencer Marketing | ium Labs",
@@ -289,11 +290,18 @@ const InfluencerService = () => {
 
           <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              {/* Network Graph */}
-              <KOLNetworkGraph 
-                kols={cryptoKOLs}
-                accentColor={ACCENT_COLOR}
-              />
+              {/* 3D Globe for Desktop, 2D Map for Mobile */}
+              {isMobile || shouldDisable3D ? (
+                <KOLNetworkGraph 
+                  kols={cryptoKOLs}
+                  accentColor={ACCENT_COLOR}
+                />
+              ) : (
+                <Globe3D 
+                  kols={cryptoKOLs}
+                  accentColor={ACCENT_COLOR}
+                />
+              )}
 
               {/* Sound Wave Canvas */}
               <div className="relative h-16 mt-8 mb-8">
