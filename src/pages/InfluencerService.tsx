@@ -164,8 +164,25 @@ const twitterKOLs = [
   { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA", platform: "x" },
 ];
 
-// Combined KOL list (Twitter only - Telegram avatars not supported by unavatar.io)
-const cryptoKOLs = [...twitterKOLs];
+// Telegram KOLs (Korean)
+const telegramKOLs = [
+  { name: "변창호 코인사관학교", handle: "@bchosn", followers: "Top", expertise: "리서치", platform: "telegram" },
+  { name: "DeFi 농부 조선생", handle: "@bsc_farmer_kr", followers: "50K+", expertise: "DeFi", platform: "telegram" },
+  { name: "매실남", handle: "@waitstudy", followers: "30K+", expertise: "Trading", platform: "telegram" },
+  { name: "잼민123", handle: "@mujammin123", followers: "25K+", expertise: "에어드랍", platform: "telegram" },
+  { name: "해달의 투자 정보", handle: "@seaotterbtc", followers: "20K+", expertise: "시황", platform: "telegram" },
+  { name: "차설 텔레그램", handle: "@chasul_trader", followers: "40K+", expertise: "TA", platform: "telegram" },
+  { name: "머피", handle: "@murphybus", followers: "35K+", expertise: "Macro", platform: "telegram" },
+  { name: "불개미 CRYPTO", handle: "@fireantcrypto", followers: "30K+", expertise: "초기투자", platform: "telegram" },
+  { name: "차분남", handle: "@chavoonnam", followers: "25K+", expertise: "TA", platform: "telegram" },
+  { name: "훈쌤의 차트 공부방", handle: "@hoon_trading", followers: "20K+", expertise: "교육", platform: "telegram" },
+  { name: "베이지컬리", handle: "@basixally", followers: "15K+", expertise: "BTC", platform: "telegram" },
+  { name: "젠티(Jenti)", handle: "@jenti_defi", followers: "18K+", expertise: "DeFi", platform: "telegram" },
+  { name: "치코의 택배상자", handle: "@chikointhebox", followers: "15K+", expertise: "에어드랍", platform: "telegram" },
+];
+
+// Combined KOL list
+const cryptoKOLs = [...twitterKOLs, ...telegramKOLs];
 
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
