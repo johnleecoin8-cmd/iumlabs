@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useMobileOptimization } from '@/hooks/useMobileOptimization';
+import asiaGlobeMap from '@/assets/maps/asia-globe.png';
 
 interface KOL {
   name: string;
@@ -15,21 +16,22 @@ interface KOLNetworkGraphProps {
   accentColor?: string;
 }
 
-// 아시아 국가별 좌표 (SVG viewBox 0-100 기준)
+// 구체 지도 이미지에 맞춘 국가별 좌표 (%)
+// 구체 중심: 약 50%, 50% / 아시아가 중심-우측에 위치
 const COUNTRY_POSITIONS: Record<string, { x: number; y: number; name: string }> = {
-  KR: { x: 78, y: 28, name: '한국' },
-  JP: { x: 88, y: 32, name: '일본' },
-  CN: { x: 58, y: 35, name: '중국' },
-  TW: { x: 75, y: 48, name: '대만' },
-  HK: { x: 68, y: 50, name: '홍콩' },
-  SG: { x: 55, y: 78, name: '싱가포르' },
-  VN: { x: 60, y: 58, name: '베트남' },
-  TH: { x: 50, y: 58, name: '태국' },
-  MY: { x: 52, y: 72, name: '말레이시아' },
-  ID: { x: 62, y: 85, name: '인도네시아' },
-  PH: { x: 75, y: 60, name: '필리핀' },
-  IN: { x: 32, y: 48, name: '인도' },
-  AE: { x: 15, y: 50, name: 'UAE' },
+  KR: { x: 68, y: 32, name: '한국' },
+  JP: { x: 76, y: 35, name: '일본' },
+  CN: { x: 54, y: 42, name: '중국' },
+  TW: { x: 66, y: 48, name: '대만' },
+  HK: { x: 60, y: 52, name: '홍콩' },
+  SG: { x: 52, y: 72, name: '싱가포르' },
+  VN: { x: 56, y: 58, name: '베트남' },
+  TH: { x: 48, y: 56, name: '태국' },
+  MY: { x: 50, y: 68, name: '말레이시아' },
+  ID: { x: 58, y: 78, name: '인도네시아' },
+  PH: { x: 68, y: 58, name: '필리핀' },
+  IN: { x: 36, y: 50, name: '인도' },
+  AE: { x: 22, y: 48, name: 'UAE' },
 };
 
 const KOLNetworkGraph: React.FC<KOLNetworkGraphProps> = ({ kols, accentColor = "#F59E0B" }) => {
@@ -77,159 +79,137 @@ const KOLNetworkGraph: React.FC<KOLNetworkGraphProps> = ({ kols, accentColor = "
   const hoveredPos = hoveredCountry ? COUNTRY_POSITIONS[hoveredCountry] : null;
 
   return (
-    <div className="relative w-full aspect-[16/9] max-h-[550px] rounded-2xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06]">
-      {/* SVG 아시아 지도 */}
-      <svg
-        viewBox="0 0 100 100"
-        className="w-full h-full"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <defs>
-          {/* 배경 그라데이션 */}
-          <radialGradient id="mapBgGlow" cx="60%" cy="50%" r="50%">
-            <stop offset="0%" stopColor={accentColor} stopOpacity="0.06" />
-            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-          </radialGradient>
-          
-          {/* 노드 글로우 필터 */}
-          <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="0.8" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
+    <div className="relative w-full aspect-square md:aspect-[4/3] max-h-[650px] rounded-2xl overflow-hidden border border-white/[0.06]">
+      {/* 구체 지도 배경 이미지 */}
+      <div className="absolute inset-0">
+        <img 
+          src={asiaGlobeMap} 
+          alt="Asia Globe Map" 
+          className="w-full h-full object-contain"
+          style={{ 
+            filter: 'brightness(0.7) saturate(0.8)',
+          }}
+        />
+        {/* 어두운 오버레이 */}
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
 
-          {/* 연결선 그라데이션 */}
-          <linearGradient id="connGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={accentColor} stopOpacity="0.3" />
-            <stop offset="50%" stopColor={accentColor} stopOpacity="0.5" />
-            <stop offset="100%" stopColor={accentColor} stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-
-        {/* 배경 */}
-        <rect width="100" height="100" fill="#0A0A0A" />
-        <rect width="100" height="100" fill="url(#mapBgGlow)" />
-
-        {/* 그리드 라인 */}
-        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map(x => (
-          <line key={`v-${x}`} x1={x} y1="0" x2={x} y2="100" stroke="white" strokeOpacity="0.03" strokeWidth="0.08" />
-        ))}
-        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map(y => (
-          <line key={`h-${y}`} x1="0" y1={y} x2="100" y2={y} stroke="white" strokeOpacity="0.03" strokeWidth="0.08" />
-        ))}
-
-        {/* 국가 간 연결선 */}
-        {countryNodes.map((node, i) => 
-          countryNodes.slice(i + 1).map((target, j) => {
-            const isHighlighted = hoveredCountry === node.countryCode || hoveredCountry === target.countryCode;
-            const distance = Math.sqrt(Math.pow(node.x - target.x, 2) + Math.pow(node.y - target.y, 2));
-            // 가까운 노드끼리만 연결
-            if (distance > 35) return null;
-            
-            return (
-              <line
-                key={`conn-${i}-${j}`}
-                x1={node.x}
-                y1={node.y}
-                x2={target.x}
-                y2={target.y}
-                stroke={accentColor}
-                strokeOpacity={isHighlighted ? 0.5 : 0.12}
-                strokeWidth={isHighlighted ? 0.25 : 0.1}
-                className="transition-all duration-300"
-              />
-            );
-          })
-        )}
-
-        {/* 국가 노드 */}
+      {/* 국가 노드들 */}
+      <div className="absolute inset-0">
         {countryNodes.map((node) => {
           const isHovered = hoveredCountry === node.countryCode;
           const nodeSize = getNodeSize(node.totalFollowers);
+          const sizePx = isMobile ? nodeSize * 8 : nodeSize * 10;
 
           return (
-            <g
+            <div
               key={node.countryCode}
-              className="cursor-pointer"
+              className="absolute cursor-pointer transition-all duration-300"
+              style={{
+                left: `${node.x}%`,
+                top: `${node.y}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
               onMouseEnter={() => setHoveredCountry(node.countryCode)}
               onMouseLeave={() => setHoveredCountry(null)}
             >
               {/* 펄스 링 */}
-              <circle
-                cx={node.x}
-                cy={node.y}
-                r={nodeSize * 1.8}
-                fill="none"
-                stroke={accentColor}
-                strokeOpacity={isHovered ? 0.4 : 0.1}
-                strokeWidth="0.15"
-                className={isHovered ? "animate-ping" : ""}
-                style={{ animationDuration: '2s' }}
+              <div
+                className={`absolute rounded-full border transition-all duration-300 ${isHovered ? 'animate-ping' : ''}`}
+                style={{
+                  width: sizePx * 2,
+                  height: sizePx * 2,
+                  left: '50%',
+                  top: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  borderColor: isHovered ? accentColor : `${accentColor}40`,
+                  animationDuration: '2s',
+                }}
               />
 
               {/* 글로우 배경 */}
               {isHovered && (
-                <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r={nodeSize * 2.5}
-                  fill={accentColor}
-                  fillOpacity="0.15"
+                <div
+                  className="absolute rounded-full transition-all duration-300"
+                  style={{
+                    width: sizePx * 3,
+                    height: sizePx * 3,
+                    left: '50%',
+                    top: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: `radial-gradient(circle, ${accentColor}40 0%, transparent 70%)`,
+                  }}
                 />
               )}
 
               {/* 메인 노드 */}
-              <circle
-                cx={node.x}
-                cy={node.y}
-                r={nodeSize}
-                fill={isHovered ? accentColor : '#1a1a1a'}
-                stroke={accentColor}
-                strokeWidth={isHovered ? 0.4 : 0.2}
-                filter="url(#nodeGlow)"
-                className="transition-all duration-300"
-              />
-
-              {/* 국가 코드 */}
-              <text
-                x={node.x}
-                y={node.y + 0.5}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill={isHovered ? '#000' : '#fff'}
-                fontSize={isMobile ? 1.8 : 2.2}
-                fontWeight="700"
-                fontFamily="system-ui, sans-serif"
-                className="pointer-events-none select-none"
+              <div
+                className="relative rounded-full flex items-center justify-center transition-all duration-300 shadow-lg"
+                style={{
+                  width: sizePx,
+                  height: sizePx,
+                  background: isHovered ? accentColor : 'rgba(26, 26, 26, 0.95)',
+                  border: `2px solid ${accentColor}`,
+                  boxShadow: isHovered 
+                    ? `0 0 20px ${accentColor}80, 0 0 40px ${accentColor}40` 
+                    : `0 0 10px ${accentColor}30`,
+                }}
               >
-                {node.countryCode}
-              </text>
+                {/* 국가 코드 */}
+                <span
+                  className="font-bold text-center pointer-events-none select-none"
+                  style={{
+                    fontSize: isMobile ? '10px' : '12px',
+                    color: isHovered ? '#000' : '#fff',
+                  }}
+                >
+                  {node.countryCode}
+                </span>
 
-              {/* KOL 수 뱃지 */}
-              <circle
-                cx={node.x + nodeSize * 0.7}
-                cy={node.y - nodeSize * 0.7}
-                r={1.3}
-                fill={accentColor}
-              />
-              <text
-                x={node.x + nodeSize * 0.7}
-                y={node.y - nodeSize * 0.7 + 0.3}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fill="#000"
-                fontSize={1.1}
-                fontWeight="bold"
-                className="pointer-events-none select-none"
-              >
-                {node.kols.length}
-              </text>
-            </g>
+                {/* KOL 수 뱃지 */}
+                <div
+                  className="absolute flex items-center justify-center rounded-full text-black font-bold"
+                  style={{
+                    width: isMobile ? 14 : 18,
+                    height: isMobile ? 14 : 18,
+                    fontSize: isMobile ? '8px' : '10px',
+                    background: accentColor,
+                    top: -4,
+                    right: -4,
+                  }}
+                >
+                  {node.kols.length}
+                </div>
+              </div>
+            </div>
           );
         })}
-      </svg>
+
+        {/* 연결선 SVG 오버레이 */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none">
+          {countryNodes.map((node, i) => 
+            countryNodes.slice(i + 1).map((target, j) => {
+              const isHighlighted = hoveredCountry === node.countryCode || hoveredCountry === target.countryCode;
+              const distance = Math.sqrt(Math.pow(node.x - target.x, 2) + Math.pow(node.y - target.y, 2));
+              if (distance > 30) return null;
+              
+              return (
+                <line
+                  key={`conn-${i}-${j}`}
+                  x1={`${node.x}%`}
+                  y1={`${node.y}%`}
+                  x2={`${target.x}%`}
+                  y2={`${target.y}%`}
+                  stroke={accentColor}
+                  strokeOpacity={isHighlighted ? 0.6 : 0.15}
+                  strokeWidth={isHighlighted ? 2 : 1}
+                  className="transition-all duration-300"
+                />
+              );
+            })
+          )}
+        </svg>
+      </div>
 
       {/* 호버 툴팁 */}
       {hoveredCountry && hoveredCountryData && hoveredPos && (
