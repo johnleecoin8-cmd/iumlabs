@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState, useMemo } from "react";
-import { useMobileOptimization } from "@/hooks/useMobileOptimization";
+import React, { useState, useMemo } from 'react';
+import { useMobileOptimization } from '@/hooks/useMobileOptimization';
 
 interface KOL {
   name: string;
@@ -7,6 +7,7 @@ interface KOL {
   followers: string;
   expertise: string;
   platform: string;
+  country?: string; // 국가 코드: KR, JP, CN, SG, VN, TH, ID, PH, MY, TW, HK, IN, AE
 }
 
 interface KOLNetworkGraphProps {
@@ -14,311 +15,312 @@ interface KOLNetworkGraphProps {
   accentColor?: string;
 }
 
-interface Node {
-  id: string;
-  x: number;
-  y: number;
-  radius: number;
-  kol: KOL | null;
-  isCenter: boolean;
-  angle: number;
-  ring: number;
-}
+// 아시아 국가별 좌표 (SVG viewBox 0-100 기준)
+const COUNTRY_POSITIONS: Record<string, { x: number; y: number; name: string }> = {
+  KR: { x: 78, y: 28, name: '한국' },
+  JP: { x: 88, y: 32, name: '일본' },
+  CN: { x: 58, y: 35, name: '중국' },
+  TW: { x: 75, y: 48, name: '대만' },
+  HK: { x: 68, y: 50, name: '홍콩' },
+  SG: { x: 55, y: 78, name: '싱가포르' },
+  VN: { x: 60, y: 58, name: '베트남' },
+  TH: { x: 50, y: 58, name: '태국' },
+  MY: { x: 52, y: 72, name: '말레이시아' },
+  ID: { x: 62, y: 85, name: '인도네시아' },
+  PH: { x: 75, y: 60, name: '필리핀' },
+  IN: { x: 32, y: 48, name: '인도' },
+  AE: { x: 15, y: 50, name: 'UAE' },
+};
 
-const KOLNetworkGraph = ({ kols, accentColor = "#F59E0B" }: KOLNetworkGraphProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [hoveredNode, setHoveredNode] = useState<string | null>(null);
-  const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+const KOLNetworkGraph: React.FC<KOLNetworkGraphProps> = ({ kols, accentColor = "#F59E0B" }) => {
+  const [hoveredCountry, setHoveredCountry] = useState<string | null>(null);
   const { isMobile } = useMobileOptimization();
 
-  // Resize observer
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+  // 국가별로 KOL 그룹화
+  const kolsByCountry = useMemo(() => {
+    const grouped: Record<string, KOL[]> = {};
+    kols.forEach(kol => {
+      const country = kol.country || 'KR'; // 기본값 한국
+      if (!grouped[country]) grouped[country] = [];
+      grouped[country].push(kol);
+    });
+    return grouped;
+  }, [kols]);
 
-    const updateDimensions = () => {
-      const rect = container.getBoundingClientRect();
-      setDimensions({
-        width: rect.width,
-        height: isMobile ? 500 : 600,
-      });
-    };
+  // 국가별 노드 데이터 생성
+  const countryNodes = useMemo(() => {
+    return Object.entries(kolsByCountry).map(([countryCode, countryKols]) => {
+      const pos = COUNTRY_POSITIONS[countryCode] || COUNTRY_POSITIONS.KR;
+      return {
+        countryCode,
+        countryName: pos.name,
+        x: pos.x,
+        y: pos.y,
+        kols: countryKols,
+        totalFollowers: countryKols.reduce((sum, k) => {
+          const num = parseFloat(k.followers.replace(/[KMB,]/g, ''));
+          const multiplier = k.followers.includes('M') ? 1000000 : k.followers.includes('K') ? 1000 : 1;
+          return sum + (num * multiplier);
+        }, 0),
+      };
+    });
+  }, [kolsByCountry]);
 
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
-  }, [isMobile]);
-
-  // Generate node positions
-  const nodes: Node[] = useMemo(() => {
-    const centerX = dimensions.width / 2;
-    const centerY = dimensions.height / 2;
-    const maxNodes = isMobile ? 24 : 48;
-    const selectedKols = kols.slice(0, maxNodes);
-    
-    // Center node (Ium Labs)
-    const nodeList: Node[] = [
-      {
-        id: "center",
-        x: centerX,
-        y: centerY,
-        radius: isMobile ? 35 : 45,
-        kol: null,
-        isCenter: true,
-        angle: 0,
-        ring: 0,
-      },
-    ];
-
-    // Calculate rings
-    const rings = isMobile ? 2 : 3;
-    const nodesPerRing = isMobile ? [10, 14] : [12, 18, 18];
-    const ringRadii = isMobile 
-      ? [dimensions.width * 0.2, dimensions.width * 0.35]
-      : [dimensions.width * 0.15, dimensions.width * 0.26, dimensions.width * 0.38];
-
-    let kolIndex = 0;
-    
-    for (let ring = 0; ring < rings; ring++) {
-      const count = Math.min(nodesPerRing[ring], selectedKols.length - kolIndex);
-      const radius = ringRadii[ring];
-      
-      for (let i = 0; i < count && kolIndex < selectedKols.length; i++) {
-        const angle = (i / count) * Math.PI * 2 - Math.PI / 2;
-        // Add slight randomness
-        const jitterX = (Math.random() - 0.5) * 15;
-        const jitterY = (Math.random() - 0.5) * 15;
-        
-        nodeList.push({
-          id: selectedKols[kolIndex].handle,
-          x: centerX + Math.cos(angle) * radius + jitterX,
-          y: centerY + Math.sin(angle) * radius + jitterY,
-          radius: isMobile ? 20 : (ring === 0 ? 28 : ring === 1 ? 24 : 20),
-          kol: selectedKols[kolIndex],
-          isCenter: false,
-          angle,
-          ring: ring + 1,
-        });
-        kolIndex++;
-      }
-    }
-
-    return nodeList;
-  }, [kols, dimensions, isMobile]);
-
-  // Get connection color based on platform
-  const getConnectionColor = (kol: KOL | null) => {
-    if (!kol) return accentColor;
-    return kol.platform === "telegram" ? "#0088cc" : accentColor;
+  const getNodeSize = (totalFollowers: number) => {
+    if (totalFollowers >= 5000000) return isMobile ? 3.5 : 4.5;
+    if (totalFollowers >= 1000000) return isMobile ? 3 : 4;
+    if (totalFollowers >= 500000) return isMobile ? 2.5 : 3.5;
+    return isMobile ? 2 : 3;
   };
 
+  const hoveredCountryData = hoveredCountry ? kolsByCountry[hoveredCountry] : null;
+  const hoveredPos = hoveredCountry ? COUNTRY_POSITIONS[hoveredCountry] : null;
+
   return (
-    <div 
-      ref={containerRef}
-      className="relative w-full overflow-hidden rounded-2xl bg-[#0A0A0A] border border-white/[0.06]"
-      style={{ height: dimensions.height }}
-    >
-      {/* SVG for connections */}
+    <div className="relative w-full aspect-[16/9] max-h-[550px] rounded-2xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06]">
+      {/* SVG 아시아 지도 */}
       <svg
-        className="absolute inset-0 w-full h-full"
-        style={{ zIndex: 1 }}
+        viewBox="0 0 100 100"
+        className="w-full h-full"
+        preserveAspectRatio="xMidYMid slice"
       >
         <defs>
-          {/* Gradients for connections */}
-          <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.2" />
-          </linearGradient>
-          <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#ef4444" stopOpacity="0.2" />
-            <stop offset="100%" stopColor="#ef4444" stopOpacity="0.8" />
-          </linearGradient>
-          <linearGradient id="amberGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor={accentColor} stopOpacity="0.6" />
-            <stop offset="100%" stopColor={accentColor} stopOpacity="0.2" />
-          </linearGradient>
-          <linearGradient id="telegramGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#0088cc" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#0088cc" stopOpacity="0.2" />
+          {/* 배경 그라데이션 */}
+          <radialGradient id="mapBgGlow" cx="60%" cy="50%" r="50%">
+            <stop offset="0%" stopColor={accentColor} stopOpacity="0.06" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+          </radialGradient>
+          
+          {/* 노드 글로우 필터 */}
+          <filter id="nodeGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="0.8" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          {/* 연결선 그라데이션 */}
+          <linearGradient id="connGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor={accentColor} stopOpacity="0.3" />
+            <stop offset="50%" stopColor={accentColor} stopOpacity="0.5" />
+            <stop offset="100%" stopColor={accentColor} stopOpacity="0.3" />
           </linearGradient>
         </defs>
-        
-        {/* Connection lines from center to each node */}
-        {nodes.slice(1).map((node, index) => {
-          const centerNode = nodes[0];
-          const isHovered = hoveredNode === node.id;
-          const isTelegram = node.kol?.platform === "telegram";
-          
-          // Calculate control points for curved lines
-          const midX = (centerNode.x + node.x) / 2;
-          const midY = (centerNode.y + node.y) / 2;
-          const offset = (index % 2 === 0 ? 1 : -1) * 20;
-          const controlX = midX + offset;
-          const controlY = midY + offset;
-          
-          return (
-            <g key={node.id}>
-              {/* Main connection line */}
-              <path
-                d={`M ${centerNode.x} ${centerNode.y} Q ${controlX} ${controlY} ${node.x} ${node.y}`}
-                stroke={isTelegram ? "url(#telegramGradient)" : "url(#amberGradient)"}
-                strokeWidth={isHovered ? 2.5 : 1.2}
-                fill="none"
-                opacity={isHovered ? 1 : 0.4}
+
+        {/* 배경 */}
+        <rect width="100" height="100" fill="#0A0A0A" />
+        <rect width="100" height="100" fill="url(#mapBgGlow)" />
+
+        {/* 그리드 라인 */}
+        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map(x => (
+          <line key={`v-${x}`} x1={x} y1="0" x2={x} y2="100" stroke="white" strokeOpacity="0.03" strokeWidth="0.08" />
+        ))}
+        {[10, 20, 30, 40, 50, 60, 70, 80, 90].map(y => (
+          <line key={`h-${y}`} x1="0" y1={y} x2="100" y2={y} stroke="white" strokeOpacity="0.03" strokeWidth="0.08" />
+        ))}
+
+        {/* 국가 간 연결선 */}
+        {countryNodes.map((node, i) => 
+          countryNodes.slice(i + 1).map((target, j) => {
+            const isHighlighted = hoveredCountry === node.countryCode || hoveredCountry === target.countryCode;
+            const distance = Math.sqrt(Math.pow(node.x - target.x, 2) + Math.pow(node.y - target.y, 2));
+            // 가까운 노드끼리만 연결
+            if (distance > 35) return null;
+            
+            return (
+              <line
+                key={`conn-${i}-${j}`}
+                x1={node.x}
+                y1={node.y}
+                x2={target.x}
+                y2={target.y}
+                stroke={accentColor}
+                strokeOpacity={isHighlighted ? 0.5 : 0.12}
+                strokeWidth={isHighlighted ? 0.25 : 0.1}
                 className="transition-all duration-300"
               />
-              
-              {/* Glow effect on hover */}
+            );
+          })
+        )}
+
+        {/* 국가 노드 */}
+        {countryNodes.map((node) => {
+          const isHovered = hoveredCountry === node.countryCode;
+          const nodeSize = getNodeSize(node.totalFollowers);
+
+          return (
+            <g
+              key={node.countryCode}
+              className="cursor-pointer"
+              onMouseEnter={() => setHoveredCountry(node.countryCode)}
+              onMouseLeave={() => setHoveredCountry(null)}
+            >
+              {/* 펄스 링 */}
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r={nodeSize * 1.8}
+                fill="none"
+                stroke={accentColor}
+                strokeOpacity={isHovered ? 0.4 : 0.1}
+                strokeWidth="0.15"
+                className={isHovered ? "animate-ping" : ""}
+                style={{ animationDuration: '2s' }}
+              />
+
+              {/* 글로우 배경 */}
               {isHovered && (
-                <path
-                  d={`M ${centerNode.x} ${centerNode.y} Q ${controlX} ${controlY} ${node.x} ${node.y}`}
-                  stroke={isTelegram ? "#0088cc" : accentColor}
-                  strokeWidth={4}
-                  fill="none"
-                  opacity={0.2}
-                  filter="blur(4px)"
+                <circle
+                  cx={node.x}
+                  cy={node.y}
+                  r={nodeSize * 2.5}
+                  fill={accentColor}
+                  fillOpacity="0.15"
                 />
               )}
+
+              {/* 메인 노드 */}
+              <circle
+                cx={node.x}
+                cy={node.y}
+                r={nodeSize}
+                fill={isHovered ? accentColor : '#1a1a1a'}
+                stroke={accentColor}
+                strokeWidth={isHovered ? 0.4 : 0.2}
+                filter="url(#nodeGlow)"
+                className="transition-all duration-300"
+              />
+
+              {/* 국가 코드 */}
+              <text
+                x={node.x}
+                y={node.y + 0.5}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill={isHovered ? '#000' : '#fff'}
+                fontSize={isMobile ? 1.8 : 2.2}
+                fontWeight="700"
+                fontFamily="system-ui, sans-serif"
+                className="pointer-events-none select-none"
+              >
+                {node.countryCode}
+              </text>
+
+              {/* KOL 수 뱃지 */}
+              <circle
+                cx={node.x + nodeSize * 0.7}
+                cy={node.y - nodeSize * 0.7}
+                r={1.3}
+                fill={accentColor}
+              />
+              <text
+                x={node.x + nodeSize * 0.7}
+                y={node.y - nodeSize * 0.7 + 0.3}
+                textAnchor="middle"
+                dominantBaseline="central"
+                fill="#000"
+                fontSize={1.1}
+                fontWeight="bold"
+                className="pointer-events-none select-none"
+              >
+                {node.kols.length}
+              </text>
             </g>
           );
         })}
       </svg>
 
-      {/* Nodes */}
-      <div className="absolute inset-0" style={{ zIndex: 2 }}>
-        {nodes.map((node) => {
-          const isHovered = hoveredNode === node.id;
-          
-          if (node.isCenter) {
-            // Center node (Ium Labs logo)
-            return (
-              <div
-                key={node.id}
-                className="absolute transform -translate-x-1/2 -translate-y-1/2"
-                style={{
-                  left: node.x,
-                  top: node.y,
-                  width: node.radius * 2,
-                  height: node.radius * 2,
-                }}
-              >
-                <div 
-                  className="w-full h-full rounded-full border-2 flex items-center justify-center overflow-hidden"
-                  style={{ 
-                    borderColor: accentColor,
-                    background: `radial-gradient(circle, ${accentColor}30 0%, #0a0a0a 70%)`,
-                    boxShadow: `0 0 30px ${accentColor}40, 0 0 60px ${accentColor}20`,
-                  }}
-                >
-                  <img 
-                    src="/logo.png" 
-                    alt="Ium Labs"
-                    className="w-3/4 h-3/4 object-contain"
-                  />
-                </div>
-              </div>
-            );
-          }
+      {/* 호버 툴팁 */}
+      {hoveredCountry && hoveredCountryData && hoveredPos && (
+        <div 
+          className="absolute z-50 pointer-events-none"
+          style={{
+            left: `${hoveredPos.x}%`,
+            top: `${hoveredPos.y}%`,
+            transform: hoveredPos.y > 60 ? 'translate(-50%, calc(-100% - 20px))' : 'translate(-50%, 30px)',
+          }}
+        >
+          <div className="bg-black/95 backdrop-blur-md border border-white/10 rounded-xl p-4 min-w-[260px] max-w-[320px] shadow-2xl">
+            <div className="flex items-center gap-2 mb-3 pb-2 border-b border-white/10">
+              <span className="text-lg font-bold" style={{ color: accentColor }}>
+                {hoveredPos.name}
+              </span>
+              <span className="text-xs text-white/40 font-mono bg-white/5 px-2 py-0.5 rounded">
+                {hoveredCountry}
+              </span>
+            </div>
 
-          const kol = node.kol!;
-          const isTelegram = kol.platform === "telegram";
-          const avatarUrl = isTelegram 
-            ? `https://unavatar.io/telegram/${kol.handle.replace("@", "")}`
-            : `https://unavatar.io/twitter/${kol.handle.replace("@", "")}`;
-          const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
-          const profileUrl = isTelegram 
-            ? `https://t.me/${kol.handle.replace("@", "")}`
-            : `https://x.com/${kol.handle.replace("@", "")}`;
-          const nodeColor = isTelegram ? "#0088cc" : accentColor;
+            <div className="space-y-1.5 max-h-[180px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin' }}>
+              {hoveredCountryData.map((kol, idx) => {
+                const isTelegram = kol.platform === 'telegram';
+                const avatarUrl = isTelegram 
+                  ? `https://unavatar.io/telegram/${kol.handle.replace('@', '')}`
+                  : `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
+                const nodeColor = isTelegram ? '#0088cc' : accentColor;
 
-          return (
-            <a
-              key={node.id}
-              href={profileUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 cursor-pointer"
-              style={{
-                left: node.x,
-                top: node.y,
-                width: node.radius * 2,
-                height: node.radius * 2,
-                zIndex: isHovered ? 10 : 2,
-              }}
-              onMouseEnter={() => setHoveredNode(node.id)}
-              onMouseLeave={() => setHoveredNode(null)}
-            >
-              {/* Node circle */}
-              <div 
-                className="w-full h-full rounded-full overflow-hidden border-2 transition-all duration-300"
-                style={{ 
-                  borderColor: isHovered ? nodeColor : `${nodeColor}50`,
-                  transform: isHovered ? "scale(1.2)" : "scale(1)",
-                  boxShadow: isHovered ? `0 0 20px ${nodeColor}60` : "none",
-                  backgroundColor: "#111",
-                }}
-              >
-                <img 
-                  src={avatarUrl}
-                  alt={kol.name}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = fallbackUrl;
-                  }}
-                />
-              </div>
-
-              {/* Hover tooltip */}
-              {isHovered && (
-                <div 
-                  className="absolute left-1/2 transform -translate-x-1/2 pointer-events-none"
-                  style={{
-                    top: node.radius * 2 + 8,
-                    zIndex: 100,
-                  }}
-                >
+                return (
                   <div 
-                    className="px-3 py-2 rounded-lg border whitespace-nowrap"
-                    style={{
-                      backgroundColor: "rgba(10, 10, 10, 0.95)",
-                      borderColor: `${nodeColor}40`,
-                      boxShadow: `0 4px 20px rgba(0, 0, 0, 0.5)`,
-                    }}
+                    key={idx}
+                    className="flex items-center gap-2.5 p-2 rounded-lg bg-white/5"
                   >
-                    <p className="text-white text-xs font-medium">{kol.name}</p>
-                    <p className="text-xs" style={{ color: nodeColor }}>{kol.handle}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-white/50 text-[10px]">{kol.followers}</span>
-                      <span 
-                        className="text-[10px] px-1.5 py-0.5 rounded-full"
-                        style={{ backgroundColor: `${nodeColor}20`, color: nodeColor }}
-                      >
-                        {kol.expertise}
-                      </span>
+                    <img
+                      src={avatarUrl}
+                      alt={kol.name}
+                      className="w-8 h-8 rounded-full object-cover border"
+                      style={{ borderColor: `${nodeColor}50` }}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
+                      }}
+                    />
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-medium text-white truncate">{kol.name}</div>
+                      <div className="text-xs text-white/40 truncate">{kol.handle}</div>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <div className="text-xs font-mono font-medium" style={{ color: nodeColor }}>{kol.followers}</div>
+                      <div className="text-[10px] text-white/30">{kol.expertise}</div>
                     </div>
                   </div>
-                </div>
-              )}
-            </a>
-          );
-        })}
+                );
+              })}
+            </div>
+
+            <div className="mt-3 pt-2 border-t border-white/10 flex justify-between text-xs">
+              <span className="text-white/40">Total KOLs</span>
+              <span className="font-mono font-semibold" style={{ color: accentColor }}>
+                {hoveredCountryData.length}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 범례 */}
+      <div className="absolute bottom-4 left-4 flex items-center gap-4 text-xs text-white/40">
+        <div className="flex items-center gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full border" style={{ borderColor: accentColor, background: '#1a1a1a' }} />
+          <span>KOL Network</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-4 h-[1px]" style={{ background: accentColor, opacity: 0.4 }} />
+          <span>Connection</span>
+        </div>
       </div>
 
-      {/* Ambient glow effects */}
+      {/* 통계 */}
+      <div className="absolute top-4 right-4 bg-black/70 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2.5">
+        <div className="text-[10px] text-white/40 uppercase tracking-wider mb-0.5">Active Regions</div>
+        <div className="text-2xl font-bold font-mono" style={{ color: accentColor }}>
+          {countryNodes.length}
+        </div>
+      </div>
+
+      {/* 코너 비네트 */}
       <div 
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(circle at 50% 50%, ${accentColor}08 0%, transparent 50%)`,
-          zIndex: 0,
-        }}
-      />
-      
-      {/* Corner vignette */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: "radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%)",
-          zIndex: 3,
+          background: 'radial-gradient(ellipse at 60% 50%, transparent 30%, rgba(0,0,0,0.5) 100%)',
         }}
       />
     </div>
