@@ -110,59 +110,79 @@ const featuredKOLs = [
   { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi", bio: "DeFi power user. Protocol architect." },
 ];
 
-// Full KOL Grid
-const cryptoKOLs = [
-  { name: "Coinboy", handle: "@coinboy717", followers: "50K", expertise: "Trading" },
-  { name: "ONEMINNFT", handle: "@ONEMINNFT", followers: "45K", expertise: "NFT" },
-  { name: "Nakju", handle: "@nakjumon", followers: "18.7K", expertise: "Trading" },
-  { name: "KuiGas", handle: "@KuiGas", followers: "96K", expertise: "Research" },
-  { name: "Jason Chen", handle: "@jason_chen998", followers: "90K", expertise: "Trading" },
-  { name: "Calman", handle: "@CalmanBTC", followers: "70K", expertise: "BTC" },
-  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", expertise: "Data" },
-  { name: "Hebi", handle: "@hebi555", followers: "377K", expertise: "Trading" },
-  { name: "Koji Higashi", handle: "@Coin_and_Peace", followers: "48K", expertise: "BTC" },
-  { name: "DEG", handle: "@DEG_2020", followers: "32K", expertise: "Trading" },
-  { name: "miin", handle: "@NftPinuts", followers: "85K", expertise: "NFT" },
-  { name: "ikehaya", handle: "@IHayato", followers: "100K", expertise: "NFT" },
-  { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes" },
-  { name: "Novogratz", handle: "@novogratz", followers: "450K", expertise: "Macro" },
-  { name: "Sassano", handle: "@sassal0x", followers: "290K", expertise: "ETH" },
-  { name: "Tone Vays", handle: "@ToneVays", followers: "280K", expertise: "Trading" },
-  { name: "Nick Szabo", handle: "@NickSzabo4", followers: "340K", expertise: "BTC" },
-  { name: "Frank", handle: "@frankdegods", followers: "390K", expertise: "NFT" },
-  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
-  { name: "CredibleCrypto", handle: "@CredibleCrypto", followers: "410K", expertise: "TA" },
-  { name: "Crypto Birb", handle: "@crypto_birb", followers: "410K", expertise: "TA" },
-  { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt" },
-  { name: "Trader XO", handle: "@TraderXO", followers: "290K", expertise: "TA" },
-  { name: "SmartContracter", handle: "@SmartContracter", followers: "265K", expertise: "Trading" },
-  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
-  { name: "Larry Cermak", handle: "@lawmaster", followers: "420K", expertise: "Data" },
-  { name: "VentureCoinist", handle: "@VentureCoinist", followers: "210K", expertise: "VC" },
-  { name: "inversebrah", handle: "@inversebrah", followers: "320K", expertise: "Memes" },
-  { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro" },
-  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA" },
-  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi" },
-  { name: "Andrew Kang", handle: "@Rewkang", followers: "340K", expertise: "VC" },
-  { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading" },
-  { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi" },
-  { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC" },
-  { name: "Gareth Soloway", handle: "@GarethSoloway", followers: "310K", expertise: "TA" },
-  { name: "Thor", handle: "@ThorHartvigsen", followers: "95K", expertise: "DeFi" },
-  { name: "Defi Edge", handle: "@thedefiedge", followers: "85K", expertise: "DeFi" },
-  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "80K", expertise: "DeFi" },
-  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", expertise: "Trading" },
-  { name: "Posty", handle: "@PostyXBT", followers: "38K", expertise: "TA" },
-  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", expertise: "DeFi" },
-  { name: "Flood", handle: "@ThinkingUSD", followers: "35K", expertise: "Macro" },
-  { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
-  { name: "Rager", handle: "@Raboratory", followers: "125K", expertise: "Trading" },
-  { name: "Bluntz", handle: "@Bluntz_Capital", followers: "180K", expertise: "TA" },
-  { name: "Pentoshi", handle: "@Pentosh1", followers: "680K", expertise: "Trading" },
-  { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "310K", expertise: "TA" },
-  { name: "Daan Crypto", handle: "@DaanCrypto", followers: "380K", expertise: "Trading" },
-  { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA" },
+// Full KOL Grid - X (Twitter) KOLs
+const twitterKOLs = [
+  { name: "Coinboy", handle: "@coinboy717", followers: "50K", expertise: "Trading", platform: "x" },
+  { name: "ONEMINNFT", handle: "@ONEMINNFT", followers: "45K", expertise: "NFT", platform: "x" },
+  { name: "Nakju", handle: "@nakjumon", followers: "18.7K", expertise: "Trading", platform: "x" },
+  { name: "KuiGas", handle: "@KuiGas", followers: "96K", expertise: "Research", platform: "x" },
+  { name: "Jason Chen", handle: "@jason_chen998", followers: "90K", expertise: "Trading", platform: "x" },
+  { name: "Calman", handle: "@CalmanBTC", followers: "70K", expertise: "BTC", platform: "x" },
+  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", expertise: "Data", platform: "x" },
+  { name: "Hebi", handle: "@hebi555", followers: "377K", expertise: "Trading", platform: "x" },
+  { name: "Koji Higashi", handle: "@Coin_and_Peace", followers: "48K", expertise: "BTC", platform: "x" },
+  { name: "DEG", handle: "@DEG_2020", followers: "32K", expertise: "Trading", platform: "x" },
+  { name: "miin", handle: "@NftPinuts", followers: "85K", expertise: "NFT", platform: "x" },
+  { name: "ikehaya", handle: "@IHayato", followers: "100K", expertise: "NFT", platform: "x" },
+  { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes", platform: "x" },
+  { name: "Novogratz", handle: "@novogratz", followers: "450K", expertise: "Macro", platform: "x" },
+  { name: "Sassano", handle: "@sassal0x", followers: "290K", expertise: "ETH", platform: "x" },
+  { name: "Tone Vays", handle: "@ToneVays", followers: "280K", expertise: "Trading", platform: "x" },
+  { name: "Nick Szabo", handle: "@NickSzabo4", followers: "340K", expertise: "BTC", platform: "x" },
+  { name: "Frank", handle: "@frankdegods", followers: "390K", expertise: "NFT", platform: "x" },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi", platform: "x" },
+  { name: "CredibleCrypto", handle: "@CredibleCrypto", followers: "410K", expertise: "TA", platform: "x" },
+  { name: "Crypto Birb", handle: "@crypto_birb", followers: "410K", expertise: "TA", platform: "x" },
+  { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt", platform: "x" },
+  { name: "Trader XO", handle: "@TraderXO", followers: "290K", expertise: "TA", platform: "x" },
+  { name: "SmartContracter", handle: "@SmartContracter", followers: "265K", expertise: "Trading", platform: "x" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi", platform: "x" },
+  { name: "Larry Cermak", handle: "@lawmaster", followers: "420K", expertise: "Data", platform: "x" },
+  { name: "VentureCoinist", handle: "@VentureCoinist", followers: "210K", expertise: "VC", platform: "x" },
+  { name: "inversebrah", handle: "@inversebrah", followers: "320K", expertise: "Memes", platform: "x" },
+  { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro", platform: "x" },
+  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA", platform: "x" },
+  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi", platform: "x" },
+  { name: "Andrew Kang", handle: "@Rewkang", followers: "340K", expertise: "VC", platform: "x" },
+  { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading", platform: "x" },
+  { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi", platform: "x" },
+  { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC", platform: "x" },
+  { name: "Gareth Soloway", handle: "@GarethSoloway", followers: "310K", expertise: "TA", platform: "x" },
+  { name: "Thor", handle: "@ThorHartvigsen", followers: "95K", expertise: "DeFi", platform: "x" },
+  { name: "Defi Edge", handle: "@thedefiedge", followers: "85K", expertise: "DeFi", platform: "x" },
+  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "80K", expertise: "DeFi", platform: "x" },
+  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", expertise: "Trading", platform: "x" },
+  { name: "Posty", handle: "@PostyXBT", followers: "38K", expertise: "TA", platform: "x" },
+  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", expertise: "DeFi", platform: "x" },
+  { name: "Flood", handle: "@ThinkingUSD", followers: "35K", expertise: "Macro", platform: "x" },
+  { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA", platform: "x" },
+  { name: "Rager", handle: "@Raboratory", followers: "125K", expertise: "Trading", platform: "x" },
+  { name: "Bluntz", handle: "@Bluntz_Capital", followers: "180K", expertise: "TA", platform: "x" },
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "680K", expertise: "Trading", platform: "x" },
+  { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "310K", expertise: "TA", platform: "x" },
+  { name: "Daan Crypto", handle: "@DaanCrypto", followers: "380K", expertise: "Trading", platform: "x" },
+  { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA", platform: "x" },
 ];
+
+// Telegram KOLs (Korean)
+const telegramKOLs = [
+  { name: "변창호 코인사관학교", handle: "@bchosn", followers: "Top", expertise: "리서치", platform: "telegram" },
+  { name: "DeFi 농부 조선생", handle: "@bsc_farmer_kr", followers: "50K+", expertise: "DeFi", platform: "telegram" },
+  { name: "매실남", handle: "@waitstudy", followers: "30K+", expertise: "Trading", platform: "telegram" },
+  { name: "잼민123", handle: "@mujammin123", followers: "25K+", expertise: "에어드랍", platform: "telegram" },
+  { name: "해달의 투자 정보", handle: "@seaotterbtc", followers: "20K+", expertise: "시황", platform: "telegram" },
+  { name: "차설 텔레그램", handle: "@chasul_trader", followers: "40K+", expertise: "TA", platform: "telegram" },
+  { name: "머피", handle: "@murphybus", followers: "35K+", expertise: "Macro", platform: "telegram" },
+  { name: "불개미 CRYPTO", handle: "@fireantcrypto", followers: "30K+", expertise: "초기투자", platform: "telegram" },
+  { name: "차분남", handle: "@chavoonnam", followers: "25K+", expertise: "TA", platform: "telegram" },
+  { name: "훈쌤의 차트 공부방", handle: "@hoon_trading", followers: "20K+", expertise: "교육", platform: "telegram" },
+  { name: "베이지컬리", handle: "@basixally", followers: "15K+", expertise: "BTC", platform: "telegram" },
+  { name: "젠티(Jenti)", handle: "@jenti_defi", followers: "18K+", expertise: "DeFi", platform: "telegram" },
+  { name: "치코의 택배상자", handle: "@chikointhebox", followers: "15K+", expertise: "에어드랍", platform: "telegram" },
+];
+
+// Combined KOL list
+const cryptoKOLs = [...twitterKOLs, ...telegramKOLs];
 
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -351,14 +371,19 @@ const InfluencerService = () => {
               {/* KOL Avatar Grid */}
               <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
                 {cryptoKOLs.map((kol) => {
-                  const avatarUrl = `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
+                  const isTelegram = kol.platform === 'telegram';
+                  const avatarUrl = isTelegram 
+                    ? `https://unavatar.io/telegram/${kol.handle.replace('@', '')}`
+                    : `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
                   const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
-                  const twitterUrl = `https://x.com/${kol.handle.replace('@', '')}`;
+                  const profileUrl = isTelegram 
+                    ? `https://t.me/${kol.handle.replace('@', '')}`
+                    : `https://x.com/${kol.handle.replace('@', '')}`;
                   
                   return (
                     <a
                       key={kol.handle}
-                      href={twitterUrl}
+                      href={profileUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative aspect-square"
@@ -366,7 +391,7 @@ const InfluencerService = () => {
                       <div 
                         className="w-full h-full rounded-xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105"
                         style={{ 
-                          borderColor: `${ACCENT_COLOR}30`,
+                          borderColor: isTelegram ? '#0088cc30' : `${ACCENT_COLOR}30`,
                           backgroundColor: '#0a0a0a'
                         }}
                       >
@@ -382,10 +407,10 @@ const InfluencerService = () => {
                         {/* Hover overlay */}
                         <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1 rounded-xl">
                           <span className="text-[9px] font-medium text-white text-center">{kol.name}</span>
-                          <span className="text-[7px] text-amber-400 text-center">{kol.followers}</span>
+                          <span className={`text-[7px] text-center ${isTelegram ? 'text-sky-400' : 'text-amber-400'}`}>{kol.followers}</span>
                           <span 
                             className="text-[6px] px-1.5 py-0.5 rounded-full mt-0.5"
-                            style={{ backgroundColor: `${ACCENT_COLOR}30`, color: ACCENT_COLOR }}
+                            style={{ backgroundColor: isTelegram ? '#0088cc30' : `${ACCENT_COLOR}30`, color: isTelegram ? '#0088cc' : ACCENT_COLOR }}
                           >
                             {kol.expertise}
                           </span>
@@ -397,7 +422,7 @@ const InfluencerService = () => {
               </div>
 
               <p className="text-center text-white/40 text-sm mt-8">
-                70+ elite KOLs ready to amplify your project · Click to view on 𝕏
+                70+ elite KOLs ready to amplify your project · 𝕏 & Telegram
               </p>
             </div>
           </div>
