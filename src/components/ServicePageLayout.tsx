@@ -312,16 +312,6 @@ const ServicePageLayout = ({
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-16 sm:pt-8 pb-4">
             <div className="max-w-7xl mx-auto text-center">
-              {/* Service Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border mb-3 sm:mb-6"
-                style={{ borderColor: `${accentColor}50`, backgroundColor: `${accentColor}10` }}
-              >
-                <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: accentColor }} />
-                <span className="text-[11px] sm:text-sm" style={{ color: accentColor }}>{serviceName}</span>
-              </motion.div>
 
               {/* Main Headline */}
               <motion.h1 
