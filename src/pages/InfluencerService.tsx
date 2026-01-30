@@ -141,7 +141,7 @@ const twitterKOLs = [
   { name: "VentureCoinist", handle: "@VentureCoinist", followers: "210K", expertise: "VC", platform: "x" },
   { name: "inversebrah", handle: "@inversebrah", followers: "320K", expertise: "Memes", platform: "x" },
   { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro", platform: "x" },
-  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA", platform: "x" },
+  
   { name: "Andrew Kang", handle: "@Rewkang", followers: "340K", expertise: "VC", platform: "x" },
   { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading", platform: "x" },
   { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi", platform: "x" },
