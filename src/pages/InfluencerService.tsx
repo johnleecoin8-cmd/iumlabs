@@ -1,13 +1,11 @@
-import { useEffect, useRef } from "react";
-import { Star, Users, TrendingUp, Target, Sparkles } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Star, Users, TrendingUp, Target, Sparkles, ChevronDown } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
-import Globe3D from "@/components/influencer/Globe3D";
-import KOLNetworkGraph from "@/components/influencer/KOLNetworkGraph";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -189,9 +187,108 @@ const telegramKOLs = [
 // Combined KOL list
 const cryptoKOLs = [...twitterKOLs, ...telegramKOLs];
 
+// KOL Avatar Grid with fade effect
+const KOLAvatarGrid = ({ kols, accentColor }: { kols: typeof cryptoKOLs; accentColor: string }) => {
+  const [showAll, setShowAll] = useState(false);
+  const { isMobile } = useMobileOptimization();
+  
+  // 5 rows: mobile 6 cols = 30, desktop 10 cols = 50
+  const itemsPerRow = isMobile ? 6 : 10;
+  const visibleRows = 5;
+  const visibleCount = itemsPerRow * visibleRows;
+  
+  const displayedKOLs = showAll ? kols : kols.slice(0, visibleCount);
+  const hasMore = kols.length > visibleCount;
+  
+  return (
+    <div className="relative">
+      <div className={`grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3 ${!showAll && hasMore ? 'pb-0' : ''}`}>
+        {displayedKOLs.map((kol, index) => {
+          const isTelegram = kol.platform === 'telegram';
+          const avatarUrl = isTelegram 
+            ? `https://unavatar.io/telegram/${kol.handle.replace('@', '')}`
+            : `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
+          const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
+          const profileUrl = isTelegram 
+            ? `https://t.me/${kol.handle.replace('@', '')}`
+            : `https://x.com/${kol.handle.replace('@', '')}`;
+          
+          // Last row fade effect
+          const isInLastRow = !showAll && hasMore && index >= (visibleRows - 1) * itemsPerRow;
+          
+          return (
+            <a
+              key={kol.handle}
+              href={profileUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative aspect-square"
+              style={{
+                opacity: isInLastRow ? 0.3 : 1,
+                transition: 'opacity 0.3s ease'
+              }}
+            >
+              <div 
+                className="w-full h-full rounded-xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105"
+                style={{ 
+                  borderColor: isTelegram ? '#0088cc30' : `${accentColor}30`,
+                  backgroundColor: '#0a0a0a'
+                }}
+              >
+                <img 
+                  src={avatarUrl}
+                  alt={kol.name}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  onError={(e) => {
+                    e.currentTarget.src = fallbackUrl;
+                  }}
+                />
+              </div>
+              
+              {/* Hover Info */}
+              <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-xl flex flex-col items-center justify-center p-1">
+                <span className="text-white text-[10px] md:text-xs font-medium text-center truncate w-full px-1">{kol.name}</span>
+                <span className="text-white/60 text-[8px] md:text-[10px] truncate w-full text-center">{kol.handle}</span>
+                {isTelegram && (
+                  <span className="text-sky-400 text-[8px] mt-0.5">TG</span>
+                )}
+              </div>
+            </a>
+          );
+        })}
+      </div>
+      
+      {/* Fade Overlay & Show More */}
+      {!showAll && hasMore && (
+        <div className="relative mt-0">
+          <div className="absolute -top-20 left-0 right-0 h-20 bg-gradient-to-t from-[#0A0A0A] to-transparent pointer-events-none" />
+          <button
+            onClick={() => setShowAll(true)}
+            className="w-full py-4 flex items-center justify-center gap-2 text-white/60 hover:text-white transition-colors"
+          >
+            <span className="text-sm">Show all {kols.length} KOLs</span>
+            <ChevronDown className="w-4 h-4" />
+          </button>
+        </div>
+      )}
+      
+      {showAll && hasMore && (
+        <button
+          onClick={() => setShowAll(false)}
+          className="w-full py-4 flex items-center justify-center gap-2 text-white/60 hover:text-white transition-colors mt-4"
+        >
+          <span className="text-sm">Show less</span>
+          <ChevronDown className="w-4 h-4 rotate-180" />
+        </button>
+      )}
+    </div>
+  );
+};
+
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { isMobile, shouldDisableHeavyAnimations, shouldDisable3D } = useMobileOptimization();
+  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
   usePageMeta({
     title: "Korea's Elite KOL Network & Web3 Influencer Marketing | ium Labs",
@@ -290,83 +387,7 @@ const InfluencerService = () => {
 
           <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              {/* 3D Globe for Desktop, 2D Map for Mobile */}
-              {isMobile || shouldDisable3D ? (
-                <KOLNetworkGraph 
-                  kols={cryptoKOLs}
-                  accentColor={ACCENT_COLOR}
-                />
-              ) : (
-                <Globe3D 
-                  kols={cryptoKOLs}
-                  accentColor={ACCENT_COLOR}
-                />
-              )}
-
-              {/* Sound Wave Canvas */}
-              <div className="relative h-16 mt-8 mb-8">
-                <canvas 
-                  ref={canvasRef}
-                  className="absolute inset-0 w-full h-full opacity-60"
-                />
-              </div>
-
-              {/* KOL Avatar Grid */}
-              <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
-                {cryptoKOLs.map((kol) => {
-                  const isTelegram = kol.platform === 'telegram';
-                  const avatarUrl = isTelegram 
-                    ? `https://unavatar.io/telegram/${kol.handle.replace('@', '')}`
-                    : `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
-                  const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
-                  const profileUrl = isTelegram 
-                    ? `https://t.me/${kol.handle.replace('@', '')}`
-                    : `https://x.com/${kol.handle.replace('@', '')}`;
-                  
-                  return (
-                    <a
-                      key={kol.handle}
-                      href={profileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative aspect-square"
-                    >
-                      <div 
-                        className="w-full h-full rounded-xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105"
-                        style={{ 
-                          borderColor: isTelegram ? '#0088cc30' : `${ACCENT_COLOR}30`,
-                          backgroundColor: '#0a0a0a'
-                        }}
-                      >
-                        <img 
-                          src={avatarUrl}
-                          alt={kol.name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = fallbackUrl;
-                          }}
-                        />
-                        
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1 rounded-xl">
-                          <span className="text-[9px] font-medium text-white text-center">{kol.name}</span>
-                          <span className={`text-[7px] text-center ${isTelegram ? 'text-sky-400' : 'text-amber-400'}`}>{kol.followers}</span>
-                          <span 
-                            className="text-[6px] px-1.5 py-0.5 rounded-full mt-0.5"
-                            style={{ backgroundColor: isTelegram ? '#0088cc30' : `${ACCENT_COLOR}30`, color: isTelegram ? '#0088cc' : ACCENT_COLOR }}
-                          >
-                            {kol.expertise}
-                          </span>
-                        </div>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-
-              <p className="text-center text-white/40 text-sm mt-8">
-                70+ elite KOLs ready to amplify your project · 𝕏 & Telegram
-              </p>
+              <KOLAvatarGrid kols={cryptoKOLs} accentColor={ACCENT_COLOR} />
             </div>
           </div>
         </div>
