@@ -31,7 +31,7 @@ export const allClientLogos: ClientLogo[] = [
   { name: "Ondo Finance", logo: ondoLogo, services: ["kol", "pr", "research"] },
   { name: "Bybit", logo: bybitLogo, services: ["kol", "events", "pr"] },
   { name: "Peaq", logo: peaqLogo, services: ["pr", "events", "community"] },
-  { name: "Story Protocol", logo: storyProtocolLogo, services: ["kol", "community"] },
+  // { name: "Story Protocol", logo: storyProtocolLogo, services: ["kol", "community"] }, // Hidden
   { name: "MegaETH", logo: megaethLogo, noInvert: true, services: ["kol", "community"] },
   { name: "Tria", logo: triaLogo, noInvert: true, services: ["community"] },
   { name: "Mantra", logo: mantraLogo, noInvert: true, services: ["kol", "pr", "events"] },

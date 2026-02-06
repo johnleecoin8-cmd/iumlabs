@@ -78,10 +78,10 @@ const fallbackImages: Record<string, {
     logo: bnbLogo,
     bgImage: bnbCampaign
   },
-  'story-protocol': {
-    logo: storyLogo,
-    bgImage: storyCampaign
-  },
+  // 'story-protocol': {
+  //   logo: storyLogo,
+  //   bgImage: storyCampaign
+  // }, // Hidden
   'bybit': {
     logo: bybitLogo,
     bgImage: bybitCampaign

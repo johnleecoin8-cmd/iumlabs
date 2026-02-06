@@ -33,18 +33,7 @@ interface CaseStudy {
 }
 
 const cases: CaseStudy[] = [
-  {
-    name: "Story Protocol",
-    slug: "story-protocol",
-    logo: storyLogo,
-    image: storyBg,
-    video: "/videos/projects/story-hero.mp4",
-    challenge: "한국 진출 0에서 시작",
-    solution: "커뮤니티 + PR + 인플루언서 통합 캠페인",
-    result: "+340%",
-    resultSub: "Trading Volume",
-    category: "IP Protocol"
-  },
+  // Story Protocol hidden
   {
     name: "MANTRA",
     slug: "mantra",

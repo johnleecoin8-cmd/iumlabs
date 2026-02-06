@@ -17,15 +17,9 @@ interface Testimonial {
   result: string;
   rating: number;
 }
-const testimonials: Testimonial[] = [{
-  quote: "ium Labs made our Korea launch seamless. They understood our vision from day one and delivered beyond expectations. Their local expertise and data-driven approach was exactly what we needed.",
-  author: "Sarah Kim",
-  role: "Head of Marketing",
-  company: "Story Protocol",
-  logo: storyLogo,
-  result: "+340% Trading Volume",
-  rating: 5
-}, {
+const testimonials: Testimonial[] = [
+  // Story Protocol testimonial hidden
+{
   quote: "The team's execution was flawless. From community building to media relations, they handled everything with precision and professionalism. We saw real results within weeks.",
   author: "Michael Chen",
   role: "Head of BD",

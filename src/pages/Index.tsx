@@ -13,9 +13,6 @@ const campaignImages = [{
   src: seoulMetroBillboard,
   alt: "Seoul Metro Billboard Campaign for Web3 project marketing in Korea"
 }, {
-  src: storyOriginSummit,
-  alt: "Story Protocol Origin Summit event organized by ium Labs in Seoul"
-}, {
   src: ondoSeminar,
   alt: "Ondo Finance Korean market seminar hosted by ium Labs"
 }, {
