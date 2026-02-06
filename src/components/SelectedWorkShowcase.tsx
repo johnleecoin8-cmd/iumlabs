@@ -23,14 +23,7 @@ const SelectedWorkShowcase = () => {
   const isInView = useInView(ref, { once: true, margin: "400px" }); // Earlier trigger for preloading
 
   const projects = [
-    {
-      name: "Story Protocol",
-      category: "IP Platform",
-      result: "Korea #1",
-      media: storyBg,
-      video: "/videos/projects/story-hero.mp4",
-      slug: "story-protocol"
-    },
+    // Story Protocol hidden
     {
       name: "MANTRA",
       category: "L1 Infrastructure",

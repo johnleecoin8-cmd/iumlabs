@@ -23,20 +23,7 @@ import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 // All Projects Data for 4-row Marquee
 const allProjects = [
   // Row 1 (→ right) - Featured Case Studies
-  {
-    name: 'Story Protocol',
-    slug: 'story-protocol',
-    logo: storyLogo,
-    bgImage: '/images/projects/story-bg.jpg',
-    bgVideo: '/videos/projects/story-hero.mp4',
-    category: 'IP Infra',
-    strategy: 'Branding & Hype',
-    metric: { value: 1, suffix: '', prefix: '#', label: 'Share of Voice' },
-    result: 'Dominated crypto-social discussions for 3 consecutive weeks',
-    color: 'purple',
-    glowColor: 'rgba(168,85,247,0.5)',
-    progress: 100
-  },
+  // Story Protocol hidden
   {
     name: 'peaq',
     slug: 'peaq',

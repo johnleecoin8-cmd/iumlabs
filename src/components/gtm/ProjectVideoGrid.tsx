@@ -33,16 +33,7 @@ interface Project {
 }
 
 const projects: Project[] = [
-  {
-    name: "Story Protocol",
-    slug: "story-protocol",
-    logo: storyLogo,
-    image: storyBg,
-    video: "/videos/projects/story-hero.mp4",
-    result: "+340%",
-    resultSub: "Trading Volume",
-    category: "IP Protocol"
-  },
+  // Story Protocol hidden
   {
     name: "MANTRA",
     slug: "mantra",
