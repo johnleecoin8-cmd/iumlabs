@@ -10,7 +10,7 @@ const routeVideoMap: Record<string, string[]> = {
   '/projects': ['/videos/projects/story-hero.mp4', '/videos/projects/mantra-hero.mp4'],
   '/services': ['/videos/services-background.mp4'],
   '/contact': [],
-  '/research': ['/videos/research-background.mp4'],
+  '/blog': ['/videos/research-background.mp4'],
 };
 
 /**

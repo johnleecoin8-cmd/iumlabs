@@ -1249,7 +1249,7 @@ export default function ResearchForm() {
               <Button
                 type="button"
                 variant="outline"
-                onClick={() => navigate('/ium-admin/research')}
+                onClick={() => navigate('/ium-admin/blog')}
               >
                 Cancel
               </Button>

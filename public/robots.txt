@@ -8,6 +8,11 @@ Disallow: /admin/
 Disallow: /ium-admin/
 Disallow: /api/
 
+# Block search parameter URLs (prevent duplicate content)
+Disallow: /*?
+Disallow: /*?s=*
+Disallow: /*?search*
+
 # Sitemap location
 Sitemap: https://iumlabs.io/sitemap.xml
 
