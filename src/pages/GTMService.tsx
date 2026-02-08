@@ -2125,7 +2125,7 @@ const CTASection = () => {
                 Schedule a Strategy Session
               </Button>
             </Link>
-            <Link to="/research">
+            <Link to="/blog">
               <Button size="lg" variant="outline" className="min-w-[220px] text-base">
                 Get the Market Report
               </Button>

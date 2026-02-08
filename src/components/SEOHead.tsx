@@ -11,6 +11,11 @@ interface SEOHeadProps {
   author?: string;
   keywords?: string[];
   noindex?: boolean;
+  /**
+   * Override canonical URL for alias pages
+   * e.g., /kol-marketing should point to /services/influencer
+   */
+  canonicalPath?: string;
 }
 
 const BASE_URL = 'https://iumlabs.io';
@@ -32,8 +37,10 @@ const SEOHead = ({
   author,
   keywords = [],
   noindex = false,
+  canonicalPath,
 }: SEOHeadProps) => {
   const fullUrl = `${BASE_URL}${path}`;
+  const canonicalUrl = canonicalPath ? `${BASE_URL}${canonicalPath}` : fullUrl;
   const imageUrl = image.startsWith('http') ? image : `${BASE_URL}${image}`;
   
   // Default keywords for the site
@@ -59,8 +66,8 @@ const SEOHead = ({
       <meta name="keywords" content={allKeywords.join(', ')} />
       <meta name="author" content={author || SITE_NAME} />
       
-      {/* Canonical URL */}
-      <link rel="canonical" href={fullUrl} />
+      {/* Canonical URL - supports override for alias pages */}
+      <link rel="canonical" href={canonicalUrl} />
       
       {/* Robots */}
       {noindex ? (

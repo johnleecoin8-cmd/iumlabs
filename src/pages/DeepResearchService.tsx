@@ -761,7 +761,7 @@ const DeepResearchService = () => {
               <div className="container mx-auto px-4 sm:px-6 lg:px-12">
                 <div className="flex items-center justify-end mb-6">
                   <Link 
-                    to="/research" 
+                    to="/blog" 
                     className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
                   >
                     View All <ArrowRight className="w-4 h-4" />
@@ -771,7 +771,7 @@ const DeepResearchService = () => {
                   {researchPosts.map(post => (
                     <Link
                       key={post.id}
-                      to={`/research/${post.slug}`}
+                      to={`/blog/${post.slug}`}
                       className="group p-4 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300"
                     >
                       {post.image && (

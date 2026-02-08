@@ -3,5 +3,9 @@
 /sitemap.xml  /sitemap.xml  200
 /robots.txt  /robots.txt  200
 
+# 301 Redirects for /research → /blog migration (SEO value preservation)
+/research  /blog  301
+/research/*  /blog/:splat  301
+
 # SPA fallback
 /*  /index.html  200
