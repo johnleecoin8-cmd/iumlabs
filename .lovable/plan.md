@@ -1,193 +1,114 @@
 
+# Google Search Console SEO 문제 해결 계획
 
-# 3D 인터랙티브 지구본 KOL 네트워크 구현 계획
+## 발견된 문제들
 
-## 개요
-현재 2D 이미지 기반 아시아 지도를 **3D 회전 가능한 지구본**으로 교체하고, 국가를 클릭하면 해당 지역으로 **확대(zoom)** 되면서 해당 국가의 KOL들이 표시되는 인터랙티브 시스템을 구현합니다.
+### 1. "적절한 표준 태그가 포함된 대체 페이지" (Alternate page with proper canonical tag)
+- **영향 받은 URL**: `https://iumlabs.io/blog/kol-marketing`, `https://iumlabs.io/?s={search_term_string}`
+- **원인**: 검색 파라미터(`?s=`) URL이 크롤링되고 있으나 차단되지 않음
 
----
+### 2. `/research` 경로 문제
+- **영향 받은 URL**: `https://iumlabs.io/research` (2026.2.6 크롤링됨)
+- **원인**: `/research` → `/blog`로 리브랜딩했지만:
+  - 301 리다이렉트가 없음
+  - 코드 내 `/research` 링크가 여전히 존재 (GTMService.tsx, DeepResearchService.tsx 등)
+  - 구글이 여전히 `/research` URL을 크롤링 중
 
-## 핵심 기능
-
-### 1. 3D 지구본 시각화
-- React Three Fiber + Drei를 사용한 텍스처 매핑 지구본
-- 아시아 중심 초기 뷰 (한국이 보이는 각도)
-- 느린 자동 회전 + 마우스 드래그로 수동 회전
-
-### 2. 국가 마커
-- 각 국가 위치에 3D 핀/마커 배치
-- 호버 시 글로우 효과 + 국가명 표시
-- 클릭 가능한 인터랙티브 마커
-
-### 3. 클릭 시 확대 (Zoom to Region)
-- 국가 마커 클릭 → 카메라가 해당 지역으로 부드럽게 이동/확대
-- 확대된 상태에서 해당 국가의 KOL 목록 표시
-- "뒤로가기" 버튼으로 전체 지구본 뷰로 복귀
+### 3. 중복 콘텐츠 가능성
+- `/kol-marketing`과 `/services/influencer`가 동일한 컴포넌트를 렌더링
+- 두 URL 모두 sitemap에 있음
 
 ---
 
-## 시각적 디자인
+## 해결 방안
+
+### Phase 1: robots.txt 업데이트
+**목표**: 검색 파라미터 URL 크롤링 차단
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │                    3D GLOBE                            │ │
-│  │                                                        │ │
-│  │              🌏  [Rotating Earth]                      │ │
-│  │                   ○ KR                                 │ │
-│  │                ○ CN    ○ JP                            │ │
-│  │              ○ TH  ○ TW                                │ │
-│  │            ○ SG                                        │ │
-│  │                                                        │ │
-│  │   [Active Regions: 12]              [← Back to Globe]  │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                             │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │  [ZOOMED STATE - Korea Selected]                       ││
-│  │  ┌─────────┬─────────┬─────────┬─────────┐             ││
-│  │  │ Pentoshi│ Coinboy │ 변창호  │ 차설    │             ││
-│  │  │ 680K    │ 50K     │ Top     │ 40K+    │             ││
-│  │  └─────────┴─────────┴─────────┴─────────┘             ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
+# robots.txt에 추가
+Disallow: /*?s=*
+Disallow: /*?search*
+Disallow: /?*
 ```
 
----
-
-## 기술 구현
-
-### 파일 구조
+### Phase 2: 301 리다이렉트 추가
+**목표**: 이전 URL에서 새 URL로 영구 리다이렉트
 
 ```text
-src/
-├── components/
-│   └── influencer/
-│       ├── KOLNetworkGraph.tsx  (기존 - 삭제 또는 유지)
-│       ├── Globe3D.tsx          (신규 - 3D 지구본 컴포넌트)
-│       ├── GlobeMarker.tsx      (신규 - 국가 마커 컴포넌트)
-│       └── KOLDetailPanel.tsx   (신규 - KOL 상세 패널)
-└── pages/
-    └── InfluencerService.tsx    (수정 - Globe3D 적용)
+# _redirects에 추가
+/research  /blog  301
+/research/*  /blog/:splat  301
 ```
 
-### 주요 의존성 활용
-- `@react-three/fiber@^8.18.0` - React Three Fiber
-- `@react-three/drei@^9.122.0` - OrbitControls, Sphere, Html 등
-- `three@^0.160.1` - Three.js 코어
+### Phase 3: 내부 링크 수정
+**목표**: 코드 내 모든 `/research` 참조를 `/blog`로 변경
 
----
-
-## 상세 구현
-
-### 1. Globe3D.tsx (3D 지구본 메인 컴포넌트)
-
-**핵심 요소:**
-- `<Canvas>` - Three.js 렌더링 컨테이너
-- `<OrbitControls>` - 마우스 드래그/줌 제어
-- `<Sphere>` - 지구본 메쉬 + 텍스처
-- `<Html>` - 3D 공간에 HTML 마커 렌더링
-
-**상태 관리:**
-- `selectedCountry` - 현재 선택된 국가 (null = 전체 뷰)
-- `isZoomed` - 확대 상태 여부
-- `cameraTarget` - 카메라 목표 위치
-
-### 2. 국가 좌표 매핑
-
-위도/경도 → 3D 좌표 변환 공식:
-```
-x = -sin(φ) × cos(θ)
-y = cos(φ)
-z = sin(φ) × sin(θ)
-
-φ = (90 - latitude) × π/180
-θ = (longitude + 180) × π/180
-```
-
-**국가별 좌표:**
-| 국가 | 위도 | 경도 |
+| 파일 | 현재 | 변경 |
 |------|------|------|
-| KR 한국 | 37.5 | 127 |
-| JP 일본 | 36 | 138 |
-| CN 중국 | 35 | 105 |
-| SG 싱가포르 | 1.3 | 103.8 |
-| TW 대만 | 25 | 121 |
-| HK 홍콩 | 22 | 114 |
-| TH 태국 | 14 | 100 |
-| VN 베트남 | 16 | 108 |
-| ID 인도네시아 | -6 | 107 |
-| PH 필리핀 | 14.5 | 121 |
-| MY 말레이시아 | 3 | 102 |
-| IN 인도 | 20 | 77 |
-| AE UAE | 24 | 54 |
+| `src/pages/GTMService.tsx` | `/research` | `/blog` |
+| `src/pages/DeepResearchService.tsx` | `/research`, `/research/${slug}` | `/blog`, `/blog/${slug}` |
+| `src/pages/admin/ResearchForm.tsx` | `/ium-admin/research` | `/ium-admin/blog` |
+| `src/hooks/useVideoPreload.ts` | `'/research'` | `'/blog'` |
 
-### 3. 카메라 확대 애니메이션
+### Phase 4: Canonical URL 명확화
+**목표**: 서비스 별칭 URL에 기본 canonical 지정
 
-클릭 시 카메라 이동:
-```typescript
-// 전체 뷰: 거리 4.5, 아시아 중심
-// 확대 뷰: 거리 2.5, 선택 국가 중심
+| 별칭 URL | Canonical URL |
+|----------|---------------|
+| `/kol-marketing` | `/services/influencer` |
+| `/growth-marketing` | `/services/gtm` |
+| `/community-growth` | `/services/community` |
+| `/research-data` | `/services/deep-research` |
 
-useFrame(() => {
-  if (isZoomed && targetPosition) {
-    camera.position.lerp(targetPosition, 0.05);
-    controls.target.lerp(targetCenter, 0.05);
-  }
-});
-```
+**또는** sitemap에서 중복 URL 제거
 
-### 4. 모바일 최적화
-
-`useMobileOptimization()` 훅 활용:
-- **모바일**: 정적 2D 폴백 (기존 KOLNetworkGraph 유지)
-- **데스크톱**: 풀 3D 인터랙티브 지구본
+### Phase 5: Sitemap 정리
+- Story Protocol 관련 URL 제거 (숨김 처리됨)
+- `lastmod` 날짜 업데이트
+- 중복 서비스 URL 정리
 
 ---
 
-## 사용자 흐름
+## 구현 순서
 
 ```text
-1. 페이지 로드
-   └── 3D 지구본 표시 (아시아 중심, 느린 자동회전)
-   
-2. 마우스 호버
-   └── 국가 마커 위에 호버 → 글로우 효과 + 국가명 표시
-   
-3. 국가 클릭
-   ├── 카메라가 해당 국가로 부드럽게 확대
-   ├── 자동회전 일시정지
-   └── 하단에 해당 국가 KOL 그리드 표시
-   
-4. KOL 카드 클릭
-   └── 프로필 링크로 이동 (X/Telegram)
-   
-5. 뒤로가기
-   └── "Back to Globe" 클릭 → 전체 뷰로 복귀
+1. robots.txt 업데이트 (검색 파라미터 차단)
+2. _redirects에 /research → /blog 301 리다이렉트 추가
+3. 코드 내 /research 링크를 /blog로 변경 (4개 파일)
+4. sitemap.xml에서 Story Protocol 제거 + 날짜 업데이트
+5. 별칭 URL에 canonical 태그 추가 (선택)
 ```
 
 ---
 
-## 구현 단계
-
-| 단계 | 작업 | 예상 난이도 |
-|------|------|-------------|
-| 1 | Globe3D 기본 컴포넌트 생성 (회전 지구본) | 중 |
-| 2 | 국가 마커 배치 + 호버 효과 | 중 |
-| 3 | 클릭 → 카메라 줌 애니메이션 | 상 |
-| 4 | KOL 상세 패널 연동 | 중 |
-| 5 | 모바일 폴백 처리 | 하 |
-| 6 | 성능 최적화 + 테스트 | 중 |
+## 예상 결과
+- 검색 파라미터 URL 크롤링 중단
+- `/research` → `/blog` 리다이렉트로 SEO 가치 보존
+- 중복 콘텐츠 문제 해결
+- Google Search Console에서 "적절한 표준 태그" 오류 해소
 
 ---
 
-## 추가 고려사항
+## 기술 세부사항
 
-### 지구 텍스처 옵션
-1. **어두운 스타일** - 검은 바다 + 밝은 대륙 경계선 (Arkham 느낌)
-2. **밤 지구** - NASA night lights 이미지
-3. **와이어프레임** - 홀로그램 스타일 (Logo3D와 일관성)
+### _redirects 파일 변경
+```text
+# 기존
+/*  /index.html  200
 
-### 연결선 효과
-- 선택 국가에서 다른 국가로 뻗는 곡선 연결선
-- 데이터 흐름을 시각화하는 애니메이션
+# 변경
+/research  /blog  301
+/research/*  /blog/:splat  301
+/*  /index.html  200
+```
 
+### robots.txt 추가 규칙
+```text
+# Block search parameter URLs
+Disallow: /*?
+Disallow: /*?s=*
+```
+
+### 서비스 페이지 Canonical 처리 (SEOHead.tsx)
+서비스 별칭 페이지에서 주요 URL을 canonical로 지정하는 props 추가
