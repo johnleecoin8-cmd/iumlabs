@@ -14,7 +14,7 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+// Story Protocol removed per client visibility restrictions
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra-mono.png";
@@ -93,10 +93,6 @@ const clientLogos = [{
   name: "Peaq",
   logo: peaqLogo,
   noInvert: false
-}, {
-  name: "Story Protocol",
-  logo: storyProtocolLogo,
-  noInvert: true
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
