@@ -157,9 +157,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           </div>
         </div>
 
-        {/* Hover border glow */}
+        {/* Hover border glow - enhanced with colored edge glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className="absolute inset-0 border border-white/25" />
+          <div className="absolute inset-0 border border-white/25 shadow-[inset_0_0_30px_rgba(255,255,255,0.06)]" />
+          <div className="absolute -inset-px bg-gradient-to-t from-primary/20 via-transparent to-transparent rounded-[1px]" />
         </div>
       </Link>
     </div>
