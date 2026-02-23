@@ -49,6 +49,11 @@ const Index = () => {
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
+          <AnimatedSection direction="none">
+            <Suspense fallback={<SectionLoader />}>
+              <MediaPartnersSection />
+            </Suspense>
+          </AnimatedSection>
         </div>
       </section>
       
@@ -110,14 +115,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Media Partners */}
-      <section className="bg-surface-base" id="media-partners">
-        <AnimatedSection direction="none">
-          <Suspense fallback={<SectionLoader />}>
-            <MediaPartnersSection />
-          </Suspense>
-        </AnimatedSection>
-      </section>
+
+
       
       {/* Contact - 05 */}
       <section className="bg-surface-base" id="contact">

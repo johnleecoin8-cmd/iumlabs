@@ -22,7 +22,7 @@ const WhyChooseUsSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-[600px] sm:min-h-[700px] md:min-h-[800px] lg:min-h-[90vh] flex items-center justify-center">
+      <div className="relative z-10 min-h-[560px] sm:min-h-[640px] md:min-h-[720px] lg:min-h-[80vh] flex items-center justify-center">
         <motion.div
           className="container mx-auto px-4 sm:px-8 md:px-10 py-16 sm:py-20 md:py-24 max-w-2xl text-center"
           initial={{ opacity: 0, y: 30 }}
