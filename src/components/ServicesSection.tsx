@@ -2,7 +2,6 @@ import { ArrowRight, Compass, Users, Search, Mic2, Newspaper, Rocket, Target, Fi
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
-// Import service images
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
@@ -81,9 +80,10 @@ const services = [
 
 const ServiceRow = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
+  const isEven = index % 2 === 0; // 좌, 우 교차
 
   const { ref, isVisible } = useScrollAnimation({
-    threshold: 0.1,
+    threshold: 0.15,
     rootMargin: '30px',
     triggerOnce: true
   });
@@ -92,56 +92,92 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
     <div
       ref={ref}
       className={cn(
-        "group transition-all duration-500 ease-out will-change-transform",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+        "group transition-all duration-600 ease-out will-change-transform",
+        isVisible
+          ? "opacity-100 translate-x-0"
+          : isEven
+            ? "opacity-0 -translate-x-12"
+            : "opacity-0 translate-x-12"
       )}
-      style={{ transitionDelay: `${index * 60}ms` }}
+      style={{ transitionDelay: `${index * 80}ms` }}
     >
       <Link
         to={service.link}
-        className="relative flex items-center gap-4 sm:gap-6 md:gap-10 px-4 sm:px-8 md:px-12 lg:px-16 py-5 sm:py-6 md:py-7 border-b border-border/30 overflow-hidden transition-all duration-500 active:scale-[0.995]"
+        className={cn(
+          "relative flex items-stretch overflow-hidden border-b border-border/20 transition-all duration-500 active:scale-[0.995] min-h-[120px] sm:min-h-[140px] md:min-h-[160px]",
+          isEven ? "flex-row" : "flex-row-reverse"
+        )}
       >
-        {/* Hover background image reveal */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-          {service.image && (
-            <img
-              src={service.image}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700"
-            />
-          )}
-          <div className="absolute inset-0 bg-black/70 group-hover:bg-black/60 transition-colors duration-500" />
-        </div>
-
-        {/* Number */}
-        <span className="relative z-10 text-xs sm:text-sm font-mono text-muted-foreground/50 group-hover:text-white/50 transition-colors duration-500 w-6 sm:w-8 flex-shrink-0">
-          {service.number}
-        </span>
-
-        {/* Icon */}
-        <div className="relative z-10 flex-shrink-0">
-          <Icon
-            className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground/60 group-hover:text-white group-hover:drop-shadow-[0_0_12px_rgba(255,255,255,0.3)] transition-all duration-500"
-            strokeWidth={1.5}
+        {/* Image side */}
+        <div className="relative w-[35%] sm:w-[30%] md:w-[28%] flex-shrink-0 overflow-hidden">
+          <img
+            src={service.image}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500" />
+          {/* Number overlay */}
+          <div className={cn(
+            "absolute bottom-3 sm:bottom-4 text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500",
+            isEven ? "right-3 sm:right-4" : "left-3 sm:left-4"
+          )}>
+            {service.number}
+          </div>
         </div>
 
-        {/* Title */}
-        <h3 className="relative z-10 text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-foreground group-hover:text-white transition-colors duration-500 tracking-tight flex-shrink-0">
-          {service.title}
-        </h3>
+        {/* Content side */}
+        <div className={cn(
+          "flex-1 flex flex-col justify-center py-5 sm:py-6 md:py-8 transition-colors duration-500 bg-background group-hover:bg-secondary/30",
+          isEven ? "pl-5 sm:pl-8 md:pl-12 pr-4 sm:pr-6 md:pr-10" : "pr-5 sm:pr-8 md:pr-12 pl-4 sm:pl-6 md:pl-10"
+        )}>
+          <div className="flex items-center gap-3 mb-2 sm:mb-3">
+            <Icon
+              className="w-4 h-4 sm:w-5 sm:h-5 text-primary/70 group-hover:text-primary transition-colors duration-500"
+              strokeWidth={1.5}
+            />
+            <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500">
+              Service {service.number}
+            </span>
+          </div>
 
-        {/* Description - hidden on mobile, shown on md+ */}
-        <p className="relative z-10 hidden md:block text-sm lg:text-base text-muted-foreground/60 group-hover:text-white/70 transition-colors duration-500 flex-1 min-w-0 truncate">
-          {service.description}
-        </p>
+          <h3 className={cn(
+            "text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight mb-1.5 sm:mb-2",
+            isEven ? "text-left" : "text-right"
+          )}>
+            {service.title}
+          </h3>
 
-        {/* Arrow */}
-        <div className="relative z-10 flex-shrink-0 ml-auto">
-          <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground/40 group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300" />
+          <p className={cn(
+            "text-xs sm:text-sm md:text-base text-muted-foreground/60 group-hover:text-muted-foreground/90 transition-colors duration-500 leading-relaxed max-w-md",
+            isEven ? "text-left" : "text-right ml-auto"
+          )}>
+            {service.description}
+          </p>
+
+          {/* Arrow indicator */}
+          <div className={cn(
+            "mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-muted-foreground/40 group-hover:text-primary transition-all duration-300",
+            isEven ? "justify-start" : "justify-end"
+          )}>
+            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
+              Learn more
+            </span>
+            <ArrowRight className={cn(
+              "w-4 h-4 transition-transform duration-300",
+              isEven
+                ? "group-hover:translate-x-1.5"
+                : "rotate-180 group-hover:-translate-x-1.5"
+            )} />
+          </div>
         </div>
+
+        {/* Hover accent line */}
+        <div className={cn(
+          "absolute top-0 bottom-0 w-[3px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top",
+          isEven ? "left-0" : "right-0"
+        )} />
       </Link>
     </div>
   );
@@ -150,7 +186,7 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
 const ServicesSection = () => {
   return (
     <section className="bg-background">
-      <div className="flex flex-col border-t border-border/30">
+      <div className="flex flex-col">
         {services.map((service, index) => (
           <ServiceRow key={service.number} service={service} index={index} />
         ))}
