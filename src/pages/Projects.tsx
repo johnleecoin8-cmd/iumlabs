@@ -611,11 +611,14 @@ const Projects = () => {
     poster: '/images/projects-hero-poster.jpg',
   });
 
-  // Trigger stats visibility when video loads
+  // Trigger stats visibility when component mounts (with fallback for slow video)
   useEffect(() => {
     if (heroVideoLoaded) {
       setTimeout(() => setIsStatsVisible(true), 300);
     }
+    // Fallback: show stats even if video hasn't loaded after 1.5s
+    const fallbackTimer = setTimeout(() => setIsStatsVisible(true), 1500);
+    return () => clearTimeout(fallbackTimer);
   }, [heroVideoLoaded]);
 
   // Fetch projects from database + first gallery image (display_order asc)
