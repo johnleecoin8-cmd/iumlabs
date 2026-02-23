@@ -32,34 +32,47 @@ const WhyChooseUsSection = () => {
         >
           {/* Small label */}
           <motion.span
-            className="inline-block text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/40 font-mono mb-4 sm:mb-6"
+            className="inline-block text-[10px] sm:text-xs tracking-[0.35em] uppercase text-primary/60 font-mono mb-4 sm:mb-6 border border-primary/20 px-3 py-1 rounded-full backdrop-blur-sm"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            Seoul, Korea
+            ◆ Seoul, Korea
           </motion.span>
 
           {/* Headline */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
-            Data-Driven<br />
-            Market Entry.
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 tracking-tight leading-[1.05]">
+            <span className="block">Data-Driven</span>
+            <span className="block bg-gradient-to-r from-white via-primary/90 to-primary bg-clip-text text-transparent">
+              Market Entry.
+            </span>
           </h2>
+
+          {/* Sub-tagline */}
+          <motion.p
+            className="text-white/30 text-xs sm:text-sm font-mono tracking-[0.2em] uppercase mb-6 sm:mb-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
+            Research · Strategy · Execution
+          </motion.p>
 
           {/* Description */}
           <p className="text-white/55 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mb-8 sm:mb-10 tracking-wide">
-            In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. 
+            In Korean, <span className="text-white/80 font-semibold italic">'ium' (이음)</span> means 'connection.' But to us, it means <span className="text-primary/80 font-semibold">integration</span>. 
             We engineer your entry into the Korean market using proprietary research and 
-            quantitative impact analysis. We structure your narrative to flawlessly 'ium' (connect) 
+            quantitative impact analysis. We structure your narrative to flawlessly <span className="text-white/80 font-semibold italic">'ium'</span> (connect) 
             global protocols with local liquidity.
           </p>
 
           {/* Bottom accent */}
           <div className="flex items-center gap-4">
-            <div className="w-12 h-px bg-primary/50" />
-            <p className="text-primary/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
-              Founded by veterans from Binance & KuCoin
+            <div className="w-16 h-[2px] bg-gradient-to-r from-primary/70 to-transparent" />
+            <p className="text-white/50 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
+              Founded by veterans from <span className="text-primary/80">Binance</span> & <span className="text-primary/80">KuCoin</span>
             </p>
           </div>
         </motion.div>
