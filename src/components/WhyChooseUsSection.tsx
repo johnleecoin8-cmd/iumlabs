@@ -30,7 +30,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           {/* Headline */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-[3.2rem] lg:text-[3.8rem] font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1] whitespace-nowrap">
             Mastering Seoul's Velocity.
           </h2>
 
