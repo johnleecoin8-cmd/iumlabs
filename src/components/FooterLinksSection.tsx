@@ -102,13 +102,13 @@ const FooterLinksSection = () => {
                   {footerLinks.marketing.title}
                 </h4>
                 <ul className="space-y-2 md:space-y-3">
-                  {footerLinks.marketing.links.map(link => (
-                    <li key={link.name}>
+                  {footerLinks.marketing.links.map((link) =>
+                  <li key={link.name}>
                       <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                         {link.name}
                       </Link>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 
@@ -118,13 +118,13 @@ const FooterLinksSection = () => {
                   {footerLinks.growth.title}
                 </h4>
                 <ul className="space-y-2 md:space-y-3">
-                  {footerLinks.growth.links.map(link => (
-                    <li key={link.name}>
+                  {footerLinks.growth.links.map((link) =>
+                  <li key={link.name}>
                       <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                         {link.name}
                       </Link>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 
@@ -134,13 +134,13 @@ const FooterLinksSection = () => {
                   {footerLinks.company.title}
                 </h4>
                 <ul className="space-y-2 md:space-y-3">
-                  {footerLinks.company.links.map(link => (
-                    <li key={link.name}>
+                  {footerLinks.company.links.map((link) =>
+                  <li key={link.name}>
                       <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                         {link.name}
                       </Link>
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 
@@ -150,29 +150,29 @@ const FooterLinksSection = () => {
                   {footerLinks.legal.title}
                 </h4>
                 <ul className="space-y-2">
-                  {footerLinks.legal.links.map(link => (
-                    <li key={link.name}>
-                      {link.name === "Terms of Service" ? (
-                        <button 
-                          onClick={() => setTermsOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                        >
+                  {footerLinks.legal.links.map((link) =>
+                  <li key={link.name}>
+                      {link.name === "Terms of Service" ?
+                    <button
+                      onClick={() => setTermsOpen(true)}
+                      className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left">
+
                           {link.name}
-                        </button>
-                      ) : link.name === "Privacy Policy" ? (
-                        <button 
-                          onClick={() => setPrivacyOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                        >
+                        </button> :
+                    link.name === "Privacy Policy" ?
+                    <button
+                      onClick={() => setPrivacyOpen(true)}
+                      className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left">
+
                           {link.name}
-                        </button>
-                      ) : (
-                        <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
+                        </button> :
+
+                    <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
                           {link.name}
                         </Link>
-                      )}
+                    }
                     </li>
-                  ))}
+                  )}
                 </ul>
               </div>
 
@@ -209,29 +209,29 @@ const FooterLinksSection = () => {
                   {footerLinks.legal.title}
                 </h4>
                 <ul className="space-y-3">
-                  {footerLinks.legal.links.map(link => (
-                    <li key={link.name}>
-                      {link.name === "Terms of Service" ? (
-                        <button 
-                          onClick={() => setTermsOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
-                        >
+                  {footerLinks.legal.links.map((link) =>
+                  <li key={link.name}>
+                      {link.name === "Terms of Service" ?
+                    <button
+                      onClick={() => setTermsOpen(true)}
+                      className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left">
+
                           {link.name}
-                        </button>
-                      ) : link.name === "Privacy Policy" ? (
-                        <button 
-                          onClick={() => setPrivacyOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
-                        >
+                        </button> :
+                    link.name === "Privacy Policy" ?
+                    <button
+                      onClick={() => setPrivacyOpen(true)}
+                      className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left">
+
                           {link.name}
-                        </button>
-                      ) : (
-                        <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
+                        </button> :
+
+                    <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                           {link.name}
                         </Link>
-                      )}
+                    }
                     </li>
-                  ))}
+                  )}
                 </ul>
                 <div className="mt-6 flex items-start gap-3 text-muted-foreground/70 text-xs">
                   <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
@@ -267,12 +267,12 @@ const FooterLinksSection = () => {
           </nav>
 
           {/* Bottom Row - Copyright & Social */}
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 py-0">
-            <p className="text-muted-foreground/60 text-sm">
-              © {currentYear} {brandConfig.name}. All rights reserved.
-            </p>
-            
-          </div>
+          
+
+
+
+
+
         </div>
       </section>
 
@@ -280,7 +280,7 @@ const FooterLinksSection = () => {
       <TermsModal isOpen={termsOpen} onClose={() => setTermsOpen(false)} />
       <PrivacyModal isOpen={privacyOpen} onClose={() => setPrivacyOpen(false)} />
       <MissionModal isOpen={missionOpen} onClose={() => setMissionOpen(false)} />
-    </>
-  );
+    </>);
+
 };
 export default FooterLinksSection;
