@@ -140,14 +140,14 @@ const AnimatedStat = ({
   label,
   delay = 0,
   isVisible = true
-}: {
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  label: string;
-  delay?: number;
-  isVisible?: boolean;
-}) => {
+
+
+
+
+
+
+
+}: {value: number;suffix?: string;prefix?: string;label: string;delay?: number;isVisible?: boolean;}) => {
   const count = useCountUp({
     end: value,
     delay: delay * 1000,
@@ -178,10 +178,10 @@ const AnimatedStat = ({
 const GlitchText = ({
   children,
   className = ''
-}: {
-  children: string;
-  className?: string;
-}) => {
+
+
+
+}: {children: string;className?: string;}) => {
   return <span className={`relative inline-block ${className}`}>
       <span className="relative z-10">{children}</span>
       <motion.span className="absolute top-0 left-0 text-primary opacity-70 z-0" style={{
@@ -229,109 +229,109 @@ const HeroSection = () => {
       
       {/* Grid pattern */}
       <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-        backgroundImage: `
+      backgroundImage: `
           linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
           linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
         `,
-        backgroundSize: '60px 60px'
-      }} />
+      backgroundSize: '60px 60px'
+    }} />
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto">
         <motion.p initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6
-        }} className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6
+      }} className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
           <motion.span className="w-8 h-px bg-primary" initial={{
-            scaleX: 0
-          }} animate={{
-            scaleX: 1
-          }} transition={{
-            duration: 0.8,
-            delay: 0.2
-          }} />
+          scaleX: 0
+        }} animate={{
+          scaleX: 1
+        }} transition={{
+          duration: 0.8,
+          delay: 0.2
+        }} />
           Korea GTM Strategy
         </motion.p>
         
         <motion.h1 initial={{
-          opacity: 0,
-          y: 40
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.8,
-          delay: 0.1
-        }} className="text-[clamp(1.5rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-8">
+        opacity: 0,
+        y: 40
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.1
+      }} className="text-[clamp(1.5rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-8">
           <span className="block overflow-hidden">
             <motion.span className="block" initial={{
-              y: '100%'
-            }} animate={{
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.2,
-              ease: [0.33, 1, 0.68, 1]
-            }}>
+            y: '100%'
+          }} animate={{
+            y: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.2,
+            ease: [0.33, 1, 0.68, 1]
+          }}>
               <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
             </motion.span>
           </span>
           <span className="block overflow-hidden">
             <motion.span className="block text-foreground/80 text-[clamp(1.2rem,4vw,3rem)]" initial={{
-              y: '100%'
-            }} animate={{
-              y: 0
-            }} transition={{
-              duration: 0.8,
-              delay: 0.35,
-              ease: [0.33, 1, 0.68, 1]
-            }}>
+            y: '100%'
+          }} animate={{
+            y: 0
+          }} transition={{
+            duration: 0.8,
+            delay: 0.35,
+            ease: [0.33, 1, 0.68, 1]
+          }}>
               Your Strategic Bridge to the Korean Ecosystem.
             </motion.span>
           </span>
         </motion.h1>
 
         <motion.p initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.5
-        }} className="text-sm sm:text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl leading-relaxed">
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6,
+        delay: 0.5
+      }} className="text-sm sm:text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl leading-relaxed">
           The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
         </motion.p>
 
         {/* Stats Row */}
         <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.7
-        }} className="flex flex-row items-center gap-6 md:gap-12 mb-10 md:mb-16">
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6,
+        delay: 0.7
+      }} className="flex flex-row items-center gap-6 md:gap-12 mb-10 md:mb-16">
           <div className="text-center group">
             <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 0.8,
-              duration: 0.5,
-              type: "spring"
-            }}>
+            opacity: 0,
+            scale: 0.5
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            delay: 0.8,
+            duration: 0.5,
+            type: "spring"
+          }}>
               #2
             </motion.p>
             <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Global Volume</p>
@@ -339,16 +339,16 @@ const HeroSection = () => {
           <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
           <div className="text-center group">
             <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 1.0,
-              duration: 0.5,
-              type: "spring"
-            }}>
+            opacity: 0,
+            scale: 0.5
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            delay: 1.0,
+            duration: 0.5,
+            type: "spring"
+          }}>
               4x
             </motion.p>
             <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Velocity</p>
@@ -356,16 +356,16 @@ const HeroSection = () => {
           <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
           <div className="text-center group">
             <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 1.2,
-              duration: 0.5,
-              type: "spring"
-            }}>
+            opacity: 0,
+            scale: 0.5
+          }} animate={{
+            opacity: 1,
+            scale: 1
+          }} transition={{
+            delay: 1.2,
+            duration: 0.5,
+            type: "spring"
+          }}>
               100%
             </motion.p>
             <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Retail-Driven</p>
@@ -374,15 +374,15 @@ const HeroSection = () => {
 
         {/* CTA Button */}
         <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          delay: 1.0,
-          duration: 0.6
-        }}>
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        delay: 1.0,
+        duration: 0.6
+      }}>
           <Link to="/projects" className="inline-flex items-center gap-3 text-sm md:text-base text-muted-foreground hover:text-primary transition-colors group border border-border/50 hover:border-primary/50 px-6 py-3 rounded-sm">
             View Our Case Studies
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -392,36 +392,36 @@ const HeroSection = () => {
 
       {/* Scroll indicator */}
       <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        delay: 1.5,
-        duration: 0.8
-      }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
+      opacity: 0,
+      y: 20
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      delay: 1.5,
+      duration: 0.8
+    }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
         <motion.span className="text-sm text-muted-foreground tracking-[0.3em] uppercase" animate={{
-          opacity: [0.5, 1, 0.5]
-        }} transition={{
-          duration: 2,
-          repeat: Infinity
-        }}>
+        opacity: [0.5, 1, 0.5]
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }}>
           Scroll
         </motion.span>
         <motion.div className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2" animate={{
-          borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
-        }} transition={{
-          duration: 2,
-          repeat: Infinity
-        }}>
+        borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }}>
           <motion.div className="w-1.5 h-3 bg-primary rounded-full" animate={{
-            y: [0, 16, 0]
-          }} transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }} />
+          y: [0, 16, 0]
+        }} transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }} />
         </motion.div>
       </motion.div>
     </section>;
@@ -437,14 +437,14 @@ const AnimatedProgressBar = ({
   delay = 0,
   isHighlight = false,
   isVisible = true
-}: {
-  label: string;
-  percentage: number;
-  value: string;
-  delay?: number;
-  isHighlight?: boolean;
-  isVisible?: boolean;
-}) => {
+
+
+
+
+
+
+
+}: {label: string;percentage: number;value: string;delay?: number;isHighlight?: boolean;isVisible?: boolean;}) => {
   const [width, setWidth] = useState(0);
   useEffect(() => {
     if (isVisible) {
@@ -480,9 +480,9 @@ const AnimatedProgressBar = ({
 // ============================================
 const KoreaMapVisualization = ({
   isVisible
-}: {
-  isVisible: boolean;
-}) => {
+
+
+}: {isVisible: boolean;}) => {
   const [activePoint, setActivePoint] = useState<number | null>(null);
   const dataPoints = [{
     id: 0,
@@ -594,7 +594,7 @@ const KoreaMapVisualization = ({
       }} />)}
 
         {/* Data points */}
-        {dataPoints.map(point => <g key={point.id}>
+        {dataPoints.map((point) => <g key={point.id}>
             {/* Pulse ring */}
             <motion.circle cx={point.x} cy={point.y} r="4" fill="none" stroke="hsl(var(--primary))" strokeWidth="0.5" initial={{
           scale: 0,
@@ -622,7 +622,7 @@ const KoreaMapVisualization = ({
       </svg>
 
       {/* Data point tooltips */}
-      {dataPoints.map(point => <motion.div key={`tooltip-${point.id}`} className="absolute pointer-events-none" style={{
+      {dataPoints.map((point) => <motion.div key={`tooltip-${point.id}`} className="absolute pointer-events-none" style={{
       left: `${point.x}%`,
       top: `${point.y}%`,
       transform: 'translate(-50%, -150%)'
@@ -887,18 +887,18 @@ const CircularProgressRing = ({
   delay = 0,
   isVisible = true,
   color = 'primary'
-}: {
-  value: number;
-  maxValue?: number;
-  size?: number;
-  strokeWidth?: number;
-  label: string;
-  suffix?: string;
-  prefix?: string;
-  delay?: number;
-  isVisible?: boolean;
-  color?: string;
-}) => {
+
+
+
+
+
+
+
+
+
+
+
+}: {value: number;maxValue?: number;size?: number;strokeWidth?: number;label: string;suffix?: string;prefix?: string;delay?: number;isVisible?: boolean;color?: string;}) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const [progress, setProgress] = useState(0);
@@ -982,15 +982,15 @@ const MiniGauge = ({
   color = 'primary',
   delay = 0,
   isVisible = true
-}: {
-  value: number;
-  maxValue?: number;
-  size?: number;
-  label: string;
-  color?: string;
-  delay?: number;
-  isVisible?: boolean;
-}) => {
+
+
+
+
+
+
+
+
+}: {value: number;maxValue?: number;size?: number;label: string;color?: string;delay?: number;isVisible?: boolean;}) => {
   const strokeWidth = 4;
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
@@ -1043,9 +1043,9 @@ const MiniGauge = ({
 // ============================================
 const LLMEngineVisualization = ({
   isVisible
-}: {
-  isVisible: boolean;
-}) => {
+
+
+}: {isVisible: boolean;}) => {
   const [activeDataSource, setActiveDataSource] = useState<number | null>(null);
   const [processingProgress, setProcessingProgress] = useState(0);
   const [currentPhase, setCurrentPhase] = useState(0);
@@ -1066,10 +1066,10 @@ const LLMEngineVisualization = ({
 
     // Animate processing bar and sync output updates at 100%
     const progressTimer = setInterval(() => {
-      setProcessingProgress(prev => {
+      setProcessingProgress((prev) => {
         if (prev >= 100) {
           // Update output metrics when processing completes
-          setLiveData(prevData => ({
+          setLiveData((prevData) => ({
             ...prevData,
             timing: Math.floor(55 + Math.random() * 43),
             channels: Math.floor(55 + Math.random() * 43),
@@ -1084,12 +1084,12 @@ const LLMEngineVisualization = ({
 
     // Cycle through phases
     const phaseTimer = setInterval(() => {
-      setCurrentPhase(prev => (prev + 1) % 4);
+      setCurrentPhase((prev) => (prev + 1) % 4);
     }, 3000);
 
     // Simulate live data source updates (input data only)
     const dataTimer = setInterval(() => {
-      setLiveData(prev => ({
+      setLiveData((prev) => ({
         ...prev,
         onchain: Math.floor(800 + Math.random() * 100),
         social: Math.floor(1200 + Math.random() * 100),
@@ -1399,7 +1399,7 @@ const LLMEngineVisualization = ({
           {/* Connection Lines: Data Sources → AI Core */}
           <div className="hidden lg:flex flex-col items-center justify-center px-4 py-8 relative z-10">
             {/* Animated connection lines from each data source */}
-            {[0, 1, 2].map(i => <motion.div key={i} className="relative h-16 flex items-center" initial={{
+            {[0, 1, 2].map((i) => <motion.div key={i} className="relative h-16 flex items-center" initial={{
             opacity: 0
           }} animate={isVisible ? {
             opacity: 1
@@ -1583,7 +1583,7 @@ const LLMEngineVisualization = ({
               {/* Main connection line */}
               <div className="w-16 h-0.5 bg-gradient-to-r from-primary/60 to-primary/40 relative overflow-hidden">
                 {/* Multiple animated particles */}
-                {[0, 1, 2].map(i => <motion.div key={i} className="absolute h-full w-3 bg-primary" animate={{
+                {[0, 1, 2].map((i) => <motion.div key={i} className="absolute h-full w-3 bg-primary" animate={{
                 x: ['-100%', '600%']
               }} transition={{
                 duration: 1.2,
@@ -1731,12 +1731,12 @@ const LLMEngineVisualization = ({
         }}>
             <span className="text-[10px] text-muted-foreground/70 uppercase tracking-widest font-medium">Powered by</span>
             <div className="w-px h-4 bg-border/50" />
-            <a 
-              href="https://www.selanetwork.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
-            >
+            <a
+            href="https://www.selanetwork.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+
               <img src="/logos/sela-network.png" alt="Sela Network" className="w-5 h-5 rounded-full object-cover" />
               <span className="text-sm font-medium bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Sela Network</span>
               <span className="text-xs text-muted-foreground">growlops</span>
@@ -1876,14 +1876,14 @@ const CaseMetricBar = ({
   prefix = '',
   delay = 0,
   isVisible = true
-}: {
-  label: string;
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  delay?: number;
-  isVisible?: boolean;
-}) => {
+
+
+
+
+
+
+
+}: {label: string;value: number;suffix?: string;prefix?: string;delay?: number;isVisible?: boolean;}) => {
   const displayValue = useCountUp({
     end: value,
     prefix,
@@ -1903,11 +1903,11 @@ const TiltCaseCard = ({
   project,
   index,
   isVisible
-}: {
-  project: typeof featuredProjects[0];
-  index: number;
-  isVisible: boolean;
-}) => {
+
+
+
+
+}: {project: typeof featuredProjects[0];index: number;isVisible: boolean;}) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [tilt, setTilt] = useState({
     x: 0,
@@ -2016,9 +2016,9 @@ const SuccessStoriesSection = () => {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-        {featuredProjects.map((project, index) => <TiltCaseCard key={project.slug} project={project} index={index} isVisible={isInView} />)}
-      </div>
+      
+
+
     </motion.div>
   </section>;
 };
