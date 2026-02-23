@@ -366,8 +366,8 @@ const MarqueeRow = ({
   speed?: number;
 }) => {
   const { isMobile } = useMobileOptimization();
-  // Mobile: 4x faster (quarter the duration)
-  const actualSpeed = isMobile ? speed / 4 : speed;
+  // Mobile: 7x faster for snappy scrolling
+  const actualSpeed = isMobile ? speed / 7 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
   const [isPaused, setIsPaused] = useState(false);
