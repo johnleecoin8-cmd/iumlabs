@@ -38,7 +38,6 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
 
-const TrustBadgesSection = lazy(() => import("@/components/TrustBadgesSection"));
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -226,11 +225,6 @@ const Index = () => {
       <main id="hero" className="bg-surface-base">
         <HeroSection />
       </main>
-      
-      {/* Trust Badges - As Featured In */}
-      <Suspense fallback={<SectionLoader />}>
-        <TrustBadgesSection />
-      </Suspense>
       
       {/* About - 01 */}
       <section className="bg-surface-base" id="why-choose-us">

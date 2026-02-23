@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { Building2, Clock, Layers, LucideIcon } from "lucide-react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
-import ProjectGrowthChart from "./ProjectGrowthChart";
 // Meta info item component with icon and accent color
 interface MetaInfoItemProps {
   label: string;
@@ -186,11 +185,6 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
                 <MetricCard key={idx} metric={metric} index={idx} />
               ))}
             </motion.div>
-          )}
-          
-          {/* Growth Chart */}
-          {displayMetrics && displayMetrics.length > 0 && (
-            <ProjectGrowthChart metrics={displayMetrics} glowColor={project.glowColor} />
           )}
           
           {/* Scope of Work & What We Did */}
