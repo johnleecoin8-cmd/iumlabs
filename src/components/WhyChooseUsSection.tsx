@@ -13,6 +13,7 @@ const WhyChooseUsSection = () => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
+          src={optimizedSrc}
           {...videoProps}
           className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         />
