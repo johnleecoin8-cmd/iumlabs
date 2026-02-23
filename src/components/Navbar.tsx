@@ -9,16 +9,31 @@ import logoImage from "@/assets/logo.png";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
-// Services submenu data (same as Sidebar)
-const servicesSubMenu = [
-  { name: "Web3 GTM Strategy", href: "/services" },
-  { name: "Brand Identity & Web", href: "/services/branding" },
-  { name: "SEO & Paid Ads", href: "/services/seo-ads" },
-  { name: "Offline Events Korea", href: "/services/offline-event" },
-  { name: "Community Management", href: "/services/community" },
-  { name: "Deep Research & Analytics", href: "/services/deep-research" },
-  { name: "Influencer & KOL Marketing", href: "/services/influencer" },
-  { name: "PR & Media Coverage", href: "/services/pr" },
+// Services grouped by category (same as Sidebar)
+const servicesCategories = [
+  {
+    label: "Marketing",
+    items: [
+      { name: "Web3 GTM Strategy", href: "/services" },
+      { name: "Brand Identity & Web", href: "/services/branding" },
+      { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+      { name: "Influencer & KOL", href: "/services/influencer" },
+      { name: "PR & Media Coverage", href: "/services/pr" },
+    ],
+  },
+  {
+    label: "Research",
+    items: [
+      { name: "Deep Research & Analytics", href: "/services/deep-research" },
+      { name: "Community Management", href: "/services/community" },
+    ],
+  },
+  {
+    label: "Events",
+    items: [
+      { name: "Offline Events Korea", href: "/services/offline-event" },
+    ],
+  },
 ];
 
 const brandConfig = {
@@ -189,22 +204,31 @@ const Navbar = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: "easeOut" }}
                               >
-                                <div className="space-y-1 py-1">
-                                  {servicesSubMenu.map((item, subIndex) => (
-                                    <motion.div
-                                      key={item.href}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ duration: 0.2, delay: subIndex * 0.03 }}
-                                    >
-                                      <Link
-                                        to={item.href}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
-                                      >
-                                        {item.name}
-                                      </Link>
-                                    </motion.div>
+                                <div className="space-y-3 py-1">
+                                  {servicesCategories.map((category) => (
+                                    <div key={category.label}>
+                                      <span className="text-[10px] text-muted-foreground/60 font-medium tracking-[0.15em] uppercase block mb-1 ml-1">
+                                        {category.label}
+                                      </span>
+                                      <div className="space-y-0.5">
+                                        {category.items.map((item, subIndex) => (
+                                          <motion.div
+                                            key={item.href}
+                                            initial={{ opacity: 0, x: -10 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ duration: 0.2, delay: subIndex * 0.03 }}
+                                          >
+                                            <Link
+                                              to={item.href}
+                                              onClick={() => setIsMenuOpen(false)}
+                                              className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
+                                            >
+                                              {item.name}
+                                            </Link>
+                                          </motion.div>
+                                        ))}
+                                      </div>
+                                    </div>
                                   ))}
                                 </div>
                               </motion.div>
