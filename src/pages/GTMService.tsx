@@ -1988,108 +1988,7 @@ const TiltCaseCard = ({
       </Link>
     </motion.article>;
 };
-
-// ============================================
-// SUCCESS STORIES SECTION - Real Data Case Studies
-// ============================================
-const SuccessStoriesSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-10%"
-  });
-  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 md:py-24 bg-muted/30 border-y border-border w-full">
-    <motion.div initial={{
-      opacity: 0
-    }} animate={isInView ? {
-      opacity: 1
-    } : {}} className="w-full">
-      <div className="mb-12">
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          03 Case Studies
-        </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-          Proven Results
-        </h2>
-        <p className="text-muted-foreground max-w-2xl">
-          Measurable outcomes from our flagship campaigns. Every metric backed by real on-chain data.
-        </p>
-      </div>
-
-      
-
-
-    </motion.div>
-  </section>;
-};
-const StrategyInActionSection = () => {
-  // This section is now replaced by SuccessStoriesSection
-  return null;
-};
-
-// ============================================
-// CLIENT LOGOS MARQUEE
-// ============================================
-import bnbLogo from '@/assets/logos/bnb.png';
-import bybitLogo from '@/assets/logos/bybit.png';
-import kucoinLogo from '@/assets/logos/kucoin.png';
-import mantraLogo from '@/assets/logos/mantra.png';
-import peaqLogo from '@/assets/logos/peaq.png';
-import storyLogo from '@/assets/logos/story-protocol.png';
-import saharaLogo from '@/assets/logos/sahara-ai.png';
-import megaethLogo from '@/assets/logos/megaeth.png';
-import polygonLogo from '@/assets/logos/polygon.svg';
-import ondoLogo from '@/assets/logos/ondo.svg';
-import triaLogo from '@/assets/logos/tria-official.png';
-import synfuturesLogo from '@/assets/logos/synfutures.png';
-import fogoLogo from '@/assets/logos/fogo.png';
-import zkpassLogo from '@/assets/logos/zkpass.png';
-const clientLogos = [{
-  name: 'BNB Chain',
-  logo: bnbLogo
-}, {
-  name: 'Bybit',
-  logo: bybitLogo
-}, {
-  name: 'KuCoin',
-  logo: kucoinLogo
-}, {
-  name: 'MANTRA',
-  logo: mantraLogo
-}, {
-  name: 'peaq',
-  logo: peaqLogo
-}, {
-  name: 'Story Protocol',
-  logo: storyLogo
-}, {
-  name: 'Sahara AI',
-  logo: saharaLogo
-}, {
-  name: 'MegaETH',
-  logo: megaethLogo
-}, {
-  name: 'Polygon',
-  logo: polygonLogo
-}, {
-  name: 'Ondo',
-  logo: ondoLogo
-}, {
-  name: 'Tria',
-  logo: triaLogo
-}, {
-  name: 'SynFutures',
-  logo: synfuturesLogo
-}, {
-  name: 'Fogo',
-  logo: fogoLogo
-}, {
-  name: 'zkPass',
-  logo: zkpassLogo
-}];
-const ClientLogosMarquee = () => {
-  return null;
-};
+// Dead code removed: ClientLogosMarquee, clientLogos data, and duplicate logo imports
 
 // ============================================
 // CTA SECTION - Enhanced with Gradient
@@ -2156,10 +2055,8 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
-        {/* SuccessStoriesSection removed - empty section with no content */}
         <PerformanceSection />
         <AuthoritySection />
-        <ClientLogosMarquee />
       </main>
       
       {/* Contact Section */}
