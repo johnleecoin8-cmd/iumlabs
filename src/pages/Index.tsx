@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
@@ -67,153 +68,205 @@ const processPhases = [{
   subPoints: ["On-chain Events & Campaigns", "Holder Retention Programs", "Sustainable Growth"],
   quote: ''
 }];
-const ProcessBillboardOverlay = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
+const ProcessInteractiveNumbers = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const {
-    isMobile,
-    shouldDisableHeavyAnimations
-  } = useMobileOptimization();
+  const { isMobile } = useMobileOptimization();
 
-  // Auto-cycle through phases - COMPLETELY DISABLED on mobile for performance
-  useEffect(() => {
-    // Skip auto-cycling entirely on mobile to prevent battery drain
-    if (!isVisible || isPaused || isMobile || shouldDisableHeavyAnimations) return;
-    const interval = setInterval(() => {
-      setHoveredIndex(prev => prev === null ? 0 : (prev + 1) % processPhases.length);
-    }, 3000); // 3초마다 (데스크톱에서만)
-
-    return () => clearInterval(interval);
-  }, [isVisible, isPaused, isMobile, shouldDisableHeavyAnimations]);
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true);
         observer.disconnect();
       }
-    }, {
-      threshold: 0.2,
-      rootMargin: '50px'
-    });
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    }, { threshold: 0.2 });
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-  return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full rounded-lg md:rounded-xl overflow-hidden">
-        {/* Background Image - Fixed Billboard */}
-        <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center" />
-        
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/70 to-black/50" />
-        
-        {/* Corner Decoration */}
-        <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
-          <span className="text-[10px] md:text-xs text-white/50 font-mono tracking-wider">HOW WE WORK</span>
-        </div>
-        
-        {/* Mobile: Full-width vertical list / Desktop: 4-column grid */}
-        <div className="relative z-10">
-          {/* Desktop Layout - 4-column grid */}
-          <div className="hidden lg:grid lg:grid-cols-4 h-[450px]">
+
+  const activePhase = processPhases[activeIndex];
+  const ActiveIcon = activePhase.icon;
+
+  return (
+    <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 py-8 md:py-16">
+      <div className="max-w-6xl mx-auto">
+        {/* Desktop: Numbers left + Detail right */}
+        <div className="hidden lg:grid lg:grid-cols-[1fr_1.2fr] gap-12 items-center min-h-[400px]">
+          {/* Left: Large interactive numbers */}
+          <div className="flex flex-col gap-2">
             {processPhases.map((phase, index) => {
-              const Icon = phase.icon;
-              const isHovered = hoveredIndex === index;
-              const hasHover = hoveredIndex !== null;
-              
+              const isActive = activeIndex === index;
               return (
-                <div 
-                  key={index} 
-                  className={`
-                    relative flex flex-col items-center justify-center text-center gap-2 p-6
-                    border-r last:border-r-0 border-white/10
-                    cursor-pointer transition-all duration-500
-                    ${isHovered ? 'bg-white/10' : hasHover ? 'bg-black/20' : 'bg-transparent'}
-                  `}
+                <motion.button
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  className={`group relative flex items-center gap-6 px-6 py-5 rounded-2xl text-left transition-all duration-500 ${
+                    isActive
+                      ? 'bg-white/[0.06] border border-white/[0.12]'
+                      : 'bg-transparent border border-transparent hover:bg-white/[0.03]'
+                  }`}
                   style={{
                     opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
+                    transform: isVisible ? 'translateX(0)' : 'translateX(-30px)',
+                    transition: `opacity 0.6s ease-out ${index * 120}ms, transform 0.6s ease-out ${index * 120}ms`
                   }}
-                  onMouseEnter={() => {
-                    setIsPaused(true);
-                    setHoveredIndex(index);
-                  }}
-                  onMouseLeave={() => setIsPaused(false)}
-                  onClick={() => setHoveredIndex(index)}
                 >
-                  {/* Step Number */}
-                  <span className={`text-sm font-mono tracking-widest mb-2 ${isHovered ? 'text-white/80' : 'text-white/40'} transition-colors`}>
+                  {/* Large Number */}
+                  <span className={`text-5xl font-bold font-mono transition-colors duration-500 ${
+                    isActive ? 'text-primary' : 'text-white/15 group-hover:text-white/30'
+                  }`}>
                     0{index + 1}
                   </span>
-                  
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 border bg-white/5 border-white/20 ${isHovered ? 'bg-white/20 border-white/40 scale-110' : ''} transition-all duration-500`}>
-                    <Icon className={`w-6 h-6 ${isHovered ? 'text-white' : 'text-white/60'}`} />
+
+                  {/* Title + Subtitle */}
+                  <div className="flex flex-col">
+                    <span className={`text-lg font-semibold transition-colors duration-300 ${
+                      isActive ? 'text-white' : 'text-white/40 group-hover:text-white/70'
+                    }`}>
+                      {phase.title}
+                    </span>
+                    <span className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
+                      isActive ? 'text-white/50' : 'text-white/20'
+                    }`}>
+                      {phase.subtitle}
+                    </span>
                   </div>
-                  
-                  {/* Title & Subtitle */}
-                  <h4 className="text-lg font-medium text-white">{phase.title}</h4>
-                  <p className="text-sm text-white/40 uppercase tracking-wide">{phase.subtitle}</p>
-                  
-                  {/* Sub Points - visible on hover */}
-                  <div className={`space-y-1 mt-3 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-[100px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
-                    {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-xs text-white/60">{point}</div>
-                    ))}
-                  </div>
-                  
-                  {/* Bottom Accent Line */}
-                  <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent transition-all duration-500 ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}`} />
-                </div>
+
+                  {/* Active indicator line */}
+                  <motion.div
+                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-primary"
+                    initial={false}
+                    animate={{ height: isActive ? '60%' : '0%', opacity: isActive ? 1 : 0 }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
+                </motion.button>
               );
             })}
           </div>
-          
-          {/* Mobile/Tablet: Card style grid with center alignment */}
-          <div className="lg:hidden py-6 px-4 sm:px-6 grid grid-cols-2 gap-3">
-            {processPhases.map((phase, index) => {
-              const Icon = phase.icon;
-              return (
-                <div 
-                  key={index}
-                  className="flex flex-col items-center text-center p-4 rounded-xl bg-black/40 border border-white/10"
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
-                  }}
+
+          {/* Right: Detail panel with slide animation */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, x: 40, scale: 0.97 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -20, scale: 0.97 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className="relative p-8 md:p-10 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm"
+            >
+              {/* Background glow */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Icon + Phase label */}
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                    <ActiveIcon className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-2xl font-bold text-white">{activePhase.title}</h4>
+                    <p className="text-sm text-white/40 uppercase tracking-wider">{activePhase.subtitle}</p>
+                  </div>
+                </div>
+
+                {/* Sub-points with stagger */}
+                <div className="space-y-3">
+                  {activePhase.subPoints.map((point, i) => (
+                    <motion.div
+                      key={`${activeIndex}-${i}`}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                      <span className="text-sm text-white/70 leading-relaxed">{point}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Step progress indicator */}
+                <div className="flex gap-2 mt-8">
+                  {processPhases.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1 rounded-full transition-all duration-500 ${
+                        i === activeIndex ? 'w-8 bg-primary' : 'w-3 bg-white/10'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Mobile: Vertical accordion style */}
+        <div className="lg:hidden space-y-3">
+          {processPhases.map((phase, index) => {
+            const Icon = phase.icon;
+            const isActive = activeIndex === index;
+            return (
+              <motion.div
+                key={index}
+                className={`rounded-xl border transition-all duration-400 overflow-hidden ${
+                  isActive
+                    ? 'bg-white/[0.05] border-white/[0.12]'
+                    : 'bg-transparent border-white/[0.06]'
+                }`}
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                  transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
+                }}
+              >
+                <button
+                  onClick={() => setActiveIndex(index)}
+                  className="w-full flex items-center gap-4 px-5 py-4 text-left"
                 >
-                  {/* Number */}
-                  <span className="text-xs font-mono text-white/40 mb-2">0{index + 1}</span>
-                  
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-3">
-                    <Icon className="w-4 h-4 text-white/70" />
+                  <span className={`text-2xl font-bold font-mono transition-colors duration-300 ${
+                    isActive ? 'text-primary' : 'text-white/15'
+                  }`}>
+                    0{index + 1}
+                  </span>
+                  <div className="flex-1">
+                    <h4 className={`text-sm font-semibold transition-colors ${isActive ? 'text-white' : 'text-white/50'}`}>
+                      {phase.title}
+                    </h4>
+                    <p className="text-[10px] text-white/30 uppercase tracking-wider">{phase.subtitle}</p>
                   </div>
-                  
-                  {/* Title & Subtitle */}
-                  <h4 className="text-sm font-medium text-white mb-1">{phase.title}</h4>
-                  <p className="text-[10px] text-white/40 uppercase tracking-wide mb-3">{phase.subtitle}</p>
-                  
-                  {/* Sub Points */}
-                  <div className="space-y-1">
-                    {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-[10px] text-white/50 leading-relaxed">
-                        {point}
+                  <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-primary' : 'text-white/20'}`} />
+                </button>
+
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-4 space-y-2 border-t border-white/[0.06] pt-3 ml-12">
+                        {phase.subPoints.map((point, i) => (
+                          <div key={i} className="flex items-start gap-2">
+                            <div className="mt-1.5 w-1 h-1 rounded-full bg-primary/50 flex-shrink-0" />
+                            <span className="text-xs text-white/60">{point}</span>
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 const Index = () => {
   return <div className="min-h-screen bg-surface-base">
@@ -280,7 +333,7 @@ const Index = () => {
           
           {/* Featured Billboard Image with Process Overlay */}
           <AnimatedSection delay={100}>
-            <ProcessBillboardOverlay />
+            <ProcessInteractiveNumbers />
           </AnimatedSection>
         </div>
       </section>
