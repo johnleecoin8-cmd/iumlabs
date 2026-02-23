@@ -49,25 +49,19 @@ const serviceTags = [{
   position: "top-[66%] right-[2%]"
 }];
 
-// Mobile tags - repositioned for better visual distribution
+// Mobile tags - repositioned to avoid overlap with centered headline
 const mobileServiceTags = [{
   label: "Research",
-  position: "top-[12%] left-[5%]"
+  position: "top-[8%] left-[5%]"
 }, {
   label: "GTM",
-  position: "top-[18%] right-[6%]"
+  position: "top-[14%] right-[6%]"
 }, {
   label: "Marketing",
-  position: "top-[32%] left-[4%]"
+  position: "bottom-[42%] left-[4%]"
 }, {
   label: "Events",
-  position: "top-[38%] right-[5%]"
-}, {
-  label: "Media",
-  position: "top-[52%] left-[6%]"
-}, {
-  label: "KOL",
-  position: "top-[58%] right-[4%]"
+  position: "bottom-[36%] right-[5%]"
 }];
 const clientLogos = [{
   name: "BNB",

@@ -285,7 +285,7 @@ const ProjectCard = ({
           }}
         />
         {/* Dark overlay for readability */}
-        <div className="absolute inset-0 bg-black/80" />
+        <div className="absolute inset-0 bg-black/80 md:bg-black/80 max-md:bg-black/85" />
         
         {/* Content wrapper */}
         <div className="relative z-10">
