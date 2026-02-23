@@ -80,7 +80,7 @@ const services = [
 
 const ServiceRow = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const isEven = index % 2 === 0; // 좌, 우 교차
+  const isEven = index % 2 === 0;
 
   const { ref, isVisible } = useScrollAnimation({
     threshold: 0.15,
@@ -96,15 +96,15 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
         isVisible
           ? "opacity-100 translate-x-0"
           : isEven
-            ? "opacity-0 -translate-x-12"
-            : "opacity-0 translate-x-12"
+            ? "opacity-0 -translate-x-8"
+            : "opacity-0 translate-x-8"
       )}
       style={{ transitionDelay: `${index * 80}ms` }}
     >
       <Link
         to={service.link}
         className={cn(
-          "relative flex items-stretch overflow-hidden border-b border-border/20 transition-all duration-500 active:scale-[0.995] h-[80px] sm:h-[90px] md:h-[100px]",
+          "relative flex items-stretch overflow-hidden border-b border-white/[0.06] transition-all duration-500 active:scale-[0.995] h-[140px] sm:h-[160px] md:h-[180px]",
           isEven ? "flex-row" : "flex-row-reverse"
         )}
       >
@@ -117,42 +117,41 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500" />
-          {/* Number overlay */}
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 group-hover:via-black/10 transition-all duration-500" />
+          {/* Number overlay - positioned near content edge */}
           <div className={cn(
-            "absolute bottom-1 sm:bottom-2 text-2xl sm:text-3xl md:text-4xl font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500",
-            isEven ? "right-2 sm:right-3" : "left-2 sm:left-3"
+            "absolute bottom-3 sm:bottom-4 md:bottom-5 text-4xl sm:text-5xl md:text-6xl font-black leading-none text-white/[0.08] group-hover:text-white/[0.15] transition-colors duration-500 font-mono",
+            isEven ? "right-3 sm:right-4 md:right-6" : "left-3 sm:left-4 md:left-6"
           )}>
             {service.number}
           </div>
         </div>
 
-        {/* Content side */}
+        {/* Vertical accent line between image and content */}
+        <div className="w-[1px] bg-white/[0.06] group-hover:bg-primary/40 transition-colors duration-500 flex-shrink-0" />
+
+        {/* Content side - always left-aligned */}
         <div className={cn(
-          "flex-1 flex items-center gap-3 sm:gap-4 md:gap-6 py-3 sm:py-4 transition-colors duration-500 bg-background group-hover:bg-secondary/30",
-          isEven ? "pl-4 sm:pl-6 md:pl-10 pr-4 sm:pr-6 md:pr-8" : "pr-4 sm:pr-6 md:pr-10 pl-4 sm:pl-6 md:pl-8",
-          isEven ? "flex-row" : "flex-row-reverse"
+          "flex-1 flex items-center transition-colors duration-500 bg-[#0A0A0A] group-hover:bg-[#111]",
+          "px-5 sm:px-6 md:px-10"
         )}>
-          <Icon
-            className="w-4 h-4 sm:w-5 sm:h-5 text-primary/70 group-hover:text-primary transition-colors duration-500 flex-shrink-0"
-            strokeWidth={1.5}
-          />
+          <div className="flex-1 flex flex-col justify-center gap-1.5 sm:gap-2 min-w-0">
+            <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-500">
+              Service {service.number}
+            </span>
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight">
+              {service.title}
+            </h3>
+            <p className="hidden sm:block text-xs md:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500 line-clamp-2">
+              {service.description}
+            </p>
+          </div>
 
-          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight flex-shrink-0">
-            {service.title}
-          </h3>
-
-          <p className="hidden md:block text-xs lg:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500 truncate flex-1 min-w-0">
-            {service.description}
-          </p>
-
-          <ArrowRight className={cn(
-            "w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all duration-300 flex-shrink-0 ml-auto",
-            isEven ? "group-hover:translate-x-1" : "rotate-180 group-hover:-translate-x-1"
-          )} />
+          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 flex-shrink-0 ml-4" />
         </div>
 
-        {/* Hover accent line */}
+        {/* Hover accent line on outer edge */}
         <div className={cn(
           "absolute top-0 bottom-0 w-[3px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top",
           isEven ? "left-0" : "right-0"
