@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, TrendingUp, Star 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import ResearchHeroSection from "@/components/ResearchHeroSection";

@@ -196,6 +196,7 @@ const CommunityService = () => {
     title: "Web3 Community Growth & Discord/Telegram Management Korea | ium Labs",
     description: "Build thriving crypto communities in Korea. 24/7 moderation, AI automation, and engagement strategies for Discord, Telegram, and KakaoTalk.",
     path: "/services/community",
+    canonicalPath: "/services/community",
     image: "/og-image.png",
     keywords: ["Discord Management Korea", "Telegram Community Web3", "KakaoTalk Crypto", "Community Building Korea", "Web3 Community Growth"]
   });

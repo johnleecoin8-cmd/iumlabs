@@ -14,7 +14,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Send } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";

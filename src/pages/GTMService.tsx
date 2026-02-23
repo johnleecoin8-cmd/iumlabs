@@ -8,7 +8,7 @@ import AuthoritySection from '@/components/gtm/AuthoritySection';
 import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
 import GTMContactFormSection from '@/components/gtm/GTMContactFormSection';
-import CTABannerSection from '@/components/CTABannerSection';
+
 import FooterLinksSection from '@/components/FooterLinksSection';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
@@ -2144,6 +2144,7 @@ const GTMService = () => {
     title: "Web3 Community Growth & KOL Marketing in Korea",
     description: "Maximize your project's visibility with Korea's top crypto influencers and community managers. Specialized in Telegram, KakaoTalk & Twitter engagement.",
     path: "/services",
+    canonicalPath: "/services/gtm",
     image: "/og-image.png",
     suffix: "ium Labs",
     keywords: ["Community Growth Korea", "KOL Marketing", "User Acquisition Web3", "CEX Listing Support Korea", "Korea GTM Strategy"]
@@ -2164,8 +2165,6 @@ const GTMService = () => {
       {/* Contact Section */}
       <GTMContactFormSection sectionNumber="05" />
       
-      {/* CTA Banner */}
-      <CTABannerSection />
       
       {/* Footer Links */}
       <FooterLinksSection />

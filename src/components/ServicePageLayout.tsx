@@ -6,7 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
@@ -610,8 +610,6 @@ const ServicePageLayout = ({
         <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
 
-      {/* CTA Banner */}
-      <CTABannerSection />
 
       {/* Footer Links */}
       <FooterLinksSection />

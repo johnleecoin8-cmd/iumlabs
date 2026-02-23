@@ -9,6 +9,7 @@ interface PageMetaOptions {
   image?: string;
   suffix?: string;
   keywords?: string[];
+  canonicalPath?: string;
 }
 
 /**
@@ -28,6 +29,7 @@ export const usePageMeta = (
     let pagePath: string | undefined;
     let titleSuffix: string;
     let keywords: string[] | undefined;
+    let canonicalPath: string | undefined;
 
     if (typeof titleOrOptions === 'object') {
       title = titleOrOptions.title;
@@ -35,6 +37,7 @@ export const usePageMeta = (
       pagePath = titleOrOptions.path;
       titleSuffix = titleOrOptions.suffix || "ium Labs";
       keywords = titleOrOptions.keywords;
+      canonicalPath = titleOrOptions.canonicalPath;
     } else {
       title = titleOrOptions;
       desc = description;
@@ -76,17 +79,22 @@ export const usePageMeta = (
     }
 
     // Update canonical URL and og:url
-    if (pagePath) {
-      const fullUrl = `https://iumlabs.io${pagePath}`;
+    // Use canonicalPath if provided (for alias pages), otherwise use pagePath
+    const canonicalUrl = canonicalPath 
+      ? `https://iumlabs.io${canonicalPath}` 
+      : pagePath 
+        ? `https://iumlabs.io${pagePath}` 
+        : undefined;
 
+    if (canonicalUrl) {
       const canonicalLink = document.querySelector('link[rel="canonical"]');
       if (canonicalLink) {
-        canonicalLink.setAttribute('href', fullUrl);
+        canonicalLink.setAttribute('href', canonicalUrl);
       }
 
       const ogUrlMeta = document.querySelector('meta[property="og:url"]');
       if (ogUrlMeta) {
-        ogUrlMeta.setAttribute('content', fullUrl);
+        ogUrlMeta.setAttribute('content', canonicalUrl);
       }
     }
 

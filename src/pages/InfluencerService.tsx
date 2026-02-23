@@ -294,6 +294,7 @@ const InfluencerService = () => {
     title: "Korea's Elite KOL Network & Web3 Influencer Marketing | ium Labs",
     description: "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Data-driven influencer campaigns for DeFi, GameFi, and L2 projects.",
     path: "/services/influencer",
+    canonicalPath: "/services/influencer",
     image: "/og-image.png",
     keywords: ["Korean KOL Network", "Crypto Influencer Korea", "Web3 KOL Marketing", "YouTube Crypto Korea", "KOL Marketing Korea"]
   });
