@@ -78,7 +78,7 @@ const WhyChooseUsSection = () => {
         </div>
 
         {/* Right: Video */}
-        <div className="relative overflow-hidden lg:col-span-7">
+        <div className="relative overflow-hidden w-full lg:w-[65%]">
           <video
             ref={videoRef}
             src={optimizedSrc}
