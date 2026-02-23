@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
 const WhyChooseUsSection = () => {
-  const { videoRef, isVideoReady, videoProps } = useVideoPlayer({
+  const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
     forceFirstFrame: true
   });
