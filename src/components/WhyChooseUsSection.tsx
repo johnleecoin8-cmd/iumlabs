@@ -23,7 +23,7 @@ const WhyChooseUsSection = () => {
       {/* Content */}
       <div className="relative z-10 flex items-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
         <motion.div
-          className="container mx-auto px-6 sm:px-10 md:px-12 py-12 sm:py-16 md:py-20 max-w-2xl mr-auto"
+          className="container mx-auto px-6 sm:px-10 md:px-12 py-12 sm:py-16 md:py-20 max-w-2xl text-center"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -42,7 +42,7 @@ const WhyChooseUsSection = () => {
           </p>
 
           {/* Bottom accent */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center gap-4">
             <div className="w-12 h-px bg-purple-400/50" />
             <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
               Founded by veterans from Binance & KuCoin
