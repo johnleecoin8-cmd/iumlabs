@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
@@ -854,8 +854,6 @@ const Projects = () => {
         <ContactFormSection sectionNumber="03" />
       </section>
       
-      {/* CTA Banner */}
-      <CTABannerSection />
       
       {/* Footer Links */}
       <FooterLinksSection />

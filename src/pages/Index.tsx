@@ -37,7 +37,7 @@ const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSectio
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";

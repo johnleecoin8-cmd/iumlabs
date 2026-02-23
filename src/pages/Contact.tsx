@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTABannerSection from "@/components/CTABannerSection";
+
 import FooterLinksSection from "@/components/FooterLinksSection";
 import SEOHead from "@/components/SEOHead";
 import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Clock, ExternalLink, Navigation } from "lucide-react";
@@ -430,8 +430,6 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* CTA Banner */}
-      <CTABannerSection />
       
       {/* Footer Links */}
       <FooterLinksSection />
