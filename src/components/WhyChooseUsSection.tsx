@@ -3,7 +3,7 @@ import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
 const WhyChooseUsSection = () => {
   const { videoRef, isVideoReady, videoProps } = useVideoPlayer({
-    src: '/videos/about-background.mp4',
+    src: '/videos/about-background.mp4?v=2',
     forceFirstFrame: true,
   });
 
