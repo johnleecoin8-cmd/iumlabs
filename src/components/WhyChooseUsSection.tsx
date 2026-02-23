@@ -1,50 +1,68 @@
 import { motion } from 'framer-motion';
-import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
-import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
+import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
 const WhyChooseUsSection = () => {
-  return (
-    <section className="bg-background">
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] md:max-h-[600px] lg:max-h-[780px] overflow-hidden">
-        {/* Left: Featured Image with Hover Effect */}
-        <div className="md:border-r border-border overflow-hidden h-[380px] sm:h-[450px] md:h-full relative group active:scale-[0.995] transition-transform">
-          <img 
-            src={aboutImageDefault} 
-            alt="ium Labs Team - Default" 
-            className="block w-full h-full object-cover object-center transition-opacity duration-500 group-hover:opacity-0"
-          />
-          <img 
-            src={aboutImageHover} 
-            alt="ium Labs Team - Hover" 
-            className="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-          />
-        </div>
+  const { videoRef, isVideoReady, videoProps } = useVideoPlayer({
+    src: '/videos/about-background.mp4',
+    forceFirstFrame: true,
+  });
 
-        {/* Right: Content */}
-        <div className="flex flex-col">
-          <motion.div 
-            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center flex-1"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            viewport={{ once: true, margin: "-50px" }}
+  return (
+    <section className="bg-background relative overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          {...videoProps}
+          className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 min-h-[500px] sm:min-h-[560px] md:min-h-[620px] lg:min-h-[700px] flex items-center">
+        <motion.div
+          className="p-8 sm:p-12 md:p-16 lg:p-20 max-w-3xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          {/* Small label */}
+          <motion.span
+            className="inline-block text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/50 font-mono mb-4 sm:mb-6"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
           >
-            {/* Headline */}
-            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
-              Data-Driven Market Entry.
-            </h2>
-            
-            {/* Description */}
-            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-10 sm:mb-12">
-              In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. Stop relying on intuition. We engineer your entry into the Korean market using proprietary research and quantitative impact analysis. We don't just market; we structure your narrative to flawlessly 'ium' (connect) global protocols with local liquidity.
-            </p>
-            
-            {/* CTA Note */}
-            <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
+            Seoul, Korea
+          </motion.span>
+
+          {/* Headline */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
+            Data-Driven<br />
+            Market Entry.
+          </h2>
+
+          {/* Description */}
+          <p className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mb-8 sm:mb-10">
+            In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. 
+            We engineer your entry into the Korean market using proprietary research and 
+            quantitative impact analysis. We structure your narrative to flawlessly 'ium' (connect) 
+            global protocols with local liquidity.
+          </p>
+
+          {/* Bottom accent */}
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-px bg-primary/60" />
+            <p className="text-primary text-xs sm:text-sm font-medium tracking-wide">
               Founded by veterans from Binance & KuCoin
             </p>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
