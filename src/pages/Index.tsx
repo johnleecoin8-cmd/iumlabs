@@ -68,201 +68,155 @@ const processPhases = [{
   subPoints: ["On-chain Events & Campaigns", "Holder Retention Programs", "Sustainable Growth"],
   quote: ''
 }];
-const ProcessInteractiveNumbers = () => {
+const processBackgrounds = [seoulMetroBillboard, storyOriginSummit, ondoSeminar, peaqSummit];
+
+const ProcessCardSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const { isMobile } = useMobileOptimization();
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
+      if (entry.isIntersecting) { setIsVisible(true); observer.disconnect(); }
     }, { threshold: 0.2 });
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const activePhase = processPhases[activeIndex];
-  const ActiveIcon = activePhase.icon;
+  // Auto-advance (desktop only)
+  useEffect(() => {
+    if (!isVisible || isMobile) return;
+    const timer = setInterval(() => {
+      setDirection(1);
+      setActiveIndex(prev => (prev + 1) % processPhases.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [isVisible, isMobile]);
+
+  const goTo = (index: number) => {
+    setDirection(index > activeIndex ? 1 : -1);
+    setActiveIndex(index);
+  };
+
+  const variants = {
+    enter: (dir: number) => ({ x: dir > 0 ? '100%' : '-100%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit: (dir: number) => ({ x: dir > 0 ? '-100%' : '100%', opacity: 0 }),
+  };
 
   return (
-    <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 py-8 md:py-16">
-      <div className="max-w-6xl mx-auto">
-        {/* Desktop: Numbers left + Detail right */}
-        <div className="hidden lg:grid lg:grid-cols-[1fr_1.2fr] gap-12 items-center min-h-[400px]">
-          {/* Left: Large interactive numbers */}
-          <div className="flex flex-col gap-2">
-            {processPhases.map((phase, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`group relative flex items-center gap-6 px-6 py-5 rounded-2xl text-left transition-all duration-500 ${
-                    isActive
-                      ? 'bg-white/[0.06] border border-white/[0.12]'
-                      : 'bg-transparent border border-transparent hover:bg-white/[0.03]'
-                  }`}
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateX(0)' : 'translateX(-30px)',
-                    transition: `opacity 0.6s ease-out ${index * 120}ms, transform 0.6s ease-out ${index * 120}ms`
-                  }}
-                >
-                  {/* Large Number */}
-                  <span className={`text-5xl font-bold font-mono transition-colors duration-500 ${
-                    isActive ? 'text-primary' : 'text-white/15 group-hover:text-white/30'
-                  }`}>
-                    0{index + 1}
-                  </span>
+    <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 py-4 md:py-8">
+      {/* Main card area */}
+      <div className="relative w-full aspect-[16/9] md:aspect-[2.4/1] rounded-xl md:rounded-2xl overflow-hidden">
+        {/* Background image carousel */}
+        <AnimatePresence custom={direction} mode="popLayout">
+          <motion.div
+            key={activeIndex}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+            className="absolute inset-0"
+          >
+            <img
+              src={processBackgrounds[activeIndex]}
+              alt={processPhases[activeIndex].title}
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+            {/* Gradient overlays */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+          </motion.div>
+        </AnimatePresence>
 
-                  {/* Title + Subtitle */}
-                  <div className="flex flex-col">
-                    <span className={`text-lg font-semibold transition-colors duration-300 ${
-                      isActive ? 'text-white' : 'text-white/40 group-hover:text-white/70'
-                    }`}>
-                      {phase.title}
-                    </span>
-                    <span className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                      isActive ? 'text-white/50' : 'text-white/20'
-                    }`}>
-                      {phase.subtitle}
-                    </span>
-                  </div>
-
-                  {/* Active indicator line */}
-                  <motion.div
-                    className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-primary"
-                    initial={false}
-                    animate={{ height: isActive ? '60%' : '0%', opacity: isActive ? 1 : 0 }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  />
-                </motion.button>
-              );
-            })}
-          </div>
-
-          {/* Right: Detail panel with slide animation */}
+        {/* Content overlay */}
+        <div className="absolute inset-0 z-10 flex flex-col justify-end p-5 sm:p-8 md:p-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeIndex}
-              initial={{ opacity: 0, x: 40, scale: 0.97 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              exit={{ opacity: 0, x: -20, scale: 0.97 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-              className="relative p-8 md:p-10 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5, ease: 'easeOut' }}
+              className="max-w-lg"
             >
-              {/* Background glow */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
+              {/* Step badge */}
+              <div className="flex items-center gap-3 mb-3 md:mb-4">
+                <span className="text-xs md:text-sm font-mono text-primary tracking-widest">
+                  STEP 0{activeIndex + 1}
+                </span>
+                <div className="h-px flex-1 max-w-[60px] bg-primary/30" />
+              </div>
 
-              <div className="relative z-10">
-                {/* Icon + Phase label */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                    <ActiveIcon className="w-6 h-6 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="text-2xl font-bold text-white">{activePhase.title}</h4>
-                    <p className="text-sm text-white/40 uppercase tracking-wider">{activePhase.subtitle}</p>
-                  </div>
-                </div>
+              {/* Title */}
+              <h4 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-1 md:mb-2">
+                {processPhases[activeIndex].title}
+              </h4>
+              <p className="text-xs sm:text-sm text-white/50 uppercase tracking-wider mb-4 md:mb-6">
+                {processPhases[activeIndex].subtitle}
+              </p>
 
-                {/* Sub-points with stagger */}
-                <div className="space-y-3">
-                  {activePhase.subPoints.map((point, i) => (
-                    <motion.div
-                      key={`${activeIndex}-${i}`}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: i * 0.1 }}
-                      className="flex items-start gap-3"
-                    >
-                      <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
-                      <span className="text-sm text-white/70 leading-relaxed">{point}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Step progress indicator */}
-                <div className="flex gap-2 mt-8">
-                  {processPhases.map((_, i) => (
-                    <div
-                      key={i}
-                      className={`h-1 rounded-full transition-all duration-500 ${
-                        i === activeIndex ? 'w-8 bg-primary' : 'w-3 bg-white/10'
-                      }`}
-                    />
-                  ))}
-                </div>
+              {/* Sub-points */}
+              <div className="space-y-2">
+                {processPhases[activeIndex].subPoints.map((point, i) => (
+                  <motion.div
+                    key={`${activeIndex}-${i}`}
+                    initial={{ opacity: 0, x: -15 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 + i * 0.1 }}
+                    className="flex items-center gap-2.5"
+                  >
+                    <Check className="w-3.5 h-3.5 text-primary flex-shrink-0" />
+                    <span className="text-xs sm:text-sm text-white/70">{point}</span>
+                  </motion.div>
+                ))}
               </div>
             </motion.div>
           </AnimatePresence>
+
+          {/* Bottom nav: dots + arrows */}
+          <div className="flex items-center justify-between mt-6 md:mt-8">
+            {/* Dots */}
+            <div className="flex gap-2">
+              {processPhases.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`h-1.5 rounded-full transition-all duration-500 ${
+                    i === activeIndex ? 'w-8 bg-primary' : 'w-3 bg-white/20 hover:bg-white/40'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Arrow buttons */}
+            <div className="flex gap-2">
+              <button
+                onClick={() => goTo((activeIndex - 1 + processPhases.length) % processPhases.length)}
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 transition-all"
+              >
+                <ArrowRight className="w-4 h-4 rotate-180" />
+              </button>
+              <button
+                onClick={() => goTo((activeIndex + 1) % processPhases.length)}
+                className="w-9 h-9 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 transition-all"
+              >
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Mobile: Vertical accordion style */}
-        <div className="lg:hidden space-y-3">
-          {processPhases.map((phase, index) => {
-            const Icon = phase.icon;
-            const isActive = activeIndex === index;
-            return (
-              <motion.div
-                key={index}
-                className={`rounded-xl border transition-all duration-400 overflow-hidden ${
-                  isActive
-                    ? 'bg-white/[0.05] border-white/[0.12]'
-                    : 'bg-transparent border-white/[0.06]'
-                }`}
-                style={{
-                  opacity: isVisible ? 1 : 0,
-                  transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                  transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
-                }}
-              >
-                <button
-                  onClick={() => setActiveIndex(index)}
-                  className="w-full flex items-center gap-4 px-5 py-4 text-left"
-                >
-                  <span className={`text-2xl font-bold font-mono transition-colors duration-300 ${
-                    isActive ? 'text-primary' : 'text-white/15'
-                  }`}>
-                    0{index + 1}
-                  </span>
-                  <div className="flex-1">
-                    <h4 className={`text-sm font-semibold transition-colors ${isActive ? 'text-white' : 'text-white/50'}`}>
-                      {phase.title}
-                    </h4>
-                    <p className="text-[10px] text-white/30 uppercase tracking-wider">{phase.subtitle}</p>
-                  </div>
-                  <Icon className={`w-4 h-4 transition-colors ${isActive ? 'text-primary' : 'text-white/20'}`} />
-                </button>
-
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="overflow-hidden"
-                    >
-                      <div className="px-5 pb-4 space-y-2 border-t border-white/[0.06] pt-3 ml-12">
-                        {phase.subPoints.map((point, i) => (
-                          <div key={i} className="flex items-start gap-2">
-                            <div className="mt-1.5 w-1 h-1 rounded-full bg-primary/50 flex-shrink-0" />
-                            <span className="text-xs text-white/60">{point}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
+        {/* Top-right label */}
+        <div className="absolute top-4 right-4 md:top-6 md:right-6 z-10">
+          <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">
+            {String(activeIndex + 1).padStart(2, '0')} / {String(processPhases.length).padStart(2, '0')}
+          </span>
         </div>
       </div>
     </div>
@@ -333,7 +287,7 @@ const Index = () => {
           
           {/* Featured Billboard Image with Process Overlay */}
           <AnimatedSection delay={100}>
-            <ProcessInteractiveNumbers />
+            <ProcessCardSlider />
           </AnimatedSection>
         </div>
       </section>
