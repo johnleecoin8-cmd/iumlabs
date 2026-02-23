@@ -42,7 +42,7 @@ const WhyChooseUsSection = () => {
           </p>
 
           {/* Bottom accent */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center gap-4">
             <div className="w-12 h-px bg-purple-400/50" />
             <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
               Founded by veterans from Binance & KuCoin
