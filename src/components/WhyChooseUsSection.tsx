@@ -30,15 +30,14 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}
         >
           {/* Headline */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-[3.2rem] lg:text-[3.8rem] font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1] whitespace-nowrap">
-            Mastering Seoul's Velocity.
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
+            Seoul Moves Fast.<br />We Make You Land.
           </h2>
 
           {/* Description */}
-          <p className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mb-8 sm:mb-10 tracking-wide">
-            <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection—and that's exactly what we build.
-            We connect global teams to Korea through research-backed positioning, localized narrative systems, and partner-driven distribution.
-            From first signal to sustained growth, we make your Korea entry feel native—and perform.
+          <p className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide">
+            <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection.
+            We connect your team to Korea with research-led positioning, localized narrative systems, and distribution partners—so your launch hits on day one and compounds into sustained growth.
           </p>
 
           {/* Bottom accent */}
@@ -47,6 +46,7 @@ const WhyChooseUsSection = () => {
             <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
               Founded by veterans from Binance & KuCoin
             </p>
+            <div className="w-12 h-px bg-purple-400/50" />
           </div>
         </motion.div>
       </div>
