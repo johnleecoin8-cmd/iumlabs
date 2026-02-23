@@ -1,42 +1,40 @@
 
+# About 섹션 텍스트 고급화 리디자인
 
-# Services Section (02) Visual Enhancement
+현재 About 섹션의 텍스트가 너무 단순하고 고급스러운 느낌이 부족합니다. 경복궁 배경 영상과 어울리는 럭셔리하고 세련된 타이포그래피로 전면 개편합니다.
 
-## Goal
-Add distinctive visual elements to the Services section to match the richness of the Cases section, while keeping the clean zigzag layout intact.
+## 변경 방향
 
-## What We'll Add
+### 1. 헤드라인 리디자인
+- "Data-Driven" 부분을 **serif italic** (Playfair Display)로 변경하여 클래식한 고급감 부여
+- "Market Entry." 부분은 기존 sans-serif bold 유지하여 serif/sans 대비 효과
+- 그라데이션을 gold 톤 (`from-amber-200 via-white to-amber-100`)으로 변경하여 프리미엄 느낌 강조
 
-### 1. Background Visual Layer
-- Subtle dot grid pattern (matching Cases section style)
-- Faint scanline overlay for a techy/agency feel
-- A soft radial glow centered behind the section
+### 2. 상단 라벨 변경
+- 현재 `◆ Seoul, Korea` 뱃지 스타일을 thin horizontal line + 텍스트로 교체
+- `Est. Seoul, Korea` 형태로 더 절제된 고급 표현
 
-### 2. Hover Glow Effect per Row
-- Each service row gets a subtle colored glow on hover (similar to how Cases cards have per-project color glows)
-- Assign a unique accent color to each service (e.g., GTM = cyan, Branding = purple, SEO = green, etc.)
-- On hover, a soft colored shadow/glow appears around or behind the row
+### 3. 서브 태그라인 제거 또는 리파인
+- "Research · Strategy · Execution" 을 더 넓은 letter-spacing과 얇은 세리프로 변경
+- 구분자를 `—` (em dash)로 교체
 
-### 3. Animated Accent Details
-- A thin horizontal progress-like line at the bottom of each row that fills on hover (like the Cases progress bars)
-- The "Service 0X" label gets a subtle typing/fade animation when scrolled into view
+### 4. 본문 텍스트 개선
+- 전체적으로 line-height를 더 넉넉하게 (`leading-[1.8]`)
+- 하이라이트 키워드를 gold/amber 계열로 통일
+- 글자 크기를 약간 키워서 여백감 확보
 
-### 4. Floating Particles (Lightweight)
-- 4-6 small floating dots in the section background, gently animating up/down with varying opacity (same pattern as Cases)
-- Only rendered on desktop to keep mobile snappy
+### 5. 하단 액센트 리디자인
+- "Founded by veterans from Binance & KuCoin" 을 더 미니멀하게
+- 얇은 금색 라인 + 작은 텍스트
 
-### 5. Section Edge Gradients
-- Top and bottom fade gradients to blend the section edges smoothly into the dark background
+---
 
-## Technical Details
+## 기술 상세
 
-### File: `src/components/ServicesSection.tsx`
-- Add a background effects container (dot grid, scanline, floating particles) using CSS + framer-motion
-- Add a `color` property to each service object for per-row accent glow
-- Add a bottom progress bar div to each `ServiceRow` that scales from 0 to 100% width on hover
-- Add top/bottom gradient overlays to the section wrapper
-- Import `motion` from framer-motion (already installed)
+**수정 파일:** `src/components/WhyChooseUsSection.tsx`
 
-### No new files or dependencies needed
-- framer-motion is already installed
-- All changes contained within `ServicesSection.tsx`
+**핵심 변경:**
+- `font-serif italic` 적용 (이미 Playfair Display가 tailwind에 설정되어 있음)
+- 컬러 팔레트를 primary에서 amber/gold 톤으로 일부 전환
+- 전체 레이아웃 여백 및 spacing 조정
+- 그라데이션 오버레이를 약간 더 어둡게 하여 텍스트 가독성과 고급감 향상
