@@ -285,7 +285,7 @@ export default function ProjectForm() {
                     value={formData.result}
                     onChange={(e) => setFormData((prev) => ({ ...prev, result: e.target.value }))}
                     className="bg-[#0A0A0A] border-white/10 text-white"
-                    placeholder="e.g. +340% Korean Trading Volume"
+                    placeholder="e.g. 2M+ Impressions"
                   />
                 </div>
 
