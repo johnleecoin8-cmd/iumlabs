@@ -12,20 +12,16 @@ const sections = [{
   number: "02",
   label: "Services"
 }, {
-  id: "process",
-  number: "03",
-  label: "Process"
-}, {
   id: "cases",
-  number: "04",
+  number: "03",
   label: "Cases"
 }, {
   id: "insights",
-  number: "05",
+  number: "04",
   label: "Insights"
 }, {
   id: "contact",
-  number: "06",
+  number: "05",
   label: "Contact"
 }];
 const SectionIndicator = () => {
