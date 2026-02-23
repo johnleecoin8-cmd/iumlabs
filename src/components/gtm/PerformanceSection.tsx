@@ -268,26 +268,24 @@ const ProjectCard = ({
     <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
       <div
         className={`
-          group relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
+          relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           transition-all duration-500
-          ${colors.glow}
-          hover:border-opacity-60
           overflow-hidden
         `}
       >
-        {/* Project background image - appears on hover */}
+        {/* Project background image - always visible */}
         <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          className="absolute inset-0"
           style={{
             backgroundImage: `url(${project.bgImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         />
-        {/* Dark overlay on hover for readability */}
-        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/70" />
         
         {/* Content wrapper */}
         <div className="relative z-10">
@@ -298,7 +296,7 @@ const ProjectCard = ({
             alt={project.name}
             loading="lazy"
             decoding="async"
-            className="h-5 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-5 md:h-8 w-auto object-contain opacity-100 transition-opacity"
           />
           <div className="flex items-center gap-1.5 md:gap-2">
             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
@@ -320,15 +318,15 @@ const ProjectCard = ({
           <div className={`text-2xl md:text-4xl font-bold font-mono ${colors.text}`}>
             {project.metric.prefix || ''}{project.metric.value}{project.metric.suffix}
           </div>
-          <div className="text-[10px] md:text-sm text-muted-foreground font-mono uppercase tracking-wider group-hover:text-white/70 transition-colors">
+          <div className="text-[10px] md:text-sm text-white/70 font-mono uppercase tracking-wider transition-colors">
             {project.metric.label}
           </div>
         </div>
 
         {/* Strategy Label */}
         <div className="mb-2 md:mb-4">
-          <div className="text-[8px] md:text-xs text-muted-foreground mb-0.5 md:mb-1 group-hover:text-white/50 transition-colors">STRATEGY</div>
-          <div className="text-[10px] md:text-sm text-foreground font-medium group-hover:text-white transition-colors">
+          <div className="text-[8px] md:text-xs text-white/50 mb-0.5 md:mb-1 transition-colors">STRATEGY</div>
+          <div className="text-[10px] md:text-sm text-white font-medium transition-colors">
             {project.strategy}
           </div>
         </div>
@@ -336,10 +334,10 @@ const ProjectCard = ({
         {/* Progress Bar */}
         <div className="space-y-1">
           <div className="flex items-center justify-between text-[10px] font-mono">
-            <span className="text-muted-foreground group-hover:text-white/50 transition-colors">EXECUTION</span>
+             <span className="text-white/50 transition-colors">EXECUTION</span>
             <span className={colors.text}>{project.progress}%</span>
           </div>
-          <div className="h-1 bg-border/30 group-hover:bg-white/20 rounded-full overflow-hidden transition-colors">
+          <div className="h-1 bg-white/20 rounded-full overflow-hidden transition-colors">
             <div
               className={`h-full ${colors.progress} rounded-full`}
               style={{ width: `${project.progress}%` }}
@@ -348,7 +346,7 @@ const ProjectCard = ({
         </div>
 
         {/* Arrow indicator */}
-        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+        <div className="absolute top-6 right-6 z-20">
           <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
         </div>
         </div>
