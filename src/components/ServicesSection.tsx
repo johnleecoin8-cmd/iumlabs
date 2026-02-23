@@ -21,7 +21,8 @@ const services = [
     link: "/services",
     icon: Rocket,
     image: gtmImage,
-    accentColor: "0 200 255",    // cyan
+    accent: "0, 200, 255",       // cyan
+    tag: "STRATEGY",
   },
   {
     number: "02",
@@ -30,7 +31,8 @@ const services = [
     link: "/services/branding",
     icon: Compass,
     image: websiteImage,
-    accentColor: "168 85 247",   // purple
+    accent: "168, 85, 247",      // purple
+    tag: "CREATIVE",
   },
   {
     number: "03",
@@ -39,7 +41,8 @@ const services = [
     link: "/services/seo-ads",
     icon: Search,
     image: seoAdsImage,
-    accentColor: "34 197 94",    // green
+    accent: "34, 197, 94",       // green
+    tag: "GROWTH",
   },
   {
     number: "04",
@@ -48,7 +51,8 @@ const services = [
     link: "/services/offline-event",
     icon: Target,
     image: eventsImage,
-    accentColor: "251 146 60",   // orange
+    accent: "251, 146, 60",      // orange
+    tag: "ACTIVATION",
   },
   {
     number: "05",
@@ -57,7 +61,8 @@ const services = [
     link: "/services/community",
     icon: Users,
     image: communityImage,
-    accentColor: "56 189 248",   // sky
+    accent: "56, 189, 248",      // sky
+    tag: "COMMUNITY",
   },
   {
     number: "06",
@@ -66,7 +71,8 @@ const services = [
     link: "/services/deep-research",
     icon: FileSearch,
     image: deepResearchImage,
-    accentColor: "244 63 94",    // rose
+    accent: "244, 63, 94",       // rose
+    tag: "RESEARCH",
   },
   {
     number: "07",
@@ -75,7 +81,8 @@ const services = [
     link: "/services/influencer",
     icon: Mic2,
     image: kolImage,
-    accentColor: "250 204 21",   // yellow
+    accent: "250, 204, 21",      // yellow
+    tag: "INFLUENCE",
   },
   {
     number: "08",
@@ -84,11 +91,13 @@ const services = [
     link: "/services/pr",
     icon: Newspaper,
     image: prImage,
-    accentColor: "139 92 246",   // violet
+    accent: "139, 92, 246",      // violet
+    tag: "MEDIA",
   }
 ];
 
 const ServiceRow = ({ service, index }: { service: typeof services[0]; index: number }) => {
+  const Icon = service.icon;
   const isEven = index % 2 === 0;
 
   const { ref, isVisible } = useScrollAnimation({
@@ -96,6 +105,8 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
     rootMargin: '30px',
     triggerOnce: true
   });
+
+  const accentRgb = service.accent;
 
   return (
     <div
@@ -113,15 +124,15 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
       <Link
         to={service.link}
         className={cn(
-          "relative flex items-stretch overflow-hidden border-b border-white/[0.06] transition-all duration-500 active:scale-[0.995] h-[140px] sm:h-[160px] md:h-[180px]",
+          "relative flex items-stretch overflow-hidden border-b border-white/[0.06] transition-all duration-500 active:scale-[0.995] h-[160px] sm:h-[180px] md:h-[200px]",
           isEven ? "flex-row" : "flex-row-reverse"
         )}
       >
-        {/* Hover glow background */}
+        {/* Hover glow - radial from image side */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
           style={{
-            background: `radial-gradient(ellipse at ${isEven ? '30%' : '70%'} 50%, rgba(${service.accentColor}, 0.06) 0%, transparent 70%)`
+            background: `radial-gradient(ellipse at ${isEven ? '25%' : '75%'} 50%, rgba(${accentRgb}, 0.08) 0%, transparent 65%)`
           }}
         />
 
@@ -134,66 +145,126 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          {/* Gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent group-hover:from-black/40 group-hover:via-black/10 transition-all duration-500" />
-          {/* Number overlay */}
+          {/* Color-tinted overlay */}
+          <div
+            className="absolute inset-0 transition-all duration-500"
+            style={{
+              background: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(${accentRgb}, 0.08) 50%, rgba(0,0,0,0.3) 100%)`
+            }}
+          />
+          {/* Large number watermark */}
           <div className={cn(
-            "absolute bottom-3 sm:bottom-4 md:bottom-5 text-4xl sm:text-5xl md:text-6xl font-black leading-none text-white/[0.08] group-hover:text-white/[0.15] transition-colors duration-500 font-mono",
+            "absolute bottom-2 sm:bottom-3 md:bottom-4 font-black leading-none font-mono transition-all duration-500",
+            "text-5xl sm:text-6xl md:text-7xl",
             isEven ? "right-3 sm:right-4 md:right-6" : "left-3 sm:left-4 md:left-6"
-          )}>
+          )}
+            style={{ color: `rgba(${accentRgb}, 0.15)` }}
+          >
             {service.number}
+          </div>
+          {/* Icon badge floating on image */}
+          <div
+            className={cn(
+              "absolute top-3 sm:top-4 md:top-5 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center backdrop-blur-md border transition-all duration-500 group-hover:scale-110",
+              isEven ? "left-3 sm:left-4 md:left-5" : "right-3 sm:right-4 md:right-5"
+            )}
+            style={{
+              backgroundColor: `rgba(${accentRgb}, 0.15)`,
+              borderColor: `rgba(${accentRgb}, 0.3)`,
+            }}
+          >
+            <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" style={{ color: `rgb(${accentRgb})` }} />
           </div>
         </div>
 
-        {/* Vertical accent line */}
+        {/* Colored separator line */}
         <div
-          className="w-[1px] flex-shrink-0 transition-all duration-500 z-[1]"
-          style={{
-            backgroundColor: `rgba(${service.accentColor}, 0.08)`,
-          }}
+          className="w-[2px] flex-shrink-0 z-[1] relative overflow-hidden"
+          style={{ backgroundColor: `rgba(${accentRgb}, 0.1)` }}
         >
-          <div
-            className="w-full h-0 group-hover:h-full transition-all duration-700 ease-out"
-            style={{ backgroundColor: `rgba(${service.accentColor}, 0.5)` }}
+          <motion.div
+            className="absolute inset-x-0 top-0 w-full"
+            initial={{ height: '0%' }}
+            whileInView={{ height: '100%' }}
+            transition={{ duration: 0.8, delay: index * 0.08 + 0.2 }}
+            style={{ backgroundColor: `rgba(${accentRgb}, 0.5)` }}
           />
         </div>
 
         {/* Content side */}
         <div className={cn(
-          "flex-1 flex items-center transition-colors duration-500 bg-[#0A0A0A] group-hover:bg-[#111] z-[1]",
+          "flex-1 flex items-center transition-colors duration-500 bg-[#0A0A0A] group-hover:bg-[#0F0F0F] z-[1]",
           "px-5 sm:px-6 md:px-10"
         )}>
-          <div className="flex-1 flex flex-col justify-center gap-1.5 sm:gap-2 min-w-0">
-            <motion.span
-              initial={{ opacity: 0, x: -8 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: index * 0.08 + 0.3, duration: 0.5 }}
-              className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/40 group-hover:text-primary/60 transition-colors duration-500"
-            >
-              Service {service.number}
-            </motion.span>
+          <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-2.5 min-w-0">
+            {/* Tag badge */}
+            <div className="flex items-center gap-2.5">
+              <span
+                className="inline-flex items-center px-2 py-0.5 rounded text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-[0.15em]"
+                style={{
+                  backgroundColor: `rgba(${accentRgb}, 0.1)`,
+                  color: `rgb(${accentRgb})`,
+                  border: `1px solid rgba(${accentRgb}, 0.2)`,
+                }}
+              >
+                {service.tag}
+              </span>
+              <span className="text-[10px] sm:text-xs font-mono text-muted-foreground/30">
+                {service.number}/08
+              </span>
+            </div>
+
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight">
               {service.title}
             </h3>
-            <p className="hidden sm:block text-xs md:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500 line-clamp-2">
+
+            <p className="hidden sm:block text-xs md:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/70 transition-colors duration-500 line-clamp-2 max-w-md">
               {service.description}
             </p>
+
+            {/* Mini metric bar */}
+            <div className="hidden md:flex items-center gap-2 mt-1">
+              <div className="h-[3px] w-16 rounded-full overflow-hidden" style={{ backgroundColor: `rgba(${accentRgb}, 0.1)` }}>
+                <motion.div
+                  className="h-full rounded-full"
+                  initial={{ width: '0%' }}
+                  whileInView={{ width: `${60 + index * 5}%` }}
+                  transition={{ duration: 1, delay: index * 0.08 + 0.4 }}
+                  style={{ backgroundColor: `rgb(${accentRgb})` }}
+                />
+              </div>
+              <span className="text-[9px] font-mono" style={{ color: `rgba(${accentRgb}, 0.6)` }}>
+                Core Service
+              </span>
+            </div>
           </div>
 
-          <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300 flex-shrink-0 ml-4" />
+          {/* Arrow with accent ring */}
+          <div
+            className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-500 group-hover:scale-110"
+            style={{
+              border: `1px solid rgba(${accentRgb}, 0.15)`,
+              backgroundColor: `rgba(${accentRgb}, 0.05)`,
+            }}
+          >
+            <ArrowRight
+              className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-all duration-300"
+              style={{ color: `rgba(${accentRgb}, 0.6)` }}
+            />
+          </div>
         </div>
 
-        {/* Hover accent line on outer edge */}
+        {/* Colored accent edge */}
         <div className={cn(
           "absolute top-0 bottom-0 w-[3px] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top z-[2]",
           isEven ? "left-0" : "right-0"
-        )} style={{ backgroundColor: `rgba(${service.accentColor}, 0.7)` }} />
+        )} style={{ backgroundColor: `rgb(${accentRgb})` }} />
 
-        {/* Bottom progress bar */}
+        {/* Bottom progress bar on hover */}
         <div className="absolute bottom-0 left-0 right-0 h-[2px] z-[2]">
           <div
             className="h-full w-0 group-hover:w-full transition-all duration-700 ease-out"
-            style={{ backgroundColor: `rgba(${service.accentColor}, 0.5)` }}
+            style={{ backgroundColor: `rgba(${accentRgb}, 0.5)` }}
           />
         </div>
       </Link>
@@ -201,17 +272,17 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
   );
 };
 
-/* Floating particle for background */
-const FloatingParticle = ({ delay, x, size }: { delay: number; x: number; size: number }) => (
+/* Floating particle */
+const FloatingParticle = ({ delay, x, size, color }: { delay: number; x: number; size: number; color: string }) => (
   <motion.div
-    className="absolute rounded-full bg-primary/20 hidden md:block pointer-events-none"
-    style={{ left: `${x}%`, width: size, height: size }}
+    className="absolute rounded-full hidden md:block pointer-events-none"
+    style={{ left: `${x}%`, width: size, height: size, backgroundColor: color }}
     animate={{
-      y: [0, -30, 0],
-      opacity: [0.15, 0.4, 0.15],
+      y: [0, -40, 0],
+      opacity: [0.1, 0.35, 0.1],
     }}
     transition={{
-      duration: 5 + delay,
+      duration: 6 + delay,
       repeat: Infinity,
       ease: "easeInOut",
       delay,
@@ -221,16 +292,16 @@ const FloatingParticle = ({ delay, x, size }: { delay: number; x: number; size: 
 
 const ServicesSection = () => {
   const particles = useMemo(() => [
-    { delay: 0, x: 12, size: 3 },
-    { delay: 1.5, x: 35, size: 2 },
-    { delay: 0.8, x: 58, size: 4 },
-    { delay: 2.2, x: 78, size: 2 },
-    { delay: 1.0, x: 92, size: 3 },
+    { delay: 0, x: 10, size: 3, color: 'rgba(0, 200, 255, 0.4)' },
+    { delay: 1.8, x: 30, size: 2, color: 'rgba(168, 85, 247, 0.3)' },
+    { delay: 0.6, x: 55, size: 4, color: 'rgba(34, 197, 94, 0.3)' },
+    { delay: 2.5, x: 75, size: 2, color: 'rgba(251, 146, 60, 0.3)' },
+    { delay: 1.2, x: 90, size: 3, color: 'rgba(244, 63, 94, 0.3)' },
   ], []);
 
   return (
     <section className="relative bg-background overflow-hidden">
-      {/* Background effects layer */}
+      {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Dot grid */}
         <div
@@ -242,13 +313,15 @@ const ServicesSection = () => {
         />
         {/* Scanlines */}
         <div
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.015]"
           style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, hsl(var(--foreground) / 0.05) 2px, hsl(var(--foreground) / 0.05) 4px)',
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, hsl(var(--foreground) / 0.04) 3px, hsl(var(--foreground) / 0.04) 4px)',
           }}
         />
-        {/* Radial glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,hsl(var(--primary)/0.04),transparent_70%)]" />
+        {/* Dual radial glows */}
+        <div className="absolute inset-0" style={{
+          background: 'radial-gradient(ellipse at 20% 30%, rgba(0, 200, 255, 0.02), transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.02), transparent 50%)'
+        }} />
 
         {/* Floating particles */}
         {particles.map((p, i) => (
@@ -256,8 +329,8 @@ const ServicesSection = () => {
         ))}
       </div>
 
-      {/* Top edge gradient */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-background to-transparent z-[1] pointer-events-none" />
+      {/* Top fade */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-background to-transparent z-[1] pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-[1] flex flex-col">
@@ -266,8 +339,8 @@ const ServicesSection = () => {
         ))}
       </div>
 
-      {/* Bottom edge gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent z-[1] pointer-events-none" />
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent z-[1] pointer-events-none" />
     </section>
   );
 };
