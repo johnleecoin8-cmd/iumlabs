@@ -12,7 +12,7 @@ const WhyChooseUsSection = () => {
       <div className="grid grid-cols-1 lg:grid-cols-10 min-h-[560px] sm:min-h-[640px] md:min-h-[720px] lg:min-h-[75vh]">
         
         {/* Left: Text Content */}
-        <div className="relative z-10 flex items-center px-6 sm:px-10 md:px-14 lg:px-16 py-16 sm:py-20 md:py-24 bg-[#0A0A0A]">
+        <div className="relative z-10 flex items-center px-6 sm:px-10 md:px-14 lg:px-16 py-16 sm:py-20 md:py-24 bg-[#0A0A0A] lg:col-span-3">
           <motion.div
             className="max-w-lg"
             initial={{ opacity: 0, y: 30 }}
