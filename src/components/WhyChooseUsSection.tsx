@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
 const WhyChooseUsSection = () => {
-  const { videoRef, isVideoReady, videoProps } = useVideoPlayer({
+  const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
     src: '/videos/gyeongbokgung-about.mp4',
     forceFirstFrame: true,
   });
@@ -13,6 +13,7 @@ const WhyChooseUsSection = () => {
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
+          src={optimizedSrc}
           {...videoProps}
           className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
         />
