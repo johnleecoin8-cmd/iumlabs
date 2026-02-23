@@ -104,7 +104,7 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
       <Link
         to={service.link}
         className={cn(
-          "relative flex items-stretch overflow-hidden border-b border-border/20 transition-all duration-500 active:scale-[0.995] min-h-[120px] sm:min-h-[140px] md:min-h-[160px]",
+          "relative flex items-stretch overflow-hidden border-b border-border/20 transition-all duration-500 active:scale-[0.995] h-[80px] sm:h-[90px] md:h-[100px]",
           isEven ? "flex-row" : "flex-row-reverse"
         )}
       >
@@ -120,8 +120,8 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
           <div className="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors duration-500" />
           {/* Number overlay */}
           <div className={cn(
-            "absolute bottom-3 sm:bottom-4 text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500",
-            isEven ? "right-3 sm:right-4" : "left-3 sm:left-4"
+            "absolute bottom-1 sm:bottom-2 text-2xl sm:text-3xl md:text-4xl font-black leading-none text-white/10 group-hover:text-white/20 transition-colors duration-500",
+            isEven ? "right-2 sm:right-3" : "left-2 sm:left-3"
           )}>
             {service.number}
           </div>
@@ -129,48 +129,27 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
 
         {/* Content side */}
         <div className={cn(
-          "flex-1 flex flex-col justify-center py-5 sm:py-6 md:py-8 transition-colors duration-500 bg-background group-hover:bg-secondary/30",
-          isEven ? "pl-5 sm:pl-8 md:pl-12 pr-4 sm:pr-6 md:pr-10" : "pr-5 sm:pr-8 md:pr-12 pl-4 sm:pl-6 md:pl-10"
+          "flex-1 flex items-center gap-3 sm:gap-4 md:gap-6 py-3 sm:py-4 transition-colors duration-500 bg-background group-hover:bg-secondary/30",
+          isEven ? "pl-4 sm:pl-6 md:pl-10 pr-4 sm:pr-6 md:pr-8" : "pr-4 sm:pr-6 md:pr-10 pl-4 sm:pl-6 md:pl-8",
+          isEven ? "flex-row" : "flex-row-reverse"
         )}>
-          <div className="flex items-center gap-3 mb-2 sm:mb-3">
-            <Icon
-              className="w-4 h-4 sm:w-5 sm:h-5 text-primary/70 group-hover:text-primary transition-colors duration-500"
-              strokeWidth={1.5}
-            />
-            <span className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500">
-              Service {service.number}
-            </span>
-          </div>
+          <Icon
+            className="w-4 h-4 sm:w-5 sm:h-5 text-primary/70 group-hover:text-primary transition-colors duration-500 flex-shrink-0"
+            strokeWidth={1.5}
+          />
 
-          <h3 className={cn(
-            "text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight mb-1.5 sm:mb-2",
-            isEven ? "text-left" : "text-right"
-          )}>
+          <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight flex-shrink-0">
             {service.title}
           </h3>
 
-          <p className={cn(
-            "text-xs sm:text-sm md:text-base text-muted-foreground/60 group-hover:text-muted-foreground/90 transition-colors duration-500 leading-relaxed max-w-md",
-            isEven ? "text-left" : "text-right ml-auto"
-          )}>
+          <p className="hidden md:block text-xs lg:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/80 transition-colors duration-500 truncate flex-1 min-w-0">
             {service.description}
           </p>
 
-          {/* Arrow indicator */}
-          <div className={cn(
-            "mt-3 sm:mt-4 flex items-center gap-2 text-xs sm:text-sm text-muted-foreground/40 group-hover:text-primary transition-all duration-300",
-            isEven ? "justify-start" : "justify-end"
-          )}>
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 font-medium">
-              Learn more
-            </span>
-            <ArrowRight className={cn(
-              "w-4 h-4 transition-transform duration-300",
-              isEven
-                ? "group-hover:translate-x-1.5"
-                : "rotate-180 group-hover:-translate-x-1.5"
-            )} />
-          </div>
+          <ArrowRight className={cn(
+            "w-4 h-4 text-muted-foreground/30 group-hover:text-primary transition-all duration-300 flex-shrink-0 ml-auto",
+            isEven ? "group-hover:translate-x-1" : "rotate-180 group-hover:-translate-x-1"
+          )} />
         </div>
 
         {/* Hover accent line */}
