@@ -92,14 +92,14 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     <div 
       ref={ref}
       className={cn(
-        "group relative overflow-hidden transition-all duration-500 ease-out will-change-transform flex-shrink-0 w-[calc(100%/4)] md:w-[calc(100%/8)]",
+        "group relative overflow-hidden transition-all duration-500 ease-out will-change-transform w-full",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
       style={{ transitionDelay: `${index * 75}ms` }}
     >
       <Link
         to={service.link}
-        className="block h-full min-h-[220px] sm:min-h-[280px] md:min-h-[340px] lg:min-h-[400px] w-full relative transition-all duration-300 active:scale-[0.98] border-r border-border/40 last:border-r-0"
+        className="block h-full min-h-[160px] sm:min-h-[200px] md:min-h-[220px] w-full relative transition-all duration-300 active:scale-[0.98] border-b border-border/40 last:border-b-0"
       >
         {/* Background Layer */}
         <div className="absolute inset-0">
@@ -159,7 +159,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 const ServicesSection = () => {
   return (
     <section className="bg-background">
-      <div className="flex flex-wrap md:flex-nowrap overflow-x-auto scrollbar-hide">
+      <div className="flex flex-col">
         {services.map((service, index) => (
           <ServiceCard key={service.number} service={service} index={index} />
         ))}
