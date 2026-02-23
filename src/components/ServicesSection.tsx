@@ -81,8 +81,6 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const hasBorderRight = (index % 4) !== 3;
-  const hasBorderBottom = index < 4;
   
   const { ref, isVisible } = useScrollAnimation({ 
     threshold: 0.1,
@@ -94,20 +92,14 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     <div 
       ref={ref}
       className={cn(
-        "group relative overflow-hidden transition-all duration-500 ease-out will-change-transform",
+        "group relative overflow-hidden transition-all duration-500 ease-out will-change-transform flex-shrink-0",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
       style={{ transitionDelay: `${index * 75}ms` }}
     >
       <Link
         to={service.link}
-        className={`block h-full min-h-[180px] sm:min-h-[240px] md:min-h-[320px] lg:min-h-[360px] relative transition-all duration-300 active:scale-[0.98] ${
-          hasBorderRight ? "lg:border-r border-border/40" : ""
-        } ${hasBorderBottom ? "border-b border-border/40" : ""} ${
-          (index % 2) === 0 ? "sm:border-r border-border/40 md:border-r lg:border-r-0" : ""
-        } ${(index % 2) === 0 && hasBorderRight ? "lg:border-r" : ""} ${
-          (index % 2) === 1 ? "md:border-r-0 lg:border-r" : ""
-        }`}
+        className="block h-full min-h-[220px] sm:min-h-[280px] md:min-h-[340px] w-[260px] sm:w-[300px] md:w-[340px] lg:w-[380px] relative transition-all duration-300 active:scale-[0.98] border-r border-border/40 last:border-r-0"
       >
         {/* Background Layer */}
         <div className="absolute inset-0">
@@ -120,18 +112,15 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
                 decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              {/* Dark overlay */}
               <div className="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition-colors duration-500" />
             </>
           ) : (
             <>
-              {/* Gradient fallback for services without images */}
               <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/50" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_hsl(var(--primary)/0.15),_transparent_50%)]" />
               <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-colors duration-500" />
             </>
           )}
-          {/* Bottom gradient for text readability */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
         </div>
 
@@ -157,7 +146,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           </div>
         </div>
 
-        {/* Hover border glow - enhanced with colored edge glow */}
+        {/* Hover border glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
           <div className="absolute inset-0 border border-white/25 shadow-[inset_0_0_30px_rgba(255,255,255,0.06)]" />
           <div className="absolute -inset-px bg-gradient-to-t from-primary/20 via-transparent to-transparent rounded-[1px]" />
@@ -170,7 +159,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 const ServicesSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="flex overflow-x-auto scrollbar-hide">
         {services.map((service, index) => (
           <ServiceCard key={service.number} service={service} index={index} />
         ))}
