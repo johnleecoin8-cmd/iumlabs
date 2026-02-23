@@ -1,43 +1,42 @@
 
-# Services Section Visual Refinement
 
-## Current Issues
-- Row height too compact (80-100px) making images and text feel cramped
-- Image overlays and number watermarks look inconsistent across different service images
-- Text content side feels bare and unstructured
-- Alternating content direction (flex-row-reverse) for text side adds confusion rather than elegance
-- No visual breathing room between the image and text halves
-- Section lacks a cohesive, polished agency feel
+# Services Section (02) Visual Enhancement
 
-## Refinement Plan
+## Goal
+Add distinctive visual elements to the Services section to match the richness of the Cases section, while keeping the clean zigzag layout intact.
 
-### 1. Increase Row Height for Visual Breathing Room
-- Restore row height to `h-[140px] sm:h-[160px] md:h-[180px]` -- enough to let images breathe without being oversized
-- Keep the 50/50 image-to-content ratio
+## What We'll Add
 
-### 2. Clean Up Image Side
-- Keep the alternating left/right image placement (the zigzag)
-- Add a consistent gradient overlay (bottom-to-top dark gradient) instead of flat black/30
-- Make the number overlay larger and more intentional as a design element: semi-transparent, positioned consistently in the corner nearest the content
-- Subtle zoom on hover (keep existing scale-110)
+### 1. Background Visual Layer
+- Subtle dot grid pattern (matching Cases section style)
+- Faint scanline overlay for a techy/agency feel
+- A soft radial glow centered behind the section
 
-### 3. Polish Content Side
-- Remove the reversed flex direction for text -- keep text always left-aligned for readability regardless of which side it's on
-- Structure content vertically: small mono "SERVICE 01" label on top, title below, description under that
-- Add a subtle vertical accent line on the border between image and content (the side facing the image)
-- Arrow indicator stays at the far edge, vertically centered
+### 2. Hover Glow Effect per Row
+- Each service row gets a subtle colored glow on hover (similar to how Cases cards have per-project color glows)
+- Assign a unique accent color to each service (e.g., GTM = cyan, Branding = purple, SEO = green, etc.)
+- On hover, a soft colored shadow/glow appears around or behind the row
 
-### 4. Consistent Styling
-- Add a thin `border-white/[0.06]` divider between rows (matching the site's design system)
-- Content background: `bg-[#0A0A0A]` base with `hover:bg-[#111]` for subtle feedback
-- Typography: title in `text-lg md:text-2xl font-bold tracking-tight`, description in `text-xs md:text-sm text-muted-foreground/50`
+### 3. Animated Accent Details
+- A thin horizontal progress-like line at the bottom of each row that fills on hover (like the Cases progress bars)
+- The "Service 0X" label gets a subtle typing/fade animation when scrolled into view
 
-### 5. Animation Polish
-- Keep the directional slide-in (left for even, right for odd)
-- Reduce translate distance from 12 to 8 for subtlety
-- Keep stagger delay at 80ms per item
+### 4. Floating Particles (Lightweight)
+- 4-6 small floating dots in the section background, gently animating up/down with varying opacity (same pattern as Cases)
+- Only rendered on desktop to keep mobile snappy
+
+### 5. Section Edge Gradients
+- Top and bottom fade gradients to blend the section edges smoothly into the dark background
 
 ## Technical Details
-- Single file edit: `src/components/ServicesSection.tsx`
-- No new dependencies needed
-- All changes are CSS/layout adjustments within the existing component structure
+
+### File: `src/components/ServicesSection.tsx`
+- Add a background effects container (dot grid, scanline, floating particles) using CSS + framer-motion
+- Add a `color` property to each service object for per-row accent glow
+- Add a bottom progress bar div to each `ServiceRow` that scales from 0 to 100% width on hover
+- Add top/bottom gradient overlays to the section wrapper
+- Import `motion` from framer-motion (already installed)
+
+### No new files or dependencies needed
+- framer-motion is already installed
+- All changes contained within `ServicesSection.tsx`
