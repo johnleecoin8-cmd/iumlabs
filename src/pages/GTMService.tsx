@@ -2156,7 +2156,7 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
-        <SuccessStoriesSection />
+        {/* SuccessStoriesSection removed - empty section with no content */}
         <PerformanceSection />
         <AuthoritySection />
         <ClientLogosMarquee />
