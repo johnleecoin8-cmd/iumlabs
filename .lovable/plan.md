@@ -1,65 +1,54 @@
 
-# 비주얼 이슈 및 SEO 일괄 수정 계획
 
-## 수정 항목 3가지
+# 경쟁사 벤치마크 기반 개선 구현 계획
+
+리드 마그넷, 테스티모니얼, 프라이싱, 팀 소개를 제외한 2가지 개선 사항을 진행합니다.
 
 ---
 
-### 1. 빈 CTABannerSection 컴포넌트 제거
+## 1. 홈페이지 Trust Badges 섹션 추가
 
-빈 `<section>` 태그가 약 200px의 불필요한 여백을 생성하고 있습니다.
+현재 MediaPartnersSection(미디어 로고 마키)과 ClientLogosSection(클라이언트 로고)은 있지만, 미디어 노출 실적을 강조하는 "As Featured In" 스타일의 신뢰 배지 섹션이 없습니다.
 
 **작업 내용:**
-- 아래 7개 페이지에서 `CTABannerSection` import 및 사용 제거:
-  - `Index.tsx`, `GTMService.tsx`, `Contact.tsx`, `Projects.tsx`, `Jobs.tsx`, `Research.tsx`, `ServicePageLayout.tsx`
-- `CTABannerSection.tsx` 파일 삭제
+- 새 컴포넌트 `TrustBadgesSection.tsx` 생성
+- 미디어 출연/보도 실적을 강조하는 배지 스타일 (예: "Featured in CoinDesk", "Covered by Cointelegraph" 등)
+- 기존 MediaPartnersSection 바로 위 또는 Hero 바로 아래(01 About 섹션 전)에 배치
+- 미니멀한 수평 배열, 기존 디자인 톤(다크 배경, 작은 텍스트, 얇은 보더)과 일관성 유지
+- 모바일에서는 2열 또는 수평 스크롤
+
+**배치 위치 (Index.tsx):**
+- Hero 섹션과 01 About 섹션 사이에 삽입
 
 ---
 
-### 2. 04 Cases 섹션 가독성 개선
+## 2. 프로젝트 상세 페이지 Before/After 성장 차트 추가
 
-배경 이미지 위 텍스트가 읽기 어렵고, 모바일에서 카드가 잘리는 문제가 있습니다.
-
-**작업 내용 (PerformanceSection.tsx):**
-- 오버레이 불투명도 증가: `bg-black/70` -> `bg-black/80`
-- 모바일 카드 크기 미세 조정으로 잘림 방지
-
----
-
-### 3. 서비스 별칭 페이지 Canonical URL 적용
-
-`/kol-marketing`, `/growth-marketing`, `/community-growth`, `/research-data` 4개 별칭이 주요 서비스 URL과 중복 색인되고 있습니다.
-
-현재 서비스 페이지는 `usePageMeta` 훅을 사용하며 canonical 설정이 없습니다.
+현재 프로젝트 상세 페이지의 메트릭은 정적 숫자 카드(MetricCard)로만 표시됩니다. 경쟁사들은 시간 기반 성장 그래프와 Before/After 비교를 활용합니다.
 
 **작업 내용:**
-- `usePageMeta` 훅에 `canonicalPath` 옵션 추가
-- 각 서비스 페이지에서 현재 경로를 감지하여 별칭 접근 시 canonical을 주요 URL로 설정:
-
-| 별칭 경로 | Canonical |
-|-----------|-----------|
-| `/kol-marketing` | `/services/influencer` |
-| `/growth-marketing` | `/services/gtm` |
-| `/community-growth` | `/services/community` |
-| `/research-data` | `/services/deep-research` |
+- 새 컴포넌트 `ProjectGrowthChart.tsx` 생성
+- Recharts (이미 설치됨)를 사용하여 간단한 Before/After 바 차트 또는 라인 차트 렌더링
+- 데이터 소스: 각 프로젝트의 기존 metrics 배열을 활용 (value에서 숫자 추출하여 Before=0 기준, After=실제값으로 시각화)
+- `ProjectContentSection.tsx`의 메트릭 그리드 아래에 차트 섹션 추가
+- 프로젝트 glowColor를 차트 액센트 색상으로 활용
+- 모바일 반응형 대응
 
 ---
 
-## 수정 파일 목록
+## 수정/생성 파일 목록
 
 | 파일 | 작업 |
 |------|------|
-| `src/components/CTABannerSection.tsx` | 삭제 |
-| `src/pages/Index.tsx` | CTABanner 제거 |
-| `src/pages/GTMService.tsx` | CTABanner 제거 |
-| `src/pages/Contact.tsx` | CTABanner 제거 |
-| `src/pages/Projects.tsx` | CTABanner 제거 |
-| `src/pages/Jobs.tsx` | CTABanner 제거 |
-| `src/pages/Research.tsx` | CTABanner 제거 |
-| `src/components/ServicePageLayout.tsx` | CTABanner 제거 |
-| `src/components/gtm/PerformanceSection.tsx` | 오버레이 강화 |
-| `src/hooks/usePageMeta.tsx` | canonical 지원 추가 |
-| `src/pages/InfluencerService.tsx` | canonical 적용 |
-| `src/pages/GTMService.tsx` | canonical 적용 |
-| `src/pages/CommunityService.tsx` | canonical 적용 |
-| `src/pages/DeepResearchService.tsx` | canonical 적용 |
+| `src/components/TrustBadgesSection.tsx` | 신규 생성 - Trust Badges 컴포넌트 |
+| `src/pages/Index.tsx` | Trust Badges 섹션 삽입 |
+| `src/components/project-detail/ProjectGrowthChart.tsx` | 신규 생성 - Before/After 차트 |
+| `src/components/project-detail/ProjectContentSection.tsx` | 차트 컴포넌트 삽입 |
+
+---
+
+## 기술 세부사항
+
+- TrustBadgesSection: 기존 미디어 로고 에셋(`@/assets/logos/`) 재활용, framer-motion 애니메이션 적용
+- ProjectGrowthChart: recharts `BarChart` 사용, 프로젝트 metrics 데이터에서 숫자값 자동 파싱, 반응형 `ResponsiveContainer`
+- 기존 미니멀 디자인 원칙 준수 (불필요한 장식 요소 배제)
