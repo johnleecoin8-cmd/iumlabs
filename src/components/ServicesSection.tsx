@@ -109,7 +109,7 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
         )}
       >
         {/* Image side */}
-        <div className="relative w-[35%] sm:w-[30%] md:w-[28%] flex-shrink-0 overflow-hidden">
+        <div className="relative w-[45%] sm:w-[48%] md:w-[50%] flex-shrink-0 overflow-hidden">
           <img
             src={service.image}
             alt=""
