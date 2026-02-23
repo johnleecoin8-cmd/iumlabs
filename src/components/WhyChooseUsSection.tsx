@@ -31,8 +31,7 @@ const WhyChooseUsSection = () => {
         >
           {/* Headline */}
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
-            Connect to Korea.<br />
-            Precisely.
+            Mastering Seoul's Velocity.
           </h2>
 
           {/* Description */}
