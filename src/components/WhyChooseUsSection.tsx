@@ -21,9 +21,9 @@ const WhyChooseUsSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-end min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
+      <div className="relative z-10 flex items-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
         <motion.div
-          className="container mx-auto px-6 sm:px-10 md:px-12 pb-12 sm:pb-16 md:pb-20 max-w-2xl mr-auto"
+          className="container mx-auto px-6 sm:px-10 md:px-12 py-12 sm:py-16 md:py-20 max-w-2xl mr-auto"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -31,22 +31,21 @@ const WhyChooseUsSection = () => {
         >
           {/* Headline */}
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
-            Data-Driven<br />
-            Market Entry.
+            Connect to Korea.<br />
+            Precisely.
           </h2>
 
           {/* Description */}
           <p className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mb-8 sm:mb-10 tracking-wide">
-            In Korean, <span className="text-white/80 font-medium">'ium' (이음)</span> means 'connection.' But to us, it means <span className="text-primary font-medium">integration</span>. 
-            We engineer your entry into the Korean market using proprietary research and 
-            quantitative impact analysis. We structure your narrative to flawlessly 'ium' (connect) 
-            global protocols with local liquidity.
+            <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection—and that's exactly what we build.
+            We connect global teams to Korea through research-backed positioning, localized narrative systems, and partner-driven distribution.
+            From first signal to sustained growth, we make your Korea entry feel native—and perform.
           </p>
 
           {/* Bottom accent */}
           <div className="flex items-center gap-4">
-            <div className="w-12 h-px bg-primary/50" />
-            <p className="text-primary/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
+            <div className="w-12 h-px bg-purple-400/50" />
+            <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
               Founded by veterans from Binance & KuCoin
             </p>
           </div>
