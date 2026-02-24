@@ -848,8 +848,7 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Selected Work Section - Horizontal Scroll Gallery */}
-      <SelectedWorkSection projects={selectedWorkProjects} />
+      
       
       
       {/* Contact Section - 03 */}
