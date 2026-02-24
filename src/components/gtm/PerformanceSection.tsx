@@ -265,13 +265,12 @@ const ProjectCard = ({
   const colors = colorClasses[project.color as keyof typeof colorClasses];
 
   return (
-    <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
+    <div className="block flex-shrink-0 cursor-default select-none">
       <div
         className={`
           relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
-          transition-all duration-500
           overflow-hidden
         `}
       >
@@ -351,7 +350,7 @@ const ProjectCard = ({
         </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
