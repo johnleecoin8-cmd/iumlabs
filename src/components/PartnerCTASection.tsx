@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 import CalendlyButton from "@/components/CalendlyButton";
 import { ArrowRight } from "lucide-react";
 
-const stats = [
-  { value: "15+", label: "Projects" },
-  { value: "$50M+", label: "Ecosystem Value" },
-  { value: "24h", label: "Response" },
-];
-
 const PartnerCTASection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -25,57 +19,41 @@ const PartnerCTASection = () => {
           className="block text-[10px] tracking-[0.35em] text-white/30 font-mono uppercase mb-12"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          Let's Work Together
+          Next Step
         </motion.span>
 
         {/* Headline */}
         <motion.h2
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[7rem] font-bold text-white leading-[1.05] tracking-tight mb-6"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[7rem] font-bold text-white leading-[1.05] tracking-tight mb-20 md:mb-28"
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.15 }}
         >
-          <span className="italic font-light">Your Bridge</span>
+          <span className="italic font-light">Your Growth</span>
           <br />
-          to Korea.
+          Starts Here.
         </motion.h2>
 
-        {/* Sub text */}
+        {/* Sub text — positioned closer to CTA */}
         <motion.p
-          className="text-white/35 text-sm md:text-base max-w-md mb-16 leading-relaxed"
+          className="text-white/35 text-sm md:text-base max-w-md mb-10 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          From strategy to execution — we are your all-in-one partner for the Korean Web3 market.
+          15+ global projects trusted us to navigate Korea.
+          <br />
+          Yours could be next.
         </motion.p>
-
-        {/* Stats - minimal inline */}
-        <motion.div
-          className="flex items-center gap-6 md:gap-8 text-white/40 text-xs font-mono tracking-widest uppercase mb-16"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.45 }}
-        >
-          {stats.map((stat, i) => (
-            <div key={stat.label} className="flex items-center gap-6 md:gap-8">
-              {i > 0 && <span className="text-white/15">—</span>}
-              <span>
-                <span className="text-white/70 font-semibold">{stat.value}</span>{" "}
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
           className="flex flex-col sm:flex-row items-start gap-4"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
         >
           <CalendlyButton
             className="px-8 py-3.5 bg-white text-black font-medium text-sm tracking-wide hover:bg-white/90 transition-colors"
@@ -84,7 +62,7 @@ const PartnerCTASection = () => {
             to="/projects"
             className="group flex items-center gap-2 px-2 py-3.5 text-white/50 hover:text-white/80 transition-colors text-sm tracking-wide"
           >
-            View Our Work
+            See Case Studies
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
