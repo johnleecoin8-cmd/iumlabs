@@ -261,7 +261,7 @@ const HeroSection = () => {
           </a>
           
           {/* Micro-copy for trust */}
-          <p className="mt-3 text-[10px] sm:text-xs text-white/50">
+          <p className="mt-3 text-[10px] sm:text-sm text-white/50">
             <span className="inline-flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               Free 30-min consultation • Response within 24h
