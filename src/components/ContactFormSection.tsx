@@ -140,7 +140,7 @@ const ContactFormSection = ({
         <div id="contact-form" className="border-t border-white/10">
           <div className="flex flex-col lg:flex-row">
             {/* Left Column - Contact Info (Desktop) */}
-            <div className="hidden lg:block lg:w-2/5 p-8 lg:p-12 border-r border-white/15">
+            <div className="hidden lg:block lg:w-1/3 p-8 lg:p-10 border-r border-white/15">
               <div className="sticky top-24">
                 <span className="text-[10px] uppercase tracking-wider text-white/40 mb-4 block">Contact Info</span>
                 
@@ -192,7 +192,7 @@ const ContactFormSection = ({
                 </a>
                 
                 {/* 3D Bridge Logo */}
-                <div className="w-full h-40 md:h-48 lg:h-56 flex items-center justify-center mt-4">
+                <div className="w-full h-28 flex items-center justify-center mt-4">
                   <div className="w-full h-full">
                     <Logo3D />
                   </div>
@@ -201,7 +201,7 @@ const ContactFormSection = ({
             </div>
 
             {/* Right Column - Multi-Step Form */}
-            <div className="w-full lg:w-3/5 p-4 sm:p-6 md:p-8 lg:p-12">
+            <div className="w-full lg:w-2/3 p-4 sm:p-6 md:p-8 lg:p-12">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
