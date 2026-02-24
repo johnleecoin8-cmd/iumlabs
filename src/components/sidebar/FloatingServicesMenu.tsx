@@ -5,31 +5,16 @@ import { ChevronDown, Briefcase } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-// Services grouped by category
-const servicesCategories = [
-  {
-    label: "Marketing",
-    items: [
-      { name: "GTM Strategy", href: "/services" },
-      { name: "Branding/Website", href: "/services/branding" },
-      { name: "SEO/Paid Ads", href: "/services/seo-ads" },
-      { name: "Influencer/KOL", href: "/services/influencer" },
-      { name: "PR/Media", href: "/services/pr" },
-    ],
-  },
-  {
-    label: "Research",
-    items: [
-      { name: "Deep Research", href: "/services/deep-research" },
-      { name: "Community Management", href: "/services/community" },
-    ],
-  },
-  {
-    label: "Events",
-    items: [
-      { name: "Offline Event", href: "/services/offline-event" },
-    ],
-  },
+// Flat services list
+const serviceItems = [
+  { name: "GTM Strategy", href: "/services" },
+  { name: "Branding/Website", href: "/services/branding" },
+  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
+  { name: "Influencer/KOL", href: "/services/influencer" },
+  { name: "PR/Media", href: "/services/pr" },
+  { name: "Deep Research", href: "/services/deep-research" },
+  { name: "Community Management", href: "/services/community" },
+  { name: "Offline Event", href: "/services/offline-event" },
 ];
 
 const allServiceItems = servicesCategories.flatMap(c => c.items);
