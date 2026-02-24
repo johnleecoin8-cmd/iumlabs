@@ -285,7 +285,7 @@ const CasesSection = ({
       
 
       {/* 5x3 Cases Grid (15 projects) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {displayCases.map((caseItem, index) => <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />)}
       </div>
 
