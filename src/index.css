@@ -392,11 +392,11 @@ video {
 
   /* Logo Marquee Animation */
   .logo-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 15s linear infinite;
   }
 
   .animate-marquee-slow {
-    animation: marquee 80s linear infinite;
+    animation: marquee 40s linear infinite;
   }
   
   @keyframes marquee {
