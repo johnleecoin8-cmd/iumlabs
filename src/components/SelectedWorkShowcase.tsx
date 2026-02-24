@@ -57,6 +57,22 @@ const SelectedWorkShowcase = () => {
       slug: "bybit"
     },
     {
+      name: "Aptos",
+      category: "Layer 1",
+      result: "Ecosystem Growth",
+      media: "/images/projects/aptos-bg.jpg",
+      video: "/videos/projects/aptos-hero.mp4",
+      slug: "aptos"
+    },
+    {
+      name: "Kite AI",
+      category: "AI",
+      result: "Market Entry",
+      media: "/images/projects/kite-bg.jpg",
+      video: "/videos/projects/kite-hero.mp4",
+      slug: "kite"
+    },
+    {
       name: "FOGO",
       category: "L1 Chain",
       result: "Market Entry",
