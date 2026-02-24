@@ -172,14 +172,45 @@ const allProjects = [
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 83
   },
-];
-
-// Split into 4 rows
-const projectRows = [
-  allProjects.slice(0, 3),   // Row 1: MANTRA, Story, peaq
-  allProjects.slice(3, 6),   // Row 2: BNB, Bybit, KuCoin
-  allProjects.slice(6, 9),   // Row 3: Sahara, OpenLedger, MegaETH
-  allProjects.slice(9, 12),  // Row 4: Ondo, Polygon, Tria
+  {
+    name: 'Story Protocol',
+    slug: 'story-protocol',
+    logo: storyLogo,
+    bgImage: '/images/projects/story-bg.jpg',
+    bgVideo: '/videos/projects/story-hero.mp4',
+    category: 'IP Layer',
+    strategy: 'Ecosystem Growth',
+    metric: { value: 120, suffix: 'K+', label: 'Creators' },
+    color: 'purple',
+    glowColor: 'rgba(168,85,247,0.5)',
+    progress: 90
+  },
+  {
+    name: 'Ondo Finance',
+    slug: 'ondo-finance',
+    logo: polygonLogo,
+    bgImage: '/images/projects/ondo-bg.jpg',
+    bgVideo: undefined,
+    category: 'RWA',
+    strategy: 'Institutional Outreach',
+    metric: { value: 500, suffix: 'M+', label: 'TVL' },
+    color: 'blue',
+    glowColor: 'rgba(59,130,246,0.5)',
+    progress: 93
+  },
+  {
+    name: 'Aptos',
+    slug: 'aptos',
+    logo: bnbLogo,
+    bgImage: '/images/projects/aptos-bg.jpg',
+    bgVideo: undefined,
+    category: 'L1',
+    strategy: 'Developer Relations',
+    metric: { value: 15, suffix: 'K+', label: 'Devs Onboarded' },
+    color: 'green',
+    glowColor: 'rgba(34,197,94,0.5)',
+    progress: 85
+  },
 ];
 
 // Network Stats - Updated to reflect new messaging
