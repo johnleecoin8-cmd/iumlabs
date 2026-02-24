@@ -202,9 +202,6 @@ const ContactFormSection = ({
 
             {/* Right Column - Multi-Step Form */}
             <div className="w-full lg:w-3/5 p-4 sm:p-6 md:p-8 lg:p-12">
-              <p className="text-white text-base sm:text-lg md:text-xl tracking-wide mb-6 text-center font-extralight" style={{ fontFamily: "'Georgia', serif" }}>
-                Contact us and get your road-map in Korea.
-              </p>
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
