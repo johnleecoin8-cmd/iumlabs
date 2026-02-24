@@ -1,6 +1,45 @@
 import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.25, delayChildren: 0.1 }
+  }
+};
+
+const headlineLineVariants = {
+  hidden: { opacity: 0, x: -40, filter: 'blur(8px)' },
+  visible: { 
+    opacity: 1, x: 0, filter: 'blur(0px)',
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const descriptionVariants = {
+  hidden: { opacity: 0, y: 20, filter: 'blur(12px)' },
+  visible: { 
+    opacity: 1, y: 0, filter: 'blur(0px)',
+    transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const accentLineVariants = {
+  hidden: { scaleX: 0 },
+  visible: { 
+    scaleX: 1,
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+  }
+};
+
+const fadeUpVariants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { 
+    opacity: 1, y: 0,
+    transition: { duration: 0.6, ease: 'easeOut' }
+  }
+};
+
 const WhyChooseUsSection = () => {
   const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
@@ -24,30 +63,50 @@ const WhyChooseUsSection = () => {
       <div className="relative z-10 flex items-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
         <motion.div
           className="container mx-auto px-6 sm:px-10 md:px-12 py-12 sm:py-16 md:py-20 max-w-2xl text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
         >
-          {/* Headline */}
+          {/* Headline — each line slides in separately */}
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
-            Seoul Moves Fast.<br />We Make You Land.
+            <motion.span className="block" variants={headlineLineVariants}>
+              Seoul Moves Fast.
+            </motion.span>
+            <motion.span 
+              className="block bg-gradient-to-r from-white via-purple-300 to-purple-400 bg-clip-text text-transparent"
+              variants={headlineLineVariants}
+            >
+              We Make You Land.
+            </motion.span>
           </h2>
 
-          {/* Description */}
-          <p className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide">
+          {/* Description — blur reveal */}
+          <motion.p 
+            className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide"
+            variants={descriptionVariants}
+          >
             <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection.
             We connect your team to Korea with research-led positioning, localized narrative systems, and distribution partners—so your launch hits on day one and compounds into sustained growth.
-          </p>
+          </motion.p>
 
-          {/* Bottom accent */}
-          <div className="flex items-center justify-center gap-4">
-            <div className="w-12 h-px bg-purple-400/50" />
+          {/* Bottom accent — lines scale out from center */}
+          <motion.div 
+            className="flex items-center justify-center gap-4"
+            variants={fadeUpVariants}
+          >
+            <motion.div 
+              className="w-12 h-px bg-purple-400/50 origin-right"
+              variants={accentLineVariants}
+            />
             <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
               Founded by veterans from Binance & KuCoin
             </p>
-            <div className="w-12 h-px bg-purple-400/50" />
-          </div>
+            <motion.div 
+              className="w-12 h-px bg-purple-400/50 origin-left"
+              variants={accentLineVariants}
+            />
+          </motion.div>
         </motion.div>
       </div>
     </section>
