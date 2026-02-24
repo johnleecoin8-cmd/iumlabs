@@ -174,14 +174,68 @@ const allProjects = [
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 83
   },
+  // Row 5 (→ right)
+  {
+    name: 'SynFutures',
+    slug: 'synfutures',
+    logo: synfuturesLogo,
+    bgImage: '/images/projects/synfutures-bg.jpg',
+    bgVideo: undefined,
+    category: 'DeFi',
+    strategy: 'Billboard Campaign',
+    metric: { value: 500, suffix: 'K+', label: 'Impressions' },
+    color: 'blue',
+    glowColor: 'rgba(59,130,246,0.5)',
+    progress: 85
+  },
+  {
+    name: 'Spacecoin',
+    slug: 'spacecoin',
+    logo: spacecoinLogo,
+    bgImage: '/images/projects/spacecoin-bg.jpg',
+    bgVideo: '/videos/projects/spacecoin-hero.mp4',
+    category: 'Infrastructure',
+    strategy: 'Brand Awareness',
+    metric: { value: 200, suffix: 'K+', label: 'Impressions' },
+    color: 'purple',
+    glowColor: 'rgba(168,85,247,0.5)',
+    progress: 80
+  },
+  {
+    name: 'Aptos',
+    slug: 'aptos',
+    logo: '',
+    bgImage: '/images/projects/aptos-bg.jpg',
+    bgVideo: undefined,
+    category: 'Layer 1',
+    strategy: 'Market Penetration',
+    metric: { value: 15, suffix: 'K+', label: 'Community' },
+    color: 'green',
+    glowColor: 'rgba(34,197,94,0.5)',
+    progress: 86
+  },
+  {
+    name: 'Kite',
+    slug: 'kite',
+    logo: '',
+    bgImage: '/images/projects/kite-bg.jpg',
+    bgVideo: undefined,
+    category: 'AI',
+    strategy: 'Community Building',
+    metric: { value: 10, suffix: 'K+', label: 'Members' },
+    color: 'pink',
+    glowColor: 'rgba(236,72,153,0.5)',
+    progress: 82
+  },
 ];
 
-// Split into 4 rows
+// Split into 5 rows
 const projectRows = [
-  allProjects.slice(0, 3),   // Row 1: MANTRA, Story, peaq
-  allProjects.slice(3, 6),   // Row 2: BNB, Bybit, KuCoin
-  allProjects.slice(6, 9),   // Row 3: Sahara, OpenLedger, MegaETH
-  allProjects.slice(9, 12),  // Row 4: Ondo, Polygon, Tria
+  allProjects.slice(0, 3),   // Row 1: peaq, MANTRA, BNB
+  allProjects.slice(3, 6),   // Row 2: Bybit, KuCoin, Sahara AI
+  allProjects.slice(6, 9),   // Row 3: OpenLedger, MegaETH, FOGO
+  allProjects.slice(9, 12),  // Row 4: Polygon, Tria, SynFutures
+  allProjects.slice(12, 15), // Row 5: Spacecoin, Aptos, Kite
 ];
 
 // Network Stats - Updated to reflect new messaging
