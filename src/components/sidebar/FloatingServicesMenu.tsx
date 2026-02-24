@@ -17,7 +17,7 @@ const serviceItems = [
   { name: "Offline Event", href: "/services/offline-event" },
 ];
 
-const allServiceItems = servicesCategories.flatMap(c => c.items);
+const allServiceItems = serviceItems;
 
 interface FloatingServicesMenuProps {
   isActive: boolean;

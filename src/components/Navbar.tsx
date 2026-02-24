@@ -9,31 +9,16 @@ import logoImage from "@/assets/logo.png";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
-// Services grouped by category (same as Sidebar)
-const servicesCategories = [
-  {
-    label: "Marketing",
-    items: [
-      { name: "Web3 GTM Strategy", href: "/services" },
-      { name: "Brand Identity & Web", href: "/services/branding" },
-      { name: "SEO & Paid Ads", href: "/services/seo-ads" },
-      { name: "Influencer & KOL", href: "/services/influencer" },
-      { name: "PR & Media Coverage", href: "/services/pr" },
-    ],
-  },
-  {
-    label: "Research",
-    items: [
-      { name: "Deep Research & Analytics", href: "/services/deep-research" },
-      { name: "Community Management", href: "/services/community" },
-    ],
-  },
-  {
-    label: "Events",
-    items: [
-      { name: "Offline Events Korea", href: "/services/offline-event" },
-    ],
-  },
+// Flat services list
+const serviceItems = [
+  { name: "Web3 GTM Strategy", href: "/services" },
+  { name: "Brand Identity & Web", href: "/services/branding" },
+  { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+  { name: "Influencer & KOL", href: "/services/influencer" },
+  { name: "PR & Media Coverage", href: "/services/pr" },
+  { name: "Deep Research & Analytics", href: "/services/deep-research" },
+  { name: "Community Management", href: "/services/community" },
+  { name: "Offline Events Korea", href: "/services/offline-event" },
 ];
 
 const brandConfig = {
