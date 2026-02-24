@@ -13,7 +13,7 @@ import kucoinLogo from "@/assets/logos/kucoin-mono.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
+import peaqLogo from "@/assets/logos/peaq.png";
 // Story Protocol removed per client visibility restrictions
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
@@ -21,6 +21,8 @@ import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
+import aptosLogo from "@/assets/logos/aptos.png";
+import kiteLogo from "@/assets/logos/kite.png";
 
 // Desktop tags - 8 services (positioned at edges with good spacing)
 const serviceTags = [{
@@ -86,7 +88,7 @@ const clientLogos = [{
 }, {
   name: "Peaq",
   logo: peaqLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
@@ -110,6 +112,14 @@ const clientLogos = [{
 }, {
   name: "SynFutures",
   logo: synfuturesLogo,
+  noInvert: true
+}, {
+  name: "Aptos",
+  logo: aptosLogo,
+  noInvert: false
+}, {
+  name: "Kite",
+  logo: kiteLogo,
   noInvert: true
 }];
 // Default stats as fallback
