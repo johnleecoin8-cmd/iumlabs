@@ -839,6 +839,20 @@ video {
    MARQUEE ANIMATIONS
    ============================================ */
 
+/* Generic marquee container */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  gap: 2rem;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 2rem;
+  flex-shrink: 0;
+  animation: marquee 30s linear infinite;
+}
+
 /* Slow Marquee for logos - Desktop 1.5x faster (40s → ~27s) */
 .logo-marquee-slow {
   animation: marquee 27s linear infinite;
