@@ -155,7 +155,7 @@ const HeroSection = () => {
     networkInfo,
     ShimmerOverlay,
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4?v=2',
+    src: '/videos/hero-background.mp4',
     poster: '/images/hero-poster.jpg',
     autoPlay: true,
     preload: 'auto',
@@ -207,7 +207,7 @@ const HeroSection = () => {
               WebkitAppearance: 'none',
             }}
           >
-            <source src="/videos/hero-background.mp4?v=2#t=0.001" type="video/mp4" />
+            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
           </video>
         )}
       </div>

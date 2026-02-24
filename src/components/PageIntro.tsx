@@ -63,7 +63,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   // Preload hero video
   useEffect(() => {
     const video = document.createElement('video');
-    video.src = '/videos/hero-background.mp4?v=2#t=0.001';
+    video.src = '/videos/hero-background.mp4#t=0.001';
     video.preload = 'metadata';
     
     const handleVideoReady = () => {
