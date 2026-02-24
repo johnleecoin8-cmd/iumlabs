@@ -206,7 +206,7 @@ const allProjects = [
   {
     name: 'Aptos',
     slug: 'aptos',
-    logo: '',
+    logo: aptosLogo,
     bgImage: '/images/projects/aptos-bg.jpg',
     bgVideo: undefined,
     category: 'Layer 1',
