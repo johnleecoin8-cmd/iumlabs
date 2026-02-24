@@ -31,7 +31,7 @@ const Research = () => {
   const [scrollY, setScrollY] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const postsPerPage = 8;
+  const postsPerPage = 6;
 
   // Fetch from DB only
   const {
