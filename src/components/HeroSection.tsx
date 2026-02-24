@@ -251,7 +251,7 @@ const HeroSection = () => {
           {/* CTA Button - Enhanced - Mobile optimized */}
           <a 
             href="/contact#contact-form" 
-            className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-10 sm:py-5 font-semibold text-sm sm:text-lg rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[56px] border border-white/30 relative overflow-hidden cta-hero-glow mt-6 sm:mt-10"
+            className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-9 sm:py-4 font-semibold text-sm sm:text-base rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[52px] border border-white/30 relative overflow-hidden cta-hero-glow mt-6 sm:mt-10"
             onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
             {/* Animated glow ring */}
