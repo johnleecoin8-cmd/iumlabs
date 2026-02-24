@@ -850,17 +850,17 @@ video {
   display: flex;
   gap: 2rem;
   flex-shrink: 0;
-  animation: marquee 30s linear infinite;
+  animation: marquee 15s linear infinite;
 }
 
-/* Slow Marquee for logos - Desktop 1.5x faster (40s → ~27s) */
+/* Slow Marquee for logos */
 .logo-marquee-slow {
-  animation: marquee 27s linear infinite;
+  animation: marquee 13s linear infinite;
 }
 
 /* Fast Marquee */
 .logo-marquee-fast {
-  animation: marquee 20s linear infinite;
+  animation: marquee 10s linear infinite;
 }
 
 /* Pause on hover */
