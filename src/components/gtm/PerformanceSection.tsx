@@ -21,6 +21,8 @@ import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 import synfuturesLogo from '@/assets/logos/synfutures.png';
 import spacecoinLogo from '@/assets/logos/spacecoin.png';
+import aptosLogo from '@/assets/logos/aptos.png';
+import kiteLogo from '@/assets/logos/kite.png';
 
 // All Projects Data for 4-row Marquee
 const allProjects = [
