@@ -84,7 +84,7 @@ const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: {
       className={`text-center p-12 md:p-16 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="text-6xl md:text-8xl font-bold mb-4 text-foreground">
+      <div className="text-7xl md:text-9xl font-bold mb-4 text-foreground">
         {displayValue}
       </div>
       <div className="text-lg md:text-xl text-muted-foreground mb-3">
