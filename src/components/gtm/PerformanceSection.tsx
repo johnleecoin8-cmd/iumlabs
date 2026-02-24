@@ -172,45 +172,14 @@ const allProjects = [
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 83
   },
-  {
-    name: 'Story Protocol',
-    slug: 'story-protocol',
-    logo: storyLogo,
-    bgImage: '/images/projects/story-bg.jpg',
-    bgVideo: '/videos/projects/story-hero.mp4',
-    category: 'IP Layer',
-    strategy: 'Ecosystem Growth',
-    metric: { value: 120, suffix: 'K+', label: 'Creators' },
-    color: 'purple',
-    glowColor: 'rgba(168,85,247,0.5)',
-    progress: 90
-  },
-  {
-    name: 'Ondo Finance',
-    slug: 'ondo-finance',
-    logo: polygonLogo,
-    bgImage: '/images/projects/ondo-bg.jpg',
-    bgVideo: undefined,
-    category: 'RWA',
-    strategy: 'Institutional Outreach',
-    metric: { value: 500, suffix: 'M+', label: 'TVL' },
-    color: 'blue',
-    glowColor: 'rgba(59,130,246,0.5)',
-    progress: 93
-  },
-  {
-    name: 'Aptos',
-    slug: 'aptos',
-    logo: bnbLogo,
-    bgImage: '/images/projects/aptos-bg.jpg',
-    bgVideo: undefined,
-    category: 'L1',
-    strategy: 'Developer Relations',
-    metric: { value: 15, suffix: 'K+', label: 'Devs Onboarded' },
-    color: 'green',
-    glowColor: 'rgba(34,197,94,0.5)',
-    progress: 85
-  },
+];
+
+// Split into 4 rows
+const projectRows = [
+  allProjects.slice(0, 3),   // Row 1: MANTRA, Story, peaq
+  allProjects.slice(3, 6),   // Row 2: BNB, Bybit, KuCoin
+  allProjects.slice(6, 9),   // Row 3: Sahara, OpenLedger, MegaETH
+  allProjects.slice(9, 12),  // Row 4: Ondo, Polygon, Tria
 ];
 
 // Network Stats - Updated to reflect new messaging
@@ -296,10 +265,10 @@ const ProjectCard = ({
   const colors = colorClasses[project.color as keyof typeof colorClasses];
 
   return (
-    <div className="block cursor-default select-none">
+    <div className="block flex-shrink-0 cursor-default select-none">
       <div
         className={`
-          relative p-3 md:p-6 w-full aspect-[11/10]
+          relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           overflow-hidden
@@ -608,14 +577,24 @@ export const PerformanceSection = () => {
 
       <div className="w-full relative z-10">
 
-        {/* 5x3 Static Grid (15 projects) */}
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-4">
-          {allProjects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              project={project}
-            />
-          ))}
+        {/* 4-Row Alternating Marquee */}
+        <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-2">
+          {/* Gradient masks for entire section */}
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            
+            <div className="space-y-2 md:space-y-2">
+              {projectRows.map((rowProjects, index) => (
+                <MarqueeRow
+                  key={index}
+                  projects={rowProjects}
+                  direction={index % 2 === 0 ? 'right' : 'left'}
+                  speed={20 + index * 2}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
