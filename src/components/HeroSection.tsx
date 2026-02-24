@@ -282,7 +282,7 @@ const HeroSection = () => {
 
       {/* Stats Section - Enhanced - Mobile optimized */}
       <div className="relative z-10 py-3 sm:py-6 md:py-8">
-        <div className="container mx-auto px-3 sm:px-8 md:px-10">
+        <div className="container mx-auto px-6 sm:px-12 md:px-20 lg:px-32">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
           </div>
