@@ -5,34 +5,19 @@ import { ChevronDown, Briefcase } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-// Services grouped by category
-const servicesCategories = [
-  {
-    label: "Marketing",
-    items: [
-      { name: "GTM Strategy", href: "/services" },
-      { name: "Branding/Website", href: "/services/branding" },
-      { name: "SEO/Paid Ads", href: "/services/seo-ads" },
-      { name: "Influencer/KOL", href: "/services/influencer" },
-      { name: "PR/Media", href: "/services/pr" },
-    ],
-  },
-  {
-    label: "Research",
-    items: [
-      { name: "Deep Research", href: "/services/deep-research" },
-      { name: "Community Management", href: "/services/community" },
-    ],
-  },
-  {
-    label: "Events",
-    items: [
-      { name: "Offline Event", href: "/services/offline-event" },
-    ],
-  },
+// Flat services list
+const serviceItems = [
+  { name: "GTM Strategy", href: "/services" },
+  { name: "Branding/Website", href: "/services/branding" },
+  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
+  { name: "Influencer/KOL", href: "/services/influencer" },
+  { name: "PR/Media", href: "/services/pr" },
+  { name: "Deep Research", href: "/services/deep-research" },
+  { name: "Community Management", href: "/services/community" },
+  { name: "Offline Event", href: "/services/offline-event" },
 ];
 
-const allServiceItems = servicesCategories.flatMap(c => c.items);
+const allServiceItems = serviceItems;
 
 interface FloatingServicesMenuProps {
   isActive: boolean;
@@ -101,45 +86,36 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
               exit={{ opacity: 0, scale: 0.95, x: -10 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
-              <div className="space-y-3">
-                {servicesCategories.map((category, catIndex) => (
-                  <div key={category.label}>
-                    <span className="text-[9px] text-white/30 font-medium tracking-[0.2em] uppercase block mb-1.5 ml-1">
-                      {category.label}
-                    </span>
-                    <div className="space-y-0.5">
-                      {category.items.map((item, index) => {
-                        const isItemActive = currentPath === item.href;
-                        return (
-                          <motion.div
-                            key={item.href}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: (catIndex * 3 + index) * 0.03 }}
-                          >
-                            <Link
-                              to={item.href}
-                              className={cn(
-                                "group/item relative flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all duration-300",
-                                isItemActive 
-                                  ? "bg-white/[0.06] border border-white/[0.08] text-white" 
-                                  : "border border-transparent text-white/50 hover:text-white hover:bg-white/[0.04] hover:border-white/[0.06]"
-                              )}
-                            >
-                              <span className="text-[13px] font-medium">{item.name}</span>
-                              <span className={cn(
-                                "text-[10px] transition-all duration-300 ml-auto",
-                                isItemActive 
-                                  ? "opacity-100 text-primary/60" 
-                                  : "opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0"
-                              )}>→</span>
-                            </Link>
-                          </motion.div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
+              <div className="space-y-0.5">
+                {serviceItems.map((item, index) => {
+                  const isItemActive = currentPath === item.href;
+                  return (
+                    <motion.div
+                      key={item.href}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2, delay: index * 0.03 }}
+                    >
+                      <Link
+                        to={item.href}
+                        className={cn(
+                          "group/item relative flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all duration-300",
+                          isItemActive 
+                            ? "bg-white/[0.06] border border-white/[0.08] text-white" 
+                            : "border border-transparent text-white/50 hover:text-white hover:bg-white/[0.04] hover:border-white/[0.06]"
+                        )}
+                      >
+                        <span className="text-[13px] font-medium">{item.name}</span>
+                        <span className={cn(
+                          "text-[10px] transition-all duration-300 ml-auto",
+                          isItemActive 
+                            ? "opacity-100 text-primary/60" 
+                            : "opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0"
+                        )}>→</span>
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           )}
@@ -204,45 +180,36 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            <div className="space-y-3 py-1">
-              {servicesCategories.map((category, catIndex) => (
-                <div key={category.label}>
-                  <span className="text-[9px] text-white/25 font-medium tracking-[0.15em] uppercase block mb-1 ml-1">
-                    {category.label}
-                  </span>
-                  <div className="space-y-0.5">
-                    {category.items.map((item, index) => {
-                      const isItemActive = currentPath === item.href;
-                      return (
-                        <motion.div
-                          key={item.href}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.2, delay: (catIndex * 3 + index) * 0.03 }}
-                        >
-                          <Link
-                            to={item.href}
-                            className={cn(
-                              "group/item relative flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all duration-300",
-                              isItemActive 
-                                ? "bg-white/[0.06] border border-white/[0.08] text-white" 
-                                : "border border-transparent text-white/50 hover:text-white hover:bg-white/[0.04] hover:border-white/[0.06]"
-                            )}
-                          >
-                            <span className="text-[13px] font-medium">{item.name}</span>
-                            <span className={cn(
-                              "text-[10px] transition-all duration-300 ml-auto",
-                              isItemActive 
-                                ? "opacity-100 text-primary/60" 
-                                : "opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0"
-                            )}>→</span>
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-0.5 py-1">
+              {serviceItems.map((item, index) => {
+                const isItemActive = currentPath === item.href;
+                return (
+                  <motion.div
+                    key={item.href}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.2, delay: index * 0.03 }}
+                  >
+                    <Link
+                      to={item.href}
+                      className={cn(
+                        "group/item relative flex items-center gap-2 px-3 py-1.5 rounded-xl transition-all duration-300",
+                        isItemActive 
+                          ? "bg-white/[0.06] border border-white/[0.08] text-white" 
+                          : "border border-transparent text-white/50 hover:text-white hover:bg-white/[0.04] hover:border-white/[0.06]"
+                      )}
+                    >
+                      <span className="text-[13px] font-medium">{item.name}</span>
+                      <span className={cn(
+                        "text-[10px] transition-all duration-300 ml-auto",
+                        isItemActive 
+                          ? "opacity-100 text-primary/60" 
+                          : "opacity-0 -translate-x-1 group-hover/item:opacity-100 group-hover/item:translate-x-0"
+                      )}>→</span>
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         )}
