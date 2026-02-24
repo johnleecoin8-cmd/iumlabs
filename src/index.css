@@ -860,7 +860,7 @@ video {
 
 /* Fast Marquee */
 .logo-marquee-fast {
-  animation: marquee 10s linear infinite;
+  animation: marquee 20s linear infinite;
 }
 
 /* Pause on hover */
