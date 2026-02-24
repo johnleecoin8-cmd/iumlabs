@@ -29,7 +29,7 @@ import seoAdsImage from "@/assets/services/seo-ads.jpg";
 import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
-import prImage from "@/assets/services/pr-media.jpg";
+import prImage from "@/assets/services/pr-coindesk.png";
 
 const services = [
   {
