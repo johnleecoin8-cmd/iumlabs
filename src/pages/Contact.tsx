@@ -217,15 +217,14 @@ const Contact = () => {
             <div className="max-w-5xl mx-auto text-center">
               {/* Main Headline */}
               <h1 className="font-sans text-display-hero font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
-                <span className="text-white">Partner With</span>
+                <span className="text-white">Conquer Korea,</span>
                 <br />
-                <span className="text-white/90">Korea's </span>
-                <span className="text-white">Web3 Experts</span>
+                <span className="text-white/90">Together</span>
               </h1>
 
               {/* Subtext */}
               <p className="text-body-lg text-white/60 max-w-2xl mx-auto mb-6 font-light tracking-wide leading-relaxed">
-                From strategy to execution — we bridge global projects into the <span className="text-white font-medium">Korean market</span>.
+                Your vision, our battlefield. Let's pioneer the <span className="text-white font-medium">Korean Web3 market</span> — from day one to market dominance.
               </p>
 
               {/* CTA Button */}
