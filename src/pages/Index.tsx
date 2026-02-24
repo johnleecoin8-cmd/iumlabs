@@ -119,6 +119,11 @@ const Index = () => {
 
 
       
+      {/* Partner CTA - Impact Block */}
+      <Suspense fallback={<SectionLoader />}>
+        <PartnerCTASection />
+      </Suspense>
+
       {/* Contact - 05 */}
       <section className="bg-surface-base" id="contact">
         <AnimatedSection>
