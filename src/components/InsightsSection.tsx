@@ -105,7 +105,7 @@ const InsightsSection = () => {
         .select('*')
         .eq('is_published', true)
         .order('display_order', { ascending: true })
-        .limit(3);
+        .limit(6);
       if (error) throw error;
       return (data || []).map(post => ({
         id: post.slug,
