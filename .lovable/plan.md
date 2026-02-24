@@ -1,35 +1,38 @@
 
 
-## Cases 섹션 15개로 확장 (3개 프로젝트 추가)
+# Insights와 Contact 사이 임팩트 CTA 섹션 추가
 
-### 현재 상태
-- DB에 15개 프로젝트가 `is_published = true`로 등록됨
-- CasesSection에서 `.limit(12)`와 `maxItems = 12`로 12개만 표시
-- 빠진 3개: **Spacecoin**, **Aptos**, **Kite**
+## 개요
+Insights (04)와 Contact (05) 섹션 사이에 풀스크린 느낌의 임팩트 있는 "함께하자" 섹션을 추가합니다. 콘텐츠를 다 본 사용자가 Contact으로 넘어가기 전, 강렬한 한 방을 주는 역할입니다.
 
-### 변경 내용 (`src/components/CasesSection.tsx`)
+## 디자인 컨셉
+- **풀 뷰포트 높이** (min-h-[60vh]) 의 임팩트 섹션
+- 중앙에 큰 타이포그래피: "Ready to Enter Korea?" 또는 "Your Bridge to Korea Starts Here"
+- 배경에 은은한 글로우 애니메이션 (framer-motion)
+- 핵심 수치 3개를 한 줄로 (15+ Projects / $50M+ Ecosystem / 24h Response)
+- 하단에 CTA 버튼 2개: "Book a Call" (Calendly) + "View Our Work" (Projects 페이지)
+- 스크롤 시 텍스트가 fade-up으로 순차 등장
 
-**1. 쿼리 limit 변경**
-- `.limit(12)` → `.limit(15)`
+## 구현 파일
 
-**2. maxItems 기본값 변경**
-- `maxItems = 12` → `maxItems = 15`
+### 1. 새 컴포넌트 생성: `src/components/PartnerCTASection.tsx`
+- 풀폭 다크 배경 (`bg-[#0A0A0A]`)에 중앙 정렬 레이아웃
+- framer-motion `useInView`로 스크롤 진입 시 텍스트 애니메이션
+- 상단 작은 라벨: "PARTNER WITH US"
+- 메인 헤드라인: 큰 텍스트 (text-4xl ~ text-7xl)
+- 서브 텍스트: 한 줄 설명
+- 핵심 수치 3개 가로 배치 (border 구분)
+- CTA 버튼 2개 (흰색 primary + outline secondary)
+- 배경에 그라디언트 글로우 원형 2개 (subtle, animated)
 
-**3. fallback 이미지 3개 추가**
-Spacecoin, Aptos, Kite의 DB `background_url`이 mp4 동영상이라 이미지 fallback 필요:
-- `spacecoin`: bgImage → `/images/projects/spacecoin-bg.jpg`
-- `aptos`: bgImage → `/images/projects/aptos-bg.jpg`
-- `kite`: bgImage → `/images/projects/kite-bg.jpg`
+### 2. `src/pages/Index.tsx` 수정
+- Insights 섹션과 Contact 섹션 사이에 `PartnerCTASection` 삽입
+- Lazy load 적용 + AnimatedSection 래핑
 
-(이 3개는 `public/images/projects/`에 이미 존재하는 파일)
+## 기술 세부사항
+- framer-motion의 `motion.div` + `whileInView`로 스크롤 트리거 애니메이션
+- 반응형: 모바일에서는 수치가 세로 스택, 버튼도 풀폭
+- Calendly 링크와 /projects 내부 라우팅 사용
+- 기존 디자인 시스템 (bg-[#0A0A0A], border-white/10, rounded-full 버튼) 준수
+- SectionIndicator에는 별도 번호 부여 없이 전환 구간으로 처리 (독립 임팩트 블록)
 
-**4. 그리드 레이아웃**
-- 데스크톱 3열 그리드 → 15개 = 5행 (딱 맞음)
-- 모바일 2열 그리드 → 8행 (마지막 행 1개) — 자연스러움
-- 레이아웃 CSS 변경 불필요
-
-**5. 주석 업데이트**
-- `{/* 3x4 Cases Grid (12 projects max) */}` → `{/* 3x5 Cases Grid (15 projects) */}`
-
-### 수정 파일
-- `src/components/CasesSection.tsx` 1개 파일만 수정
