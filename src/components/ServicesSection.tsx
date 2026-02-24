@@ -9,7 +9,7 @@ import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
 import communityImage from "@/assets/services/community-management.webp";
 import kolImage from "@/assets/services/kol-avatars.webp";
-import prImage from "@/assets/services/pr-media.webp";
+import prImage from "@/assets/services/pr-coindesk.png";
 import seoAdsImage from "@/assets/services/seo-ads.webp";
 import deepResearchImage from "@/assets/services/deep-research.png";
 

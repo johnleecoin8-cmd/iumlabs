@@ -5,7 +5,7 @@ import { MessageCircle, Megaphone, Users, Calendar, Search, ArrowRight, Check, X
 
 // Service images
 import communityGrowth from '@/assets/services/community-growth.jpg';
-import prMedia from '@/assets/services/pr-media.jpg';
+import prMedia from '@/assets/services/pr-coindesk.png';
 import kolNetwork from '@/assets/services/kol-network.jpg';
 import seoAds from '@/assets/services/seo-ads.jpg';
 import events from '@/assets/services/events.jpg';
