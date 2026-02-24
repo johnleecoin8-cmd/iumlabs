@@ -11,60 +11,30 @@ const PartnerCTASection = () => {
   return (
     <section
       ref={ref}
-      className="relative min-h-[70vh] flex items-center justify-center bg-[#0A0A0A] border-t border-white/[0.06]"
+      className="relative flex items-center justify-center bg-[#0A0A0A] border-t border-white/[0.06]"
     >
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 py-24 md:py-32">
-        {/* Label */}
-        <motion.span
-          className="block text-[10px] tracking-[0.35em] text-white/30 font-mono uppercase mb-12"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8 }}
-        >
-          Next Step
-        </motion.span>
-
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 py-16 md:py-20">
         {/* Headline */}
         <motion.h2
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[7rem] font-bold text-white leading-[1.05] tracking-tight mb-20 md:mb-28"
-          initial={{ opacity: 0, y: 40 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight mb-8"
+          initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.15 }}
+          transition={{ duration: 0.7 }}
         >
-          <span className="italic font-light">Your Growth</span>
+          한국 시장,
           <br />
-          Starts Here.
+          <span className="italic font-light">같이 뚫자.</span>
         </motion.h2>
 
-        {/* Sub text — positioned closer to CTA */}
-        <motion.p
-          className="text-white/35 text-sm md:text-base max-w-md mb-10 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          15+ global projects trusted us to navigate Korea.
-          <br />
-          Yours could be next.
-        </motion.p>
-
-        {/* CTA Buttons */}
+        {/* CTA */}
         <motion.div
-          className="flex flex-col sm:flex-row items-start gap-4"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.45 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
           <CalendlyButton
             className="px-8 py-3.5 bg-white text-black font-medium text-sm tracking-wide hover:bg-white/90 transition-colors"
           />
-          <Link
-            to="/projects"
-            className="group flex items-center gap-2 px-2 py-3.5 text-white/50 hover:text-white/80 transition-colors text-sm tracking-wide"
-          >
-            See Case Studies
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
         </motion.div>
       </div>
     </section>
