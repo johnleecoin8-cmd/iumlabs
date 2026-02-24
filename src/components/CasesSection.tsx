@@ -125,6 +125,18 @@ const fallbackImages: Record<string, {
   'openledger': {
     logo: '',
     bgImage: openledgerCampaign
+  },
+  'spacecoin': {
+    logo: '',
+    bgImage: '/images/projects/spacecoin-bg.jpg'
+  },
+  'aptos': {
+    logo: '',
+    bgImage: '/images/projects/aptos-bg.jpg'
+  },
+  'kite': {
+    logo: '',
+    bgImage: '/images/projects/kite-bg.jpg'
   }
 };
 interface CaseCardProps {
