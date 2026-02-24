@@ -87,7 +87,7 @@ const WhyChooseUsSection = () => {
             variants={descriptionVariants}>
 
             <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection.
-            We connect your team to Korea with research-led positioning, localized narrative systems, and distribution partners—so your launch hits on day one and compounds into sustained growth.
+            230+ handpicked KOLs. 55+ executed events. We've already built the community infrastructure your project needs in Korea — so when you launch, you're not starting from zero. You're starting from everywhere.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
