@@ -1241,9 +1241,9 @@ video {
     animation-duration: 6s !important;
   }
   
-  /* Mobile marquee slower (less CPU) */
+  /* Mobile marquee */
   .logo-marquee-slow {
-    animation-duration: 45s !important;
+    animation-duration: 22s !important;
   }
   
   /* Reduce backdrop blur on mobile (expensive on GPU) */
