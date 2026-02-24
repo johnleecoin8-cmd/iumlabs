@@ -259,9 +259,8 @@ const ContactFormSection = ({
                             transition={{ duration: 0.2 }}
                             className="space-y-3 sm:space-y-4"
                           >
-                            <div className="mb-3">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about yourself</h4>
-                              <p className="text-xs sm:text-sm text-white/50">Basic contact information</p>
+                            <div className="mb-4 text-center -order-1">
+                              <p className="text-sm sm:text-base text-white/60">Leave your question about Korean/APAC market, and get a proposal.</p>
                             </div>
 
                             {/* Name & Email */}
