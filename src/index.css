@@ -1273,11 +1273,11 @@ video {
 
 /* Ultra-low power mode for mobile touch devices */
 @media (max-width: 767px) and (pointer: coarse) {
-  /* Significantly slower marquee for low-end devices */
+  /* Faster marquee for mobile */
   .logo-marquee,
   .logo-marquee-slow,
   .logo-marquee-fast {
-    animation-duration: 60s !important;
+    animation-duration: 30s !important;
   }
   
   /* Disable floating animations completely */
