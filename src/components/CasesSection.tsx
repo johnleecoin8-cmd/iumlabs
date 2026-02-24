@@ -125,6 +125,14 @@ const fallbackImages: Record<string, {
   'openledger': {
     logo: '',
     bgImage: openledgerCampaign
+  },
+  'aptos': {
+    logo: '',
+    bgImage: '/images/projects/aptos-bg.jpg'
+  },
+  'kite': {
+    logo: '',
+    bgImage: '/images/projects/kite-bg.jpg'
   }
 };
 interface CaseCardProps {
@@ -210,7 +218,7 @@ interface CasesSectionProps {
   maxItems?: number;
 }
 const CasesSection = ({
-  maxItems = 12
+  maxItems = 15
 }: CasesSectionProps) => {
   const {
     data: projects
@@ -229,7 +237,7 @@ const CasesSection = ({
           logo_url,
           background_url,
           website_url
-        `).eq('is_published', true).order('display_order').limit(12);
+        `).eq('is_published', true).order('display_order').limit(15);
 
       // Fetch first gallery image for each project
       if (projectsData) {
