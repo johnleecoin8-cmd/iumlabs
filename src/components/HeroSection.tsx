@@ -251,12 +251,12 @@ const HeroSection = () => {
           {/* CTA Button - Enhanced - Mobile optimized */}
           <a 
             href="/contact#contact-form" 
-            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30 relative overflow-hidden cta-hero-glow"
+            className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-7 py-3.5 sm:px-10 sm:py-5 font-semibold text-sm sm:text-lg rounded-full active:scale-[0.98] min-h-[48px] sm:min-h-[56px] border border-white/30 relative overflow-hidden cta-hero-glow mt-4 sm:mt-6"
             onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
             {/* Animated glow ring */}
             <span className="absolute inset-0 rounded-full animate-cta-ring pointer-events-none" />
-            <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300" />
+            <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
             <span>Get Your Free Proposal</span>
           </a>
           
