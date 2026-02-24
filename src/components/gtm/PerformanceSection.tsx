@@ -350,7 +350,7 @@ const ProjectCard = ({
         </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
