@@ -163,8 +163,8 @@ const StatsSection = () => {
           </p>
           
           {/* Marquee Container */}
-          <div className="marquee">
-            <div className="marquee-content">
+          <div className="marquee" style={{ '--marquee-speed': '12s' } as React.CSSProperties}>
+            <div className="marquee-content" style={{ animationDuration: '12s' }}>
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-${index}`}
