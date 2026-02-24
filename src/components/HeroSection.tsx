@@ -244,7 +244,7 @@ const HeroSection = () => {
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-xs sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
+          <p className="text-xs sm:text-base md:text-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
             Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
