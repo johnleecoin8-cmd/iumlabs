@@ -155,7 +155,7 @@ const HeroSection = () => {
     networkInfo,
     ShimmerOverlay,
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4',
+    src: '/videos/hero-background.mp4?v=2',
     poster: '/images/hero-poster.jpg',
     autoPlay: true,
     preload: 'auto',
