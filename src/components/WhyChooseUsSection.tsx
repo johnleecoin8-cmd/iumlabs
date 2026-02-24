@@ -85,9 +85,7 @@ const WhyChooseUsSection = () => {
           <motion.p
             className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide"
             variants={descriptionVariants}>
-
-            <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection.
-            230+ handpicked KOLs. 55+ executed events. We've already built the community infrastructure your project needs in Korea — so when you launch, you're not starting from zero. You're starting from everywhere.
+            We're a Seoul-native Web3 agency with a proven track record of launching 18+ global projects into Korea — including BNB, Mantra, and Bybit — through GTM strategy, influencer marketing, AMA, PR, community building, and offline events. One partner for full market entry.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
