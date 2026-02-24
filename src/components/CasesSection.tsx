@@ -125,6 +125,18 @@ const fallbackImages: Record<string, {
   'openledger': {
     logo: '',
     bgImage: openledgerCampaign
+  },
+  'spacecoin': {
+    logo: '',
+    bgImage: '/images/projects/spacecoin-bg.jpg'
+  },
+  'aptos': {
+    logo: '',
+    bgImage: '/images/projects/aptos-bg.jpg'
+  },
+  'kite': {
+    logo: '',
+    bgImage: '/images/projects/kite-bg.jpg'
   }
 };
 interface CaseCardProps {
@@ -210,7 +222,7 @@ interface CasesSectionProps {
   maxItems?: number;
 }
 const CasesSection = ({
-  maxItems = 12
+  maxItems = 15
 }: CasesSectionProps) => {
   const {
     data: projects
@@ -229,7 +241,7 @@ const CasesSection = ({
           logo_url,
           background_url,
           website_url
-        `).eq('is_published', true).order('display_order').limit(12);
+        `).eq('is_published', true).order('display_order').limit(15);
 
       // Fetch first gallery image for each project
       if (projectsData) {
@@ -274,7 +286,7 @@ const CasesSection = ({
       {/* Top Info Bar */}
       
 
-      {/* 3x4 Cases Grid (12 projects max) */}
+      {/* 3x5 Cases Grid (15 projects) */}
       <div className="grid grid-cols-2 lg:grid-cols-3">
         {displayCases.map((caseItem, index) => <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />)}
       </div>
