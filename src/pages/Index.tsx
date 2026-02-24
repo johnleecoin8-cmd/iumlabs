@@ -121,7 +121,7 @@ const Index = () => {
       
       {/* Partner CTA - Impact Block */}
       <Suspense fallback={<SectionLoader />}>
-        <PartnerCTASection />
+        
       </Suspense>
 
       {/* Contact - 05 */}
