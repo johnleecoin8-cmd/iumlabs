@@ -113,6 +113,14 @@ const clientLogos = [{
   name: "SynFutures",
   logo: synfuturesLogo,
   noInvert: true
+}, {
+  name: "Aptos",
+  logo: aptosLogo,
+  noInvert: false
+}, {
+  name: "Kite",
+  logo: kiteLogo,
+  noInvert: true
 }];
 // Default stats as fallback
 const defaultStats = [{
