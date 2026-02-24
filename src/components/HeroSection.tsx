@@ -336,7 +336,7 @@ const StatItem = ({
     decimals: 0
   });
   return <div className="text-center cursor-default select-none">
-      <div className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
+      <div className="text-4xl sm:text-5xl md:text-5xl lg:text-5xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
         {prefix}{count}{suffix}
       </div>
       <div className="text-[10px] sm:text-sm md:text-base text-white/60 font-medium">
