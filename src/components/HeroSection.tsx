@@ -336,10 +336,10 @@ const StatItem = ({
     decimals: 0
   });
   return <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 sm:mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
+      <div className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-0.5 sm:mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tighter leading-none">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-sm text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
+      <div className="text-[10px] sm:text-sm md:text-base text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
         {label}
       </div>
     </div>;
