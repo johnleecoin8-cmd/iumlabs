@@ -353,7 +353,7 @@ const ProjectCard = ({
             alt={project.name}
             loading="lazy"
             decoding="async"
-            className="h-5 md:h-8 w-auto object-contain opacity-100 transition-opacity"
+            className={`h-5 md:h-8 w-auto object-contain opacity-100 transition-opacity ${project.slug === 'aptos' ? 'invert' : ''}`}
           />
           <div className="flex items-center gap-1.5 md:gap-2">
             <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
