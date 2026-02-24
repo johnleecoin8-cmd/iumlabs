@@ -181,7 +181,7 @@ const CaseCard = ({
     // Tablet: 3 columns
     "md:border-r", index % 3 === 2 && "md:border-r-0",
     // Desktop: 5 columns
-    "lg:border-r", index % 5 === 4 && "lg:border-r-0")}>
+    "xl:border-r", index % 5 === 4 && "xl:border-r-0")}>
         <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
           <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
@@ -285,7 +285,7 @@ const CasesSection = ({
       
 
       {/* 5x3 Cases Grid (15 projects) */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {displayCases.map((caseItem, index) => <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />)}
       </div>
 
