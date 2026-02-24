@@ -392,7 +392,7 @@ video {
 
   /* Logo Marquee Animation */
   .logo-marquee {
-    animation: marquee 15s linear infinite;
+    animation: marquee 30s linear infinite;
   }
 
   .animate-marquee-slow {
@@ -855,12 +855,12 @@ video {
 
 /* Slow Marquee for logos */
 .logo-marquee-slow {
-  animation: marquee 13s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 
 /* Fast Marquee */
 .logo-marquee-fast {
-  animation: marquee 10s linear infinite;
+  animation: marquee 20s linear infinite;
 }
 
 /* Pause on hover */
