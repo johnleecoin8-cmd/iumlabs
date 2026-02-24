@@ -249,7 +249,7 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
-          <h1 className="font-sans text-[1.5rem] sm:text-[2.9rem] md:text-[clamp(3.1rem,5.6vw,4.6rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-24 sm:mt-36 md:mt-44">
+          <h1 className="font-sans text-[1.8rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6vw,5rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-24 sm:mt-36 md:mt-44">
             <span className="text-white font-sans leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
           </h1>
 
