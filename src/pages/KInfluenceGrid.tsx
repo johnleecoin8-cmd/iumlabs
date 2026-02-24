@@ -262,7 +262,7 @@ const KInfluenceGrid = () => {
                 <div className="hidden lg:flex items-center gap-3 text-xs">
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-500/5 rounded-lg border border-teal-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-                    <span className="text-teal-400 font-medium">774 Channels</span>
+                    <span className="text-teal-400 font-medium">1,556 Channels</span>
                   </div>
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-500/5 rounded-lg border border-violet-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-violet-400" />
