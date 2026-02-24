@@ -607,7 +607,7 @@ const Projects = () => {
     posterProps: heroPosterProps,
     ShimmerOverlay: HeroShimmerOverlay,
   } = useVideoPlayer({
-    src: '/videos/projects-hero.mp4',
+    src: '/videos/projects-hero.mp4?v=2',
     poster: '/images/projects-hero-poster.jpg',
   });
 
@@ -744,7 +744,7 @@ const Projects = () => {
                     filter: "brightness(0.35)",
                   }}
                 >
-                  <source src="/videos/projects-hero.mp4" type="video/mp4" />
+                  <source src="/videos/projects-hero.mp4?v=2" type="video/mp4" />
                 </video>
               )}
               
