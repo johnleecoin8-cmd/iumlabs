@@ -31,7 +31,7 @@ const Research = () => {
   const [scrollY, setScrollY] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const postsPerPage = 8;
+  const postsPerPage = 6;
 
   // Fetch from DB only
   const {
@@ -219,7 +219,7 @@ const Research = () => {
               <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-white/20 mx-auto mb-3 sm:mb-4" />
               <h3 className="text-lg sm:text-xl font-medium text-white mb-2">No articles yet</h3>
               <p className="text-sm sm:text-base text-white/60">Check back soon for our latest research and insights.</p>
-            </div> : <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6">
+            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
               {currentPosts.map(post => <div key={post.id}>
                   <Link to={`/blog/${post.slug}`} className="group block active:scale-[0.98]">
                     <div className="relative hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform duration-300">
