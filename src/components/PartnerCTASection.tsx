@@ -1,8 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
 import CalendlyButton from "@/components/CalendlyButton";
-import { ArrowRight } from "lucide-react";
 
 const PartnerCTASection = () => {
   const ref = useRef(null);
