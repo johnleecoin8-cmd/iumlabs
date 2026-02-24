@@ -21,6 +21,8 @@ import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 import synfuturesLogo from '@/assets/logos/synfutures.png';
 import spacecoinLogo from '@/assets/logos/spacecoin.png';
+import aptosLogo from '@/assets/logos/aptos.png';
+import kiteLogo from '@/assets/logos/kite.png';
 
 // All Projects Data for 4-row Marquee
 const allProjects = [
@@ -204,7 +206,7 @@ const allProjects = [
   {
     name: 'Aptos',
     slug: 'aptos',
-    logo: '',
+    logo: aptosLogo,
     bgImage: '/images/projects/aptos-bg.jpg',
     bgVideo: undefined,
     category: 'Layer 1',
@@ -217,7 +219,7 @@ const allProjects = [
   {
     name: 'Kite',
     slug: 'kite',
-    logo: '',
+    logo: kiteLogo,
     bgImage: '/images/projects/kite-bg.jpg',
     bgVideo: undefined,
     category: 'AI',
