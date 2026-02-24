@@ -174,7 +174,7 @@ const StatsSection = () => {
                 </div>
               ))}
             </div>
-            <div className="marquee-content" aria-hidden="true">
+            <div className="marquee-content" aria-hidden="true" style={{ animationDuration: '12s' }}>
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-dup-${index}`}
