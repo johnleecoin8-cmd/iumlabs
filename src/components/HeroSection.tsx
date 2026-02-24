@@ -115,25 +115,25 @@ const clientLogos = [{
 // Default stats as fallback
 const defaultStats = [{
   id: "client_valuation",
-  value: 8,
+  value: 7,
   label: "Client Valuation",
   prefix: "$",
   suffix: "B+"
 }, {
   id: "kol_network",
-  value: 180,
+  value: 230,
   label: "KOL Network",
   prefix: "",
   suffix: "+"
 }, {
   id: "projects_launched",
-  value: 18,
+  value: 19,
   label: "Projects Launched",
   prefix: "",
   suffix: "+"
 }, {
   id: "events_hosted",
-  value: 42,
+  value: 55,
   label: "Events Hosted",
   prefix: "",
   suffix: "+"
