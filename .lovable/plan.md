@@ -1,20 +1,14 @@
 
-# WhyChooseUs Section - Copy & Style Update
+# Stats 숫자 크기 확대
 
-## Changes (single file: `src/components/WhyChooseUsSection.tsx`)
+현재 `text-7xl md:text-9xl`인 스탯 숫자를 더 크게 키웁니다.
 
-### Content Updates
-- **Headline**: "Connect to Korea. Precisely." (clean, two-line split)
-- **Body**: New 3-sentence copy about "ium (이음)" connection, research-backed positioning, and native Korea entry
-- **Bottom line**: "FOUNDED BY VETERANS FROM BINANCE & KUCOIN" (small uppercase text)
+## 변경 사항
 
-### Style Updates
-- Replace all `text-primary` (blue) highlights with purple (`text-purple-400`)
-- Bottom accent line also switches to purple (`bg-purple-400/50`, `text-purple-400/80`)
-- Adjust content positioning: center-vertically instead of bottom-aligned for better visual balance
-- Keep fullscreen video background with dark overlay intact
+**파일: `src/components/StatsSection.tsx`**
 
-### Layout Positioning
-- Switch from `items-end` to `items-center` so content sits in the vertical middle of the section
-- Remove bottom padding bias, use centered padding instead
-- Keep `max-w-2xl mr-auto` (left-aligned text block)
+- 스탯 숫자 크기: `text-7xl md:text-9xl` → `text-8xl md:text-[10rem]`
+  - 모바일: 8xl (6rem / 96px)
+  - 데스크탑: 10rem (160px) - Tailwind 기본 스케일을 넘어서 커스텀 값 사용
+- `font-bold` → `font-black`으로 더 두껍게
+- 카드 패딩도 `p-12 md:p-16` → `p-14 md:p-20`으로 여유 확보
