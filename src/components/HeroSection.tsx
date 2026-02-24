@@ -292,7 +292,7 @@ const HeroSection = () => {
       {/* Client Logo Marquee - Full Width */}
       <div className="relative z-10 py-3 sm:py-4 overflow-hidden">
         <div className="flex items-center logo-marquee-slow">
-          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-1 sm:gap-2 mx-1 sm:mx-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
+          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-1.5 sm:gap-2.5 mx-1 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
               <img
                 src={client.logo}
                 alt={client.name}
