@@ -300,7 +300,7 @@ const HeroSection = () => {
                 decoding="async"
                 className={`h-4 sm:h-6 w-auto max-w-[90px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
               />
-              <span className="text-white/75 text-[9px] sm:text-xs font-medium whitespace-nowrap">
+              <span className="text-white/75 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>)}
