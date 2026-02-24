@@ -298,7 +298,7 @@ const HeroSection = () => {
                 alt={client.name}
                 loading="lazy"
                 decoding="async"
-                className={`h-3.5 sm:h-5 w-auto max-w-[80px] sm:max-w-[100px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
+                className={`h-4 sm:h-6 w-auto max-w-[90px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
               />
               <span className="text-white/75 text-[9px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
