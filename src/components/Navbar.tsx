@@ -189,31 +189,22 @@ const Navbar = () => {
                                 exit={{ height: 0, opacity: 0 }}
                                 transition={{ duration: 0.3, ease: "easeOut" }}
                               >
-                                <div className="space-y-3 py-1">
-                                  {servicesCategories.map((category) => (
-                                    <div key={category.label}>
-                                      <span className="text-[10px] text-muted-foreground/60 font-medium tracking-[0.15em] uppercase block mb-1 ml-1">
-                                        {category.label}
-                                      </span>
-                                      <div className="space-y-0.5">
-                                        {category.items.map((item, subIndex) => (
-                                          <motion.div
-                                            key={item.href}
-                                            initial={{ opacity: 0, x: -10 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            transition={{ duration: 0.2, delay: subIndex * 0.03 }}
-                                          >
-                                            <Link
-                                              to={item.href}
-                                              onClick={() => setIsMenuOpen(false)}
-                                              className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
-                                            >
-                                              {item.name}
-                                            </Link>
-                                          </motion.div>
-                                        ))}
-                                      </div>
-                                    </div>
+                                <div className="space-y-0.5 py-1">
+                                  {serviceItems.map((item, subIndex) => (
+                                    <motion.div
+                                      key={item.href}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.2, delay: subIndex * 0.03 }}
+                                    >
+                                      <Link
+                                        to={item.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
+                                      >
+                                        {item.name}
+                                      </Link>
+                                    </motion.div>
                                   ))}
                                 </div>
                               </motion.div>
