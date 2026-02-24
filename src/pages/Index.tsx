@@ -13,6 +13,7 @@ const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcas
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
+const PartnerCTASection = lazy(() => import("@/components/PartnerCTASection"));
 
 // Loading fallback for lazy components
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
