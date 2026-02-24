@@ -168,7 +168,7 @@ const StatsSection = () => {
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-${index}`}
-                  className="text-2xl font-semibold text-muted-foreground/30 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
+                  className="text-xl font-semibold text-muted-foreground/30 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
                 >
                   {partner}
                 </div>
