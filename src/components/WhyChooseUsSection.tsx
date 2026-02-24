@@ -10,7 +10,7 @@ const containerVariants = {
 
 const headlineLineVariants = {
   hidden: { opacity: 0, x: -40, filter: 'blur(8px)' },
-  visible: { 
+  visible: {
     opacity: 1, x: 0, filter: 'blur(0px)',
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
@@ -18,7 +18,7 @@ const headlineLineVariants = {
 
 const descriptionVariants = {
   hidden: { opacity: 0, y: 20, filter: 'blur(12px)' },
-  visible: { 
+  visible: {
     opacity: 1, y: 0, filter: 'blur(0px)',
     transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
   }
@@ -26,7 +26,7 @@ const descriptionVariants = {
 
 const accentLineVariants = {
   hidden: { scaleX: 0 },
-  visible: { 
+  visible: {
     scaleX: 1,
     transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
   }
@@ -34,7 +34,7 @@ const accentLineVariants = {
 
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 12 },
-  visible: { 
+  visible: {
     opacity: 1, y: 0,
     transition: { duration: 0.6, ease: 'easeOut' }
   }
@@ -54,8 +54,8 @@ const WhyChooseUsSection = () => {
           ref={videoRef}
           src={optimizedSrc}
           {...videoProps}
-          className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`}
-        />
+          className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`} />
+
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
@@ -66,51 +66,51 @@ const WhyChooseUsSection = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-        >
+          viewport={{ once: true, margin: "-50px" }}>
+
           {/* Headline — each line slides in separately */}
           <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
-            <motion.span 
+            <motion.span
               className="block bg-gradient-to-r from-white via-purple-300 to-purple-400 bg-clip-text text-transparent"
-              variants={headlineLineVariants}
-            >
+              variants={headlineLineVariants}>
+
               We Make You Land.
             </motion.span>
           </h2>
 
           {/* Description — blur reveal */}
-          <motion.p 
+          <motion.p
             className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide"
-            variants={descriptionVariants}
-          >
+            variants={descriptionVariants}>
+
             <span className="text-purple-400 font-medium">"ium (이음)"</span> means connection.
             We connect your team to Korea with research-led positioning, localized narrative systems, and distribution partners—so your launch hits on day one and compounds into sustained growth.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
-          <motion.div 
-            className="flex items-center justify-center gap-4"
-            variants={fadeUpVariants}
-          >
-            <motion.div 
-              className="w-12 h-px bg-purple-400/50 origin-right"
-              variants={accentLineVariants}
-            />
-            <p className="text-purple-400/80 text-[10px] sm:text-xs font-medium tracking-wider uppercase">
-              Founded by veterans from Binance & KuCoin
-            </p>
-            <motion.div 
-              className="w-12 h-px bg-purple-400/50 origin-left"
-              variants={accentLineVariants}
-            />
-          </motion.div>
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </motion.div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default WhyChooseUsSection;
