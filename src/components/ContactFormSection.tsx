@@ -227,6 +227,11 @@ const ContactFormSection = ({
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
+                    {/* Description */}
+                    <div className="mb-4 text-center">
+                      <p className="text-sm sm:text-base text-white/60">Leave your question about Korean/APAC market, and get a proposal.</p>
+                    </div>
+
                     {/* Step Indicator */}
                     <div className="mb-4 sm:mb-5">
                       <div className="flex items-center justify-between mb-3">
@@ -259,9 +264,6 @@ const ContactFormSection = ({
                             transition={{ duration: 0.2 }}
                             className="space-y-3 sm:space-y-4"
                           >
-                            <div className="mb-4 text-center -order-1">
-                              <p className="text-sm sm:text-base text-white/60">Leave your question about Korean/APAC market, and get a proposal.</p>
-                            </div>
 
                             {/* Name & Email */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
