@@ -178,7 +178,7 @@ const StatsSection = () => {
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-dup-${index}`}
-                  className="text-xl font-semibold text-muted-foreground/30 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
+                  className="text-base font-medium text-muted-foreground/25 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
                 >
                   {partner}
                 </div>
