@@ -1,20 +1,18 @@
 
 
-# 히어로 섹션 마퀴 크기 축소
+## About 섹션 카피 변경
 
-## 변경 내용
+`WhyChooseUsSection.tsx`의 description 텍스트를 아래 내용으로 교체합니다.
 
-`src/components/HeroSection.tsx`의 Client Logo Marquee 영역을 전체적으로 한 단계씩 줄임.
+**변경 전:**
+> "ium (이음)" means connection. 230+ handpicked KOLs. 55+ executed events. We've already built the community infrastructure your project needs in Korea — so when you launch, you're not starting from zero. You're starting from everywhere.
 
-### 구체적 수정
+**변경 후:**
+> We're a Seoul-native Web3 agency with a proven track record of launching 18+ global projects into Korea — including BNB, Mantra, and Bybit — through GTM strategy, influencer marketing, AMA, PR, community building, and offline events. One partner for full market entry.
 
-| 요소 | 현재 | 변경 |
-|------|------|------|
-| 컨테이너 패딩 | `py-4 sm:py-6` | `py-2 sm:py-3` |
-| 배지 간격 | `gap-1.5 sm:gap-3, mx-1.5 sm:mx-3` | `gap-1 sm:gap-2, mx-1 sm:mx-2` |
-| 배지 패딩 | `px-3.5 sm:px-6 py-2 sm:py-3.5` | `px-2.5 sm:px-4 py-1.5 sm:py-2` |
-| 로고 이미지 높이 | `h-5 sm:h-7` | `h-3.5 sm:h-5` |
-| 로고 max-width | `max-w-[110px] sm:max-w-[140px]` | `max-w-[80px] sm:max-w-[100px]` |
-| 텍스트 크기 | `text-[10px] sm:text-sm` | `text-[9px] sm:text-xs` |
+### 기술 상세
+- **파일**: `src/components/WhyChooseUsSection.tsx`
+- 기존 `<motion.p>` 내부의 텍스트 전체를 새 카피로 교체
+- `"ium (이음)"` 부분의 purple 강조 스타일은 제거 (새 카피에 해당 내용 없음)
+- 헤드라인("Seoul Moves Fast. / We Make You Land.")은 그대로 유지
 
-결과: 마퀴 전체 높이가 약 40% 줄어들어 히어로 콘텐츠에 시선이 더 집중됨.
