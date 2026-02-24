@@ -81,13 +81,13 @@ const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: {
 
   return (
     <div 
-      className={`text-center p-8 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
+      className={`text-center p-10 md:p-14 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="text-4xl md:text-5xl font-bold mb-2 text-foreground">
+      <div className="text-5xl md:text-7xl font-bold mb-3 text-foreground">
         {displayValue}
       </div>
-      <div className="text-sm text-muted-foreground mb-2">
+      <div className="text-base md:text-lg text-muted-foreground mb-2">
         {stat.label}
       </div>
       <MiniChart 
