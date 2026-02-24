@@ -229,7 +229,7 @@ const CasesSection = ({
           logo_url,
           background_url,
           website_url
-        `).eq('is_published', true).order('display_order').limit(12);
+        `).eq('is_published', true).order('display_order').limit(15);
 
       // Fetch first gallery image for each project
       if (projectsData) {
