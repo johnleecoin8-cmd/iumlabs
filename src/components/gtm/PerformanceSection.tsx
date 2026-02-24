@@ -608,24 +608,14 @@ export const PerformanceSection = () => {
 
       <div className="w-full relative z-10">
 
-        {/* 4-Row Alternating Marquee */}
-        <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-2">
-          {/* Gradient masks for entire section */}
-          <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-            
-            <div className="space-y-2 md:space-y-2">
-              {projectRows.map((rowProjects, index) => (
-                <MarqueeRow
-                  key={index}
-                  projects={rowProjects}
-                  direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={20 + index * 2}
-                />
-              ))}
-            </div>
-          </div>
+        {/* 5x3 Static Grid (15 projects) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 md:gap-4">
+          {allProjects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              project={project}
+            />
+          ))}
         </div>
       </div>
     </section>
