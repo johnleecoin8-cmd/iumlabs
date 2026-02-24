@@ -219,7 +219,7 @@ const allProjects = [
   {
     name: 'Kite',
     slug: 'kite',
-    logo: '',
+    logo: kiteLogo,
     bgImage: '/images/projects/kite-bg.jpg',
     bgVideo: undefined,
     category: 'AI',
