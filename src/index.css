@@ -855,7 +855,7 @@ video {
 
 /* Slow Marquee for logos */
 .logo-marquee-slow {
-  animation: marquee 13s linear infinite;
+  animation: marquee 26s linear infinite;
 }
 
 /* Fast Marquee */
