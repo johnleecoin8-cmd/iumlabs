@@ -88,7 +88,7 @@ const clientLogos = [{
 }, {
   name: "Peaq",
   logo: peaqLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
