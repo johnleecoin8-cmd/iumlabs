@@ -84,7 +84,7 @@ const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: {
       className={`text-center p-14 md:p-20 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="text-8xl md:text-[10rem] font-black mb-4 text-foreground leading-none tracking-tighter">
+      <div className="text-[5rem] sm:text-[7rem] md:text-[10rem] font-black mb-4 text-foreground leading-none tracking-tighter">
         {displayValue}
       </div>
       <div className="text-lg md:text-xl text-muted-foreground mb-3">
@@ -163,8 +163,8 @@ const StatsSection = () => {
           </p>
           
           {/* Marquee Container */}
-          <div className="marquee">
-            <div className="marquee-content">
+          <div className="marquee" style={{ '--marquee-speed': '12s' } as React.CSSProperties}>
+            <div className="marquee-content" style={{ animationDuration: '12s' }}>
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-${index}`}
@@ -174,7 +174,7 @@ const StatsSection = () => {
                 </div>
               ))}
             </div>
-            <div className="marquee-content" aria-hidden="true">
+            <div className="marquee-content" aria-hidden="true" style={{ animationDuration: '12s' }}>
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-dup-${index}`}
