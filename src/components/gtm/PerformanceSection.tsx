@@ -296,10 +296,10 @@ const ProjectCard = ({
   const colors = colorClasses[project.color as keyof typeof colorClasses];
 
   return (
-    <div className="block flex-shrink-0 cursor-default select-none">
+    <div className="block cursor-default select-none">
       <div
         className={`
-          relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
+          relative p-3 md:p-6 w-full aspect-[11/10]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           overflow-hidden
