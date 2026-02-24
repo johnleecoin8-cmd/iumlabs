@@ -427,44 +427,14 @@ const MarqueeRow = ({
   const actualSpeed = isMobile ? speed / 7 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
-  const [isPaused, setIsPaused] = useState(false);
-  const [dragStart, setDragStart] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
-  
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsPaused(true);
-    setDragStart(e.touches[0].clientX);
-  };
-  
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isPaused) return;
-    const diff = e.touches[0].clientX - dragStart;
-    setDragOffset(diff);
-  };
-  
-  const handleTouchEnd = () => {
-    setIsPaused(false);
-    setDragOffset(0);
-  };
-  
   return (
-    <div 
-      className="relative overflow-hidden py-2 touch-pan-x"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
+    <div className="relative overflow-hidden py-2">
       <motion.div
         className="flex gap-3 md:gap-4"
-        animate={isPaused ? {
-          x: dragOffset
-        } : {
+        animate={{
           x: direction === 'left' ? ['0%', '-25%'] : ['-25%', '0%']
         }}
-        transition={isPaused ? {
-          type: 'tween',
-          duration: 0
-        } : {
+        transition={{
           x: {
             duration: actualSpeed,
             repeat: Infinity,
