@@ -210,7 +210,7 @@ interface CasesSectionProps {
   maxItems?: number;
 }
 const CasesSection = ({
-  maxItems = 12
+  maxItems = 15
 }: CasesSectionProps) => {
   const {
     data: projects
