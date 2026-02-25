@@ -198,7 +198,7 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <div className="relative h-full min-h-[85vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
+  return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
         {/* Always render poster as a safe fallback */}
@@ -346,7 +346,7 @@ const StatItem = ({
     decimals: 0
   });
   return <div className="text-center cursor-default select-none">
-      <div className="text-2xl sm:text-5xl md:text-5xl lg:text-5xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
+      <div className="text-3xl sm:text-5xl md:text-5xl lg:text-5xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
         {prefix}{count}{suffix}
       </div>
       <div className="text-[10px] sm:text-sm md:text-base text-white/60 font-medium">
