@@ -152,7 +152,7 @@ const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { createRipple } = useRipple();
   const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
-  
+
   // Use unified video player hook
   const {
     videoRef,
@@ -163,41 +163,41 @@ const HeroSection = () => {
     posterProps,
     quality,
     networkInfo,
-    ShimmerOverlay,
+    ShimmerOverlay
   } = useVideoPlayer({
     src: '/videos/hero-background.mp4',
     poster: '/images/hero-poster.jpg',
     autoPlay: true,
-    preload: 'auto',
+    preload: 'auto'
   });
-  
+
   // Fetch dynamic brand stats
   const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
-    "client_valuation", "kol_network", "projects_launched", "events_hosted"
-  ]);
-  
+  "client_valuation", "kol_network", "projects_launched", "events_hosted"]
+  );
+
   // Merge dynamic stats with fallback defaults
   const stats = useMemo(() => {
-    return defaultStats.map(defaultStat => {
+    return defaultStats.map((defaultStat) => {
       const dynamicStat = statsMap[defaultStat.id];
       if (dynamicStat) {
         return {
           ...defaultStat,
           value: dynamicStat.value,
           prefix: dynamicStat.prefix || defaultStat.prefix,
-          suffix: dynamicStat.suffix || defaultStat.suffix,
+          suffix: dynamicStat.suffix || defaultStat.suffix
         };
       }
       return defaultStat;
     });
   }, [statsMap]);
-  
+
   useEffect(() => {
     // Trigger count-up animation after component mounts
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
-  
+
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
@@ -207,19 +207,19 @@ const HeroSection = () => {
         {/* Shimmer loading overlay */}
         <ShimmerOverlay />
 
-        {!shouldDisableVideo && !hasVideoError && (
-          <video
-            ref={videoRef}
-            {...videoProps}
-            className="absolute inset-0 w-full h-full object-cover z-10"
-            style={{
-              ...videoProps.style,
-              WebkitAppearance: 'none',
-            }}
-          >
+        {!shouldDisableVideo && !hasVideoError &&
+      <video
+        ref={videoRef}
+        {...videoProps}
+        className="absolute inset-0 w-full h-full object-cover z-10"
+        style={{
+          ...videoProps.style,
+          WebkitAppearance: 'none'
+        }}>
+
             <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
           </video>
-        )}
+      }
       </div>
       
       {/* Dark overlay */}
@@ -230,9 +230,9 @@ const HeroSection = () => {
 
       {/* Floating Service Tags - Desktop only (disabled animation on mobile for performance) */}
       {!shouldDisableHeavyAnimations && serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
-          animation: `float-gentle ${3 + (index % 3) * 0.5}s ease-in-out infinite`,
-          animationDelay: `${index * 0.3}s`
-        }}>
+      animation: `float-gentle ${3 + index % 3 * 0.5}s ease-in-out infinite`,
+      animationDelay: `${index * 0.3}s`
+    }}>
           <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
@@ -250,20 +250,20 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-sans text-[1.6rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6vw,5rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-24 sm:mt-36 md:mt-44">
-            <span className="text-white font-sans leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
+            <span className="text-white font-sans leading-tight text-2xl">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
+          <p className="text-xs sm:text-base md:text-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
             Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
-          <a 
-            href="/contact#contact-form" 
-            className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-9 sm:py-4 font-semibold text-sm sm:text-base rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[52px] border border-white/30 relative overflow-hidden cta-hero-glow mt-10 sm:mt-16"
-            onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
-          >
+          <a
+          href="/contact#contact-form"
+          className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-9 sm:py-4 font-semibold text-sm sm:text-base rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[52px] border border-white/30 relative overflow-hidden cta-hero-glow mt-10 sm:mt-16"
+          onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}>
+
             {/* Animated glow ring */}
             <span className="absolute inset-0 rounded-full animate-cta-ring pointer-events-none" />
             <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
@@ -282,7 +282,7 @@ const HeroSection = () => {
 
       {/* Stats Section - Enhanced - Mobile optimized */}
       <div className="relative z-10 py-3 sm:py-6 md:py-8">
-        <div className="container mx-auto px-6 sm:px-12 md:px-20 lg:px-32">
+        <div className="container mx-auto px-3 sm:px-8 md:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
           </div>
@@ -294,12 +294,12 @@ const HeroSection = () => {
         <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-1.5 sm:gap-2.5 mx-1 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
               <img
-                src={client.logo}
-                alt={client.name}
-                loading="lazy"
-                decoding="async"
-                className={`h-4 sm:h-6 w-auto max-w-[90px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
-              />
+            src={client.logo}
+            alt={client.name}
+            loading="lazy"
+            decoding="async"
+            className={`h-4 sm:h-6 w-auto max-w-[90px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+
               <span className="text-white/75 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
@@ -330,14 +330,14 @@ const StatItem = ({
   suffix = "",
   isVisible,
   delay
-}: {
-  value: number;
-  label: string;
-  prefix?: string;
-  suffix?: string;
-  isVisible: boolean;
-  delay: number;
-}) => {
+
+
+
+
+
+
+
+}: {value: number;label: string;prefix?: string;suffix?: string;isVisible: boolean;delay: number;}) => {
   const count = useCountUp({
     end: Math.round(value),
     isVisible,
