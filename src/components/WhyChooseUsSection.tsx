@@ -62,14 +62,14 @@ const WhyChooseUsSection = () => {
       {/* Content */}
       <div className="relative z-10 flex items-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
         <motion.div
-          className="container mx-auto px-6 sm:px-10 md:px-12 py-12 sm:py-16 md:py-20 max-w-2xl text-center"
+          className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-12 sm:py-16 md:py-20 max-w-4xl text-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline — each line slides in separately */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -83,7 +83,7 @@ const WhyChooseUsSection = () => {
 
           {/* Description — blur reveal */}
           <motion.p
-            className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg max-w-xl mx-auto mb-8 sm:mb-10 tracking-wide"
+            className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 tracking-wide"
             variants={descriptionVariants}>
             We're a Seoul-native Web3 agency with a proven track record of launching 18+ global projects into Korea including BNB, Mantra, and Bybit through GTM strategy, influencer marketing, AMA, PR, community building, and offline events. One partner for full market entry.
           </motion.p>
