@@ -27,7 +27,7 @@ const MediaPartnersSection = () => {
         {/* Small label */}
         <div className="flex items-center justify-center gap-3 pt-4 pb-2">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-white/20" />
-          <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase font-light">Media Partners</span>
+          <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase font-light">Media Spots</span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-white/20" />
         </div>
         
