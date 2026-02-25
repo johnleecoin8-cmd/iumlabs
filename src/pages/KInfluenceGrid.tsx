@@ -1,18 +1,18 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useHypeProjects } from '@/hooks/useHypeProjects';
-import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
+import { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import HypeGalaxyMap from '@/components/mindshare/HypeGalaxyMap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 
 import Navbar from '@/components/Navbar';
-import { Search, X, Clock, LayoutGrid, Sparkles } from 'lucide-react';
+import { Search, X, Clock } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import { motion, AnimatePresence } from 'framer-motion';
 
-type ViewMode = 'treemap' | 'galaxy';
+
 
 // Tunable threshold constants
 const TREND_THRESHOLD = {
@@ -102,7 +102,7 @@ const KInfluenceGrid = () => {
   
   
   const [searchQuery, setSearchQuery] = useState('');
-  const [viewMode, setViewMode] = useState<ViewMode>('treemap');
+  
   
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
@@ -228,34 +228,6 @@ const KInfluenceGrid = () => {
             <div className="flex items-center justify-between gap-2 sm:gap-3 pb-3 sm:pb-4">
               {/* Left: View Toggle */}
               <div className="flex items-center gap-2 sm:gap-4">
-                {/* View Mode Toggle - compact on mobile */}
-                <div className="flex items-center gap-0.5 sm:gap-1 bg-white/[0.02] rounded-lg p-0.5 sm:p-1 border border-white/[0.06]">
-                  <button
-                    onClick={() => setViewMode('treemap')}
-                    className={cn(
-                      "flex items-center gap-1 px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium rounded-md transition-all duration-200",
-                      viewMode === 'treemap'
-                        ? "bg-teal-500/20 text-teal-400 border border-teal-500/30"
-                        : "text-white/40 hover:text-white/70 border border-transparent"
-                    )}
-                  >
-                    <LayoutGrid className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
-                    <span className="hidden xs:inline sm:inline">Treemap</span>
-                  </button>
-                  <button
-                    onClick={() => setViewMode('galaxy')}
-                    className={cn(
-                      "flex items-center gap-1 px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium rounded-md transition-all duration-200",
-                      viewMode === 'galaxy'
-                        ? "bg-violet-500/20 text-violet-400 border border-violet-500/30"
-                        : "text-white/40 hover:text-white/70 border border-transparent"
-                    )}
-                  >
-                    <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
-                    <span className="hidden xs:inline sm:inline">Galaxy</span>
-                  </button>
-                </div>
-
                 <span className="text-[10px] sm:text-sm font-semibold text-white/60 sm:text-white/80">Top 20</span>
 
                 {/* Channel stats - Hidden on mobile */}
@@ -347,18 +319,14 @@ const KInfluenceGrid = () => {
               </motion.div>
             ) : treemapProjects.length > 0 ? (
               <motion.div
-                key={viewMode}
+                key="galaxy"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
                 className="h-[calc(100vh-180px)] sm:h-[calc(100vh-240px)] lg:h-[calc(100vh-200px)] min-h-[400px] sm:min-h-[500px]"
               >
-                {viewMode === 'treemap' ? (
-                  <MindshareTreemap projects={treemapProjects} />
-                ) : (
-                  <HypeGalaxyMap projects={treemapProjects} />
-                )}
+                <HypeGalaxyMap projects={treemapProjects} />
               </motion.div>
             ) : (
               <motion.div
