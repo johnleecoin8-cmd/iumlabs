@@ -169,10 +169,19 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       return { ...project, normalizedSparkline: interpolated };
     });
 
+    // 모든 sparkline 값의 최대값을 구해서 0~100 정규화
+    const allValues: number[] = [];
+    normalizedProjects.forEach(p => {
+      (p.normalizedSparkline || []).forEach(v => { if (v > 0) allValues.push(v); });
+    });
+    const maxVal = allValues.length > 0 ? Math.max(...allValues) : 1;
+
     return timeLabels.map((time, timeIdx) => {
       const point: Record<string, string | number> = { time };
       normalizedProjects.forEach(project => {
-        point[project.ticker] = Math.round((project.normalizedSparkline[timeIdx] || 0) * 100) / 100;
+        const raw = project.normalizedSparkline[timeIdx] || 0;
+        // 정규화: 0~100 범위로 스케일링
+        point[project.ticker] = Math.round((raw / maxVal) * 100 * 100) / 100;
       });
       return point;
     });
@@ -324,7 +333,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                 tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10, opacity: 0.5 }} 
                 tickLine={false}
                 axisLine={false}
-                domain={['auto', 'auto']}
+                domain={[0, 100]}
                 width={40}
                 tickFormatter={(val) => val.toFixed(1)}
               />
