@@ -198,7 +198,7 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
+  return <div className="relative h-full min-h-[110vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
         {/* Always render poster as a safe fallback */}
