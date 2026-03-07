@@ -84,8 +84,10 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, 6000);
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleVideoReady);
-      video.removeEventListener('canplay', handleVideoReady);
+      video.removeEventListener('loadeddata', handleVideoReady);
+      video.removeEventListener('canplaythrough', handleVideoReady);
+      video.pause();
+      video.src = '';
       clearTimeout(maxTimer);
     };
   }, []);
