@@ -1306,11 +1306,15 @@ video {
 
 /* Ultra-low power mode for mobile touch devices */
 @media (max-width: 767px) and (pointer: coarse) {
-  /* Faster marquee for mobile */
-  .logo-marquee,
-  .logo-marquee-slow,
+  /* 3x faster marquee for mobile touch */
+  .logo-marquee {
+    animation-duration: 10s !important;
+  }
+  .logo-marquee-slow {
+    animation-duration: 8.7s !important;
+  }
   .logo-marquee-fast {
-    animation-duration: 30s !important;
+    animation-duration: 6.7s !important;
   }
   
   /* Disable floating animations completely */
