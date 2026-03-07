@@ -64,22 +64,30 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   useEffect(() => {
     const video = document.createElement('video');
     video.src = '/videos/hero-background.mp4#t=0.001';
-    video.preload = 'metadata';
+    video.preload = 'auto';
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('webkit-playsinline', 'true');
     
     const handleVideoReady = () => {
       videoLoaded.current = true;
     };
 
-    video.addEventListener('loadedmetadata', handleVideoReady);
-    video.addEventListener('canplay', handleVideoReady);
+    video.addEventListener('loadeddata', handleVideoReady);
+    video.addEventListener('canplaythrough', handleVideoReady);
+    
+    // Force the browser to start downloading
+    video.load();
     
     const maxTimer = setTimeout(() => {
       videoLoaded.current = true;
-    }, 4000);
+    }, 6000);
 
     return () => {
-      video.removeEventListener('loadedmetadata', handleVideoReady);
-      video.removeEventListener('canplay', handleVideoReady);
+      video.removeEventListener('loadeddata', handleVideoReady);
+      video.removeEventListener('canplaythrough', handleVideoReady);
+      video.pause();
+      video.src = '';
       clearTimeout(maxTimer);
     };
   }, []);
