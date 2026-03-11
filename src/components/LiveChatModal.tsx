@@ -93,12 +93,6 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
               >
                 Chat on Telegram
               </a>
-              <a
-                href={`mailto:${brand.email}`}
-                className="lunar-btn-outline"
-              >
-                Send Email
-              </a>
             </div>
           </div>
 
