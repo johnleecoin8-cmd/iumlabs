@@ -245,17 +245,6 @@ const Navbar = () => {
 
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
                   <a
-                    href={`mailto:${brandConfig.email}`}
-                    className={`flex items-center gap-2 text-xs sm:text-sm text-foreground hover:text-primary transition-all duration-300 ${
-                      isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                    }`}
-                    style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
-                  >
-                    <Mail className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span>{brandConfig.email}</span>
-                  </a>
-
-                  <a
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
