@@ -11,7 +11,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
   const videoLoaded = useRef(false);
-  const progressInterval = useRef<NodeJS.Timeout | null>(null);
+  const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleComplete = useCallback(() => {
     const elapsed = Date.now() - startTime;

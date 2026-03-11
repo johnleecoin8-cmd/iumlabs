@@ -187,7 +187,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
   const lastX = useRef(0);
   const lastTime = useRef(0);
   const momentumFrame = useRef<number | null>(null);
-  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const breakpoint = useBreakpoint();
 
   const config = useMemo(() => ({
