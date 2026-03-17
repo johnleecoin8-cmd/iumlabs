@@ -148,18 +148,13 @@ const AppRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services/all" element={<MobileServicesPage />} />
-        <Route path="/services" element={<GTMService />} />
         <Route path="/services/gtm" element={<GTMService />} />
-        <Route path="/growth-marketing" element={<GTMService />} />
         <Route path="/services/branding" element={<BrandingService />} />
         <Route path="/services/seo-ads" element={<SEOAdsService />} />
         <Route path="/services/offline-event" element={<OfflineEventService />} />
         <Route path="/services/community" element={<CommunityService />} />
-        <Route path="/community-growth" element={<CommunityService />} />
         <Route path="/services/deep-research" element={<DeepResearchService />} />
-        <Route path="/research-data" element={<DeepResearchService />} />
         <Route path="/services/influencer" element={<InfluencerService />} />
-        <Route path="/kol-marketing" element={<InfluencerService />} />
         <Route path="/services/pr" element={<PRService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
