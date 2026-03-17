@@ -4,9 +4,7 @@
 # All crawlers
 User-agent: *
 Allow: /
-Disallow: /admin/
 Disallow: /ium-admin/
-Disallow: /api/
 
 # Block internal search/filter parameter URLs (prevent duplicate content)
 Disallow: /*?s=

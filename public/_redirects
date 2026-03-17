@@ -7,5 +7,17 @@
 /research  /blog  301
 /research/*  /blog/:splat  301
 
+# 301 Redirects for alias routes → canonical URLs (prevent duplicate content)
+/services  /services/gtm  301
+/growth-marketing  /services/gtm  301
+/kol-marketing  /services/influencer  301
+/community-growth  /services/community  301
+/research-data  /services/deep-research  301
+
+# 301 Redirects for removed/non-existent project pages (prevent Soft 404)
+/projects/ondo  /projects  301
+/projects/zkpass  /projects  301
+/projects/story-protocol  /projects  301
+
 # SPA fallback
 /*  /index.html  200
