@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { X, Send, Calendar } from "lucide-react";
+import { X, Send, Calendar, Mail } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { brand } from "@/config/content";
 
 const FloatingContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +15,11 @@ const FloatingContactButton = () => {
     label: "Free 30-min Call",
     href: "https://calendly.com/iumlabs/30min",
     color: "bg-primary"
+  }, {
+    icon: Mail,
+    label: "Email Us",
+    href: `mailto:${brand.email}`,
+    color: "bg-white/15"
   }, {
     icon: Send,
     label: "Telegram",
