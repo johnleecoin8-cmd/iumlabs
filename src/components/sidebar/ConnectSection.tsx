@@ -1,4 +1,4 @@
-import { Send, Linkedin } from "lucide-react";
+import { Send, Linkedin, Mail } from "lucide-react";
 import { motion } from "framer-motion";
 import { brand } from "@/config/content";
 
@@ -7,6 +7,12 @@ interface ConnectSectionProps {
 }
 
 const connectLinks = [
+  {
+    icon: Mail,
+    label: brand.email,
+    href: `mailto:${brand.email}`,
+    external: false,
+  },
   {
     icon: Send,
     label: "@iumlabs",
