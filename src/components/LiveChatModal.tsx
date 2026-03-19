@@ -86,12 +86,6 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
             {/* Contact Buttons */}
             <div className="flex flex-wrap gap-3">
               <a
-                href={`mailto:${brand.email}`}
-                className="lunar-btn"
-              >
-                Email Us
-              </a>
-              <a
                 href={brand.telegramLink}
                 target="_blank"
                 rel="noopener noreferrer"

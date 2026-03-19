@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { X, Send, Calendar, Mail } from "lucide-react";
+import { X, Send, Calendar } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
-import { brand } from "@/config/content";
 
 const FloatingContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
