@@ -16,11 +16,6 @@ const FloatingContactButton = () => {
     href: "https://calendly.com/iumlabs/30min",
     color: "bg-primary"
   }, {
-    icon: Mail,
-    label: "Email Us",
-    href: `mailto:${brand.email}`,
-    color: "bg-white/15"
-  }, {
     icon: Send,
     label: "Telegram",
     href: "https://t.me/iumlabs",
