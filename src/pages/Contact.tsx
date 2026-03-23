@@ -180,10 +180,10 @@ const Contact = () => {
   };
   return <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead
-        title="Contact Korea's Top Web3 Marketing Agency | ium Labs"
-        description="Get a free consultation for your Korea market entry. Schedule a call with Seoul's premier crypto marketing experts today. 24h response guaranteed."
+        title="Contact Korea's #1 Web3 & Crypto Marketing Agency | ium Labs"
+        description="Get a free consultation for your Korea Web3 market entry. Schedule a call with Korea's premier crypto marketing agency. 24h response guaranteed."
         path="/contact"
-        keywords={['Contact Web3 Agency Korea', 'Korea Market Consultation', 'Crypto Marketing Seoul', 'Web3 GTM Inquiry']}
+        keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Contact Web3 Agency Korea', 'Korea Market Consultation']}
       />
       <Navbar />
       

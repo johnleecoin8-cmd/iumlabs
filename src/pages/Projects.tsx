@@ -708,10 +708,10 @@ const Projects = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Web3 GTM Case Studies | ium Labs Korea Portfolio"
-        description="View our portfolio of 18+ successful Korean crypto and Web3 marketing campaigns. Real results from Polygon, Ondo, Story Protocol, and more blockchain projects launched in Korea."
+        title="Korea Web3 & Crypto Marketing Case Studies | ium Labs"
+        description="18+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
         path="/projects"
-        keywords={['Web3 Case Studies', 'Crypto Marketing Portfolio', 'Korean Blockchain Projects', 'GTM Success Stories']}
+        keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 Case Studies Korea', 'Crypto Marketing Portfolio']}
       />
       <Navbar />
       
