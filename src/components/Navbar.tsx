@@ -1,17 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, Send, Linkedin, Mail, MapPin, ChevronDown } from "lucide-react";
+import { Menu, Send, Linkedin, Mail, MapPin, ChevronDown, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
+import CalendlyButton from "./CalendlyButton";
 import logoImage from "@/assets/logo.png";
-import { useSidebarState } from "@/hooks/useSidebarState";
-import { useScrollDirection } from "@/hooks/useScrollDirection";
 
-// Flat services list
 const serviceItems = [
-  { name: "Web3 GTM Strategy", href: "/services" },
+  { name: "Web3 GTM Strategy", href: "/services/gtm" },
   { name: "Brand Identity & Web", href: "/services/branding" },
   { name: "SEO & Paid Ads", href: "/services/seo-ads" },
   { name: "Influencer & KOL", href: "/services/influencer" },
@@ -26,275 +24,354 @@ const brandConfig = {
   email: brand.email,
   telegram: brand.telegramLink,
   linkedin: brand.linkedin,
-  office: brand.address
+  office: brand.address,
 };
 
-const navLinks = navigation.links.map(link => ({
-  to: link.href,
-  label: link.name
-}));
+// Desktop nav links (subset for top bar)
+const desktopLinks = [
+  { name: "Services", href: "/services/gtm", hasDropdown: true },
+  { name: "Projects", href: "/projects" },
+  { name: "Blog", href: "/blog" },
+  { name: "K-Leaderboard", href: "/k-leaderboard" },
+  { name: "Careers", href: "/jobs" },
+];
+
+const mobileLinks = navigation.links;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [servicesDropdown, setServicesDropdown] = useState(false);
+  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
-  const { isCollapsed } = useSidebarState();
-  const { isVisible: isNavVisible } = useScrollDirection({ threshold: 10 });
-
-  // Hide on admin pages
-  const isAdminPage = location.pathname.startsWith('/ium-admin');
+  const isAdminPage = location.pathname.startsWith("/ium-admin");
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  // Scroll progress tracking
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setServicesOpen(false);
+    setServicesDropdown(false);
+  }, [location.pathname]);
+
+  // Scroll detection for background
   useEffect(() => {
     const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      setIsScrolled(window.scrollY > 40);
     };
-
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (isAdminPage) {
-    return null;
-  }
+  // Lock body scroll when menu open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
-  const mobileNavLayer = (
+  if (isAdminPage) return null;
+
+  const handleDropdownEnter = () => {
+    if (dropdownTimeout.current) clearTimeout(dropdownTimeout.current);
+    setServicesDropdown(true);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setServicesDropdown(false), 150);
+  };
+
+  const navContent = (
     <>
-      {/* Mobile Top Navigation Bar */}
-      <nav 
-        className={`fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(0.75rem,env(safe-area-inset-top))] sm:left-[max(0.75rem,env(safe-area-inset-left))] sm:right-[max(0.75rem,env(safe-area-inset-right))] z-[60] lg:hidden transition-transform duration-300 ease-out ${
-          isNavVisible || isMenuOpen ? 'translate-y-0' : '-translate-y-[calc(100%+1rem)]'
+      {/* ═══ Desktop + Mobile Top Bar ═══ */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-[999] transition-all duration-500 ease-[cubic-bezier(0.33,1,0.68,1)] ${
+          isScrolled
+            ? "bg-black/80 backdrop-blur-xl border-b border-white/[0.06]"
+            : "bg-transparent"
         }`}
       >
-        <div className="relative bg-background/95 backdrop-blur-xl border border-border/50 rounded-xl shadow-lg overflow-hidden">
-          <div className="px-3 py-2 flex items-center justify-between">
+        <div className="w-full px-5 sm:px-6 lg:px-10">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-1.5">
-              <img src={logoImage} alt="ium Labs" className="w-6 h-6 rounded-md object-contain" />
-              <span className="text-sm font-semibold text-foreground">{brandConfig.name}</span>
+            <Link to="/" className="flex items-center gap-2.5 shrink-0">
+              <img
+                src={logoImage}
+                alt="ium Labs"
+                className="w-7 h-7 lg:w-8 lg:h-8 rounded-lg object-contain"
+              />
+              <span className="text-sm lg:text-base font-semibold text-white">
+                {brandConfig.name}
+              </span>
             </Link>
 
-            {/* Hamburger Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="p-1.5 rounded-lg hover:bg-secondary/60 transition-colors"
-              aria-label="Open menu"
-            >
-              <Menu className="w-5 h-5 text-foreground" />
-            </button>
-          </div>
-          
-          {/* Scroll Progress Bar */}
-          <motion.div 
-            className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-primary via-primary/80 to-primary/60"
-            initial={{ width: 0 }}
-            animate={{ width: `${scrollProgress}%` }}
-            transition={{ duration: 0.1, ease: "easeOut" }}
-          />
-        </div>
-      </nav>
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+              {desktopLinks.map((link) => {
+                const isActive =
+                  location.pathname === link.href ||
+                  (link.hasDropdown && location.pathname.startsWith("/services"));
 
-      {/* Backdrop Overlay - transparent to show original page */}
-      <div
-        className={`fixed inset-0 z-[100] bg-black/30 transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      />
+                if (link.hasDropdown) {
+                  return (
+                    <div
+                      key={link.name}
+                      className="relative"
+                      onMouseEnter={handleDropdownEnter}
+                      onMouseLeave={handleDropdownLeave}
+                    >
+                      <Link
+                        to={link.href}
+                        className={`flex items-center gap-1 px-4 py-2 rounded-full text-sm transition-colors duration-200 ${
+                          isActive
+                            ? "text-white"
+                            : "text-white/50 hover:text-white/80"
+                        }`}
+                      >
+                        {link.name}
+                        <ChevronDown
+                          className={`w-3 h-3 transition-transform duration-200 ${
+                            servicesDropdown ? "rotate-180" : ""
+                          }`}
+                        />
+                      </Link>
 
-      {/* Top Panel Menu - slides from top, 60% height */}
-      <div
-        className={`fixed top-0 left-0 right-0 h-[60vh] z-[101] bg-background transition-all duration-300 ease-out rounded-b-2xl shadow-2xl ${
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
-      >
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+                      {/* Dropdown */}
+                      <AnimatePresence>
+                        {servicesDropdown && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 8 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 8 }}
+                            transition={{ duration: 0.2, ease: [0.33, 1, 0.68, 1] }}
+                            className="absolute top-full left-0 mt-2 w-64 py-2 bg-[#111111] border border-white/[0.08] rounded-2xl shadow-2xl shadow-black/40"
+                            onMouseEnter={handleDropdownEnter}
+                            onMouseLeave={handleDropdownLeave}
+                          >
+                            {serviceItems.map((item) => (
+                              <Link
+                                key={item.href}
+                                to={item.href}
+                                className="block px-4 py-2.5 text-sm text-white/50 hover:text-white hover:bg-white/[0.04] transition-colors duration-150"
+                              >
+                                {item.name}
+                              </Link>
+                            ))}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                }
 
-        <div className="h-full flex flex-col relative z-10">
-          {/* Header */}
-          <div className="flex-shrink-0 container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-            <div className="flex items-center justify-between">
-              <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <img src={logoImage} alt="ium Labs Logo" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain" />
-                <span className="text-base sm:text-lg font-semibold text-foreground">{brandConfig.name}</span>
-              </Link>
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className={`px-4 py-2 rounded-full text-sm transition-colors duration-200 ${
+                      isActive
+                        ? "text-white"
+                        : "text-white/50 hover:text-white/80"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </nav>
 
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              {/* Desktop CTA */}
+              <CalendlyButton className="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 bg-white text-black text-sm font-medium rounded-full hover:bg-white/90 transition-all duration-200">
+                Contact Us
+              </CalendlyButton>
+
+              {/* Mobile hamburger */}
               <button
-                onClick={() => setIsMenuOpen(false)}
-                className="group flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
+                onClick={() => setIsMenuOpen(true)}
+                className="lg:hidden p-2 rounded-full hover:bg-white/[0.06] transition-colors"
+                aria-label="Open menu"
               >
-                <span>close</span>
-                <div className="relative w-5 h-5 flex items-center justify-center">
-                  <span className="absolute w-4 h-0.5 bg-current rotate-45 transition-transform duration-300 group-hover:rotate-[135deg]" />
-                  <span className="absolute w-4 h-0.5 bg-current -rotate-45 transition-transform duration-300 group-hover:rotate-[45deg]" />
-                </div>
+                <Menu className="w-5 h-5 text-white" />
               </button>
             </div>
           </div>
+        </div>
+      </header>
 
-          {/* Content - scrollable on mobile */}
-          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-y-auto overflow-x-hidden">
-            <div className="min-h-full grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 content-start md:content-center">
-              {/* Navigation Links */}
-              <div className="flex flex-col justify-center">
-                <span
-                  className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "200ms" : "0ms" }}
-                >
-                  Menu
-                </span>
-                <nav className="space-y-1 sm:space-y-1.5 md:space-y-2" aria-label="Main navigation">
-                  {navLinks.map((link, index) => {
-                    // Services with accordion
-                    if (link.label === 'Services') {
-                      return (
-                        <div key={link.to}>
-                          <button
-                            onClick={() => setServicesOpen(!servicesOpen)}
-                            className={`w-full flex items-center justify-between text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[36px] sm:min-h-[40px] md:min-h-[48px] ${
-                              isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                            }`}
-                            style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
-                          >
-                            <span>{link.label}</span>
-                            <motion.div
-                              animate={{ rotate: servicesOpen ? 180 : 0 }}
-                              transition={{ duration: 0.2 }}
+      {/* ═══ Mobile Full-Screen Menu ═══ */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-[9998] bg-black/60 backdrop-blur-sm lg:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+
+            {/* Panel — slides from top */}
+            <motion.div
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ duration: 0.5, ease: [0.33, 1, 0.68, 1] }}
+              className="fixed inset-0 z-[9999] bg-black lg:hidden overflow-y-auto"
+            >
+              <div className="min-h-full flex flex-col px-6 sm:px-8">
+                {/* Header */}
+                <div className="flex items-center justify-between h-14 sm:h-16 shrink-0">
+                  <Link
+                    to="/"
+                    className="flex items-center gap-2.5"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <img
+                      src={logoImage}
+                      alt="ium Labs"
+                      className="w-7 h-7 rounded-lg object-contain"
+                    />
+                    <span className="text-sm font-semibold text-white">
+                      {brandConfig.name}
+                    </span>
+                  </Link>
+                  <button
+                    onClick={() => setIsMenuOpen(false)}
+                    className="p-2 rounded-full hover:bg-white/[0.06] transition-colors"
+                  >
+                    <X className="w-5 h-5 text-white" />
+                  </button>
+                </div>
+
+                {/* Navigation */}
+                <nav className="flex-1 flex flex-col justify-center py-8 -mt-10">
+                  <div className="space-y-1">
+                    {mobileLinks.map((link, index) => {
+                      if (link.name === "Services") {
+                        return (
+                          <div key={link.href}>
+                            <button
+                              onClick={() => setServicesOpen(!servicesOpen)}
+                              className="w-full flex items-center justify-between py-3"
                             >
-                              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
-                            </motion.div>
-                          </button>
-                          
-                          {/* Services Submenu */}
-                          <AnimatePresence>
-                            {servicesOpen && (
-                              <motion.div
-                                className="overflow-hidden mt-2 ml-2 pl-3 border-l border-border/30"
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3, ease: "easeOut" }}
-                              >
-                                <div className="space-y-0.5 py-1">
-                                  {serviceItems.map((item, subIndex) => (
-                                    <motion.div
-                                      key={item.href}
-                                      initial={{ opacity: 0, x: -10 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ duration: 0.2, delay: subIndex * 0.03 }}
-                                    >
+                              <span className="text-3xl sm:text-4xl font-bold text-white">
+                                {link.name}
+                              </span>
+                              <ChevronDown
+                                className={`w-6 h-6 text-white/40 transition-transform duration-300 ${
+                                  servicesOpen ? "rotate-180" : ""
+                                }`}
+                              />
+                            </button>
+                            <AnimatePresence>
+                              {servicesOpen && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  transition={{ duration: 0.3 }}
+                                  className="overflow-hidden ml-1 pl-4 border-l border-white/[0.08]"
+                                >
+                                  <div className="space-y-1 py-2">
+                                    {serviceItems.map((item) => (
                                       <Link
+                                        key={item.href}
                                         to={item.href}
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="block text-xs sm:text-sm text-muted-foreground hover:text-primary transition-colors duration-200 py-1"
+                                        className="block py-2 text-base text-white/40 hover:text-white transition-colors"
                                       >
                                         {item.name}
                                       </Link>
-                                    </motion.div>
-                                  ))}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      );
-                    }
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        );
+                      }
 
-                    return (
-                      <div key={link.to}>
+                      return (
                         <Link
-                          to={link.to}
+                          key={link.href}
+                          to={link.href}
                           onClick={() => setIsMenuOpen(false)}
-                          className={`block text-base sm:text-lg md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[36px] sm:min-h-[40px] md:min-h-[48px] flex items-center ${
-                            isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                          }`}
-                          style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
+                          className="block py-3 text-3xl sm:text-4xl font-bold text-white hover:text-white/70 transition-colors"
                         >
-                          {link.label}
+                          {link.name}
                         </Link>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </nav>
-              </div>
 
-              {/* Contact Info - Compact Layout */}
-              <div className="flex flex-col justify-center space-y-2">
-                <span
-                  className={`text-muted-foreground text-[10px] uppercase tracking-widest mb-1 block transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "400ms" : "0ms" }}
-                >
-                  Connect
-                </span>
-
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-                  <a
-                    href={brandConfig.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-2 text-xs sm:text-sm text-foreground hover:text-primary transition-all duration-300 ${
-                      isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                    }`}
-                    style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
-                  >
-                    <Send className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span>@iumlabs</span>
-                  </a>
-
-                  <a
-                    href={brandConfig.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-2 text-xs sm:text-sm text-foreground hover:text-primary transition-all duration-300 ${
-                      isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                    }`}
-                    style={{ transitionDelay: isMenuOpen ? "550ms" : "0ms" }}
-                  >
-                    <Linkedin className="w-3.5 h-3.5 text-muted-foreground" />
-                    <span>LinkedIn</span>
-                  </a>
-                </div>
-
-                <div
-                  className={`flex items-center gap-2 text-[10px] sm:text-xs text-muted-foreground pt-1 transition-all duration-300 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
-                >
-                  <MapPin className="w-3 h-3 flex-shrink-0" />
-                  <span>{brandConfig.office}</span>
+                {/* Bottom info */}
+                <div className="shrink-0 py-8 border-t border-white/[0.06] space-y-4">
+                  <div className="flex flex-wrap gap-5">
+                    <a
+                      href={brandConfig.telegram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      <Send className="w-4 h-4" />
+                      Telegram
+                    </a>
+                    <a
+                      href={brandConfig.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                      LinkedIn
+                    </a>
+                    {brandConfig.email && (
+                      <a
+                        href={`mailto:${brandConfig.email}`}
+                        className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors"
+                      >
+                        <Mail className="w-4 h-4" />
+                        Email
+                      </a>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-2 text-xs text-white/20">
+                    <MapPin className="w-3 h-3 shrink-0" />
+                    <span>{brandConfig.office}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      <LiveChatModal
+        isOpen={isLiveChatOpen}
+        onClose={() => setIsLiveChatOpen(false)}
+      />
     </>
   );
 
-  return (
-    <>
-      {isMounted ? createPortal(mobileNavLayer, document.body) : null}
-
-      {/* Live Chat Modal */}
-      <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
-    </>
-  );
+  return <>{isMounted ? createPortal(navContent, document.body) : null}</>;
 };
+
 export default Navbar;
