@@ -193,12 +193,12 @@ const telegramChannels = [{
 }];
 const CommunityService = () => {
   usePageMeta({
-    title: "Web3 Community Growth & Discord/Telegram Management Korea | ium Labs",
-    description: "Build thriving crypto communities in Korea. 24/7 moderation, AI automation, and engagement strategies for Discord, Telegram, and KakaoTalk.",
+    title: "Korea Web3 Community Management & Crypto Growth Agency",
+    description: "Build thriving crypto communities in Korea. 24/7 Discord, Telegram & KakaoTalk management by Korea's leading Web3 community growth agency.",
     path: "/services/community",
     canonicalPath: "/services/community",
     image: "/og-image.png",
-    keywords: ["Discord Management Korea", "Telegram Community Web3", "KakaoTalk Crypto", "Community Building Korea", "Web3 Community Growth"]
+    keywords: ["Korea Web3", "Korea Crypto", "Korea Web3 Marketing", "Korea Crypto Agency", "Discord Management Korea", "Telegram Community Web3", "KakaoTalk Crypto"]
   });
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [typingIndicator, setTypingIndicator] = useState(false);

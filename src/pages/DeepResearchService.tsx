@@ -564,11 +564,11 @@ const distributionChannels = [{
 const DeepResearchService = () => {
   usePageMeta({
     canonicalPath: "/services/deep-research",
-    title: "On-chain Data Intelligence & Market Research Korea | ium Labs",
-    description: "Deep dive into Korean crypto trends with our proprietary LLM-based 'ium K-Hype Intelligence Engine'. Data-backed decision making for Web3.",
+    title: "Korea Crypto Research & Web3 Market Intelligence",
+    description: "Deep dive into Korean crypto trends with our proprietary AI-powered intelligence engine. Korea's leading Web3 research agency for data-backed market entry decisions.",
     path: "/services/deep-research",
     image: "/og-image.png",
-    keywords: ["On-chain Analysis Korea", "Market Intelligence", "Crypto Trend Report", "LLM Data Engine", "Korean Crypto Research"]
+    keywords: ["Korea Web3", "Korea Crypto", "Korea Crypto Agency", "Korean Crypto Research", "Web3 Market Intelligence Korea", "On-chain Analysis Korea"]
   });
 
   const [activeChannel, setActiveChannel] = useState(0);

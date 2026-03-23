@@ -2040,13 +2040,13 @@ const CTASection = () => {
 // ============================================
 const GTMService = () => {
   usePageMeta({
-    title: "Web3 Community Growth & KOL Marketing in Korea",
-    description: "Maximize your project's visibility with Korea's top crypto influencers and community managers. Specialized in Telegram, KakaoTalk & Twitter engagement.",
+    title: "Korea Web3 GTM Strategy & Crypto Go-To-Market Agency",
+    description: "Full-stack Korea Web3 GTM services for global crypto projects. Data-driven market entry strategy, KOL marketing, community growth, and CEX listing support in Korea.",
     path: "/services",
     canonicalPath: "/services/gtm",
     image: "/og-image.png",
     suffix: "ium Labs",
-    keywords: ["Community Growth Korea", "KOL Marketing", "User Acquisition Web3", "CEX Listing Support Korea", "Korea GTM Strategy"]
+    keywords: ["Korea Web3", "Korea Crypto", "Korea Web3 Marketing", "Korea Crypto Agency", "Korea GTM Strategy", "Web3 Market Entry Korea", "CEX Listing Korea"]
   });
   return <>
       <ServiceSchema name="Korea Web3 GTM Strategy & Marketing Services" description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." url="/services" provider="ium Labs" areaServed="South Korea" serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]} />

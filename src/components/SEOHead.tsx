@@ -45,14 +45,15 @@ const SEOHead = ({
   
   // Default keywords for the site
   const defaultKeywords = [
+    'Korea Web3',
+    'Korea Crypto',
     'Korea Web3 Marketing',
+    'Korea Crypto Agency',
     'Korean Crypto Marketing',
     'Web3 GTM Korea',
     'Blockchain Marketing Korea',
-    'Crypto Marketing Agency',
     'Korean Market Entry',
-    'Web3 Research',
-    'Blockchain Intelligence',
+    'Web3 Marketing Agency Korea',
   ];
   
   const allKeywords = [...new Set([...keywords, ...defaultKeywords])];

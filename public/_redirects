@@ -19,5 +19,8 @@
 /projects/zkpass  /projects  301
 /projects/story-protocol  /projects  301
 
+# 301 Redirect for legacy service routes (prevent Soft 404)
+/services/social-media  /services/community  301
+
 # SPA fallback
 /*  /index.html  200
