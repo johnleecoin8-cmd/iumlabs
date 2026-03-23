@@ -94,10 +94,11 @@ const isTrending = (sparkline: number[] | null): boolean => {
 
 const KInfluenceGrid = () => {
   usePageMeta({
-    title: "K-Leaderboard | Korean Crypto Mindshare Rankings",
-    description: "Real-time Web3 mindshare rankings from Korean crypto communities. Track trending projects across X, Telegram, Naver, and KakaoTalk. Powered by Ium Labs.",
+    title: "K-Leaderboard | Korea Crypto & Web3 Mindshare Rankings",
+    description: "Real-time Korea Web3 and crypto mindshare rankings. Track trending projects across Korean communities on X, Telegram, Naver, and KakaoTalk.",
     path: "/k-leaderboard",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Korea Web3", "Korea Crypto", "Korea Crypto Agency", "Korean Crypto Rankings", "Web3 Mindshare Korea"]
   });
   
   

@@ -291,12 +291,12 @@ const InfluencerService = () => {
   const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
   usePageMeta({
-    title: "Korea's Elite KOL Network & Web3 Influencer Marketing | ium Labs",
-    description: "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Data-driven influencer campaigns for DeFi, GameFi, and L2 projects.",
+    title: "Korea Crypto KOL & Web3 Influencer Marketing Agency",
+    description: "Access 70+ elite Korean crypto KOLs with 15M+ total reach. Korea's top Web3 influencer marketing agency for DeFi, GameFi, and L2 projects.",
     path: "/services/influencer",
     canonicalPath: "/services/influencer",
     image: "/og-image.png",
-    keywords: ["Korean KOL Network", "Crypto Influencer Korea", "Web3 KOL Marketing", "YouTube Crypto Korea", "KOL Marketing Korea"]
+    keywords: ["Korea Web3", "Korea Crypto", "Korea Crypto Agency", "Korean KOL Network", "Crypto Influencer Korea", "Web3 KOL Marketing Korea"]
   });
 
   // Sound wave animation - DISABLED on mobile for performance
