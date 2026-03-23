@@ -1,20 +1,17 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, TrendingUp, Star } from "lucide-react";
+import { Clock, ArrowRight, TrendingUp, Star, ArrowUpRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ContactFormSection from "@/components/ContactFormSection";
-
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import ResearchHeroSection from "@/components/ResearchHeroSection";
 import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useQuery } from "@tanstack/react-query";
-const categories = ["All", "Market Research", "Strategy", "DeFi", "Marketing", "Technology", "Industry"];
+import { Input } from "@/components/ui/input";
 
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
@@ -24,70 +21,82 @@ const calculateReadTime = (content: string | null): string => {
   const minutes = Math.ceil(wordCount / wordsPerMinute);
   return `${minutes} min read`;
 };
+
 const Research = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [scrollY, setScrollY] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const postsPerPage = 6;
+  const postsPerPage = 9;
 
   // Fetch from DB only
-  const {
-    data: dbPosts,
-    isLoading
-  } = useQuery({
-    queryKey: ['research-posts'],
+  const { data: dbPosts, isLoading } = useQuery({
+    queryKey: ["research-posts"],
     queryFn: async () => {
-      const {
-        data,
-        error
-      } = await supabase.from('research_posts').select('*').eq('is_published', true).order('display_order', {
-        ascending: true
-      });
+      const { data, error } = await supabase
+        .from("research_posts")
+        .select("*")
+        .eq("is_published", true)
+        .order("display_order", { ascending: true });
       if (error) throw error;
       return data;
-    }
+    },
   });
 
   // Transform DB data to display format
-  const posts = (dbPosts || []).map(post => ({
+  const posts = (dbPosts || []).map((post) => ({
     id: post.id,
     slug: post.slug,
     title: post.title,
-    image: post.image || '',
-    date: post.date || new Date(post.created_at || '').toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    }),
+    image: post.image || "",
+    date:
+      post.date ||
+      new Date(post.created_at || "").toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      }),
     readTime: post.read_time || calculateReadTime(post.content),
-    category: post.category || 'Blog',
-    author: post.author || 'Ium Labs',
-    authorRole: post.author_role || 'Ium Labs Team',
-    excerpt: post.excerpt || (post.content ? post.content.substring(0, 150) + '...' : ''),
+    category: post.category || "Blog",
+    author: post.author || "Ium Labs",
+    authorRole: post.author_role || "Ium Labs Team",
+    excerpt:
+      post.excerpt || (post.content ? post.content.substring(0, 150) + "..." : ""),
     tags: post.tags || [],
-    content: post.content || '',
-    isFeatured: (post as any).is_featured || false
+    content: post.content || "",
+    isFeatured: (post as any).is_featured || false,
   }));
 
-  // Get featured post (is_featured: true, or most recent if none featured)
-  const featuredPost = posts.find(p => p.isFeatured) || posts[0];
+  // Get featured post
+  const featuredPost = posts.find((p) => p.isFeatured) || posts[0];
+
+  // Reset page when filters change
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, {
-      passive: true
-    });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  const filteredPosts = posts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) || post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
+
+  const filteredPosts = posts.filter((post) => {
+    const matchesSearch =
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
+    const matchesCategory =
+      selectedCategory === "All" || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
-  const currentPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+
+  // For grid, exclude featured post on first page with no filters
+  const isDefaultView = currentPage === 1 && selectedCategory === "All" && !searchQuery;
+  const gridPosts = isDefaultView
+    ? filteredPosts.filter((p) => p.id !== featuredPost?.id)
+    : filteredPosts;
+
+  const totalPages = Math.ceil(gridPosts.length / postsPerPage);
+  const currentPosts = gridPosts.slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  );
+
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newsletterEmail) {
@@ -96,11 +105,9 @@ const Research = () => {
     }
     setIsSubscribing(true);
     try {
-      const {
-        error
-      } = await supabase.from("newsletter_subscribers").insert({
-        email: newsletterEmail
-      });
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert({ email: newsletterEmail });
       if (error) {
         if (error.code === "23505") {
           toast.error("This email is already subscribed!");
@@ -117,237 +124,279 @@ const Research = () => {
       setIsSubscribing(false);
     }
   };
-  return <div className="min-h-screen bg-[#0A0A0A]">
-      <SEOHead title="Korea Crypto & Web3 Blog | Market Insights by ium Labs" description="Data-driven Korea crypto and Web3 insights. Ecosystem analysis, market intelligence, and strategic research for blockchain projects entering the Korean market." path="/blog" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Korean Crypto Blog', 'Web3 Market Insights Korea']} />
+
+  return (
+    <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Korea Crypto & Web3 Blog | Market Insights by ium Labs"
+        description="Data-driven Korea crypto and Web3 insights. Ecosystem analysis, market intelligence, and strategic research for blockchain projects entering the Korean market."
+        path="/blog"
+        keywords={[
+          "Korea Web3",
+          "Korea Crypto",
+          "Korea Web3 Marketing",
+          "Korea Crypto Agency",
+          "Korean Crypto Blog",
+          "Web3 Market Insights Korea",
+        ]}
+      />
       <Navbar />
-      
-      {/* Hero Section - Homepage Style */}
+
+      {/* Hero with integrated search & filters */}
+      <ResearchHeroSection
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+        totalResults={filteredPosts.length}
+      />
+
       <main className="bg-[#0A0A0A]">
-        <ResearchHeroSection />
-      </main>
-
-      {/* Filter Section */}
-      
-
-      {/* 02 - Featured Article Section */}
-      {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost && <section className="bg-[#121212] border-t border-white/10" id="featured">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
-            <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-              <h2 className="text-base sm:text-lg md:text-xl font-medium text-white flex items-center gap-2">
-                Featured
-                {featuredPost.isFeatured && <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-500 fill-yellow-500" />}
-              </h2>
-            </div>
-            <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
-              Latest Blog
-            </span>
-          </div>
-          
-          {/* Featured Content */}
-          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 sm:py-12 md:py-16">
-            <Link to={`/blog/${featuredPost.slug}`} className="group block active:scale-[0.99]">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 items-center">
-                <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
-                  {featuredPost.image ? <img src={featuredPost.image} alt={featuredPost.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <TrendingUp className="w-12 h-12 sm:w-16 sm:h-16 text-primary/40" />
-                    </div>}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300">
-                    <span className="px-2.5 sm:px-3 py-1 bg-primary text-primary-foreground rounded-full text-xs sm:text-sm font-medium">
-                      Read Article
-                    </span>
-                  </div>
+        {/* Featured Article - only on default view */}
+        {isDefaultView && featuredPost && (
+          <section className="container mx-auto max-w-7xl px-4 md:px-8 pt-10 sm:pt-14 md:pt-16">
+            <Link to={`/blog/${featuredPost.slug}`} className="group block">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500">
+                {/* Image */}
+                <div className="aspect-[2/1] sm:aspect-[2.5/1] relative overflow-hidden">
+                  {featuredPost.image ? (
+                    <img
+                      src={featuredPost.image}
+                      alt={featuredPost.title}
+                      loading="eager"
+                      className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <TrendingUp className="w-16 h-16 text-primary/30" />
+                    </div>
+                  )}
+                  {/* Gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
                 </div>
-                <div>
-                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                    {featuredPost.category && <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-primary/10 text-primary rounded-full text-[10px] sm:text-caption border border-primary/20">
+
+                {/* Content overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 md:p-10 lg:p-12">
+                  <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                    <span className="flex items-center gap-1.5 px-2.5 py-1 bg-primary/20 backdrop-blur-sm text-primary rounded-full text-[11px] sm:text-xs font-medium border border-primary/20">
+                      <Star className="w-3 h-3 fill-current" />
+                      Featured
+                    </span>
+                    {featuredPost.category && (
+                      <span className="px-2.5 py-1 bg-white/10 backdrop-blur-sm text-white/80 rounded-full text-[11px] sm:text-xs">
                         {featuredPost.category}
-                      </span>}
-                    <span className="text-white/40 text-[10px] sm:text-caption flex items-center gap-1 sm:gap-1.5">
-                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
+                      </span>
+                    )}
+                    <span className="text-white/40 text-[11px] sm:text-xs flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <h2 className="text-xl sm:text-2xl md:text-display-md text-white leading-tight mb-3 sm:mb-4 group-hover:text-primary/90 transition-colors duration-300">
+
+                  <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-white leading-tight mb-2 sm:mb-3 max-w-3xl group-hover:text-primary/90 transition-colors duration-300">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-sm sm:text-body-lg text-white/60 mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
+
+                  <p className="text-sm sm:text-base text-white/50 line-clamp-2 max-w-2xl mb-4 sm:mb-5 hidden sm:block">
                     {featuredPost.excerpt}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 sm:gap-3">
-                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/20 flex items-center justify-center text-[10px] sm:text-caption font-medium text-primary">
-                        {featuredPost.author.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <p className="text-xs sm:text-body-sm text-white font-medium">{featuredPost.author}</p>
-                        <p className="text-[10px] sm:text-label text-white/40">{featuredPost.date}</p>
-                      </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-[10px] sm:text-xs font-medium text-white/80">
+                      {featuredPost.author
+                        .split(" ")
+                        .map((n) => n[0])
+                        .join("")}
                     </div>
-                    <span className="text-primary flex items-center gap-1.5 sm:gap-2 group-hover:gap-3 transition-all text-xs sm:text-body-sm font-medium">
-                      Read More <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    <div className="flex items-center gap-2 text-xs text-white/40">
+                      <span className="text-white/60">{featuredPost.author}</span>
+                      <span>·</span>
+                      <span>{featuredPost.date}</span>
+                    </div>
+                    <span className="ml-auto text-primary flex items-center gap-1.5 text-xs sm:text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-2 group-hover:translate-x-0">
+                      Read <ArrowUpRight className="w-3.5 h-3.5" />
                     </span>
                   </div>
                 </div>
               </div>
             </Link>
-          </div>
-        </section>}
+          </section>
+        )}
 
-      {/* 03 - Article Grid Section */}
-      <section className="bg-[#0F0F0F] border-t border-white/10" id="articles">
-        {/* Section Header */}
-        <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
-              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "03" : "02"}
-            </span>
-            <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">All Articles</h2>
-          </div>
-          <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
-            {filteredPosts.length} Results
-          </span>
-        </div>
-        
-        {/* Article Grid Content */}
-        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 sm:py-12 md:py-16">
-          {isLoading ? <div className="flex items-center justify-center py-12 sm:py-20">
-              <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-primary"></div>
-            </div> : currentPosts.length === 0 ? <div className="text-center py-12 sm:py-20">
-              <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-white/20 mx-auto mb-3 sm:mb-4" />
-              <h3 className="text-lg sm:text-xl font-medium text-white mb-2">No articles yet</h3>
-              <p className="text-sm sm:text-base text-white/60">Check back soon for our latest research and insights.</p>
-            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-              {currentPosts.map(post => <div key={post.id}>
-                  <Link to={`/blog/${post.slug}`} className="group block active:scale-[0.98]">
-                    <div className="relative hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform duration-300">
-                      {/* Image */}
-                      <div className="aspect-[16/10] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-2 sm:mb-3 md:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
-                        {post.image ? <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary/40" />
-                          </div>}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 flex items-center justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0">
-                          <span className="text-white text-[10px] sm:text-xs md:text-sm font-medium">Read</span>
-                          <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-primary" />
+        {/* Article Grid */}
+        <section className="container mx-auto max-w-7xl px-4 md:px-8 py-10 sm:py-14 md:py-16">
+          {isLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary" />
+            </div>
+          ) : currentPosts.length === 0 ? (
+            <div className="text-center py-20">
+              <TrendingUp className="w-10 h-10 text-white/15 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-white/80 mb-2">No articles found</h3>
+              <p className="text-sm text-white/40">
+                {searchQuery || selectedCategory !== "All"
+                  ? "Try adjusting your search or filters."
+                  : "Check back soon for our latest research and insights."}
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
+              {currentPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="group block"
+                >
+                  <article className="h-full">
+                    {/* Thumbnail */}
+                    <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 border border-white/[0.06] group-hover:border-white/[0.12] transition-all duration-400 relative">
+                      {post.image ? (
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover group-hover:scale-[1.05] transition-transform duration-500"
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-white/[0.04] to-white/[0.01] flex items-center justify-center">
+                          <TrendingUp className="w-8 h-8 text-white/15" />
                         </div>
-                      </div>
-                      
-                      {/* Meta */}
-                      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 mb-1 sm:mb-2 md:mb-3">
-                        {post.category && <span className="px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-[8px] sm:text-[10px] md:text-label border border-primary/20 truncate max-w-[60px] sm:max-w-none">
-                            {post.category}
-                          </span>}
-                        <span className="text-white/40 text-[8px] sm:text-[10px] md:text-label flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
-                          <Clock className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3" />
-                          {post.readTime}
-                        </span>
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-xs sm:text-sm md:text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-1 sm:mb-2 md:mb-3 line-clamp-2">
-                        {post.title}
-                      </h3>
-                      
-                      {/* Author & Date */}
-                      <div className="flex items-center justify-between text-[8px] sm:text-[10px] md:text-label text-white/40">
-                        <span className="truncate max-w-[50%]">{post.author}</span>
-                        <span className="whitespace-nowrap">{post.date}</span>
-                      </div>
+                      )}
                     </div>
-                  </Link>
-                </div>)}
-            </div>}
+
+                    {/* Meta */}
+                    <div className="flex items-center gap-2.5 mb-2.5">
+                      {post.category && (
+                        <span className="text-[11px] text-primary/80 font-medium">
+                          {post.category}
+                        </span>
+                      )}
+                      <span className="text-[11px] text-white/30 flex items-center gap-1">
+                        <Clock className="w-2.5 h-2.5" />
+                        {post.readTime}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-sm sm:text-base font-medium text-white leading-snug group-hover:text-primary/90 transition-colors duration-300 mb-2 line-clamp-2">
+                      {post.title}
+                    </h3>
+
+                    {/* Excerpt */}
+                    <p className="text-xs sm:text-sm text-white/40 line-clamp-2 mb-3 leading-relaxed">
+                      {post.excerpt}
+                    </p>
+
+                    {/* Author & Date */}
+                    <div className="flex items-center gap-2 text-[11px] text-white/30">
+                      <span>{post.author}</span>
+                      <span>·</span>
+                      <span>{post.date}</span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          )}
 
           {/* Pagination */}
-          {totalPages > 1 && <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-10 sm:mt-16">
-              <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-2.5 sm:p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95 min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center">
-                <ChevronLeft className="w-4 h-4 text-white" />
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-12 sm:mt-16">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-full text-xs font-medium bg-white/[0.04] border border-white/[0.08] text-white/50 disabled:opacity-30 hover:bg-white/[0.08] transition-all"
+              >
+                Previous
               </button>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                {Array.from({
-              length: totalPages
-            }, (_, i) => i + 1).map(page => <button key={page} onClick={() => setCurrentPage(page)} className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-medium transition-all hover:scale-105 active:scale-95 ${currentPage === page ? "bg-primary text-primary-foreground" : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"}`}>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`w-8 h-8 rounded-full text-xs font-medium transition-all ${
+                      currentPage === page
+                        ? "bg-white text-black"
+                        : "text-white/40 hover:bg-white/[0.06] hover:text-white/60"
+                    }`}
+                  >
                     {page}
-                  </button>)}
+                  </button>
+                ))}
               </div>
-              <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="p-2.5 sm:p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95 min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center">
-                <ChevronRight className="w-4 h-4 text-white" />
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded-full text-xs font-medium bg-white/[0.04] border border-white/[0.08] text-white/50 disabled:opacity-30 hover:bg-white/[0.08] transition-all"
+              >
+                Next
               </button>
-            </div>}
-        </div>
-      </section>
+            </div>
+          )}
+        </section>
 
+        {/* Newsletter - Minimal */}
+        <section className="border-t border-white/[0.06]">
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16 sm:py-20">
+            <div className="max-w-xl mx-auto text-center">
+              <h2 className="text-xl sm:text-2xl font-medium text-white mb-3">
+                Stay in the loop
+              </h2>
+              <p className="text-sm text-white/40 mb-6">
+                Weekly insights on Korean Web3 markets. Join 500+ founders.
+              </p>
 
-      {/* 04 - Newsletter Section */}
-      <section className="bg-[#121212] border-t border-white/10" id="newsletter">
-        {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
-              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "04" : "03"}
-            </span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Subscribe</h2>
+              <form
+                onSubmit={handleNewsletterSubmit}
+                className="flex gap-3 max-w-sm mx-auto"
+              >
+                <Input
+                  type="email"
+                  placeholder="your@email.com"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  className="flex-1 bg-white/[0.04] border-white/[0.08] rounded-xl px-4 h-11 text-sm text-white placeholder:text-white/30 focus:border-white/20"
+                  required
+                />
+                <button
+                  type="submit"
+                  disabled={isSubscribing}
+                  className="px-5 h-11 text-xs font-medium rounded-xl bg-white text-black hover:bg-white/90 transition-all disabled:opacity-50 whitespace-nowrap"
+                >
+                  {isSubscribing ? "..." : "Subscribe"}
+                </button>
+              </form>
+            </div>
           </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
-            Weekly Insights
-          </span>
-        </div>
+        </section>
 
-        {/* Newsletter Content */}
-        <div className="container mx-auto max-w-4xl px-4 md:px-8 py-20 text-center">
-          <h2 className="text-display-md text-white mb-6">
-            Stay Ahead of the Curve
-          </h2>
-          <p className="text-body-lg text-white/60 mb-8 max-w-2xl mx-auto">
-            Get our latest research, market analysis, and strategic insights delivered directly to your inbox. Join 500+ Web3 founders staying informed.
-          </p>
-          
-          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            <Input type="email" placeholder="Enter your email" value={newsletterEmail} onChange={e => setNewsletterEmail(e.target.value)} className="flex-1 bg-white/5 border-white/10 rounded-full px-6 h-14 text-white placeholder:text-white/40 focus:border-primary/50" required />
-            <button type="submit" disabled={isSubscribing} className="group flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 h-14 text-sm font-medium rounded-full hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 disabled:opacity-50">
-              {isSubscribing ? "Subscribing..." : "Subscribe"}
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* 06 - CTA Section */}
-      <section className="bg-[#0F0F0F] border-t border-white/10" id="cta">
-        {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
-              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "06" : "05"}
-            </span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Get in Touch</h2>
+        {/* CTA - Minimal */}
+        <section className="border-t border-white/[0.06]">
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16 sm:py-20">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 max-w-3xl mx-auto">
+              <div>
+                <h2 className="text-lg sm:text-xl font-medium text-white mb-1.5">
+                  Need custom research?
+                </h2>
+                <p className="text-sm text-white/40">
+                  Tailored market analysis for your Web3 project in Korea.
+                </p>
+              </div>
+              <CalendlyButton className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.1] text-white px-6 py-3 text-sm font-medium rounded-xl hover:bg-white/[0.1] hover:border-white/[0.2] transition-all whitespace-nowrap">
+                Book a Call
+                <ArrowRight className="w-3.5 h-3.5" />
+              </CalendlyButton>
+            </div>
           </div>
-        </div>
+        </section>
+      </main>
 
-        {/* CTA Content */}
-        <div className="container mx-auto max-w-4xl px-4 md:px-8 py-20 text-center">
-          <h2 className="text-display-md text-white mb-6">
-            Need Custom Research?
-          </h2>
-          <p className="text-body-lg text-white/60 mb-8 max-w-2xl mx-auto">
-            Our research team provides tailored market analysis and strategic insights for Web3 projects looking to enter the Korean market.
-          </p>
-          
-          <CalendlyButton className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 text-sm font-medium rounded-full hover:bg-primary/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
-            Schedule a Consultation
-            <ArrowRight className="w-4 h-4" />
-          </CalendlyButton>
-        </div>
-      </section>
-
-      <ContactFormSection />
-      
       <FooterLinksSection />
       <Footer />
       <FloatingContactButton />
-    </div>;
+    </div>
+  );
 };
+
 export default Research;
