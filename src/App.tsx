@@ -53,88 +53,43 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Logo center pulse page transition
+// Simple fade page transition — story.foundation style
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
+  const [opacity, setOpacity] = useState(1);
   const isFirstMount = useRef(true);
   const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
-    // Skip animation on first mount
     if (isFirstMount.current) {
       isFirstMount.current = false;
       return;
     }
-
-    // Only animate if pathname actually changed
-    if (prevPathname.current === location.pathname) {
-      return;
-    }
+    if (prevPathname.current === location.pathname) return;
     prevPathname.current = location.pathname;
 
-    // Start transition sequence
-    setPhase('fadeOut');
-
-    const fadeOutTimer = setTimeout(() => {
-      setPhase('logo');
-    }, 200);
-
-    const logoTimer = setTimeout(() => {
+    setOpacity(0);
+    const timer = setTimeout(() => {
       setDisplayChildren(children);
-      setPhase('fadeIn');
-    }, 600);
-
-    const fadeInTimer = setTimeout(() => {
-      setPhase('idle');
-    }, 850);
-
-    return () => {
-      clearTimeout(fadeOutTimer);
-      clearTimeout(logoTimer);
-      clearTimeout(fadeInTimer);
-    };
+      setOpacity(1);
+    }, 250);
+    return () => clearTimeout(timer);
   }, [location.pathname, children]);
 
-  // Update children immediately when not transitioning
   useEffect(() => {
-    if (phase === 'idle' && children !== displayChildren) {
+    if (opacity === 1 && children !== displayChildren) {
       setDisplayChildren(children);
     }
-  }, [children, displayChildren, phase]);
+  }, [children, displayChildren, opacity]);
 
   return (
-    <>
-      {/* Logo overlay */}
-      {(phase === 'logo' || phase === 'fadeOut') && (
-        <div 
-          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
-          style={{ willChange: 'opacity' }}
-        >
-          <img 
-            src={logo} 
-            alt="ium Labs" 
-            className={`w-16 h-16 object-contain brightness-0 invert ${
-              phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
-            }`}
-            style={{ willChange: 'opacity, transform' }}
-          />
-        </div>
-      )}
-
-      {/* Page content */}
-      <div 
-        className={`transition-opacity duration-200 ease-out ${
-          phase === 'fadeOut' || phase === 'logo' 
-            ? 'opacity-0' 
-            : 'opacity-100'
-        }`}
-        style={{ willChange: 'opacity' }}
-      >
-        {displayChildren}
-      </div>
-    </>
+    <div
+      className="transition-opacity duration-300 ease-[cubic-bezier(0.33,1,0.68,1)]"
+      style={{ opacity }}
+    >
+      {displayChildren}
+    </div>
   );
 };
 
