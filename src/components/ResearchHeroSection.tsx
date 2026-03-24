@@ -21,74 +21,103 @@ const ResearchHeroSection = ({
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 200);
+    const timer = setTimeout(() => setIsVisible(true), 150);
     return () => clearTimeout(timer);
   }, []);
 
   return (
-    <div className="relative pt-28 sm:pt-32 md:pt-36 pb-8 sm:pb-12">
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent pointer-events-none" />
+    <div className="relative pt-28 sm:pt-32 md:pt-40 pb-12 sm:pb-16 overflow-hidden">
+      {/* === Background depth layers === */}
+
+      {/* Ambient glow orbs */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-600/[0.07] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-20 right-1/4 w-[400px] h-[400px] bg-cyan-500/[0.05] rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-primary/[0.06] rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Dot grid pattern */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.35]"
+        style={{
+          backgroundImage: "radial-gradient(circle at center, rgba(255,255,255,0.06) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }}
+      />
 
       <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10">
         {/* Header */}
         <div
-          className={`transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          className={`transition-all duration-700 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            <span className="text-xs text-white/50 font-mono tracking-widest uppercase">Blog</span>
+          <div className="flex items-center gap-3 mb-5">
+            <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse shadow-[0_0_12px_rgba(168,85,247,0.6)]" />
+            <span className="text-xs text-white/40 font-mono tracking-[0.2em] uppercase">Insights & Research</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-white leading-[1.1] tracking-tight mb-4 sm:mb-5">
-            Insights & Research
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-5 sm:mb-6">
+            Explore the{" "}
+            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
+              Korean Web3
+            </span>
+            <br />
+            Ecosystem
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-white/50 max-w-2xl leading-relaxed mb-8 sm:mb-10">
-            Data-driven market analysis, strategic insights, and deep dives into the Korean Web3 ecosystem.
+          <p className="text-base sm:text-lg text-white/40 max-w-xl leading-relaxed mb-10 sm:mb-12">
+            Data-driven market analysis, strategic insights, and deep dives — curated by the team building Korea's Web3 bridge.
           </p>
         </div>
 
-        {/* Search + Filter bar */}
+        {/* Search + Filter */}
         <div
-          className={`transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+          className={`transition-all duration-700 delay-300 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
         >
-          {/* Search */}
-          <div className="relative mb-5 max-w-md">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
-            <input
-              type="text"
-              placeholder="Search articles..."
-              value={searchQuery}
-              onChange={(e) => onSearchChange?.(e.target.value)}
-              className="w-full bg-white/[0.04] border border-white/10 rounded-xl pl-11 pr-4 py-3 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-white/20 focus:bg-white/[0.06] transition-all"
-            />
+          {/* Search bar with glow */}
+          <div className="relative mb-6 max-w-lg group">
+            <div className="absolute -inset-px bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-2xl blur-sm opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+            <div className="relative flex items-center bg-[#111111] border border-white/[0.08] rounded-2xl group-focus-within:border-white/[0.15] transition-all duration-300">
+              <Search className="ml-4 w-4 h-4 text-white/25 shrink-0" />
+              <input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => onSearchChange?.(e.target.value)}
+                className="w-full bg-transparent px-4 py-3.5 text-sm text-white placeholder:text-white/25 focus:outline-none"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => onSearchChange?.("")}
+                  className="mr-4 text-xs text-white/30 hover:text-white/60 transition-colors"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Categories */}
+          {/* Category pills */}
           <div className="flex items-center gap-2 flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => onCategoryChange?.(cat)}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
+                className={`relative px-4 py-2 rounded-full text-xs font-medium transition-all duration-300 ${
                   selectedCategory === cat
-                    ? "bg-white text-black"
-                    : "bg-white/[0.04] text-white/50 border border-white/[0.08] hover:bg-white/[0.08] hover:text-white/70"
+                    ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                    : "bg-white/[0.03] text-white/40 border border-white/[0.06] hover:bg-white/[0.07] hover:text-white/60 hover:border-white/[0.12]"
                 }`}
               >
                 {cat}
               </button>
             ))}
             {totalResults > 0 && (
-              <span className="text-xs text-white/30 ml-2">{totalResults} articles</span>
+              <span className="text-xs text-white/20 ml-3 font-mono">{totalResults} articles</span>
             )}
           </div>
         </div>
       </div>
 
-      {/* Bottom border */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      {/* Bottom fade line */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
     </div>
   );
 };
