@@ -247,8 +247,8 @@ const SeoulMapVisualization = () => {
 
       {/* Map Label */}
       <div className="absolute top-3 left-3 z-20 flex items-center gap-2 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm">
-        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-xs font-medium text-emerald-400">Seoul Event Map</span>
+        <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+        <span className="text-xs font-medium text-blue-400">Seoul Event Map</span>
       </div>
 
       {/* Venue Count */}
@@ -294,7 +294,7 @@ const SeoulMapVisualization = () => {
               {/* Pin icon */}
               <div 
                 className={`w-7 h-7 rounded-full flex items-center justify-center border-2 shadow-lg transition-all ${
-                  isSelected ? 'bg-emerald-500 border-white shadow-emerald-500/50' : 'bg-emerald-500/90 border-emerald-300/50'
+                  isSelected ? 'bg-blue-500 border-white shadow-blue-500/50' : 'bg-blue-500/90 border-blue-300/50'
                 }`}
               >
                 <MapPin className="w-3.5 h-3.5 text-white" />
@@ -317,13 +317,13 @@ const SeoulMapVisualization = () => {
                   initial={{ opacity: 0, y: 10, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                  className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-44 p-3 rounded-xl bg-black/95 border border-emerald-500/40 backdrop-blur-md z-30 shadow-xl"
+                  className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-44 p-3 rounded-xl bg-black/95 border border-blue-500/40 backdrop-blur-md z-30 shadow-xl"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm font-semibold text-white">{venue.name}</span>
-                    <span className="text-xs text-emerald-400">{venue.korean}</span>
+                    <span className="text-xs text-blue-400">{venue.korean}</span>
                   </div>
-                  <div className="text-[11px] text-emerald-400 mb-1">{venue.type}</div>
+                  <div className="text-[11px] text-blue-400 mb-1">{venue.type}</div>
                   <div className="text-[10px] text-white/50 mb-2">Capacity: {venue.capacity}</div>
                   <div className="pt-2 border-t border-white/10">
                     <div className="text-[9px] text-white/40 mb-1">Past Events:</div>
@@ -331,7 +331,7 @@ const SeoulMapVisualization = () => {
                       {venue.events.map(event => (
                         <span 
                           key={event}
-                          className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400"
+                          className="text-[9px] px-1.5 py-0.5 rounded-full bg-blue-500/20 text-blue-400"
                         >
                           {event}
                         </span>
@@ -339,7 +339,7 @@ const SeoulMapVisualization = () => {
                     </div>
                   </div>
                   {/* Arrow */}
-                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/95 border-l border-t border-emerald-500/40 rotate-45" />
+                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/95 border-l border-t border-blue-500/40 rotate-45" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -439,7 +439,7 @@ const OfflineEventService = () => {
                             className="flex items-center justify-between"
                           >
                             <span className="text-white/50 text-xs">{metric.label}</span>
-                            <span className="text-emerald-400 text-sm font-semibold">{metric.value}</span>
+                            <span className="text-blue-400 text-sm font-semibold">{metric.value}</span>
                           </div>
                         ))}
                       </div>

@@ -243,18 +243,18 @@ const SEOAdsService = () => {
                           onClick={() => setActivePhase(index)}
                           className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 flex-1 ${
                             isActive 
-                              ? 'bg-amber-500/[0.08] border-amber-500/30' 
+                              ? 'bg-blue-500/[0.08] border-blue-500/30' 
                               : 'bg-[#0D0D0D] border-white/[0.06] hover:border-white/[0.12]'
                           }`}
                         >
                           <div className="flex items-center gap-4">
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                              isActive ? 'bg-amber-500/20' : 'bg-white/10'
+                              isActive ? 'bg-blue-500/20' : 'bg-white/10'
                             }`}>
-                              <Icon className={`w-5 h-5 ${isActive ? 'text-amber-400' : 'text-white/60'}`} />
+                              <Icon className={`w-5 h-5 ${isActive ? 'text-blue-400' : 'text-white/60'}`} />
                             </div>
                             <div>
-                              <span className={`text-xs font-medium ${isActive ? 'text-amber-400' : 'text-white/40'}`}>
+                              <span className={`text-xs font-medium ${isActive ? 'text-blue-400' : 'text-white/40'}`}>
                                 {phase.week}
                               </span>
                               <h4 className={`font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
@@ -274,14 +274,14 @@ const SEOAdsService = () => {
                   className="bg-[#0D0D0D] border border-white/[0.06] rounded-2xl p-5 sm:p-6 md:p-8"
                 >
                   <div className="flex items-center gap-2.5 mb-5">
-                    <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                       {(() => {
                         const Icon = journeyPhases[activePhase].icon;
-                        return <Icon className="w-5 h-5 text-amber-400" />;
+                        return <Icon className="w-5 h-5 text-blue-400" />;
                       })()}
                     </div>
                     <div>
-                      <span className="text-[10px] text-amber-400 font-medium">{journeyPhases[activePhase].week}</span>
+                      <span className="text-[10px] text-blue-400 font-medium">{journeyPhases[activePhase].week}</span>
                       <h3 className="text-lg font-bold text-white">{journeyPhases[activePhase].title}</h3>
                     </div>
                   </div>
@@ -291,7 +291,7 @@ const SEOAdsService = () => {
                     <ul className="space-y-2">
                       {journeyPhases[activePhase].activities.map((activity, idx) => (
                         <li key={idx} className="flex items-start gap-3 text-white/80">
-                          <Zap className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                          <Zap className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                           <span className="text-sm">{activity}</span>
                         </li>
                       ))}
@@ -304,7 +304,7 @@ const SEOAdsService = () => {
                       {journeyPhases[activePhase].deliverables.map((deliverable, idx) => (
                         <span 
                           key={idx}
-                          className="px-3 py-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-medium rounded-lg"
+                          className="px-3 py-1.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-medium rounded-lg"
                         >
                           {deliverable}
                         </span>
@@ -321,7 +321,7 @@ const SEOAdsService = () => {
                         return (
                           <div key={idx} className="p-3 bg-white/5 rounded-lg">
                             <div className="flex items-center gap-2 mb-1">
-                              <MetricIcon className="w-4 h-4 text-amber-400" />
+                              <MetricIcon className="w-4 h-4 text-blue-400" />
                               <span className="text-xs text-white/40">{metric.label}</span>
                             </div>
                             <span className="text-lg font-bold text-white">{metric.value}</span>

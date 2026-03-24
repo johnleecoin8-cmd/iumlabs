@@ -196,7 +196,7 @@ const GlitchText = ({
     }}>
         {children}
       </motion.span>
-      <motion.span className="absolute top-0 left-0 text-cyan-400 opacity-50 z-0" style={{
+      <motion.span className="absolute top-0 left-0 text-blue-400 opacity-50 z-0" style={{
       clipPath: 'inset(50% 0 0 0)'
     }} animate={{
       x: [0, 2, -2, 0],
@@ -1109,13 +1109,13 @@ const LLMEngineVisualization = ({
     items: ['X (Twitter) Mentions', 'Telegram Buzz', 'Naver Blog & Cafe', 'Kakao Communities'],
     value: liveData.social,
     suffix: '+ signals',
-    color: 'from-purple-500/20 to-transparent',
-    borderColor: 'border-purple-500/50',
-    activeBorder: 'border-purple-500',
-    iconBg: 'bg-purple-500/20',
-    iconColor: 'text-purple-500',
-    dotColor: 'bg-purple-500',
-    barColor: 'bg-purple-500/50'
+    color: 'from-blue-500/20 to-transparent',
+    borderColor: 'border-blue-500/50',
+    activeBorder: 'border-blue-500',
+    iconBg: 'bg-blue-500/20',
+    iconColor: 'text-blue-500',
+    dotColor: 'bg-blue-500',
+    barColor: 'bg-blue-500/50'
   }, {
     id: 1,
     icon: Database,
@@ -1137,13 +1137,13 @@ const LLMEngineVisualization = ({
     items: ['Sector Dominance', 'Narrative Share', 'Relative Strength', 'Community Mindshare'],
     value: liveData.market,
     suffix: ' data points',
-    color: 'from-cyan-500/20 to-transparent',
-    borderColor: 'border-cyan-500/50',
-    activeBorder: 'border-cyan-500',
-    iconBg: 'bg-cyan-500/20',
-    iconColor: 'text-cyan-500',
-    dotColor: 'bg-cyan-500',
-    barColor: 'bg-cyan-500/50'
+    color: 'from-blue-500/20 to-transparent',
+    borderColor: 'border-blue-500/50',
+    activeBorder: 'border-blue-500',
+    iconBg: 'bg-blue-500/20',
+    iconColor: 'text-blue-500',
+    dotColor: 'bg-blue-500',
+    barColor: 'bg-blue-500/50'
   }];
   const pipelineStages = [{
     label: 'COLLECT',
@@ -1407,9 +1407,9 @@ const LLMEngineVisualization = ({
             delay: 0.6 + i * 0.1
           }}>
                 {/* Main connection line */}
-                <div className={`w-16 h-0.5 relative overflow-hidden ${i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' : i === 1 ? 'bg-gradient-to-r from-purple-500/60 to-primary/40' : 'bg-gradient-to-r from-red-500/60 to-primary/40'}`}>
+                <div className={`w-16 h-0.5 relative overflow-hidden ${i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' : i === 1 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' : 'bg-gradient-to-r from-red-500/60 to-primary/40'}`}>
                   {/* Animated particle */}
-                  <motion.div className={`absolute h-full w-3 ${i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-red-400'}`} animate={{
+                  <motion.div className={`absolute h-full w-3 ${i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-blue-400' : 'bg-red-400'}`} animate={{
                 x: ['-100%', '600%']
               }} transition={{
                 duration: 1.5,
@@ -1455,7 +1455,7 @@ const LLMEngineVisualization = ({
             }} />
 
               {/* Gradient border wrapper */}
-              <div className="relative p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-red-500">
+              <div className="relative p-[2px] bg-gradient-to-br from-blue-500 via-blue-500 to-red-500">
                 <div className="relative p-4 sm:p-8 bg-background">
                   {/* Pulsing border overlay */}
                   <motion.div className="absolute inset-0 border-2 border-transparent rounded-sm" style={{
@@ -1476,14 +1476,14 @@ const LLMEngineVisualization = ({
                   repeat: Infinity,
                   delay: 0
                 }} />
-                  <motion.div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-purple-500" animate={{
+                  <motion.div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-blue-500" animate={{
                   opacity: [0.5, 1, 0.5]
                 }} transition={{
                   duration: 1.5,
                   repeat: Infinity,
                   delay: 0.2
                 }} />
-                  <motion.div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-purple-500" animate={{
+                  <motion.div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-blue-500" animate={{
                   opacity: [0.5, 1, 0.5]
                 }} transition={{
                   duration: 1.5,
@@ -1606,7 +1606,7 @@ const LLMEngineVisualization = ({
           <div className="space-y-3 sm:space-y-4 relative z-10">
             <p className="text-[10px] sm:text-xs tracking-widest text-muted-foreground mb-2 sm:mb-4 text-center lg:text-right flex items-center gap-2 justify-center lg:justify-end">
               STRATEGIC OUTPUT
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
             </p>
             
             <motion.div initial={{
@@ -1630,7 +1630,7 @@ const LLMEngineVisualization = ({
                     <Target className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                   </div>
                   <span className="text-xs sm:text-sm font-medium text-foreground">Optimized Strategy</span>
-                  <motion.span className="ml-auto text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full" animate={{
+                  <motion.span className="ml-auto text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 bg-blue-500/20 text-blue-500 rounded-full" animate={{
                   opacity: [0.7, 1, 0.7]
                 }} transition={{
                   duration: 2,
@@ -1651,7 +1651,7 @@ const LLMEngineVisualization = ({
                   delay: 1.2 + i * 0.1
                 }} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm overflow-hidden">
                       <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 min-w-0">
-                        <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
+                        <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0 ${metric.color === 'green' ? 'text-blue-500' : metric.color === 'yellow' ? 'text-blue-500' : 'text-primary'}`} />
                         <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wide truncate">{metric.label}</span>
                       </div>
                       
@@ -1660,13 +1660,13 @@ const LLMEngineVisualization = ({
                       opacity: 0.5
                     }} animate={{
                       opacity: 1
-                    }} className={`text-lg sm:text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}>
+                    }} className={`text-lg sm:text-xl font-mono font-medium ${metric.color === 'green' ? 'text-blue-500' : metric.color === 'yellow' ? 'text-blue-500' : 'text-primary'}`}>
                           {metric.value}%
                         </motion.span>
                       </div>
                       
                       <div className="h-1 bg-muted rounded-full overflow-hidden">
-                        <motion.div className={`h-full rounded-full ${metric.color === 'green' ? 'bg-green-500' : metric.color === 'yellow' ? 'bg-yellow-500' : 'bg-primary'}`} initial={{
+                        <motion.div className={`h-full rounded-full ${metric.color === 'green' ? 'bg-blue-500' : metric.color === 'yellow' ? 'bg-blue-500' : 'bg-primary'}`} initial={{
                       width: 0
                     }} animate={isVisible ? {
                       width: `${metric.value}%`
@@ -1691,18 +1691,18 @@ const LLMEngineVisualization = ({
             y: 0
           } : {}} transition={{
             delay: 1.6
-          }} className="p-3 border border-green-500/30 bg-green-500/5">
+          }} className="p-3 border border-blue-500/30 bg-blue-500/5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <motion.div className="w-2.5 h-2.5 rounded-full bg-green-500" animate={{
+                  <motion.div className="w-2.5 h-2.5 rounded-full bg-blue-500" animate={{
                   scale: [1, 1.2, 1]
                 }} transition={{
                   duration: 2,
                   repeat: Infinity
                 }} />
-                  <span className="text-xs font-medium text-green-500">High Confidence</span>
+                  <span className="text-xs font-medium text-blue-500">High Confidence</span>
                 </div>
-                <span className="text-xs font-mono text-green-500">
+                <span className="text-xs font-mono text-blue-500">
                   {Math.floor((liveData.timing + liveData.channels + liveData.budget + liveData.volume) / 4)}%
                 </span>
               </div>

@@ -604,7 +604,7 @@ const Jobs = () => {
             }} transition={{
               delay: 0.15
             }}>
-                  <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
+                  <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
                     <DollarSign className="w-4 h-4" />
                     <span className="text-sm font-medium">{selectedPosition.salary}</span>
                   </div>
