@@ -150,7 +150,7 @@ const ResearchDetail = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A]">
+      <div className="min-h-screen bg-black">
         <Navbar />
         <div className="container mx-auto max-w-4xl px-4 py-32 text-center">
           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto" />
@@ -162,7 +162,7 @@ const ResearchDetail = () => {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-[#0A0A0A]">
+      <div className="min-h-screen bg-black">
         <Navbar />
         <div className="container mx-auto max-w-4xl px-4 py-32 text-center">
           <h1 className="text-2xl font-medium text-white mb-3">Article Not Found</h1>
@@ -177,7 +177,7 @@ const ResearchDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-black">
       <Navbar />
 
       {/* Article Header */}

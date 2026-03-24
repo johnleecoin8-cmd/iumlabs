@@ -45,14 +45,14 @@ const GlowCard = ({
     <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      className={`group/card relative rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-px overflow-hidden transition-all duration-500 hover:from-purple-500/20 hover:to-cyan-500/20 ${className}`}
+      className={`group/card relative rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] p-px overflow-hidden transition-all duration-500 hover:from-blue-500/20 hover:to-blue-400/20 ${className}`}
     >
       {/* Spotlight follow */}
       <div
         className="pointer-events-none absolute -inset-px opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"
         style={{
           background:
-            "radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(168,85,247,0.12), transparent 60%)",
+            "radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(64,128,255,0.12), transparent 60%)",
         }}
       />
       {/* Inner surface */}
@@ -163,7 +163,7 @@ const Research = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-black">
       <SEOHead
         title="Korea Crypto & Web3 Blog | Market Insights by ium Labs"
         description="Data-driven Korea crypto and Web3 insights. Ecosystem analysis, market intelligence, and strategic research for blockchain projects entering the Korean market."
@@ -187,11 +187,11 @@ const Research = () => {
         totalResults={filteredPosts.length}
       />
 
-      <main className="bg-[#0A0A0A] relative">
+      <main className="bg-black relative">
         {/* Ambient background */}
         <div className="absolute top-0 left-0 w-full h-[800px] pointer-events-none overflow-hidden">
-          <div className="absolute top-40 right-[10%] w-[500px] h-[500px] bg-purple-600/[0.04] rounded-full blur-[180px]" />
-          <div className="absolute top-[400px] left-[15%] w-[400px] h-[400px] bg-cyan-500/[0.03] rounded-full blur-[150px]" />
+          <div className="absolute top-40 right-[10%] w-[500px] h-[500px] bg-blue-500/[0.04] rounded-full blur-[180px]" />
+          <div className="absolute top-[400px] left-[15%] w-[400px] h-[400px] bg-blue-400/[0.03] rounded-full blur-[150px]" />
         </div>
 
         {/* ═══ Featured Article ═══ */}
@@ -200,7 +200,7 @@ const Research = () => {
             <Link to={`/blog/${featuredPost.slug}`} className="group block">
               <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden">
                 {/* Glow behind card */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 via-pink-500/10 to-cyan-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-blue-500/10 to-blue-400/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
 
                 <div className="relative border border-white/[0.08] rounded-2xl sm:rounded-3xl overflow-hidden group-hover:border-white/[0.15] transition-all duration-500">
                   {/* Image */}
@@ -213,8 +213,8 @@ const Research = () => {
                         className="w-full h-full object-cover group-hover:scale-[1.04] transition-transform duration-[800ms] ease-out"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-purple-900/40 to-cyan-900/20 flex items-center justify-center">
-                        <TrendingUp className="w-20 h-20 text-purple-400/20" />
+                      <div className="w-full h-full bg-gradient-to-br from-blue-900/40 to-blue-900/20 flex items-center justify-center">
+                        <TrendingUp className="w-20 h-20 text-blue-400/20" />
                       </div>
                     )}
                     {/* Multi-layer gradient overlay */}
@@ -225,7 +225,7 @@ const Research = () => {
                   {/* Content overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 md:p-10 lg:p-14">
                     <div className="flex items-center gap-3 mb-4 sm:mb-5">
-                      <span className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/20 backdrop-blur-md text-purple-300 rounded-full text-[11px] sm:text-xs font-semibold border border-purple-500/20 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+                      <span className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-500/20 backdrop-blur-md text-blue-300 rounded-full text-[11px] sm:text-xs font-semibold border border-blue-500/20 shadow-[0_0_15px_rgba(64,128,255,0.15)]">
                         <Star className="w-3 h-3 fill-current" />
                         Featured
                       </span>
@@ -236,7 +236,7 @@ const Research = () => {
                       )}
                     </div>
 
-                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.15] mb-3 sm:mb-4 max-w-3xl group-hover:text-purple-100 transition-colors duration-500">
+                    <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-[1.15] mb-3 sm:mb-4 max-w-3xl group-hover:text-blue-100 transition-colors duration-500">
                       {featuredPost.title}
                     </h2>
 
@@ -246,7 +246,7 @@ const Research = () => {
 
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500/30 to-cyan-500/30 border border-white/[0.1] flex items-center justify-center text-[11px] font-semibold text-white/80">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500/30 to-blue-400/30 border border-white/[0.1] flex items-center justify-center text-[11px] font-semibold text-white/80">
                           {featuredPost.author.split(" ").map((n) => n[0]).join("")}
                         </div>
                         <div className="flex items-center gap-2 text-xs text-white/35">
@@ -260,7 +260,7 @@ const Research = () => {
                           </span>
                         </div>
                       </div>
-                      <span className="hidden sm:flex items-center gap-2 text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-3 group-hover:translate-x-0">
+                      <span className="hidden sm:flex items-center gap-2 text-blue-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-all duration-500 translate-x-3 group-hover:translate-x-0">
                         Read article
                         <ArrowUpRight className="w-4 h-4" />
                       </span>
@@ -277,7 +277,7 @@ const Research = () => {
           {/* Section label */}
           {isDefaultView && currentPosts.length > 0 && (
             <div className="flex items-center gap-3 mb-8 sm:mb-10">
-              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-r from-purple-500/50 to-transparent" />
+              <div className="h-px flex-1 max-w-[40px] bg-gradient-to-r from-blue-500/50 to-transparent" />
               <span className="text-xs text-white/30 font-mono tracking-[0.15em] uppercase">Latest Articles</span>
               <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
             </div>
@@ -286,8 +286,8 @@ const Research = () => {
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-24">
               <div className="relative">
-                <div className="w-10 h-10 rounded-full border-2 border-purple-500/20 border-t-purple-400 animate-spin" />
-                <div className="absolute inset-0 w-10 h-10 rounded-full blur-md bg-purple-500/10 animate-pulse" />
+                <div className="w-10 h-10 rounded-full border-2 border-blue-500/20 border-t-blue-400 animate-spin" />
+                <div className="absolute inset-0 w-10 h-10 rounded-full blur-md bg-blue-500/10 animate-pulse" />
               </div>
               <p className="text-xs text-white/20 mt-4 font-mono">Loading articles...</p>
             </div>
@@ -324,8 +324,8 @@ const Research = () => {
                           className="w-full h-full object-cover group-hover:scale-[1.06] transition-transform duration-700 ease-out"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-cyan-900/15 flex items-center justify-center">
-                          <TrendingUp className="w-8 h-8 text-purple-400/20" />
+                        <div className="w-full h-full bg-gradient-to-br from-blue-900/30 to-blue-900/15 flex items-center justify-center">
+                          <TrendingUp className="w-8 h-8 text-blue-400/20" />
                         </div>
                       )}
                       {/* Hover gradient */}
@@ -354,7 +354,7 @@ const Research = () => {
                       </div>
 
                       {/* Title */}
-                      <h3 className="text-[15px] sm:text-base font-semibold text-white leading-snug group-hover:text-purple-300 transition-colors duration-300 mb-2.5 line-clamp-2">
+                      <h3 className="text-[15px] sm:text-base font-semibold text-white leading-snug group-hover:text-blue-300 transition-colors duration-300 mb-2.5 line-clamp-2">
                         {post.title}
                       </h3>
 
@@ -366,12 +366,12 @@ const Research = () => {
                       {/* Author + Read More */}
                       <div className="flex items-center justify-between pt-4 border-t border-white/[0.04]">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500/20 to-cyan-500/20 border border-white/[0.08] flex items-center justify-center text-[9px] font-semibold text-white/50">
+                          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-400/20 border border-white/[0.08] flex items-center justify-center text-[9px] font-semibold text-white/50">
                             {post.author.split(" ").map((n) => n[0]).join("")}
                           </div>
                           <span className="text-[11px] text-white/35">{post.author}</span>
                         </div>
-                        <span className="flex items-center gap-1 text-[11px] text-purple-400/60 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
+                        <span className="flex items-center gap-1 text-[11px] text-blue-400/60 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0">
                           Read <ArrowUpRight className="w-3 h-3" />
                         </span>
                       </div>
@@ -420,11 +420,11 @@ const Research = () => {
 
         {/* ═══ Newsletter ═══ */}
         <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-600/[0.03] to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/[0.03] to-transparent pointer-events-none" />
           <div className="border-t border-white/[0.06]" />
           <div className="container mx-auto max-w-7xl px-4 md:px-8 py-20 sm:py-24 relative z-10">
             <div className="max-w-lg mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 border border-purple-500/15 rounded-full text-[11px] text-purple-400 font-medium mb-5">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-500/10 border border-blue-500/15 rounded-full text-[11px] text-blue-400 font-medium mb-5">
                 <Sparkles className="w-3 h-3" />
                 Newsletter
               </div>
@@ -437,7 +437,7 @@ const Research = () => {
 
               <form onSubmit={handleNewsletterSubmit} className="flex gap-3 max-w-md mx-auto">
                 <div className="relative flex-1 group">
-                  <div className="absolute -inset-px bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-xl blur-sm opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute -inset-px bg-gradient-to-r from-blue-500/20 to-blue-400/20 rounded-xl blur-sm opacity-0 group-focus-within:opacity-100 transition-opacity duration-500" />
                   <Input
                     type="email"
                     placeholder="your@email.com"
@@ -472,7 +472,7 @@ const Research = () => {
                     Tailored market analysis for your Web3 project in Korea.
                   </p>
                 </div>
-                <CalendlyButton className="inline-flex items-center gap-2.5 bg-gradient-to-r from-purple-500/15 to-cyan-500/15 border border-purple-500/20 text-purple-300 px-7 py-3.5 text-sm font-semibold rounded-xl hover:from-purple-500/25 hover:to-cyan-500/25 hover:border-purple-400/30 transition-all duration-300 whitespace-nowrap shadow-[0_0_20px_rgba(168,85,247,0.1)]">
+                <CalendlyButton className="inline-flex items-center gap-2.5 bg-gradient-to-r from-blue-500/15 to-blue-400/15 border border-blue-500/20 text-blue-300 px-7 py-3.5 text-sm font-semibold rounded-xl hover:from-blue-500/25 hover:to-blue-400/25 hover:border-blue-400/30 transition-all duration-300 whitespace-nowrap shadow-[0_0_20px_rgba(64,128,255,0.1)]">
                   Book a Call
                   <ArrowRight className="w-4 h-4" />
                 </CalendlyButton>
