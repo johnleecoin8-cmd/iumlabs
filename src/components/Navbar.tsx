@@ -45,7 +45,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [servicesDropdown, setServicesDropdown] = useState(false);
-  const dropdownTimeout = useRef<NodeJS.Timeout | null>(null);
+  const dropdownTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const location = useLocation();
 
   const isAdminPage = location.pathname.startsWith("/ium-admin");
