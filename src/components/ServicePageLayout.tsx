@@ -52,14 +52,14 @@ const clientLogos = [
 
 // All services for "More Services" section
 const allServices = [
-  { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
-  { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
-  { slug: "seo-ads", title: "SEO & Paid Ads", color: "#F59E0B" },
-  { slug: "offline-event", title: "Offline Event", color: "#10B981" },
-  { slug: "community", title: "Community Management", color: "#5865F2" },
-  { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
-  { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
-  { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
+  { slug: "gtm", title: "GTM Strategy", color: "hsl(217 91% 60%)" },
+  { slug: "branding", title: "Branding & Website", color: "hsl(217 91% 60%)" },
+  { slug: "seo-ads", title: "SEO & Paid Ads", color: "hsl(217 91% 60%)" },
+  { slug: "offline-event", title: "Offline Event", color: "hsl(217 91% 60%)" },
+  { slug: "community", title: "Community Management", color: "hsl(217 91% 60%)" },
+  { slug: "deep-research", title: "Deep Research", color: "hsl(217 91% 60%)" },
+  { slug: "influencer", title: "Influencer/KOL", color: "hsl(217 91% 60%)" },
+  { slug: "pr", title: "PR & Media", color: "hsl(217 91% 60%)" },
 ];
 
 export interface ServiceStat {
@@ -439,7 +439,7 @@ const ServicePageLayout = ({
                       <ul className="space-y-2.5">
                         {deliverable.items.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2.5 text-white/50 text-xs leading-relaxed">
-                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-violet-400/60" />
+                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-white/40" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -524,7 +524,7 @@ const ServicePageLayout = ({
                     >
                       <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
                         <span className="flex items-center gap-3">
-                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-violet-400/60" />
+                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-white/40" />
                           <span>{item.question}</span>
                         </span>
                       </AccordionTrigger>

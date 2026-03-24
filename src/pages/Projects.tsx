@@ -189,9 +189,9 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
     >
       <div
         className={cn(
-          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
-          !isRightColumn && "lg:border-r border-border",
-          !isLastRow && "border-b border-border"
+          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-white/[0.02] h-full",
+          !isRightColumn && "lg:border-r border-white/[0.06]",
+          !isLastRow && "border-b border-white/[0.06]"
         )}
       >
         <Link
@@ -263,7 +263,7 @@ const CategoryFilter = ({
         className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
           activeCategory === "All"
             ? "bg-foreground text-background border-foreground"
-            : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
+            : "bg-transparent text-muted-foreground border-white/[0.06] hover:border-foreground/50 hover:text-foreground"
         }`}
       >
         All
@@ -275,7 +275,7 @@ const CategoryFilter = ({
           className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
             activeCategory === category
               ? "bg-foreground text-background border-foreground"
-              : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
+              : "bg-transparent text-muted-foreground border-white/[0.06] hover:border-foreground/50 hover:text-foreground"
           }`}
         >
           {category}
@@ -384,19 +384,19 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
   if (projects.length === 0) return null;
 
   return (
-    <section ref={ref} className="scroll-reveal bg-[#0A0A0A]" id="gallery">
-      <div className="border-t border-border">
+    <section ref={ref} className="scroll-reveal bg-black" id="gallery">
+      <div className="border-t border-white/[0.06]">
         {/* Section Header - matches other sections */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border"
+          className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/[0.06]"
         >
           <div className="flex items-baseline gap-6 md:gap-10">
             <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
             <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
           </div>
-          <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
+          <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-white/[0.06] rounded-full">
             ← Drag / Scroll →
           </span>
         </motion.div>
@@ -512,7 +512,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 
                           {/* Result Metric */}
                           <div className="mb-6">
-                            <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent leading-tight">
+                            <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent leading-tight">
                               {project.result}
                             </span>
                           </div>
@@ -575,7 +575,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
           >
             <div className="relative h-[2px] bg-border rounded-full overflow-hidden">
               <motion.div
-                className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-blue-400 rounded-full"
                 style={{ width: `${scrollProgress}%` }}
                 transition={{ duration: 0.1 }}
               />
@@ -814,20 +814,20 @@ const Projects = () => {
       </main>
       
       {/* Cases Section - 01 */}
-      <section className="scroll-reveal bg-[#121212]" id="cases">
-        <div className="border-t border-border">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
+      <section className="scroll-reveal bg-black" id="cases">
+        <div className="border-t border-white/[0.06]">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/[0.06]">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
             </div>
-            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-white/[0.06] rounded-full">
               {filteredCases.length} Projects
             </span>
           </div>
           
           {/* Category Filter - integrated below header */}
-          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-border/50">
+          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-white/[0.06]/50">
             <CategoryFilter 
               categories={categories} 
               activeCategory={activeCategory} 
