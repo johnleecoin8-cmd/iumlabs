@@ -223,12 +223,12 @@ const ServicePageLayout = ({
   const contactSectionNum = getNextSectionNumber();
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-black">
       <Navbar />
-      
+
       {/* Hero Section */}
-      <main className="p-1 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
-        <div className="relative min-h-[100svh] sm:min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
+      <main className="bg-black" id="hero">
+        <div className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden">
           {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
             {/* Fallback Image - 즉시 표시 */}
@@ -284,30 +284,7 @@ const ServicePageLayout = ({
             <span className="text-xs sm:text-sm font-medium">Back</span>
           </motion.button>
 
-          {/* Floating Service Tags - Desktop */}
-          {serviceTags.slice(0, 6).map((tag, index) => {
-            const positions = [
-              "top-[15%] left-[5%]",
-              "top-[35%] left-[4%]",
-              "top-[55%] left-[6%]",
-              "top-[18%] right-[6%]",
-              "top-[42%] right-[5%]",
-              "top-[66%] right-[7%]",
-            ];
-            return (
-              <motion.div
-                key={index}
-                className={`absolute ${positions[index]} hidden lg:block z-10`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-              >
-                <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
-                  {tag.label}
-                </span>
-              </motion.div>
-            );
-          })}
+          {/* Floating tags removed — story.foundation style */}
 
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-16 sm:pt-8 pb-4">
@@ -322,7 +299,7 @@ const ServicePageLayout = ({
               >
                 <span className="text-white">{serviceTitle}</span>
                 <br />
-                <span style={{ color: accentColor }}>{serviceSubtitle}</span>
+                <span className="text-white/70">{serviceSubtitle}</span>
               </motion.h1>
 
               {/* Description */}
@@ -341,12 +318,10 @@ const ServicePageLayout = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <CalendlyButton 
-                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[46px]"
-                  style={{ backgroundColor: accentColor, color: '#fff' }}
+                <CalendlyButton
+                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
                 >
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-4 h-4 sm:w-4 sm:h-4" />
+                  <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>
                 </CalendlyButton>
               </motion.div>
