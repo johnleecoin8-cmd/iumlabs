@@ -117,6 +117,14 @@ const ServiceRow = ({ service, index }: { service: typeof services[0]; index: nu
 const ServicesSection = () => {
   return (
     <section className="relative bg-black">
+      {/* Subtle tech dot grid */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        style={{
+          backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.5) 0.5px, transparent 0.5px)",
+          backgroundSize: "40px 40px",
+        }}
+      />
       <div className="relative flex flex-col">
         {services.map((service, index) => (
           <ServiceRow key={service.number} service={service} index={index} />

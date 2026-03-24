@@ -1,8 +1,10 @@
 import { Send } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import { useBrandStatsByIds } from "@/hooks/useBrandStats";
+
+const HeroCanvas = lazy(() => import("@/components/HeroCanvas"));
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -99,23 +101,30 @@ const HeroSection = () => {
       </div>
 
       {/* Overlays */}
-      <div className="absolute inset-0 bg-black/50 z-[1]" />
+      <div className="absolute inset-0 bg-black/60 z-[1]" />
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black z-[1]" />
+
+      {/* 3D Particle Network */}
+      <Suspense fallback={null}>
+        <HeroCanvas />
+      </Suspense>
 
       {/* Main Content */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-6 lg:px-10">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-display text-[1.75rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6vw,5rem)] font-bold leading-[1.1] tracking-tight mb-4 sm:mb-6 mt-20 sm:mt-0">
+          <h1 className="font-display text-[1.75rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6.5vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 mt-20 sm:mt-0">
             <span className="text-white">
-              Your Web3 Ecosystem Partner
+              Your Web3 Ecosystem
               <br />
-              for the Korean Market
+              Partner for{" "}
+              <span className="bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
+                Korea
+              </span>
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-white/50 max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-            Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community
-            Network and Deep Market Research.
+          <p className="text-sm sm:text-base md:text-lg text-white/40 max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed">
+            Hyper-local growth through Korea's top-tier KOL network, community infrastructure, and deep market research.
           </p>
 
           {/* CTA — pill button, story style */}
