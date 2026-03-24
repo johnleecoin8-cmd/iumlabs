@@ -1,8 +1,10 @@
 import { useRef, useMemo, Component, ReactNode } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Float } from "@react-three/drei";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 
-// Error boundary for WebGL
+/* ── Error Boundary ──────────────────────────── */
 class WebGLErrorBoundary extends Component<
   { children: ReactNode; fallback: ReactNode },
   { hasError: boolean }
@@ -19,170 +21,147 @@ class WebGLErrorBoundary extends Component<
   }
 }
 
-/* ── Particle Network ─────────────────────────── */
-const PARTICLE_COUNT = 120;
-const SPREAD = 8;
-const CONNECTION_DIST = 2.2;
-
-const ParticleNetwork = () => {
-  const pointsRef = useRef<THREE.Points>(null);
-  const linesRef = useRef<THREE.LineSegments>(null);
+/* ── Glowing Orb ─────────────────────────────── */
+const GlowOrb = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const wireRef = useRef<THREE.Mesh>(null);
   const mouse = useRef({ x: 0, y: 0 });
   const { viewport } = useThree();
 
-  // Generate initial positions
-  const { positions, velocities } = useMemo(() => {
-    const pos = new Float32Array(PARTICLE_COUNT * 3);
-    const vel = new Float32Array(PARTICLE_COUNT * 3);
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * SPREAD * 2;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * SPREAD;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * SPREAD * 0.5;
-      vel[i * 3] = (Math.random() - 0.5) * 0.003;
-      vel[i * 3 + 1] = (Math.random() - 0.5) * 0.003;
-      vel[i * 3 + 2] = (Math.random() - 0.5) * 0.001;
-    }
-    return { positions: pos, velocities: vel };
-  }, []);
-
-  // Line geometry for connections
-  const linePositions = useMemo(
-    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6),
-    []
-  );
-  const lineColors = useMemo(
-    () => new Float32Array(PARTICLE_COUNT * PARTICLE_COUNT * 6),
-    []
-  );
-
-  // Track mouse
-  const handlePointerMove = useMemo(
-    () => (e: PointerEvent) => {
+  useMemo(() => {
+    const handler = (e: PointerEvent) => {
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
-    },
-    []
-  );
-
-  useMemo(() => {
-    window.addEventListener("pointermove", handlePointerMove);
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [handlePointerMove]);
+    };
+    window.addEventListener("pointermove", handler);
+    return () => window.removeEventListener("pointermove", handler);
+  }, []);
 
   useFrame((state) => {
-    if (!pointsRef.current || !linesRef.current) return;
-
-    const posAttr = pointsRef.current.geometry.attributes
-      .position as THREE.BufferAttribute;
-    const arr = posAttr.array as Float32Array;
-
-    // Move particles
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const ix = i * 3;
-      arr[ix] += velocities[ix];
-      arr[ix + 1] += velocities[ix + 1];
-      arr[ix + 2] += velocities[ix + 2];
-
-      // Mouse influence
-      const dx = mouse.current.x * viewport.width * 0.5 - arr[ix];
-      const dy = mouse.current.y * viewport.height * 0.5 - arr[ix + 1];
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 3) {
-        arr[ix] += dx * 0.002;
-        arr[ix + 1] += dy * 0.002;
-      }
-
-      // Wrap around
-      if (arr[ix] > SPREAD) arr[ix] = -SPREAD;
-      if (arr[ix] < -SPREAD) arr[ix] = SPREAD;
-      if (arr[ix + 1] > SPREAD * 0.5) arr[ix + 1] = -SPREAD * 0.5;
-      if (arr[ix + 1] < -SPREAD * 0.5) arr[ix + 1] = SPREAD * 0.5;
+    const t = state.clock.elapsedTime;
+    if (meshRef.current) {
+      meshRef.current.rotation.x = Math.sin(t * 0.2) * 0.3 + mouse.current.y * 0.15;
+      meshRef.current.rotation.y = t * 0.08 + mouse.current.x * 0.15;
+      meshRef.current.rotation.z = Math.cos(t * 0.15) * 0.1;
     }
-    posAttr.needsUpdate = true;
-
-    // Build connections
-    let lineIdx = 0;
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      for (let j = i + 1; j < PARTICLE_COUNT; j++) {
-        const dx = arr[i * 3] - arr[j * 3];
-        const dy = arr[i * 3 + 1] - arr[j * 3 + 1];
-        const dz = arr[i * 3 + 2] - arr[j * 3 + 2];
-        const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-        if (d < CONNECTION_DIST) {
-          const alpha = 1 - d / CONNECTION_DIST;
-          linePositions[lineIdx * 6] = arr[i * 3];
-          linePositions[lineIdx * 6 + 1] = arr[i * 3 + 1];
-          linePositions[lineIdx * 6 + 2] = arr[i * 3 + 2];
-          linePositions[lineIdx * 6 + 3] = arr[j * 3];
-          linePositions[lineIdx * 6 + 4] = arr[j * 3 + 1];
-          linePositions[lineIdx * 6 + 5] = arr[j * 3 + 2];
-          const c = alpha * 0.15;
-          lineColors[lineIdx * 6] = c;
-          lineColors[lineIdx * 6 + 1] = c;
-          lineColors[lineIdx * 6 + 2] = c * 1.5;
-          lineColors[lineIdx * 6 + 3] = c;
-          lineColors[lineIdx * 6 + 4] = c;
-          lineColors[lineIdx * 6 + 5] = c * 1.5;
-          lineIdx++;
-        }
-      }
+    if (wireRef.current) {
+      wireRef.current.rotation.x = Math.sin(t * 0.2) * 0.3 + mouse.current.y * 0.15;
+      wireRef.current.rotation.y = t * 0.08 + mouse.current.x * 0.15;
+      wireRef.current.rotation.z = Math.cos(t * 0.15) * 0.1;
     }
-
-    const lineGeo = linesRef.current.geometry;
-    const lPos = lineGeo.attributes.position as THREE.BufferAttribute;
-    const lCol = lineGeo.attributes.color as THREE.BufferAttribute;
-    (lPos.array as Float32Array).set(linePositions.subarray(0, lineIdx * 6));
-    (lCol.array as Float32Array).set(lineColors.subarray(0, lineIdx * 6));
-    lineGeo.setDrawRange(0, lineIdx * 2);
-    lPos.needsUpdate = true;
-    lCol.needsUpdate = true;
-
-    // Gentle global rotation
-    pointsRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-    linesRef.current.rotation.y = state.clock.elapsedTime * 0.02;
   });
 
   return (
-    <group position={[0, 0, 0]}>
-      {/* Particles */}
-      <points ref={pointsRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={PARTICLE_COUNT}
-            array={positions}
-            itemSize={3}
+    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.8}>
+      <group position={[1.5, 0.2, 0]}>
+        {/* Solid inner orb — emissive for bloom pickup */}
+        <mesh ref={meshRef}>
+          <icosahedronGeometry args={[1.4, 3]} />
+          <meshStandardMaterial
+            color="#1a3a8a"
+            emissive="#2050cc"
+            emissiveIntensity={1.8}
+            toneMapped={false}
+            roughness={0.15}
+            metalness={0.95}
+            transparent
+            opacity={0.25}
           />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.03}
-          color="#ffffff"
-          transparent
-          opacity={0.4}
-          sizeAttenuation
-          depthWrite={false}
-        />
-      </points>
+        </mesh>
 
-      {/* Connection lines */}
-      <lineSegments ref={linesRef}>
-        <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={PARTICLE_COUNT * PARTICLE_COUNT}
-            array={linePositions}
-            itemSize={3}
+        {/* Wireframe overlay */}
+        <mesh ref={wireRef}>
+          <icosahedronGeometry args={[1.42, 3]} />
+          <meshStandardMaterial
+            color="#4080ff"
+            emissive="#4080ff"
+            emissiveIntensity={2.5}
+            toneMapped={false}
+            wireframe
+            transparent
+            opacity={0.35}
           />
-          <bufferAttribute
-            attach="attributes-color"
-            count={PARTICLE_COUNT * PARTICLE_COUNT}
-            array={lineColors}
-            itemSize={3}
+        </mesh>
+
+        {/* Outer glow ring */}
+        <mesh rotation={[Math.PI / 2, 0, 0]}>
+          <ringGeometry args={[1.8, 2.0, 64]} />
+          <meshStandardMaterial
+            color="#3060dd"
+            emissive="#3060dd"
+            emissiveIntensity={2}
+            toneMapped={false}
+            transparent
+            opacity={0.08}
+            side={THREE.DoubleSide}
           />
-        </bufferGeometry>
-        <lineBasicMaterial vertexColors transparent opacity={0.6} depthWrite={false} />
-      </lineSegments>
-    </group>
+        </mesh>
+      </group>
+    </Float>
+  );
+};
+
+/* ── Floating Particles ──────────────────────── */
+const ParticleField = ({ count = 800 }: { count?: number }) => {
+  const ref = useRef<THREE.Points>(null);
+
+  const positions = useMemo(() => {
+    const arr = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) {
+      arr[i] = (Math.random() - 0.5) * 25;
+    }
+    return arr;
+  }, [count]);
+
+  useFrame((state) => {
+    if (ref.current) {
+      ref.current.rotation.y = state.clock.elapsedTime * 0.015;
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.05;
+    }
+  });
+
+  return (
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={count}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.02}
+        color="#ffffff"
+        transparent
+        opacity={0.3}
+        sizeAttenuation
+        depthWrite={false}
+      />
+    </points>
+  );
+};
+
+/* ── Scene ────────────────────────────────────── */
+const Scene = () => {
+  return (
+    <>
+      <ambientLight intensity={0.15} />
+      <pointLight position={[5, 5, 5]} intensity={0.6} color="#4080ff" />
+      <pointLight position={[-5, -3, 3]} intensity={0.3} color="#2050aa" />
+
+      <GlowOrb />
+      <ParticleField />
+
+      <EffectComposer>
+        <Bloom
+          luminanceThreshold={0.4}
+          luminanceSmoothing={0.9}
+          intensity={1.2}
+          mipmapBlur
+        />
+      </EffectComposer>
+    </>
   );
 };
 
@@ -191,12 +170,23 @@ const HeroCanvas = () => {
   return (
     <WebGLErrorBoundary fallback={<div className="absolute inset-0 bg-black" />}>
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 60 }}
+        camera={{ position: [0, 0, 5.5], fov: 50 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
-        style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }}
+        gl={{
+          antialias: false,
+          alpha: true,
+          powerPreference: "high-performance",
+          toneMapping: THREE.ACESFilmicToneMapping,
+          toneMappingExposure: 1.2,
+        }}
+        style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 2,
+          pointerEvents: "none",
+        }}
       >
-        <ParticleNetwork />
+        <Scene />
       </Canvas>
     </WebGLErrorBoundary>
   );

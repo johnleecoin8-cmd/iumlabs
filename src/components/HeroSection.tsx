@@ -1,7 +1,6 @@
-import { Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 
 const HeroCanvas = lazy(() => import("@/components/HeroCanvas"));
@@ -48,21 +47,7 @@ const defaultStats = [
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-
-  const {
-    videoRef,
-    isVideoReady,
-    hasVideoError,
-    shouldDisableVideo,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-  } = useVideoPlayer({
-    src: "/videos/hero-background.mp4",
-    poster: "/images/hero-poster.jpg",
-    autoPlay: true,
-    preload: "auto",
-  });
+  const [textVisible, setTextVisible] = useState(false);
 
   const { statsMap } = useBrandStatsByIds([
     "client_valuation", "kol_network", "projects_launched", "events_hosted",
@@ -78,75 +63,80 @@ const HeroSection = () => {
   }, [statsMap]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 600);
-    return () => clearTimeout(timer);
+    const t1 = setTimeout(() => setTextVisible(true), 300);
+    const t2 = setTimeout(() => setIsVisible(true), 800);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   return (
-    <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0">
-        <img {...posterProps} fetchPriority="high" decoding="async" />
-        <ShimmerOverlay />
-        {!shouldDisableVideo && !hasVideoError && (
-          <video
-            ref={videoRef}
-            {...videoProps}
-            className="absolute inset-0 w-full h-full object-cover z-10"
-            style={{ ...videoProps.style, WebkitAppearance: "none" }}
-          >
-            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
-          </video>
-        )}
-      </div>
+    <div className="relative h-screen min-h-[700px] flex flex-col justify-between overflow-hidden bg-black">
+      {/* Ambient glow orbs (CSS, instant load) */}
+      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-blue-600/[0.06] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-blue-500/[0.04] rounded-full blur-[130px] pointer-events-none" />
 
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-black/60 z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black z-[1]" />
-
-      {/* 3D Particle Network */}
+      {/* 3D Canvas — the main visual */}
       <Suspense fallback={null}>
         <HeroCanvas />
       </Suspense>
 
-      {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-6 lg:px-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="font-display text-[1.75rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6.5vw,5.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 mt-20 sm:mt-0">
-            <span className="text-white">
-              Your Web3 Ecosystem
-              <br />
+      {/* Content */}
+      <div className="flex-1 flex items-center relative z-10 px-6 lg:px-10">
+        <div className="max-w-3xl">
+          {/* Headline */}
+          <h1
+            className={`font-display text-[2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold leading-[1.02] tracking-[-0.04em] mb-5 sm:mb-7 transition-all duration-1000 ease-[cubic-bezier(0.33,1,0.68,1)] ${
+              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            <span className="text-white block">
+              Web3 Ecosystem
+            </span>
+            <span className="text-white block">
               Partner for{" "}
-              <span className="bg-gradient-to-r from-white via-blue-200 to-blue-400 bg-clip-text text-transparent">
+              <span
+                className="bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent"
+                style={{ textShadow: "0 0 60px rgba(64,128,255,0.3)" }}
+              >
                 Korea
               </span>
             </span>
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg text-white/40 max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-            Hyper-local growth through Korea's top-tier KOL network, community infrastructure, and deep market research.
-          </p>
-
-          {/* CTA — pill button, story style */}
-          <a
-            href="/contact#contact-form"
-            className="inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black text-sm sm:text-base font-semibold rounded-full hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
+          {/* Subtext */}
+          <p
+            className={`text-sm sm:text-base md:text-lg text-white/35 max-w-lg mb-8 sm:mb-10 leading-relaxed transition-all duration-1000 delay-200 ease-[cubic-bezier(0.33,1,0.68,1)] ${
+              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
           >
-            <Send className="w-4 h-4" />
-            Get Your Free Proposal
-          </a>
-
-          <p className="mt-4 text-xs text-white/30">
-            <span className="inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Free 30-min consultation · Response within 24h
-            </span>
+            Hyper-local growth through Korea's top-tier KOL network,
+            community infrastructure, and deep market research.
           </p>
+
+          {/* CTAs — story.foundation dual button pattern */}
+          <div
+            className={`flex flex-wrap items-center gap-4 transition-all duration-1000 delay-400 ease-[cubic-bezier(0.33,1,0.68,1)] ${
+              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            }`}
+          >
+            <a
+              href="/contact#contact-form"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
+            >
+              Start a Project
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="/projects"
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/15 text-white/70 text-sm font-medium rounded-full hover:border-white/30 hover:text-white transition-all duration-200"
+            >
+              Explore
+            </a>
+          </div>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="relative z-10 py-6 sm:py-8">
+      <div className="relative z-10 py-6 sm:py-8 border-t border-white/[0.04]">
         <div className="w-full px-6 lg:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {stats.map((stat, index) => (
@@ -164,8 +154,8 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Client Logo Marquee */}
-      <div className="relative z-10 py-4 overflow-hidden border-t border-white/[0.06]">
+      {/* Client Logos */}
+      <div className="relative z-10 py-4 overflow-hidden border-t border-white/[0.04]">
         <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div
@@ -178,10 +168,10 @@ const HeroSection = () => {
                 loading="lazy"
                 decoding="async"
                 className={`h-5 sm:h-6 w-auto max-w-[100px] object-contain flex-shrink-0 ${
-                  client.noInvert ? "opacity-70" : "brightness-0 invert opacity-60"
+                  client.noInvert ? "opacity-50" : "brightness-0 invert opacity-40"
                 }`}
               />
-              <span className="text-white/40 text-xs font-medium whitespace-nowrap">
+              <span className="text-white/25 text-xs font-medium whitespace-nowrap hidden sm:inline">
                 {client.name}
               </span>
             </div>
@@ -222,7 +212,7 @@ const StatItem = ({
         {count}
         {suffix}
       </div>
-      <div className="text-[11px] sm:text-sm text-white/35 font-medium">{label}</div>
+      <div className="text-[11px] sm:text-sm text-white/25 font-medium">{label}</div>
     </div>
   );
 };
