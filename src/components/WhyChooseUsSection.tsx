@@ -74,7 +74,7 @@ const WhyChooseUsSection = () => {
               Seoul Moves Fast.
             </motion.span>
             <motion.span
-              className="block bg-gradient-to-r from-white via-purple-300 to-purple-400 bg-clip-text text-transparent"
+              className="block text-white"
               variants={headlineLineVariants}>
 
               We Make You Land.

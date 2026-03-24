@@ -17,8 +17,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        display: ['Syne', 'Space Grotesk', 'Inter', 'sans-serif'],
+        display: ['Space Grotesk', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -102,12 +101,8 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "float": {
-          "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-12px)" },
-        },
         "fade-up": {
-          from: { opacity: "0", transform: "translateY(32px)" },
+          from: { opacity: "0", transform: "translateY(24px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
         "fade-in": {
@@ -115,20 +110,8 @@ export default {
           to: { opacity: "1" },
         },
         "scale-in": {
-          from: { opacity: "0", transform: "scale(0.95)" },
+          from: { opacity: "0", transform: "scale(0.96)" },
           to: { opacity: "1", transform: "scale(1)" },
-        },
-        "slide-up": {
-          from: { opacity: "0", transform: "translateY(20px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
-        },
-        "slide-in-left": {
-          from: { opacity: "0", transform: "translateX(-20px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
-        },
-        "slide-in-right": {
-          from: { opacity: "0", transform: "translateX(20px)" },
-          to: { opacity: "1", transform: "translateX(0)" },
         },
         "marquee": {
           "0%": { transform: "translateX(0)" },
@@ -138,104 +121,15 @@ export default {
           "0%": { transform: "translateX(-50%)" },
           "100%": { transform: "translateX(0)" },
         },
-        "kenburns": {
-          "0%": { transform: "scale(1) translate(0, 0)" },
-          "25%": { transform: "scale(1.12) translate(-1.5%, 1%)" },
-          "50%": { transform: "scale(1.2) translate(-3%, -2%)" },
-          "75%": { transform: "scale(1.1) translate(1%, -1%)" },
-          "100%": { transform: "scale(1) translate(0, 0)" },
-        },
-        "light-sweep": {
-          "0%": { opacity: "0", transform: "translateX(-100%) rotate(-45deg)" },
-          "50%": { opacity: "0.4" },
-          "100%": { opacity: "0", transform: "translateX(100%) rotate(-45deg)" },
-        },
-        "aurora": {
-          "0%, 100%": { opacity: "0.2", transform: "translateX(0) scale(1)" },
-          "25%": { opacity: "0.35", transform: "translateX(8%) scale(1.08)" },
-          "50%": { opacity: "0.25", transform: "translateX(-5%) scale(1.05)" },
-          "75%": { opacity: "0.3", transform: "translateX(3%) scale(1.03)" },
-        },
-        "pulse-soft": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.7" },
-        },
-        // Floating Island animations
-        "floating-subtle": {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "33%": { transform: "translateY(-4px) rotate(0.2deg)" },
-          "66%": { transform: "translateY(3px) rotate(-0.15deg)" },
-        },
-        "neon-pulse": {
-          "0%, 100%": { 
-            boxShadow: "0 0 20px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--primary) / 0.1), inset 0 0 20px hsl(var(--primary) / 0.05)" 
-          },
-          "50%": { 
-            boxShadow: "0 0 30px hsl(var(--primary) / 0.25), 0 0 60px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.08)" 
-          },
-        },
-        "glow-line": {
-          "0%": { transform: "translateY(-100%)", opacity: "0" },
-          "50%": { opacity: "1" },
-          "100%": { transform: "translateY(100%)", opacity: "0" },
-        },
-        "particle-float": {
-          "0%": { transform: "translateY(0) scale(1)", opacity: "1" },
-          "100%": { transform: "translateY(-20px) scale(0)", opacity: "0" },
-        },
-        "ripple-out": {
-          "0%": { transform: "scale(0.5)", opacity: "0.8" },
-          "100%": { transform: "scale(2.5)", opacity: "0" },
-        },
-        "reveal-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "reveal-fade": {
-          "0%": { opacity: "0", filter: "blur(8px)" },
-          "100%": { opacity: "1", filter: "blur(0)" },
-        },
-        "scroll-indicator": {
-          "0%, 100%": { transform: "translateY(0)", opacity: "1" },
-          "50%": { transform: "translateY(6px)", opacity: "0.5" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 0 0 hsl(var(--primary) / 0.4)" },
-          "50%": { boxShadow: "0 0 20px 4px hsl(var(--primary) / 0.2)" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 4s ease-in-out infinite",
-        "fade-up": "fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        "fade-in": "fade-in 0.5s ease-out forwards",
-        "scale-in": "scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        "slide-up": "slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        "slide-in-left": "slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        "slide-in-right": "slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.33, 1, 0.68, 1) forwards",
+        "fade-in": "fade-in 0.4s ease-out forwards",
+        "scale-in": "scale-in 0.4s cubic-bezier(0.33, 1, 0.68, 1) forwards",
         "marquee": "marquee 30s linear infinite",
         "marquee-reverse": "marquee-reverse 30s linear infinite",
-        "kenburns": "kenburns 12s ease-in-out infinite",
-        "light-sweep": "light-sweep 4s ease-in-out infinite",
-        "aurora": "aurora 6s ease-in-out infinite",
-        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
-        // Floating Island animations
-        "floating-subtle": "floating-subtle 5s ease-in-out infinite",
-        "neon-pulse": "neon-pulse 3s ease-in-out infinite",
-        "glow-line": "glow-line 3s ease-in-out infinite",
-        "particle-float": "particle-float 0.6s ease-out forwards",
-        "ripple-out": "ripple-out 0.6s ease-out forwards",
-        // New micro-interaction animations
-        "reveal-up": "reveal-up 0.6s ease-out forwards",
-        "reveal-fade": "reveal-fade 0.8s ease-out forwards",
-        "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
