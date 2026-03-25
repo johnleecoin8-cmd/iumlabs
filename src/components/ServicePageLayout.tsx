@@ -483,6 +483,9 @@ const ServicePageLayout = ({
         </section>
       )}
 
+      {/* FAQ Schema for Google Rich Snippets */}
+      {faqItems && faqItems.length > 0 && <FAQSchema faqs={faqItems} />}
+
       {/* FAQ Section - Minimal Agency Style */}
       {faqItems && faqItems.length > 0 && (
         <section className="bg-[#0A0A0A]">

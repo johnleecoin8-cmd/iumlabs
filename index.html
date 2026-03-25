@@ -55,6 +55,7 @@
     "@type": "Organization",
     "@id": "https://iumlabs.io/#organization",
     "name": "ium Labs",
+    "alternateName": ["이음 랩스", "Ium Labs", "ium labs"],
     "url": "https://iumlabs.io/",
     "logo": {
       "@type": "ImageObject",
@@ -62,37 +63,123 @@
       "width": 512,
       "height": 512
     },
-    "description": "ium Labs bridges global projects to the Korean market through Web3 GTM Strategy, Korea KOL Networks, and Community Management. Korea GTM Agency.",
+    "image": "https://iumlabs.io/images/share-og.jpeg",
+    "description": "Korea's #1 Web3 marketing and crypto agency. ium Labs bridges global blockchain projects to the Korean market through data-driven GTM strategy, KOL networks, community management, and PR.",
     "foundingDate": "2025",
-    "areaServed": {
-      "@type": "Country",
-      "name": "South Korea"
+    "numberOfEmployees": {
+      "@type": "QuantitativeValue",
+      "minValue": 10,
+      "maxValue": 50
     },
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "South Korea"
+      },
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 37.4979,
+          "longitude": 127.0276
+        },
+        "description": "Seoul, South Korea"
+      }
+    ],
     "knowsAbout": [
       "Korea Web3 Marketing",
+      "Korea Crypto Agency",
       "Crypto GTM Strategy",
       "Korea Crypto Marketing",
       "Korea Market Entry",
-      "KOL Networks",
-      "Community Management",
-      "PR & Media Relations"
+      "KOL Marketing Korea",
+      "Web3 Community Management",
+      "Blockchain PR Korea",
+      "Token Generation Event Support",
+      "Korean Exchange Listing",
+      "Naver SEO for Crypto",
+      "KakaoTalk Marketing"
     ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Korea Web3 Marketing Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Korea GTM Strategy",
+            "url": "https://iumlabs.io/services/gtm"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "KOL & Influencer Marketing",
+            "url": "https://iumlabs.io/services/influencer"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Community Management",
+            "url": "https://iumlabs.io/services/community"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "PR & Media Relations",
+            "url": "https://iumlabs.io/services/pr"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Branding & Website",
+            "url": "https://iumlabs.io/services/branding"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO & Paid Ads",
+            "url": "https://iumlabs.io/services/seo-ads"
+          }
+        }
+      ]
+    },
     "sameAs": [
       "https://twitter.com/iumlabs",
+      "https://x.com/iumlabs",
       "https://www.linkedin.com/company/iumlabs",
       "https://t.me/iumlabs"
     ],
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "contactType": "Business Development",
-      "email": "contact@iumlabs.io",
-      "availableLanguage": ["English", "Korean"]
-    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "Business Development",
+        "email": "admin@iumlabs.io",
+        "availableLanguage": ["English", "Korean"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "Customer Support",
+        "url": "https://iumlabs.io/contact",
+        "availableLanguage": ["English", "Korean"]
+      }
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "373 Gangnam-daero, 10F",
       "addressLocality": "Seocho-gu",
       "addressRegion": "Seoul",
+      "postalCode": "06621",
       "addressCountry": "KR"
     }
   },
