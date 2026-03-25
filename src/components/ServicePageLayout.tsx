@@ -12,6 +12,7 @@ import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import FAQSchema from "@/components/FAQSchema";
 import {
   Accordion,
   AccordionContent,
