@@ -12,6 +12,7 @@ import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import FAQSchema from "@/components/FAQSchema";
 import {
   Accordion,
   AccordionContent,
@@ -481,6 +482,9 @@ const ServicePageLayout = ({
           </div>
         </section>
       )}
+
+      {/* FAQ Schema for Google Rich Snippets */}
+      {faqItems && faqItems.length > 0 && <FAQSchema faqs={faqItems} />}
 
       {/* FAQ Section - Minimal Agency Style */}
       {faqItems && faqItems.length > 0 && (

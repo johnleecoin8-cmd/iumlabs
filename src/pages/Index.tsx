@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
+import FAQSchema from "@/components/FAQSchema";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -10,6 +11,7 @@ const CasesSection = lazy(() => import("@/components/CasesSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
 
 const SectionLoader = () => (
   <div className="h-64 flex items-center justify-center">
@@ -43,6 +45,14 @@ const SectionHeader = ({
   </div>
 );
 
+const homepageFaqs = [
+  { question: "What is Korea Web3 marketing?", answer: "Korea Web3 marketing is a specialized strategy for blockchain and crypto projects entering the Korean market. It includes localized GTM strategy, KOL influencer campaigns, community building on KakaoTalk and Telegram, PR distribution through Korean crypto media like Blockmedia and Coinness, and exchange listing support." },
+  { question: "Why do Web3 projects need a Korea crypto agency?", answer: "South Korea is the #2 global crypto market by trading volume with a retail-driven ecosystem. A dedicated Korea crypto agency like ium Labs provides native language expertise, established KOL networks, regulatory compliance guidance (VASP), and direct relationships with Korean exchanges and media outlets." },
+  { question: "What services does ium Labs offer for Korea market entry?", answer: "ium Labs provides full-stack Korea Web3 marketing: GTM strategy, KOL/influencer marketing with 80+ verified Korean KOLs, community management (Discord, Telegram, KakaoTalk), PR & media distribution, branding & website localization, SEO & paid ads on Naver and Google Korea, and offline event management." },
+  { question: "How long does it take to launch in the Korean crypto market?", answer: "A typical Korea market entry takes 4-8 weeks from initial strategy to launch. This includes 1-2 weeks for market research and localization, 1-2 weeks for community and channel setup, and 2-4 weeks for the initial campaign push including KOL activations and media coverage." },
+  { question: "Which blockchain projects has ium Labs worked with?", answer: "ium Labs has partnered with leading Web3 projects including Polygon, BNB Chain, KuCoin, Bybit, Story Protocol, Ondo Finance, MegaETH, Mantra, Sahara AI, and many more. Our portfolio spans Layer 1/2 infrastructure, exchanges, DeFi protocols, and NFT platforms." },
+];
+
 const Index = () => {
   return (
     <div className="min-h-screen bg-black">
@@ -61,6 +71,7 @@ const Index = () => {
           "Web3 Agency Seoul",
         ]}
       />
+      <FAQSchema faqs={homepageFaqs} />
 
       <Navbar />
 
@@ -118,10 +129,19 @@ const Index = () => {
         </AnimatedSection>
       </section>
 
-      {/* Contact — 05 */}
+      {/* FAQ — 05 */}
+      <section id="faq" className="border-t border-white/[0.06]">
+        <AnimatedSection>
+          <Suspense fallback={<SectionLoader />}>
+            <FAQSection />
+          </Suspense>
+        </AnimatedSection>
+      </section>
+
+      {/* Contact — 06 */}
       <section id="contact" className="border-t border-white/[0.06]">
         <AnimatedSection>
-          <ContactFormSection sectionNumber="05" />
+          <ContactFormSection sectionNumber="06" />
         </AnimatedSection>
       </section>
 
