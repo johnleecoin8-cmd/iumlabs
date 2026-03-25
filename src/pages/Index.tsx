@@ -11,6 +11,7 @@ const CasesSection = lazy(() => import("@/components/CasesSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
 
 const SectionLoader = () => (
   <div className="h-64 flex items-center justify-center">
