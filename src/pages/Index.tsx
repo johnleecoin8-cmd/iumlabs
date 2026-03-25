@@ -129,10 +129,19 @@ const Index = () => {
         </AnimatedSection>
       </section>
 
-      {/* Contact — 05 */}
+      {/* FAQ — 05 */}
+      <section id="faq" className="border-t border-white/[0.06]">
+        <AnimatedSection>
+          <Suspense fallback={<SectionLoader />}>
+            <FAQSection />
+          </Suspense>
+        </AnimatedSection>
+      </section>
+
+      {/* Contact — 06 */}
       <section id="contact" className="border-t border-white/[0.06]">
         <AnimatedSection>
-          <ContactFormSection sectionNumber="05" />
+          <ContactFormSection sectionNumber="06" />
         </AnimatedSection>
       </section>
 
