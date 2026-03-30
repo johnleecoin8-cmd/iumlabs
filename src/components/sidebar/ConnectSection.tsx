@@ -1,5 +1,6 @@
-import { Send, Linkedin } from "lucide-react";
+import { Send, Linkedin, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { brand } from "@/config/content";
 
 interface ConnectSectionProps {
@@ -22,6 +23,8 @@ const connectLinks = [
 ];
 
 const ConnectSection = ({ isCollapsed }: ConnectSectionProps) => {
+  const navigate = useNavigate();
+
   return (
     <>
       {isCollapsed ? (
@@ -48,6 +51,18 @@ const ConnectSection = ({ isCollapsed }: ConnectSectionProps) => {
               <link.icon className="w-4 h-4" />
             </motion.a>
           ))}
+          <motion.button
+            onClick={() => navigate("/contact")}
+            className="p-2 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-all duration-200"
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: connectLinks.length * 0.05 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            title="Contact Us"
+          >
+            <MessageSquare className="w-4 h-4" />
+          </motion.button>
         </motion.div>
       ) : (
         <motion.div
@@ -74,6 +89,16 @@ const ConnectSection = ({ isCollapsed }: ConnectSectionProps) => {
               <span className="text-xs">{link.label}</span>
             </motion.a>
           ))}
+          <motion.button
+            onClick={() => navigate("/contact")}
+            className="flex items-center gap-2 w-full mt-2 px-2.5 py-2 rounded-lg bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 hover:border-primary/30 transition-all duration-200 text-xs font-medium"
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: connectLinks.length * 0.05 }}
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Contact Us</span>
+          </motion.button>
         </motion.div>
       )}
     </>
