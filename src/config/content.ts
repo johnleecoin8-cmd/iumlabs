@@ -49,7 +49,6 @@ export const navigation = {
     { name: "Blog", href: "/blog" },
     { name: "K-Leaderboard", href: "/k-leaderboard" },
     { name: "Career", href: "/jobs" },
-    { name: "Contact", href: "/contact" },
   ],
   ctaButton: "Get Started",
 };

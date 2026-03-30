@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Home, Briefcase, FolderOpen, BookOpen, Mail, Users, Crown } from "lucide-react";
+import { ChevronLeft, Home, Briefcase, FolderOpen, BookOpen, Users, Crown } from "lucide-react";
 import { motion } from "framer-motion";
 import { navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -20,7 +20,6 @@ const navIconMap: Record<string, React.ElementType> = {
   'Blog': BookOpen,
   'K-Leaderboard': Crown,
   'Career': Users,
-  'Contact': Mail
 };
 // Section IDs for scroll-based highlighting on homepage
 const sectionIds = ['hero', 'services', 'process', 'cases', 'why-choose-us', 'gallery', 'media-partners', 'insights', 'contact'];
