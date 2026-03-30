@@ -265,7 +265,7 @@ const CommunityService = () => {
                       <Hash className="w-5 h-5 text-gray-400" />
                       <span className="text-white font-medium">general</span>
                       <div className="ml-auto flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         <span className="text-xs text-gray-400">1,234 online</span>
                       </div>
                     </div>
@@ -323,7 +323,7 @@ const CommunityService = () => {
                   <div className="bg-[#17212b] rounded-xl overflow-hidden shadow-2xl border border-white/10">
                     {/* Telegram Header */}
                     <div className="bg-[#232e3c] px-4 py-3 flex items-center gap-3 border-b border-black/20">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-500 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
                         <span className="text-white font-bold">P</span>
                       </div>
                       <div>
@@ -331,7 +331,7 @@ const CommunityService = () => {
                         <span className="text-xs text-gray-400">1,234 members</span>
                       </div>
                       <div className="ml-auto flex items-center gap-2">
-                        <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                         <span className="text-xs text-gray-400">423 online</span>
                       </div>
                     </div>
@@ -355,7 +355,7 @@ const CommunityService = () => {
                       <div className="flex-1 p-4 min-h-[300px]">
                         {telegramMessages.slice(0, visibleMessages).map((msg, index) => (
                           <div key={index} className="flex gap-3 mb-4">
-                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${msg.isBot ? 'bg-[#0088CC]' : 'bg-gradient-to-br from-blue-500 to-pink-500'}`}>
+                            <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${msg.isBot ? 'bg-[#0088CC]' : 'bg-gradient-to-br from-purple-500 to-pink-500'}`}>
                               {msg.avatar}
                             </div>
                             <div>

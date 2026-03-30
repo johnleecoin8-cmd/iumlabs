@@ -1,9 +1,11 @@
-import { ArrowRight } from "lucide-react";
-import { lazy, Suspense, useEffect, useMemo, useState } from "react";
+import { ChevronDown, Send } from "lucide-react";
+import { useEffect, useMemo, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useRipple } from "@/hooks/useRipple";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import { brand } from "@/config/content";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import { useBrandStatsByIds } from "@/hooks/useBrandStats";
-
-const HeroCanvas = lazy(() => import("@/components/HeroCanvas"));
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -12,6 +14,7 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.png";
+// Story Protocol removed per client visibility restrictions
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra-mono.png";
@@ -21,200 +24,334 @@ import synfuturesLogo from "@/assets/logos/synfutures.png";
 import aptosLogo from "@/assets/logos/aptos.png";
 import kiteLogo from "@/assets/logos/kite.png";
 
-const clientLogos = [
-  { name: "BNB", logo: bnbLogo, noInvert: false },
-  { name: "KuCoin", logo: kucoinLogo, noInvert: true },
-  { name: "Polygon", logo: polygonLogo, noInvert: false },
-  { name: "Ondo Finance", logo: ondoLogo, noInvert: false },
-  { name: "Bybit", logo: bybitLogo, noInvert: false },
-  { name: "Peaq", logo: peaqLogo, noInvert: true },
-  { name: "Spacecoin", logo: spacecoinLogo, noInvert: true },
-  { name: "Tria", logo: triaLogo, noInvert: true },
-  { name: "Mantra", logo: mantraLogo, noInvert: true },
-  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true },
-  { name: "FOGO", logo: fogoLogo, noInvert: true },
-  { name: "SynFutures", logo: synfuturesLogo, noInvert: true },
-  { name: "Aptos", logo: aptosLogo, noInvert: false },
-  { name: "Kite", logo: kiteLogo, noInvert: true },
-];
+// Desktop tags - 8 services (positioned at edges with good spacing)
+const serviceTags = [{
+  label: "Deep Research",
+  position: "top-[6%] left-[3%]"
+}, {
+  label: "GTM Strategy",
+  position: "top-[24%] left-[2%]"
+}, {
+  label: "Community Growth",
+  position: "top-[44%] left-[3%]"
+}, {
+  label: "Branding & Web",
+  position: "top-[64%] left-[2%]"
+}, {
+  label: "KOL Marketing",
+  position: "top-[8%] right-[3%]"
+}, {
+  label: "Media & PR",
+  position: "top-[26%] right-[2%]"
+}, {
+  label: "SEO & Ads",
+  position: "top-[46%] right-[3%]"
+}, {
+  label: "Offline Events",
+  position: "top-[66%] right-[2%]"
+}];
 
-const defaultStats = [
-  { id: "client_valuation", value: 7, label: "Client Valuation", prefix: "$", suffix: "B+" },
-  { id: "kol_network", value: 230, label: "KOL Network", prefix: "", suffix: "+" },
-  { id: "projects_launched", value: 19, label: "Projects Launched", prefix: "", suffix: "+" },
-  { id: "events_hosted", value: 55, label: "Events Hosted", prefix: "", suffix: "+" },
-];
-
+// Mobile tags - repositioned to avoid overlap with centered headline
+const mobileServiceTags = [{
+  label: "Research",
+  position: "top-[8%] left-[5%]"
+}, {
+  label: "GTM",
+  position: "top-[14%] right-[6%]"
+}, {
+  label: "Marketing",
+  position: "bottom-[42%] left-[4%]"
+}, {
+  label: "Events",
+  position: "bottom-[36%] right-[5%]"
+}];
+const clientLogos = [{
+  name: "BNB",
+  logo: bnbLogo,
+  noInvert: false
+}, {
+  name: "KuCoin",
+  logo: kucoinLogo,
+  noInvert: true
+}, {
+  name: "Polygon",
+  logo: polygonLogo,
+  noInvert: false
+}, {
+  name: "Ondo Finance",
+  logo: ondoLogo,
+  noInvert: false
+}, {
+  name: "Bybit",
+  logo: bybitLogo,
+  noInvert: false
+}, {
+  name: "Peaq",
+  logo: peaqLogo,
+  noInvert: true
+}, {
+  name: "Spacecoin",
+  logo: spacecoinLogo,
+  noInvert: true
+}, {
+  name: "Tria",
+  logo: triaLogo,
+  noInvert: true
+}, {
+  name: "Mantra",
+  logo: mantraLogo,
+  noInvert: true
+}, {
+  name: "Sahara AI",
+  logo: saharaAiLogo,
+  noInvert: true
+}, {
+  name: "FOGO",
+  logo: fogoLogo,
+  noInvert: true
+}, {
+  name: "SynFutures",
+  logo: synfuturesLogo,
+  noInvert: true
+}, {
+  name: "Aptos",
+  logo: aptosLogo,
+  noInvert: false
+}, {
+  name: "Kite",
+  logo: kiteLogo,
+  noInvert: true
+}];
+// Default stats as fallback
+const defaultStats = [{
+  id: "client_valuation",
+  value: 7,
+  label: "Client Valuation",
+  prefix: "$",
+  suffix: "B+"
+}, {
+  id: "kol_network",
+  value: 230,
+  label: "KOL Network",
+  prefix: "",
+  suffix: "+"
+}, {
+  id: "projects_launched",
+  value: 19,
+  label: "Projects Launched",
+  prefix: "",
+  suffix: "+"
+}, {
+  id: "events_hosted",
+  value: 55,
+  label: "Events Hosted",
+  prefix: "",
+  suffix: "+"
+}];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [textVisible, setTextVisible] = useState(false);
+  const { createRipple } = useRipple();
+  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
-  const { statsMap } = useBrandStatsByIds([
-    "client_valuation", "kol_network", "projects_launched", "events_hosted",
-  ]);
+  // Use unified video player hook
+  const {
+    videoRef,
+    isVideoReady,
+    hasVideoError,
+    shouldDisableVideo,
+    videoProps,
+    posterProps,
+    quality,
+    networkInfo,
+    ShimmerOverlay
+  } = useVideoPlayer({
+    src: '/videos/hero-background.mp4',
+    poster: '/images/hero-poster.jpg',
+    autoPlay: true,
+    preload: 'auto'
+  });
 
+  // Fetch dynamic brand stats
+  const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
+  "client_valuation", "kol_network", "projects_launched", "events_hosted"]
+  );
+
+  // Merge dynamic stats with fallback defaults
   const stats = useMemo(() => {
-    return defaultStats.map((d) => {
-      const dyn = statsMap[d.id];
-      return dyn
-        ? { ...d, value: dyn.value, prefix: dyn.prefix || d.prefix, suffix: dyn.suffix || d.suffix }
-        : d;
+    return defaultStats.map((defaultStat) => {
+      const dynamicStat = statsMap[defaultStat.id];
+      if (dynamicStat) {
+        return {
+          ...defaultStat,
+          value: dynamicStat.value,
+          prefix: dynamicStat.prefix || defaultStat.prefix,
+          suffix: dynamicStat.suffix || defaultStat.suffix
+        };
+      }
+      return defaultStat;
     });
   }, [statsMap]);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setTextVisible(true), 300);
-    const t2 = setTimeout(() => setIsVisible(true), 800);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
+    // Trigger count-up animation after component mounts
+    const timer = setTimeout(() => setIsVisible(true), 800);
+    return () => clearTimeout(timer);
   }, []);
 
-  return (
-    <div className="relative h-screen min-h-[700px] flex flex-col justify-between overflow-hidden bg-black">
-      {/* Ambient glow orbs (CSS, instant load) */}
-      <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-blue-600/[0.06] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/3 w-[400px] h-[400px] bg-blue-500/[0.04] rounded-full blur-[130px] pointer-events-none" />
+  return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
+      {/* Background Layer - Video with mobile optimizations */}
+      <div className="absolute inset-0">
+        {/* Always render poster as a safe fallback */}
+        <img {...posterProps} fetchPriority="high" decoding="async" />
 
-      {/* 3D Canvas — the main visual */}
-      <Suspense fallback={null}>
-        <HeroCanvas />
-      </Suspense>
+        {/* Shimmer loading overlay */}
+        <ShimmerOverlay />
 
-      {/* Content */}
-      <div className="flex-1 flex items-center relative z-10 px-6 lg:px-10">
-        <div className="max-w-3xl">
-          {/* Headline */}
-          <h1
-            className={`font-display text-[2rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold leading-[1.02] tracking-[-0.04em] mb-5 sm:mb-7 transition-all duration-1000 ease-[cubic-bezier(0.33,1,0.68,1)] ${
-              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-            }`}
-          >
-            <span className="text-white block">
-              Web3 Ecosystem
-            </span>
-            <span className="text-white block">
-              Partner for{" "}
-              <span
-                className="bg-gradient-to-r from-blue-300 to-blue-500 bg-clip-text text-transparent"
-                style={{ textShadow: "0 0 60px rgba(64,128,255,0.3)" }}
-              >
-                Korea
-              </span>
-            </span>
+        {!shouldDisableVideo && !hasVideoError &&
+      <video
+        ref={videoRef}
+        {...videoProps}
+        className="absolute inset-0 w-full h-full object-cover z-10"
+        style={{
+          ...videoProps.style,
+          WebkitAppearance: 'none'
+        }}>
+
+            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
+          </video>
+      }
+      </div>
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/50" />
+      
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
+
+      {/* Floating Service Tags - Desktop only (disabled animation on mobile for performance) */}
+      {!shouldDisableHeavyAnimations && serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
+      animation: `float-gentle ${3 + index % 3 * 0.5}s ease-in-out infinite`,
+      animationDelay: `${index * 0.3}s`
+    }}>
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
+            {tag.label}
+          </span>
+        </div>)}
+
+      {/* Mobile tags - static (no animation) for performance */}
+      {isMobile && mobileServiceTags.slice(0, 4).map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`}>
+          <span className="font-sans px-3 py-1.5 text-[11px] rounded-md bg-black/60 border border-white/25 text-white/90 whitespace-nowrap backdrop-blur-md shadow-lg">
+            {tag.label}
+          </span>
+        </div>)}
+
+      {/* Main Content - Centered */}
+      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Main Headline - Premium Display Typography - Mobile optimized */}
+          <h1 className="font-sans text-[1.6rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6vw,5rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-24 sm:mt-36 md:mt-44">
+            <span className="text-white font-sans leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
           </h1>
 
-          {/* Subtext */}
-          <p
-            className={`text-sm sm:text-base md:text-lg text-white/35 max-w-lg mb-8 sm:mb-10 leading-relaxed transition-all duration-1000 delay-200 ease-[cubic-bezier(0.33,1,0.68,1)] ${
-              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
-            Hyper-local growth through Korea's top-tier KOL network,
-            community infrastructure, and deep market research.
+          {/* Subtext - Enhanced readability - Mobile optimized */}
+          <p className="text-xs sm:text-base md:text-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
+            Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
-          {/* CTAs — story.foundation dual button pattern */}
-          <div
-            className={`flex flex-wrap items-center gap-4 transition-all duration-1000 delay-400 ease-[cubic-bezier(0.33,1,0.68,1)] ${
-              textVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
-            <a
-              href="/contact#contact-form"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
-            >
-              Start a Project
-              <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="/projects"
-              className="inline-flex items-center gap-2.5 px-7 py-3.5 border border-white/15 text-white/70 text-sm font-medium rounded-full hover:border-white/30 hover:text-white transition-all duration-200"
-            >
-              Explore
-            </a>
+          {/* CTA Button - Enhanced - Mobile optimized */}
+          <a
+          href="/contact#contact-form"
+          className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-9 sm:py-4 font-semibold text-sm sm:text-base rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[52px] border border-white/30 relative overflow-hidden cta-hero-glow mt-10 sm:mt-16"
+          onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}>
+
+            {/* Animated glow ring */}
+            <span className="absolute inset-0 rounded-full animate-cta-ring pointer-events-none" />
+            <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
+            <span>Get Your Free Proposal</span>
+          </a>
+          
+          {/* Micro-copy for trust */}
+          <p className="mt-3 text-[10px] sm:text-sm text-white/50">
+            <span className="inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Free 30-min consultation • Response within 24h
+            </span>
+          </p>
+        </div>
+      </div>
+
+      {/* Stats Section - Enhanced - Mobile optimized */}
+      <div className="relative z-10 py-3 sm:py-6 md:py-8">
+        <div className="container mx-auto px-3 sm:px-8 md:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 md:gap-8">
+            {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
           </div>
         </div>
       </div>
 
-      {/* Stats */}
-      <div className="relative z-10 py-6 sm:py-8 border-t border-white/[0.04]">
-        <div className="w-full px-6 lg:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <StatItem
-                key={index}
-                value={stat.value}
-                label={stat.label}
-                prefix={stat.prefix}
-                suffix={stat.suffix}
-                isVisible={isVisible}
-                delay={index * 100}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Client Logos */}
-      <div className="relative z-10 py-4 overflow-hidden border-t border-white/[0.04]">
+      {/* Client Logo Marquee - Full Width */}
+      <div className="relative z-10 py-3 sm:py-4 overflow-hidden">
         <div className="flex items-center logo-marquee-slow">
-          {[...clientLogos, ...clientLogos].map((client, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-2 mx-3 px-4 py-2 flex-shrink-0"
-            >
+          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-1.5 sm:gap-2.5 mx-1 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
               <img
-                src={client.logo}
-                alt={client.name}
-                loading="lazy"
-                decoding="async"
-                className={`h-5 sm:h-6 w-auto max-w-[100px] object-contain flex-shrink-0 ${
-                  client.noInvert ? "opacity-50" : "brightness-0 invert opacity-40"
-                }`}
-              />
-              <span className="text-white/25 text-xs font-medium whitespace-nowrap hidden sm:inline">
+            src={client.logo}
+            alt={client.name}
+            loading="lazy"
+            decoding="async"
+            className={`h-4 sm:h-6 w-auto max-w-[90px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+
+              <span className="text-white/75 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </div>
-  );
+
+      {/* Enhanced Scroll Indicator - Bottom Right */}
+      <div className="absolute bottom-16 sm:bottom-24 right-3 sm:right-8 z-10 flex items-center gap-2 group cursor-pointer hover:scale-105 transition-transform" onClick={() => window.scrollBy({
+      top: window.innerHeight * 0.8,
+      behavior: 'smooth'
+    })}>
+        <span className="text-white/40 text-[10px] sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
+        <div className="relative flex flex-col items-center">
+          <div className="w-4 h-6 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1">
+            <div className="w-1 h-1 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
+          </div>
+        </div>
+      </div>
+    </div>;
 };
 
+// Stat Item Component with Count-Up Animation
 const StatItem = ({
   value,
   label,
   prefix = "",
   suffix = "",
   isVisible,
-  delay,
-}: {
-  value: number;
-  label: string;
-  prefix?: string;
-  suffix?: string;
-  isVisible: boolean;
-  delay: number;
-}) => {
+  delay
+
+
+
+
+
+
+
+}: {value: number;label: string;prefix?: string;suffix?: string;isVisible: boolean;delay: number;}) => {
   const count = useCountUp({
     end: Math.round(value),
     isVisible,
     delay,
     duration: 2000,
-    decimals: 0,
+    decimals: 0
   });
-
-  return (
-    <div className="text-center">
-      <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-none mb-1">
-        {prefix}
-        {count}
-        {suffix}
+  return <div className="text-center cursor-default select-none">
+      <div className="text-3xl sm:text-5xl md:text-5xl lg:text-5xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
+        {prefix}{count}{suffix}
       </div>
-      <div className="text-[11px] sm:text-sm text-white/25 font-medium">{label}</div>
-    </div>
-  );
+      <div className="text-[10px] sm:text-sm md:text-base text-white/60 font-medium">
+        {label}
+      </div>
+    </div>;
 };
-
 export default HeroSection;

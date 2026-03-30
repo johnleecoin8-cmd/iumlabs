@@ -56,16 +56,7 @@ const WhyChooseUsSection = () => {
           {...videoProps}
           className={`w-full h-full object-cover transition-opacity duration-700 ${isVideoReady ? 'opacity-100' : 'opacity-0'}`} />
 
-        <div className="absolute inset-0 bg-black/65" />
-        {/* Tech grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
       {/* Content */}
@@ -83,7 +74,7 @@ const WhyChooseUsSection = () => {
               Seoul Moves Fast.
             </motion.span>
             <motion.span
-              className="block text-white"
+              className="block bg-gradient-to-r from-white via-purple-300 to-purple-400 bg-clip-text text-transparent"
               variants={headlineLineVariants}>
 
               We Make You Land.

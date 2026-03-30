@@ -256,8 +256,82 @@ const Jobs = () => {
           }} transition={{
             delay: 0.5,
             duration: 0.6
-          }} className="hidden">.</motion.span>
-
+          }} className="lunar-tag-dark absolute top-[15%] left-[8%] md:left-[12%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '0s'
+          }}>
+              Researcher
+            </motion.span>
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.7,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute top-[22%] right-[10%] md:right-[15%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '0.5s'
+          }}>
+              Growth Manager
+            </motion.span>
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.9,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[28%] left-[6%] md:left-[10%] animate-float text-xs md:text-sm hidden md:block" style={{
+            animationDelay: '1s'
+          }}>
+              Seoul HQ
+            </motion.span>
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.1,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[35%] right-[8%] md:right-[12%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '1.5s'
+          }}>
+              Remote OK
+            </motion.span>
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.3,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute top-[35%] left-[4%] md:left-[6%] animate-float text-xs md:text-sm hidden lg:block" style={{
+            animationDelay: '2s'
+          }}>
+              Web3 Native
+            </motion.span>
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.5,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[20%] right-[5%] md:right-[8%] animate-float text-xs md:text-sm hidden lg:block" style={{
+            animationDelay: '2.5s'
+          }}>
+              Global Impact
+            </motion.span>
+            
             {/* Content */}
             <div className="relative z-10 container mx-auto px-6 text-center">
               <AnimatedSection>
@@ -530,7 +604,7 @@ const Jobs = () => {
             }} transition={{
               delay: 0.15
             }}>
-                  <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
+                  <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
                     <DollarSign className="w-4 h-4" />
                     <span className="text-sm font-medium">{selectedPosition.salary}</span>
                   </div>

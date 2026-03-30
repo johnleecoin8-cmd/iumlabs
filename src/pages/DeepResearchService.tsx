@@ -325,7 +325,7 @@ const ResearchDashboard = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all ${
                 activeTab === tab.id 
-                  ? 'bg-blue-500/20 text-blue-400' 
+                  ? 'bg-cyan-500/20 text-cyan-400' 
                   : 'text-white/50 hover:text-white/80'
               }`}
             >
@@ -361,8 +361,8 @@ const ResearchDashboard = () => {
                   <p className="text-xs text-white/50">Real-time market intelligence</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
-                  <span className="text-xs text-blue-400">Live</span>
+                  <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                  <span className="text-xs text-green-400">Live</span>
                 </div>
               </div>
 
@@ -387,7 +387,7 @@ const ResearchDashboard = () => {
                     <div className="text-xs text-white/50 mb-1">{metric.label}</div>
                     <div className="text-xl font-bold text-white">{metric.value}</div>
                     <div className={`flex items-center gap-1 text-xs ${
-                      metric.trend === "up" ? "text-blue-400" : "text-red-400"
+                      metric.trend === "up" ? "text-green-400" : "text-red-400"
                     }`}>
                       {metric.trend === "up" ? (
                         <ArrowUpRight className="w-3 h-3" />
@@ -417,8 +417,8 @@ const ResearchDashboard = () => {
                   <p className="text-xs text-white/50">Live blockchain transactions</p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Activity className="w-4 h-4 text-blue-400 animate-pulse" />
-                  <span className="text-xs text-blue-400">Monitoring</span>
+                  <Activity className="w-4 h-4 text-cyan-400 animate-pulse" />
+                  <span className="text-xs text-cyan-400">Monitoring</span>
                 </div>
               </div>
 
@@ -436,15 +436,15 @@ const ResearchDashboard = () => {
                     >
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
                         event.type === "transfer" ? "bg-blue-500/20" :
-                        event.type === "swap" ? "bg-blue-500/20" :
-                        event.type === "stake" ? "bg-blue-500/20" :
+                        event.type === "swap" ? "bg-green-500/20" :
+                        event.type === "stake" ? "bg-purple-500/20" :
                         event.type === "bridge" ? "bg-orange-500/20" :
                         "bg-pink-500/20"
                       }`}>
                         <Wallet className={`w-4 h-4 ${
                           event.type === "transfer" ? "text-blue-400" :
-                          event.type === "swap" ? "text-blue-400" :
-                          event.type === "stake" ? "text-blue-400" :
+                          event.type === "swap" ? "text-green-400" :
+                          event.type === "stake" ? "text-purple-400" :
                           event.type === "bridge" ? "text-orange-400" :
                           "text-pink-400"
                         }`} />
@@ -454,7 +454,7 @@ const ResearchDashboard = () => {
                         <div className="text-[10px] text-white/40">{event.hash}</div>
                       </div>
                       <div className="text-right">
-                        <div className="text-sm text-blue-400">{event.amount}</div>
+                        <div className="text-sm text-cyan-400">{event.amount}</div>
                         <div className="text-[10px] text-white/30">{event.time}</div>
                       </div>
                     </motion.div>
@@ -469,11 +469,11 @@ const ResearchDashboard = () => {
                   <div className="text-[10px] text-white/40 uppercase">Txns/Hour</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-blue-400">$142M</div>
+                  <div className="text-lg font-bold text-cyan-400">$142M</div>
                   <div className="text-[10px] text-white/40 uppercase">Volume (24h)</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-lg font-bold text-blue-400">+18.3%</div>
+                  <div className="text-lg font-bold text-green-400">+18.3%</div>
                   <div className="text-[10px] text-white/40 uppercase">Activity</div>
                 </div>
               </div>
@@ -494,8 +494,8 @@ const ResearchDashboard = () => {
                   <h3 className="text-lg font-semibold text-white">Research Insights</h3>
                   <p className="text-xs text-white/50">AI-powered analysis</p>
                 </div>
-                <div className="px-2 py-1 rounded-full bg-blue-500/20 border border-blue-500/30">
-                  <span className="text-[10px] text-blue-400 font-medium">Analyzing...</span>
+                <div className="px-2 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/30">
+                  <span className="text-[10px] text-cyan-400 font-medium">Analyzing...</span>
                 </div>
               </div>
 
@@ -503,25 +503,25 @@ const ResearchDashboard = () => {
               <div className="p-4 rounded-xl bg-black/50 border border-white/10 font-mono min-h-[200px]">
                 <div className="flex items-center gap-2 mb-4 pb-2 border-b border-white/10">
                   <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-blue-500" />
-                  <div className="w-3 h-3 rounded-full bg-blue-500" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <div className="w-3 h-3 rounded-full bg-green-500" />
                   <span className="text-xs text-white/40 ml-2">research_terminal</span>
                 </div>
 
                 <div className="space-y-3">
                   <div className="flex items-start gap-2">
-                    <span className="text-blue-400">$</span>
-                    <span className="text-blue-400">analyze</span>
+                    <span className="text-cyan-400">$</span>
+                    <span className="text-green-400">analyze</span>
                     <span className="text-white/60">--market korean_crypto</span>
                   </div>
                   
                   <div className="pl-4 text-white/80 text-sm">
                     {typedText}
-                    <span className="inline-block w-2 h-4 bg-blue-400 ml-1 animate-pulse" />
+                    <span className="inline-block w-2 h-4 bg-cyan-400 ml-1 animate-pulse" />
                   </div>
 
                   <div className="flex items-center gap-2 pt-2">
-                    <div className="w-1 h-1 rounded-full bg-blue-400 animate-pulse" />
+                    <div className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
                     <span className="text-[10px] text-white/40">Processing {currentInsight + 1}/{researchInsights.length} insights...</span>
                   </div>
                 </div>
@@ -534,11 +534,11 @@ const ResearchDashboard = () => {
                   <div className="text-[10px] text-white/40">DeFi Growth YoY</div>
                 </div>
                 <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
-                  <div className="text-lg font-bold text-blue-400">3.2x</div>
+                  <div className="text-lg font-bold text-cyan-400">3.2x</div>
                   <div className="text-[10px] text-white/40">Trading Frequency</div>
                 </div>
                 <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
-                  <div className="text-lg font-bold text-blue-400">340%</div>
+                  <div className="text-lg font-bold text-green-400">340%</div>
                   <div className="text-[10px] text-white/40">Listing Volume Spike</div>
                 </div>
               </div>
@@ -763,7 +763,7 @@ const DeepResearchService = () => {
                 <div className="flex items-center justify-end mb-6">
                   <Link 
                     to="/blog" 
-                    className="text-sm text-blue-400 hover:text-cyan-300 flex items-center gap-1"
+                    className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
                   >
                     View All <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -784,8 +784,8 @@ const DeepResearchService = () => {
                           />
                         </div>
                       )}
-                      <div className="text-xs text-blue-400 mb-1">{post.category}</div>
-                      <h4 className="text-sm font-medium text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                      <div className="text-xs text-cyan-400 mb-1">{post.category}</div>
+                      <h4 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors line-clamp-2">
                         {post.title}
                       </h4>
                       <div className="text-xs text-white/40 mt-2">{post.read_time}</div>

@@ -90,7 +90,7 @@ const ProjectDetail = () => {
     featureImage: fallbackProject?.featureImage,
     category: dbProject.category || '',
     result: dbProject.result || '',
-    glowColor: '#4080ff',
+    glowColor: dbProject.glow_color || '#00D4FF',
     description: dbProject.description || '',
     challenge: dbProject.challenge || fallbackProject?.challenge || '',
     client_name: dbProject.client_name || fallbackProject?.name,

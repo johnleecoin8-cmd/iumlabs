@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -41,12 +41,12 @@ video {
 
 @layer base {
   :root {
-    /* Clean Color System — story.foundation inspired */
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
     
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
     
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
@@ -83,10 +83,10 @@ video {
     --light-bg: 0 0% 96%;
     --light-fg: 0 0% 8%;
 
-    /* Section background system — unified black */
-    --surface-base: 0 0% 0%;
-    --surface-odd: 0 0% 0%;
-    --surface-even: 0 0% 0%;
+    /* Section background system - Black vs Dark Gray */
+    --surface-base: 0 0% 3%;      /* #080808 - pure black */
+    --surface-odd: 0 0% 3%;       /* #080808 - black sections */
+    --surface-even: 0 0% 10%;     /* #1A1A1A - dark gray sections */
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
@@ -101,8 +101,8 @@ video {
     --background: 0 0% 3%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
     
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
@@ -224,7 +224,100 @@ video {
     color: hsl(var(--light-fg));
   }
 
-  /* Legacy lunar-* classes removed — use Tailwind utilities directly */
+  /* Lunar Strategy Tags - Dark variant (with background) */
+  .lunar-tag-dark {
+    @apply px-4 py-2 text-sm font-medium rounded-sm border transition-all duration-300;
+    background: hsl(0 0% 0% / 0.6);
+    backdrop-filter: blur(8px);
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.9);
+  }
+  
+  .lunar-tag-dark:hover {
+    background: hsl(0 0% 0% / 0.8);
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
+  }
+
+  /* Lunar Strategy Tag - Light variant */
+  .lunar-tag-light {
+    @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
+    background: transparent;
+    border-color: hsl(0 0% 0% / 0.15);
+    color: hsl(0 0% 0% / 0.7);
+  }
+
+  .lunar-tag-light:hover {
+    border-color: hsl(0 0% 0% / 0.4);
+    color: hsl(0 0% 0%);
+  }
+
+  /* Service Tags - Clean style (no neon glow) */
+  .service-tag {
+    @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
+    background: transparent;
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.8);
+  }
+  
+  .service-tag:hover {
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
+  }
+
+  /* Lunar Strategy Blue Button - Solid, Clean */
+  .lunar-btn {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  
+  .lunar-btn:hover {
+    background-color: hsl(var(--primary) / 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.3);
+  }
+
+  /* White/Light Solid Button */
+  .lunar-btn-solid {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  
+  .lunar-btn-solid:hover {
+    background-color: hsl(var(--foreground) / 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px hsl(var(--foreground) / 0.2);
+  }
+
+  /* Lunar Strategy Outline Button - Clean */
+  .lunar-btn-outline {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full border transition-all duration-300;
+    background: transparent;
+    border-color: hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+  
+  .lunar-btn-outline:hover {
+    border-color: hsl(var(--foreground) / 0.5);
+    background: hsl(var(--foreground) / 0.05);
+    transform: translateY(-2px);
+  }
+
+  /* Dark outline button - Clean */
+  .lunar-btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full border transition-all duration-300;
+    background: transparent;
+    border-color: hsl(var(--dark-fg) / 0.3);
+    color: hsl(var(--dark-fg));
+  }
+  
+  .lunar-btn-outline-dark:hover {
+    border-color: hsl(var(--dark-fg) / 0.6);
+    background: hsl(var(--dark-fg) / 0.05);
+    transform: translateY(-2px);
+  }
 
   /* Bracket Link Style */
   .bracket-link {

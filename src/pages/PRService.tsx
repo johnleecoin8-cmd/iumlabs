@@ -287,7 +287,7 @@ const LiveNewsDistribution = () => {
                   }}
                   transition={{ duration: 0.5, repeat: isActive ? Infinity : 0 }}
                   className={`w-12 h-12 rounded-xl border-2 flex items-center justify-center ${
-                    isComplete ? 'bg-blue-500/20' : isActive ? 'bg-blue-500/20' : 'bg-white/5'
+                    isComplete ? 'bg-green-500/20' : isActive ? 'bg-purple-500/20' : 'bg-white/5'
                   }`}
                 >
                   <Icon 
@@ -349,7 +349,7 @@ const LiveNewsDistribution = () => {
                       exit={{ opacity: 0 }}
                       className="absolute -top-2 -right-2"
                     >
-                      <CheckCircle2 className="w-5 h-5 text-blue-400" />
+                      <CheckCircle2 className="w-5 h-5 text-green-400" />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -381,7 +381,7 @@ const LiveNewsDistribution = () => {
           </div>
           <div className="w-px h-10 bg-white/10" />
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-blue-400">
+            <div className="text-2xl sm:text-3xl font-bold text-green-400">
               Live
             </div>
             <div className="text-[10px] text-white/50 uppercase tracking-wider">Status</div>
@@ -405,8 +405,8 @@ const LiveNewsDistribution = () => {
               transition={{ delay: index * 0.1 }}
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition-colors group"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-blue-500" />
-              <span className="text-[10px] text-blue-400 w-20">{news.outlet}</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-purple-500" />
+              <span className="text-[10px] text-purple-400 w-20">{news.outlet}</span>
               <span className="text-xs text-white/80 flex-1 truncate">{news.title}</span>
               <span className="text-[10px] text-white/30">{news.time}</span>
               <ArrowRight className="w-3 h-3 text-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />

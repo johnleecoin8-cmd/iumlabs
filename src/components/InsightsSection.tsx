@@ -136,7 +136,7 @@ const InsightsSection = () => {
   };
 
   return (
-    <section className="bg-black px-6 lg:px-10 py-8 md:py-12">
+    <section className="bg-background p-4 sm:p-6 md:p-8">
       {/* Header Row: Title + Subscribe */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
         {/* Left: Title & Description */}
@@ -188,7 +188,7 @@ const InsightsSection = () => {
       )}
 
       {/* Footer Row */}
-      <div className="flex items-center justify-between mt-6 pt-4 border-t border-white/[0.06]">
+      <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
         <p className="text-muted-foreground text-[10px] sm:text-xs">
           Join 500+ Web3 founders getting our weekly insights.
         </p>

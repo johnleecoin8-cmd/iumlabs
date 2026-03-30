@@ -5,7 +5,6 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import FAQSchema from "@/components/FAQSchema";
 
 const faqs = [
   {
@@ -54,9 +53,7 @@ const FAQSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <>
-      <FAQSchema faqs={faqs} />
-      <section ref={ref} className="py-24 px-4 bg-card/30">
+    <section ref={ref} className="py-24 px-4 bg-card/30">
       <div className="container mx-auto max-w-4xl">
         <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
@@ -86,8 +83,7 @@ const FAQSection = () => {
           </Accordion>
         </div>
       </div>
-      </section>
-    </>
+    </section>
   );
 };
 

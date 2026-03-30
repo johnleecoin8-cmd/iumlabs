@@ -12,7 +12,6 @@ import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-import FAQSchema from "@/components/FAQSchema";
 import {
   Accordion,
   AccordionContent,
@@ -53,14 +52,14 @@ const clientLogos = [
 
 // All services for "More Services" section
 const allServices = [
-  { slug: "gtm", title: "GTM Strategy", color: "hsl(217 91% 60%)" },
-  { slug: "branding", title: "Branding & Website", color: "hsl(217 91% 60%)" },
-  { slug: "seo-ads", title: "SEO & Paid Ads", color: "hsl(217 91% 60%)" },
-  { slug: "offline-event", title: "Offline Event", color: "hsl(217 91% 60%)" },
-  { slug: "community", title: "Community Management", color: "hsl(217 91% 60%)" },
-  { slug: "deep-research", title: "Deep Research", color: "hsl(217 91% 60%)" },
-  { slug: "influencer", title: "Influencer/KOL", color: "hsl(217 91% 60%)" },
-  { slug: "pr", title: "PR & Media", color: "hsl(217 91% 60%)" },
+  { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
+  { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
+  { slug: "seo-ads", title: "SEO & Paid Ads", color: "#F59E0B" },
+  { slug: "offline-event", title: "Offline Event", color: "#10B981" },
+  { slug: "community", title: "Community Management", color: "#5865F2" },
+  { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
+  { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
+  { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
 ];
 
 export interface ServiceStat {
@@ -224,12 +223,12 @@ const ServicePageLayout = ({
   const contactSectionNum = getNextSectionNumber();
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
-
+      
       {/* Hero Section */}
-      <main className="bg-black" id="hero">
-        <div className="relative min-h-[100svh] flex flex-col justify-between overflow-hidden">
+      <main className="p-1 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
+        <div className="relative min-h-[100svh] sm:min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
           {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
             {/* Fallback Image - 즉시 표시 */}
@@ -285,7 +284,30 @@ const ServicePageLayout = ({
             <span className="text-xs sm:text-sm font-medium">Back</span>
           </motion.button>
 
-          {/* Floating tags removed — story.foundation style */}
+          {/* Floating Service Tags - Desktop */}
+          {serviceTags.slice(0, 6).map((tag, index) => {
+            const positions = [
+              "top-[15%] left-[5%]",
+              "top-[35%] left-[4%]",
+              "top-[55%] left-[6%]",
+              "top-[18%] right-[6%]",
+              "top-[42%] right-[5%]",
+              "top-[66%] right-[7%]",
+            ];
+            return (
+              <motion.div
+                key={index}
+                className={`absolute ${positions[index]} hidden lg:block z-10`}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
+              >
+                <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
+                  {tag.label}
+                </span>
+              </motion.div>
+            );
+          })}
 
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-16 sm:pt-8 pb-4">
@@ -300,7 +322,7 @@ const ServicePageLayout = ({
               >
                 <span className="text-white">{serviceTitle}</span>
                 <br />
-                <span className="text-white/70">{serviceSubtitle}</span>
+                <span style={{ color: accentColor }}>{serviceSubtitle}</span>
               </motion.h1>
 
               {/* Description */}
@@ -319,10 +341,12 @@ const ServicePageLayout = ({
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <CalendlyButton
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 transition-all duration-200 active:scale-[0.98]"
+                <CalendlyButton 
+                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[46px]"
+                  style={{ backgroundColor: accentColor, color: '#fff' }}
                 >
-                  <Calendar className="w-4 h-4" />
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                  <Calendar className="w-4 h-4 sm:w-4 sm:h-4" />
                   <span>Book a Meeting</span>
                 </CalendlyButton>
               </motion.div>
@@ -415,7 +439,7 @@ const ServicePageLayout = ({
                       <ul className="space-y-2.5">
                         {deliverable.items.map((item, idx) => (
                           <li key={idx} className="flex items-start gap-2.5 text-white/50 text-xs leading-relaxed">
-                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-white/40" />
+                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-violet-400/60" />
                             <span>{item}</span>
                           </li>
                         ))}
@@ -483,9 +507,6 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* FAQ Schema for Google Rich Snippets */}
-      {faqItems && faqItems.length > 0 && <FAQSchema faqs={faqItems} />}
-
       {/* FAQ Section - Minimal Agency Style */}
       {faqItems && faqItems.length > 0 && (
         <section className="bg-[#0A0A0A]">
@@ -503,7 +524,7 @@ const ServicePageLayout = ({
                     >
                       <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
                         <span className="flex items-center gap-3">
-                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-white/40" />
+                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-violet-400/60" />
                           <span>{item.question}</span>
                         </span>
                       </AccordionTrigger>

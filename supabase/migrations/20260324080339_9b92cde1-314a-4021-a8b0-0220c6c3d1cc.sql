@@ -1,1 +1,0 @@
-UPDATE public.hype_projects SET logo_url = 'https://cdn-mashboard.despreadlabs.io/images/tracking-projects/logo/peaq.png' WHERE ticker = 'PEAQ';

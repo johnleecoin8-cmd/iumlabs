@@ -151,7 +151,7 @@ const StatItem = ({
       <div className="text-lg sm:text-xl md:text-3xl font-bold text-white mb-0.5 group-hover:text-primary transition-colors">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-caption text-white/50 font-light group-hover:text-white/70/70 transition-colors">
+      <div className="text-[10px] sm:text-caption text-white/50 font-light group-hover:text-white/70 transition-colors">
         {label}
       </div>
     </div>
@@ -189,9 +189,9 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
     >
       <div
         className={cn(
-          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-white/[0.02] h-full",
-          !isRightColumn && "lg:border-r border-white/[0.06]",
-          !isLastRow && "border-b border-white/[0.06]"
+          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
+          !isRightColumn && "lg:border-r border-border",
+          !isLastRow && "border-b border-border"
         )}
       >
         <Link
@@ -211,32 +211,32 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
           {/* Content */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-wider">{project.category}</span>
+              <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{project.category}</span>
               {project.websiteUrl && (
                 <a
                   href={project.websiteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-white/40 hover:text-white/70 transition-colors"
+                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <ExternalLink className="w-2.5 h-2.5" />
                 </a>
               )}
             </div>
-            <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-white/70/80 transition-colors line-clamp-1">
+            <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
               {project.name}
             </h3>
-            <p className="text-white/80 font-medium text-[10px] sm:text-xs line-clamp-1">
+            <p className="text-foreground/80 font-medium text-[10px] sm:text-xs line-clamp-1">
               {project.result}
             </p>
-            <p className="text-white/40 text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
+            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
               {project.description}
             </p>
           </div>
 
           {/* View case link */}
-          <div className="flex items-center gap-1.5 mt-3 text-white/40 group-hover:text-white/70 transition-colors text-[10px] sm:text-xs">
+          <div className="flex items-center gap-1.5 mt-3 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs">
             <span className="group-hover:underline underline-offset-4">View case</span>
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
           </div>
@@ -263,7 +263,7 @@ const CategoryFilter = ({
         className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
           activeCategory === "All"
             ? "bg-foreground text-background border-foreground"
-            : "bg-transparent text-white/40 border-white/[0.06] hover:border-foreground/50 hover:text-white/70"
+            : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
         }`}
       >
         All
@@ -275,7 +275,7 @@ const CategoryFilter = ({
           className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
             activeCategory === category
               ? "bg-foreground text-background border-foreground"
-              : "bg-transparent text-white/40 border-white/[0.06] hover:border-foreground/50 hover:text-white/70"
+              : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
           }`}
         >
           {category}
@@ -384,19 +384,19 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
   if (projects.length === 0) return null;
 
   return (
-    <section ref={ref} className="scroll-reveal bg-black" id="gallery">
-      <div className="border-t border-white/[0.06]">
+    <section ref={ref} className="scroll-reveal bg-[#0A0A0A]" id="gallery">
+      <div className="border-t border-border">
         {/* Section Header - matches other sections */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/[0.06]"
+          className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border"
         >
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">02</span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
+            <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
+            <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
           </div>
-          <span className="text-xs text-white/40 tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-white/[0.06] rounded-full">
+          <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
             ← Drag / Scroll →
           </span>
         </motion.div>
@@ -512,7 +512,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 
                           {/* Result Metric */}
                           <div className="mb-6">
-                            <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent leading-tight">
+                            <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent leading-tight">
                               {project.result}
                             </span>
                           </div>
@@ -520,7 +520,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
                           {/* View Project Button */}
                           <Link
                             to={`/projects/${project.slug}`}
-                            className="inline-flex items-center gap-2 text-white/80 hover:text-white/70 text-xs tracking-widest transition-colors group/link"
+                            className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
                             onClick={(e) => isDragging && e.preventDefault()}
                           >
                             <span>VIEW PROJECT</span>
@@ -557,7 +557,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
                 >
                   <div className="text-center">
                     <ArrowRight className="w-8 h-8 text-white/40 group-hover:text-primary mx-auto mb-3 group-hover:translate-x-1 transition-all" />
-                    <span className="text-white/60 group-hover:text-white/70 text-sm font-medium transition-colors">
+                    <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
                       View All
                     </span>
                   </div>
@@ -575,14 +575,14 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
           >
             <div className="relative h-[2px] bg-border rounded-full overflow-hidden">
               <motion.div
-                className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-blue-400 rounded-full"
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
                 style={{ width: `${scrollProgress}%` }}
                 transition={{ duration: 0.1 }}
               />
             </div>
             <div className="flex justify-between mt-2">
-              <span className="text-white/40 text-[10px] tracking-wider">01</span>
-              <span className="text-white/40 text-[10px] tracking-wider">{String(projects.length).padStart(2, '0')}</span>
+              <span className="text-muted-foreground text-[10px] tracking-wider">01</span>
+              <span className="text-muted-foreground text-[10px] tracking-wider">{String(projects.length).padStart(2, '0')}</span>
             </div>
           </motion.div>
 
@@ -706,7 +706,7 @@ const Projects = () => {
   }, [cases, activeCategory]);
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-background">
       <SEOHead
         title="Korea Web3 & Crypto Marketing Case Studies | ium Labs"
         description="18+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
@@ -716,7 +716,7 @@ const Projects = () => {
       <Navbar />
       
       {/* Hero Section - Homepage Style */}
-      <main className="bg-black" id="hero">
+      <main className="bg-background" id="hero">
         <div className="overflow-hidden">
           <div className="relative min-h-[80vh] flex flex-col justify-between overflow-hidden">
             {/* Background Layer - Video with poster fallback */}
@@ -814,20 +814,20 @@ const Projects = () => {
       </main>
       
       {/* Cases Section - 01 */}
-      <section className="scroll-reveal bg-black" id="cases">
-        <div className="border-t border-white/[0.06]">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/[0.06]">
+      <section className="scroll-reveal bg-[#121212]" id="cases">
+        <div className="border-t border-border">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
             </div>
-            <span className="text-xs text-white/40 tracking-wider hidden sm:block px-3 py-1 border border-white/[0.06] rounded-full">
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
               {filteredCases.length} Projects
             </span>
           </div>
           
           {/* Category Filter - integrated below header */}
-          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-white/[0.06]/50">
+          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-border/50">
             <CategoryFilter 
               categories={categories} 
               activeCategory={activeCategory} 
@@ -852,7 +852,7 @@ const Projects = () => {
       
       
       {/* Contact Section - 03 */}
-      <section className="scroll-reveal bg-black" id="contact">
+      <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
         <ContactFormSection sectionNumber="03" />
       </section>
       

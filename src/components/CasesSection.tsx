@@ -179,12 +179,14 @@ const CaseCard = ({
   return <div ref={ref} className={cn("h-full transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
     transitionDelay: `${index % 6 * 50}ms`
   }}>
-      <div className={cn("group block p-2.5 sm:p-4 md:p-5 transition-colors duration-300 hover:bg-white/[0.02] h-full border-b border-white/[0.06]",
-    index % 2 === 0 && "border-r border-r-white/[0.06] max-lg:border-r",
-    "lg:border-r lg:border-r-white/[0.06]", index % 3 === 2 && "lg:border-r-0")}>
+      <div className={cn("group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full border-b border-border",
+    // Mobile & Tablet: 2 columns - right border on left column (even index)
+    index % 2 === 0 && "border-r max-lg:border-r",
+    // Desktop: 3 columns - no right border on last column
+    "lg:border-r", index % 3 === 2 && "lg:border-r-0")}>
         <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
-          <div className="w-full aspect-[16/9] rounded-xl overflow-hidden mb-3 transition-all duration-300">
+          <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img src={bgImage} alt={name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
 
@@ -280,7 +282,7 @@ const CasesSection = ({
   });
   const cases = projects || [];
   const displayCases = cases.slice(0, maxItems);
-  return <section className="bg-black">
+  return <section className="bg-background">
       {/* Top Info Bar */}
       
 

@@ -201,7 +201,7 @@ const MinimalProcessGrid = () => {
                 className={`
                   relative p-5 sm:p-6 rounded-2xl border transition-all duration-500 cursor-pointer
                   ${isActive 
-                    ? 'border-blue-500/30 bg-blue-500/[0.05]' 
+                    ? 'border-violet-500/30 bg-violet-500/[0.05]' 
                     : 'border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12]'
                   }
                 `}
@@ -217,7 +217,7 @@ const MinimalProcessGrid = () => {
                 {/* Week Number */}
                 <span className={`
                   text-[10px] font-mono tracking-widest uppercase mb-4 block
-                  ${isActive ? 'text-blue-400' : 'text-white/30'}
+                  ${isActive ? 'text-violet-400' : 'text-white/30'}
                 `}>
                   {phase.week}
                 </span>
@@ -226,11 +226,11 @@ const MinimalProcessGrid = () => {
                 <div className={`
                   w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-all duration-300
                   ${isActive 
-                    ? 'bg-blue-500/20 border border-blue-500/30' 
+                    ? 'bg-violet-500/20 border border-violet-500/30' 
                     : 'bg-white/[0.03] border border-white/[0.06]'
                   }
                 `}>
-                  <Icon className={`w-5 h-5 ${isActive ? 'text-blue-400' : 'text-white/40'}`} />
+                  <Icon className={`w-5 h-5 ${isActive ? 'text-violet-400' : 'text-white/40'}`} />
                 </div>
                 
                 {/* Title */}
@@ -248,7 +248,7 @@ const MinimalProcessGrid = () => {
                 `}>
                   {phase.activities.slice(0, 3).map((activity, i) => (
                     <div key={i} className="flex items-start gap-2 text-[11px] text-white/50">
-                      <Check className="w-3 h-3 mt-0.5 flex-shrink-0 text-blue-400/50" />
+                      <Check className="w-3 h-3 mt-0.5 flex-shrink-0 text-violet-400/50" />
                       <span className="line-clamp-1">{activity}</span>
                     </div>
                   ))}
@@ -257,7 +257,7 @@ const MinimalProcessGrid = () => {
                 {/* Bottom accent line */}
                 <div className={`
                   absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] rounded-full
-                  bg-gradient-to-r from-transparent via-blue-400 to-transparent
+                  bg-gradient-to-r from-transparent via-violet-400 to-transparent
                   transition-all duration-500
                   ${isActive ? 'w-1/2 opacity-100' : 'w-0 opacity-0'}
                 `} />
@@ -299,7 +299,7 @@ const GalleryMarquee = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="absolute bottom-3 left-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <span className="text-[10px] text-blue-400/80 font-mono uppercase tracking-wider">
+              <span className="text-[10px] text-violet-400/80 font-mono uppercase tracking-wider">
                 {img.project}
               </span>
             </div>

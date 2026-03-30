@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { HelmetProvider } from "react-helmet-async";
-// Sidebar and MobileBottomNav removed — using top Navbar for all breakpoints
+import Sidebar from "@/components/Sidebar";
+import MobileBottomNav from "@/components/MobileBottomNav";
+import { SidebarProvider } from "@/hooks/useSidebarState";
 import PageIntro from "@/components/PageIntro";
 import Index from "./pages/Index";
 
@@ -53,43 +55,88 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Simple fade page transition — story.foundation style
+// Logo center pulse page transition
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [opacity, setOpacity] = useState(1);
+  const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
   const isFirstMount = useRef(true);
   const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
+    // Skip animation on first mount
     if (isFirstMount.current) {
       isFirstMount.current = false;
       return;
     }
-    if (prevPathname.current === location.pathname) return;
+
+    // Only animate if pathname actually changed
+    if (prevPathname.current === location.pathname) {
+      return;
+    }
     prevPathname.current = location.pathname;
 
-    setOpacity(0);
-    const timer = setTimeout(() => {
+    // Start transition sequence
+    setPhase('fadeOut');
+
+    const fadeOutTimer = setTimeout(() => {
+      setPhase('logo');
+    }, 200);
+
+    const logoTimer = setTimeout(() => {
       setDisplayChildren(children);
-      setOpacity(1);
-    }, 250);
-    return () => clearTimeout(timer);
+      setPhase('fadeIn');
+    }, 600);
+
+    const fadeInTimer = setTimeout(() => {
+      setPhase('idle');
+    }, 850);
+
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(logoTimer);
+      clearTimeout(fadeInTimer);
+    };
   }, [location.pathname, children]);
 
+  // Update children immediately when not transitioning
   useEffect(() => {
-    if (opacity === 1 && children !== displayChildren) {
+    if (phase === 'idle' && children !== displayChildren) {
       setDisplayChildren(children);
     }
-  }, [children, displayChildren, opacity]);
+  }, [children, displayChildren, phase]);
 
   return (
-    <div
-      className="transition-opacity duration-300 ease-[cubic-bezier(0.33,1,0.68,1)]"
-      style={{ opacity }}
-    >
-      {displayChildren}
-    </div>
+    <>
+      {/* Logo overlay */}
+      {(phase === 'logo' || phase === 'fadeOut') && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
+          style={{ willChange: 'opacity' }}
+        >
+          <img 
+            src={logo} 
+            alt="ium Labs" 
+            className={`w-16 h-16 object-contain brightness-0 invert ${
+              phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
+            }`}
+            style={{ willChange: 'opacity, transform' }}
+          />
+        </div>
+      )}
+
+      {/* Page content */}
+      <div 
+        className={`transition-opacity duration-200 ease-out ${
+          phase === 'fadeOut' || phase === 'logo' 
+            ? 'opacity-0' 
+            : 'opacity-100'
+        }`}
+        style={{ willChange: 'opacity' }}
+      >
+        {displayChildren}
+      </div>
+    </>
   );
 };
 
@@ -156,8 +203,12 @@ const AppContent = () => {
     <>
       {showIntro && <PageIntro onComplete={handleIntroComplete} />}
       <ScrollToTop />
-      <div className="w-full">
-        <AppRoutes />
+      <div className="flex w-full">
+        <Sidebar />
+        <div className="flex-1 min-w-0 pb-16 lg:pb-0">
+          <AppRoutes />
+        </div>
+        <MobileBottomNav />
       </div>
     </>
   );
@@ -170,7 +221,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AppContent />
+          <SidebarProvider>
+            <AppContent />
+          </SidebarProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
