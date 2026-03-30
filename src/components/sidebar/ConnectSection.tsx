@@ -1,5 +1,6 @@
-import { Send, Linkedin } from "lucide-react";
+import { Send, Linkedin, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { brand } from "@/config/content";
 
 interface ConnectSectionProps {
