@@ -20,7 +20,6 @@ const navIconMap: Record<string, React.ElementType> = {
   'Blog': BookOpen,
   'K-Leaderboard': Crown,
   'Career': Users,
-  'Contact': Mail
 };
 // Section IDs for scroll-based highlighting on homepage
 const sectionIds = ['hero', 'services', 'process', 'cases', 'why-choose-us', 'gallery', 'media-partners', 'insights', 'contact'];
