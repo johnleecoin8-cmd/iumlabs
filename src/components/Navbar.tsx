@@ -103,8 +103,8 @@ const Navbar = () => {
     <>
       {/* ===== Mode C: Edge Minimal — no bar, floating elements ===== */}
 
-      {/* Top layer: logo left, CTA+menu right — always visible */}
-      <div className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
+      {/* Top layer: logo left, CTA+menu right — hidden when scrolled (compact bar takes over) */}
+      <div className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
         <div className="flex items-start justify-between px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           {/* Logo */}
           <Link to="/" className="pointer-events-auto flex items-center gap-3 px-5 py-3 rounded-full bg-black/60 backdrop-blur-xl border border-white/[0.12] hover:bg-black/70 transition-all">
@@ -136,14 +136,14 @@ const Navbar = () => {
       <AnimatePresence>
         {scrolled && (
           <motion.div
-            className="fixed top-0 left-0 right-0 z-[49]"
+            className="fixed top-0 left-0 right-0 z-[51]"
             initial={{ y: -80, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -80, opacity: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <div className="mx-3 sm:mx-4 lg:mx-6 mt-3 sm:mt-4">
-              <div className="bg-black/70 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between">
+              <div className="bg-[#0A0A0A]/95 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
                 <Link to="/" className="flex items-center gap-2">
                   <img src={logoImage} alt="ium Labs" className="w-5 h-5 object-contain brightness-0 invert" />
                   <span className="text-xs font-semibold text-white/90 hidden sm:block">ium Labs</span>
