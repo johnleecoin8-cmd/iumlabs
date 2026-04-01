@@ -1,13 +1,9 @@
-import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sparkles, Globe, Building2, Mic, UserCheck, Handshake, Eye, ClipboardCheck, BarChart3, Newspaper } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { CalendarDays, MapPin, Camera, Users, Sparkles } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
-import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import SEOHead from "@/components/SEOHead";
-import seoulMapImage from "@/assets/maps/seoul-dark-map.png";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -16,119 +12,6 @@ const breadcrumbItems = [
   { name: "Services", url: "https://iumlabs.io/services" },
   { name: "Offline Events", url: "https://iumlabs.io/services/offline-event" }
 ];
-
-// Seoul event venues data
-const seoulVenues = [
-  { 
-    id: 1, 
-    name: "Gangnam", 
-    korean: "강남",
-    type: "VIP Lounge",
-    capacity: "100-300",
-    x: 62, 
-    y: 68,
-    events: ["MANTRA Party", "Ondo Seminar"]
-  },
-  { 
-    id: 2, 
-    name: "Seongsu", 
-    korean: "성수",
-    type: "Gallery & Studio",
-    capacity: "50-150",
-    x: 68, 
-    y: 42,
-    events: ["MegaETH Launch", "Fogo Fest"]
-  },
-  { 
-    id: 3, 
-    name: "Itaewon", 
-    korean: "이태원",
-    type: "Rooftop Bar",
-    capacity: "80-200",
-    x: 45, 
-    y: 48,
-    events: ["KOL Dinner", "Networking Night"]
-  },
-  { 
-    id: 4, 
-    name: "Hongdae", 
-    korean: "홍대",
-    type: "Event Hall",
-    capacity: "200-500",
-    x: 32, 
-    y: 35,
-    events: ["Community Meetup", "Hackathon"]
-  },
-  { 
-    id: 5, 
-    name: "Yeouido", 
-    korean: "여의도",
-    type: "Conference Center",
-    capacity: "300-1000",
-    x: 28, 
-    y: 55,
-    events: ["KBW Side Event", "Summit"]
-  },
-  { 
-    id: 6, 
-    name: "Myeongdong", 
-    korean: "명동",
-    type: "Boutique Venue",
-    capacity: "50-120",
-    x: 52, 
-    y: 45,
-    events: ["Press Conference", "Launch Party"]
-  },
-];
-
-// Event Planning Journey phases
-const journeyPhases = [
-  {
-    week: "Week 1",
-    title: "Concept & Venue",
-    icon: Search,
-    activities: ["Brainstorm the vibe and theme", "Scout the best spots in Seoul", "From Gangnam lounges to Seongsu galleries", "Lock in the perfect venue"],
-    deliverables: ["Event concept", "Venue confirmed"],
-    metrics: [
-      { icon: Building2, label: "Venues Scouted", value: "5-10" },
-      { icon: Mic, label: "Speakers", value: "3-5" },
-    ],
-  },
-  {
-    week: "Week 2",
-    title: "Guest List & Partners",
-    icon: Target,
-    activities: ["Start locking in the RSVPs", "Connect with local partners", "Build the hype with KOLs", "Coordinate with media partners"],
-    deliverables: ["Guest list", "Partner lineup"],
-    metrics: [
-      { icon: UserCheck, label: "RSVPs", value: "100-300" },
-      { icon: Handshake, label: "Partners", value: "5+" },
-    ],
-  },
-  {
-    week: "Week 3",
-    title: "The Big Push",
-    icon: Megaphone,
-    activities: ["Promotion goes live", "Hit the socials hard", "Ensure registrations are pouring in", "Media partnership activation"],
-    deliverables: ["Promo assets", "Press kit"],
-    metrics: [
-      { icon: Eye, label: "Impressions", value: "50K+" },
-      { icon: ClipboardCheck, label: "Registration", value: "80%+" },
-    ],
-  },
-  {
-    week: "Week 4",
-    title: "Showtime",
-    icon: Zap,
-    activities: ["On-site management", "Live coverage and updates", "Making sure everything runs like clockwork", "Post-event content creation"],
-    deliverables: ["Event recap", "Photo/Video"],
-    metrics: [
-      { icon: BarChart3, label: "Attendees", value: "100-500" },
-      { icon: Newspaper, label: "Coverage", value: "10+ Articles" },
-    ],
-  },
-];
-
 
 const serviceTags: ServiceTag[] = [
   { label: "Web3 Events" },
@@ -219,152 +102,6 @@ const faqItems: FAQItem[] = [
   },
 ];
 
-// Interactive Seoul Map Component
-const SeoulMapVisualization = () => {
-  const [selectedVenue, setSelectedVenue] = useState<typeof seoulVenues[0] | null>(null);
-  const [animatingPins, setAnimatingPins] = useState<number[]>([]);
-
-  // Animate pins sequentially on load
-  useEffect(() => {
-    seoulVenues.forEach((venue, index) => {
-      setTimeout(() => {
-        setAnimatingPins(prev => [...prev, venue.id]);
-      }, index * 200);
-    });
-  }, []);
-
-  return (
-    <div className="relative h-[320px] rounded-2xl border border-white/10 overflow-hidden">
-      {/* Actual Seoul Map Image */}
-      <img 
-        src={seoulMapImage}
-        alt="Seoul Map"
-        className="absolute inset-0 w-full h-full object-cover opacity-70"
-      />
-      
-      {/* Gradient overlays for better pin visibility */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
-
-      {/* Map Label */}
-      <div className="absolute top-3 left-3 z-20 flex items-center gap-2 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm">
-        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-xs font-medium text-emerald-400">Seoul Event Map</span>
-      </div>
-
-      {/* Venue Count */}
-      <div className="absolute top-3 right-3 z-20 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
-        <span className="text-[10px] text-white/60">{seoulVenues.length} Premium Venues</span>
-      </div>
-
-      {/* Venue Pins */}
-      {seoulVenues.map((venue) => {
-        const isAnimated = animatingPins.includes(venue.id);
-        const isSelected = selectedVenue?.id === venue.id;
-
-        return (
-          <motion.div
-            key={venue.id}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ 
-              scale: isAnimated ? 1 : 0, 
-              opacity: isAnimated ? 1 : 0 
-            }}
-            transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className={`absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer ${isSelected ? 'z-40' : 'z-10'}`}
-            style={{ left: `${venue.x}%`, top: `${venue.y}%` }}
-            onMouseEnter={() => setSelectedVenue(venue)}
-            onMouseLeave={() => setSelectedVenue(null)}
-          >
-            {/* Pin */}
-            <motion.div
-              animate={{ 
-                scale: isSelected ? 1.3 : 1,
-                y: isSelected ? -5 : 0
-              }}
-              className="relative"
-            >
-              {/* Ping animation */}
-              <motion.div
-                animate={{ scale: [1, 2.5, 1], opacity: [0.6, 0, 0.6] }}
-                transition={{ duration: 2, repeat: Infinity, delay: venue.id * 0.3 }}
-                className="absolute inset-0 w-8 h-8 -translate-x-1 -translate-y-1 rounded-full"
-                style={{ backgroundColor: ACCENT_COLOR }}
-              />
-              
-              {/* Pin icon */}
-              <div 
-                className={`w-7 h-7 rounded-full flex items-center justify-center border-2 shadow-lg transition-all ${
-                  isSelected ? 'bg-emerald-500 border-white shadow-emerald-500/50' : 'bg-emerald-500/90 border-emerald-300/50'
-                }`}
-              >
-                <MapPin className="w-3.5 h-3.5 text-white" />
-              </div>
-              
-              {/* District label */}
-              {!isSelected && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap">
-                  <span className="text-[9px] font-medium text-white/80 bg-black/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
-                    {venue.korean}
-                  </span>
-                </div>
-              )}
-            </motion.div>
-
-            {/* Tooltip */}
-            <AnimatePresence>
-              {isSelected && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                  className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-44 p-3 rounded-xl bg-black/95 border border-emerald-500/40 backdrop-blur-md z-30 shadow-xl"
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-sm font-semibold text-white">{venue.name}</span>
-                    <span className="text-xs text-emerald-400">{venue.korean}</span>
-                  </div>
-                  <div className="text-[11px] text-emerald-400 mb-1">{venue.type}</div>
-                  <div className="text-[10px] text-white/50 mb-2">Capacity: {venue.capacity}</div>
-                  <div className="pt-2 border-t border-white/10">
-                    <div className="text-[9px] text-white/40 mb-1">Past Events:</div>
-                    <div className="flex flex-wrap gap-1">
-                      {venue.events.map(event => (
-                        <span 
-                          key={event}
-                          className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400"
-                        >
-                          {event}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  {/* Arrow */}
-                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/95 border-l border-t border-emerald-500/40 rotate-45" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        );
-      })}
-
-      {/* Bottom bar with info */}
-      <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 to-transparent z-20">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-            <span className="text-xs text-white/60">Global Teams Welcome</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <Users className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-            <span className="text-xs text-white/60">50-500+ Capacity</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const OfflineEventService = () => {
   usePageMeta({
     title: "Korea Web3 Event Planning & Crypto Meetups Agency",
@@ -373,8 +110,6 @@ const OfflineEventService = () => {
     image: "/og-image.png",
     keywords: ["Korea Web3", "Korea Crypto", "Korea Web3 Marketing", "Korea Web3 Events", "KBW Side Events", "Seoul Crypto Meetup"]
   });
-  
-  
 
   return (
     <>
@@ -398,76 +133,14 @@ const OfflineEventService = () => {
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="offline-event"
-    >
-      {/* Event Journey Section */}
-      <section className="bg-[#0A0A0A]">
-        <div className="border-t border-white/[0.06]">
-          <SectionHeader title="Event Journey" badge="4-Week Program" />
-          
-          <div className="py-8 sm:py-12 md:py-16">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                {/* Left - Seoul Map Visualization */}
-                <div className="flex flex-col gap-4">
-                  <p className="text-white/60 text-sm leading-relaxed">
-                    We want you to just "show up" to a perfect party. From concept to execution, we handle every detail so you can focus on what matters—connecting with Korea's crypto community.
-                  </p>
-                  
-                  {/* Interactive Seoul Map */}
-                  <SeoulMapVisualization />
-                  
-                </div>
-
-                {/* Right - Phase Cards */}
-                <div className="grid grid-cols-2 gap-3">
-                  {journeyPhases.map((phase) => (
-                    <div
-                      key={phase.title}
-                      className="relative bg-[#0D0D0D] border border-white/[0.06] rounded-2xl p-4 hover:border-white/[0.12] transition-all duration-300"
-                    >
-                      {/* Week Badge */}
-                      <div 
-                        className="text-xs font-semibold px-2.5 py-1 rounded-full w-fit mb-3"
-                        style={{ 
-                          backgroundColor: `${ACCENT_COLOR}15`,
-                          color: ACCENT_COLOR
-                        }}
-                      >
-                        {phase.week}
-                      </div>
-                      
-                      {/* Title */}
-                      <h4 className="text-white text-base font-semibold mb-4">{phase.title}</h4>
-
-                      {/* Metrics - Stacked Layout */}
-                      <div className="space-y-2">
-                        {phase.metrics.map((metric) => (
-                          <div 
-                            key={metric.label} 
-                            className="flex items-center justify-between"
-                          >
-                            <span className="text-white/50 text-xs">{metric.label}</span>
-                            <span className="text-emerald-400 text-sm font-semibold">{metric.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <ServiceSchema 
-        name="Web3 Events in Korea"
-        description="Create unforgettable crypto events in Seoul. Korean Web3 marketing through launch parties, meetups, and conferences with KOL attendance."
-        url="/services/offline-event"
-        serviceType={["Event Planning", "Web3 Events", "Crypto Meetups", "Launch Parties"]}
-      />
-    </ServicePageLayout>
+    />
+    <BreadcrumbSchema items={breadcrumbItems} />
+    <ServiceSchema
+      name="Web3 Events in Korea"
+      description="Create unforgettable crypto events in Seoul. Korean Web3 marketing through launch parties, meetups, and conferences with KOL attendance."
+      url="/services/offline-event"
+      serviceType={["Event Planning", "Web3 Events", "Crypto Meetups", "Launch Parties"]}
+    />
     </>
   );
 };
