@@ -8,6 +8,7 @@ import ServicePageLayout, { ServiceTag, ServiceStat, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe, Activity, Database, Wallet, ArrowUpRight, ArrowDownRight, Terminal } from "lucide-react";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
@@ -596,7 +597,14 @@ const DeepResearchService = () => {
   }, []);
 
   return (
-    <ServicePageLayout 
+    <>
+    <SEOHead
+      title="Web3 Deep Research & Market Intelligence Korea | ium Labs"
+      description="Data-driven Web3 market research and competitive intelligence for the Korean crypto market. Ecosystem mapping and strategic insights."
+      path="/services/deep-research"
+      keywords={['Web3 Research Korea', 'Crypto Market Intelligence', 'Korean Market Research Web3', 'Blockchain Analytics Korea']}
+    />
+    <ServicePageLayout
       serviceName="Deep Research" 
       serviceTitle="Deep Research" 
       serviceSubtitle="& Distribution" 
@@ -806,6 +814,7 @@ const DeepResearchService = () => {
         serviceType={["Market Research", "Competitor Analysis", "Investment Thesis", "Crypto Research"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

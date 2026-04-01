@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
 const ACCENT_COLOR = "#F59E0B";
@@ -359,6 +360,13 @@ const InfluencerService = () => {
   }, [isMobile, shouldDisableHeavyAnimations]);
   
   return (
+    <>
+    <SEOHead
+      title="Korean Crypto KOL & Influencer Marketing | ium Labs"
+      description="Access 500+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. Campaign management with ROI tracking."
+      path="/services/influencer"
+      keywords={['Korean KOL Marketing', 'Crypto Influencer Korea', 'Web3 KOL Network', 'Korean Crypto YouTube', 'Blockchain Influencer Marketing']}
+    />
     <ServicePageLayout
       serviceName="Influencer/KOL"
       serviceTitle="Influencer &"
@@ -402,6 +410,7 @@ const InfluencerService = () => {
         serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing", "Web3 Marketing"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

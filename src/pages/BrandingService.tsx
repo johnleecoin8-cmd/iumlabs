@@ -7,6 +7,7 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 
 // Branding service images
 import brandingWebsite from "@/assets/services/branding-website.png";
@@ -320,6 +321,13 @@ const BrandingService = () => {
   });
 
   return (
+    <>
+    <SEOHead
+      title="Web3 Branding & Website Design Korea | ium Labs"
+      description="Professional branding and website design for Web3 projects targeting the Korean market. Logo, identity, and landing pages."
+      path="/services/branding"
+      keywords={['Web3 Branding Korea', 'Crypto Website Design', 'Blockchain Branding Seoul', 'Web3 Landing Page']}
+    />
     <ServicePageLayout
       serviceName="Branding & Website"
       serviceTitle="Brand"
@@ -381,6 +389,7 @@ const BrandingService = () => {
         serviceType={["Brand Identity", "Web Design", "Web Development", "UI/UX Design"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

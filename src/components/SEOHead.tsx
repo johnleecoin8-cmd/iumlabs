@@ -110,6 +110,14 @@ const SEOHead = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
       <meta name="twitter:image:alt" content={`${title} - ${SITE_NAME}`} />
+
+      {/* Googlebot */}
+      <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+      {/* Hreflang */}
+      <link rel="alternate" hrefLang="en" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="ko" href={canonicalUrl} />
+      <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
     </Helmet>
   );
 };

@@ -9,8 +9,9 @@
     <meta name="title" content="Korea Web3 Marketing & Crypto Agency | ium Labs">
     <meta name="description" content="ium Labs is Korea's #1 Web3 marketing and crypto agency. Full-stack GTM strategy, KOL marketing, community growth, and PR for global blockchain projects entering the Korean market.">
     <meta name="author" content="ium Labs">
-    <meta name="robots" content="index, follow">
-    <meta name="keywords" content="Korea Web3, Korea Crypto, Korea Web3 Marketing, Korea Crypto Agency, Korean Crypto Marketing, Web3 GTM Korea, Blockchain Marketing Korea, KOL Marketing Korea">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="keywords" content="Korea Web3, Korea Crypto, Korea Web3 Marketing, Korea Crypto Agency, Korean Crypto Marketing, Web3 GTM Korea, Blockchain Marketing Korea, KOL Marketing Korea, 한국 웹3 마케팅, 크립토 에이전시, 블록체인 마케팅 한국">
     
     <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
@@ -44,8 +45,11 @@
     <!-- Naver Verification -->
     <meta name="naver-site-verification" content="6b3b3b61387a6c4c99a3568c8a719430" />
     
-    <!-- Canonical URL -->
+    <!-- Canonical & Hreflang -->
     <link rel="canonical" href="https://iumlabs.io/">
+    <link rel="alternate" hreflang="en" href="https://iumlabs.io/">
+    <link rel="alternate" hreflang="ko" href="https://iumlabs.io/">
+    <link rel="alternate" hreflang="x-default" href="https://iumlabs.io/">
 
     <!-- Structured Data / JSON-LD -->
     <script type="application/ld+json">
@@ -55,6 +59,7 @@
     "@type": "Organization",
     "@id": "https://iumlabs.io/#organization",
     "name": "ium Labs",
+    "alternateName": ["아이움 랩스", "ium", "iumlabs"],
     "url": "https://iumlabs.io/",
     "logo": {
       "@type": "ImageObject",
@@ -105,7 +110,53 @@
     "description": "Korea Web3 Marketing & GTM Agency",
     "publisher": {
       "@id": "https://iumlabs.io/#organization"
-    }
+    },
+    "inLanguage": ["en", "ko"]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://iumlabs.io/#service",
+    "name": "ium Labs",
+    "url": "https://iumlabs.io",
+    "email": "contact@iumlabs.io",
+    "image": "https://iumlabs.io/images/share-og.jpeg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "373 Gangnam-daero, 10F",
+      "addressLocality": "Seocho-gu, Seoul",
+      "addressCountry": "KR"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "priceRange": "$$$",
+    "serviceType": [
+      "Web3 GTM Strategy", "Crypto KOL Marketing", "Community Management",
+      "PR & Media Relations", "Deep Research", "Branding & Website",
+      "SEO & Paid Ads", "Offline Events"
+    ],
+    "areaServed": [
+      {"@type": "Country", "name": "South Korea"},
+      {"@type": "Country", "name": "Japan"},
+      {"@type": "Country", "name": "Singapore"},
+      {"@type": "Country", "name": "United Arab Emirates"}
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://iumlabs.io/"},
+      {"@type": "ListItem", "position": 2, "name": "Services", "item": "https://iumlabs.io/services/gtm"},
+      {"@type": "ListItem", "position": 3, "name": "Projects", "item": "https://iumlabs.io/projects"},
+      {"@type": "ListItem", "position": 4, "name": "Blog", "item": "https://iumlabs.io/blog"},
+      {"@type": "ListItem", "position": 5, "name": "Contact", "item": "https://iumlabs.io/contact"},
+      {"@type": "ListItem", "position": 6, "name": "Careers", "item": "https://iumlabs.io/jobs"}
+    ]
   },
   {
     "@context": "https://schema.org",
@@ -179,5 +230,32 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Noscript fallback for crawlers that don't execute JS -->
+    <noscript>
+      <div style="padding: 40px; max-width: 800px; margin: 0 auto; font-family: system-ui, sans-serif;">
+        <h1>ium Labs – Korea's #1 Web3 Marketing & Crypto Agency</h1>
+        <p>ium Labs bridges global projects to the Korean market through Web3 GTM Strategy, Korea KOL Networks, and Community Management.</p>
+        <h2>Our Services</h2>
+        <ul>
+          <li><a href="/services/gtm">GTM Strategy</a> – Full-stack Go-To-Market strategy for Korea market entry</li>
+          <li><a href="/services/influencer">KOL & Influencer Marketing</a> – 500+ vetted Korean crypto KOLs</li>
+          <li><a href="/services/community">Community Management</a> – Telegram, Discord, KakaoTalk, Naver Cafe</li>
+          <li><a href="/services/pr">PR & Media Relations</a> – CoinDesk Korea, Block Media, TokenPost</li>
+          <li><a href="/services/deep-research">Deep Research</a> – Data-driven market intelligence</li>
+          <li><a href="/services/branding">Branding & Website</a> – Web3 brand identity and landing pages</li>
+          <li><a href="/services/seo-ads">SEO & Paid Ads</a> – Naver SEO and crypto ad networks</li>
+          <li><a href="/services/offline-event">Offline Events</a> – Meetups and conferences in Seoul</li>
+        </ul>
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="/projects">Projects & Case Studies</a></li>
+          <li><a href="/blog">Blog & Research</a></li>
+          <li><a href="/contact">Contact Us</a></li>
+          <li><a href="/jobs">Careers</a></li>
+        </ul>
+        <p>Contact: <a href="mailto:contact@iumlabs.io">contact@iumlabs.io</a> | Seoul, Seocho-gu, 373 Gangnam-daero 10F</p>
+      </div>
+    </noscript>
   </body>
 </html>

@@ -7,6 +7,7 @@ import MediaPartnersSection from "@/components/MediaPartnersSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 
 // Import media logos
 import blockmediaLogo from "@/assets/logos/blockmedia-new.png";
@@ -428,7 +429,14 @@ const PRService = () => {
   });
 
   return (
-    <ServicePageLayout 
+    <>
+    <SEOHead
+      title="Korean Crypto PR & Media Relations | ium Labs"
+      description="Secure coverage in CoinDesk Korea, Block Media, TokenPost, and mainstream Korean media. Press releases and crisis communications."
+      path="/services/pr"
+      keywords={['Korean Crypto PR', 'Web3 Media Relations Korea', 'Blockchain PR Seoul', 'CoinDesk Korea', 'Crypto Press Release']}
+    />
+    <ServicePageLayout
       serviceName="PR & Media Relations" 
       serviceTitle="PR &" 
       serviceSubtitle="Media" 
@@ -482,6 +490,7 @@ const PRService = () => {
         serviceType={["PR & Media", "Press Release", "Media Outreach", "Crisis Management"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

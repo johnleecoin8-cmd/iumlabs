@@ -7,6 +7,7 @@ import PerformanceSection from '@/components/gtm/PerformanceSection';
 import AuthoritySection from '@/components/gtm/AuthoritySection';
 import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
+import SEOHead from "@/components/SEOHead";
 import GTMContactFormSection from '@/components/gtm/GTMContactFormSection';
 
 import FooterLinksSection from '@/components/FooterLinksSection';
@@ -2049,6 +2050,12 @@ const GTMService = () => {
     keywords: ["Korea Web3", "Korea Crypto", "Korea Web3 Marketing", "Korea Crypto Agency", "Korea GTM Strategy", "Web3 Market Entry Korea", "CEX Listing Korea"]
   });
   return <>
+      <SEOHead
+        title="Korea Web3 GTM Strategy | Go-To-Market Agency | ium Labs"
+        description="Full-stack Go-To-Market strategy for Web3 projects entering Korea. Market analysis, brand positioning, and actionable GTM roadmaps."
+        path="/services/gtm"
+        keywords={['Korea Web3 GTM', 'Go-To-Market Korea', 'Web3 Market Entry Korea', 'Crypto GTM Strategy', 'Korea Market Analysis']}
+      />
       <ServiceSchema name="Korea Web3 GTM Strategy & Marketing Services" description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." url="/services" provider="ium Labs" areaServed="South Korea" serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]} />
       <Navbar />
       <main className="bg-background">

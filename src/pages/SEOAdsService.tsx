@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -185,6 +186,13 @@ const SEOAdsService = () => {
   const [activePhase, setActivePhase] = useState(0);
 
   return (
+    <>
+    <SEOHead
+      title="Web3 SEO & Paid Ads Korea | ium Labs"
+      description="Performance-driven SEO and paid advertising for Web3 projects in Korea. Naver SEO, Google Ads, and crypto-native ad networks."
+      path="/services/seo-ads"
+      keywords={['Web3 SEO Korea', 'Crypto Paid Ads', 'Naver SEO Web3', 'Blockchain Advertising Korea']}
+    />
     <ServicePageLayout
       serviceName="SEO & Paid Ads"
       serviceTitle="SEO &"
@@ -345,6 +353,7 @@ const SEOAdsService = () => {
         serviceType={["SEO Optimization", "Paid Advertising", "Google Ads", "Crypto Marketing"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

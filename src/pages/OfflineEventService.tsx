@@ -6,6 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 import seoulMapImage from "@/assets/maps/seoul-dark-map.png";
 
 const ACCENT_COLOR = "#10B981";
@@ -376,6 +377,13 @@ const OfflineEventService = () => {
   
 
   return (
+    <>
+    <SEOHead
+      title="Web3 Offline Events Korea | Meetups & Conferences | ium Labs"
+      description="Plan and execute Web3 meetups, conferences, and side events in Seoul and across Korea. End-to-end event management."
+      path="/services/offline-event"
+      keywords={['Web3 Events Korea', 'Crypto Meetup Seoul', 'Blockchain Conference Korea', 'Web3 Side Events']}
+    />
     <ServicePageLayout
       serviceName="Offline Events"
       serviceTitle="Offline"
@@ -460,6 +468,7 @@ const OfflineEventService = () => {
         serviceType={["Event Planning", "Web3 Events", "Crypto Meetups", "Launch Parties"]}
       />
     </ServicePageLayout>
+    </>
   );
 };
 

@@ -1,6 +1,24 @@
 # Ium Labs Robots.txt
 # https://iumlabs.io
 
+# Google
+User-agent: Googlebot
+Allow: /
+Disallow: /ium-admin/
+Crawl-delay: 1
+
+# Naver
+User-agent: Yeti
+Allow: /
+Disallow: /ium-admin/
+Crawl-delay: 1
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Disallow: /ium-admin/
+Crawl-delay: 1
+
 # All crawlers
 User-agent: *
 Allow: /

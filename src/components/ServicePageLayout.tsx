@@ -6,6 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
+import SEOHead from "@/components/SEOHead";
 
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";

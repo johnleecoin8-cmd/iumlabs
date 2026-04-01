@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import SEOHead from "@/components/SEOHead";
 const ACCENT_COLOR = "#5865F2";
 const breadcrumbItems = [{
   name: "Home",
@@ -220,7 +221,12 @@ const CommunityService = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, [currentMessages.length]);
-  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
+  return <><SEOHead
+      title="Korean Crypto Community Management | ium Labs"
+      description="Build and manage thriving Korean crypto communities on Telegram, Discord, KakaoTalk, and Naver Cafe with native 24/7 managers."
+      path="/services/community"
+      keywords={['Korean Community Management', 'Crypto Community Korea', 'Telegram Korea Web3', 'Discord Community Korea', 'KakaoTalk Crypto']}
+    /><ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
       {/* Platform Preview Section */}
       <section className="bg-[#0A0A0A]">
         <div className="border-t border-white/[0.06]">
@@ -469,6 +475,6 @@ const CommunityService = () => {
         url="/services/community"
         serviceType={["Community Management", "Discord Management", "Telegram Management", "KakaoTalk Management"]}
       />
-    </ServicePageLayout>;
+    </ServicePageLayout></>;
 };
 export default CommunityService;
