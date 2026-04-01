@@ -150,6 +150,7 @@ const AppRoutes = () => {
     <PageTransitionWrapper key={location.pathname}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
+        <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
         <Route path="/services/all" element={<MobileServicesPage />} />
         <Route path="/services/gtm" element={<GTMService />} />
         <Route path="/services/branding" element={<BrandingService />} />
