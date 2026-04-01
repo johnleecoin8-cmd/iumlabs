@@ -24,6 +24,7 @@ import CommunityService from "./pages/CommunityService";
 import DeepResearchService from "./pages/DeepResearchService";
 import InfluencerService from "./pages/InfluencerService";
 import PRService from "./pages/PRService";
+import AMAService from "./pages/AMAService";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Transparency from "./pages/Transparency";
@@ -160,6 +161,7 @@ const AppRoutes = () => {
         <Route path="/services/deep-research" element={<DeepResearchService />} />
         <Route path="/services/influencer" element={<InfluencerService />} />
         <Route path="/services/pr" element={<PRService />} />
+        <Route path="/services/ama" element={<AMAService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />

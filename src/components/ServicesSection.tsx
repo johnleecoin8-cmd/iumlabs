@@ -1,9 +1,6 @@
-import { ArrowRight, Compass, Users, Search, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { useMemo } from "react";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
@@ -17,330 +14,232 @@ const services = [
   {
     number: "01",
     title: "GTM Strategy",
-    description: "Strategic market entry planning and execution for the Korean market.",
-    link: "/services",
+    description: "Full-stack Go-To-Market planning for Korean market entry.",
+    link: "/services/gtm",
     icon: Rocket,
     image: gtmImage,
-    accent: "0, 200, 255",       // cyan
-    tag: "STRATEGY",
+    accent: "#00C8FF",
+    details: [
+      "Competitive landscape & gap analysis",
+      "Korea-fit narrative & positioning",
+      "Launch timeline & milestone planning",
+      "Exchange listing strategy (Upbit, Bithumb)",
+    ],
   },
   {
     number: "02",
     title: "Brand Identity & Web",
-    description: "Strategic brand identity and high-performance websites for Web3 projects.",
+    description: "Strategic brand identity and high-performance websites.",
     link: "/services/branding",
     icon: Compass,
     image: websiteImage,
-    accent: "168, 85, 247",      // purple
-    tag: "CREATIVE",
+    accent: "#A855F7",
+    details: [
+      "Logo, visual identity & brand guidelines",
+      "Web3-native website design & development",
+      "Korean localization & copywriting",
+      "Landing pages for TGE & campaigns",
+    ],
   },
   {
     number: "03",
     title: "SEO / Paid Ads",
-    description: "Search optimization and targeted advertising across crypto-native platforms.",
+    description: "Search optimization and crypto-native advertising.",
     link: "/services/seo-ads",
     icon: Search,
     image: seoAdsImage,
-    accent: "34, 197, 94",       // green
-    tag: "GROWTH",
+    accent: "#22C55E",
+    details: [
+      "Naver SEO & keyword strategy",
+      "Google Ads & crypto ad networks",
+      "Performance tracking & ROI reporting",
+      "A/B testing & conversion optimization",
+    ],
   },
   {
     number: "04",
     title: "Offline Event",
-    description: "End-to-end event planning and on-ground activation for Web3 experiences.",
+    description: "End-to-end event planning for Web3 experiences in Korea.",
     link: "/services/offline-event",
     icon: Target,
     image: eventsImage,
-    accent: "251, 146, 60",      // orange
-    tag: "ACTIVATION",
+    accent: "#FB923C",
+    details: [
+      "Seoul meetups & side event production",
+      "Venue sourcing & logistics management",
+      "Speaker curation & panel moderation",
+      "Post-event content & lead capture",
+    ],
   },
   {
     number: "05",
     title: "Community Management",
-    description: "Discord & Telegram community infrastructure for scalable growth.",
+    description: "24/7 Korean community infrastructure across all platforms.",
     link: "/services/community",
     icon: Users,
     image: communityImage,
-    accent: "56, 189, 248",      // sky
-    tag: "COMMUNITY",
+    accent: "#38BDF8",
+    details: [
+      "Telegram, Discord, KakaoTalk setup",
+      "Native Korean community managers",
+      "AMA hosting & engagement programs",
+      "Sentiment monitoring & reporting",
+    ],
   },
   {
     number: "06",
     title: "Deep Research",
-    description: "Data-driven market intelligence and on-chain analytics insights.",
+    description: "Data-driven market intelligence and on-chain analytics.",
     link: "/services/deep-research",
     icon: FileSearch,
     image: deepResearchImage,
-    accent: "244, 63, 94",       // rose
-    tag: "RESEARCH",
+    accent: "#F43F5E",
+    details: [
+      "Korean market ecosystem mapping",
+      "On-chain behavior & wallet profiling",
+      "Competitor share-of-voice analysis",
+      "Investment thesis & due diligence",
+    ],
   },
   {
     number: "07",
     title: "Influencer / KOL",
-    description: "Influencer campaigns powered by top Korean crypto voices.",
+    description: "Campaigns powered by top Korean crypto voices.",
     link: "/services/influencer",
     icon: Mic2,
     image: kolImage,
-    accent: "250, 204, 21",      // yellow
-    tag: "INFLUENCE",
+    accent: "#FACC15",
+    details: [
+      "170+ vetted Korean KOL network",
+      "YouTube, Twitter, Telegram, Naver",
+      "Campaign management & ROI tracking",
+      "Ambassador & long-term partnerships",
+    ],
   },
   {
     number: "08",
-    title: "PR",
-    description: "Narrative development and media placements in Korean outlets.",
+    title: "PR & Media",
+    description: "Narrative development and Korean media placements.",
     link: "/services/pr",
     icon: Newspaper,
     image: prImage,
-    accent: "139, 92, 246",      // violet
-    tag: "MEDIA",
-  }
+    accent: "#8B5CF6",
+    details: [
+      "CoinDesk Korea, Block Media, TokenPost",
+      "Korean press release writing & distribution",
+      "Mainstream media (Chosun, MBN, Nikkei)",
+      "Crisis communication & reputation management",
+    ],
+  },
+  {
+    number: "09",
+    title: "AMA Hosting",
+    description: "Structured AMA sessions that drive real engagement.",
+    link: "/services/ama",
+    icon: Mic,
+    image: communityImage,
+    accent: "#EC4899",
+    details: [
+      "Telegram, Discord, Twitter Spaces AMAs",
+      "Native Korean-speaking professional hosts",
+      "Pre-event promotion & question curation",
+      "Post-AMA recap content & analytics",
+    ],
+  },
 ];
 
-const ServiceRow = ({ service, index }: { service: typeof services[0]; index: number }) => {
+const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const isEven = index % 2 === 0;
-
-  const { ref, isVisible } = useScrollAnimation({
-    threshold: 0.15,
-    rootMargin: '30px',
-    triggerOnce: true
-  });
-
-  const accentRgb = service.accent;
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "group transition-all duration-600 ease-out will-change-transform",
-        isVisible
-          ? "opacity-100 translate-x-0"
-          : isEven
-            ? "opacity-0 -translate-x-8"
-            : "opacity-0 translate-x-8"
-      )}
-      style={{ transitionDelay: `${index * 80}ms` }}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
     >
       <Link
         to={service.link}
-        className={cn(
-          "relative flex items-stretch overflow-hidden border-b border-white/[0.06] transition-all duration-500 active:scale-[0.995] h-[160px] sm:h-[180px] md:h-[200px]",
-          isEven ? "flex-row" : "flex-row-reverse"
-        )}
+        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500"
       >
-        {/* Hover glow - radial from image side */}
-        <div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0"
-          style={{
-            background: `radial-gradient(ellipse at ${isEven ? '25%' : '75%'} 50%, rgba(${accentRgb}, 0.08) 0%, transparent 65%)`
-          }}
-        />
-
-        {/* Image side */}
-        <div className="relative w-[45%] sm:w-[48%] md:w-[50%] flex-shrink-0 overflow-hidden z-[1]">
+        {/* Image — large */}
+        <div className="relative aspect-[16/9] overflow-hidden">
           <img
             src={service.image}
-            alt=""
+            alt={service.title}
             loading="lazy"
             decoding="async"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          {/* Color-tinted overlay */}
-          <div
-            className="absolute inset-0 transition-all duration-500"
-            style={{
-              background: `linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(${accentRgb}, 0.08) 50%, rgba(0,0,0,0.3) 100%)`
-            }}
-          />
-          {/* Large number watermark */}
-          <div className={cn(
-            "absolute bottom-2 sm:bottom-3 md:bottom-4 font-black leading-none font-mono transition-all duration-500",
-            "text-5xl sm:text-6xl md:text-7xl",
-            isEven ? "right-3 sm:right-4 md:right-6" : "left-3 sm:left-4 md:left-6"
-          )}
-            style={{ color: `rgba(${accentRgb}, 0.15)` }}
-          >
-            {service.number}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-black/40 to-black/10" />
+
+          {/* Number + Icon floating on image */}
+          <div className="absolute top-4 sm:top-5 left-4 sm:left-6 flex items-center gap-3">
+            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest" style={{ color: service.accent }}>
+              [ {service.number} ]
+            </span>
           </div>
-          {/* Icon badge floating on image */}
           <div
-            className={cn(
-              "absolute top-3 sm:top-4 md:top-5 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg flex items-center justify-center backdrop-blur-md border transition-all duration-500 group-hover:scale-110",
-              isEven ? "left-3 sm:left-4 md:left-5" : "right-3 sm:right-4 md:right-5"
-            )}
-            style={{
-              backgroundColor: `rgba(${accentRgb}, 0.15)`,
-              borderColor: `rgba(${accentRgb}, 0.3)`,
-            }}
+            className="absolute top-4 sm:top-5 right-4 sm:right-6 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center backdrop-blur-sm border transition-transform duration-300 group-hover:scale-110"
+            style={{ backgroundColor: `${service.accent}15`, borderColor: `${service.accent}30` }}
           >
-            <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5 md:w-5 md:h-5" style={{ color: `rgb(${accentRgb})` }} />
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: service.accent }} />
           </div>
         </div>
 
-        {/* Colored separator line */}
-        <div
-          className="w-[2px] flex-shrink-0 z-[1] relative overflow-hidden"
-          style={{ backgroundColor: `rgba(${accentRgb}, 0.1)` }}
-        >
-          <motion.div
-            className="absolute inset-x-0 top-0 w-full"
-            initial={{ height: '0%' }}
-            whileInView={{ height: '100%' }}
-            transition={{ duration: 0.8, delay: index * 0.08 + 0.2 }}
-            style={{ backgroundColor: `rgba(${accentRgb}, 0.5)` }}
-          />
-        </div>
+        {/* Content */}
+        <div className="p-5 sm:p-6 lg:p-8">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-white/90 transition-colors">
+            {service.title}
+          </h3>
+          <p className="text-sm text-white/40 mb-5 leading-relaxed">
+            {service.description}
+          </p>
 
-        {/* Content side */}
-        <div className={cn(
-          "flex-1 flex items-center transition-colors duration-500 bg-[#0A0A0A] group-hover:bg-[#0F0F0F] z-[1]",
-          "px-5 sm:px-6 md:px-10"
-        )}>
-          <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-2.5 min-w-0">
-            {/* Tag badge */}
-            <div className="flex items-center gap-2.5">
-              <span
-                className="inline-flex items-center px-2 py-0.5 rounded text-[8px] sm:text-[9px] font-mono font-bold uppercase tracking-[0.15em]"
-                style={{
-                  backgroundColor: `rgba(${accentRgb}, 0.1)`,
-                  color: `rgb(${accentRgb})`,
-                  border: `1px solid rgba(${accentRgb}, 0.2)`,
-                }}
-              >
-                {service.tag}
-              </span>
-              <span className="text-[10px] sm:text-xs font-mono text-muted-foreground/30">
-                {service.number}/08
-              </span>
-            </div>
+          {/* Detail list with dashes */}
+          <ul className="space-y-2 mb-6">
+            {service.details.map((detail, i) => (
+              <li key={i} className="flex items-start gap-3 text-[13px] sm:text-sm text-white/55 group-hover:text-white/65 transition-colors">
+                <span className="text-white/20 mt-0.5 flex-shrink-0">—</span>
+                <span>{detail}</span>
+              </li>
+            ))}
+          </ul>
 
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground group-hover:text-foreground transition-colors duration-500 tracking-tight">
-              {service.title}
-            </h3>
-
-            <p className="hidden sm:block text-xs md:text-sm text-muted-foreground/50 group-hover:text-muted-foreground/70 transition-colors duration-500 line-clamp-2 max-w-md">
-              {service.description}
-            </p>
-
-            {/* Mini metric bar */}
-            <div className="hidden md:flex items-center gap-2 mt-1">
-              <div className="h-[3px] w-16 rounded-full overflow-hidden" style={{ backgroundColor: `rgba(${accentRgb}, 0.1)` }}>
-                <motion.div
-                  className="h-full rounded-full"
-                  initial={{ width: '0%' }}
-                  whileInView={{ width: `${60 + index * 5}%` }}
-                  transition={{ duration: 1, delay: index * 0.08 + 0.4 }}
-                  style={{ backgroundColor: `rgb(${accentRgb})` }}
-                />
-              </div>
-              <span className="text-[9px] font-mono" style={{ color: `rgba(${accentRgb}, 0.6)` }}>
-                Core Service
-              </span>
-            </div>
-          </div>
-
-          {/* Arrow with accent ring */}
-          <div
-            className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center flex-shrink-0 ml-4 transition-all duration-500 group-hover:scale-110"
-            style={{
-              border: `1px solid rgba(${accentRgb}, 0.15)`,
-              backgroundColor: `rgba(${accentRgb}, 0.05)`,
-            }}
-          >
+          {/* CTA */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs sm:text-[13px] font-medium" style={{ color: service.accent }}>
+              Learn more
+            </span>
             <ArrowRight
-              className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-0.5 transition-all duration-300"
-              style={{ color: `rgba(${accentRgb}, 0.6)` }}
+              className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300"
+              style={{ color: service.accent }}
             />
           </div>
         </div>
 
-        {/* Colored accent edge */}
-        <div className={cn(
-          "absolute top-0 bottom-0 w-[3px] scale-y-0 group-hover:scale-y-100 transition-transform duration-500 origin-top z-[2]",
-          isEven ? "left-0" : "right-0"
-        )} style={{ backgroundColor: `rgb(${accentRgb})` }} />
-
-        {/* Bottom progress bar on hover */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px] z-[2]">
+        {/* Bottom accent line on hover */}
+        <div className="absolute bottom-0 left-0 right-0 h-[2px]">
           <div
-            className="h-full w-0 group-hover:w-full transition-all duration-700 ease-out"
-            style={{ backgroundColor: `rgba(${accentRgb}, 0.5)` }}
+            className="h-full w-0 group-hover:w-full transition-all duration-600 ease-out"
+            style={{ backgroundColor: service.accent }}
           />
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
-/* Floating particle */
-const FloatingParticle = ({ delay, x, size, color }: { delay: number; x: number; size: number; color: string }) => (
-  <motion.div
-    className="absolute rounded-full hidden md:block pointer-events-none"
-    style={{ left: `${x}%`, width: size, height: size, backgroundColor: color }}
-    animate={{
-      y: [0, -40, 0],
-      opacity: [0.1, 0.35, 0.1],
-    }}
-    transition={{
-      duration: 6 + delay,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay,
-    }}
-  />
-);
-
 const ServicesSection = () => {
-  const particles = useMemo(() => [
-    { delay: 0, x: 10, size: 3, color: 'rgba(0, 200, 255, 0.4)' },
-    { delay: 1.8, x: 30, size: 2, color: 'rgba(168, 85, 247, 0.3)' },
-    { delay: 0.6, x: 55, size: 4, color: 'rgba(34, 197, 94, 0.3)' },
-    { delay: 2.5, x: 75, size: 2, color: 'rgba(251, 146, 60, 0.3)' },
-    { delay: 1.2, x: 90, size: 3, color: 'rgba(244, 63, 94, 0.3)' },
-  ], []);
-
   return (
-    <section className="relative bg-background overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Dot grid */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, hsl(var(--foreground)) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-        {/* Scanlines */}
-        <div
-          className="absolute inset-0 opacity-[0.015]"
-          style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 3px, hsl(var(--foreground) / 0.04) 3px, hsl(var(--foreground) / 0.04) 4px)',
-          }}
-        />
-        {/* Dual radial glows */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at 20% 30%, rgba(0, 200, 255, 0.02), transparent 50%), radial-gradient(ellipse at 80% 70%, rgba(168, 85, 247, 0.02), transparent 50%)'
-        }} />
-
-        {/* Floating particles */}
-        {particles.map((p, i) => (
-          <FloatingParticle key={i} {...p} />
-        ))}
+    <section className="py-6 sm:py-10 md:py-14">
+      <div className="px-3 sm:px-4 lg:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          {services.map((service, index) => (
+            <ServiceCard key={service.number} service={service} index={index} />
+          ))}
+        </div>
       </div>
-
-      {/* Top fade */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-background to-transparent z-[1] pointer-events-none" />
-
-      {/* Content */}
-      <div className="relative z-[1] flex flex-col">
-        {services.map((service, index) => (
-          <ServiceRow key={service.number} service={service} index={index} />
-        ))}
-      </div>
-
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-background to-transparent z-[1] pointer-events-none" />
     </section>
   );
 };
