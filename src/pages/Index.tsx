@@ -25,19 +25,21 @@ import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
 const Index = () => {
-  return <div className="min-h-screen bg-surface-base">
+  return <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead title="Korea Web3 Marketing & Crypto Agency | ium Labs" description="ium Labs is Korea's #1 Web3 marketing and crypto agency. We provide full-stack GTM strategy, KOL marketing, community growth, and PR for global blockchain projects entering the Korean market." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
       
       <Navbar />
       
       {/* Hero - Full Bleed */}
-      <main id="hero" className="bg-surface-base">
-        <HeroSection />
+      <main id="hero" className="px-2 sm:px-3 pt-2 sm:pt-3">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+          <HeroSection />
+        </div>
       </main>
-      
+
       {/* About - 01 */}
-      <section className="bg-surface-base" id="why-choose-us">
-        <div className="border-t border-white/10">
+      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="why-choose-us">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
@@ -59,8 +61,8 @@ const Index = () => {
       </section>
       
       {/* Services - 02 */}
-      <section className="bg-surface-base" id="services">
-        <div className="border-t border-white/10">
+      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="services">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
@@ -77,8 +79,8 @@ const Index = () => {
       </section>
       
       {/* Cases (Portfolio) - 03 */}
-      <section className="bg-surface-base" id="cases">
-        <div className="border-t border-white/10">
+      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="cases">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
@@ -97,8 +99,8 @@ const Index = () => {
       </section>
       
       {/* Insights - 04 */}
-      <section className="bg-surface-base" id="insights">
-        <div className="border-t border-white/10">
+      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="insights">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
@@ -125,17 +127,27 @@ const Index = () => {
       </Suspense>
 
       {/* Contact - 05 */}
-      <section className="bg-surface-base" id="contact">
-        <AnimatedSection>
-          <ContactFormSection sectionNumber="05" />
-        </AnimatedSection>
+      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="contact">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+          <AnimatedSection>
+            <ContactFormSection sectionNumber="05" />
+          </AnimatedSection>
+        </div>
       </section>
-      
+
       {/* Footer Links */}
-      <FooterLinksSection />
-      
+      <div className="px-2 sm:px-3 pt-2 sm:pt-3">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+          <FooterLinksSection />
+        </div>
+      </div>
+
       {/* Footer Brand */}
-      <Footer />
+      <div className="px-2 sm:px-3 py-2 sm:py-3">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+          <Footer />
+        </div>
+      </div>
     </div>;
 };
 export default Index;

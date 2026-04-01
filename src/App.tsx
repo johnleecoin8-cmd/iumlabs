@@ -212,7 +212,7 @@ const AppContent = () => {
       <ScrollToTop />
       <div className="flex w-full">
         <Sidebar />
-        <div className="flex-1 min-w-0 pb-16 lg:pb-0">
+        <div className="flex-1 min-w-0">
           <AppRoutes />
         </div>
         <MobileBottomNav />
