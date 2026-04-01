@@ -214,218 +214,155 @@ const GlitchText = ({
 };
 
 // ============================================
-// HERO SECTION - Simplified for Performance
+// HERO SECTION - Lunar Strategy Style
 // ============================================
+
+// Import client logos for hero marquee
+import bnbLogo from "@/assets/logos/bnb.png";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import bybitLogo from "@/assets/logos/bybit.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
+import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import triaLogo from "@/assets/logos/tria-official.png";
+import mantraLogo from "@/assets/logos/mantra.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import fogoLogo from "@/assets/logos/fogo.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
+import CalendlyButton from "@/components/CalendlyButton";
+
+const heroLogos = [
+  { name: "BNB Chain", logo: bnbLogo, noInvert: false },
+  { name: "Bybit", logo: bybitLogo, noInvert: false },
+  { name: "KuCoin", logo: kucoinLogo, noInvert: false },
+  { name: "Polygon", logo: polygonLogo, noInvert: false },
+  { name: "Ondo", logo: ondoLogo, noInvert: false },
+  { name: "Story Protocol", logo: storyProtocolLogo, noInvert: false },
+  { name: "MegaETH", logo: megaethLogo, noInvert: false },
+  { name: "Peaq", logo: peaqLogo, noInvert: false },
+  { name: "Tria", logo: triaLogo, noInvert: true },
+  { name: "Mantra", logo: mantraLogo, noInvert: true },
+  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true },
+  { name: "FOGO", logo: fogoLogo, noInvert: true },
+  { name: "SynFutures", logo: synfuturesLogo, noInvert: true },
+];
+
+const floatingTags = [
+  { label: "Go-To-Market Strategy", top: "18%", left: "4%", right: undefined },
+  { label: "KOL Marketing", top: "32%", left: undefined, right: "5%" },
+  { label: "PR & Media", top: "12%", left: "35%", right: undefined },
+  { label: "Community Growth", top: "48%", left: "3%", right: undefined },
+  { label: "Exchange Listing", top: "22%", left: undefined, right: "3%" },
+  { label: "Offline Events", top: "55%", left: undefined, right: "8%" },
+];
+
 const HeroSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  return (
+    <section className="relative min-h-[100svh] flex flex-col justify-center items-center overflow-hidden bg-[#0A0A0A]">
+      {/* Background image — moon/globe style */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] sm:w-[100%] max-w-[900px] aspect-square rounded-full bg-gradient-to-t from-white/[0.04] to-transparent pointer-events-none" />
+      <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[120%] sm:w-[80%] max-w-[800px] aspect-square rounded-full border border-white/[0.06] pointer-events-none" />
+      <div className="absolute bottom-[-25%] left-1/2 -translate-x-1/2 w-[130%] sm:w-[90%] max-w-[850px] aspect-square rounded-full border border-white/[0.03] pointer-events-none" />
 
-  return <section ref={ref} className="relative min-h-[80vh] flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 bg-background overflow-hidden w-full">
-      {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
-      
-      {/* Subtle radial glow */}
-      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
-      
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
-      backgroundImage: `
-          linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-          linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-        `,
-      backgroundSize: '60px 60px'
-    }} />
+      {/* Floating service tags — desktop only */}
+      {floatingTags.map((tag, i) => (
+        <motion.div
+          key={i}
+          className="absolute hidden lg:block z-10"
+          style={{ top: tag.top, left: tag.left, right: tag.right }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.8 + i * 0.12, duration: 0.5 }}
+        >
+          <span className="px-4 py-2 text-xs font-medium whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.1] text-white/70 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-default">
+            {tag.label}
+          </span>
+        </motion.div>
+      ))}
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto">
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6
-      }} className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-          <motion.span className="w-8 h-px bg-primary" initial={{
-          scaleX: 0
-        }} animate={{
-          scaleX: 1
-        }} transition={{
-          duration: 0.8,
-          delay: 0.2
-        }} />
-          Korea GTM Strategy
-        </motion.p>
-        
-        <motion.h1 initial={{
-        opacity: 0,
-        y: 40
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8,
-        delay: 0.1
-      }} className="text-[clamp(1.5rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-8">
-          <span className="block overflow-hidden">
-            <motion.span className="block" initial={{
-            y: '100%'
-          }} animate={{
-            y: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: [0.33, 1, 0.68, 1]
-          }}>
-              <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
-            </motion.span>
+      {/* Main content — centered */}
+      <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-24 sm:pt-32 pb-8">
+        <motion.h1
+          className="text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.03em] text-white"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          Your Crypto
+          <br />
+          <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
+            Ecosystem Growth
           </span>
-          <span className="block overflow-hidden">
-            <motion.span className="block text-foreground/80 text-[clamp(1.2rem,4vw,3rem)]" initial={{
-            y: '100%'
-          }} animate={{
-            y: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.35,
-            ease: [0.33, 1, 0.68, 1]
-          }}>
-              Your Strategic Bridge to the Korean Ecosystem.
-            </motion.span>
-          </span>
+          <br />
+          Agency in Korea
         </motion.h1>
 
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 0.5
-      }} className="text-sm sm:text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl leading-relaxed">
-          The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
+        <motion.p
+          className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed font-light"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          Since 2025, we've launched 19+ ecosystems and projects into the Korean crypto market — the #2 market globally by trading volume.
         </motion.p>
 
-        {/* Stats Row */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 0.7
-      }} className="flex flex-row items-center gap-6 md:gap-12 mb-10 md:mb-16">
-          <div className="text-center group">
-            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-            opacity: 0,
-            scale: 0.5
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            delay: 0.8,
-            duration: 0.5,
-            type: "spring"
-          }}>
-              #2
-            </motion.p>
-            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Global Volume</p>
-          </div>
-          <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <div className="text-center group">
-            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-            opacity: 0,
-            scale: 0.5
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            delay: 1.0,
-            duration: 0.5,
-            type: "spring"
-          }}>
-              4x
-            </motion.p>
-            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Velocity</p>
-          </div>
-          <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <div className="text-center group">
-            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-            opacity: 0,
-            scale: 0.5
-          }} animate={{
-            opacity: 1,
-            scale: 1
-          }} transition={{
-            delay: 1.2,
-            duration: 0.5,
-            type: "spring"
-          }}>
-              100%
-            </motion.p>
-            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Retail-Driven</p>
-          </div>
+        {/* CTA */}
+        <motion.div
+          className="mt-8 sm:mt-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
+        >
+          <CalendlyButton className="inline-flex items-center gap-3 px-8 py-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium text-sm sm:text-base rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 active:scale-[0.97]">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
+              <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm1-13H9v6l5.25 3.15.75-1.23-4.5-2.67V5z" fill="currentColor"/>
+            </svg>
+            Book a Free Consultation
+          </CalendlyButton>
         </motion.div>
 
-        {/* CTA Button */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        delay: 1.0,
-        duration: 0.6
-      }}>
-          <Link to="/projects" className="inline-flex items-center gap-3 text-sm md:text-base text-muted-foreground hover:text-primary transition-colors group border border-border/50 hover:border-primary/50 px-6 py-3 rounded-sm">
-            View Our Case Studies
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+        {/* Mobile tags */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-2 mt-8 lg:hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.5 }}
+        >
+          {floatingTags.map((tag, i) => (
+            <span key={i} className="px-3 py-1.5 text-[10px] font-medium rounded-md bg-white/[0.04] border border-white/[0.1] text-white/60">
+              {tag.label}
+            </span>
+          ))}
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      delay: 1.5,
-      duration: 0.8
-    }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
-        <motion.span className="text-sm text-muted-foreground tracking-[0.3em] uppercase" animate={{
-        opacity: [0.5, 1, 0.5]
-      }} transition={{
-        duration: 2,
-        repeat: Infinity
-      }}>
-          Scroll
-        </motion.span>
-        <motion.div className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2" animate={{
-        borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
-      }} transition={{
-        duration: 2,
-        repeat: Infinity
-      }}>
-          <motion.div className="w-1.5 h-3 bg-primary rounded-full" animate={{
-          y: [0, 16, 0]
-        }} transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }} />
-        </motion.div>
-      </motion.div>
-    </section>;
+      {/* Client logo marquee — bottom */}
+      <div className="relative z-10 w-full border-t border-white/[0.06] mt-auto">
+        <div className="flex items-center overflow-hidden py-4 sm:py-5">
+          <div className="flex items-center logo-marquee-slow">
+            {[...heroLogos, ...heroLogos].map((client, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 mx-3 sm:mx-4 px-4 py-2 bg-white/[0.02] rounded-full border border-white/[0.06] hover:border-white/[0.15] transition-all duration-300 flex-shrink-0"
+              >
+                <img
+                  src={client.logo}
+                  alt={client.name}
+                  loading="lazy"
+                  className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-80' : 'brightness-0 invert opacity-70'}`}
+                />
+                <span className="text-white/60 text-[11px] sm:text-xs font-medium whitespace-nowrap">
+                  {client.name}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 // ============================================
