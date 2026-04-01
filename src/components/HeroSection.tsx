@@ -26,43 +26,43 @@ import kiteLogo from "@/assets/logos/kite.png";
 
 // Desktop tags - 8 services (positioned at edges with good spacing)
 const serviceTags = [{
-  label: "Deep Research",
+  label: "$7B+ Client Valuation",
   position: "top-[6%] left-[3%]"
 }, {
-  label: "GTM Strategy",
+  label: "19+ Projects Launched",
   position: "top-[24%] left-[2%]"
 }, {
-  label: "Community Growth",
+  label: "170+ KOL Network",
   position: "top-[44%] left-[3%]"
 }, {
-  label: "Branding & Web",
+  label: "55+ Events Hosted",
   position: "top-[64%] left-[2%]"
 }, {
-  label: "KOL Marketing",
+  label: "#2 Market by Volume",
   position: "top-[8%] right-[3%]"
 }, {
-  label: "Media & PR",
+  label: "24/7 Community Ops",
   position: "top-[26%] right-[2%]"
 }, {
-  label: "SEO & Ads",
+  label: "Korea-Native Team",
   position: "top-[46%] right-[3%]"
 }, {
-  label: "Offline Events",
+  label: "5-Day Launch Speed",
   position: "top-[66%] right-[2%]"
 }];
 
 // Mobile tags - repositioned to avoid overlap with centered headline
 const mobileServiceTags = [{
-  label: "Research",
+  label: "$7B+ Valuation",
   position: "top-[8%] left-[5%]"
 }, {
-  label: "GTM",
+  label: "19+ Projects",
   position: "top-[14%] right-[6%]"
 }, {
-  label: "Marketing",
+  label: "170+ KOLs",
   position: "bottom-[42%] left-[4%]"
 }, {
-  label: "Events",
+  label: "55+ Events",
   position: "bottom-[36%] right-[5%]"
 }];
 const clientLogos = [{

@@ -107,20 +107,20 @@ const Navbar = () => {
       <div className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
         <div className="flex items-start justify-between px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           {/* Logo */}
-          <Link to="/" className="pointer-events-auto flex items-center gap-3 px-5 py-3 rounded-full bg-black/60 backdrop-blur-xl border border-white/[0.12] hover:bg-black/70 transition-all">
-            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain brightness-0 invert drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+          <Link to="/" className="pointer-events-auto flex items-center gap-3">
+            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain brightness-0 invert " />
             <span className="text-[15px] font-bold text-white tracking-tight">ium Labs</span>
           </Link>
 
           {/* Right side */}
           <div className="pointer-events-auto flex items-center gap-2">
-            <CalendlyButton className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[13px] font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+            <CalendlyButton className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[13px] font-medium transition-all ">
               <span>Book a Meeting</span>
             </CalendlyButton>
 
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/40 backdrop-blur-md border border-white/[0.08] hover:bg-black/50 transition-all"
+              className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 transition-all"
               aria-label="Open menu"
             >
               <div className="flex flex-col gap-[4px]">
@@ -143,7 +143,7 @@ const Navbar = () => {
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
             <div className="mx-3 sm:mx-4 lg:mx-6 mt-3 sm:mt-4">
-              <div className="bg-[#0A0A0A]/95 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+              <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
                 <Link to="/" className="flex items-center gap-2">
                   <img src={logoImage} alt="ium Labs" className="w-5 h-5 object-contain brightness-0 invert" />
                   <span className="text-xs font-semibold text-white/90 hidden sm:block">ium Labs</span>
