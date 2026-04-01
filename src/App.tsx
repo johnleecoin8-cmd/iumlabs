@@ -30,6 +30,9 @@ import Transparency from "./pages/Transparency";
 import Jobs from "./pages/Jobs";
 import KInfluenceGrid from "./pages/KInfluenceGrid";
 import MobileServicesPage from "./pages/MobileServicesPage";
+import CryptoMarketingKorea from "./pages/CryptoMarketingKorea";
+import KOLMarketingKorea from "./pages/KOLMarketingKorea";
+import KoreaWeb3Guide from "./pages/KoreaWeb3Guide";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -166,6 +169,9 @@ const AppRoutes = () => {
         <Route path="/transparency" element={<Transparency />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/k-leaderboard" element={<KInfluenceGrid />} />
+        <Route path="/crypto-marketing-korea" element={<CryptoMarketingKorea />} />
+        <Route path="/kol-marketing-korea" element={<KOLMarketingKorea />} />
+        <Route path="/korea-web3-guide" element={<KoreaWeb3Guide />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />

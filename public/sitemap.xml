@@ -212,6 +212,26 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- SEO Landing Pages -->
+  <url>
+    <loc>https://iumlabs.io/crypto-marketing-korea</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/kol-marketing-korea</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/korea-web3-guide</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- Jobs -->
   <url>
     <loc>https://iumlabs.io/jobs</loc>
