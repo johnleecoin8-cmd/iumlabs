@@ -114,7 +114,7 @@ const Navbar = () => {
 
           {/* Right side */}
           <div className="pointer-events-auto flex items-center gap-2">
-            <CalendlyButton className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[13px] font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+            <CalendlyButton className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[13px] font-medium transition-all hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
               <span>Book a Meeting</span>
             </CalendlyButton>
 
@@ -156,7 +156,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <CalendlyButton className="flex items-center px-4 py-1.5 rounded-full bg-[#3B82F6] hover:bg-[#2563EB] text-white text-[11px] font-medium transition-all">
+                  <CalendlyButton className="flex items-center px-4 py-1.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[11px] font-medium transition-all">
                     <span>Book a Meeting</span>
                   </CalendlyButton>
                   <button
