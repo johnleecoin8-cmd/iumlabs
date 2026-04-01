@@ -9,6 +9,7 @@ import kolImage from "@/assets/services/kol-avatars.webp";
 import prImage from "@/assets/services/pr-coindesk.png";
 import seoAdsImage from "@/assets/services/seo-ads.webp";
 import deepResearchImage from "@/assets/services/deep-research.png";
+import amaImage from "@/assets/services/ama-spaces.png";
 
 const services = [
   {
@@ -137,7 +138,7 @@ const services = [
     description: "Structured AMA sessions that drive real engagement.",
     link: "/services/ama",
     icon: Mic,
-    image: communityImage,
+    image: amaImage,
     accent: "#EC4899",
     details: [
       "Telegram, Discord, Twitter Spaces AMAs",
