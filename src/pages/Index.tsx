@@ -39,7 +39,7 @@ const Index = () => {
 
       {/* About */}
       <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="why-choose-us">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
@@ -53,7 +53,7 @@ const Index = () => {
       
       {/* Services */}
       <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="services">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
           </div>
@@ -65,7 +65,7 @@ const Index = () => {
       
       {/* Cases */}
       <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="cases">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Case Studies</h2>
           </div>
@@ -79,7 +79,7 @@ const Index = () => {
       
       {/* Insights */}
       <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="insights">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111111] border border-white/[0.06]">
+        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Insights</h2>
           </div>
@@ -103,7 +103,7 @@ const Index = () => {
       <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="contact">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
           <AnimatedSection>
-            <ContactFormSection sectionNumber="05" />
+            <ContactFormSection />
           </AnimatedSection>
         </div>
       </section>
