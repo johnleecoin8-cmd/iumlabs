@@ -47,7 +47,7 @@ const WhyChooseUsSection = () => {
   });
 
   return (
-    <section className="relative overflow-hidden min-h-[90vh]">
+    <section className="relative overflow-hidden">
       {/* Fullscreen Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -59,8 +59,9 @@ const WhyChooseUsSection = () => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex items-center">
+      {/* Content — centered vertically, stats pushed to bottom */}
+      <div className="relative z-10 flex flex-col min-h-[90vh]">
+        <div className="flex-1 flex items-center">
         <motion.div
           className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-10 sm:py-14 md:py-16 max-w-4xl text-center"
           variants={containerVariants}
@@ -106,9 +107,9 @@ const WhyChooseUsSection = () => {
 
 
         </motion.div>
-      </div>
+        </div>
 
-      {/* Stats bar */}
+      {/* Stats bar — bottom */}
       <div className="relative z-10 border-t border-white/[0.08] py-8 sm:py-12 md:py-14">
         <div className="container mx-auto px-6 sm:px-10 md:px-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 md:gap-14">
@@ -129,6 +130,7 @@ const WhyChooseUsSection = () => {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </section>);
 
