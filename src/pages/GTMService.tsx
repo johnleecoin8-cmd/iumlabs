@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, X, Check } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -7,6 +7,25 @@ import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
 import gtmHeroImage from "@/assets/services/gtm-hero.avif";
 import { projectsData } from "@/data/projectsData";
+
+// Client logos
+import bnbLogo from "@/assets/logos/bnb.png";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import bybitLogo from "@/assets/logos/bybit.png";
+import mantraLogo from "@/assets/logos/mantra.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
+import aptosLogo from "@/assets/logos/aptos.png";
+
+const clientLogos = [
+  { name: "BNB Chain", logo: bnbLogo },
+  { name: "Bybit", logo: bybitLogo },
+  { name: "KuCoin", logo: kucoinLogo },
+  { name: "Polygon", logo: polygonLogo },
+  { name: "Mantra", logo: mantraLogo },
+  { name: "Peaq", logo: peaqLogo },
+  { name: "Aptos", logo: aptosLogo },
+];
 
 const caseStudies = [
   { slug: "bnb-chain", result: "+420% Volume", detail: "2-week volume surge through KOL campaigns and Seoul networking events" },
@@ -25,7 +44,7 @@ const GTMService = () => {
       />
       <Navbar />
 
-      {/* ===== Hero ===== */}
+      {/* ===== 1. Hero ===== */}
       <section className="relative min-h-[70vh] flex items-end overflow-hidden">
         <img src={gtmHeroImage} alt="Korea" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.3)" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30" />
@@ -43,7 +62,19 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== The Problem — narrative text ===== */}
+      {/* ===== 2. Client logo marquee ===== */}
+      <section className="border-y border-white/[0.06] overflow-hidden py-5">
+        <div className="flex items-center logo-marquee-slow">
+          {[...clientLogos, ...clientLogos, ...clientLogos].map((client, i) => (
+            <div key={i} className="flex items-center gap-2.5 mx-4 px-5 py-2 bg-white/[0.03] rounded-full border border-white/[0.06] flex-shrink-0">
+              <img src={client.logo} alt={client.name} className="h-5 w-auto object-contain brightness-0 invert opacity-70" />
+              <span className="text-white/50 text-xs font-medium whitespace-nowrap">{client.name}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== 3. The Problem ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="max-w-3xl">
           <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 leading-tight">
@@ -70,7 +101,58 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Who This Is For ===== */}
+      {/* ===== 4. Before / After ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {/* Before */}
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#111] border border-white/[0.06]">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-6 h-6 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
+                <X className="w-3 h-3 text-red-400" />
+              </div>
+              <h3 className="text-base font-bold text-white">Without Korea GTM</h3>
+            </div>
+            <ul className="space-y-2.5">
+              {[
+                "Translated English campaigns that don't resonate",
+                "Global KOLs with zero Korean audience",
+                "No presence on Naver, KakaoTalk, or Korean Telegram",
+                "Invisible on Korean exchanges",
+                "Burning budget without Korean user acquisition",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-white/35 leading-relaxed">
+                  <span className="text-red-400/40 mt-0.5">—</span>{item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* After */}
+          <div className="p-6 sm:p-8 rounded-2xl bg-[#10B981]/[0.05] border border-[#10B981]/20">
+            <div className="flex items-center gap-2 mb-5">
+              <div className="w-6 h-6 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
+                <Check className="w-3 h-3 text-[#10B981]" />
+              </div>
+              <h3 className="text-base font-bold text-white">With ium Labs</h3>
+            </div>
+            <ul className="space-y-2.5">
+              {[
+                "Korea-fit narrative crafted by native speakers",
+                "170+ vetted Korean KOLs activated for your project",
+                "24/7 community on Telegram, Discord, KakaoTalk, Naver",
+                "Exchange listing strategy for Upbit, Bithumb, Coinone",
+                "Measurable ROI with monthly performance analytics",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-2.5 text-sm text-white/50 leading-relaxed">
+                  <span className="text-[#10B981]/60 mt-0.5">—</span>{item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5. Who This Is For ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Who this is for</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -90,11 +172,23 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== What We Deliver ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">What we deliver</h2>
+      {/* ===== 6. Full-width mood image ===== */}
+      <section className="px-3 sm:px-4 pb-8">
+        <div className="relative rounded-2xl overflow-hidden aspect-[21/6]">
+          <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.4) saturate(0.8)" }} />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <p className="text-xl sm:text-3xl lg:text-4xl font-bold text-white/80 text-center tracking-tight px-4">
+              19+ projects. $7B+ valuation. One team in Seoul.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 7. What We Deliver ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-8">What we deliver</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left — process */}
           <div className="space-y-6">
             {[
               { n: "01", title: "Analyze", desc: "Competitor SOV analysis, on-chain wallet profiling, market opportunity mapping, regulatory landscape review." },
@@ -111,8 +205,6 @@ const GTMService = () => {
               </div>
             ))}
           </div>
-
-          {/* Right — deliverables */}
           <div className="space-y-6">
             {[
               { title: "Market Intelligence", items: ["Competitive landscape & SOV report", "On-chain wallet behavior analysis", "Market opportunity mapping", "Regulatory compliance guidance"] },
@@ -121,8 +213,7 @@ const GTMService = () => {
             ].map((d) => (
               <div key={d.title}>
                 <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />
-                  {d.title}
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />{d.title}
                 </h3>
                 <ul className="space-y-1">
                   {d.items.map((item, idx) => (
@@ -137,7 +228,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Case Studies ===== */}
+      {/* ===== 8. Case Studies ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl sm:text-2xl font-bold text-white">Results</h2>
@@ -163,7 +254,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== FAQ ===== */}
+      {/* ===== 9. FAQ ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">FAQ</h2>
         <div className="max-w-3xl space-y-5">
@@ -181,7 +272,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== CTA ===== */}
+      {/* ===== 10. CTA ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <div className="rounded-2xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <div>
