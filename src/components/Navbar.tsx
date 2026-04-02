@@ -47,13 +47,13 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed top-3 right-3 sm:top-4 sm:right-4 z-[101] w-[calc(100%-24px)] sm:w-[480px] max-h-[70vh] overflow-y-auto"
-            initial={{ opacity: 0, scale: 0.95, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            className="fixed top-0 right-0 z-[101] w-full sm:w-1/2 h-full overflow-y-auto"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-[#111] border border-white/[0.08] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden">
+            <div className="bg-[#111] border-l border-white/[0.06] shadow-2xl h-full">
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
                 <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
@@ -66,7 +66,7 @@ const Navbar = () => {
               </div>
 
               {/* Content */}
-              <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="p-6 sm:p-8 lg:p-10 flex flex-col gap-10">
                 {/* Nav links */}
                 <div>
                   <span className="text-[9px] text-white/25 uppercase tracking-[0.2em] mb-3 block">Menu</span>
@@ -75,7 +75,7 @@ const Navbar = () => {
                       if (link.label === "Services") {
                         return (
                           <div key={link.to}>
-                            <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-base font-semibold text-white hover:text-white/70 transition-colors py-1.5">
+                            <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-xl sm:text-2xl font-bold text-white hover:text-white/70 transition-colors py-2">
                               <span>{link.label}</span>
                               <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-4 h-4" /></motion.div>
                             </button>
@@ -91,7 +91,7 @@ const Navbar = () => {
                           </div>
                         );
                       }
-                      return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-base font-semibold text-white hover:text-white/70 transition-colors py-1.5">{link.label}</Link>;
+                      return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-xl sm:text-2xl font-bold text-white hover:text-white/70 transition-colors py-2">{link.label}</Link>;
                     })}
                   </nav>
                 </div>
