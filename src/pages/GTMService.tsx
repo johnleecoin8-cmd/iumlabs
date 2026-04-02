@@ -266,22 +266,6 @@ const HeroSection = () => {
       <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.35)" }} />
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />
 
-      {/* Floating service tags — desktop only */}
-      {floatingTags.map((tag, i) => (
-        <motion.div
-          key={i}
-          className="absolute hidden lg:block z-10"
-          style={{ top: tag.top, left: tag.left, right: tag.right }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.8 + i * 0.12, duration: 0.5 }}
-        >
-          <span className="px-4 py-2 text-xs font-medium whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.1] text-white/70 hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300 cursor-default">
-            {tag.label}
-          </span>
-        </motion.div>
-      ))}
-
       {/* Main content — centered */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-24 sm:pt-32 pb-8">
         <motion.h1
@@ -305,7 +289,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Since 2025, we've launched 19+ ecosystems and projects into the Korean crypto market — the #2 market globally by trading volume.
+          19+ ecosystems and projects launched into the Korean crypto market — the #2 market globally by trading volume.
         </motion.p>
 
         {/* CTA */}
