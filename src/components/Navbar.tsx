@@ -47,7 +47,7 @@ const Navbar = () => {
         <div className="h-full flex flex-col">
           <div className="flex items-center justify-between px-6 sm:px-8 lg:px-12 py-5 border-b border-white/[0.06]">
             <Link to="/" className="flex items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
-              <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain brightness-0 invert" />
+              <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg" />
               <span className="text-sm font-semibold text-white">ium Labs</span>
             </Link>
             <button onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-white/70 hover:bg-white/[0.1] hover:text-white transition-all text-sm">
@@ -108,7 +108,7 @@ const Navbar = () => {
         <div className="flex items-start justify-between px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
           {/* Logo */}
           <Link to="/" className="pointer-events-auto flex items-center gap-3">
-            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain brightness-0 invert " />
+            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg " />
             <span className="text-[15px] font-bold text-white tracking-tight">ium Labs</span>
           </Link>
 
@@ -145,7 +145,7 @@ const Navbar = () => {
             <div className="mx-3 sm:mx-4 lg:mx-6 mt-3 sm:mt-4">
               <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
                 <Link to="/" className="flex items-center gap-2">
-                  <img src={logoImage} alt="ium Labs" className="w-5 h-5 object-contain brightness-0 invert" />
+                  <img src={logoImage} alt="ium Labs" className="w-5 h-5 object-contain rounded-lg" />
                   <span className="text-xs font-semibold text-white/90 hidden sm:block">ium Labs</span>
                 </Link>
 

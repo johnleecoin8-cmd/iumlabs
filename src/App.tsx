@@ -121,7 +121,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
           <img 
             src={logo} 
             alt="ium Labs" 
-            className={`w-16 h-16 object-contain brightness-0 invert ${
+            className={`w-16 h-16 object-contain rounded-xl ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
             style={{ willChange: 'opacity, transform' }}
