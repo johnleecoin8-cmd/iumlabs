@@ -92,7 +92,7 @@ const ResearchHeroSection = () => {
       {/* Background Layer - Video */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Fallback poster - always visible until video is ready */}
-        <img {...posterProps} fetchPriority="high" decoding="async" />
+        <img {...posterProps} fetchpriority="high" decoding="async" />
 
         {/* Shimmer loading overlay */}
         <ShimmerOverlay />

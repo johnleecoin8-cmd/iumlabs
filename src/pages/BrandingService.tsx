@@ -1,4 +1,4 @@
-import { Palette } from "lucide-react";
+import { Shield } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import SEOHead from "@/components/SEOHead";
@@ -6,94 +6,94 @@ import SEOHead from "@/components/SEOHead";
 const ACCENT_COLOR = "#8B5CF6";
 
 const serviceTags: ServiceTag[] = [
-  { label: "Brand Identity" },
-  { label: "Logo Design" },
-  { label: "Web Development" },
-  { label: "UI/UX Design" },
-  { label: "Design System" },
-  { label: "Motion Graphics" },
+  { label: "VASP Registration" },
+  { label: "PIPA Compliance" },
+  { label: "Regulatory Strategy" },
+  { label: "Exchange Compliance" },
+  { label: "AML/KYC Advisory" },
+  { label: "Legal Landscape" },
 ];
 
 const stats: ServiceStat[] = [
-  { value: 14, label: "Brands Delivered", suffix: "" },
-  { value: 21, label: "Websites Launched", suffix: "" },
-  { value: 3.5, label: "Avg. Project Duration", suffix: " Weeks" },
-  { value: 98, label: "Client Satisfaction", suffix: "%" },
+  { value: 19, label: "Projects Advised", suffix: "+" },
+  { value: 100, label: "Compliance Rate", suffix: "%" },
+  { value: 5, label: "Regulatory Frameworks", suffix: "" },
+  { value: 24, label: "Response Time", suffix: "h" },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Brand Identity",
+    title: "Regulatory Analysis",
     items: [
-      "The Basics: Logo kit (Primary, Secondary, Icons)",
-      "The Vibe: Color palettes, gradients, and custom fonts",
-      "The Rules: A simple Brand Guideline PDF so your team stays on track",
+      "Korean Virtual Asset Act (가상자산법) compliance assessment",
+      "PIPA personal data protection strategy for biometric & user data",
+      "Regulatory landscape report tailored to your project category",
     ],
   },
   {
-    title: "Website & Tech",
+    title: "Compliance Strategy",
     items: [
-      "Design: Fully responsive and interactive layouts",
-      "Development: Clean code, fast loading, and SEO-ready",
-      "Web3 Ready: Easy wallet connections and smooth animations",
+      "VASP registration guidance and documentation preparation",
+      "Exchange listing compliance — Upbit, Bithumb, Coinone requirements",
+      "AML/KYC framework recommendations for Korean market entry",
     ],
   },
   {
-    title: "Ongoing Support",
+    title: "Ongoing Advisory",
     items: [
-      "Launch Assist: We're with you through go-live and beyond",
-      "Quick Fixes: Fast turnaround on minor updates",
-      "Growth Ready: Easy to scale as your project evolves",
+      "Regulatory update monitoring — real-time alerts on policy changes",
+      "Government relations and industry association introductions",
+      "Quarterly compliance health check and risk assessment",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "What's in the branding package?",
-    answer: "Everything you need to look professional: logos, colors, fonts, and a guidebook on how to use them. We can also scale up to full visual systems if you're going big.",
+    question: "Do you provide legal advice?",
+    answer: "We work with Law Office Asset and Freeman Law — leading firms specializing in Korean blockchain and virtual asset regulations. Through these partnerships, we provide 1:1 consulting that covers both strategic advisory and formal legal guidance, all coordinated by our team.",
   },
   {
-    question: "Do you build websites from scratch?",
-    answer: "Always. No generic templates here. We build custom sites that are optimized for speed and specifically designed for your project's goals.",
+    question: "What Korean regulations apply to Web3 projects?",
+    answer: "Key regulations include the Virtual Asset User Protection Act, PIPA (Personal Information Protection Act), and exchange-specific listing requirements. The regulatory landscape varies by project type — DeFi, NFT, and token projects each face different requirements.",
   },
   {
-    question: "How long does the whole process take?",
-    answer: "Our standard program runs 4 weeks from kickoff to launch. Need it faster? We can discuss rush options depending on your timeline.",
+    question: "How long does VASP registration guidance take?",
+    answer: "Our regulatory assessment takes 1-2 weeks. Full VASP registration support, including documentation preparation and application guidance, typically runs 4-8 weeks depending on project complexity.",
   },
 ];
 
 const BrandingService = () => {
   usePageMeta({
-    title: "Korea Web3 Branding & Crypto Design Agency",
-    description: "Korea's premier Web3 branding agency. Crypto-native design, UI/UX, and visual identity services that resonate with Korean investors and global audiences.",
-    path: "/services/branding",
+    title: "Korea Crypto Regulations & Compliance Consulting | ium Labs",
+    description: "Navigate Korea's crypto regulatory landscape with confidence. VASP registration, PIPA compliance, exchange listing requirements, and ongoing regulatory advisory.",
+    path: "/services/compliance",
     image: "/og-image.png",
-    keywords: ["Korea Web3", "Korea Crypto", "Korea Web3 Marketing", "Web3 Branding Korea", "Crypto Design Agency Korea"]
+    keywords: ["Korea Crypto Regulations", "VASP Registration Korea", "PIPA Compliance", "Korea Blockchain Compliance", "Crypto Regulatory Advisory Korea"]
   });
 
   return (
     <>
     <SEOHead
-      title="Web3 Branding & Website Design Korea | ium Labs"
-      description="Professional branding and website design for Web3 projects targeting the Korean market. Logo, identity, and landing pages."
-      path="/services/branding"
-      keywords={['Web3 Branding Korea', 'Crypto Website Design', 'Blockchain Branding Seoul', 'Web3 Landing Page']}
+      title="Korea Crypto Regulations & Compliance Consulting | ium Labs"
+      description="Navigate Korea's crypto regulatory landscape. VASP registration guidance, PIPA compliance strategy, and exchange listing requirements for Web3 projects."
+      path="/services/compliance"
+      keywords={['Korea Crypto Regulations', 'VASP Registration', 'PIPA Compliance', 'Blockchain Compliance Korea']}
     />
     <ServicePageLayout
-      serviceName="Branding & Website"
-      serviceTitle="Brand"
-      serviceSubtitle="& Website"
-      serviceDescription="We build standout identities and ultra-fast websites for Web3 teams. From your first logo to a fully custom site, we handle the heavy lifting so you can focus on scaling."
-      serviceIcon={Palette}
+      serviceName="Regulations & Compliance"
+      serviceTitle="Regulations"
+      serviceSubtitle="& Compliance"
+      serviceDescription="Korea's crypto regulations are complex and fast-changing. In partnership with Law Office Asset and Freeman Law, we provide 1:1 regulatory consulting — from VASP registration to exchange compliance, tailored to your project."
+      serviceIcon={Shield}
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
-      videoSrc="/videos/branding-hero.mp4"
-      posterSrc="/images/posters/branding-hero.jpg"
+      videoSrc=""
+      posterSrc="/images/posters/compliance-hero.png"
       deliverables={deliverables}
       faqItems={faqItems}
-      currentSlug="branding"
+      currentSlug="compliance"
     />
     </>
   );

@@ -626,6 +626,34 @@ export const projectsData: Record<string, ProjectData> = {
       { src: openledgerInterviewImg, title: "Media Interview", description: "OpenLedger executive interview with Korean crypto media" }
     ],
     news: []
+  },
+  "world": {
+    name: "World (WLD)",
+    logo: "",
+    bgImage: saharaAiBg,
+    bgVideo: "/videos/projects/world-hero.mov",
+    category: "Identity / AI",
+    result: "Korea Legal & PR",
+    glowColor: "#1D1D1B",
+    description: "World is the largest human identity and financial network, co-founded by Sam Altman. ium Labs provided Korea legal guidance and PR & media relations to support World's market presence in Korea.",
+    challenge: "Korea's strict personal data protection laws (PIPA) and biometric data regulations required careful navigation. World needed localized legal guidance to ensure compliance while building public trust through strategic media positioning.",
+    whatWeDid: "We provided comprehensive Korean legal consulting on PIPA compliance and biometric data handling, while executing a targeted PR & media relations campaign across Korea's top crypto outlets including BlockMedia and CoinDesk Korea.",
+    metrics: [
+      { value: "Legal", label: "PIPA Compliance Guide" },
+      { value: "Tier-1", label: "Media Coverage" }
+    ],
+    strategy: [
+      "Korean legal consulting on PIPA and biometric data regulations",
+      "PR & media relations across Korea's top crypto media outlets"
+    ],
+    results: [
+      { metric: "Legal Guide", value: "PIPA Compliance" },
+      { metric: "PR Coverage", value: "Tier-1 Media" }
+    ],
+    services: ["Legal Guide", "PR & Media Relations"],
+    shortServices: ["Legal", "PR"],
+    gallery: [],
+    news: []
   }
 };
 

@@ -15,13 +15,17 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
     const element = ref.current;
     if (!element) return;
 
+    // Immediately check if element is already in viewport
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      setIsVisible(true);
+      if (triggerOnce) return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Add slight delay for smoother feel
-          requestAnimationFrame(() => {
-            setIsVisible(true);
-          });
+          setIsVisible(true);
           if (triggerOnce) {
             observer.unobserve(element);
           }
@@ -29,7 +33,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
           setIsVisible(false);
         }
       },
-      { threshold, rootMargin }
+      { threshold: Math.max(threshold, 0.01), rootMargin: rootMargin || '50px' }
     );
 
     observer.observe(element);

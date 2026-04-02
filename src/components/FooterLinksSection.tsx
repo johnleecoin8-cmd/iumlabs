@@ -43,7 +43,7 @@ const FooterLinksSection = () => {
   return (
     <section className="border-t border-white/[0.06] bg-[#0A0A0A]">
       <div className="px-4 sm:px-6 lg:px-10 py-10 sm:py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
           {sections.map((section) => (
             <div key={section.title}>
               <h3 className="text-xs font-medium text-white/30 uppercase tracking-wider mb-4">

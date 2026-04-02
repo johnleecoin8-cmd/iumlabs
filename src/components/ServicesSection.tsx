@@ -7,8 +7,8 @@ import eventsImage from "@/assets/services/offline-event.webp";
 import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-avatars.webp";
 import prImage from "@/assets/services/pr-coindesk.png";
-import seoAdsImage from "@/assets/services/seo-ads.webp";
-import deepResearchImage from "@/assets/services/deep-research.png";
+import seoAdsImage from "@/assets/services/seo-naver.png";
+import deepResearchImage from "@/assets/services/deep-research-blog.png";
 import amaImage from "@/assets/services/ama-spaces.png";
 
 const services = [
@@ -29,36 +29,21 @@ const services = [
   },
   {
     number: "02",
-    title: "Brand Identity & Web",
-    description: "Strategic brand identity and high-performance websites.",
-    link: "/services/branding",
-    icon: Compass,
-    image: websiteImage,
-    accent: "#A855F7",
+    title: "Influencer / KOL",
+    description: "Campaigns powered by top Korean crypto voices.",
+    link: "/services/influencer",
+    icon: Mic2,
+    image: kolImage,
+    accent: "#FACC15",
     details: [
-      "Logo, visual identity & brand guidelines",
-      "Web3-native website design & development",
-      "Korean localization & copywriting",
-      "Landing pages for TGE & campaigns",
+      "170+ vetted Korean KOL network",
+      "YouTube, Twitter, Telegram, Naver",
+      "Campaign management & ROI tracking",
+      "Ambassador & long-term partnerships",
     ],
   },
   {
     number: "03",
-    title: "SEO / Paid Ads",
-    description: "Search optimization and crypto-native advertising.",
-    link: "/services/seo-ads",
-    icon: Search,
-    image: seoAdsImage,
-    accent: "#22C55E",
-    details: [
-      "Naver SEO & keyword strategy",
-      "Google Ads & crypto ad networks",
-      "Performance tracking & ROI reporting",
-      "A/B testing & conversion optimization",
-    ],
-  },
-  {
-    number: "04",
     title: "Offline Event",
     description: "End-to-end event planning for Web3 experiences in Korea.",
     link: "/services/offline-event",
@@ -70,6 +55,21 @@ const services = [
       "Venue sourcing & logistics management",
       "Speaker curation & panel moderation",
       "Post-event content & lead capture",
+    ],
+  },
+  {
+    number: "04",
+    title: "SEO / Paid Ads",
+    description: "Search optimization and crypto-native advertising.",
+    link: "/services/seo-ads",
+    icon: Search,
+    image: seoAdsImage,
+    accent: "#22C55E",
+    details: [
+      "Naver SEO & keyword strategy",
+      "Google Ads & crypto ad networks",
+      "Performance tracking & ROI reporting",
+      "A/B testing & conversion optimization",
     ],
   },
   {
@@ -104,17 +104,17 @@ const services = [
   },
   {
     number: "07",
-    title: "Influencer / KOL",
-    description: "Campaigns powered by top Korean crypto voices.",
-    link: "/services/influencer",
-    icon: Mic2,
-    image: kolImage,
-    accent: "#FACC15",
+    title: "Regulations & Compliance",
+    description: "Navigate Korea's crypto regulations with confidence.",
+    link: "/services/compliance",
+    icon: Compass,
+    image: "/images/posters/compliance-hero.png",
+    accent: "#A855F7",
     details: [
-      "170+ vetted Korean KOL network",
-      "YouTube, Twitter, Telegram, Naver",
-      "Campaign management & ROI tracking",
-      "Ambassador & long-term partnerships",
+      "VASP registration & licensing guidance",
+      "PIPA & personal data compliance strategy",
+      "Korean crypto regulatory landscape analysis",
+      "Exchange listing compliance documentation",
     ],
   },
   {
@@ -154,10 +154,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+      viewport={{ once: true, amount: 0.05, margin: "50px" }}
+      transition={{ duration: 0.4, delay: index * 0.05 }}
     >
       <Link
         to={service.link}
@@ -172,7 +172,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-black/40 to-black/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-black/30 to-transparent" />
 
           {/* Number + Icon floating on image */}
           <div className="absolute top-4 sm:top-5 left-4 sm:left-6 flex items-center gap-3">

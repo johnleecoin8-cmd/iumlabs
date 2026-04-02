@@ -495,7 +495,7 @@ const StatCard = ({
 
 export const PerformanceSection = () => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
   const [isLive, setIsLive] = useState(true);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ const CalendlyButton = ({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("/contact");
+    navigate("/book-a-meeting");
   };
 
   return (

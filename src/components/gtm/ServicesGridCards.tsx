@@ -94,15 +94,15 @@ const services: Service[] = [
     color: "from-emerald-500 to-teal-500"
   },
   {
-    id: "branding",
-    labelKo: "브랜딩 & 웹사이트",
-    labelEn: "Branding & Website",
+    id: "compliance",
+    labelKo: "규제 & 컴플라이언스",
+    labelEn: "Regulations & Compliance",
     icon: Megaphone,
     mainImage: brandingWebsite,
-    description: "한국 시장에 맞는 브랜드 로컬라이제이션 및 웹사이트 개발",
-    features: ["Brand Localization", "Website Dev", "UI/UX", "Design System"],
+    description: "한국 가상자산 규제 환경 분석 및 컴플라이언스 전략 수립",
+    features: ["VASP Registration", "PIPA Compliance", "Regulatory Analysis", "Exchange Compliance"],
     gallery: [],
-    link: "/services/branding",
+    link: "/services/compliance",
     color: "from-rose-500 to-red-500"
   },
 ];

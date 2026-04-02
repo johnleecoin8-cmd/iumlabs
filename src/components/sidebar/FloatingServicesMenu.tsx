@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 // Flat services list
 const serviceItems = [
   { name: "GTM Strategy", href: "/services" },
-  { name: "Branding/Website", href: "/services/branding" },
+  { name: "Regulations & Compliance", href: "/services/compliance" },
   { name: "SEO/Paid Ads", href: "/services/seo-ads" },
   { name: "Influencer/KOL", href: "/services/influencer" },
   { name: "PR/Media", href: "/services/pr" },

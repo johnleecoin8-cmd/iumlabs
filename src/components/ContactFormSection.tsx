@@ -324,7 +324,7 @@ const ContactFormSection = ({
                                     key={option}
                                     type="button"
                                     onClick={() => setFormData({ ...formData, budget: option })}
-                                    className={`px-3 py-2.5 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
+                                    className={`px-3 py-2.5 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[44px] font-medium active:scale-[0.97] ${
                                       formData.budget === option
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'

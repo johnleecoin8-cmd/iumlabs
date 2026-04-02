@@ -42,13 +42,13 @@ const services = [
     stats: "50+ Projects"
   },
   {
-    title: "Branding",
-    description: "Identity & website",
+    title: "Compliance",
+    description: "Regulations & advisory",
     icon: Palette,
-    link: "/services/branding",
+    link: "/services/compliance",
     video: "/videos/branding-hero.mp4",
     poster: brandingImage,
-    stats: "15+ Brands"
+    stats: "19+ Projects"
   },
   {
     title: "SEO & Ads",

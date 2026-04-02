@@ -137,6 +137,10 @@ const fallbackImages: Record<string, {
   'kite': {
     logo: '',
     bgImage: '/images/projects/kite-bg.jpg'
+  },
+  'world': {
+    logo: '',
+    bgImage: '/images/projects/world-bg.jpg'
   }
 };
 interface CaseCardProps {

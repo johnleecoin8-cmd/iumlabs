@@ -160,13 +160,13 @@ const KOLMarketingKorea = () => {
                 Korean KOL Marketing
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
+              <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-6">
                 Korean KOL Marketing
                 <br />
                 <span className="text-white/40">for Crypto & Web3</span>
               </h1>
 
-              <p className="text-lg md:text-xl text-white/50 max-w-2xl mb-10 leading-relaxed">
+              <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mb-10 font-light tracking-wide leading-relaxed">
                 Access our network of 170+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. Every campaign is ROI-tracked and performance-driven.
               </p>
 

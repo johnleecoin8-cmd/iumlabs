@@ -8,6 +8,14 @@ import SEOHead from "@/components/SEOHead";
 import gtmHeroImage from "@/assets/services/gtm-hero.avif";
 import { projectsData } from "@/data/projectsData";
 
+// GTM-specific project card images
+import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.png";
+import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.png";
+import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.png";
+import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.png";
+import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.png";
+import seoulSkylineImg from "@/assets/campaigns/seoul-skyline.png";
+
 // Client logos
 import bnbLogo from "@/assets/logos/bnb.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -49,10 +57,10 @@ const GTMService = () => {
         <img src={gtmHeroImage} alt="Korea" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.3)" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30" />
         <div className="relative z-10 px-4 sm:px-8 lg:px-14 pb-10 sm:pb-14 pt-32 max-w-4xl">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight mb-4">
+          <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold text-white leading-[1.05] tracking-[-0.03em] mb-4">
             Korea Market Entry<br />Strategy & Execution
           </h1>
-          <p className="text-base sm:text-lg text-white/50 max-w-2xl mb-6">
+          <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mb-6 font-light tracking-wide leading-relaxed">
             Full-stack GTM for Web3 projects entering the #2 crypto market globally.
             From positioning to launch day — one partner, full execution.
           </p>
@@ -228,41 +236,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 8. Case Studies — horizontal scroll ===== */}
-      <section className="pb-14 sm:pb-20">
-        <div className="flex items-center justify-between mb-6 px-4 sm:px-8 lg:px-14">
-          <h2 className="text-xl sm:text-2xl font-bold text-white">Results</h2>
-          <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
-            All projects <ArrowRight className="w-3 h-3 inline" />
-          </Link>
-        </div>
-        <div className="flex gap-3 sm:gap-4 overflow-x-auto px-4 sm:px-8 lg:px-14 pb-4 snap-x snap-mandatory scrollbar-hide">
-          {[
-            ...caseStudies,
-            { slug: "polygon", result: "200+ Developers", detail: "L2 hackathon and developer incentive program in Korea" },
-            { slug: "sahara-ai", result: "400+ Attendees", detail: "AI launch events with Korean developer community" },
-          ].map((cs) => {
-            const project = projectsData[cs.slug];
-            return (
-              <Link
-                key={cs.slug}
-                to={`/projects/${cs.slug}`}
-                className="group block relative flex-shrink-0 w-[75vw] sm:w-[45vw] lg:w-[30vw] rounded-2xl overflow-hidden aspect-[4/3] snap-start"
-              >
-                <img src={project?.bgImage || ''} alt={project?.name || ''} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-                  <div className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-1">{cs.result}</div>
-                  <h3 className="text-sm font-medium text-white/70">{project?.name}</h3>
-                  <p className="text-xs text-white/40 mt-1.5 line-clamp-2">{cs.detail}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ===== 9. FAQ ===== */}
+      {/* ===== 8. FAQ ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">FAQ</h2>
         <div className="max-w-3xl space-y-5">
@@ -289,6 +263,74 @@ const GTMService = () => {
           </div>
           <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-[#10B981] text-white text-sm font-semibold flex-shrink-0 hover:-translate-y-0.5 transition-all">
             Book a Meeting
+          </CalendlyButton>
+        </div>
+      </section>
+
+      {/* ===== Project Cards Grid ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-white">Be Next These Projects</h2>
+          <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
+            All projects <ArrowRight className="w-3 h-3 inline" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.06] rounded-2xl overflow-hidden">
+          {[
+            { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
+            { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
+            { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
+            { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
+            { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
+          ].map((cs) => {
+            const project = projectsData[cs.slug];
+            const cardImage = cs.customImg || project?.bgImage || '';
+            return (
+              <Link
+                key={cs.slug}
+                to={`/projects/${cs.slug}`}
+                onClick={() => window.scrollTo(0, 0)}
+                className="group block bg-[#0A0A0A] p-3 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]"
+              >
+                <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-white/5 transition-all duration-300">
+                  <img src={cardImage} alt={project?.name || ''} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+                <div className="space-y-1.5">
+                  <span className="text-white/30 text-[9px] sm:text-[10px] uppercase tracking-wider">{cs.category}</span>
+                  <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-white/80 transition-colors line-clamp-1">
+                    {project?.name}
+                  </h3>
+                  <p className="text-white/35 text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
+                    {project?.description?.slice(0, 100)}...
+                  </p>
+                  <div className="flex items-center gap-1.5 mt-2 text-white/30 group-hover:text-white/60 transition-colors text-[10px] sm:text-xs">
+                    <span className="group-hover:underline underline-offset-4">View case</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+
+          {/* Be the Next CTA Card */}
+          <CalendlyButton className="group block bg-[#0A0A0A] p-3 sm:p-4 text-left transition-all duration-300 hover:bg-white/[0.03]">
+            <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-3">
+              <img src={seoulSkylineImg} alt="Seoul" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-500" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight">Your Project Here</span>
+              </div>
+            </div>
+            <div className="space-y-1">
+              <span className="text-white/20 text-[9px] sm:text-[10px] uppercase tracking-wider">Next</span>
+              <h3 className="text-sm sm:text-base font-semibold text-white group-hover:text-[#10B981] transition-colors">
+                Enter Korea
+              </h3>
+              <div className="flex items-center gap-1.5 mt-2 text-white/30 group-hover:text-[#10B981] transition-colors text-[10px] sm:text-xs">
+                <span className="group-hover:underline underline-offset-4">Let's talk</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </div>
           </CalendlyButton>
         </div>
       </section>

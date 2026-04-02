@@ -16,7 +16,7 @@ export const brand = {
   telegram: "@iumlabs",
   telegramLink: "https://t.me/iumlabs",
   linkedin: "https://www.linkedin.com/company/iumlabs",
-  calendlyUrl: "https://calendly.com/iumlabs/30min",
+  calendlyUrl: "https://calendly.com/cryptobridgekorea/30min",
   copyright: `© ${new Date().getFullYear()} ium Labs`,
 };
 
@@ -48,6 +48,7 @@ export const navigation = {
     { name: "Projects", href: "/projects" },
     { name: "Blog", href: "/blog" },
     { name: "K-Leaderboard", href: "/k-leaderboard" },
+    { name: "Contact", href: "/contact" },
     { name: "Career", href: "/jobs" },
   ],
   ctaButton: "Get Started",

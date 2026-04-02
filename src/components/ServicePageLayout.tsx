@@ -9,7 +9,7 @@ import CalendlyButton from "@/components/CalendlyButton";
 
 const allServices = [
   { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
-  { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
+  { slug: "compliance", title: "Regulations & Compliance", color: "#8B5CF6" },
   { slug: "seo-ads", title: "SEO & Paid Ads", color: "#F59E0B" },
   { slug: "offline-event", title: "Offline Event", color: "#10B981" },
   { slug: "community", title: "Community Management", color: "#5865F2" },
@@ -203,14 +203,34 @@ const ServicePageLayout = ({
         </div>
       </section>
 
-      {/* ===== More services ===== */}
-      <section className="px-4 sm:px-6 lg:px-10 pb-6 border-t border-white/[0.04] pt-6">
-        <div className="flex flex-wrap gap-2">
-          {otherServices.map((s) => (
-            <Link key={s.slug} to={`/services/${s.slug}`} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] text-sm text-white/40 hover:text-white transition-all">
-              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: s.color }} />{s.title}
-            </Link>
-          ))}
+      {/* ===== More services — grid ===== */}
+      <section className="px-4 sm:px-6 lg:px-10 pb-8 border-t border-white/[0.04] pt-6">
+        <span className="text-[10px] text-white/25 uppercase tracking-[0.2em] mb-4 block font-medium">Other Services</span>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {allServices.map((s) => {
+            const isCurrent = s.slug === currentSlug;
+            return (
+              <Link
+                key={s.slug}
+                to={`/services/${s.slug}`}
+                className={`group relative px-4 py-3.5 rounded-xl border transition-all duration-300 ${
+                  isCurrent
+                    ? "bg-white/[0.06] border-white/[0.12] pointer-events-none"
+                    : "bg-white/[0.02] border-white/[0.04] hover:bg-white/[0.06] hover:border-white/[0.1] hover:-translate-y-0.5"
+                }`}
+              >
+                <div className="w-1.5 h-1.5 rounded-full mb-2.5" style={{ backgroundColor: s.color, opacity: isCurrent ? 1 : 0.5 }} />
+                <span className={`text-sm font-medium block leading-tight ${
+                  isCurrent ? "text-white" : "text-white/40 group-hover:text-white/80"
+                } transition-colors`}>
+                  {s.title}
+                </span>
+                {isCurrent && (
+                  <span className="text-[9px] text-white/20 mt-1 block uppercase tracking-wider">Current</span>
+                )}
+              </Link>
+            );
+          })}
         </div>
       </section>
 

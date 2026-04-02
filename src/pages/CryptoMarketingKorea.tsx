@@ -50,9 +50,9 @@ const services = [
   },
   {
     icon: Globe,
-    title: "Branding & Website",
-    description: "Korean-localized branding, landing pages, and pitch decks that resonate with local investors and community members.",
-    link: "/services/branding",
+    title: "Regulations & Compliance",
+    description: "Navigate Korea's crypto regulations — VASP registration, PIPA compliance, and exchange listing requirements.",
+    link: "/services/compliance",
   },
 ];
 

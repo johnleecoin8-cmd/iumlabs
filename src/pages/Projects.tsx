@@ -213,15 +213,17 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{project.category}</span>
               {project.websiteUrl && (
-                <a
-                  href={project.websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+                <span
+                  role="link"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(project.websiteUrl, '_blank', 'noopener,noreferrer');
+                  }}
+                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                 >
                   <ExternalLink className="w-2.5 h-2.5" />
-                </a>
+                </span>
               )}
             </div>
             <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
@@ -756,14 +758,14 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <h1 className="font-sans text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12">
+                <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 mt-8 sm:mt-12">
                   <span className="text-white">Web3 Project </span>
                   <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
                 </h1>
 
                 {/* Subtext */}
-                <p className="text-body-lg text-white/60 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+                <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
                   Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
                 </p>
 

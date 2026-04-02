@@ -70,7 +70,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline — each line slides in separately */}
-          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 sm:mb-8 tracking-tight leading-[1.1]">
+          <h2 className="font-sans text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold text-white mb-8 sm:mb-10 tracking-[-0.03em] leading-[1.05] whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -84,9 +84,9 @@ const WhyChooseUsSection = () => {
 
           {/* Description — blur reveal */}
           <motion.p
-            className="text-white/60 leading-relaxed text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto mb-8 sm:mb-10 tracking-wide"
+            className="text-white/80 leading-relaxed text-base sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-8 sm:mb-10 tracking-wide"
             variants={descriptionVariants}>
-            We're a Seoul-native Web3 agency with a proven track record of launching 18+ global projects into Korea including BNB, Mantra, and Bybit through GTM strategy, influencer marketing, AMA, PR, community building, and offline events. One partner for full market entry.
+            Seoul's leading Web3 growth agency since 2022, with a proven track record of launching 22+ global projects into Korea — including BNB, Bybit, and Mantra through <span className="text-white font-semibold">GTM</span>, <span className="text-white font-semibold">KOL</span>, <span className="text-white font-semibold">PR</span>, <span className="text-white font-semibold">community</span>, <span className="text-white font-semibold">events</span>, and full-stack execution. One partner. Full market entry.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
@@ -116,7 +116,7 @@ const WhyChooseUsSection = () => {
             {[
               { value: "$7B+", label: "Client Valuation" },
               { value: "230+", label: "KOL Network" },
-              { value: "19+", label: "Projects Launched" },
+              { value: "22+", label: "Korea Entries" },
               { value: "70+", label: "Events Hosted" },
             ].map((stat, i) => (
               <div key={i} className="text-center">

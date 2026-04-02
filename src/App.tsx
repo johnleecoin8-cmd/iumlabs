@@ -31,6 +31,7 @@ import MobileServicesPage from "./pages/MobileServicesPage";
 import CryptoMarketingKorea from "./pages/CryptoMarketingKorea";
 import KOLMarketingKorea from "./pages/KOLMarketingKorea";
 import KoreaWeb3Guide from "./pages/KoreaWeb3Guide";
+import BookMeeting from "./pages/BookMeeting";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -151,7 +152,8 @@ const AppRoutes = () => {
         <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
         <Route path="/services/all" element={<MobileServicesPage />} />
         <Route path="/services/gtm" element={<GTMService />} />
-        <Route path="/services/branding" element={<BrandingService />} />
+        <Route path="/services/compliance" element={<BrandingService />} />
+        <Route path="/services/branding" element={<Navigate to="/services/compliance" replace />} />
         <Route path="/services/seo-ads" element={<SEOAdsService />} />
         <Route path="/services/offline-event" element={<OfflineEventService />} />
         <Route path="/services/community" element={<CommunityService />} />
@@ -162,8 +164,11 @@ const AppRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/book-a-meeting" element={<BookMeeting />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
+        <Route path="/research" element={<Navigate to="/blog" replace />} />
+        <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
