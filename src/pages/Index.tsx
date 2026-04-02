@@ -31,14 +31,14 @@ const Index = () => {
       <Navbar />
       
       {/* Hero - Full Bleed */}
-      <main id="hero" className="px-2 sm:px-3 pt-2 sm:pt-3">
+      <main id="hero" className="px-3 sm:px-4 pt-2 sm:pt-3">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
           <HeroSection />
         </div>
       </main>
 
       {/* About */}
-      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="why-choose-us">
+      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="why-choose-us">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
@@ -52,7 +52,7 @@ const Index = () => {
       </section>
       
       {/* Services */}
-      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="services">
+      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="services">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
@@ -64,7 +64,7 @@ const Index = () => {
       </section>
       
       {/* Cases */}
-      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="cases">
+      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="cases">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Case Studies</h2>
@@ -78,7 +78,7 @@ const Index = () => {
       </section>
       
       {/* Insights */}
-      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="insights">
+      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="insights">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Insights</h2>
@@ -100,7 +100,7 @@ const Index = () => {
       </Suspense>
 
       {/* Contact - 05 */}
-      <section className="px-2 sm:px-3 pt-2 sm:pt-3" id="contact">
+      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="contact">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
           <AnimatedSection>
             <ContactFormSection />
@@ -109,14 +109,14 @@ const Index = () => {
       </section>
 
       {/* Footer Links */}
-      <div className="px-2 sm:px-3 pt-2 sm:pt-3">
+      <div className="px-3 sm:px-4 pt-2 sm:pt-3">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
           <FooterLinksSection />
         </div>
       </div>
 
       {/* Footer Brand */}
-      <div className="px-2 sm:px-3 py-2 sm:py-3">
+      <div className="px-3 sm:px-4 py-2 sm:py-3">
         <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
           <Footer />
         </div>

@@ -55,7 +55,7 @@ const Navbar = () => {
           >
             <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
               {/* Main content — 3 columns */}
-              <div className="px-8 sm:px-12 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-14">
+              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-14">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
 
                   {/* Left — Connect */}
@@ -87,7 +87,7 @@ const Navbar = () => {
                         if (link.label === "Services") {
                           return (
                             <div key={link.to}>
-                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-3xl sm:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">
+                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">
                                 <span>{link.label}</span>
                                 <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-6 h-6 text-black/25" /></motion.div>
                               </button>
@@ -103,7 +103,7 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-3xl sm:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">{link.label}</Link>;
                       })}
                     </nav>
                   </div>
@@ -123,7 +123,7 @@ const Navbar = () => {
               </div>
 
               {/* Bottom bar */}
-              <div className="border-t border-black/[0.08] px-8 sm:px-12 lg:px-20 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="border-t border-black/[0.08] px-5 sm:px-8 lg:px-20 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-black/40">
                   <Link to="/projects" onClick={() => setIsMenuOpen(false)} className="hover:text-black transition-colors">Case Studies</Link>
                   <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-black transition-colors">Blog</Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center gap-5">
-                  <CalendlyButton className="inline-flex items-center gap-2.5 px-6 py-3 bg-black text-white text-sm font-semibold rounded-full hover:bg-black/80 transition-all">
+                  <CalendlyButton className="inline-flex items-center gap-2.5 px-4 py-2.5 sm:px-6 sm:py-3 bg-black text-white text-sm font-semibold rounded-full hover:bg-black/80 transition-all">
                     <Calendar className="w-4 h-4" />
                     Book a Free Consultation
                   </CalendlyButton>
@@ -156,9 +156,9 @@ const Navbar = () => {
   return (
     <>
       {/* ===== NAVBAR — separate floating tags ===== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 pt-3 sm:pt-5">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
+          <Link to="/" className="flex items-center gap-3 px-3.5 py-2.5 sm:px-5 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
             <img src={logoImage} alt="ium Labs" className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-lg" />
             <span className="text-sm sm:text-[15px] font-bold text-white hidden sm:block tracking-tight">ium Labs</span>
           </Link>
@@ -171,7 +171,7 @@ const Navbar = () => {
             <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/80">
               <Calendar className="w-4 h-4 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
-            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/70" aria-label="Open menu">
+            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2.5 min-h-[44px] px-3.5 py-2.5 sm:px-5 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/70" aria-label="Open menu">
               <span className="hidden sm:inline">menu</span>
               <div className="flex flex-col gap-[4px]">
                 <span className="block w-[16px] h-[2px] bg-white/80 rounded-full" />

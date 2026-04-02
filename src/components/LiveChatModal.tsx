@@ -36,7 +36,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4"
+            className="absolute top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4"
             initial={{ y: -60, opacity: 0, scale: 0.96 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             exit={{ y: -60, opacity: 0, scale: 0.96 }}
@@ -53,7 +53,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
               >
                 <div className="flex animate-marquee whitespace-nowrap">
                   {Array(12).fill(null).map((_, i) => (
-                    <div key={i} className="flex items-center mx-6">
+                    <div key={i} className="flex items-center mx-3 sm:mx-6">
                       <span className="text-black/70 text-sm mr-8">contact us</span>
                       <span className="text-[#3B82F6] text-sm font-medium mr-8">sales department</span>
                     </div>
@@ -62,7 +62,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
               </motion.div>
 
               {/* Content */}
-              <div className="px-8 sm:px-12 lg:px-20 py-10 sm:py-14">
+              <div className="px-4 sm:px-8 lg:px-16 py-6 sm:py-10">
                 <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
 
                   {/* Left — message */}
@@ -73,7 +73,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                     transition={{ delay: 0.3, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   >
                     <div className="bg-[#F8F8F8] rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 mb-8">
-                      <p className="text-lg sm:text-xl lg:text-2xl leading-relaxed text-black">
+                      <p className="text-base sm:text-lg lg:text-2xl leading-relaxed text-black">
                         <span className="text-[#3B82F6] font-medium">We work closely with founders</span> and{" "}
                         <span className="text-[#3B82F6] font-medium">teams across stages</span>, from{" "}
                         <span className="text-[#3B82F6] font-medium">early launches</span> to{" "}
@@ -113,7 +113,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                   </motion.div>
 
                   {/* Right — team photos (staggered) */}
-                  <div className="flex gap-3 sm:gap-4 justify-center lg:justify-end">
+                  <div className="flex gap-2 sm:gap-3 justify-center lg:justify-end">
                     {teamMembers.map((member, i) => (
                       <motion.a
                         key={member.name}
@@ -125,7 +125,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         transition={{ delay: 0.4 + i * 0.12, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <div className="w-32 h-44 sm:w-40 sm:h-52 lg:w-48 lg:h-60 rounded-2xl overflow-hidden mb-3 bg-gradient-to-b from-slate-100 via-blue-50 to-blue-200 group-hover:shadow-lg transition-shadow">
+                        <div className="w-24 h-32 sm:w-36 sm:h-48 lg:w-48 lg:h-60 rounded-2xl overflow-hidden mb-3 bg-gradient-to-b from-slate-100 via-blue-50 to-blue-200 group-hover:shadow-lg transition-shadow">
                           <img
                             src={member.image}
                             alt={member.name}
@@ -144,7 +144,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
             {/* Floating close */}
             <motion.button
               onClick={onClose}
-              className="absolute bottom-[-56px] right-8 w-12 h-12 rounded-full bg-white/90 backdrop-blur shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-black/40 hover:text-black hover:bg-white transition-all"
+              className="absolute bottom-[-56px] right-4 sm:right-8 w-12 h-12 rounded-full bg-white/90 backdrop-blur shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-black/40 hover:text-black hover:bg-white transition-all"
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.6, duration: 0.3, type: "spring" }}

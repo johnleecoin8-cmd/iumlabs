@@ -186,7 +186,7 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline — all white, massive */}
-          <h1 className="font-sans text-[2.2rem] sm:text-[4rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 md:mb-8 mt-24 sm:mt-36 md:mt-44 text-white">
+          <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 md:mb-8 mt-16 sm:mt-28 md:mt-36 text-white">
             Your Web3 Ecosystem
             <br />
             Partner for Korea
@@ -201,7 +201,7 @@ const HeroSection = () => {
           <div className="flex flex-col items-center gap-3 mt-6 sm:mt-10">
             <a
               href="/contact#contact-form"
-              className="group inline-flex items-center gap-3 px-8 py-4 sm:px-10 sm:py-5 bg-white text-black font-semibold text-sm sm:text-base rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+              className="group inline-flex items-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-xs sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
             >
               <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
               <span>Get Your Free Proposal</span>
@@ -218,7 +218,7 @@ const HeroSection = () => {
       {/* Client Logo Marquee - Full Width */}
       <div className="relative z-10 py-4 sm:py-6 overflow-hidden">
         <div className="flex items-center logo-marquee-slow">
-          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-1.5 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
+          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-1 sm:mx-2 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
               <img
             src={client.logo}
             alt={client.name}

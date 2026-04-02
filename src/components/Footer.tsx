@@ -10,13 +10,13 @@ const Footer = () => {
       {/* CTA strip */}
       <div className="px-4 sm:px-6 lg:px-10 py-12 sm:py-16 border-b border-white/[0.06]">
         <div className="max-w-4xl">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3">
+          <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white leading-tight mb-3">
             Ready to launch in Korea?
           </h2>
           <p className="text-sm sm:text-base text-white/40 mb-6 max-w-lg">
             Book a free 30-minute strategy call. We'll map out your Korean market entry.
           </p>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <CalendlyButton className="inline-flex items-center px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all">
               Book a Meeting
             </CalendlyButton>
