@@ -96,63 +96,56 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ===== NAVBAR — Lunar Strategy style: black shell + gray inner + pill buttons ===== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-3 pt-2 sm:pt-3">
-        {/* Outer black shell */}
-        <div className="bg-black rounded-2xl p-[5px] sm:p-[6px]">
-          {/* Inner gray bar */}
-          <div className="bg-[#E8E8E8] rounded-[12px] sm:rounded-[14px] flex items-center px-3 sm:px-5 py-2.5 sm:py-3">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-              <img src={logoImage} alt="ium Labs" className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg" />
-              <span className="text-[13px] sm:text-[15px] font-bold text-black hidden sm:block tracking-tight">ium Labs</span>
-            </Link>
+      {/* ===== NAVBAR — separate floating tags ===== */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 pt-3 sm:pt-4">
+        <div className="flex items-center justify-between">
+          {/* Left: Logo tag */}
+          <Link to="/" className="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
+            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg" />
+            <span className="text-[13px] font-bold text-white hidden sm:block tracking-tight">ium Labs</span>
+          </Link>
 
-            {/* Center: get in touch (desktop) */}
-            <div className="hidden lg:flex items-center justify-center flex-1 px-4">
-              <div className="flex flex-col items-center gap-[1px]">
-                <span className="text-[9px] text-black/30 tracking-wider leading-none">get in touch</span>
-                <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-[13px] text-black hover:text-black/70 transition-colors font-medium leading-none">
-                  {brand.telegram}
-                </a>
-              </div>
-            </div>
-
-            {/* Mobile spacer */}
-            <div className="flex-1 lg:hidden" />
-
-            {/* Right: pill buttons */}
-            <div className="flex items-center gap-[5px] sm:gap-[6px]">
-              {/* Start Live Chat — pill */}
-              <a
-                href={brand.telegramLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-black/[0.06] text-black/80 hover:bg-gray-50 transition-all text-[13px] font-medium"
-              >
-                <Send className="w-4 h-4 text-[#229ED9]" />
-                <span>Start Live Chat</span>
+          {/* Center: contact tag (desktop) */}
+          <div className="hidden lg:flex px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08]">
+            <div className="flex flex-col items-center gap-[1px]">
+              <span className="text-[9px] text-white/35 tracking-wider leading-none">get in touch</span>
+              <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/80 hover:text-white transition-colors font-medium leading-none">
+                {brand.telegram}
               </a>
-
-              {/* Book a Meeting — pill */}
-              <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-black/[0.06] text-black/80 hover:bg-gray-50 transition-all text-[13px] font-medium">
-                <Calendar className="w-4 h-4 text-[#4285F4]" />
-                <span>Book a Meeting</span>
-              </CalendlyButton>
-
-              {/* Menu + capsule hamburger */}
-              <button
-                onClick={() => setIsMenuOpen(true)}
-                className="flex items-center gap-2 px-3 sm:px-4 py-2.5 text-black/70 hover:text-black transition-all text-[13px] font-medium"
-                aria-label="Open menu"
-              >
-                <span className="hidden sm:inline">menu</span>
-                <div className="w-[28px] h-[20px] bg-black rounded-full flex flex-col items-center justify-center gap-[3.5px] flex-shrink-0">
-                  <span className="block w-[13px] h-[2px] bg-white rounded-full" />
-                  <span className="block w-[13px] h-[2px] bg-white rounded-full" />
-                </div>
-              </button>
             </div>
+          </div>
+
+          {/* Right: action tags */}
+          <div className="flex items-center gap-2">
+            {/* Telegram tag */}
+            <a
+              href={brand.telegramLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80"
+            >
+              <Send className="w-3.5 h-3.5 text-[#229ED9]" />
+              <span>Start Live Chat</span>
+            </a>
+
+            {/* Book a Meeting tag */}
+            <CalendlyButton className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
+              <Calendar className="w-3.5 h-3.5 text-[#4285F4]" />
+              <span>Book a Meeting</span>
+            </CalendlyButton>
+
+            {/* Menu tag */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/70"
+              aria-label="Open menu"
+            >
+              <span className="hidden sm:inline">menu</span>
+              <div className="flex flex-col gap-[3px]">
+                <span className="block w-[14px] h-[2px] bg-white/80 rounded-full" />
+                <span className="block w-[14px] h-[2px] bg-white/80 rounded-full" />
+              </div>
+            </button>
           </div>
         </div>
       </nav>
