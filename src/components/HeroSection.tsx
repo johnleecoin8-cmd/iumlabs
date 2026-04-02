@@ -143,7 +143,7 @@ const defaultStats = [{
   suffix: "+"
 }, {
   id: "events_hosted",
-  value: 55,
+  value: 70,
   label: "Events Hosted",
   prefix: "",
   suffix: "+"
@@ -260,10 +260,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Stats Section - Enhanced - Mobile optimized */}
-      <div className="relative z-10 py-3 sm:py-6 md:py-8">
-        <div className="container mx-auto px-3 sm:px-8 md:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 md:gap-8">
+      {/* Stats Section */}
+      <div className="relative z-10 py-6 sm:py-10 md:py-12">
+        <div className="container mx-auto px-4 sm:px-10 md:px-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 md:gap-12">
             {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
           </div>
         </div>
@@ -326,10 +326,10 @@ const StatItem = ({
     decimals: 0
   });
   return <div className="text-center cursor-default select-none">
-      <div className="text-3xl sm:text-5xl md:text-5xl lg:text-5xl font-black text-white mb-0.5 sm:mb-1 stat-glow tracking-tighter leading-none">
+      <div className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-1 sm:mb-2 tracking-tighter leading-none">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-sm md:text-base text-white/60 font-medium">
+      <div className="text-[11px] sm:text-base md:text-lg text-white/50 font-medium">
         {label}
       </div>
     </div>;
