@@ -87,7 +87,7 @@ const Navbar = () => {
                         if (link.label === "Services") {
                           return (
                             <div key={link.to}>
-                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">
+                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-1.5 sm:py-2">
                                 <span>{link.label}</span>
                                 <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-6 h-6 text-black/25" /></motion.div>
                               </button>
