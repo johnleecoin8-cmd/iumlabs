@@ -109,7 +109,7 @@ const Navbar = () => {
                   </div>
 
                   {/* Right — Popular Services */}
-                  <div>
+                  <div className="hidden md:block">
                     <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Popular Services</span>
                     <div className="space-y-3">
                       <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">GTM Strategy</Link>
