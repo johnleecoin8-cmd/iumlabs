@@ -6,6 +6,55 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 
+// Service → project mapping (slug, name, result)
+const serviceProjects: Record<string, Array<{ slug: string; name: string; result: string }>> = {
+  gtm: [
+    { slug: "bnb-chain", name: "BNB Chain", result: "+420% volume surge in 2 weeks" },
+    { slug: "bybit", name: "Bybit", result: "#2 exchange by Korean traffic" },
+    { slug: "fogo", name: "FOGO", result: "250+ attendees & 55 KOL partners" },
+  ],
+  branding: [
+    { slug: "story-protocol", name: "Story Protocol", result: "500+ creators at IP workshop" },
+    { slug: "megaeth", name: "MegaETH", result: "2M+ impressions pre-mainnet" },
+    { slug: "tria", name: "Tria", result: "450K+ impressions in 6 months" },
+  ],
+  "seo-ads": [
+    { slug: "kucoin", name: "KuCoin", result: "$550M+ TVL & +600% SEO growth" },
+    { slug: "bybit", name: "Bybit", result: "150+ first-page SEO rankings" },
+    { slug: "synfutures", name: "SynFutures", result: "5M+ OOH impressions in Gangnam" },
+  ],
+  "offline-event": [
+    { slug: "bnb-chain", name: "BNB Chain", result: "VIP networking with 150+ leaders" },
+    { slug: "sahara-ai", name: "Sahara AI", result: "400+ attendees at AI launch events" },
+    { slug: "fogo", name: "FOGO", result: "250+ attendees at launch event" },
+  ],
+  community: [
+    { slug: "mantra", name: "Mantra", result: "$50M+ pipeline & Korea CEX listing" },
+    { slug: "ondo-finance", name: "Ondo Finance", result: "100K+ community members" },
+    { slug: "peaq", name: "Peaq", result: "#1 Machine Economy brand in Korea" },
+  ],
+  "deep-research": [
+    { slug: "polygon", name: "Polygon", result: "200+ developers at L2 hackathon" },
+    { slug: "ondo-finance", name: "Ondo Finance", result: "50+ institutional leads via seminars" },
+    { slug: "megaeth", name: "MegaETH", result: "Technical deep-dives pre-mainnet" },
+  ],
+  influencer: [
+    { slug: "kucoin", name: "KuCoin", result: "100+ Korean influencers onboarded" },
+    { slug: "bnb-chain", name: "BNB Chain", result: "150+ VIP community leaders" },
+    { slug: "peaq", name: "Peaq", result: "Top Korean crypto KOL campaigns" },
+  ],
+  pr: [
+    { slug: "synfutures", name: "SynFutures", result: "Gangnam billboard + digital PR" },
+    { slug: "sahara-ai", name: "Sahara AI", result: "Major Korean financial media features" },
+    { slug: "mantra", name: "Mantra", result: "Institutional Korean media coverage" },
+  ],
+  ama: [
+    { slug: "bnb-chain", name: "BNB Chain", result: "High-impact KOL AMA campaigns" },
+    { slug: "peaq", name: "Peaq", result: "Strategic AMAs with top communities" },
+    { slug: "fogo", name: "FOGO", result: "Community AMA & KOL partnerships" },
+  ],
+};
+
 const allServices = [
   { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
   { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
@@ -141,6 +190,23 @@ const ServicePageLayout = ({
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* ===== Projects using this service ===== */}
+      {serviceProjects[currentSlug] && serviceProjects[currentSlug].length > 0 && (
+        <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
+          <h2 className="text-base sm:text-lg font-bold text-white mb-4">Projects</h2>
+          <div className="space-y-2">
+            {serviceProjects[currentSlug].map((p) => (
+              <Link key={p.slug} to={`/projects/${p.slug}`} className="group flex items-center gap-3 text-sm py-2 border-b border-white/[0.04] last:border-0 hover:pl-1 transition-all">
+                <span className="text-white/15">—</span>
+                <span className="text-white font-medium">{p.name}:</span>
+                <span className="text-white/40">{p.result}</span>
+                <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all ml-auto flex-shrink-0" />
+              </Link>
             ))}
           </div>
         </section>
