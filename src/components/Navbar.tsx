@@ -53,13 +53,13 @@ const Navbar = () => {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
+            <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-h-[85vh] overflow-y-auto overscroll-contain">
               {/* Main content — 3 columns */}
-              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-8 sm:pb-14">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
 
                   {/* Left — Connect */}
-                  <div>
+                  <div className="hidden md:block">
                     <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Connect</span>
                     <div className="space-y-4 mb-8">
                       <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/70 hover:text-black transition-colors text-base">
@@ -87,7 +87,7 @@ const Navbar = () => {
                         if (link.label === "Services") {
                           return (
                             <div key={link.to}>
-                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">
+                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-1.5 sm:py-2">
                                 <span>{link.label}</span>
                                 <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-6 h-6 text-black/25" /></motion.div>
                               </button>
@@ -103,13 +103,13 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-1.5 sm:py-2">{link.label}</Link>;
                       })}
                     </nav>
                   </div>
 
                   {/* Right — Popular Services */}
-                  <div>
+                  <div className="hidden md:block">
                     <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Popular Services</span>
                     <div className="space-y-3">
                       <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">GTM Strategy</Link>
