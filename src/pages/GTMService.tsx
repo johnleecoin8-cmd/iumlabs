@@ -228,25 +228,33 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 8. Case Studies ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="flex items-center justify-between mb-6">
+      {/* ===== 8. Case Studies — horizontal scroll ===== */}
+      <section className="pb-14 sm:pb-20">
+        <div className="flex items-center justify-between mb-6 px-4 sm:px-8 lg:px-14">
           <h2 className="text-xl sm:text-2xl font-bold text-white">Results</h2>
           <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
             All projects <ArrowRight className="w-3 h-3 inline" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {caseStudies.map((cs) => {
+        <div className="flex gap-3 sm:gap-4 overflow-x-auto px-4 sm:px-8 lg:px-14 pb-4 snap-x snap-mandatory scrollbar-hide">
+          {[
+            ...caseStudies,
+            { slug: "polygon", result: "200+ Developers", detail: "L2 hackathon and developer incentive program in Korea" },
+            { slug: "sahara-ai", result: "400+ Attendees", detail: "AI launch events with Korean developer community" },
+          ].map((cs) => {
             const project = projectsData[cs.slug];
             return (
-              <Link key={cs.slug} to={`/projects/${cs.slug}`} className="group block relative rounded-xl overflow-hidden aspect-[16/10]">
-                <img src={project?.bgImage || ''} alt={project?.name || ''} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <div className="text-lg font-bold text-white mb-0.5">{cs.result}</div>
+              <Link
+                key={cs.slug}
+                to={`/projects/${cs.slug}`}
+                className="group block relative flex-shrink-0 w-[75vw] sm:w-[45vw] lg:w-[30vw] rounded-2xl overflow-hidden aspect-[4/3] snap-start"
+              >
+                <img src={project?.bgImage || ''} alt={project?.name || ''} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                  <div className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-1">{cs.result}</div>
                   <h3 className="text-sm font-medium text-white/70">{project?.name}</h3>
-                  <p className="text-[11px] text-white/40 mt-1">{cs.detail}</p>
+                  <p className="text-xs text-white/40 mt-1.5 line-clamp-2">{cs.detail}</p>
                 </div>
               </Link>
             );
