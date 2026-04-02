@@ -7,16 +7,16 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#0A0A0A] text-white" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      {/* CTA strip */}
-      <div className="px-4 sm:px-6 lg:px-10 py-12 sm:py-16 border-b border-white/[0.06]">
-        <div className="max-w-4xl">
-          <h2 className="text-xl sm:text-2xl lg:text-4xl font-bold text-white leading-tight mb-3">
+      {/* CTA strip — centered */}
+      <div className="px-4 sm:px-6 lg:px-10 py-14 sm:py-20 border-b border-white/[0.06]">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-3">
             Ready to launch in Korea?
           </h2>
-          <p className="text-sm sm:text-base text-white/40 mb-6 max-w-lg">
+          <p className="text-sm sm:text-base text-white/40 mb-8">
             Book a free 30-minute strategy call. We'll map out your Korean market entry.
           </p>
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center justify-center gap-2 sm:gap-3">
             <CalendlyButton className="inline-flex items-center px-6 py-3 rounded-full bg-white text-black text-sm font-medium hover:bg-white/90 transition-all">
               Book a Meeting
             </CalendlyButton>
