@@ -35,15 +35,15 @@ const Index = () => {
       <Navbar />
       
       {/* Hero - Full Bleed */}
-      <main id="hero" className="px-3 sm:px-4 pt-2 sm:pt-3">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+      <main id="hero" className="sm:px-4 sm:pt-3">
+        <div className="sm:rounded-3xl overflow-hidden">
           <HeroSection />
         </div>
       </main>
 
       {/* About */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="why-choose-us">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+      <section className="sm:px-4 sm:pt-3" id="why-choose-us">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
@@ -56,8 +56,8 @@ const Index = () => {
       </section>
       
       {/* Services */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="services">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+      <section className="sm:px-4 sm:pt-3" id="services">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
           </div>
@@ -68,8 +68,8 @@ const Index = () => {
       </section>
       
       {/* Cases */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="cases">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+      <section className="sm:px-4 sm:pt-3" id="cases">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Case Studies</h2>
           </div>
@@ -82,8 +82,8 @@ const Index = () => {
       </section>
       
       {/* Insights */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="insights">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+      <section className="sm:px-4 sm:pt-3" id="insights">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Blog</h2>
           </div>
@@ -104,8 +104,8 @@ const Index = () => {
       </Suspense>
 
       {/* Launch CTA */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] relative">
+      <section className="sm:px-4 sm:pt-3">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] relative">
           {/* Background image */}
           <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.55]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/50" />
@@ -133,8 +133,8 @@ const Index = () => {
       </section>
 
       {/* Contact - 05 */}
-      <section className="px-3 sm:px-4 pt-2 sm:pt-3" id="contact">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+      <section className="sm:px-4 sm:pt-3" id="contact">
+        <div className="sm:rounded-3xl overflow-hidden">
           <AnimatedSection>
             <ContactFormSection />
           </AnimatedSection>
@@ -142,15 +142,15 @@ const Index = () => {
       </section>
 
       {/* Footer Links */}
-      <div className="px-3 sm:px-4 pt-2 sm:pt-3">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+      <div className="sm:px-4 sm:pt-3">
+        <div className="sm:rounded-3xl overflow-hidden">
           <FooterLinksSection />
         </div>
       </div>
 
       {/* Footer Brand */}
-      <div className="px-3 sm:px-4 py-2 sm:py-3">
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden">
+      <div className="sm:px-4 sm:py-3">
+        <div className="sm:rounded-3xl overflow-hidden">
           <Footer />
         </div>
       </div>

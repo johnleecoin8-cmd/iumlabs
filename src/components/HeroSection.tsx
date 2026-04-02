@@ -191,7 +191,7 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <h1 className="font-sans text-[2.5rem] sm:text-[5rem] md:text-[6.875rem] font-bold leading-[0.9] tracking-[-0.04em] mb-6 sm:mb-8 mt-16 sm:mt-20 text-white whitespace-nowrap">
+          <h1 className="font-sans text-[2.25rem] sm:text-[5rem] md:text-[6.875rem] font-bold leading-[0.9] tracking-[-0.04em] mb-6 sm:mb-8 mt-16 sm:mt-20 text-white whitespace-nowrap">
             <span className="block">Your Web3 Ecosystem</span>
             <span className="block">Growth Partner</span>
           </h1>
