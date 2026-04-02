@@ -470,12 +470,12 @@ const ContactFormSection = ({
           
           {/* Contact buttons - Compact grid */}
           <div className="grid grid-cols-2 gap-2">
-            <a 
-              href={`mailto:${brand.email}`}
+            <a
+              href="/book-a-meeting"
               className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
             >
-              <Mail className="w-3.5 h-3.5 flex-shrink-0" />
-              <span className="truncate">Email</span>
+              <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="truncate">Calendly</span>
             </a>
             <a 
               href={brand.telegramLink}
