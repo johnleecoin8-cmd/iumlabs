@@ -47,13 +47,13 @@ const Navbar = () => {
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
-            className="fixed top-0 left-0 right-0 z-[101] max-h-[55vh] overflow-y-auto"
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
-            transition={{ duration: 0.3, ease: [0.32, 0.72, 0, 1] }}
+            className="fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-[101] max-h-[60vh] overflow-y-auto"
+            initial={{ opacity: 0, y: -30, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -30, scale: 0.97 }}
+            transition={{ duration: 0.25, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-[#111] border-b border-white/[0.06] shadow-2xl rounded-b-3xl">
+            <div className="bg-[#111] border border-white/[0.08] shadow-[0_20px_60px_rgba(0,0,0,0.6)] rounded-3xl">
               {/* Header */}
               <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
                 <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
