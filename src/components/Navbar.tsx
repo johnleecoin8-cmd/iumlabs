@@ -171,9 +171,9 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
+            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
               <Send className="w-3.5 h-3.5 text-[#229ED9]" /><span>Start Live Chat</span>
-            </a>
+            </button>
             <CalendlyButton className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
               <Calendar className="w-3.5 h-3.5 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
