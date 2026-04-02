@@ -25,12 +25,12 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose} />
 
-      {/* Panel — drops from top */}
-      <div className={`absolute top-0 left-0 right-0 transition-transform duration-500 ease-out ${isOpen ? "translate-y-0" : "-translate-y-full"}`}>
-        <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
+      {/* Panel — drops from top, rounded all corners, with margin */}
+      <div className={`absolute top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 transition-all duration-500 ease-out ${isOpen ? "translate-y-0 opacity-100" : "-translate-y-8 opacity-0"}`}>
+        <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden">
 
           {/* Marquee strip */}
-          <div className="bg-[#F5F5F5] py-2.5 overflow-hidden border-b border-black/[0.05]">
+          <div className="bg-black/[0.03] py-2.5 overflow-hidden">
             <div className="flex animate-marquee whitespace-nowrap">
               {Array(12).fill(null).map((_, i) => (
                 <div key={i} className="flex items-center mx-6">
@@ -92,7 +92,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                     rel="noopener noreferrer"
                     className="group text-center"
                   >
-                    <div className="w-32 h-44 sm:w-40 sm:h-52 lg:w-48 lg:h-60 rounded-2xl overflow-hidden mb-3 bg-gradient-to-b from-blue-50 to-blue-100 group-hover:shadow-lg transition-shadow">
+                    <div className="w-32 h-44 sm:w-40 sm:h-52 lg:w-48 lg:h-60 rounded-2xl overflow-hidden mb-3 bg-gradient-to-b from-slate-100 via-blue-50 to-blue-200 group-hover:shadow-lg transition-shadow">
                       <img
                         src={member.image}
                         alt={member.name}
@@ -111,9 +111,9 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
         {/* Floating close */}
         <button
           onClick={onClose}
-          className="absolute bottom-[-50px] right-8 w-11 h-11 rounded-full bg-white shadow-lg flex items-center justify-center text-black/50 hover:text-black hover:bg-white transition-all"
+          className="absolute bottom-[-56px] right-8 w-12 h-12 rounded-full bg-white/90 backdrop-blur shadow-[0_4px_20px_rgba(0,0,0,0.15)] flex items-center justify-center text-black/40 hover:text-black hover:bg-white transition-all"
         >
-          <X className="w-4 h-4" />
+          <X className="w-5 h-5" />
         </button>
       </div>
     </div>
