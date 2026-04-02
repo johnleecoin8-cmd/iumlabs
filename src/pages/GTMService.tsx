@@ -257,13 +257,14 @@ const floatingTags = [
   { label: "Offline Events", top: "55%", left: undefined, right: "8%" },
 ];
 
+import gtmHeroImage from "@/assets/services/gtm-hero.avif";
+
 const HeroSection = () => {
   return (
     <section className="relative min-h-[100svh] flex flex-col justify-center items-center overflow-hidden bg-[#0A0A0A]">
-      {/* Background image — moon/globe style */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[140%] sm:w-[100%] max-w-[900px] aspect-square rounded-full bg-gradient-to-t from-white/[0.04] to-transparent pointer-events-none" />
-      <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[120%] sm:w-[80%] max-w-[800px] aspect-square rounded-full border border-white/[0.06] pointer-events-none" />
-      <div className="absolute bottom-[-25%] left-1/2 -translate-x-1/2 w-[130%] sm:w-[90%] max-w-[850px] aspect-square rounded-full border border-white/[0.03] pointer-events-none" />
+      {/* Background image — Gyeongbokgung */}
+      <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.35)" }} />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />
 
       {/* Floating service tags — desktop only */}
       {floatingTags.map((tag, i) => (
