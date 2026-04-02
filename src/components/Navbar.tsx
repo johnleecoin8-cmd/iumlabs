@@ -97,13 +97,35 @@ const Navbar = () => {
                 </div>
 
                 {/* Connect */}
-                <div>
-                  <span className="text-[9px] text-white/25 uppercase tracking-[0.2em] mb-3 block">Connect</span>
-                  <div className="space-y-2.5">
-                    <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-white/50 hover:text-white transition-colors text-sm"><Send className="w-3.5 h-3.5" /><span>{brand.telegram}</span></a>
-                    <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 text-white/50 hover:text-white transition-colors text-sm"><Linkedin className="w-3.5 h-3.5" /><span>LinkedIn</span></a>
-                    {brand.email && <a href={`mailto:${brand.email}`} className="flex items-center gap-2.5 text-white/50 hover:text-white transition-colors text-sm"><Mail className="w-3.5 h-3.5" /><span>{brand.email}</span></a>}
-                    <div className="flex items-center gap-2.5 text-white/30 text-xs pt-1"><MapPin className="w-3 h-3 flex-shrink-0" /><span>{brand.address}</span></div>
+                <div className="flex flex-col gap-4">
+                  <span className="text-[9px] text-white/25 uppercase tracking-[0.2em] block">Connect</span>
+
+                  {/* CTA card */}
+                  <CalendlyButton className="flex items-center justify-center gap-2.5 w-full px-5 py-3.5 rounded-2xl bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all">
+                    <Calendar className="w-4 h-4" />
+                    Book a Free Call
+                  </CalendlyButton>
+
+                  {/* Contact cards */}
+                  <div className="grid grid-cols-2 gap-2">
+                    <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.06] transition-all text-sm text-white/60 hover:text-white">
+                      <Send className="w-4 h-4 text-[#229ED9]" />
+                      <span>Telegram</span>
+                    </a>
+                    <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:border-white/[0.12] hover:bg-white/[0.06] transition-all text-sm text-white/60 hover:text-white">
+                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
+                      <span>LinkedIn</span>
+                    </a>
+                  </div>
+
+                  {/* Office info */}
+                  <div className="px-4 py-3 rounded-xl bg-white/[0.03] border border-white/[0.04]">
+                    <div className="flex items-center gap-2 text-white/25 text-xs mb-1.5">
+                      <MapPin className="w-3 h-3" />
+                      <span>Seoul Office</span>
+                    </div>
+                    <p className="text-white/40 text-xs leading-relaxed">{brand.address}</p>
+                    <p className="text-white/25 text-[10px] mt-1.5">Mon–Fri 09:00–18:00 KST</p>
                   </div>
                 </div>
               </div>
