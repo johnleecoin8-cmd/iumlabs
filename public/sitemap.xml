@@ -58,8 +58,14 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/services/branding</loc>
-    <lastmod>2026-04-01</lastmod>
+    <loc>https://iumlabs.io/services/compliance</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/services/ama</loc>
+    <lastmod>2026-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.65</priority>
   </url>
@@ -230,6 +236,20 @@
     <lastmod>2026-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+  </url>
+
+  <!-- New Pages -->
+  <url>
+    <loc>https://iumlabs.io/book-a-meeting</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/k-leaderboard</loc>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.7</priority>
   </url>
 
   <!-- Jobs -->

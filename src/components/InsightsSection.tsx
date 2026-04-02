@@ -71,7 +71,7 @@ const InsightsSection = () => {
       {insights.length === 0 ? (
         <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {insights.slice(0, 8).map((article) => (
             <Link
               key={article.id}
