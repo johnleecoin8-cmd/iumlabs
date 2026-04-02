@@ -231,35 +231,35 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Premium Display Typography - Mobile optimized */}
-          <h1 className="font-sans text-[1.6rem] sm:text-[3.2rem] md:text-[clamp(3.5rem,6vw,5rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-24 sm:mt-36 md:mt-44">
-            <span className="text-white font-sans leading-tight">Your Web3 Ecosystem Partner<br />for the Korean Market</span>
+          {/* Main Headline */}
+          <h1 className="font-sans text-[2rem] sm:text-[3.5rem] md:text-[clamp(4rem,7vw,6rem)] font-bold leading-[1.08] tracking-[-0.03em] mb-4 sm:mb-6 md:mb-8 mt-24 sm:mt-36 md:mt-44">
+            <span className="text-white">Your </span>
+            <span className="text-[#3B82F6]">Web3</span>
+            <span className="text-white"> Ecosystem</span>
+            <br />
+            <span className="text-white">Partner for </span>
+            <span className="text-[#3B82F6]">Korea</span>
           </h1>
 
-          {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-xs sm:text-base md:text-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
-            Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
+          {/* Subtext */}
+          <p className="text-sm sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4 sm:px-2">
+            Full-stack GTM, <span className="text-white/90 font-medium">170+ KOL network</span>, community growth, and PR — one partner for your <span className="text-white/90 font-medium">Korean market entry</span>.
           </p>
 
-          {/* CTA Button - Enhanced - Mobile optimized */}
-          <a
-          href="/contact#contact-form"
-          className="group primary-cta-dark inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-9 sm:py-4 font-semibold text-sm sm:text-base rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[52px] border border-white/30 relative overflow-hidden cta-hero-glow mt-10 sm:mt-16"
-          onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}>
-
-            {/* Animated glow ring */}
-            <span className="absolute inset-0 rounded-full animate-cta-ring pointer-events-none" />
-            <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
-            <span>Get Your Free Proposal</span>
-          </a>
-          
-          {/* Micro-copy for trust */}
-          <p className="mt-3 text-[10px] sm:text-sm text-white/50">
-            <span className="inline-flex items-center gap-1.5">
+          {/* CTA */}
+          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-6 sm:mt-10">
+            <a
+              href="/contact#contact-form"
+              className="group inline-flex items-center gap-3 px-8 py-4 sm:px-10 sm:py-5 bg-white text-black font-semibold text-sm sm:text-base rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+            >
+              <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
+              <span>Get Your Free Proposal</span>
+            </a>
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-sm text-white/40">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Free 30-min consultation • Response within 24h
+              Free 30-min call • Reply within 24h
             </span>
-          </p>
+          </div>
         </div>
       </div>
 
