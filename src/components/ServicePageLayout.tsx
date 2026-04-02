@@ -5,56 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
-import { projectsData as allProjectsDataMap } from "@/data/projectsData";
 
-// Service → project mapping (slug, name, result)
-const serviceProjects: Record<string, Array<{ slug: string; name: string; result: string }>> = {
-  gtm: [
-    { slug: "bnb-chain", name: "BNB Chain", result: "+420% volume surge in 2 weeks" },
-    { slug: "bybit", name: "Bybit", result: "#2 exchange by Korean traffic" },
-    { slug: "fogo", name: "FOGO", result: "250+ attendees & 55 KOL partners" },
-  ],
-  branding: [
-    { slug: "story-protocol", name: "Story Protocol", result: "500+ creators at IP workshop" },
-    { slug: "megaeth", name: "MegaETH", result: "2M+ impressions pre-mainnet" },
-    { slug: "tria", name: "Tria", result: "450K+ impressions in 6 months" },
-  ],
-  "seo-ads": [
-    { slug: "kucoin", name: "KuCoin", result: "$550M+ TVL & +600% SEO growth" },
-    { slug: "bybit", name: "Bybit", result: "150+ first-page SEO rankings" },
-    { slug: "synfutures", name: "SynFutures", result: "5M+ OOH impressions in Gangnam" },
-  ],
-  "offline-event": [
-    { slug: "bnb-chain", name: "BNB Chain", result: "VIP networking with 150+ leaders" },
-    { slug: "sahara-ai", name: "Sahara AI", result: "400+ attendees at AI launch events" },
-    { slug: "fogo", name: "FOGO", result: "250+ attendees at launch event" },
-  ],
-  community: [
-    { slug: "mantra", name: "Mantra", result: "$50M+ pipeline & Korea CEX listing" },
-    { slug: "ondo-finance", name: "Ondo Finance", result: "100K+ community members" },
-    { slug: "peaq", name: "Peaq", result: "#1 Machine Economy brand in Korea" },
-  ],
-  "deep-research": [
-    { slug: "polygon", name: "Polygon", result: "200+ developers at L2 hackathon" },
-    { slug: "ondo-finance", name: "Ondo Finance", result: "50+ institutional leads via seminars" },
-    { slug: "megaeth", name: "MegaETH", result: "Technical deep-dives pre-mainnet" },
-  ],
-  influencer: [
-    { slug: "kucoin", name: "KuCoin", result: "100+ Korean influencers onboarded" },
-    { slug: "bnb-chain", name: "BNB Chain", result: "150+ VIP community leaders" },
-    { slug: "peaq", name: "Peaq", result: "Top Korean crypto KOL campaigns" },
-  ],
-  pr: [
-    { slug: "synfutures", name: "SynFutures", result: "Gangnam billboard + digital PR" },
-    { slug: "sahara-ai", name: "Sahara AI", result: "Major Korean financial media features" },
-    { slug: "mantra", name: "Mantra", result: "Institutional Korean media coverage" },
-  ],
-  ama: [
-    { slug: "bnb-chain", name: "BNB Chain", result: "High-impact KOL AMA campaigns" },
-    { slug: "peaq", name: "Peaq", result: "Strategic AMAs with top communities" },
-    { slug: "fogo", name: "FOGO", result: "Community AMA & KOL partnerships" },
-  ],
-};
 
 const allServices = [
   { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
@@ -196,33 +147,6 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* ===== Projects using this service ===== */}
-      {serviceProjects[currentSlug] && serviceProjects[currentSlug].length > 0 && (
-        <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-base sm:text-lg font-bold text-white">Projects</h2>
-            <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
-              View all <ArrowRight className="w-3 h-3 inline" />
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {serviceProjects[currentSlug].map((p) => {
-              const projectData = allProjectsDataMap[p.slug];
-              const bgImage = projectData?.bgImage || projectData?.featureImage || '';
-              return (
-                <Link key={p.slug} to={`/projects/${p.slug}`} className="group block relative rounded-xl overflow-hidden aspect-[16/10]">
-                  <img src={bgImage} alt={p.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
-                    <h3 className="text-sm font-semibold text-white mb-0.5">{p.name}</h3>
-                    <p className="text-[11px] text-white/50">{p.result}</p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-      )}
 
       {/* ===== Process + FAQ — 2-column split ===== */}
       {(processSteps && processSteps.length > 0 || faqItems && faqItems.length > 0) && (
