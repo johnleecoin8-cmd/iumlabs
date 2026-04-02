@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
 import ProjectStrategy from "./ProjectStrategy";
-import ProjectGalleryGrid from "./ProjectGalleryGrid";
 
 interface MetricCardProps {
   metric: ProjectMetric;
@@ -178,30 +177,6 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         <ProjectStrategy strategy={project.strategy} glowColor={project.glowColor} />
       )}
 
-      {/* ===== SECTION 3: GALLERY ===== */}
-      {gallery && gallery.length > 0 && (
-        <section className="py-16 md:py-24 bg-[#0A0A0A]">
-          <div className="px-4 md:px-8 lg:px-12">
-            {/* Section Header */}
-            <motion.div 
-              className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-10 md:mb-14"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex items-baseline gap-4 md:gap-6">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
-              </div>
-              <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block px-3 py-1 border border-white/10 rounded-full">
-                {gallery.length} Images
-              </span>
-            </motion.div>
-
-            <ProjectGalleryGrid gallery={gallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))} glowColor={project.glowColor} />
-          </div>
-        </section>
-      )}
 
       {/* ===== CTA SECTION ===== */}
       <section className="py-8 md:py-12">
