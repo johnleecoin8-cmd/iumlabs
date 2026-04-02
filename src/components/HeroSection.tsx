@@ -231,19 +231,16 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline */}
-          <h1 className="font-sans text-[2rem] sm:text-[3.5rem] md:text-[clamp(4rem,7vw,6rem)] font-bold leading-[1.08] tracking-[-0.03em] mb-4 sm:mb-6 md:mb-8 mt-24 sm:mt-36 md:mt-44">
-            <span className="text-white">Your </span>
-            <span className="text-[#3B82F6]">Web3</span>
-            <span className="text-white"> Ecosystem</span>
+          {/* Main Headline — all white, massive */}
+          <h1 className="font-sans text-[2.2rem] sm:text-[4rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 md:mb-8 mt-24 sm:mt-36 md:mt-44 text-white">
+            Your Web3 Ecosystem
             <br />
-            <span className="text-white">Partner for </span>
-            <span className="text-[#3B82F6]">Korea</span>
+            Partner for Korea
           </h1>
 
           {/* Subtext */}
-          <p className="text-sm sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4 sm:px-2">
-            Full-stack GTM, <span className="text-white/90 font-medium">170+ KOL network</span>, community growth, and PR — one partner for your <span className="text-white/90 font-medium">Korean market entry</span>.
+          <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-3xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4 sm:px-2">
+            Since 2025, we've worked with 19+ ecosystems and projects in the Korean crypto space.
           </p>
 
           {/* CTA */}
