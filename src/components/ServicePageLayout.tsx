@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
+import { projects as allProjectsData } from "@/data/projectsData";
 
 // Service → project mapping (slug, name, result)
 const serviceProjects: Record<string, Array<{ slug: string; name: string; result: string }>> = {
@@ -198,16 +199,27 @@ const ServicePageLayout = ({
       {/* ===== Projects using this service ===== */}
       {serviceProjects[currentSlug] && serviceProjects[currentSlug].length > 0 && (
         <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
-          <h2 className="text-base sm:text-lg font-bold text-white mb-4">Projects</h2>
-          <div className="space-y-2">
-            {serviceProjects[currentSlug].map((p) => (
-              <Link key={p.slug} to={`/projects/${p.slug}`} className="group flex items-center gap-3 text-sm py-2 border-b border-white/[0.04] last:border-0 hover:pl-1 transition-all">
-                <span className="text-white/15">—</span>
-                <span className="text-white font-medium">{p.name}:</span>
-                <span className="text-white/40">{p.result}</span>
-                <ArrowRight className="w-3 h-3 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all ml-auto flex-shrink-0" />
-              </Link>
-            ))}
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-base sm:text-lg font-bold text-white">Projects</h2>
+            <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
+              View all <ArrowRight className="w-3 h-3 inline" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {serviceProjects[currentSlug].map((p) => {
+              const projectData = allProjectsData.find(pd => pd.slug === p.slug);
+              const bgImage = projectData?.bgImage || projectData?.featureImage || '';
+              return (
+                <Link key={p.slug} to={`/projects/${p.slug}`} className="group block relative rounded-xl overflow-hidden aspect-[16/10]">
+                  <img src={bgImage} alt={p.name} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
+                    <h3 className="text-sm font-semibold text-white mb-0.5">{p.name}</h3>
+                    <p className="text-[11px] text-white/50">{p.result}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
