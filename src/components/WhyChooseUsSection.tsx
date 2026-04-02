@@ -47,7 +47,7 @@ const WhyChooseUsSection = () => {
   });
 
   return (
-    <section className="relative overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
+    <section className="relative overflow-hidden">
       {/* Fullscreen Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -60,9 +60,9 @@ const WhyChooseUsSection = () => {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex items-center min-h-[60vh] sm:min-h-[70vh] lg:min-h-[80vh]">
+      <div className="relative z-10 flex items-center">
         <motion.div
-          className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-12 sm:py-16 md:py-20 max-w-4xl text-center"
+          className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-10 sm:py-14 md:py-16 max-w-4xl text-center"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
