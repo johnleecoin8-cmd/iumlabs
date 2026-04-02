@@ -26,7 +26,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A]">
-      <SEOHead title="Korea Web3 Marketing & Crypto Agency | ium Labs" description="ium Labs is Korea's #1 Web3 marketing and crypto agency. We provide full-stack GTM strategy, KOL marketing, community growth, and PR for global blockchain projects entering the Korean market." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
+      <SEOHead title="ium Labs | Korea Web3 Marketing & Crypto Agency" description="The fastest way to enter Korea's crypto market. Full-stack GTM strategy, KOL marketing, community growth, and PR — 19+ projects launched. One partner, full execution." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
       
       <Navbar />
       
