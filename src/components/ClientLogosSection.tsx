@@ -41,6 +41,8 @@ export const allClientLogos: ClientLogo[] = [
   { name: "FOGO", logo: fogoLogo, noInvert: true, services: ["events", "community"] },
   { name: "SynFutures", logo: synfuturesLogo, noInvert: true, services: ["kol", "pr"] },
   { name: "zkPass", logo: zkpassLogo, noInvert: true, services: ["kol", "community", "events"] },
+  { name: "Aptos", logo: aptosLogo, noInvert: false, services: ["kol", "pr", "events", "community"] },
+  { name: "Kite", logo: kiteLogo, noInvert: true, services: ["kol", "community"] },
 ];
 
 // Service-specific client filters

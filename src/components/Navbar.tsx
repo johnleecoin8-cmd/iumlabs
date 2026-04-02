@@ -53,10 +53,10 @@ const Navbar = () => {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
+            <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-h-[85vh] overflow-y-auto overscroll-contain">
               {/* Main content — 3 columns */}
-              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-8 sm:pb-14">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
 
                   {/* Left — Connect */}
                   <div>
