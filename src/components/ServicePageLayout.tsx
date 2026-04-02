@@ -1,57 +1,12 @@
-import { useEffect, useState, ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft, Check, ChevronRight } from "lucide-react";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { ReactNode, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ChevronDown, LucideIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import ContactFormSection from "@/components/ContactFormSection";
-import SEOHead from "@/components/SEOHead";
-
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
-import SectionHeader from "@/components/SectionHeader";
-import { useCountUp } from "@/hooks/useCountUp";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
-// Import client logos for marquee
-import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
-import polygonLogo from "@/assets/logos/polygon.svg";
-import ondoLogo from "@/assets/logos/ondo.svg";
-import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria-official.png";
-import mantraLogo from "@/assets/logos/mantra.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
-import fogoLogo from "@/assets/logos/fogo.png";
-import synfuturesLogo from "@/assets/logos/synfutures.png";
-
-const clientLogos = [
-  { name: "BNB", logo: bnbLogo, noInvert: false },
-  { name: "KuCoin", logo: kucoinLogo, noInvert: false },
-  { name: "Polygon", logo: polygonLogo, noInvert: false },
-  { name: "Ondo Finance", logo: ondoLogo, noInvert: false },
-  { name: "Bybit", logo: bybitLogo, noInvert: false },
-  { name: "Peaq", logo: peaqLogo, noInvert: false },
-  { name: "Story Protocol", logo: storyProtocolLogo, noInvert: false },
-  { name: "MegaETH", logo: megaethLogo, noInvert: false },
-  { name: "Tria", logo: triaLogo, noInvert: true },
-  { name: "Mantra", logo: mantraLogo, noInvert: true },
-  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true },
-  { name: "FOGO", logo: fogoLogo, noInvert: true },
-  { name: "SynFutures", logo: synfuturesLogo, noInvert: true },
-];
-
-// All services for "More Services" section
 const allServices = [
   { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
   { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
@@ -61,6 +16,7 @@ const allServices = [
   { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
   { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
   { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
+  { slug: "ama", title: "AMA Hosting", color: "#EC4899" },
 ];
 
 export interface ServiceStat {
@@ -92,7 +48,6 @@ export interface FAQItem {
 }
 
 interface ServicePageLayoutProps {
-  // Hero Section
   serviceName: string;
   serviceTitle: string;
   serviceSubtitle: string;
@@ -103,62 +58,12 @@ interface ServicePageLayoutProps {
   accentColor: string;
   videoSrc?: string;
   posterSrc?: string;
-  
-  // Process Section (optional - can be replaced by custom children)
   processSteps?: ProcessStep[];
-  
-  // Deliverables Section (optional)
   deliverables?: Deliverable[];
-  
-  // FAQ Section (optional)
   faqItems?: FAQItem[];
-  
-  // Additional sections (optional)
   children?: ReactNode;
-  
-  // Current service slug for filtering "More Services"
   currentSlug: string;
 }
-
-// Stat Item Component with Count-Up Animation
-const StatItem = ({ 
-  value, 
-  label, 
-  prefix = "", 
-  suffix = "",
-  isVisible,
-  delay 
-}: { 
-  value: number; 
-  label: string; 
-  prefix?: string; 
-  suffix?: string;
-  isVisible: boolean;
-  delay: number;
-}) => {
-  const count = useCountUp({
-    end: value,
-    isVisible,
-    delay,
-    duration: 2000,
-  });
-  
-  return (
-    <motion.div 
-      className="text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
-    >
-      <div className="text-xl sm:text-xl md:text-3xl font-bold text-white mb-1 sm:mb-1">
-        {prefix}{count}{suffix}
-      </div>
-      <div className="text-[10px] sm:text-xs text-white/50 font-light leading-tight">
-        {label}
-      </div>
-    </motion.div>
-  );
-};
 
 const ServicePageLayout = ({
   serviceName,
@@ -169,337 +74,211 @@ const ServicePageLayout = ({
   serviceTags,
   stats,
   accentColor,
-  videoSrc = "/videos/services-background.mp4",
   posterSrc,
+  videoSrc = "/videos/services-background.mp4",
   processSteps,
   deliverables,
   faqItems,
   children,
   currentSlug,
 }: ServicePageLayoutProps) => {
-  const navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(false);
-  const isMobile = useIsMobile();
-
-  // Generate poster path from video path if not provided
   const defaultPosterSrc = posterSrc || (videoSrc ? videoSrc.replace('/videos/', '/images/posters/').replace('.mp4', '.jpg') : '/images/hero-poster.jpg');
-
-  const {
-    videoRef,
-    isVideoReady: videoLoaded,
-    hasVideoError,
-    shouldDisableVideo,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-  } = useVideoPlayer({
-    src: videoSrc,
-    poster: defaultPosterSrc,
-  });
-
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 800);
-    return () => clearTimeout(timer);
-  }, []);
-
-
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
-
-  // Calculate section numbers dynamically
-  // Order: Children (custom sections) -> Deliverables -> Process (if exists) -> More Services -> FAQ -> Contact
-  let sectionNumber = 1;
-  const getNextSectionNumber = () => {
-    const num = sectionNumber.toString().padStart(2, '0');
-    sectionNumber++;
-    return num;
-  };
-
-  // Reset section number for each render
-  sectionNumber = 1;
-  const childrenSectionNum = children ? getNextSectionNumber() : null;
-  const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
-  const processSectionNum = processSteps && processSteps.length > 0 ? getNextSectionNumber() : null;
-  const faqSectionNum = faqItems ? getNextSectionNumber() : null;
-  const moreServicesSectionNum = getNextSectionNumber();
-  const contactSectionNum = getNextSectionNumber();
+  const [openStep, setOpenStep] = useState<string | null>(processSteps?.[0]?.number || null);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
-      
-      {/* Hero Section */}
-      <main className="p-1 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
-        <div className="relative min-h-[100svh] sm:min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
-          {/* Background Layer - Video with Fallback */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Fallback Image - 즉시 표시 */}
-            <img
-              {...posterProps}
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ 
-                ...posterProps.style,
-                filter: "brightness(0.35)"
-              }}
-              fetchPriority="high"
-              decoding="async"
-            />
 
-            {/* Shimmer loading overlay */}
-            <ShimmerOverlay />
-            
-            {/* Video - 로딩 후 fade-in */}
-            {!shouldDisableVideo && !hasVideoError && (
-              <video
-                ref={videoRef}
-                {...videoProps}
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ 
-                  ...videoProps.style,
-                  filter: "brightness(0.35)",
-                  WebkitAppearance: 'none',
-                }}
-              >
-                <source src={`${videoSrc}#t=0.001`} type="video/mp4" />
-              </video>
-            )}
-            
-            {/* Dark overlay gradient - 강도 조절 */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.5)] via-[hsl(0,0%,4%,0.2)] to-[hsl(0,0%,4%,0.95)]" />
-            
-            {/* Accent color overlay */}
-            <div 
-              className="absolute inset-0 opacity-10"
-              style={{ background: `radial-gradient(ellipse at 50% 0%, ${accentColor} 0%, transparent 60%)` }}
-            />
+      {/* ===== 1. Hero — minimal + stats bar ===== */}
+      <section className="pt-24 sm:pt-28 lg:pt-32 pb-0">
+        <div className="px-4 sm:px-6 lg:px-10">
+          {/* Badge */}
+          <div className="flex items-center gap-2.5 mb-5">
+            <div
+              className="w-9 h-9 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: `${accentColor}15`, border: `1px solid ${accentColor}30` }}
+            >
+              <ServiceIcon className="w-5 h-5" style={{ color: accentColor }} />
+            </div>
+            <span className="text-xs font-mono uppercase tracking-widest" style={{ color: accentColor }}>
+              {serviceName}
+            </span>
           </div>
 
-          {/* Back Button */}
-          <motion.button
-            onClick={() => navigate(-1)}
-            className="absolute top-4 left-3 sm:top-8 sm:left-6 md:left-10 z-20 flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm active:scale-[0.97] min-h-[40px] sm:min-h-[44px]"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-          >
-            <ArrowLeft className="w-4 h-4 sm:w-4 sm:h-4" />
-            <span className="text-xs sm:text-sm font-medium">Back</span>
-          </motion.button>
+          {/* Title */}
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-[1.08] tracking-tight max-w-4xl">
+            {serviceTitle}
+            <br />
+            <span style={{ color: accentColor }}>{serviceSubtitle}</span>
+          </h1>
 
-          {/* Floating Service Tags - Desktop */}
-          {serviceTags.slice(0, 6).map((tag, index) => {
-            const positions = [
-              "top-[15%] left-[5%]",
-              "top-[35%] left-[4%]",
-              "top-[55%] left-[6%]",
-              "top-[18%] right-[6%]",
-              "top-[42%] right-[5%]",
-              "top-[66%] right-[7%]",
-            ];
-            return (
-              <motion.div
-                key={index}
-                className={`absolute ${positions[index]} hidden lg:block z-10`}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-              >
-                <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300">
-                  {tag.label}
-                </span>
-              </motion.div>
-            );
-          })}
+          {/* Description */}
+          <p className="text-sm sm:text-base lg:text-lg text-white/45 leading-relaxed mt-4 mb-8 max-w-2xl">
+            {serviceDescription}
+          </p>
 
-          {/* Main Content - Centered */}
-          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-16 sm:pt-8 pb-4">
-            <div className="max-w-7xl mx-auto text-center">
-
-              {/* Main Headline */}
-              <motion.h1 
-                className="font-sans text-[1.75rem] leading-[1.15] sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] mb-3 sm:mb-6"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <span className="text-white">{serviceTitle}</span>
-                <br />
-                <span style={{ color: accentColor }}>{serviceSubtitle}</span>
-              </motion.h1>
-
-              {/* Description */}
-              <motion.p 
-                className="text-[13px] leading-relaxed sm:text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-4 sm:mb-6 font-light tracking-wide px-1"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                {serviceDescription}
-              </motion.p>
-
-              {/* CTA Button */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              >
-                <CalendlyButton 
-                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[46px]"
-                  style={{ backgroundColor: accentColor, color: '#fff' }}
-                >
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-4 h-4 sm:w-4 sm:h-4" />
-                  <span>Book a Meeting</span>
-                </CalendlyButton>
-              </motion.div>
-            </div>
+          {/* CTA row */}
+          <div className="flex items-center gap-3 mb-10">
+            <CalendlyButton
+              className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full text-white text-sm font-semibold transition-all hover:-translate-y-0.5 active:scale-[0.97]"
+              style={{ backgroundColor: accentColor }}
+            >
+              Book a Meeting
+            </CalendlyButton>
+            <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors">
+              See our work <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
-          {/* Stats Section */}
-          <div className="relative z-10 py-4 sm:py-6">
-            <div className="container mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-                {stats.map((stat, index) => (
-                  <StatItem 
-                    key={index}
-                    value={stat.value}
-                    label={stat.label}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                    isVisible={isVisible}
-                    delay={index * 100}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Client Logo Marquee */}
-          <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
-            <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
-              <span className="number-badge">01</span>
-            </div>
-
-            <div className="flex items-center logo-marquee-slow ml-12 sm:ml-16">
-              {[...clientLogos, ...clientLogos].map((client, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
-                >
-                  <img 
-                    src={client.logo} 
-                    alt={client.name} 
-                    loading="lazy"
-                    decoding="async"
-                    className={`h-3.5 w-3.5 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
-                  />
-                  <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
-                    {client.name}
-                  </span>
+          {/* Stats bar */}
+          <div className="border-t border-white/[0.06] pt-8 pb-2">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10">
+              {stats.map((stat, i) => (
+                <div key={i} className="text-center sm:text-left">
+                  <div className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-none">
+                    {stat.prefix}{stat.value}{stat.suffix}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-white/35 mt-1 uppercase tracking-wider">
+                    {stat.label}
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-
-          {/* Scroll Indicator */}
-          <motion.div 
-            className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            <span className="text-white/40 text-[11px] sm:text-sm font-medium">scroll</span>
-            <ChevronDown className="w-4 h-4 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
-          </motion.div>
         </div>
-      </main>
+      </section>
 
-      {/* Additional Content Sections */}
-      {children}
+      {/* ===== 2. Problem — why Korea is hard ===== */}
+      <section className="px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
+        <div className="max-w-3xl">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4">Why this matters</h2>
+          <p className="text-sm sm:text-base text-white/40 leading-relaxed">
+            Korea is the #2 crypto market by trading volume, but most global projects fail here.
+            The market is trust-first, retail-driven, and culturally specific — translated global campaigns don't work.
+            You need a local team, native KOLs, and platform-specific strategies for Telegram, KakaoTalk, Naver, and Korean exchanges.
+          </p>
+        </div>
+      </section>
 
-      {/* Deliverables Section - Minimal Agency Style */}
+      {/* ===== 3. Service details — dash list + deliverables ===== */}
       {deliverables && deliverables.length > 0 && (
-        <section className="bg-[#0A0A0A]">
-          <div className="border-t border-white/[0.06]">
-            <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
-            
-            <div className="py-8 sm:py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-                  {deliverables.map((deliverable) => (
-                    <div
-                      key={deliverable.title}
-                      className="p-5 sm:p-6 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300"
-                    >
-                      <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2.5">
-                        <div 
-                          className="w-2 h-2 rounded-full flex-shrink-0"
-                          style={{ backgroundColor: accentColor }}
-                        />
-                        {deliverable.title}
-                      </h3>
-                      <ul className="space-y-2.5">
-                        {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-white/50 text-xs leading-relaxed">
-                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-violet-400/60" />
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+        <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-8">What's included</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {deliverables.map((d) => (
+              <div key={d.title} className="p-5 sm:p-6 rounded-2xl bg-[#111] border border-white/[0.06]">
+                <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
+                  {d.title}
+                </h3>
+                <ul className="space-y-2">
+                  {d.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-[13px] text-white/40 leading-relaxed">
+                      <span className="text-white/15 flex-shrink-0">—</span>
+                      {item}
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-            </div>
+            ))}
           </div>
         </section>
       )}
 
-      {/* Process Section - Conditional */}
+      {/* ===== 4. Process — accordion ===== */}
       {processSteps && processSteps.length > 0 && (
-        <section className="bg-[#0F0F0F]" id="process">
-          <div className="border-t border-white/10">
-            <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-white/10">
-              {processSteps.map((step, index) => {
-                const Icon = step.icon;
-                const isLast = index === processSteps.length - 1;
-                
-                return (
-                  <div
-                    key={step.number}
-                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 active:scale-[0.98] sm:border-r sm:border-white/10 sm:last:border-r-0"
+        <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-8">How we work</h2>
+          <div className="max-w-3xl space-y-2">
+            {processSteps.map((step) => {
+              const isOpen = openStep === step.number;
+              const Icon = step.icon;
+              return (
+                <div key={step.number} className="border border-white/[0.06] rounded-xl bg-[#111] overflow-hidden">
+                  <button
+                    onClick={() => setOpenStep(isOpen ? null : step.number)}
+                    className="w-full flex items-center gap-4 px-5 sm:px-6 py-4 sm:py-5 text-left hover:bg-white/[0.02] transition-colors"
                   >
-                    {/* Arrow indicator between steps - Desktop */}
-                    {!isLast && (
-                      <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                        <ArrowRight 
-                          className="w-6 h-6 drop-shadow-lg" 
-                          style={{ color: accentColor }}
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
-                      <span 
-                        className="text-[11px] sm:text-xs font-mono tracking-widest"
-                        style={{ color: accentColor }}
+                    <span className="text-xs font-mono tracking-widest flex-shrink-0" style={{ color: accentColor }}>
+                      {step.number}
+                    </span>
+                    <Icon className="w-4 h-4 text-white/25 flex-shrink-0" />
+                    <span className="text-sm sm:text-base font-semibold text-white flex-1">{step.title}</span>
+                    <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                      <ChevronDown className="w-4 h-4 text-white/20" />
+                    </motion.div>
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="overflow-hidden"
                       >
-                        {step.number}
-                      </span>
-                      <Icon 
-                        className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
-                        strokeWidth={1.5} 
-                      />
-                    </div>
-                    
-                    <h3 className="text-[15px] sm:text-base font-semibold text-white mb-2 sm:mb-2">
-                      {step.title}
-                    </h3>
-                    
-                    <p className="text-white/50 text-[13px] sm:text-sm leading-relaxed">
-                      {step.description}
-                    </p>
+                        <div className="px-5 sm:px-6 pb-5 sm:pb-6 pl-16 sm:pl-20">
+                          <p className="text-sm text-white/40 leading-relaxed">{step.description}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* ===== 5. Custom children (case studies etc) ===== */}
+      {children}
+
+      {/* ===== 6. Tags ===== */}
+      <section className="px-4 sm:px-6 lg:px-10 pb-10">
+        <div className="flex flex-wrap gap-2">
+          {serviceTags.map((tag, i) => (
+            <span
+              key={i}
+              className="px-3 py-1.5 text-[11px] font-medium rounded-full border"
+              style={{ color: `${accentColor}bb`, borderColor: `${accentColor}25`, backgroundColor: `${accentColor}08` }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== 7. FAQ ===== */}
+      {faqItems && faqItems.length > 0 && (
+        <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
+          <div className="max-w-3xl">
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">FAQ</h2>
+            <div className="space-y-2">
+              {faqItems.map((item, index) => {
+                const [isOpen, setIsOpen] = useState(false);
+                return (
+                  <div key={index} className="border border-white/[0.06] rounded-xl bg-[#111] overflow-hidden">
+                    <button
+                      onClick={() => setIsOpen(!isOpen)}
+                      className="w-full flex items-center gap-3 px-5 py-4 text-left text-sm text-white hover:bg-white/[0.02] transition-colors"
+                    >
+                      <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} style={{ color: `${accentColor}80` }} />
+                      <span>{item.question}</span>
+                    </button>
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <p className="px-5 pb-5 pl-12 text-sm text-white/40 leading-relaxed">{item.answer}</p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 );
               })}
@@ -508,114 +287,40 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* FAQ Section - Minimal Agency Style */}
-      {faqItems && faqItems.length > 0 && (
-        <section className="bg-[#0A0A0A]">
-          <div className="border-t border-white/[0.06]">
-            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
-            
-            <div className="py-8 sm:py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-2">
-                  {faqItems.map((item, index) => (
-                    <AccordionItem 
-                      key={index}
-                      value={`item-${index}`}
-                      className="border border-white/[0.06] rounded-2xl bg-[#0D0D0D] px-5 overflow-hidden data-[state=open]:border-white/[0.12] transition-all duration-300"
-                    >
-                      <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
-                        <span className="flex items-center gap-3">
-                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-violet-400/60" />
-                          <span>{item.question}</span>
-                        </span>
-                      </AccordionTrigger>
-                      <AccordionContent className="text-white/50 text-sm pb-5 pl-7 leading-relaxed">
-                        {item.answer}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-            </div>
+      {/* ===== 8. CTA — structured ===== */}
+      <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
+        <div className="rounded-2xl sm:rounded-3xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 lg:p-14 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Ready to get started?</h2>
+            <p className="text-sm text-white/40">Book a free 30-minute strategy call. No commitment.</p>
           </div>
-        </section>
-      )}
-
-      {/* More Services Section */}
-      <section className="bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
-          <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
-          <div 
-            className="grid grid-cols-2 lg:grid-cols-4"
+          <CalendlyButton
+            className="inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-white text-sm font-semibold transition-all hover:-translate-y-0.5 active:scale-[0.97] flex-shrink-0"
+            style={{ backgroundColor: accentColor }}
           >
-            {otherServices.map((service, index) => (
-              <div
-                key={service.slug}
-                className="border-b border-r border-white/10 [&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0 [&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+4)]:border-b-0"
-              >
-                <Link
-                  to={`/services/${service.slug}`}
-                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden active:scale-[0.97] min-h-[100px] sm:min-h-[120px]"
-                >
-                  {/* Hover background gradient */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    style={{ 
-                      background: `linear-gradient(135deg, ${service.color}15 0%, transparent 60%)` 
-                    }}
-                  />
-                  
-                  {/* Glow effect on hover */}
-                  <div 
-                    className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-                    style={{ backgroundColor: service.color }}
-                  />
-                  
-                  <div className="relative z-10">
-                    {/* Color indicator with pulse effect */}
-                    <div className="relative mb-3 sm:mb-5">
-                      <div 
-                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full group-hover:scale-110 transition-all duration-300"
-                        style={{ backgroundColor: service.color }}
-                      />
-                      <div 
-                        className="absolute inset-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
-                        style={{ backgroundColor: service.color }}
-                      />
-                    </div>
-                    
-                    {/* Service title */}
-                    <h3 className="text-white font-medium text-[13px] sm:text-lg mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform duration-300 line-clamp-2 leading-snug">
-                      {service.title}
-                    </h3>
-                    
-                    {/* Arrow with enhanced animation */}
-                    <div className="flex items-center gap-1.5 sm:gap-2">
-                      <span className="text-[10px] sm:text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
-                        Explore
-                      </span>
-                      <ArrowRight 
-                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
-                      />
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
+            Book a Meeting
+          </CalendlyButton>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="bg-[#121212]" id="contact">
-        <ContactFormSection sectionNumber={contactSectionNum} />
+      {/* ===== 9. Other services — pill links ===== */}
+      <section className="px-4 sm:px-6 lg:px-10 pb-10 border-t border-white/[0.04] pt-10">
+        <h2 className="text-sm font-medium text-white/25 uppercase tracking-wider mb-4">More services</h2>
+        <div className="flex flex-wrap gap-2">
+          {otherServices.map((s) => (
+            <Link
+              key={s.slug}
+              to={`/services/${s.slug}`}
+              className="group flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] transition-all text-sm text-white/45 hover:text-white"
+            >
+              <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: s.color }} />
+              {s.title}
+            </Link>
+          ))}
+        </div>
       </section>
 
-
-      {/* Footer Links */}
       <FooterLinksSection />
-
-      {/* Footer */}
       <div className="border-t border-white/10">
         <Footer />
       </div>
