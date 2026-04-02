@@ -47,7 +47,7 @@ const WhyChooseUsSection = () => {
   });
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden min-h-[45vh]">
       {/* Fullscreen Video Background */}
       <div className="absolute inset-0 z-0">
         <video
