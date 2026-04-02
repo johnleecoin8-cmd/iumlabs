@@ -53,9 +53,9 @@ const Navbar = () => {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] max-h-[85vh] overflow-y-auto overscroll-contain">
-              {/* Main content — 3 columns */}
-              <div className="px-5 sm:px-8 lg:px-20 pt-12 sm:pt-16 pb-8 sm:pb-14">
+            <div className="bg-white md:rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] h-screen md:h-auto md:max-h-[85vh] overflow-y-auto overscroll-contain">
+              {/* Main content */}
+              <div className="px-5 sm:px-8 lg:px-20 pt-14 sm:pt-16 pb-8 sm:pb-14">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
 
                   {/* Left — Connect */}
@@ -94,8 +94,8 @@ const Navbar = () => {
                               <AnimatePresence>
                                 {servicesOpen && (
                                   <motion.div className="overflow-hidden ml-1 pl-4 border-l-2 border-black/[0.08]" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
-                                    <div className="space-y-1 py-2">
-                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-base text-black/50 hover:text-black transition-colors py-1">{item.name}</Link>)}
+                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 py-2">
+                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-sm sm:text-base text-black/50 hover:text-black transition-colors py-1">{item.name}</Link>)}
                                     </div>
                                   </motion.div>
                                 )}
