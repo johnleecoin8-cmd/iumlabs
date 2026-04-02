@@ -863,7 +863,7 @@ const Projects = () => {
       {/* Footer */}
       <Footer />
       
-      <FloatingContactButton />
+      
     </div>
   );
 };
