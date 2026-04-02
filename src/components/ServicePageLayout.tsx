@@ -1,7 +1,6 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ChevronDown, LucideIcon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, LucideIcon } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -62,7 +61,6 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => {
   const defaultPosterSrc = posterSrc || (videoSrc ? videoSrc.replace('/videos/', '/images/posters/').replace('.mp4', '.jpg') : '/images/hero-poster.jpg');
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
-  const [openStep, setOpenStep] = useState<string | null>(processSteps?.[0]?.number || null);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
@@ -149,32 +147,22 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* ===== Process accordion ===== */}
+      {/* ===== Process — number list (always open) ===== */}
       {processSteps && processSteps.length > 0 && (
         <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
-          <h2 className="text-lg sm:text-xl font-bold text-white mb-6">How we work</h2>
-          <div className="max-w-3xl space-y-2">
-            {processSteps.map((step) => {
-              const isOpen = openStep === step.number;
-              const Icon = step.icon;
-              return (
-                <div key={step.number} className="border border-white/[0.06] rounded-xl bg-[#111] overflow-hidden">
-                  <button onClick={() => setOpenStep(isOpen ? null : step.number)} className="w-full flex items-center gap-4 px-5 py-4 text-left hover:bg-white/[0.02] transition-colors">
-                    <span className="text-xs font-mono tracking-widest flex-shrink-0" style={{ color: accentColor }}>{step.number}</span>
-                    <Icon className="w-4 h-4 text-white/20 flex-shrink-0" />
-                    <span className="text-sm font-semibold text-white flex-1">{step.title}</span>
-                    <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-4 h-4 text-white/20" /></motion.div>
-                  </button>
-                  <AnimatePresence>
-                    {isOpen && (
-                      <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
-                        <p className="px-5 pb-5 pl-16 text-sm text-white/40 leading-relaxed">{step.description}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-8">How we work</h2>
+          <div className="max-w-3xl space-y-8">
+            {processSteps.map((step) => (
+              <div key={step.number} className="flex gap-4 sm:gap-5">
+                <span className="text-2xl sm:text-3xl font-black tracking-tighter leading-none pt-0.5" style={{ color: `${accentColor}40` }}>
+                  {step.number}
+                </span>
+                <div>
+                  <h3 className="text-base sm:text-lg font-semibold text-white mb-1.5">{step.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{step.description}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </section>
       )}
@@ -182,13 +170,16 @@ const ServicePageLayout = ({
       {/* ===== Children ===== */}
       {children}
 
-      {/* ===== FAQ ===== */}
+      {/* ===== FAQ — flat Q/A (always open) ===== */}
       {faqItems && faqItems.length > 0 && (
         <section className="px-4 sm:px-6 lg:px-10 pb-14 sm:pb-20">
-          <h2 className="text-lg sm:text-xl font-bold text-white mb-6">FAQ</h2>
-          <div className="max-w-3xl space-y-2">
+          <h2 className="text-lg sm:text-xl font-bold text-white mb-8">FAQ</h2>
+          <div className="max-w-3xl space-y-6">
             {faqItems.map((item, index) => (
-              <FAQAccordion key={index} item={item} accentColor={accentColor} />
+              <div key={index}>
+                <p className="text-sm font-semibold text-white mb-1.5">{item.question}</p>
+                <p className="text-sm text-white/40 leading-relaxed">{item.answer}</p>
+              </div>
             ))}
           </div>
         </section>
@@ -220,25 +211,6 @@ const ServicePageLayout = ({
 
       <FooterLinksSection />
       <div className="border-t border-white/10"><Footer /></div>
-    </div>
-  );
-};
-
-const FAQAccordion = ({ item, accentColor }: { item: FAQItem; accentColor: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="border border-white/[0.06] rounded-xl bg-[#111] overflow-hidden">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full flex items-center gap-3 px-5 py-4 text-left text-sm text-white hover:bg-white/[0.02] transition-colors">
-        <ChevronDown className={`w-3.5 h-3.5 flex-shrink-0 transition-transform ${isOpen ? 'rotate-180' : ''}`} style={{ color: `${accentColor}80` }} />
-        <span>{item.question}</span>
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div initial={{ height: 0 }} animate={{ height: "auto" }} exit={{ height: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden">
-            <p className="px-5 pb-5 pl-12 text-sm text-white/40 leading-relaxed">{item.answer}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
