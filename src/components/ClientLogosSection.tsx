@@ -15,6 +15,8 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
+import aptosLogo from "@/assets/logos/aptos.png";
+import kiteLogo from "@/assets/logos/kite.png";
 
 export interface ClientLogo {
   name: string;
