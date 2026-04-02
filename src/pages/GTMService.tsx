@@ -267,59 +267,31 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/40" />
 
       {/* Main content — centered */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-5xl mx-auto pt-24 sm:pt-32 pb-8">
-        <motion.h1
-          className="text-[2rem] sm:text-[3rem] md:text-[4rem] lg:text-[5rem] xl:text-[5.5rem] font-bold leading-[1.05] tracking-[-0.03em] text-white"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          Your Crypto
-          <br />
-          <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-            Ecosystem Growth
-          </span>
-          <br />
-          Agency in Korea
-        </motion.h1>
+      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mt-16 sm:mt-28 md:mt-36 text-white">
+            Your Crypto Ecosystem
+            <br />
+            Growth Agency in Korea
+          </h1>
 
-        <motion.p
-          className="mt-6 sm:mt-8 text-sm sm:text-base md:text-lg text-white/50 max-w-2xl mx-auto leading-relaxed font-light"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          19+ ecosystems and projects launched into the Korean crypto market — the #2 market globally by trading volume.
-        </motion.p>
+          <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-3xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4 sm:px-2 mt-4 sm:mt-6">
+            19+ ecosystems and projects launched into the Korean crypto market. One partner, full execution.
+          </p>
 
-        {/* CTA */}
-        <motion.div
-          className="mt-8 sm:mt-10"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.6 }}
-        >
-          <CalendlyButton className="inline-flex items-center gap-3 px-8 py-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white font-medium text-sm sm:text-base rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] hover:-translate-y-0.5 active:scale-[0.97]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="opacity-80">
-              <path d="M10 0C4.477 0 0 4.477 0 10s4.477 10 10 10 10-4.477 10-10S15.523 0 10 0zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm1-13H9v6l5.25 3.15.75-1.23-4.5-2.67V5z" fill="currentColor"/>
-            </svg>
-            Book a Free Consultation
-          </CalendlyButton>
-        </motion.div>
-
-        {/* Mobile tags */}
-        <motion.div
-          className="flex flex-wrap justify-center gap-2 mt-8 lg:hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.5 }}
-        >
-          {floatingTags.map((tag, i) => (
-            <span key={i} className="px-3 py-1.5 text-[10px] font-medium rounded-md bg-white/[0.04] border border-white/[0.1] text-white/60">
-              {tag.label}
+          <div className="flex flex-col items-center gap-3 mt-6 sm:mt-10">
+            <a
+              href="/contact#contact-form"
+              className="group inline-flex items-center gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-xs sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+            >
+              Get Your Free Proposal
+            </a>
+            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-sm text-white/40">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              Free 30-min call · Reply within 24h
             </span>
-          ))}
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* Client logo marquee — bottom */}
