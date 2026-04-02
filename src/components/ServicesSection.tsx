@@ -161,7 +161,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500"
+        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] hover:bg-[#151515] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
       >
         {/* Image — large */}
         <div className="relative aspect-[16/9] overflow-hidden">

@@ -77,7 +77,7 @@ const ServicePageLayout = ({
               src={defaultPosterSrc}
               alt={serviceName}
               className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.45)" }}
+              style={{ filter: "brightness(0.55)" }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30" />
 

@@ -194,7 +194,7 @@ const HeroSection = () => {
 
           {/* Subtext */}
           <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-3xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4 sm:px-2">
-            Since 2025, we've worked with 19+ ecosystems and projects in the Korean crypto space.
+            19+ ecosystems and projects launched into the Korean crypto market. One partner, full execution.
           </p>
 
           {/* CTA — centered */}
