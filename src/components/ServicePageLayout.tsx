@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
-import { projects as allProjectsData } from "@/data/projectsData";
+import { projectsData as allProjectsDataMap } from "@/data/projectsData";
 
 // Service → project mapping (slug, name, result)
 const serviceProjects: Record<string, Array<{ slug: string; name: string; result: string }>> = {
@@ -207,7 +207,7 @@ const ServicePageLayout = ({
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {serviceProjects[currentSlug].map((p) => {
-              const projectData = allProjectsData.find(pd => pd.slug === p.slug);
+              const projectData = allProjectsDataMap[p.slug];
               const bgImage = projectData?.bgImage || projectData?.featureImage || '';
               return (
                 <Link key={p.slug} to={`/projects/${p.slug}`} className="group block relative rounded-xl overflow-hidden aspect-[16/10]">
