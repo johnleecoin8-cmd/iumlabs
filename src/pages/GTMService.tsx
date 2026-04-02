@@ -4,7 +4,6 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PerformanceSection from '@/components/gtm/PerformanceSection';
-import AuthoritySection from '@/components/gtm/AuthoritySection';
 import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
 import SEOHead from "@/components/SEOHead";
@@ -2000,7 +1999,6 @@ const GTMService = () => {
         <MarketIntelligenceSection />
         <FrameworkSection />
         <PerformanceSection />
-        <AuthoritySection />
       </main>
       
       {/* Contact Section */}
