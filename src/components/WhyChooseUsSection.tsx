@@ -107,6 +107,29 @@ const WhyChooseUsSection = () => {
 
         </motion.div>
       </div>
+
+      {/* Stats bar */}
+      <div className="relative z-10 border-t border-white/[0.08] py-8 sm:py-12 md:py-14">
+        <div className="container mx-auto px-6 sm:px-10 md:px-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 md:gap-14">
+            {[
+              { value: "$7B+", label: "Client Valuation" },
+              { value: "230+", label: "KOL Network" },
+              { value: "19+", label: "Projects Launched" },
+              { value: "70+", label: "Events Hosted" },
+            ].map((stat, i) => (
+              <div key={i} className="text-center">
+                <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-[11px] sm:text-sm md:text-base text-white/45 font-medium">
+                  {stat.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>);
 
 };

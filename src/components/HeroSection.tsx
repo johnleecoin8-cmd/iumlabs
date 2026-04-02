@@ -260,14 +260,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="relative z-10 py-6 sm:py-10 md:py-12">
-        <div className="container mx-auto px-4 sm:px-10 md:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 md:gap-12">
-            {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
-          </div>
-        </div>
-      </div>
 
       {/* Client Logo Marquee - Full Width */}
       <div className="relative z-10 py-4 sm:py-6 overflow-hidden">
