@@ -436,7 +436,7 @@ const KOLMarketingKorea = () => {
 
         {/* ===== SECTION 06 — Contact ===== */}
         <section className="border-t border-white/[0.06]">
-          <ContactFormSection sectionNumber="06" />
+          <ContactFormSection />
         </section>
 
         {/* ===== Footer ===== */}

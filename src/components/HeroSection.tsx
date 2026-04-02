@@ -1,10 +1,8 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useMemo, useState, MouseEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useRipple } from "@/hooks/useRipple";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import { brand } from "@/config/content";
-import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 
 // Import client logos
@@ -24,47 +22,6 @@ import synfuturesLogo from "@/assets/logos/synfutures.png";
 import aptosLogo from "@/assets/logos/aptos.png";
 import kiteLogo from "@/assets/logos/kite.png";
 
-// Desktop tags - 8 services (positioned at edges with good spacing)
-const serviceTags = [{
-  label: "$7B+ Client Valuation",
-  position: "top-[6%] left-[3%]"
-}, {
-  label: "19+ Projects Launched",
-  position: "top-[24%] left-[2%]"
-}, {
-  label: "170+ KOL Network",
-  position: "top-[44%] left-[3%]"
-}, {
-  label: "55+ Events Hosted",
-  position: "top-[64%] left-[2%]"
-}, {
-  label: "#2 Market by Volume",
-  position: "top-[8%] right-[3%]"
-}, {
-  label: "24/7 Community Ops",
-  position: "top-[26%] right-[2%]"
-}, {
-  label: "Korea-Native Team",
-  position: "top-[46%] right-[3%]"
-}, {
-  label: "5-Day Launch Speed",
-  position: "top-[66%] right-[2%]"
-}];
-
-// Mobile tags - repositioned to avoid overlap with centered headline
-const mobileServiceTags = [{
-  label: "$7B+ Valuation",
-  position: "top-[8%] left-[5%]"
-}, {
-  label: "19+ Projects",
-  position: "top-[14%] right-[6%]"
-}, {
-  label: "170+ KOLs",
-  position: "bottom-[42%] left-[4%]"
-}, {
-  label: "55+ Events",
-  position: "bottom-[36%] right-[5%]"
-}];
 const clientLogos = [{
   name: "BNB",
   logo: bnbLogo,
@@ -150,9 +107,6 @@ const defaultStats = [{
 }];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { createRipple } = useRipple();
-  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
-
   // Use unified video player hook
   const {
     videoRef,

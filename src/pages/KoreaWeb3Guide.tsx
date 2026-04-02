@@ -471,7 +471,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 07 — Contact */}
-      <ContactFormSection sectionNumber="07" />
+      <ContactFormSection />
 
       {/* Footer */}
       <FooterLinksSection />

@@ -853,7 +853,7 @@ const Projects = () => {
       
       {/* Contact Section - 03 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
-        <ContactFormSection sectionNumber="03" />
+        <ContactFormSection />
       </section>
       
       

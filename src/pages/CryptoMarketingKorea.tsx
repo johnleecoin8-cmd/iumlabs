@@ -395,7 +395,7 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 06 — Contact */}
       <section className="border-t border-white/10">
-        <ContactFormSection sectionNumber="06" />
+        <ContactFormSection />
       </section>
 
       <FooterLinksSection />

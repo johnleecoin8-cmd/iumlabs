@@ -2004,7 +2004,7 @@ const GTMService = () => {
       </main>
       
       {/* Contact Section */}
-      <GTMContactFormSection sectionNumber="05" />
+      <GTMContactFormSection />
       
       
       {/* Footer Links */}

@@ -5,9 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import Sidebar from "@/components/Sidebar";
-import MobileBottomNav from "@/components/MobileBottomNav";
-import { SidebarProvider } from "@/hooks/useSidebarState";
 import PageIntro from "@/components/PageIntro";
 import Index from "./pages/Index";
 
@@ -212,13 +209,7 @@ const AppContent = () => {
     <>
       {showIntro && <PageIntro onComplete={handleIntroComplete} />}
       <ScrollToTop />
-      <div className="flex w-full">
-        <Sidebar />
-        <div className="flex-1 min-w-0">
-          <AppRoutes />
-        </div>
-        <MobileBottomNav />
-      </div>
+      <AppRoutes />
     </>
   );
 };
@@ -230,9 +221,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <SidebarProvider>
-            <AppContent />
-          </SidebarProvider>
+          <AppContent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
