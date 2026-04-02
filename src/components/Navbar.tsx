@@ -103,7 +103,7 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-2xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-xl sm:text-3xl lg:text-4xl font-bold text-black hover:text-black/50 transition-colors py-1.5 sm:py-2">{link.label}</Link>;
                       })}
                     </nav>
                   </div>
