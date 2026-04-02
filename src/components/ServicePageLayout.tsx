@@ -134,40 +134,47 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* ===== Process ===== */}
-      {processSteps && processSteps.length > 0 && (
+      {/* ===== Process + FAQ — 2-column split ===== */}
+      {(processSteps && processSteps.length > 0 || faqItems && faqItems.length > 0) && (
         <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
-          <h2 className="text-base sm:text-lg font-bold text-white mb-5">How we work</h2>
-          <div className="max-w-3xl space-y-5">
-            {processSteps.map((step) => (
-              <div key={step.number} className="flex gap-4">
-                <span className="text-xl sm:text-2xl font-black tracking-tighter leading-none pt-0.5" style={{ color: `${accentColor}40` }}>{step.number}</span>
-                <div>
-                  <h3 className="text-sm sm:text-base font-semibold text-white mb-1">{step.title}</h3>
-                  <p className="text-sm text-white/40 leading-relaxed">{step.description}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            {/* Left — Process */}
+            {processSteps && processSteps.length > 0 && (
+              <div>
+                <h2 className="text-base sm:text-lg font-bold text-white mb-5">How we work</h2>
+                <div className="space-y-5">
+                  {processSteps.map((step) => (
+                    <div key={step.number} className="flex gap-4">
+                      <span className="text-xl sm:text-2xl font-black tracking-tighter leading-none pt-0.5" style={{ color: `${accentColor}40` }}>{step.number}</span>
+                      <div>
+                        <h3 className="text-sm sm:text-base font-semibold text-white mb-1">{step.title}</h3>
+                        <p className="text-sm text-white/40 leading-relaxed">{step.description}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
-            ))}
+            )}
+
+            {/* Right — FAQ */}
+            {faqItems && faqItems.length > 0 && (
+              <div>
+                <h2 className="text-base sm:text-lg font-bold text-white mb-5">FAQ</h2>
+                <div className="space-y-4">
+                  {faqItems.map((item, index) => (
+                    <div key={index}>
+                      <p className="text-sm font-semibold text-white mb-1">{item.question}</p>
+                      <p className="text-sm text-white/40 leading-relaxed">{item.answer}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </section>
       )}
 
       {children}
-
-      {/* ===== FAQ ===== */}
-      {faqItems && faqItems.length > 0 && (
-        <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
-          <h2 className="text-base sm:text-lg font-bold text-white mb-5">FAQ</h2>
-          <div className="max-w-3xl space-y-4">
-            {faqItems.map((item, index) => (
-              <div key={index}>
-                <p className="text-sm font-semibold text-white mb-1">{item.question}</p>
-                <p className="text-sm text-white/40 leading-relaxed">{item.answer}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* ===== CTA ===== */}
       <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
