@@ -57,7 +57,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "19+", label: "Projects" },
+  { value: "22+", label: "Projects" },
   { value: "170+", label: "KOL Network" },
   { value: "$7M+", label: "Token Sales" },
   { value: "44+", label: "Events" },
@@ -152,7 +152,7 @@ const CryptoMarketingKorea = () => {
             className="mt-6 text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed"
           >
             Full-stack Web3 GTM strategy for blockchain projects entering the Korean market.
-            From KOL networks to community growth — we've launched 19+ projects and driven $7M+ in token sales.
+            From KOL networks to community growth — we've launched 22+ projects and driven $7M+ in token sales.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}

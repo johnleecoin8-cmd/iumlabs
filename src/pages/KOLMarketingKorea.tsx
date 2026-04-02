@@ -20,7 +20,7 @@ const fadeInUp = {
 const stats = [
   { value: "170+", label: "Vetted KOLs" },
   { value: "4", label: "Platforms" },
-  { value: "19+", label: "Campaigns" },
+  { value: "22+", label: "Campaigns" },
   { value: "100%", label: "ROI Tracked" },
 ];
 

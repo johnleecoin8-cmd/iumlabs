@@ -1,14 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { usePageMeta } from "@/hooks/usePageMeta";
+import SEOHead from "@/components/SEOHead";
 
 const Privacy = () => {
-  usePageMeta({
-    title: "Privacy Policy",
-    description: "Privacy Policy for Ium Labs, Korea's leading Web3 and crypto marketing agency. Learn how we protect your information.",
-    path: "/privacy"
-  });
-
   const sections = [
     { title: "1. Information We Collect", content: "We collect information you provide directly to us, including name, email address, company information, and project details when you contact us or use our services." },
     { title: "2. How We Use Your Information", content: "We use the information we collect to provide, maintain, and improve our services, communicate with you, and send you updates about our services." },
@@ -20,6 +14,11 @@ const Privacy = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Privacy Policy | ium Labs"
+        description="Privacy Policy for ium Labs, Korea's leading Web3 and crypto marketing agency. Learn how we protect your information."
+        path="/privacy"
+      />
       <Navbar />
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-6 max-w-4xl">

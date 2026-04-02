@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
+import SEOHead from "@/components/SEOHead";
 
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
@@ -102,28 +103,10 @@ const ResearchDetail = () => {
     category: p.category || 'Blog',
   }));
 
-  // Dynamic page meta for SEO - must be before any conditional returns
-  useEffect(() => {
-    if (post) {
-      const title = `${post.title} | Ium Labs Blog`;
-      const description = post.excerpt || `${post.title} - ${post.category} article by Ium Labs.`;
-      const pageUrl = `https://iumlabs.io/blog/${slug}`;
-      const ogImage = post.image.startsWith('http') 
-        ? post.image 
-        : `https://iumlabs.io${post.image}`;
-      
-      document.title = title;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
-      document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl);
-      document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImage);
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImage);
-      document.querySelector('link[rel="canonical"]')?.setAttribute('href', pageUrl);
-    }
-  }, [post, slug]);
+  // SEO meta computed from post data
+  const seoTitle = post ? `${post.title} | ium Labs Blog` : "Blog | ium Labs";
+  const seoDescription = post ? (post.excerpt || `${post.title} - ${post.category} article by ium Labs.`) : "";
+  const seoImage = post?.image?.startsWith('http') ? post.image : (post?.image ? `https://iumlabs.io${post.image}` : undefined);
 
   // Dynamic breadcrumb items - must be before any conditional returns
   const breadcrumbItems = useMemo(() => [
@@ -180,6 +163,15 @@ const ResearchDetail = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        path={`/blog/${slug}`}
+        image={seoImage}
+        keywords={[post?.category || 'Web3', 'Korea', 'Blog', 'Research'].filter(Boolean)}
+        publishedTime={post?.date}
+        author="ium Labs"
+      />
       <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
       

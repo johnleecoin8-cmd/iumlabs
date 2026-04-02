@@ -103,7 +103,7 @@ const GTMService = () => {
             <p className="text-white/60 font-medium">
               We solve this. Our Seoul-based team handles every layer of Korean market entry —
               from competitive analysis to exchange listing, community setup to KOL activation.
-              19+ projects launched. $7B+ in combined client valuation.
+              22+ projects launched. $7B+ in combined client valuation.
             </p>
           </div>
         </div>
@@ -187,7 +187,7 @@ const GTMService = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
           <div className="absolute inset-0 flex items-center justify-center">
             <p className="text-xl sm:text-3xl lg:text-4xl font-bold text-white/80 text-center tracking-tight px-4">
-              19+ projects. $7B+ valuation. One team in Seoul.
+              22+ projects. $7B+ valuation. One team in Seoul.
             </p>
           </div>
         </div>

@@ -12,6 +12,7 @@ import ProjectContentSection from "@/components/project-detail/ProjectContentSec
 import NextProject from "@/components/project-detail/NextProject";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CaseStudySchema from "@/components/CaseStudySchema";
+import SEOHead from "@/components/SEOHead";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -108,28 +109,10 @@ const ProjectDetail = () => {
     news: fallbackProject?.news || [],
   } : (fallbackProject ? { ...fallbackProject, client_name: fallbackProject.name, featureImage: fallbackProject.featureImage, bgVideo: fallbackProject.bgVideo } : null);
 
-  // Dynamic page meta for SEO
-  useEffect(() => {
-    if (project) {
-      const title = `${project.name} Case Study | Ium Labs`;
-      const description = project.description || `${project.name} - ${project.category}. Web3 marketing case study by Ium Labs.`;
-      const pageUrl = `https://iumlabs.io/projects/${slug}`;
-      const ogImage = project.bgImage.startsWith('http') 
-        ? project.bgImage 
-        : `https://iumlabs.io${project.bgImage}`;
-      
-      document.title = title;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
-      document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl);
-      document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImage);
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImage);
-      document.querySelector('link[rel="canonical"]')?.setAttribute('href', pageUrl);
-    }
-  }, [project, slug]);
+  // SEO meta computed from project data
+  const seoTitle = project ? `${project.name} Case Study | ium Labs` : "Case Study | ium Labs";
+  const seoDescription = project ? (project.description || `${project.name} - ${project.category}. Web3 marketing case study by ium Labs.`) : "";
+  const seoImage = project?.bgImage?.startsWith('http') ? project.bgImage : (project?.bgImage ? `https://iumlabs.io${project.bgImage}` : undefined);
 
   // Get next project for navigation
   const nextProjectData = getNextProject(slug || "");
@@ -156,6 +139,13 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <SEOHead
+        title={seoTitle}
+        description={seoDescription}
+        path={`/projects/${slug}`}
+        image={seoImage}
+        keywords={[project?.category || 'Web3', 'Korea', 'Case Study', project?.name || ''].filter(Boolean)}
+      />
       <Navbar />
       
       {/* Hero Section */}

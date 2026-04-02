@@ -116,7 +116,7 @@ interface Project {
 }
 
 const stats = [
-  { value: 18, label: "Projects Launched", suffix: "+" },
+  { value: 22, label: "Korea Entries", suffix: "+" },
   { value: 130, label: "Avg. Impression", suffix: "K" },
   { value: 8, label: "Client Valuation", prefix: "$", suffix: "B+" },
   { value: 2, label: "Avg. Community Users", suffix: "K+" },
@@ -711,7 +711,7 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Korea Web3 & Crypto Marketing Case Studies | ium Labs"
-        description="18+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
+        description="22+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
         path="/projects"
         keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 Case Studies Korea', 'Crypto Marketing Portfolio']}
       />
@@ -766,7 +766,7 @@ const Projects = () => {
 
                 {/* Subtext */}
                 <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
-                  Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
+                  Real results from <span className="text-white font-medium">22+ global Web3 projects</span> successfully entering and scaling in the Korean market.
                 </p>
 
                 {/* CTA Button */}

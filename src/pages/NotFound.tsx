@@ -2,6 +2,7 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { ArrowLeft, Home } from "lucide-react";
 import Navbar from "@/components/Navbar";
+import SEOHead from "@/components/SEOHead";
 
 const NotFound = () => {
   const location = useLocation();
@@ -12,6 +13,12 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Page Not Found | ium Labs"
+        description="The page you're looking for doesn't exist or has been moved."
+        path="/404"
+        noindex={true}
+      />
       <Navbar />
       
       {/* Hero - Full Screen */}

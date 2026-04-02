@@ -81,8 +81,8 @@ export const hero = {
 export const stats = {
   items: [
     { 
-      value: 19, 
-      label: "Projects Launched", 
+      value: 22,
+      label: "Korea Entries", 
       suffix: "+",
     },
     { 

@@ -1,13 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { usePageMeta } from "@/hooks/usePageMeta";
+import SEOHead from "@/components/SEOHead";
 
 const Terms = () => {
-  usePageMeta({
-    title: "Terms of Service",
-    description: "Terms of Service for Ium Labs Web3 and crypto marketing services in Korea. By using our services, you agree to these terms.",
-    path: "/terms"
-  });
 
   const sections = [
     { title: "1. Agreement to Terms", content: "By accessing and using ium Labs' services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },
@@ -20,6 +15,11 @@ const Terms = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Terms of Service | ium Labs"
+        description="Terms of Service for ium Labs Web3 and crypto marketing services in Korea."
+        path="/terms"
+      />
       <Navbar />
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-6 max-w-4xl">

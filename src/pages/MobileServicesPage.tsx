@@ -20,6 +20,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import Navbar from "@/components/Navbar";
+import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 
 // Import service poster images from home page
@@ -48,7 +49,7 @@ const services = [
     link: "/services/compliance",
     video: "/videos/branding-hero.mp4",
     poster: brandingImage,
-    stats: "19+ Projects"
+    stats: "22+ Projects"
   },
   {
     title: "SEO & Ads",
@@ -450,6 +451,12 @@ const MobileServicesPage = () => {
   
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="All Services | ium Labs — Korea Web3 Marketing Agency"
+        description="Full-stack Web3 marketing services for Korea market entry. GTM strategy, KOL marketing, PR, community management, events, SEO, and more."
+        path="/services/all"
+        keywords={['Korea Web3 Services', 'Web3 Marketing Korea', 'Crypto Agency Services', 'Korea GTM']}
+      />
       <Navbar />
       {/* Hero Section - Projects Page Style */}
       <main className="pt-16 md:pt-0 p-0.5 bg-background">

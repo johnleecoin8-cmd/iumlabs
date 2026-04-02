@@ -106,7 +106,7 @@ const KoreaWeb3Guide = () => {
             custom={2}
             className="text-lg md:text-xl text-white/50 max-w-3xl mx-auto leading-relaxed mb-10"
           >
-            Everything you need to know about launching your Web3 project in Korea — from regulations and exchange listings to KOL marketing and community building. Based on 19+ successful project launches.
+            Everything you need to know about launching your Web3 project in Korea — from regulations and exchange listings to KOL marketing and community building. Based on 22+ successful project launches.
           </motion.p>
           <motion.div
             initial="hidden"
@@ -268,7 +268,7 @@ const KoreaWeb3Guide = () => {
               Korea Market Entry Checklist
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
-              A step-by-step framework based on 19+ successful Korea launches. Skip any of these steps at your own risk — the Korean market punishes half-measures.
+              A step-by-step framework based on 22+ successful Korea launches. Skip any of these steps at your own risk — the Korean market punishes half-measures.
             </p>
           </motion.div>
 
@@ -417,7 +417,7 @@ const KoreaWeb3Guide = () => {
               How ium Labs Helps You Enter Korea
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
-              We're a Seoul-based Web3 marketing agency that has helped 19+ projects successfully launch in the Korean market. Here's how we can help you.
+              We're a Seoul-based Web3 marketing agency that has helped 22+ projects successfully launch in the Korean market. Here's how we can help you.
             </p>
           </motion.div>
 

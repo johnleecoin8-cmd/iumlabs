@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { brand } from "@/config/content";
 import logoImage from "@/assets/logo.png";
+import SEOHead from "@/components/SEOHead";
 
 const BookMeeting = () => {
   const [loaded, setLoaded] = useState(false);
@@ -22,6 +23,12 @@ const BookMeeting = () => {
 
   return (
     <div className="min-h-screen bg-[#f5f5f5] relative">
+      <SEOHead
+        title="Book a Meeting | ium Labs — Korea Web3 Marketing Agency"
+        description="Schedule a free 30-minute consultation with Korea's leading Web3 growth agency. Get a tailored Korea market entry strategy for your project."
+        path="/book-a-meeting"
+        keywords={['Book Meeting Web3 Korea', 'Korea Crypto Consultation', 'Web3 Agency Meeting', 'Korea Market Entry Call']}
+      />
       {/* Loading Screen */}
       <div
         className={`fixed inset-0 z-50 bg-[#f5f5f5] flex items-center justify-center transition-opacity duration-700 ${

@@ -9,7 +9,7 @@ import Navbar from '@/components/Navbar';
 import { Search, X, Clock } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
-import { usePageMeta } from '@/hooks/usePageMeta';
+import SEOHead from '@/components/SEOHead';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
@@ -93,13 +93,7 @@ const isTrending = (sparkline: number[] | null): boolean => {
 
 
 const KInfluenceGrid = () => {
-  usePageMeta({
-    title: "K-Leaderboard | Korea Crypto & Web3 Mindshare Rankings",
-    description: "Real-time Korea Web3 and crypto mindshare rankings. Track trending projects across Korean communities on X, Telegram, Naver, and KakaoTalk.",
-    path: "/k-leaderboard",
-    image: "/og-image.png",
-    keywords: ["Korea Web3", "Korea Crypto", "Korea Crypto Agency", "Korean Crypto Rankings", "Web3 Mindshare Korea"]
-  });
+  // SEOHead is rendered in JSX below
   
   
   const [searchQuery, setSearchQuery] = useState('');
@@ -189,6 +183,12 @@ const KInfluenceGrid = () => {
 
   return (
     <>
+      <SEOHead
+        title="K-Leaderboard | Korea Crypto & Web3 Mindshare Rankings"
+        description="Real-time Korea Web3 and crypto mindshare rankings. Track trending projects across Korean communities on X, Telegram, Naver, and KakaoTalk."
+        path="/k-leaderboard"
+        keywords={['Korea Web3', 'Korea Crypto', 'Korean Crypto Rankings', 'Web3 Mindshare Korea']}
+      />
       {/* Mobile Navbar */}
       <Navbar />
       

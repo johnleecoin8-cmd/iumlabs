@@ -1,13 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { usePageMeta } from "@/hooks/usePageMeta";
+import SEOHead from "@/components/SEOHead";
 
 const Transparency = () => {
-  usePageMeta({
-    title: "Transparency",
-    description: "Our commitment to transparency in Web3 and crypto marketing. Ium Labs Korea operates with honesty and clear communication.",
-    path: "/transparency"
-  });
 
   const sections = [
     { title: "Our Commitment to Transparency", content: "At Ium Labs, we believe in maintaining the highest standards of transparency in all our business operations and client relationships." },
@@ -20,6 +15,11 @@ const Transparency = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Transparency | ium Labs"
+        description="Our commitment to transparency in Web3 and crypto marketing. ium Labs Korea operates with honesty and clear communication."
+        path="/transparency"
+      />
       <Navbar />
       <div className="pt-32 pb-20">
         <div className="container mx-auto px-6 max-w-4xl">

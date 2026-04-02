@@ -176,7 +176,7 @@ const Contact = () => {
   return <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead
         title="Contact Korea's #1 Web3 & Crypto Marketing Agency | ium Labs"
-        description="Get a free consultation for your Korea Web3 market entry. Schedule a call with Korea's premier crypto marketing agency. 24h response guaranteed."
+        description="Let's build in Korea. Drop us a line and we respond within 24 hours with a full Korea entry plan. 22+ projects launched including BNB, Bybit, and Mantra."
         path="/contact"
         keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Contact Web3 Agency Korea', 'Korea Market Consultation']}
       />
