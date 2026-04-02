@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { Send, Linkedin, Mail, MapPin, ChevronDown, X } from "lucide-react";
+import { Send, Linkedin, Mail, MapPin, ChevronDown, Calendar, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
@@ -17,6 +17,7 @@ const serviceItems = [
   { name: "Deep Research & Analytics", href: "/services/deep-research" },
   { name: "Community Management", href: "/services/community" },
   { name: "Offline Events Korea", href: "/services/offline-event" },
+  { name: "AMA Hosting", href: "/services/ama" },
 ];
 
 const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
@@ -26,17 +27,11 @@ const Navbar = () => {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/ium-admin");
 
   useEffect(() => { setIsMounted(true); }, []);
   useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   if (isAdminPage) return null;
 
@@ -47,7 +42,7 @@ const Navbar = () => {
         <div className="h-full flex flex-col">
           <div className="flex items-center justify-between px-6 sm:px-8 lg:px-12 py-5 border-b border-white/[0.06]">
             <Link to="/" className="flex items-center gap-2.5" onClick={() => setIsMenuOpen(false)}>
-              <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg" />
+              <img src={logoImage} alt="ium Labs" className="w-7 h-7 rounded-lg object-contain" />
               <span className="text-sm font-semibold text-white">ium Labs</span>
             </Link>
             <button onClick={() => setIsMenuOpen(false)} className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-white/70 hover:bg-white/[0.1] hover:text-white transition-all text-sm">
@@ -101,80 +96,66 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ===== Mode C: Edge Minimal — no bar, floating elements ===== */}
+      {/* ===== NAVBAR — Lunar Strategy style: black shell + gray inner + pill buttons ===== */}
+      <nav className="fixed top-0 left-0 right-0 z-50 px-2 sm:px-3 pt-2 sm:pt-3">
+        {/* Outer black shell */}
+        <div className="bg-black rounded-2xl p-[5px] sm:p-[6px]">
+          {/* Inner gray bar */}
+          <div className="bg-[#E8E8E8] rounded-[12px] sm:rounded-[14px] flex items-center px-3 sm:px-5 py-2.5 sm:py-3">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
+              <img src={logoImage} alt="ium Labs" className="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg" />
+              <span className="text-[13px] sm:text-[15px] font-bold text-black hidden sm:block tracking-tight">ium Labs</span>
+            </Link>
 
-      {/* Top layer: logo left, CTA+menu right — hidden when scrolled (compact bar takes over) */}
-      <div className={`fixed top-0 left-0 right-0 z-50 pointer-events-none transition-all duration-300 ${scrolled ? 'opacity-0 -translate-y-4' : 'opacity-100 translate-y-0'}`}>
-        <div className="flex items-start justify-between px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6">
-          {/* Logo */}
-          <Link to="/" className="pointer-events-auto flex items-center gap-3">
-            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg " />
-            <span className="text-[15px] font-bold text-white tracking-tight">ium Labs</span>
-          </Link>
-
-          {/* Right side */}
-          <div className="pointer-events-auto flex items-center gap-2">
-            <CalendlyButton className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[13px] font-medium transition-all ">
-              <span>Book a Meeting</span>
-            </CalendlyButton>
-
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 transition-all"
-              aria-label="Open menu"
-            >
-              <div className="flex flex-col gap-[4px]">
-                <span className="block w-[16px] h-[2px] bg-white/80 rounded-full" />
-                <span className="block w-[16px] h-[2px] bg-white/80 rounded-full" />
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Compact bar — appears on scroll */}
-      <AnimatePresence>
-        {scrolled && (
-          <motion.div
-            className="fixed top-0 left-0 right-0 z-[51]"
-            initial={{ y: -80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -80, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-          >
-            <div className="mx-3 sm:mx-4 lg:mx-6 mt-3 sm:mt-4">
-              <div className="bg-black/80 backdrop-blur-xl rounded-2xl border border-white/[0.06] px-4 sm:px-6 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
-                <Link to="/" className="flex items-center gap-2">
-                  <img src={logoImage} alt="ium Labs" className="w-5 h-5 object-contain rounded-lg" />
-                  <span className="text-xs font-semibold text-white/90 hidden sm:block">ium Labs</span>
-                </Link>
-
-                <div className="hidden md:flex items-center gap-6">
-                  <Link to="/projects" className="text-xs text-white/50 hover:text-white transition-colors">Projects</Link>
-                  <Link to="/blog" className="text-xs text-white/50 hover:text-white transition-colors">Blog</Link>
-                  <Link to="/contact" className="text-xs text-white/50 hover:text-white transition-colors">Contact</Link>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <CalendlyButton className="flex items-center px-4 py-1.5 rounded-full bg-white text-black hover:bg-white/90 text-white text-[11px] font-medium transition-all">
-                    <span>Book a Meeting</span>
-                  </CalendlyButton>
-                  <button
-                    onClick={() => setIsMenuOpen(true)}
-                    className="flex items-center justify-center w-8 h-8 rounded-full bg-white/[0.06] hover:bg-white/[0.1] transition-all"
-                    aria-label="Open menu"
-                  >
-                    <div className="flex flex-col gap-[3px]">
-                      <span className="block w-[12px] h-[1.5px] bg-white/70 rounded-full" />
-                      <span className="block w-[12px] h-[1.5px] bg-white/70 rounded-full" />
-                    </div>
-                  </button>
-                </div>
+            {/* Center: get in touch (desktop) */}
+            <div className="hidden lg:flex items-center justify-center flex-1 px-4">
+              <div className="flex flex-col items-center gap-[1px]">
+                <span className="text-[9px] text-black/30 tracking-wider leading-none">get in touch</span>
+                <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-[13px] text-black hover:text-black/70 transition-colors font-medium leading-none">
+                  {brand.telegram}
+                </a>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            {/* Mobile spacer */}
+            <div className="flex-1 lg:hidden" />
+
+            {/* Right: pill buttons */}
+            <div className="flex items-center gap-[5px] sm:gap-[6px]">
+              {/* Start Live Chat — pill */}
+              <a
+                href={brand.telegramLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-black/[0.06] text-black/80 hover:bg-gray-50 transition-all text-[13px] font-medium"
+              >
+                <Send className="w-4 h-4 text-[#229ED9]" />
+                <span>Start Live Chat</span>
+              </a>
+
+              {/* Book a Meeting — pill */}
+              <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-white border border-black/[0.06] text-black/80 hover:bg-gray-50 transition-all text-[13px] font-medium">
+                <Calendar className="w-4 h-4 text-[#4285F4]" />
+                <span>Book a Meeting</span>
+              </CalendlyButton>
+
+              {/* Menu + capsule hamburger */}
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="flex items-center gap-2 px-3 sm:px-4 py-2.5 text-black/70 hover:text-black transition-all text-[13px] font-medium"
+                aria-label="Open menu"
+              >
+                <span className="hidden sm:inline">menu</span>
+                <div className="w-[28px] h-[20px] bg-black rounded-full flex flex-col items-center justify-center gap-[3.5px] flex-shrink-0">
+                  <span className="block w-[13px] h-[2px] bg-white rounded-full" />
+                  <span className="block w-[13px] h-[2px] bg-white rounded-full" />
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {isMounted ? createPortal(fullscreenMenu, document.body) : null}
       <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
