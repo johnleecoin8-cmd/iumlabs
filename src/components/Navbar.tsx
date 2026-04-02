@@ -55,27 +55,27 @@ const Navbar = () => {
           >
             <div className="bg-white rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.3)] overflow-hidden">
               {/* Main content — 3 columns */}
-              <div className="px-6 sm:px-8 lg:px-12 pt-8 sm:pt-10 pb-6 sm:pb-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+              <div className="px-8 sm:px-12 lg:px-20 pt-12 sm:pt-16 pb-10 sm:pb-14">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
 
-                  {/* Left — Team & Connect */}
+                  {/* Left — Connect */}
                   <div>
-                    <span className="text-[9px] text-black/30 uppercase tracking-[0.2em] mb-4 block">Connect</span>
-                    <div className="space-y-3 mb-6">
-                      <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/60 hover:text-black transition-colors text-sm">
-                        <Send className="w-4 h-4 text-[#229ED9]" /><span>{brand.telegram}</span>
+                    <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Connect</span>
+                    <div className="space-y-4 mb-8">
+                      <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/70 hover:text-black transition-colors text-base">
+                        <Send className="w-5 h-5 text-[#229ED9]" /><span>{brand.telegram}</span>
                       </a>
-                      <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/60 hover:text-black transition-colors text-sm">
-                        <Linkedin className="w-4 h-4 text-[#0A66C2]" /><span>LinkedIn</span>
+                      <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/70 hover:text-black transition-colors text-base">
+                        <Linkedin className="w-5 h-5 text-[#0A66C2]" /><span>LinkedIn</span>
                       </a>
                       {brand.email && (
-                        <a href={`mailto:${brand.email}`} className="flex items-center gap-3 text-black/60 hover:text-black transition-colors text-sm">
-                          <Mail className="w-4 h-4" /><span>{brand.email}</span>
+                        <a href={`mailto:${brand.email}`} className="flex items-center gap-3 text-black/70 hover:text-black transition-colors text-base">
+                          <Mail className="w-5 h-5 text-black/40" /><span>{brand.email}</span>
                         </a>
                       )}
                     </div>
-                    <div className="flex items-start gap-2 text-black/30 text-xs">
-                      <MapPin className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+                    <div className="flex items-start gap-2.5 text-black/40 text-sm">
+                      <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                       <span className="leading-relaxed">{brand.address}</span>
                     </div>
                   </div>
@@ -87,15 +87,15 @@ const Navbar = () => {
                         if (link.label === "Services") {
                           return (
                             <div key={link.to}>
-                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-2xl sm:text-3xl font-bold text-black hover:text-black/60 transition-colors py-1.5">
+                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-3xl sm:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">
                                 <span>{link.label}</span>
-                                <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-5 h-5 text-black/30" /></motion.div>
+                                <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-6 h-6 text-black/25" /></motion.div>
                               </button>
                               <AnimatePresence>
                                 {servicesOpen && (
-                                  <motion.div className="overflow-hidden ml-1 pl-3 border-l-2 border-black/[0.06]" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
-                                    <div className="space-y-0.5 py-1.5">
-                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/40 hover:text-black transition-colors py-1">{item.name}</Link>)}
+                                  <motion.div className="overflow-hidden ml-1 pl-4 border-l-2 border-black/[0.08]" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                    <div className="space-y-1 py-2">
+                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-base text-black/50 hover:text-black transition-colors py-1">{item.name}</Link>)}
                                     </div>
                                   </motion.div>
                                 )}
@@ -103,39 +103,39 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-2xl sm:text-3xl font-bold text-black hover:text-black/60 transition-colors py-1.5">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-3xl sm:text-4xl font-bold text-black hover:text-black/50 transition-colors py-2">{link.label}</Link>;
                       })}
                     </nav>
                   </div>
 
-                  {/* Right — Services highlight */}
+                  {/* Right — Popular Services */}
                   <div>
-                    <span className="text-[9px] text-black/30 uppercase tracking-[0.2em] mb-4 block">Popular Services</span>
-                    <div className="space-y-2.5">
-                      <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/60 hover:text-black transition-colors">GTM Strategy</Link>
-                      <Link to="/services/influencer" onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/60 hover:text-black transition-colors">KOL & Influencer Marketing</Link>
-                      <Link to="/services/community" onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/60 hover:text-black transition-colors">Community Management</Link>
-                      <Link to="/services/pr" onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/60 hover:text-black transition-colors">PR & Media Coverage</Link>
-                      <Link to="/services/ama" onClick={() => setIsMenuOpen(false)} className="block text-sm text-black/60 hover:text-black transition-colors">AMA Hosting</Link>
+                    <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Popular Services</span>
+                    <div className="space-y-3">
+                      <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">GTM Strategy</Link>
+                      <Link to="/services/influencer" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">KOL & Influencer Marketing</Link>
+                      <Link to="/services/community" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">Community Management</Link>
+                      <Link to="/services/pr" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">PR & Media Coverage</Link>
+                      <Link to="/services/ama" onClick={() => setIsMenuOpen(false)} className="block text-base text-black/60 hover:text-black transition-colors">AMA Hosting</Link>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Bottom bar */}
-              <div className="border-t border-black/[0.06] px-6 sm:px-8 lg:px-12 py-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div className="flex flex-wrap items-center gap-3 sm:gap-5 text-xs text-black/30">
+              <div className="border-t border-black/[0.08] px-8 sm:px-12 lg:px-20 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-black/40">
                   <Link to="/projects" onClick={() => setIsMenuOpen(false)} className="hover:text-black transition-colors">Case Studies</Link>
                   <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-black transition-colors">Blog</Link>
                   <Link to="/jobs" onClick={() => setIsMenuOpen(false)} className="hover:text-black transition-colors">Career</Link>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <CalendlyButton className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#3B82F6] text-white text-xs font-semibold rounded-full hover:bg-[#2563EB] transition-all">
-                    <Calendar className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-5">
+                  <CalendlyButton className="inline-flex items-center gap-2.5 px-6 py-3 bg-black text-white text-sm font-semibold rounded-full hover:bg-black/80 transition-all">
+                    <Calendar className="w-4 h-4" />
                     Book a Free Consultation
                   </CalendlyButton>
-                  <span className="hidden sm:block text-[10px] text-black/25">Mon–Fri 09:00–18:00 KST</span>
+                  <span className="hidden sm:block text-xs text-black/30">Mon–Fri 09:00–18:00 KST</span>
                 </div>
               </div>
             </div>
