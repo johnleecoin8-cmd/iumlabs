@@ -70,9 +70,21 @@ const ServicePageLayout = ({
       <section className="pt-20 sm:pt-24">
         <div className="px-3 sm:px-4">
           <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden aspect-[21/9] sm:aspect-[21/8]">
+            {/* Poster fallback */}
             <img src={defaultPosterSrc} alt={serviceName} className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.55)" }} />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30" />
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 lg:p-10">
+            {/* Video overlay */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover z-[1]"
+              style={{ filter: "brightness(0.55)" }}
+            >
+              <source src={`${videoSrc}#t=0.001`} type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30 z-[2]" />
+            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 lg:p-10 z-[3]">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${accentColor}20`, border: `1px solid ${accentColor}40` }}>
                   <ServiceIcon className="w-3.5 h-3.5" style={{ color: accentColor }} />
