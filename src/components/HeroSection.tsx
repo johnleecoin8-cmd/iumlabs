@@ -243,8 +243,8 @@ const HeroSection = () => {
             Since 2025, we've worked with 19+ ecosystems and projects in the Korean crypto space.
           </p>
 
-          {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mt-6 sm:mt-10">
+          {/* CTA — centered */}
+          <div className="flex flex-col items-center gap-3 mt-6 sm:mt-10">
             <a
               href="/contact#contact-form"
               className="group inline-flex items-center gap-3 px-8 py-4 sm:px-10 sm:py-5 bg-white text-black font-semibold text-sm sm:text-base rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
