@@ -94,8 +94,8 @@ const Navbar = () => {
                               <AnimatePresence>
                                 {servicesOpen && (
                                   <motion.div className="overflow-hidden ml-1 pl-4 border-l-2 border-black/[0.08]" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
-                                    <div className="space-y-1 py-2">
-                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-base text-black/50 hover:text-black transition-colors py-1">{item.name}</Link>)}
+                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 py-2">
+                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-sm sm:text-base text-black/50 hover:text-black transition-colors py-1">{item.name}</Link>)}
                                     </div>
                                   </motion.div>
                                 )}
