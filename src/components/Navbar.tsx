@@ -156,32 +156,32 @@ const Navbar = () => {
   return (
     <>
       {/* ===== NAVBAR — separate floating tags ===== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-4 pt-3 sm:pt-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
-            <img src={logoImage} alt="ium Labs" className="w-7 h-7 object-contain rounded-lg" />
-            <span className="text-[13px] font-bold text-white hidden sm:block tracking-tight">ium Labs</span>
+          <Link to="/" className="flex items-center gap-3 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
+            <img src={logoImage} alt="ium Labs" className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-lg" />
+            <span className="text-sm sm:text-[15px] font-bold text-white hidden sm:block tracking-tight">ium Labs</span>
           </Link>
 
-          <div className="hidden lg:flex px-5 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08]">
-            <div className="flex flex-col items-center gap-[1px]">
-              <span className="text-[9px] text-white/35 tracking-wider leading-none">get in touch</span>
-              <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-[13px] text-white/80 hover:text-white transition-colors font-medium leading-none">{brand.telegram}</a>
+          <div className="hidden lg:flex px-6 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08]">
+            <div className="flex flex-col items-center gap-[2px]">
+              <span className="text-[10px] text-white/35 tracking-wider leading-none">get in touch</span>
+              <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-sm text-white/80 hover:text-white transition-colors font-medium leading-none">{brand.telegram}</a>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
-              <Send className="w-3.5 h-3.5 text-[#229ED9]" /><span>Start Live Chat</span>
+          <div className="flex items-center gap-2 sm:gap-2.5">
+            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/80">
+              <Send className="w-4 h-4 text-[#229ED9]" /><span>Start Live Chat</span>
             </button>
-            <CalendlyButton className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/80">
-              <Calendar className="w-3.5 h-3.5 text-[#4285F4]" /><span>Book a Meeting</span>
+            <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/80">
+              <Calendar className="w-4 h-4 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
-            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] font-medium text-white/70" aria-label="Open menu">
+            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/70" aria-label="Open menu">
               <span className="hidden sm:inline">menu</span>
-              <div className="flex flex-col gap-[3px]">
-                <span className="block w-[14px] h-[2px] bg-white/80 rounded-full" />
-                <span className="block w-[14px] h-[2px] bg-white/80 rounded-full" />
+              <div className="flex flex-col gap-[4px]">
+                <span className="block w-[16px] h-[2px] bg-white/80 rounded-full" />
+                <span className="block w-[16px] h-[2px] bg-white/80 rounded-full" />
               </div>
             </button>
           </div>
