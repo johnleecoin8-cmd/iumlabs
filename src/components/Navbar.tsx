@@ -163,12 +163,6 @@ const Navbar = () => {
             <span className="text-sm sm:text-[15px] font-bold text-white hidden sm:block tracking-tight">ium Labs</span>
           </Link>
 
-          <div className="hidden lg:flex px-6 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08]">
-            <div className="flex flex-col items-center gap-[2px]">
-              <span className="text-[10px] text-white/35 tracking-wider leading-none">get in touch</span>
-              <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-sm text-white/80 hover:text-white transition-colors font-medium leading-none">{brand.telegram}</a>
-            </div>
-          </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5">
             <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2.5 px-5 py-3 sm:py-3.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-sm font-medium text-white/80">
