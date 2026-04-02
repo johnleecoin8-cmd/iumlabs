@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
 import { brand } from "@/config/content";
-import teamStrategy from "@/assets/team/team-strategy.jpeg";
-import teamGrowth from "@/assets/team/team-growth.jpeg";
-import teamCommunity from "@/assets/team/team-community.jpeg";
+import jPhoto from "@/assets/team/j-cmo.png";
+import davidPhoto from "@/assets/team/david-bd.png";
+import sukiPhoto from "@/assets/team/suki-partner.png";
 
 interface LiveChatModalProps {
   isOpen: boolean;
@@ -10,9 +10,9 @@ interface LiveChatModalProps {
 }
 
 const teamMembers = [
-  { name: "Jay", role: "Strategy Lead", image: teamStrategy },
-  { name: "Ryan", role: "Growth Lead", image: teamGrowth },
-  { name: "Daniel", role: "Community Lead", image: teamCommunity },
+  { name: "J", role: "CMO", image: jPhoto },
+  { name: "David", role: "Head of BD", image: davidPhoto },
+  { name: "Suki", role: "Managing Partner", image: sukiPhoto },
 ];
 
 const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
