@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
 
                   {/* Left — Connect */}
-                  <div>
+                  <div className="hidden md:block">
                     <span className="text-[10px] text-black/40 uppercase tracking-[0.2em] mb-5 block font-medium">Connect</span>
                     <div className="space-y-4 mb-8">
                       <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-black/70 hover:text-black transition-colors text-base">
