@@ -192,8 +192,15 @@ const GTMService = () => {
               { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events + exchange) runs $30K–$50K/month." },
             ].map((item, i) => (
               <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
-                <p className="text-base sm:text-lg font-semibold text-white mb-2">{item.q}</p>
-                <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.a}</p>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl sm:text-3xl font-black text-white/[0.08] leading-none tracking-tighter flex-shrink-0 pt-0.5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <p className="text-base sm:text-lg font-semibold text-white mb-2">{item.q}</p>
+                    <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.a}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
