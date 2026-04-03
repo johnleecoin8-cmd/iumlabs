@@ -32,6 +32,8 @@ import { projectsData } from "@/data/projectsData";
 
 import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.png";
 import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.png";
+import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.png";
+import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.png";
 import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.png";
 import seoulSkylineImg from "@/assets/campaigns/seoul-skyline.png";
 
@@ -112,10 +114,12 @@ const Index = () => {
             </div>
           </div>
           <div className="p-3 sm:p-4">
-            <div className="grid grid-cols-2 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
               {[
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
                 { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
+                { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
+                { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
                 { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
               ].map((cs) => {
                 const project = projectsData[cs.slug];

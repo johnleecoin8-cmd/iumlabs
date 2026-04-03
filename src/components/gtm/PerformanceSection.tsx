@@ -231,13 +231,11 @@ const allProjects = [
   },
 ];
 
-// Split into 5 rows
+// Split into 3 rows
 const projectRows = [
   allProjects.slice(0, 3),   // Row 1: peaq, MANTRA, BNB
   allProjects.slice(3, 6),   // Row 2: Bybit, KuCoin, Sahara AI
   allProjects.slice(6, 9),   // Row 3: OpenLedger, MegaETH, FOGO
-  allProjects.slice(9, 12),  // Row 4: Polygon, Tria, SynFutures
-  allProjects.slice(12, 15), // Row 5: Spacecoin, Aptos, Kite
 ];
 
 // Network Stats - Updated to reflect new messaging
