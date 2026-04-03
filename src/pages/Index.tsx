@@ -157,21 +157,17 @@ const Index = () => {
 
               {/* Your Project — full width bottom row */}
               <Link to="/contact" className="group col-span-2 lg:col-span-3 block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]">
-                <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-2.5 sm:mb-3">
+                <div className="w-full aspect-[3/1] sm:aspect-[4/1] rounded-lg relative overflow-hidden">
                   <img src={ctaBgImage} alt="Your Project" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-sm sm:text-xl font-bold text-white tracking-tight">Your Project Here</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">Next</span>
-                  <h3 className="text-xs sm:text-base font-semibold text-white group-hover:text-white/80 transition-colors">
-                    Be the next success story
-                  </h3>
-                  <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2 text-white/30 group-hover:text-white/60 transition-colors text-[9px] sm:text-xs">
-                    <span className="group-hover:underline underline-offset-4">Get started</span>
-                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
+                  <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-all duration-500" />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
+                    <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white tracking-tight mb-1 sm:mb-2">
+                      Be the next success story.
+                    </h3>
+                    <div className="flex items-center gap-2 text-xs sm:text-sm text-white/50 group-hover:text-white/80 transition-colors">
+                      <span>Get started</span>
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </div>
               </Link>
