@@ -102,9 +102,10 @@ const Index = () => {
 
 
       
-      {/* ===== Project Cards Grid ===== */}
+      {/* ===== Projects + CTA (unified) ===== */}
       <section className="sm:px-4 sm:pt-3 snap-start">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+          {/* Header */}
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <div className="flex items-center justify-between">
               <h2 className="text-xl sm:text-2xl font-bold text-white">22+ Projects. Real Results.</h2>
@@ -113,7 +114,9 @@ const Index = () => {
               </Link>
             </div>
           </div>
-          <div className="p-3 sm:p-4">
+
+          {/* Project Cards */}
+          <div className="p-3 sm:p-4 pb-0">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
               {[
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
@@ -121,6 +124,7 @@ const Index = () => {
                 { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
                 { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
                 { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
+                { slug: "mantra", category: "RWA", customImg: seoulSkylineImg },
               ].map((cs) => {
                 const project = projectsData[cs.slug];
                 const cardImage = cs.customImg || project?.bgImage || '';
@@ -150,60 +154,31 @@ const Index = () => {
                   </Link>
                 );
               })}
-
-              {/* Your Project CTA Card */}
-              <CalendlyButton className="group block bg-[#0A0A0A] p-2.5 sm:p-4 text-left transition-all duration-300 hover:bg-white/[0.03]">
-                <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-2.5 sm:mb-3">
-                  <img src={seoulSkylineImg} alt="Seoul" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-500" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-sm sm:text-xl lg:text-2xl font-bold text-white tracking-tight">Your Project Here</span>
-                  </div>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-white/20 text-[8px] sm:text-[10px] uppercase tracking-wider">Next</span>
-                  <h3 className="text-xs sm:text-base font-semibold text-white group-hover:text-primary transition-colors">
-                    Enter Korea
-                  </h3>
-                  <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2 text-white/30 group-hover:text-primary transition-colors text-[9px] sm:text-xs">
-                    <span className="group-hover:underline underline-offset-4">Book a call</span>
-                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </CalendlyButton>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* Partner CTA - Impact Block */}
-      <Suspense fallback={<SectionLoader />}>
-        
-      </Suspense>
-
-      {/* Launch CTA */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] relative">
-          {/* Background image */}
-          <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.55]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/50" />
-          <div className="relative px-4 sm:px-6 lg:px-10 py-16 sm:py-24">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-[10px] sm:text-xs text-white/25 uppercase tracking-[0.3em] mb-4">22+ projects launched in Korea</p>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4">
-                Be the next<br />
-                <span className="text-white/40">success story.</span>
-              </h2>
-              <p className="text-sm sm:text-base text-white/30 max-w-lg mx-auto mb-10">
-                From market analysis to launch day — one partner, full execution.
-              </p>
-              <div className="flex items-center justify-center gap-2 sm:gap-3">
-                <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 hover:-translate-y-0.5 transition-all">
-                  Book a Meeting
-                </CalendlyButton>
-                <Link to="/contact" className="inline-flex items-center px-7 py-3.5 rounded-full border border-white/[0.1] text-white/50 text-sm font-medium hover:border-white/[0.2] hover:text-white transition-all">
-                  Send a Message
-                </Link>
+          {/* Be the next — integrated CTA */}
+          <div className="relative overflow-hidden m-3 sm:m-4 mt-0 rounded-xl">
+            <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.55]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/50" />
+            <div className="relative px-4 sm:px-6 lg:px-10 py-12 sm:py-20">
+              <div className="max-w-3xl mx-auto text-center">
+                <p className="text-[10px] sm:text-xs text-white/25 uppercase tracking-[0.3em] mb-4">22+ projects launched in Korea</p>
+                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.1] tracking-tight mb-4">
+                  Be the next<br />
+                  <span className="text-white/40">success story.</span>
+                </h2>
+                <p className="text-sm text-white/30 max-w-lg mx-auto mb-8">
+                  From market analysis to launch day — one partner, full execution.
+                </p>
+                <div className="flex items-center justify-center gap-2 sm:gap-3">
+                  <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 hover:-translate-y-0.5 transition-all">
+                    Book a Meeting
+                  </CalendlyButton>
+                  <Link to="/contact" className="inline-flex items-center px-7 py-3.5 rounded-full border border-white/[0.1] text-white/50 text-sm font-medium hover:border-white/[0.2] hover:text-white transition-all">
+                    Send a Message
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
