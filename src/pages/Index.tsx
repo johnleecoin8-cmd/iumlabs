@@ -107,14 +107,14 @@ const Index = () => {
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl sm:text-2xl font-bold text-white">22+ Projects. Real Results.</h2>
+              <h2 className="text-xl sm:text-2xl font-bold text-white">Real Campaign, and Next?</h2>
               <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
-                All projects <ArrowRight className="w-3 h-3 inline" />
+                View all <ArrowRight className="w-3 h-3 inline" />
               </Link>
             </div>
           </div>
           <div className="p-3 sm:p-4">
-            <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
               {[
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
                 { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
