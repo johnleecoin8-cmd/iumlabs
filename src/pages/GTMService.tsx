@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, X, Check } from "lucide-react";
+import { ArrowRight, X, Check, Search, Globe, Megaphone, Users, Building2, Rocket } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -126,46 +126,51 @@ const GTMService = () => {
           <div className="space-y-0">
             {[
               {
-                icon: "◈",
+                icon: Search,
                 title: "Market Intelligence",
                 desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
               },
               {
-                icon: "◉",
+                icon: Globe,
                 title: "Brand Localization",
                 desc: "Your global narrative doesn't work in Korea. We rebuild it. Korea-fit brand positioning, localized content across Naver and Kakao, and community infrastructure on Telegram, Discord, and KakaoTalk.",
               },
               {
-                icon: "◆",
+                icon: Megaphone,
                 title: "KOL & Media Launch",
                 desc: "Tier-1 media coverage through BlockMedia, CoinDesk Korea, and TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram, and Naver. Structured AMA sessions that drive real engagement.",
               },
               {
-                icon: "◇",
+                icon: Users,
                 title: "Community Growth",
                 desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
               },
               {
-                icon: "◎",
+                icon: Building2,
                 title: "Exchange Listing",
                 desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
               },
               {
-                icon: "▲",
+                icon: Rocket,
                 title: "Events & Scale",
                 desc: "Offline events in Seoul, Korea Blockchain Week side events, VIP networking dinners. Ambassador programs, retention analytics, and monthly performance reporting to keep the momentum going.",
               },
-            ].map((item, i) => (
-              <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
-                <div className="flex items-start gap-4">
-                  <span className="text-xl sm:text-2xl flex-shrink-0 pt-1 text-[#10B981]/40">{item.icon}</span>
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
-                    <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+            ].map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#10B981]/60" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
+                      <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
