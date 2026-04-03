@@ -109,58 +109,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 4. Before / After ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          {/* Before */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#111] border border-white/[0.06]">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-6 h-6 rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-                <X className="w-3 h-3 text-red-400" />
-              </div>
-              <h3 className="text-base font-bold text-white">Without Korea GTM</h3>
-            </div>
-            <ul className="space-y-2.5">
-              {[
-                "Translated English campaigns that don't resonate",
-                "Global KOLs with zero Korean audience",
-                "No presence on Naver, KakaoTalk, or Korean Telegram",
-                "Invisible on Korean exchanges",
-                "Burning budget without Korean user acquisition",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-white/35 leading-relaxed">
-                  <span className="text-red-400/40 mt-0.5">—</span>{item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* After */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#10B981]/[0.05] border border-[#10B981]/20">
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-6 h-6 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
-                <Check className="w-3 h-3 text-[#10B981]" />
-              </div>
-              <h3 className="text-base font-bold text-white">With ium Labs</h3>
-            </div>
-            <ul className="space-y-2.5">
-              {[
-                "Korea-fit narrative crafted by native speakers",
-                "170+ vetted Korean KOLs activated for your project",
-                "24/7 community on Telegram, Discord, KakaoTalk, Naver",
-                "Exchange listing strategy for Upbit, Bithumb, Coinone",
-                "Measurable ROI with monthly performance analytics",
-              ].map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-sm text-white/50 leading-relaxed">
-                  <span className="text-[#10B981]/60 mt-0.5">—</span>{item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 5. What We Deliver — FINPR style ===== */}
+      {/* ===== What We Deliver — FINPR style ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-20">
           {/* Left — sticky title */}
