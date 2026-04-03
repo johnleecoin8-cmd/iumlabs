@@ -1,6 +1,24 @@
 import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 
+// Import media logos
+import coindeskLogo from "@/assets/logos/coindesk.png";
+import consensysLogo from "@/assets/logos/consensys.png";
+import economistLogo from "@/assets/logos/economist.png";
+import cointelegraphLogo from "@/assets/logos/cointelegraph.png";
+import bloomingbitLogo from "@/assets/logos/bloomingbit.png";
+import coinnessLogo from "@/assets/logos/coinness.png";
+import hankyungLogo from "@/assets/logos/hankyung-new.png";
+
+const mediaLogos = [
+  { name: "Cointelegraph", logo: cointelegraphLogo },
+  { name: "CoinDesk", logo: coindeskLogo },
+  { name: "Consensys", logo: consensysLogo },
+  { name: "Coinness", logo: coinnessLogo },
+  { name: "Bloomingbit", logo: bloomingbitLogo },
+  { name: "The Economist", logo: economistLogo },
+  { name: "한국경제", logo: hankyungLogo },
+];
 const containerVariants = {
   hidden: {},
   visible: {
