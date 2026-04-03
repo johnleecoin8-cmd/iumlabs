@@ -11,7 +11,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 const CasesSection = lazy(() => import("@/components/CasesSection"));
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
-const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
+
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
 const PartnerCTASection = lazy(() => import("@/components/PartnerCTASection"));
 
@@ -46,11 +46,6 @@ const Index = () => {
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
-          </AnimatedSection>
-          <AnimatedSection direction="none">
-            <Suspense fallback={<SectionLoader />}>
-              <MediaPartnersSection />
-            </Suspense>
           </AnimatedSection>
         </div>
       </section>
