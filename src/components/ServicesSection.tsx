@@ -30,7 +30,7 @@ const services = [
   },
   {
     number: "02",
-    title: "Influencer / KOL",
+    title: "Influencer / KOL Marketing",
     description: "Campaigns powered by top Korean crypto voices.",
     link: "/services/influencer",
     icon: Mic2,
@@ -52,9 +52,9 @@ const services = [
     image: eventsImage,
     accent: "#FB923C",
     details: [
-      "Seoul meetups & side event production",
-      "Venue sourcing & logistics management",
-      "Speaker curation & panel moderation",
+      "Korea Blockchain Week (KBW) side events",
+      "Seoul meetups & VIP networking dinners",
+      "Venue sourcing & full logistics management",
       "Post-event content & lead capture",
     ],
   },
