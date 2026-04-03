@@ -109,14 +109,6 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Mood Break Image ===== */}
-      <section className="px-3 sm:px-4 pb-4">
-        <div className="relative rounded-2xl overflow-hidden aspect-[21/7]">
-          <img src={bnbHanokEventImg} alt="ium Labs event" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.5)" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]/60" />
-        </div>
-      </section>
-
       {/* ===== What We Deliver — FINPR style ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-20">
@@ -125,9 +117,12 @@ const GTMService = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
               What We<br />Deliver
             </h2>
-            <p className="text-sm text-white/40 leading-relaxed max-w-sm">
+            <p className="text-sm text-white/40 leading-relaxed max-w-sm mb-6">
               End-to-end Korea market entry. From deep market analysis to exchange listing and post-launch growth, we cover every stage.
             </p>
+            <div className="rounded-xl overflow-hidden aspect-[4/3] max-w-sm">
+              <img src={bnbHanokEventImg} alt="ium Labs event" loading="lazy" className="w-full h-full object-cover opacity-70" />
+            </div>
           </div>
 
           {/* Right — scrolling service blocks */}
