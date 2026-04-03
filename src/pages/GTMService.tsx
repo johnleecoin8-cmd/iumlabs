@@ -82,23 +82,6 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Stats Bar ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-10 sm:py-14 border-b border-white/[0.06]">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10">
-          {[
-            { value: "$7B+", label: "Client Valuation" },
-            { value: "230+", label: "KOL Network" },
-            { value: "22+", label: "Korea Entries" },
-            { value: "70+", label: "Events Hosted" },
-          ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <div className="text-3xl sm:text-5xl font-black text-white tracking-tighter leading-none mb-1">{stat.value}</div>
-              <div className="text-[11px] sm:text-sm text-white/40 font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ===== 3. The Problem ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="max-w-3xl">
@@ -143,35 +126,39 @@ const GTMService = () => {
           <div className="space-y-0">
             {[
               {
+                icon: "🔍",
                 title: "Market Intelligence",
                 desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
               },
               {
+                icon: "🇰🇷",
                 title: "Brand Localization",
                 desc: "Your global narrative doesn't work in Korea. We rebuild it. Korea-fit brand positioning, localized content across Naver and Kakao, and community infrastructure on Telegram, Discord, and KakaoTalk.",
               },
               {
+                icon: "📢",
                 title: "KOL & Media Launch",
                 desc: "Tier-1 media coverage through BlockMedia, CoinDesk Korea, and TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram, and Naver. Structured AMA sessions that drive real engagement.",
               },
               {
+                icon: "💬",
                 title: "Community Growth",
                 desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
               },
               {
+                icon: "🏦",
                 title: "Exchange Listing",
                 desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
               },
               {
+                icon: "🚀",
                 title: "Events & Scale",
                 desc: "Offline events in Seoul, Korea Blockchain Week side events, VIP networking dinners. Ambassador programs, retention analytics, and monthly performance reporting to keep the momentum going.",
               },
             ].map((item, i) => (
               <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl sm:text-3xl font-black text-white/[0.08] leading-none tracking-tighter flex-shrink-0 pt-0.5">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
+                  <span className="text-2xl sm:text-3xl flex-shrink-0 pt-0.5">{item.icon}</span>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
