@@ -155,18 +155,23 @@ const Index = () => {
                 );
               })}
 
-              {/* Be the next — spans full row inside grid */}
-              <Link to="/contact" className="group col-span-2 lg:col-span-3 block relative overflow-hidden bg-[#0A0A0A]">
-                <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
-                <div className="relative px-4 sm:px-6 py-10 sm:py-14 text-center">
-                  <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white leading-[1.1] tracking-tight mb-2">
-                    Be the next <span className="text-white/40">success story.</span>
-                  </h2>
-                  <p className="text-xs sm:text-sm text-white/40 mb-4">From market analysis to launch day — one partner, full execution.</p>
-                  <div className="inline-flex items-center gap-2 text-sm text-white/60 group-hover:text-white transition-colors">
-                    <span>Get started</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {/* Your Project — same card format as others */}
+              <Link to="/contact" className="group block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]">
+                <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-2.5 sm:mb-3">
+                  <img src={ctaBgImage} alt="Your Project" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-500" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-sm sm:text-xl font-bold text-white tracking-tight">Your Project Here</span>
+                  </div>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">Next</span>
+                  <h3 className="text-xs sm:text-base font-semibold text-white group-hover:text-white/80 transition-colors">
+                    Be the next success story
+                  </h3>
+                  <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2 text-white/30 group-hover:text-white/60 transition-colors text-[9px] sm:text-xs">
+                    <span className="group-hover:underline underline-offset-4">Get started</span>
+                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
               </Link>
