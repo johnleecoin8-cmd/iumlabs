@@ -85,27 +85,12 @@ const GTMService = () => {
       {/* ===== 3. The Problem ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-6 leading-tight">
-            Most global projects fail in Korea.<br />
-            <span className="text-white/40">Here's why.</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 leading-tight">
+            Most global projects fail in Korea. <span className="text-white/40">Here's why.</span>
           </h2>
-          <div className="space-y-4 text-sm sm:text-base text-white/45 leading-relaxed">
-            <p>
-              Korea has 16 million active crypto users — 30% of the population. Upbit processes $4B+ daily.
-              The "Kimchi Premium" proves demand exists. But most projects enter with translated English campaigns,
-              global KOLs who don't speak Korean, and zero presence on Naver, KakaoTalk, or Korean Telegram.
-            </p>
-            <p>
-              Korean retail investors are trust-first. They follow native KOLs, read Korean-language research,
-              and make decisions through community consensus. A project without Korean community managers,
-              local media coverage, and exchange relationships is invisible here.
-            </p>
-            <p className="text-white/60 font-medium">
-              We solve this. Our Seoul-based team handles every layer of Korean market entry —
-              from competitive analysis to exchange listing, community setup to KOL activation.
-              22+ projects launched. $7B+ in combined client valuation.
-            </p>
-          </div>
+          <p className="text-sm sm:text-base text-white/45 leading-relaxed">
+            Korea has 16M active crypto users and Upbit processes $4B+ daily. But translated campaigns, global KOLs, and zero Korean presence don't work here. We solve this from Seoul — 22+ projects launched, $7B+ in client valuation.
+          </p>
         </div>
       </section>
 
@@ -117,12 +102,9 @@ const GTMService = () => {
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
               What We<br />Deliver
             </h2>
-            <p className="text-sm text-white/40 leading-relaxed max-w-sm mb-6">
+            <p className="text-sm text-white/40 leading-relaxed max-w-sm">
               End-to-end Korea market entry. From deep market analysis to exchange listing and post-launch growth, we cover every stage.
             </p>
-            <div className="rounded-xl overflow-hidden aspect-[4/3] max-w-sm">
-              <img src={bnbHanokEventImg} alt="ium Labs event" loading="lazy" className="w-full h-full object-cover opacity-70" />
-            </div>
           </div>
 
           {/* Right — scrolling service blocks */}
@@ -218,9 +200,6 @@ const GTMService = () => {
             { title: "Pre-Launch Projects", desc: "Building toward TGE but need Korean positioning, narrative, and community before launch day." },
             { title: "Post-Launch Stalling", desc: "Launched globally but Korea traction is flat. Need local team, local KOLs, local strategy." },
             { title: "Exchange Listing Prep", desc: "Targeting Upbit or Bithumb. Need compliance guidance, documentation, and post-listing marketing." },
-            { title: "Teams Burning Budget", desc: "Spending on global campaigns but can't connect efforts to Korean user acquisition or TVL." },
-            { title: "Rebrands & Pivots", desc: "Repositioning for the Korean market. New narrative, refreshed community, coordinated rollout." },
-            { title: "Early-Stage Projects", desc: "Still building but want Korean strategic foundations in place before launch." },
           ].map((item, i) => (
             <div key={i} className="p-4 sm:p-5 rounded-xl bg-[#111] border border-white/[0.06]">
               <h3 className="text-sm font-semibold text-white mb-1.5">{item.title}</h3>
