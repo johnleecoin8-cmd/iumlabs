@@ -126,39 +126,39 @@ const GTMService = () => {
           <div className="space-y-0">
             {[
               {
-                icon: "🔍",
+                icon: "◈",
                 title: "Market Intelligence",
                 desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
               },
               {
-                icon: "🇰🇷",
+                icon: "◉",
                 title: "Brand Localization",
                 desc: "Your global narrative doesn't work in Korea. We rebuild it. Korea-fit brand positioning, localized content across Naver and Kakao, and community infrastructure on Telegram, Discord, and KakaoTalk.",
               },
               {
-                icon: "📢",
+                icon: "◆",
                 title: "KOL & Media Launch",
                 desc: "Tier-1 media coverage through BlockMedia, CoinDesk Korea, and TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram, and Naver. Structured AMA sessions that drive real engagement.",
               },
               {
-                icon: "💬",
+                icon: "◇",
                 title: "Community Growth",
                 desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
               },
               {
-                icon: "🏦",
+                icon: "◎",
                 title: "Exchange Listing",
                 desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
               },
               {
-                icon: "🚀",
+                icon: "▲",
                 title: "Events & Scale",
                 desc: "Offline events in Seoul, Korea Blockchain Week side events, VIP networking dinners. Ambassador programs, retention analytics, and monthly performance reporting to keep the momentum going.",
               },
             ].map((item, i) => (
               <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
                 <div className="flex items-start gap-4">
-                  <span className="text-2xl sm:text-3xl flex-shrink-0 pt-0.5">{item.icon}</span>
+                  <span className="text-xl sm:text-2xl flex-shrink-0 pt-1 text-[#10B981]/40">{item.icon}</span>
                   <div>
                     <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
                     <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
