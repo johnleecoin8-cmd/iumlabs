@@ -29,20 +29,20 @@ import { Link } from "react-router-dom";
 import ctaBgImage from "@/assets/campaigns/event-fisheye.png";
 
 const Index = () => {
-  return <div className="min-h-screen bg-[#0A0A0A]">
+  return <div className="min-h-screen bg-[#0A0A0A] snap-y snap-proximity overflow-y-auto h-screen">
       <SEOHead title="ium Labs | Korea Web3 Marketing & Crypto Agency" description="Seoul's leading Web3 growth agency since 2022. Full-stack GTM strategy, KOL marketing, community growth, and PR — 22+ projects launched including BNB, Bybit, and Mantra. One partner, full execution." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
       
       <Navbar />
       
       {/* Hero - Full Bleed */}
-      <main id="hero" className="sm:px-4 sm:pt-3">
+      <main id="hero" className="sm:px-4 sm:pt-3 snap-start">
         <div className="sm:rounded-3xl overflow-hidden">
           <HeroSection />
         </div>
       </main>
 
       {/* About */}
-      <section className="sm:px-4 sm:pt-3" id="why-choose-us">
+      <section className="sm:px-4 sm:pt-3 snap-start" id="why-choose-us">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
@@ -51,7 +51,7 @@ const Index = () => {
       </section>
       
       {/* Services */}
-      <section className="sm:px-4 sm:pt-3" id="services">
+      <section className="sm:px-4 sm:pt-3 snap-start" id="services">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
@@ -63,7 +63,7 @@ const Index = () => {
       </section>
       
       {/* Cases */}
-      <section className="sm:px-4 sm:pt-3" id="cases">
+      <section className="sm:px-4 sm:pt-3 snap-start" id="cases">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Case Studies</h2>
@@ -77,7 +77,7 @@ const Index = () => {
       </section>
       
       {/* Insights */}
-      <section className="sm:px-4 sm:pt-3" id="insights">
+      <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Blog</h2>
@@ -99,7 +99,7 @@ const Index = () => {
       </Suspense>
 
       {/* Launch CTA */}
-      <section className="sm:px-4 sm:pt-3">
+      <section className="sm:px-4 sm:pt-3 snap-start">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] relative">
           {/* Background image */}
           <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.55]" />
@@ -128,7 +128,7 @@ const Index = () => {
       </section>
 
       {/* Contact - 05 */}
-      <section className="sm:px-4 sm:pt-3" id="contact">
+      <section className="sm:px-4 sm:pt-3 snap-start" id="contact">
         <div className="sm:rounded-3xl overflow-hidden">
           <AnimatedSection>
             <ContactFormSection />
