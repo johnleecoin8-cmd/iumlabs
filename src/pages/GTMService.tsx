@@ -129,31 +129,37 @@ const GTMService = () => {
                 icon: Search,
                 title: "Market Intelligence",
                 desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
+                img: seoulSkylineImg,
               },
               {
                 icon: Globe,
                 title: "Brand Localization",
                 desc: "Your global narrative doesn't work in Korea. We rebuild it. Korea-fit brand positioning, localized content across Naver and Kakao, and community infrastructure on Telegram, Discord, and KakaoTalk.",
+                img: bnbHanokEventImg,
               },
               {
                 icon: Megaphone,
                 title: "KOL & Media Launch",
                 desc: "Tier-1 media coverage through BlockMedia, CoinDesk Korea, and TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram, and Naver. Structured AMA sessions that drive real engagement.",
+                img: saharaAiEventImg,
               },
               {
                 icon: Users,
                 title: "Community Growth",
                 desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
+                img: kucoinPartyEventImg,
               },
               {
                 icon: Building2,
                 title: "Exchange Listing",
                 desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
+                img: peaqBoothEventImg,
               },
               {
                 icon: Rocket,
                 title: "Events & Scale",
                 desc: "Offline events in Seoul, Korea Blockchain Week side events, VIP networking dinners. Ambassador programs, retention analytics, and monthly performance reporting to keep the momentum going.",
+                img: aptosSeoulEventImg,
               },
             ].map((item, i) => {
               const Icon = item.icon;
@@ -165,7 +171,10 @@ const GTMService = () => {
                     </div>
                     <div>
                       <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
-                      <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+                      <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl mb-4">{item.desc}</p>
+                      <div className="w-full max-w-md aspect-[16/9] rounded-lg overflow-hidden">
+                        <img src={item.img} alt={item.title} loading="lazy" className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-300" />
+                      </div>
                     </div>
                   </div>
                 </div>
