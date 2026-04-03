@@ -88,7 +88,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline — each line slides in separately */}
-          <h2 className="font-sans text-3xl sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold text-white mb-8 sm:mb-10 tracking-[-0.03em] leading-[1.05] whitespace-nowrap">
+          <h2 className="font-sans text-[1.75rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold text-white mb-6 sm:mb-10 tracking-[-0.03em] leading-[1.05] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -102,7 +102,7 @@ const WhyChooseUsSection = () => {
 
           {/* Description — blur reveal */}
           <motion.p
-            className="text-white/80 leading-relaxed text-base sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-8 sm:mb-10 tracking-wide"
+            className="text-white/80 leading-relaxed text-[13px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
             variants={descriptionVariants}>
             Seoul's leading Web3 growth agency since 2022, with a proven track record of launching 22+ global projects into Korea — including BNB, Bybit, and Mantra through <span className="text-white font-semibold">GTM</span>, <span className="text-white font-semibold">KOL</span>, <span className="text-white font-semibold">PR</span>, <span className="text-white font-semibold">community</span>, <span className="text-white font-semibold">events</span>, and full-stack execution. One partner. Full market entry.
           </motion.p>
@@ -138,7 +138,7 @@ const WhyChooseUsSection = () => {
               { value: "70+", label: "Events Hosted" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
+                <div className="text-2xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
                   {stat.value}
                 </div>
                 <div className="text-[11px] sm:text-sm md:text-base text-white/45 font-medium">

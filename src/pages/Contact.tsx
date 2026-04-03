@@ -202,7 +202,7 @@ const Contact = () => {
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
               {/* Main Headline - Single Line */}
-              <h1 className="font-sans text-[2rem] sm:text-[4rem] md:text-[6rem] font-bold leading-[0.95] tracking-[-0.04em] mb-5 sm:mb-8 text-white whitespace-nowrap">
+              <h1 className="font-sans text-[2rem] sm:text-[4rem] md:text-[6rem] font-bold leading-[0.95] tracking-[-0.04em] mb-5 sm:mb-8 text-white sm:whitespace-nowrap">
                 Let's Build in Korea
               </h1>
 

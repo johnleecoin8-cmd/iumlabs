@@ -206,13 +206,13 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <h1 className="font-sans text-[2.25rem] sm:text-[5rem] md:text-[6.875rem] font-bold leading-[0.9] tracking-[-0.04em] mb-6 sm:mb-8 mt-16 sm:mt-20 text-white whitespace-nowrap">
+          <h1 className="font-sans text-[2rem] sm:text-[5rem] md:text-[6.875rem] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.04em] mb-5 sm:mb-8 mt-12 sm:mt-20 text-white sm:whitespace-nowrap">
             <span className="block">Your Web3 Ecosystem</span>
             <span className="block">Growth Partner</span>
           </h1>
 
           {/* Subtext */}
-          <p className="text-sm sm:text-lg md:text-[22px] text-white max-w-5xl mx-auto mb-8 sm:mb-12 font-light tracking-wide whitespace-nowrap">
+          <p className="text-[13px] sm:text-lg md:text-[22px] text-white/80 max-w-5xl mx-auto mb-6 sm:mb-12 font-light tracking-wide sm:whitespace-nowrap leading-relaxed px-2 sm:px-0">
             22+ projects trusted us to land in Korea.<br />Yours is next.
           </p>
 
