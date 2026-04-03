@@ -121,7 +121,6 @@ const Index = () => {
                 { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
                 { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
                 { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
-                { slug: "mantra", category: "RWA", customImg: seoulSkylineImg },
               ].map((cs) => {
                 const project = projectsData[cs.slug];
                 const cardImage = cs.customImg || project?.bgImage || '';
@@ -151,6 +150,23 @@ const Index = () => {
                   </Link>
                 );
               })}
+
+              {/* 6th card — ? CTA */}
+              <Link to="/contact" className="group block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]">
+                <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-2.5 sm:mb-3 bg-white/[0.03] border border-dashed border-white/[0.1] flex items-center justify-center group-hover:border-white/20 transition-all">
+                  <span className="text-4xl sm:text-6xl font-bold text-white/10 group-hover:text-white/25 transition-colors">?</span>
+                </div>
+                <div className="space-y-1">
+                  <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">Next</span>
+                  <h3 className="text-xs sm:text-base font-semibold text-white group-hover:text-white/80 transition-colors">
+                    Your Project
+                  </h3>
+                  <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2 text-white/30 group-hover:text-white/60 transition-colors text-[9px] sm:text-xs">
+                    <span className="group-hover:underline underline-offset-4">Get started</span>
+                    <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
