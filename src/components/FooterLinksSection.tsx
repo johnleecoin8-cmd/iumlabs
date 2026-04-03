@@ -76,7 +76,7 @@ const FooterLinksSection = () => {
             </a>
             {brand.email && (
               <a href={`mailto:${brand.email}`} className="hover:text-white/60 transition-colors">
-                {brand.email}
+                E-mail
               </a>
             )}
           </div>
