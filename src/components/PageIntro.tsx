@@ -4,19 +4,21 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 2500;
+const MIN_DISPLAY_TIME = 2000;
+const MAX_LOAD_TIME = 8000;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
-  const videoLoaded = useRef(false);
-  const progressInterval = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const realProgress = useRef(0);
+  const displayProgress = useRef(0);
+  const rafRef = useRef<number | null>(null);
 
   const handleComplete = useCallback(() => {
     const elapsed = Date.now() - startTime;
     const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
-    
+
     setTimeout(() => {
       setPhase('whiteout');
       setTimeout(() => {
@@ -26,30 +28,109 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, remaining);
   }, [startTime, onComplete]);
 
-  // Progress counter animation
+  // Track real loading progress from multiple sources
   useEffect(() => {
-    progressInterval.current = setInterval(() => {
-      setProgress(prev => {
-        if (!videoLoaded.current) {
-          const next = prev + 1.5;
-          return next >= 95 ? 95 : next;
-        }
-        
-        const next = prev + 10;
-        if (next >= 100) {
-          if (progressInterval.current) {
-            clearInterval(progressInterval.current);
-          }
-          return 100;
-        }
-        return next;
+    let loadedCount = 0;
+    const totalTasks = 4; // video, fonts, images, DOM
+
+    const updateReal = () => {
+      realProgress.current = Math.min((loadedCount / totalTasks) * 100, 100);
+    };
+
+    // 1. Hero video preload
+    const video = document.createElement('video');
+    video.src = '/videos/hero-background.mp4#t=0.001';
+    video.preload = 'auto';
+    video.muted = true;
+    video.playsInline = true;
+    video.load();
+
+    const onVideoReady = () => {
+      loadedCount++;
+      updateReal();
+    };
+    video.addEventListener('canplaythrough', onVideoReady, { once: true });
+    video.addEventListener('loadeddata', onVideoReady, { once: true });
+
+    // 2. Fonts ready
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        loadedCount++;
+        updateReal();
       });
-    }, 50);
+    } else {
+      loadedCount++;
+      updateReal();
+    }
+
+    // 3. Critical images (hero poster, logo)
+    const criticalImages = ['/images/hero-poster.jpg'];
+    let imgDone = false;
+    const checkImg = () => {
+      if (imgDone) return;
+      imgDone = true;
+      loadedCount++;
+      updateReal();
+    };
+    const img = new Image();
+    img.onload = checkImg;
+    img.onerror = checkImg;
+    img.src = criticalImages[0];
+
+    // 4. DOM content loaded
+    if (document.readyState === 'complete') {
+      loadedCount++;
+      updateReal();
+    } else {
+      window.addEventListener('load', () => {
+        loadedCount++;
+        updateReal();
+      }, { once: true });
+    }
+
+    // Max timeout fallback
+    const maxTimer = setTimeout(() => {
+      realProgress.current = 100;
+    }, MAX_LOAD_TIME);
 
     return () => {
-      if (progressInterval.current) {
-        clearInterval(progressInterval.current);
+      video.removeEventListener('canplaythrough', onVideoReady);
+      video.removeEventListener('loadeddata', onVideoReady);
+      video.pause();
+      video.src = '';
+      clearTimeout(maxTimer);
+    };
+  }, []);
+
+  // Smooth display counter that chases real progress
+  useEffect(() => {
+    const animate = () => {
+      const target = realProgress.current;
+      const current = displayProgress.current;
+
+      if (current < target) {
+        const gap = target - current;
+        const speed = gap > 20 ? 2.5 : gap > 5 ? 1.2 : 0.5;
+        displayProgress.current = Math.min(current + speed, 100);
+        setProgress(Math.floor(displayProgress.current));
+      } else if (target < 100) {
+        // Slow steady climb until everything loads — never stops
+        const slowdown = current > 80 ? 0.05 : current > 60 ? 0.1 : 0.2;
+        displayProgress.current = Math.min(current + slowdown, 99.5);
+        setProgress(Math.floor(displayProgress.current));
       }
+
+      if (displayProgress.current >= 100) {
+        setProgress(100);
+        return;
+      }
+
+      rafRef.current = requestAnimationFrame(animate);
+    };
+
+    rafRef.current = requestAnimationFrame(animate);
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
 
@@ -60,56 +141,24 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }
   }, [progress, handleComplete]);
 
-  // Preload hero video
-  useEffect(() => {
-    const video = document.createElement('video');
-    video.src = '/videos/hero-background.mp4#t=0.001';
-    video.preload = 'auto';
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute('webkit-playsinline', 'true');
-    
-    const handleVideoReady = () => {
-      videoLoaded.current = true;
-    };
-
-    video.addEventListener('loadeddata', handleVideoReady);
-    video.addEventListener('canplaythrough', handleVideoReady);
-    
-    // Force the browser to start downloading
-    video.load();
-    
-    const maxTimer = setTimeout(() => {
-      videoLoaded.current = true;
-    }, 6000);
-
-    return () => {
-      video.removeEventListener('loadeddata', handleVideoReady);
-      video.removeEventListener('canplaythrough', handleVideoReady);
-      video.pause();
-      video.src = '';
-      clearTimeout(maxTimer);
-    };
-  }, []);
-
   if (phase === 'done') return null;
 
   return (
     <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-background">
       {/* White overlay that expands on complete */}
-      <div 
+      <div
         className={`absolute inset-0 bg-white transition-opacity duration-700 ${
           phase === 'whiteout' ? 'opacity-100' : 'opacity-0'
         }`}
       />
-      
+
       {/* Content - fades out during whiteout */}
       <div className={`relative z-10 flex flex-col items-center transition-opacity duration-500 ${
         phase === 'whiteout' ? 'opacity-0' : 'opacity-100'
       }`}>
         {/* Counter */}
         <div className="mb-8">
-          <span 
+          <span
             className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-foreground tabular-nums"
             style={{ fontFeatureSettings: '"tnum"' }}
           >
@@ -119,8 +168,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
         {/* Progress bar */}
         <div className="w-48 sm:w-64 md:w-80 h-[2px] bg-border/30 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-foreground rounded-full transition-all duration-100 ease-linear"
+          <div
+            className="h-full bg-foreground rounded-full transition-all duration-150 ease-out"
             style={{ width: `${progress}%` }}
           />
         </div>

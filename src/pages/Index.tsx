@@ -29,7 +29,7 @@ import { Link } from "react-router-dom";
 import ctaBgImage from "@/assets/campaigns/event-fisheye.png";
 
 const Index = () => {
-  return <div className="min-h-screen bg-[#0A0A0A] snap-y snap-proximity overflow-y-auto h-screen">
+  return <div className="min-h-screen bg-[#0A0A0A] snap-y snap-proximity overflow-y-auto h-screen scrollbar-hide">
       <SEOHead title="ium Labs | Korea Web3 Marketing & Crypto Agency" description="Seoul's leading Web3 growth agency since 2022. Full-stack GTM strategy, KOL marketing, community growth, and PR — 22+ projects launched including BNB, Bybit, and Mantra. One partner, full execution." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
       
       <Navbar />

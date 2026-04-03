@@ -78,7 +78,7 @@ const WhyChooseUsSection = () => {
       </div>
 
       {/* Content — centered vertically, stats pushed to bottom */}
-      <div className="relative z-10 flex flex-col min-h-[93vh]">
+      <div className="relative z-10 flex flex-col min-h-[100vh] sm:min-h-[90vh]">
         <div className="flex-1 flex items-center">
         <motion.div
           className="container mx-auto px-6 sm:px-10 md:px-16 lg:px-20 py-10 sm:py-14 md:py-16 max-w-4xl text-center"
