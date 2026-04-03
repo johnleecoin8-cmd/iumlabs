@@ -163,7 +163,7 @@ const HeroSection = () => {
     { label: "AMA Hosting", bottom: "28%", right: "8%", mobileBottom: "25%", mobileRight: "4%" },
   ];
 
-  return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
+  return <div className="relative h-full min-h-[90vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
       <div className="absolute inset-0">
         <img {...posterProps} fetchPriority="high" decoding="async" />
