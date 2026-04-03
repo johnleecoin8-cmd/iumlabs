@@ -1,5 +1,6 @@
 import { Send } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import { brand } from "@/config/content";
@@ -26,59 +27,73 @@ import kiteLogo from "@/assets/logos/kite.png";
 const clientLogos = [{
   name: "BNB",
   logo: bnbLogo,
-  noInvert: false
+  noInvert: false,
+  slug: "bnb-chain"
 }, {
   name: "KuCoin",
   logo: kucoinLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "kucoin"
 }, {
   name: "Polygon",
   logo: polygonLogo,
-  noInvert: false
+  noInvert: false,
+  slug: "polygon"
 }, {
   name: "Ondo Finance",
   logo: ondoLogo,
-  noInvert: false
+  noInvert: false,
+  slug: "ondo"
 }, {
   name: "Bybit",
   logo: bybitLogo,
-  noInvert: false
+  noInvert: false,
+  slug: "bybit"
 }, {
   name: "Peaq",
   logo: peaqLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "peaq"
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "spacecoin"
 }, {
   name: "Tria",
   logo: triaLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "tria"
 }, {
   name: "Mantra",
   logo: mantraLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "mantra"
 }, {
   name: "Sahara AI",
   logo: saharaAiLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "sahara-ai"
 }, {
   name: "FOGO",
   logo: fogoLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "fogo"
 }, {
   name: "SynFutures",
   logo: synfuturesLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "synfutures"
 }, {
   name: "Aptos",
   logo: aptosLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "aptos"
 }, {
   name: "Kite",
   logo: kiteLogo,
-  noInvert: true
+  noInvert: true,
+  slug: "kite"
 }];
 // Default stats as fallback
 const defaultStats = [{
@@ -221,7 +236,7 @@ const HeroSection = () => {
       {/* Client Logo Marquee */}
       <div className="relative z-[14] py-4 sm:py-6 overflow-hidden">
         <div className="flex items-center logo-marquee-slow">
-          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-1 sm:mx-2 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
+          {[...clientLogos, ...clientLogos].map((client, index) => <Link key={index} to={`/projects/${client.slug}`} className="flex items-center gap-2 sm:gap-3 mx-1 sm:mx-2 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0">
               <img
             src={client.logo}
             alt={client.name}
@@ -231,7 +246,7 @@ const HeroSection = () => {
               <span className="text-white/75 text-[11px] sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
               </span>
-            </div>)}
+            </Link>)}
         </div>
       </div>
     </div>;

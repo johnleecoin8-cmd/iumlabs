@@ -158,19 +158,42 @@ const Navbar = () => {
       {/* ===== NAVBAR — separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
-            <img src={logoImage} alt="ium Labs" className="w-9 h-9 sm:w-11 sm:h-11 object-contain rounded-lg" />
-            <span className="text-sm sm:text-base font-bold text-white tracking-tight">ium Labs</span>
+          <Link to="/" className="flex items-center gap-3 px-4 sm:px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
+            <img src={logoImage} alt="ium Labs" className="w-8 h-8 sm:w-9 sm:h-9 object-contain rounded-lg" />
+            <span className="text-sm sm:text-[15px] font-bold text-white tracking-tight">ium Labs</span>
           </Link>
 
+          {/* Service Marquee - center */}
+          <div className="hidden lg:flex flex-1 items-center mx-2.5 h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
+            <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="flex items-center gap-5">
+                  {[
+                    { name: "GTM Strategy", href: "/services/gtm" },
+                    { name: "KOL Marketing", href: "/services/influencer" },
+                    { name: "PR & Media", href: "/services/pr" },
+                    { name: "Community Management", href: "/services/community" },
+                    { name: "Offline Events", href: "/services/offline-event" },
+                    { name: "Deep Research", href: "/services/deep-research" },
+                    { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+                    { name: "AMA Hosting", href: "/services/ama" },
+                    { name: "Compliance", href: "/services/compliance" },
+                  ].map((svc) => (
+                    <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2.5 px-6 py-3.5 sm:py-4 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[15px] font-medium text-white/80">
-              <Send className="w-[18px] h-[18px] text-[#229ED9]" /><span>Start Live Chat</span>
+            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
+              <Send className="w-4 h-4 text-[#229ED9]" /><span>Start Live Chat</span>
             </button>
-            <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-6 py-3.5 sm:py-4 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[15px] font-medium text-white/80">
-              <Calendar className="w-[18px] h-[18px] text-[#4285F4]" /><span>Book a Meeting</span>
+            <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
+              <Calendar className="w-4 h-4 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
-            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-3 min-h-[48px] px-4 py-3 sm:px-6 sm:py-4 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[15px] font-medium text-white/70" aria-label="Open menu">
+            <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2.5 h-[44px] sm:h-[52px] px-4 sm:px-5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/70" aria-label="Open menu">
               <span className="hidden sm:inline">menu</span>
               <div className="flex flex-col gap-[5px]">
                 <span className="block w-[20px] h-[2.5px] bg-white/80 rounded-full" />
