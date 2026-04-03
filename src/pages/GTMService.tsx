@@ -162,7 +162,7 @@ const GTMService = () => {
 
       {/* ===== 5. What We Deliver — FINPR style ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-20">
           {/* Left — sticky title */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
@@ -212,7 +212,7 @@ const GTMService = () => {
 
       {/* ===== 8. FAQ — same style ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-10 lg:gap-20">
           {/* Left — sticky title */}
           <div className="lg:sticky lg:top-32 lg:self-start">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">FAQ</h2>
@@ -255,36 +255,10 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Mood image ===== */}
-      <section className="px-3 sm:px-4 pb-8">
-        <div className="relative rounded-2xl overflow-hidden aspect-[21/6]">
-          <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.4) saturate(0.8)" }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <p className="text-xl sm:text-3xl lg:text-4xl font-bold text-white/80 text-center tracking-tight px-4">
-              22+ projects. $7B+ valuation. One team in Seoul.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CTA ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="rounded-2xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
-          <div>
-            <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Ready to enter Korea?</h2>
-            <p className="text-sm text-white/35">Free 30-min strategy call. We'll map out your market entry.</p>
-          </div>
-          <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-[#10B981] text-white text-sm font-semibold flex-shrink-0 hover:-translate-y-0.5 transition-all">
-            Book a Meeting
-          </CalendlyButton>
-        </div>
-      </section>
-
       {/* ===== Project Cards Grid ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl sm:text-2xl font-bold text-white">Be Next These Projects</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-white">22+ Projects. Real Results.</h2>
           <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
             All projects <ArrowRight className="w-3 h-3 inline" />
           </Link>
@@ -326,7 +300,7 @@ const GTMService = () => {
             );
           })}
 
-          {/* Be the Next CTA Card */}
+          {/* Your Project CTA Card */}
           <CalendlyButton className="group block bg-[#0A0A0A] p-3 sm:p-4 text-left transition-all duration-300 hover:bg-white/[0.03]">
             <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-3">
               <img src={seoulSkylineImg} alt="Seoul" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -341,10 +315,23 @@ const GTMService = () => {
                 Enter Korea
               </h3>
               <div className="flex items-center gap-1.5 mt-2 text-white/30 group-hover:text-[#10B981] transition-colors text-[10px] sm:text-xs">
-                <span className="group-hover:underline underline-offset-4">Let's talk</span>
+                <span className="group-hover:underline underline-offset-4">Book a call</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
               </div>
             </div>
+          </CalendlyButton>
+        </div>
+      </section>
+
+      {/* ===== Final CTA ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
+        <div className="rounded-2xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
+          <div>
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-1">Ready to enter Korea?</h2>
+            <p className="text-sm text-white/35">Free 30-min strategy call. We'll map out your market entry.</p>
+          </div>
+          <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-[#10B981] text-white text-sm font-semibold flex-shrink-0 hover:-translate-y-0.5 transition-all">
+            Book a Meeting
           </CalendlyButton>
         </div>
       </section>
