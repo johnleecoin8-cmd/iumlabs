@@ -82,73 +82,15 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 3. Problem / Solution 2-column ===== */}
+      {/* ===== 3. The Problem ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-10 leading-tight">
-          Most global projects fail in Korea. <span className="text-white/40">We fix that.</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Problems */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-red-500/[0.03] border border-red-500/10">
-            <div className="flex items-center gap-2 mb-5">
-              <X className="w-4 h-4 text-red-400/60" />
-              <span className="text-xs font-semibold text-red-400/60 uppercase tracking-wider">The Problem</span>
-            </div>
-            <div className="space-y-4">
-              {[
-                "Translated English campaigns that don't resonate with Korean retail",
-                "Global KOLs with zero Korean audience or credibility",
-                "No presence on Naver, KakaoTalk, or Korean Telegram groups",
-                "Invisible on Korean exchanges like Upbit and Bithumb",
-              ].map((item, i) => (
-                <p key={i} className="text-sm text-white/40 leading-relaxed flex items-start gap-2.5">
-                  <span className="text-red-400/30 mt-0.5 flex-shrink-0">✕</span>{item}
-                </p>
-              ))}
-            </div>
-          </div>
-          {/* Solutions */}
-          <div className="p-6 sm:p-8 rounded-2xl bg-[#10B981]/[0.03] border border-[#10B981]/10">
-            <div className="flex items-center gap-2 mb-5">
-              <Check className="w-4 h-4 text-[#10B981]/60" />
-              <span className="text-xs font-semibold text-[#10B981]/60 uppercase tracking-wider">With ium Labs</span>
-            </div>
-            <div className="space-y-4">
-              {[
-                "Korea-fit narrative crafted by native speakers from Seoul",
-                "170+ vetted Korean KOLs across YouTube, X, TG, and Naver",
-                "24/7 community management on every Korean platform",
-                "Direct exchange listing support for Upbit, Bithumb, Coinone",
-              ].map((item, i) => (
-                <p key={i} className="text-sm text-white/50 leading-relaxed flex items-start gap-2.5">
-                  <span className="text-[#10B981]/40 mt-0.5 flex-shrink-0">✓</span>{item}
-                </p>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 4. Case Study Cards — mid-page social proof ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {caseStudies.map((cs) => {
-            const project = projectsData[cs.slug];
-            return (
-              <Link key={cs.slug} to={`/projects/${cs.slug}`} onClick={() => window.scrollTo(0, 0)} className="group p-5 sm:p-6 rounded-2xl bg-[#111] border border-white/[0.06] hover:border-white/[0.12] transition-all">
-                <div className="flex items-center gap-3 mb-4">
-                  {project?.bgImage && <img src={project.bgImage} alt={project.name} className="w-8 h-8 rounded-lg object-cover" />}
-                  <span className="text-sm font-semibold text-white">{project?.name}</span>
-                </div>
-                <div className="text-2xl sm:text-3xl font-black text-[#10B981] tracking-tight mb-2">{cs.result}</div>
-                <p className="text-xs text-white/40 leading-relaxed">{cs.detail}</p>
-                <div className="flex items-center gap-1.5 mt-4 text-[10px] text-white/30 group-hover:text-white/60 transition-colors">
-                  <span>Read case study</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            );
-          })}
+        <div className="max-w-3xl">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 leading-tight">
+            Most global projects fail in Korea. <span className="text-white/40">Here's why.</span>
+          </h2>
+          <p className="text-sm sm:text-base text-white/45 leading-relaxed">
+            Korea has 16M active crypto users and Upbit processes $4B+ daily. But translated campaigns, global KOLs, and zero Korean presence don't work here. We solve this from Seoul — 22+ projects launched, $7B+ in client valuation.
+          </p>
         </div>
       </section>
 
@@ -250,56 +192,20 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== Who This Is For — interactive cards ===== */}
+      {/* ===== Who This Is For ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">Is this for you?</h2>
-        <p className="text-sm text-white/35 mb-8">If any of these sound familiar, we should talk.</p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Who this is for</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {[
-            { num: "01", title: "Pre-Launch", pain: "Building toward TGE but no Korean presence yet", solution: "We build your Korea foundation before launch: narrative, community, KOL pipeline, exchange relationships." },
-            { num: "02", title: "Stalled Growth", pain: "Launched globally but Korea traction is flat", solution: "We deploy a Seoul-based team with local KOLs, native community managers, and Korean media coverage." },
-            { num: "03", title: "Exchange Listing", pain: "Targeting Upbit or Bithumb but no roadmap", solution: "Direct relationships with all major Korean exchanges. Compliance docs, applications, and post-listing marketing." },
+            { title: "Pre-Launch Projects", desc: "Building toward TGE but need Korean positioning, narrative, and community before launch day." },
+            { title: "Post-Launch Stalling", desc: "Launched globally but Korea traction is flat. Need local team, local KOLs, local strategy." },
+            { title: "Exchange Listing Prep", desc: "Targeting Upbit or Bithumb. Need compliance guidance, documentation, and post-listing marketing." },
           ].map((item, i) => (
-            <div key={i} className="group p-5 sm:p-6 rounded-2xl bg-[#111] border border-white/[0.06] hover:border-[#10B981]/20 transition-all duration-300">
-              <span className="text-xs font-mono text-[#10B981]/40 mb-3 block">{item.num}</span>
-              <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-xs text-white/30 mb-3 italic">"{item.pain}"</p>
-              <p className="text-[13px] text-white/50 leading-relaxed">{item.solution}</p>
+            <div key={i} className="p-4 sm:p-5 rounded-xl bg-[#111] border border-white/[0.06]">
+              <h3 className="text-sm font-semibold text-white mb-1.5">{item.title}</h3>
+              <p className="text-[13px] text-white/40 leading-relaxed">{item.desc}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ===== Before / After Diagram ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <div className="rounded-2xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 overflow-hidden">
-          <h2 className="text-xl sm:text-2xl font-bold text-white mb-8 text-center">The Transformation</h2>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 items-center">
-            {/* Before */}
-            <div className="text-center md:text-right">
-              <span className="text-[10px] text-red-400/50 uppercase tracking-wider font-semibold block mb-3">Before</span>
-              <div className="space-y-2.5">
-                {["Zero Korean presence", "No local KOLs", "Invisible on exchanges", "Burning global budget"].map((item, i) => (
-                  <p key={i} className="text-sm text-white/30">{item}</p>
-                ))}
-              </div>
-            </div>
-            {/* Arrow */}
-            <div className="flex items-center justify-center">
-              <div className="w-16 h-16 rounded-full bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center">
-                <ArrowRight className="w-6 h-6 text-[#10B981]" />
-              </div>
-            </div>
-            {/* After */}
-            <div className="text-center md:text-left">
-              <span className="text-[10px] text-[#10B981]/50 uppercase tracking-wider font-semibold block mb-3">After</span>
-              <div className="space-y-2.5">
-                {["22+ Korea entries", "170+ KOL network", "Listed on Upbit/Bithumb", "Measurable Korean ROI"].map((item, i) => (
-                  <p key={i} className="text-sm text-white/60 font-medium">{item}</p>
-                ))}
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -381,28 +287,6 @@ const GTMService = () => {
           <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-[#10B981] text-white text-sm font-semibold flex-shrink-0 hover:-translate-y-0.5 transition-all">
             Book a Meeting
           </CalendlyButton>
-        </div>
-      </section>
-
-      {/* ===== Related Services ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Related Services</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          {[
-            { title: "KOL Marketing", href: "/services/influencer", accent: "#FACC15" },
-            { title: "PR & Media", href: "/services/pr", accent: "#8B5CF6" },
-            { title: "Community", href: "/services/community", accent: "#38BDF8" },
-            { title: "Offline Events", href: "/services/offline-event", accent: "#FB923C" },
-          ].map((svc) => (
-            <Link key={svc.href} to={svc.href} className="group p-4 sm:p-5 rounded-xl bg-[#111] border border-white/[0.06] hover:border-white/[0.12] transition-all">
-              <div className="w-2 h-2 rounded-full mb-3" style={{ backgroundColor: svc.accent, opacity: 0.6 }} />
-              <h3 className="text-sm font-semibold text-white group-hover:text-white/80 transition-colors">{svc.title}</h3>
-              <div className="flex items-center gap-1 mt-2 text-[10px] text-white/30 group-hover:text-white/60 transition-colors">
-                <span>Learn more</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </Link>
-          ))}
         </div>
       </section>
 
