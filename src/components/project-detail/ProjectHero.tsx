@@ -151,7 +151,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
       ))}
 
       {/* Top Navigation */}
-      <div className="relative z-10 flex justify-between items-start p-6 sm:p-8 md:p-12">
+      <div className="relative z-10 flex justify-between items-start p-6 sm:p-8 md:p-12 pt-20 sm:pt-24">
         <Link 
           to="/projects"
           className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors"
