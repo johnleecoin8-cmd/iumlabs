@@ -115,8 +115,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Project Cards */}
-          <div className="p-3 sm:p-4 pb-0">
+          {/* Project Cards + CTA in one grid */}
+          <div className="p-3 sm:p-4">
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
               {[
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
@@ -154,25 +154,23 @@ const Index = () => {
                   </Link>
                 );
               })}
-            </div>
-          </div>
 
-          {/* Be the next — same grid, full-width bottom card */}
-          <div className="px-3 sm:px-4 pb-3 sm:pb-4">
-            <Link to="/contact" className="group block relative overflow-hidden rounded-xl">
-              <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-60 transition-opacity duration-500 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
-              <div className="relative px-4 sm:px-6 py-10 sm:py-16 text-center">
-                <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-white leading-[1.1] tracking-tight mb-3">
-                  Be the next <span className="text-white/40">success story.</span>
-                </h2>
-                <p className="text-sm text-white/40 mb-6">From market analysis to launch day — one partner, full execution.</p>
-                <div className="inline-flex items-center gap-2 text-sm text-white/60 group-hover:text-white transition-colors">
-                  <span>Get started</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {/* Be the next — spans full row inside grid */}
+              <Link to="/contact" className="group col-span-2 lg:col-span-3 block relative overflow-hidden bg-[#0A0A0A]">
+                <img src={ctaBgImage} alt="" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/30" />
+                <div className="relative px-4 sm:px-6 py-10 sm:py-14 text-center">
+                  <h2 className="text-xl sm:text-3xl lg:text-4xl font-bold text-white leading-[1.1] tracking-tight mb-2">
+                    Be the next <span className="text-white/40">success story.</span>
+                  </h2>
+                  <p className="text-xs sm:text-sm text-white/40 mb-4">From market analysis to launch day — one partner, full execution.</p>
+                  <div className="inline-flex items-center gap-2 text-sm text-white/60 group-hover:text-white transition-colors">
+                    <span>Get started</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
