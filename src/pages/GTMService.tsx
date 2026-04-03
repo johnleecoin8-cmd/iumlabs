@@ -160,7 +160,82 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 5. Who This Is For ===== */}
+      {/* ===== 5. What We Deliver — FINPR style ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
+          {/* Left — sticky title */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight mb-4">
+              What We<br />Deliver
+            </h2>
+            <p className="text-sm text-white/40 leading-relaxed max-w-sm">
+              End-to-end Korea market entry. From deep market analysis to exchange listing and post-launch growth, we cover every stage.
+            </p>
+          </div>
+
+          {/* Right — scrolling service blocks */}
+          <div className="space-y-0">
+            {[
+              {
+                title: "Market Intelligence",
+                desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
+              },
+              {
+                title: "Brand Localization",
+                desc: "Your global narrative doesn't work in Korea. We rebuild it. Korea-fit brand positioning, localized content across Naver and Kakao, and community infrastructure on Telegram, Discord, and KakaoTalk.",
+              },
+              {
+                title: "KOL & Media Launch",
+                desc: "Tier-1 media coverage through BlockMedia, CoinDesk Korea, and TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram, and Naver. Structured AMA sessions that drive real engagement.",
+              },
+              {
+                title: "Community Growth",
+                desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
+              },
+              {
+                title: "Exchange Listing",
+                desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
+              },
+              {
+                title: "Events & Scale",
+                desc: "Offline events in Seoul, Korea Blockchain Week side events, VIP networking dinners. Ambassador programs, retention analytics, and monthly performance reporting to keep the momentum going.",
+              },
+            ].map((item, i) => (
+              <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
+                <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 8. FAQ — same style ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20">
+          {/* Left — sticky title */}
+          <div className="lg:sticky lg:top-32 lg:self-start">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white leading-tight">FAQ</h2>
+          </div>
+
+          {/* Right — questions */}
+          <div className="space-y-0">
+            {[
+              { q: "What makes Korean GTM different?", a: "Korea is trust-first, retail-driven. Projects need native community managers, localized narratives, local KOLs — not translated global campaigns. We handle all of this in-house from Seoul." },
+              { q: "How long does a Korea launch take?", a: "Focused launch: 2-3 weeks. Full GTM engagement: 2-3 months covering analysis, community, KOL, PR, events, and exchange strategy." },
+              { q: "Do you help with exchange listings?", a: "Yes. Direct relationships with Upbit, Bithumb, Coinone, GOPAX. We handle applications, documentation, compliance, and post-listing marketing." },
+              { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events + exchange) runs $30K–$50K/month." },
+            ].map((item, i) => (
+              <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
+                <p className="text-base sm:text-lg font-semibold text-white mb-2">{item.q}</p>
+                <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Who This Is For ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">Who this is for</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -180,7 +255,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 6. Full-width mood image ===== */}
+      {/* ===== Mood image ===== */}
       <section className="px-3 sm:px-4 pb-8">
         <div className="relative rounded-2xl overflow-hidden aspect-[21/6]">
           <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.4) saturate(0.8)" }} />
@@ -193,68 +268,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* ===== 7. What We Deliver ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-8">What we deliver</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            {[
-              { n: "01", title: "Analyze", desc: "Competitor SOV analysis, on-chain wallet profiling, market opportunity mapping, regulatory landscape review." },
-              { n: "02", title: "Build", desc: "Korea-fit narrative, community infrastructure (Telegram/Discord/KakaoTalk), Naver/Kakao integration, brand localization." },
-              { n: "03", title: "Launch", desc: "Tier-1 media coverage (BlockMedia, CoinDesk Korea), verified KOL deployment, viral campaign execution, AMA hosting." },
-              { n: "04", title: "Scale", desc: "Exchange listing support (Upbit, Bithumb), offline events in Seoul, ambassador programs, retention & analytics." },
-            ].map((step) => (
-              <div key={step.n} className="flex gap-4">
-                <span className="text-2xl font-black tracking-tighter text-[#10B981]/30 pt-0.5">{step.n}</span>
-                <div>
-                  <h3 className="text-base font-semibold text-white mb-1">{step.title}</h3>
-                  <p className="text-sm text-white/40 leading-relaxed">{step.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="space-y-6">
-            {[
-              { title: "Market Intelligence", items: ["Competitive landscape & SOV report", "On-chain wallet behavior analysis", "Market opportunity mapping", "Regulatory compliance guidance"] },
-              { title: "Launch Package", items: ["Korea-fit brand narrative", "Community infrastructure (TG, Discord, KakaoTalk)", "KOL campaign strategy & execution", "Media coverage plan"] },
-              { title: "Growth & Scale", items: ["Exchange listing strategy", "Offline event production in Seoul", "Ambassador program setup", "Monthly performance analytics"] },
-            ].map((d) => (
-              <div key={d.title}>
-                <h3 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#10B981]" />{d.title}
-                </h3>
-                <ul className="space-y-1">
-                  {d.items.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-[13px] text-white/40 leading-relaxed">
-                      <span className="text-white/15">—</span>{item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 8. FAQ ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-6">FAQ</h2>
-        <div className="max-w-3xl space-y-5">
-          {[
-            { q: "What makes Korean GTM different?", a: "Korea is trust-first, retail-driven. Projects need native community managers, localized narratives, local KOLs — not translated global campaigns. We handle all of this in-house from Seoul." },
-            { q: "How long does a Korea launch take?", a: "Focused launch: 2-3 weeks. Full GTM engagement: 2-3 months covering analysis, community, KOL, PR, events, and exchange strategy." },
-            { q: "Do you help with exchange listings?", a: "Yes. Direct relationships with Upbit, Bithumb, Coinone, GOPAX. We handle applications, documentation, compliance, and post-listing marketing." },
-            { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events + exchange) runs $30K–$50K/month." },
-          ].map((item, i) => (
-            <div key={i}>
-              <p className="text-sm font-semibold text-white mb-1">{item.q}</p>
-              <p className="text-sm text-white/40 leading-relaxed">{item.a}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== 10. CTA ===== */}
+      {/* ===== CTA ===== */}
       <section className="px-4 sm:px-8 lg:px-14 pb-14 sm:pb-20">
         <div className="rounded-2xl bg-[#111] border border-white/[0.06] p-6 sm:p-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5">
           <div>
