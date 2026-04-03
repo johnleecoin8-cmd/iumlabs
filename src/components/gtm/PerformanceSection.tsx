@@ -323,13 +323,18 @@ const ProjectCard = ({
   const colors = colorClasses[project.color as keyof typeof colorClasses];
 
   return (
-    <div className="block flex-shrink-0 cursor-default select-none">
+    <Link
+      to={`/projects/${project.slug}`}
+      className="block flex-shrink-0 select-none"
+      draggable={false}
+      onDragStart={(e) => e.preventDefault()}
+    >
       <div
         className={`
           relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
-          overflow-hidden
+          overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-300
         `}
       >
         {/* Project background image - always visible */}
@@ -408,7 +413,7 @@ const ProjectCard = ({
         </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
