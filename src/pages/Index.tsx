@@ -155,8 +155,8 @@ const Index = () => {
                 );
               })}
 
-              {/* Your Project — same card format as others */}
-              <Link to="/contact" className="group block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]">
+              {/* Your Project — full width bottom row */}
+              <Link to="/contact" className="group col-span-2 lg:col-span-3 block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]">
                 <div className="w-full aspect-[16/9] rounded-lg relative overflow-hidden mb-2.5 sm:mb-3">
                   <img src={ctaBgImage} alt="Your Project" loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-all duration-500" />
