@@ -11,7 +11,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 const CasesSection = lazy(() => import("@/components/CasesSection"));
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
-const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
+
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
 const PartnerCTASection = lazy(() => import("@/components/PartnerCTASection"));
 
