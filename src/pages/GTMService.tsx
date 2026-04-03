@@ -82,6 +82,23 @@ const GTMService = () => {
         </div>
       </section>
 
+      {/* ===== Stats Bar ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-10 sm:py-14 border-b border-white/[0.06]">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10">
+          {[
+            { value: "$7B+", label: "Client Valuation" },
+            { value: "230+", label: "KOL Network" },
+            { value: "22+", label: "Korea Entries" },
+            { value: "70+", label: "Events Hosted" },
+          ].map((stat, i) => (
+            <div key={i} className="text-center">
+              <div className="text-3xl sm:text-5xl font-black text-white tracking-tighter leading-none mb-1">{stat.value}</div>
+              <div className="text-[11px] sm:text-sm text-white/40 font-medium">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ===== 3. The Problem ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="max-w-3xl">
@@ -151,8 +168,15 @@ const GTMService = () => {
               },
             ].map((item, i) => (
               <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
-                <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+                <div className="flex items-start gap-4">
+                  <span className="text-2xl sm:text-3xl font-black text-white/[0.08] leading-none tracking-tighter flex-shrink-0 pt-0.5">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-sm sm:text-[15px] text-white/45 leading-relaxed max-w-xl">{item.desc}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
