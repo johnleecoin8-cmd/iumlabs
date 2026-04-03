@@ -47,11 +47,6 @@ const Index = () => {
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
-          <AnimatedSection direction="none">
-            <Suspense fallback={<SectionLoader />}>
-              <MediaPartnersSection />
-            </Suspense>
-          </AnimatedSection>
         </div>
       </section>
       
