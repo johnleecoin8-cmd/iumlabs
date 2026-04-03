@@ -1,6 +1,7 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
@@ -151,13 +152,16 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05, rootMargin: '50px', triggerOnce: true });
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.05, margin: "50px" }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-500 ease-out",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      )}
+      style={{ transitionDelay: `${(index % 3) * 50}ms` }}
     >
       <Link
         to={service.link}
@@ -227,7 +231,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           />
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
