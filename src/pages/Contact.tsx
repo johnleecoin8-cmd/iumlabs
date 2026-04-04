@@ -23,11 +23,6 @@ const contactInfo = [{
   label: "LinkedIn",
   value: "ium Labs",
   link: brand.linkedin
-}, {
-  icon: Mail,
-  label: "Email",
-  value: "E-mail",
-  link: `mailto:${brand.email}`
 }];
 
 // Floating tags similar to HeroSection
