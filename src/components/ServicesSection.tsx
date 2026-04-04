@@ -152,16 +152,16 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05, rootMargin: '50px', triggerOnce: true });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.08, rootMargin: '0px', triggerOnce: true });
 
   return (
     <div
       ref={ref}
       className={cn(
-        "transition-all duration-500 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        "transition-all duration-[800ms] ease-out",
+        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-[0.97]"
       )}
-      style={{ transitionDelay: `${(index % 3) * 50}ms` }}
+      style={{ transitionDelay: `${(index % 3) * 100}ms` }}
     >
       <Link
         to={service.link}

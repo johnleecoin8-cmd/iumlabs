@@ -68,11 +68,6 @@ const Navbar = () => {
                       <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-base">
                         <Linkedin className="w-5 h-5 text-[#0A66C2]" /><span>LinkedIn</span>
                       </a>
-                      {brand.email && (
-                        <a href={`mailto:${brand.email}`} className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-base">
-                          <Mail className="w-5 h-5 text-white/40" /><span>{brand.email}</span>
-                        </a>
-                      )}
                     </div>
                     <div className="flex items-start gap-2.5 text-white/40 text-sm">
                       <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />

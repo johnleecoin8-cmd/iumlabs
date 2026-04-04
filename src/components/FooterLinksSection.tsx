@@ -74,11 +74,6 @@ const FooterLinksSection = () => {
             <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
               LinkedIn
             </a>
-            {brand.email && (
-              <a href={`mailto:${brand.email}`} className="hover:text-white/60 transition-colors">
-                E-mail
-              </a>
-            )}
           </div>
           <span className="text-xs text-white/20">{brand.address}</span>
         </div>

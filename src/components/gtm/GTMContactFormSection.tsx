@@ -128,17 +128,6 @@ const GTMContactFormSection = ({
               </div>
             </div>
 
-            {/* Email */}
-            <a href={`mailto:${brand.email}`} className="group flex items-center justify-between mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-primary/15 hover:border-primary/30 transition-colors active:scale-[0.98] min-h-[44px]">
-              <div className="flex items-start gap-3 sm:gap-4">
-                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-primary/60 mt-0.5 flex-shrink-0" />
-                <div>
-                  <span className="text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground block mb-1.5 sm:mb-2">Email</span>
-                  <p className="text-foreground text-xs sm:text-sm">{brand.email}</p>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-primary/40 group-hover:text-primary group-hover:translate-x-1.5 transition-all flex-shrink-0" />
-            </a>
 
             {/* Telegram */}
             <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-primary/15 hover:border-primary/30 transition-colors active:scale-[0.98] min-h-[44px]">
