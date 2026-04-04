@@ -155,20 +155,6 @@ const ContactFormSection = ({
                   </div>
                 </div>
 
-                {/* Email */}
-                <a 
-                  href={`mailto:${brand.email}`} 
-                  className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15 hover:border-white/25 transition-colors"
-                >
-                  <div className="flex items-start gap-4">
-                    <Mail className="w-5 h-5 text-white/40 mt-0.5 flex-shrink-0" />
-                    <div>
-                      <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Email</span>
-                      <p className="text-white text-sm">{brand.email}</p>
-                    </div>
-                  </div>
-                  <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
-                </a>
 
                 {/* Telegram */}
                 <a 

@@ -117,18 +117,6 @@ const CTASection = () => {
               </div>
             </div>
 
-            {/* Email */}
-            <a
-              href={`mailto:${brand.email}`}
-              className="group flex items-start gap-4 pb-6 mb-6 border-b border-border hover:bg-secondary/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
-            >
-              <Mail className="w-5 h-5 text-muted-foreground mt-0.5" />
-              <div>
-                <p className="text-muted-foreground text-xs uppercase tracking-wider mb-1">Email</p>
-                <p className="text-foreground text-sm group-hover:text-foreground/70 transition-colors">{brand.email}</p>
-              </div>
-              <ArrowRight className="w-4 h-4 text-muted-foreground ml-auto group-hover:translate-x-1 transition-transform" />
-            </a>
 
             {/* Telegram */}
             <a
