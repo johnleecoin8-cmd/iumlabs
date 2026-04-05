@@ -78,7 +78,7 @@ const InsightsSection = () => {
               to={`/blog/${article.id}`}
               className="group block rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] transition-all"
             >
-              <div className="hidden sm:block aspect-[16/10] overflow-hidden">
+              <div className="aspect-[16/10] overflow-hidden">
                 {article.image ? (
                   <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 ) : (
@@ -86,7 +86,7 @@ const InsightsSection = () => {
                 )}
               </div>
               <div className="p-3">
-                <div className="flex items-center gap-2 text-[10px] text-white/30 mb-1.5">
+                <div className="hidden sm:flex items-center gap-2 text-[10px] text-white/30 mb-1.5">
                   <span className="uppercase tracking-wider">{article.category}</span>
                   <span>·</span>
                   <span>{article.date}</span>
