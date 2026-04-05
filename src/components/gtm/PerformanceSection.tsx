@@ -636,7 +636,7 @@ export const PerformanceSection = () => {
                   key={index}
                   projects={rowProjects}
                   direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={9 + index * 0.7}
+                  speed={11 + index * 0.7}
                   mobileSpeed={13 + index * 0.7}
                 />
               ))}
