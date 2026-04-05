@@ -71,7 +71,7 @@ const InsightsSection = () => {
       {insights.length === 0 ? (
         <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
           {insights.filter(a => !a.title.includes('Kalshi') && !a.title.includes('Deconstruction')).slice(0, 6).map((article) => (
             <Link
               key={article.id}
