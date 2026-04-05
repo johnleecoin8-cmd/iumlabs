@@ -1,5 +1,6 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
@@ -150,9 +151,14 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.01, rootMargin: '100px', triggerOnce: true });
 
   return (
-    <div>
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      style={{ transitionDelay: `${(index % 3) * 80}ms` }}
+    >
       <Link
         to={service.link}
         className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] hover:bg-[#151515] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
