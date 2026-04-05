@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import { Progress } from '@/components/ui/progress';
-import { useMobileOptimization } from '@/hooks/useMobileOptimization';
+
 
 // Project logos
 import mantraLogo from '@/assets/logos/mantra.png';
@@ -416,36 +416,41 @@ const ProjectCard = ({
   );
 };
 
-// Marquee Row with Touch Swipe Support
-const MarqueeRow = ({ 
-  projects, 
+// Marquee Row with seamless infinite loop
+const MarqueeRow = ({
+  projects,
   direction,
-  speed = 35
-}: { 
+  speed = 12
+}: {
   projects: typeof allProjects;
   direction: 'left' | 'right';
   speed?: number;
 }) => {
-  const { isMobile } = useMobileOptimization();
-  // Mobile: 63x faster for snappy scrolling (was 21x, now 3x more)
-  const actualSpeed = isMobile ? speed / 63 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
+  // Card width + gap: mobile 220+12=232, desktop 320+16=336
+  // One set = 4 cards. Translate by exactly one set width.
+  const mobileSetWidth = projects.length * (220 + 12);
+  const desktopSetWidth = projects.length * (320 + 16);
+
   return (
     <div className="relative overflow-hidden py-2">
       <motion.div
         className="flex gap-3 md:gap-4"
         animate={{
-          x: direction === 'left' ? ['0%', '-25%'] : ['-25%', '0%']
+          x: direction === 'left'
+            ? [0, -mobileSetWidth]
+            : [-mobileSetWidth, 0]
         }}
         transition={{
           x: {
-            duration: actualSpeed,
+            duration: speed,
             repeat: Infinity,
             ease: 'linear',
             repeatType: 'loop'
           }
         }}
+        style={{ willChange: 'transform' }}
       >
         {duplicated.map((project, index) => (
           <ProjectCard
@@ -622,7 +627,7 @@ export const PerformanceSection = () => {
                   key={index}
                   projects={rowProjects}
                   direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={20 + index * 2}
+                  speed={7 + index * 0.7}
                 />
               ))}
             </div>

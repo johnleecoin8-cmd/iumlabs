@@ -1255,7 +1255,7 @@ video {
     animation-duration: 100s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 125s !important;
+    animation-duration: 83s !important;
   }
   .marquee-content {
     animation-duration: 37s !important;
@@ -1320,7 +1320,7 @@ video {
     animation-duration: 100s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 125s !important;
+    animation-duration: 83s !important;
   }
   
   /* Disable floating animations completely */
