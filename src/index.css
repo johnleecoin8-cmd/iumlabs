@@ -392,6 +392,8 @@ video {
 
   /* Logo Marquee Animation */
   .logo-marquee {
+    display: inline-flex;
+    flex-shrink: 0;
     animation: marquee 30s linear infinite;
   }
 
@@ -855,11 +857,15 @@ video {
 
 /* Slow Marquee for logos */
 .logo-marquee-slow {
+  display: inline-flex;
+  flex-shrink: 0;
   animation: marquee 26s linear infinite;
 }
 
 /* Fast Marquee */
 .logo-marquee-fast {
+  display: inline-flex;
+  flex-shrink: 0;
   animation: marquee 50s linear infinite;
 }
 
@@ -1249,7 +1255,7 @@ video {
     animation-duration: 3.5s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 12.5s !important;
+    animation-duration: 21.25s !important;
   }
   .marquee-content {
     animation-duration: 5s !important;
@@ -1314,7 +1320,7 @@ video {
     animation-duration: 8.7s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 33.5s !important;
+    animation-duration: 57s !important;
   }
   
   /* Disable floating animations completely */
