@@ -420,18 +420,27 @@ const ProjectCard = ({
 const MarqueeRow = ({
   projects,
   direction,
-  speed = 12
+  speed = 12,
+  mobileSpeed,
 }: {
   projects: typeof allProjects;
   direction: 'left' | 'right';
   speed?: number;
+  mobileSpeed?: number;
 }) => {
-  // Duplicate projects 4 times for seamless loop
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const duplicated = [...projects, ...projects, ...projects, ...projects];
-  // Card width + gap: mobile 220+12=232, desktop 320+16=336
-  // One set = 4 cards. Translate by exactly one set width.
   const mobileSetWidth = projects.length * (220 + 12);
   const desktopSetWidth = projects.length * (320 + 16);
+  const setWidth = isMobile ? mobileSetWidth : desktopSetWidth;
+  const actualSpeed = isMobile && mobileSpeed ? mobileSpeed : speed;
 
   return (
     <div className="relative overflow-hidden py-2">
@@ -439,12 +448,12 @@ const MarqueeRow = ({
         className="flex gap-3 md:gap-4"
         animate={{
           x: direction === 'left'
-            ? [0, -mobileSetWidth]
-            : [-mobileSetWidth, 0]
+            ? [0, -setWidth]
+            : [-setWidth, 0]
         }}
         transition={{
           x: {
-            duration: speed,
+            duration: actualSpeed,
             repeat: Infinity,
             ease: 'linear',
             repeatType: 'loop'
@@ -627,7 +636,8 @@ export const PerformanceSection = () => {
                   key={index}
                   projects={rowProjects}
                   direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={7 + index * 0.7}
+                  speed={9 + index * 0.7}
+                  mobileSpeed={13 + index * 0.7}
                 />
               ))}
             </div>
