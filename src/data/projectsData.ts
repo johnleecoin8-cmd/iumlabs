@@ -654,6 +654,35 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["Legal", "PR"],
     gallery: [],
     news: []
+  },
+  "aptos": {
+    name: "Aptos",
+    logo: "",
+    bgImage: "/images/projects/aptos-bg.jpg",
+    bgVideo: undefined,
+    category: "Layer 1",
+    result: "15K+ Community",
+    glowColor: "#4AE8A0",
+    description: "Aptos is a next-generation Layer 1 blockchain built for scalability and safety. ium Labs executed Korea market entry through offline events, KOL marketing, and community building at Korea Blockchain Week.",
+    challenge: "Aptos needed to establish a strong Korean community presence and drive developer adoption in one of the world's most competitive Layer 1 markets.",
+    whatWeDid: "We organized Aptos Experience Seoul, a flagship side event during Korea Blockchain Week. Combined with targeted KOL campaigns across Korean crypto YouTube and Telegram, we built a thriving Korean community from scratch.",
+    metrics: [
+      { value: "15K+", label: "Community Members" },
+      { value: "KBW", label: "Side Event Hosted" }
+    ],
+    strategy: [
+      "Korea Blockchain Week side event production",
+      "Korean KOL campaign across YouTube and Telegram",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Community", value: "15K+" },
+      { metric: "Event", value: "Aptos Experience Seoul" }
+    ],
+    services: ["Offline Event", "KOL Marketing", "Community"],
+    shortServices: ["Events", "KOL", "Community"],
+    gallery: [],
+    news: []
   }
 };
 
