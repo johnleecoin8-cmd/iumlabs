@@ -67,11 +67,11 @@ const InsightsSection = () => {
         </Link>
       </div>
 
-      {/* 4x2 Grid */}
+      {/* 4x2 Grid - hidden on mobile */}
       {insights.length === 0 ? (
-        <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
+        <div className="hidden sm:block p-8 text-center text-white/30 text-sm">No articles yet.</div>
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {insights.slice(0, 8).map((article) => (
             <Link
               key={article.id}
@@ -100,8 +100,8 @@ const InsightsSection = () => {
         </div>
       )}
 
-      {/* Subscribe row */}
-      <form onSubmit={handleSubscribe} className="mt-5 flex flex-col sm:flex-row items-center gap-3 justify-center">
+      {/* Subscribe row - hidden on mobile */}
+      <form onSubmit={handleSubscribe} className="hidden sm:flex mt-5 flex-col sm:flex-row items-center gap-3 justify-center">
         <p className="text-[11px] text-white/25 hidden sm:block">Join 500+ Web3 founders</p>
         <div className="flex gap-1.5">
           <input
