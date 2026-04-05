@@ -132,7 +132,7 @@ const Index = () => {
                     className="group block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]"
                   >
                     <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-2.5 sm:mb-3">
-                      <img src={cardImage} alt={project?.name || ''} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      <img src={cardImage} alt={project?.name || ''} loading="eager" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                     <div className="space-y-1">
                       <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">{cs.category}</span>
