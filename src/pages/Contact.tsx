@@ -14,15 +14,20 @@ import officeImage from "@/assets/office/ium-labs-office.webp";
 import confetti from "canvas-confetti";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
 const contactInfo = [{
+  icon: Linkedin,
+  label: "LinkedIn",
+  value: "ium Labs",
+  link: brand.linkedin
+}, {
   icon: Send,
   label: "Telegram",
   value: brand.telegram,
   link: brand.telegramLink
 }, {
-  icon: Linkedin,
-  label: "LinkedIn",
-  value: "ium Labs",
-  link: brand.linkedin
+  icon: Mail,
+  label: "Email",
+  value: "Email",
+  link: `mailto:${brand.email}`
 }];
 
 // Floating tags similar to HeroSection
