@@ -49,7 +49,7 @@ const ContactFormSection = ({
   const step2Complete = formData.message;
   
   const totalSteps = 2;
-  const overallProgress = step1Complete ? (step2Complete ? 100 : 50) : 0;
+  const overallProgress = currentStep === 1 ? (step1Complete ? 50 : 0) : (step2Complete ? 100 : 50);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

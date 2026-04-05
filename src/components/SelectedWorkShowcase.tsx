@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -13,180 +13,172 @@ import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
 import bnbBg from '@/assets/projects/bnb-bg.jpg';
 
+const projects = [
+  {
+    name: "MANTRA",
+    category: "L1 Infrastructure",
+    result: "500% Growth",
+    media: mantraBg,
+    video: "/videos/projects/mantra-hero.mp4",
+    slug: "mantra"
+  },
+  {
+    name: "peaq",
+    category: "DePIN",
+    result: "First Mover",
+    media: peaqBg,
+    video: "/videos/projects/peaq-hero.mp4",
+    slug: "peaq"
+  },
+  {
+    name: "BNB Chain",
+    category: "Infrastructure",
+    result: "+340% Volume",
+    media: bnbBg,
+    video: "/videos/projects/bnb-hero.mp4",
+    slug: "bnb-chain"
+  },
+  {
+    name: "Bybit",
+    category: "Exchange",
+    result: "#2 Traffic",
+    media: bybitBg,
+    video: "/videos/projects/bybit-hero.mp4",
+    slug: "bybit"
+  },
+  {
+    name: "Aptos",
+    category: "Layer 1",
+    result: "Ecosystem Growth",
+    media: "/images/projects/aptos-bg.jpg",
+    video: "/videos/projects/aptos-hero.mp4",
+    slug: "aptos"
+  },
+  {
+    name: "Kite AI",
+    category: "AI",
+    result: "Market Entry",
+    media: "/images/projects/kite-bg.jpg",
+    video: "/videos/projects/kite-hero.mp4",
+    slug: "kite"
+  },
+  {
+    name: "FOGO",
+    category: "L1 Chain",
+    result: "Market Entry",
+    media: storyBg,
+    slug: "fogo"
+  },
+  {
+    name: "OpenLedger",
+    category: "Data Infra",
+    result: "Market Entry",
+    media: openledgerHero,
+    slug: "openledger"
+  }
+];
+
+const BUFFER_RANGE = 2; // preload 2 ahead, keep 2 behind
+
 const SelectedWorkShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState<Record<number, boolean>>({});
-  const [preloadedVideos, setPreloadedVideos] = useState<Set<number>>(new Set());
+  const [videoReady, setVideoReady] = useState<Record<number, boolean>>({});
+  const [loadedSet, setLoadedSet] = useState<Set<number>>(new Set());
   const ref = useRef(null);
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
-  const isInView = useInView(ref, { once: true, margin: "400px" }); // Earlier trigger for preloading
+  const isInView = useInView(ref, { once: true, margin: "400px" });
 
-  const projects = [
-    // Story Protocol hidden
-    {
-      name: "MANTRA",
-      category: "L1 Infrastructure",
-      result: "500% Growth",
-      media: mantraBg,
-      video: "/videos/projects/mantra-hero.mp4",
-      slug: "mantra"
-    },
-    {
-      name: "peaq",
-      category: "DePIN",
-      result: "First Mover",
-      media: peaqBg,
-      video: "/videos/projects/peaq-hero.mp4",
-      slug: "peaq"
-    },
-    {
-      name: "BNB Chain",
-      category: "Infrastructure",
-      result: "+340% Volume",
-      media: bnbBg,
-      video: "/videos/projects/bnb-hero.mp4",
-      slug: "bnb-chain"
-    },
-    {
-      name: "Bybit",
-      category: "Exchange",
-      result: "#2 Traffic",
-      media: bybitBg,
-      video: "/videos/projects/bybit-hero.mp4",
-      slug: "bybit"
-    },
-    {
-      name: "Aptos",
-      category: "Layer 1",
-      result: "Ecosystem Growth",
-      media: "/images/projects/aptos-bg.jpg",
-      video: "/videos/projects/aptos-hero.mp4",
-      slug: "aptos"
-    },
-    {
-      name: "Kite AI",
-      category: "AI",
-      result: "Market Entry",
-      media: "/images/projects/kite-bg.jpg",
-      video: "/videos/projects/kite-hero.mp4",
-      slug: "kite"
-    },
-    {
-      name: "FOGO",
-      category: "L1 Chain",
-      result: "Market Entry",
-      media: storyBg,
-      slug: "fogo"
-    },
-    {
-      name: "OpenLedger",
-      category: "Data Infra",
-      result: "Market Entry",
-      media: openledgerHero,
-      slug: "openledger"
+  // Determine which indices should have video elements mounted
+  const getMountedIndices = useCallback((current: number) => {
+    const indices = new Set<number>();
+    for (let offset = -BUFFER_RANGE; offset <= BUFFER_RANGE; offset++) {
+      const idx = (current + offset + projects.length) % projects.length;
+      if (projects[idx].video) indices.add(idx);
     }
-  ];
+    // Also keep any previously loaded videos mounted (cache)
+    loadedSet.forEach(idx => indices.add(idx));
+    return indices;
+  }, [loadedSet]);
 
-  // Preload first video when section comes into view
+  const mountedIndices = getMountedIndices(activeIndex);
+
+  // Play active video, pause others
   useEffect(() => {
-    if (isInView && projects[0]?.video && !preloadedVideos.has(0)) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
-      link.href = projects[0].video;
-      document.head.appendChild(link);
-      setPreloadedVideos(prev => new Set(prev).add(0));
-    }
-  }, [isInView]);
+    Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
+      if (!video) return;
+      const idx = Number(idxStr);
+      if (idx === activeIndex) {
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [activeIndex]);
 
-  // Preload next video when active index changes
-  useEffect(() => {
-    const nextIndex = (activeIndex + 1) % projects.length;
-    const nextProject = projects[nextIndex];
-    if (nextProject?.video && !preloadedVideos.has(nextIndex)) {
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.as = 'video';
-      link.href = nextProject.video;
-      document.head.appendChild(link);
-      setPreloadedVideos(prev => new Set(prev).add(nextIndex));
-    }
-  }, [activeIndex, preloadedVideos]);
-
-  // Auto-rotate when not hovering
+  // Auto-rotate
   useEffect(() => {
     if (isHovering) return;
     const interval = setInterval(() => {
       setActiveIndex(prev => (prev + 1) % projects.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isHovering, projects.length]);
+  }, [isHovering]);
 
-  const handleVideoLoad = (index: number) => {
-    setVideoLoaded(prev => ({ ...prev, [index]: true }));
+  const handleVideoReady = (index: number) => {
+    setVideoReady(prev => ({ ...prev, [index]: true }));
+    setLoadedSet(prev => new Set(prev).add(index));
   };
 
   const currentProject = projects[activeIndex];
-  const isCurrentVideoLoaded = videoLoaded[activeIndex];
 
   return (
     <section ref={ref} className="relative h-[80vh] md:h-screen bg-black overflow-hidden">
-      {/* Videos load on-demand for better performance */}
+      {/* All media layers - always mounted, opacity controlled */}
+      {projects.map((project, i) => {
+        const isActive = i === activeIndex;
+        const shouldMountVideo = mountedIndices.has(i);
+        const isVideoReady = videoReady[i];
 
-      {/* Background Media */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
-          className="absolute inset-0"
-        >
-          {/* Always show poster image first for instant feedback */}
-          <img 
-            src={currentProject.media} 
-            alt={currentProject.name} 
-            loading="lazy"
-            decoding="async"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-              currentProject.video && isCurrentVideoLoaded ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          
-          {/* Video layer - preloaded for active project with enhanced mobile support */}
-          {currentProject.video && (
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline
-              webkit-playsinline="true"
-              x5-playsinline="true"
-              x5-video-player-type="h5"
-              poster={typeof currentProject.media === 'string' ? currentProject.media : undefined}
-              preload={activeIndex === 0 || preloadedVideos.has(activeIndex) ? "auto" : "metadata"}
-              onLoadedData={(e) => {
-                handleVideoLoad(activeIndex);
-                // Multiple retry attempts for mobile autoplay
-                const video = e.currentTarget;
-                video.muted = true;
-                video.play().catch(() => {});
-                setTimeout(() => video.play().catch(() => {}), 100);
-                setTimeout(() => video.play().catch(() => {}), 300);
-              }}
+        return (
+          <div
+            key={project.slug}
+            className="absolute inset-0 transition-opacity duration-700"
+            style={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 1 : 0 }}
+          >
+            {/* Poster image - always visible as fallback */}
+            <img
+              src={project.media}
+              alt={project.name}
+              loading={Math.abs(i - activeIndex) <= BUFFER_RANGE ? "eager" : "lazy"}
+              decoding="async"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                isCurrentVideoLoaded ? 'opacity-100' : 'opacity-0'
+                project.video && isActive && isVideoReady ? 'opacity-0' : 'opacity-100'
               }`}
-            >
-              <source src={`${currentProject.video}#t=0.001`} type="video/mp4" />
-            </video>
-          )}
-          
-          <div className="absolute inset-0 bg-black/50" />
-        </motion.div>
-      </AnimatePresence>
+            />
+
+            {/* Video - mounted for buffered range + cached, hidden when not active */}
+            {project.video && shouldMountVideo && (
+              <video
+                ref={el => { videoRefs.current[i] = el; }}
+                muted
+                loop
+                playsInline
+                preload={Math.abs(((i - activeIndex + projects.length) % projects.length)) <= 1 ? "auto" : "metadata"}
+                onCanPlayThrough={() => handleVideoReady(i)}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                  isActive && isVideoReady ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <source src={`${project.video}#t=0.001`} type="video/mp4" />
+              </video>
+            )}
+
+            <div className="absolute inset-0 bg-black/50" />
+          </div>
+        );
+      })}
 
       {/* Content Grid */}
       <div className="relative z-10 h-full flex">
@@ -218,22 +210,15 @@ const SelectedWorkShowcase = () => {
                   onMouseEnter={() => setActiveIndex(i)}
                 >
                   <div className="flex items-center gap-4">
-                    {/* Project Number */}
                     <span className={`text-xs font-mono w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    
-                    {/* Project Name */}
                     <span className={`flex-1 text-lg md:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
-                    
-                    {/* Category - fixed width for alignment */}
                     <span className={`hidden md:block text-xs uppercase tracking-wider transition-colors duration-300 w-28 text-left ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
                       {project.category}
                     </span>
-                    
-                    {/* Arrow */}
                     <ArrowRight className={`w-4 h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
                   </div>
                 </Link>
@@ -241,7 +226,6 @@ const SelectedWorkShowcase = () => {
             ))}
           </div>
 
-          {/* Mobile CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -278,7 +262,7 @@ const SelectedWorkShowcase = () => {
             <p className="text-violet-400 text-xs md:text-base xl:text-lg mb-10">
               Founded by former Binance & KuCoin executives
             </p>
-            
+
             <Link
               to="/projects"
               className="inline-flex items-center gap-3 text-lg xl:text-xl text-white border border-white/30 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300"

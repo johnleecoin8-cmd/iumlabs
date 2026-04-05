@@ -180,8 +180,8 @@ const CaseCard = ({
   // Tablet (2 cols): right border on odd indices
   // Desktop (3 cols): right border on indices 0, 1 (not 2)
 
-  return <div ref={ref} className={cn("h-full transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
-    transitionDelay: `${index % 6 * 50}ms`
+  return <div ref={ref} className={cn("h-full transition-all duration-150 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
+    transitionDelay: `${index % 6 * 15}ms`
   }}>
       <div className={cn("group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full border-b border-border",
     // Mobile & Tablet: 2 columns - right border on left column (even index)

@@ -181,7 +181,7 @@ const HeroSection = () => {
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
       <div className="absolute inset-0">
-        <img {...posterProps} fetchPriority="high" decoding="async" />
+        <img {...posterProps} decoding="async" />
         <ShimmerOverlay />
         {!shouldDisableVideo && !hasVideoError &&
       <video

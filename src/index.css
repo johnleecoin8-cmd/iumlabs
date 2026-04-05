@@ -394,11 +394,11 @@ video {
   .logo-marquee {
     display: inline-flex;
     flex-shrink: 0;
-    animation: marquee 30s linear infinite;
+    animation: marquee 64s linear infinite;
   }
 
   .animate-marquee-slow {
-    animation: marquee 40s linear infinite;
+    animation: marquee 86s linear infinite;
   }
   
   @keyframes marquee {
@@ -852,21 +852,21 @@ video {
   display: flex;
   gap: 2rem;
   flex-shrink: 0;
-  animation: marquee 15s linear infinite;
+  animation: marquee 31s linear infinite;
 }
 
 /* Slow Marquee for logos */
 .logo-marquee-slow {
   display: inline-flex;
   flex-shrink: 0;
-  animation: marquee 26s linear infinite;
+  animation: marquee 56s linear infinite;
 }
 
 /* Fast Marquee */
 .logo-marquee-fast {
   display: inline-flex;
   flex-shrink: 0;
-  animation: marquee 50s linear infinite;
+  animation: marquee 107s linear infinite;
 }
 
 /* Pause on hover */
@@ -1247,42 +1247,42 @@ video {
     animation-duration: 6s !important;
   }
   
-  /* Tablet marquee - ~65% of desktop speed */
+  /* Tablet/Mobile marquee - 0.6x speed (duration ÷ 0.6) */
   .logo-marquee {
-    animation-duration: 20s !important;
+    animation-duration: 75s !important;
   }
   .logo-marquee-slow {
-    animation-duration: 18s !important;
+    animation-duration: 100s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 14s !important;
+    animation-duration: 125s !important;
   }
   .marquee-content {
-    animation-duration: 12s !important;
+    animation-duration: 37s !important;
   }
   .animate-scroll-left,
   .animate-scroll-right {
-    animation-duration: 20s !important;
+    animation-duration: 50s !important;
   }
   .animate-scroll-left-fast,
   .animate-scroll-right-fast {
-    animation-duration: 10s !important;
+    animation-duration: 25s !important;
   }
   .animate-scroll-right-slow,
   .animate-scroll-left-slow {
-    animation-duration: 28s !important;
+    animation-duration: 67s !important;
   }
   .animate-scroll-left-values {
-    animation-duration: 35s !important;
+    animation-duration: 83s !important;
   }
   .animate-scroll-right-values {
-    animation-duration: 38s !important;
+    animation-duration: 92s !important;
   }
   .animate-scroll-left-large {
-    animation-duration: 25s !important;
+    animation-duration: 58s !important;
   }
   .animate-scroll-right-large {
-    animation-duration: 28s !important;
+    animation-duration: 67s !important;
   }
   
   /* Reduce backdrop blur on mobile (expensive on GPU) */
@@ -1312,15 +1312,15 @@ video {
 
 /* Ultra-low power mode for mobile touch devices */
 @media (max-width: 767px) and (pointer: coarse) {
-  /* Mobile touch marquee - ~50% of desktop speed */
+  /* Mobile touch marquee - 0.6x speed */
   .logo-marquee {
-    animation-duration: 15s !important;
+    animation-duration: 75s !important;
   }
   .logo-marquee-slow {
-    animation-duration: 13s !important;
+    animation-duration: 100s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 10s !important;
+    animation-duration: 125s !important;
   }
   
   /* Disable floating animations completely */

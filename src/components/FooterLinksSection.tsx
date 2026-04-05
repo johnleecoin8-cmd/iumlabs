@@ -74,6 +74,9 @@ const FooterLinksSection = () => {
             <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
               LinkedIn
             </a>
+            <a href={brand.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
+              X
+            </a>
           </div>
           <span className="text-xs text-white/20">{brand.address}</span>
         </div>

@@ -158,8 +158,8 @@ const Navbar = () => {
             <span className="text-xs sm:text-[15px] font-bold text-white tracking-tight">ium Labs</span>
           </Link>
 
-          {/* Service Marquee - center */}
-          <div className="flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
+          {/* Service Marquee - center (min-width to prevent crush on small screens) */}
+          <div className="flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container min-w-0">
             <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="flex items-center gap-5">
