@@ -104,7 +104,7 @@ const WhyChooseUsSection = () => {
           <motion.p
             className="text-white/80 leading-relaxed text-[13px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
             variants={descriptionVariants}>
-            Seoul's leading Web3 growth agency since 2022, with a proven track record of launching 22+ global projects into Korea — including BNB, Bybit, and Mantra through <span className="text-white font-semibold">GTM</span>, <span className="text-white font-semibold">KOL</span>, <span className="text-white font-semibold">PR</span>, <span className="text-white font-semibold">community</span>, <span className="text-white font-semibold">events</span>, and full-stack execution. One partner. Full market entry.
+            Korea doesn't work like any other market. Retail-driven, trust-first, and brutally fast. Most agencies translate your global deck and call it localization. We don't. We rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, build <span className="text-white font-semibold">communities that stay</span>, and run <span className="text-white font-semibold">events that convert</span>. 22+ projects. Zero recycled playbooks.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
