@@ -1,7 +1,5 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { cn } from "@/lib/utils";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
@@ -152,17 +150,9 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.08, rootMargin: '0px', triggerOnce: true });
 
   return (
-    <div
-      ref={ref}
-      className={cn(
-        "transition-all duration-[800ms] ease-out",
-        isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-[0.97]"
-      )}
-      style={{ transitionDelay: `${(index % 3) * 100}ms` }}
-    >
+    <div>
       <Link
         to={service.link}
         className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] hover:bg-[#151515] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
@@ -172,8 +162,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <img
             src={service.image}
             alt={service.title}
-            loading="lazy"
-            decoding="async"
+            loading="eager"
+            decoding="sync"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-black/30 to-transparent" />
