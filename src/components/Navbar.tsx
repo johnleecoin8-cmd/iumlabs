@@ -161,7 +161,7 @@ const Navbar = () => {
           {/* Service Marquee - center */}
           <div className="flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
             <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
-              {[...Array(3)].map((_, i) => (
+              {[...Array(4)].map((_, i) => (
                 <div key={i} className="flex items-center gap-5">
                   {[
                     { name: "GTM Strategy", href: "/services/gtm" },
