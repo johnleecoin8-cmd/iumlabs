@@ -392,6 +392,8 @@ video {
 
   /* Logo Marquee Animation */
   .logo-marquee {
+    display: inline-flex;
+    flex-shrink: 0;
     animation: marquee 30s linear infinite;
   }
 
@@ -855,11 +857,15 @@ video {
 
 /* Slow Marquee for logos */
 .logo-marquee-slow {
+  display: inline-flex;
+  flex-shrink: 0;
   animation: marquee 26s linear infinite;
 }
 
 /* Fast Marquee */
 .logo-marquee-fast {
+  display: inline-flex;
+  flex-shrink: 0;
   animation: marquee 50s linear infinite;
 }
 
