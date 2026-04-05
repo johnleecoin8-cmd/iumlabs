@@ -159,7 +159,7 @@ const Navbar = () => {
           </Link>
 
           {/* Service Marquee - center */}
-          <div className="hidden lg:flex flex-1 items-center mx-2.5 h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
+          <div className="flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
             <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
               {[...Array(3)].map((_, i) => (
                 <div key={i} className="flex items-center gap-5">
@@ -174,7 +174,7 @@ const Navbar = () => {
                     { name: "AMA Hosting", href: "/services/ama" },
                     { name: "Compliance", href: "/services/compliance" },
                   ].map((svc) => (
-                    <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
+                    <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[10px] sm:text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
                   ))}
                 </div>
               ))}
