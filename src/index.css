@@ -1247,42 +1247,42 @@ video {
     animation-duration: 6s !important;
   }
   
-  /* Mobile marquee - fast */
+  /* Tablet marquee - ~65% of desktop speed */
   .logo-marquee {
-    animation-duration: 4s !important;
+    animation-duration: 20s !important;
   }
   .logo-marquee-slow {
-    animation-duration: 3.5s !important;
+    animation-duration: 18s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 21.25s !important;
+    animation-duration: 14s !important;
   }
   .marquee-content {
-    animation-duration: 5s !important;
+    animation-duration: 12s !important;
   }
   .animate-scroll-left,
   .animate-scroll-right {
-    animation-duration: 10s !important;
+    animation-duration: 20s !important;
   }
   .animate-scroll-left-fast,
   .animate-scroll-right-fast {
-    animation-duration: 5s !important;
+    animation-duration: 10s !important;
   }
   .animate-scroll-right-slow,
   .animate-scroll-left-slow {
-    animation-duration: 13.3s !important;
+    animation-duration: 28s !important;
   }
   .animate-scroll-left-values {
-    animation-duration: 16.7s !important;
+    animation-duration: 35s !important;
   }
   .animate-scroll-right-values {
-    animation-duration: 18.3s !important;
+    animation-duration: 38s !important;
   }
   .animate-scroll-left-large {
-    animation-duration: 11.7s !important;
+    animation-duration: 25s !important;
   }
   .animate-scroll-right-large {
-    animation-duration: 13.3s !important;
+    animation-duration: 28s !important;
   }
   
   /* Reduce backdrop blur on mobile (expensive on GPU) */
@@ -1312,15 +1312,15 @@ video {
 
 /* Ultra-low power mode for mobile touch devices */
 @media (max-width: 767px) and (pointer: coarse) {
-  /* 3x faster marquee for mobile touch */
+  /* Mobile touch marquee - ~50% of desktop speed */
   .logo-marquee {
-    animation-duration: 10s !important;
+    animation-duration: 15s !important;
   }
   .logo-marquee-slow {
-    animation-duration: 8.7s !important;
+    animation-duration: 13s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 57s !important;
+    animation-duration: 10s !important;
   }
   
   /* Disable floating animations completely */
