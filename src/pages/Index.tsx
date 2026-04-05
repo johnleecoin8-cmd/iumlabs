@@ -119,7 +119,7 @@ const Index = () => {
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
                 { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
                 { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
-                { slug: "mantra", category: "RWA", customImg: aptosSeoulEventImg },
+                { slug: "bybit", category: "Exchange", customImg: aptosSeoulEventImg },
                 { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
               ].map((cs) => {
                 const project = projectsData[cs.slug];
