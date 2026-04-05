@@ -28,10 +28,10 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, remaining);
   }, [startTime, onComplete]);
 
-  // Track real loading progress from multiple sources
+  // Track real loading progress — wait for ALL page images
   useEffect(() => {
     let loadedCount = 0;
-    const totalTasks = 4; // video, fonts, images, DOM
+    let totalTasks = 2; // start with video + fonts, images added dynamically
 
     const updateReal = () => {
       realProgress.current = Math.min((loadedCount / totalTasks) * 100, 100);
@@ -63,30 +63,35 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       updateReal();
     }
 
-    // 3. Critical images (hero poster, logo)
-    const criticalImages = ['/images/hero-poster.jpg'];
-    let imgDone = false;
-    const checkImg = () => {
-      if (imgDone) return;
-      imgDone = true;
-      loadedCount++;
-      updateReal();
-    };
-    const img = new Image();
-    img.onload = checkImg;
-    img.onerror = checkImg;
-    img.src = criticalImages[0];
+    // 3. Wait for ALL images on the page to load
+    const waitForAllImages = () => {
+      const allImages = document.querySelectorAll('img[src]');
+      const pendingImages = Array.from(allImages).filter(img => !img.complete);
 
-    // 4. DOM content loaded
-    if (document.readyState === 'complete') {
-      loadedCount++;
-      updateReal();
-    } else {
-      window.addEventListener('load', () => {
-        loadedCount++;
+      if (pendingImages.length === 0) {
+        // All images already loaded
+        totalTasks = 3;
+        loadedCount = 3;
         updateReal();
-      }, { once: true });
-    }
+        return;
+      }
+
+      totalTasks = 2 + pendingImages.length;
+      let imgLoadedCount = 0;
+
+      pendingImages.forEach((img) => {
+        const onDone = () => {
+          imgLoadedCount++;
+          loadedCount++;
+          updateReal();
+        };
+        img.addEventListener('load', onDone, { once: true });
+        img.addEventListener('error', onDone, { once: true });
+      });
+    };
+
+    // Wait a tick for React to render images to DOM
+    const imgTimer = setTimeout(waitForAllImages, 500);
 
     // Max timeout fallback
     const maxTimer = setTimeout(() => {
@@ -99,6 +104,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       video.pause();
       video.src = '';
       clearTimeout(maxTimer);
+      clearTimeout(imgTimer);
     };
   }, []);
 
