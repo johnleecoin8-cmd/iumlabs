@@ -77,6 +77,9 @@ const FooterLinksSection = () => {
             <a href={brand.twitter} target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
               X
             </a>
+            <a href={`mailto:${brand.email}`} className="hover:text-white/60 transition-colors">
+              {brand.email}
+            </a>
           </div>
           <span className="text-xs text-white/20">{brand.address}</span>
         </div>

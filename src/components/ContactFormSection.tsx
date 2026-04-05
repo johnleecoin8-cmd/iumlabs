@@ -157,10 +157,10 @@ const ContactFormSection = ({
 
 
                 {/* Telegram */}
-                <a 
-                  href={brand.telegramLink} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href={brand.telegramLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15"
                 >
                   <div className="flex items-start gap-4">
@@ -168,6 +168,21 @@ const ContactFormSection = ({
                     <div>
                       <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Telegram</span>
                       <p className="text-white text-sm">{brand.telegram}</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
+                </a>
+
+                {/* Email */}
+                <a
+                  href={`mailto:${brand.email}`}
+                  className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15"
+                >
+                  <div className="flex items-start gap-4">
+                    <Mail className="w-5 h-5 text-white/40 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Email</span>
+                      <p className="text-white text-sm">{brand.email}</p>
                     </div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
@@ -455,7 +470,7 @@ const ContactFormSection = ({
           </div>
           
           {/* Contact buttons - Compact grid */}
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             <a
               href="/book-a-meeting"
               className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
@@ -463,7 +478,7 @@ const ContactFormSection = ({
               <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
               <span className="truncate">Calendly</span>
             </a>
-            <a 
+            <a
               href={brand.telegramLink}
               target="_blank"
               rel="noopener noreferrer"
@@ -471,6 +486,13 @@ const ContactFormSection = ({
             >
               <Send className="w-3.5 h-3.5 flex-shrink-0" />
               <span className="truncate">Telegram</span>
+            </a>
+            <a
+              href={`mailto:${brand.email}`}
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
+            >
+              <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="truncate">Email</span>
             </a>
           </div>
         </div>
