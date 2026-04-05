@@ -85,8 +85,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Insights */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
+      {/* Insights - hidden on mobile */}
+      <section className="hidden sm:block sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Blog</h2>
