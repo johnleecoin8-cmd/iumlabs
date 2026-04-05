@@ -427,8 +427,8 @@ const MarqueeRow = ({
   speed?: number;
 }) => {
   const { isMobile } = useMobileOptimization();
-  // Mobile: 21x faster for snappy scrolling (was 7x, now 3x more)
-  const actualSpeed = isMobile ? speed / 21 : speed;
+  // Mobile: 63x faster for snappy scrolling (was 21x, now 3x more)
+  const actualSpeed = isMobile ? speed / 63 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
   return (
