@@ -1,4 +1,4 @@
-import { Send, Linkedin, MessageSquare } from "lucide-react";
+import { Send, Linkedin, Mail, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { brand } from "@/config/content";
@@ -19,6 +19,12 @@ const connectLinks = [
     label: "ium Labs",
     href: brand.linkedin,
     external: true,
+  },
+  {
+    icon: Mail,
+    label: brand.email,
+    href: `mailto:${brand.email}`,
+    external: false,
   },
 ];
 
