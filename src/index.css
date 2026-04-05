@@ -1241,15 +1241,15 @@ video {
     animation-duration: 6s !important;
   }
   
-  /* Mobile marquee - faster */
+  /* Mobile marquee - fast */
   .logo-marquee {
-    animation-duration: 6s !important;
+    animation-duration: 4s !important;
   }
   .logo-marquee-slow {
-    animation-duration: 5s !important;
+    animation-duration: 3.5s !important;
   }
   .logo-marquee-fast {
-    animation-duration: 4s !important;
+    animation-duration: 2.5s !important;
   }
   .marquee-content {
     animation-duration: 5s !important;
