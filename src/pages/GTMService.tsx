@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, X, Check, Search, Globe, Megaphone, Users, Building2, Rocket } from "lucide-react";
+import { ArrowRight, X, Check, Search, Globe, Megaphone, Users, Rocket } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -38,7 +38,7 @@ const clientLogos = [
 const caseStudies = [
   { slug: "bnb-chain", result: "+420% Volume", detail: "2-week volume surge through KOL campaigns and Seoul networking events" },
   { slug: "bybit", result: "#2 Exchange", detail: "150+ first-page SEO rankings, 850K monthly organic visitors in Korea" },
-  { slug: "mantra", result: "$50M+ Pipeline", detail: "Institutional-first market entry with Korea CEX listing support" },
+  { slug: "mantra", result: "$50M+ Pipeline", detail: "Institutional-first market entry with Korea community and KOL strategy" },
 ];
 
 const GTMService = () => {
@@ -103,7 +103,7 @@ const GTMService = () => {
               What We<br />Deliver
             </h2>
             <p className="text-sm text-white/40 leading-relaxed max-w-sm">
-              End-to-end Korea market entry. From deep market analysis to exchange listing and post-launch growth, we cover every stage.
+              End-to-end Korea market entry. From deep market analysis to community building and post-launch growth, we cover every stage.
             </p>
           </div>
 
@@ -129,11 +129,6 @@ const GTMService = () => {
                 icon: Users,
                 title: "Community Growth",
                 desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat management, sentiment monitoring, and engagement programs that keep your community active and loyal.",
-              },
-              {
-                icon: Building2,
-                title: "Exchange Listing",
-                desc: "Direct relationships with Upbit, Bithumb, Coinone, and GOPAX. We handle applications, compliance documentation, and post-listing marketing to maximize Day 1 trading volume.",
               },
               {
                 icon: Rocket,
@@ -173,8 +168,7 @@ const GTMService = () => {
             {[
               { q: "What makes Korean GTM different?", a: "Korea is trust-first, retail-driven. Projects need native community managers, localized narratives, local KOLs — not translated global campaigns. We handle all of this in-house from Seoul." },
               { q: "How long does a Korea launch take?", a: "Focused launch: 2-3 weeks. Full GTM engagement: 2-3 months covering analysis, community, KOL, PR, events, and exchange strategy." },
-              { q: "Do you help with exchange listings?", a: "Yes. Direct relationships with Upbit, Bithumb, Coinone, GOPAX. We handle applications, documentation, compliance, and post-listing marketing." },
-              { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events + exchange) runs $30K–$50K/month." },
+              { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events) runs $30K–$50K/month." },
             ].map((item, i) => (
               <div key={i} className="py-8 sm:py-10 border-b border-white/[0.06] last:border-b-0">
                 <div className="flex items-start gap-4">
@@ -199,7 +193,7 @@ const GTMService = () => {
           {[
             { title: "Pre-Launch Projects", desc: "Building toward TGE but need Korean positioning, narrative, and community before launch day." },
             { title: "Post-Launch Stalling", desc: "Launched globally but Korea traction is flat. Need local team, local KOLs, local strategy." },
-            { title: "Exchange Listing Prep", desc: "Targeting Upbit or Bithumb. Need compliance guidance, documentation, and post-listing marketing." },
+            { title: "Scaling in Korea", desc: "Already have traction but need to accelerate growth with events, partnerships, and deeper community engagement." },
           ].map((item, i) => (
             <div key={i} className="p-4 sm:p-5 rounded-xl bg-[#111] border border-white/[0.06]">
               <h3 className="text-sm font-semibold text-white mb-1.5">{item.title}</h3>
