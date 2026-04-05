@@ -66,7 +66,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     // 3. Wait for ALL images on the page to load
     const waitForAllImages = () => {
       const allImages = document.querySelectorAll('img[src]');
-      const pendingImages = Array.from(allImages).filter(img => !img.complete);
+      const pendingImages = Array.from(allImages).filter(img => !(img as HTMLImageElement).complete);
 
       if (pendingImages.length === 0) {
         // All images already loaded
