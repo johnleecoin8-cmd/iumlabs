@@ -231,12 +231,13 @@ const allProjects = [
   },
 ];
 
-// Split into 3 rows, 5 per row
+// Split into 4 rows, 4 per row, interleaved from allProjects
 const projectRows = [
-  allProjects.slice(0, 5),   // Row 1: peaq, MANTRA, BNB, Bybit, KuCoin
-  allProjects.slice(5, 10),  // Row 2: Sahara AI, OpenLedger, MegaETH, FOGO, Polygon
-  allProjects.slice(10, 15), // Row 3: Tria, SynFutures, Spacecoin, Aptos, Kite
-];
+  [allProjects[0], allProjects[4], allProjects[8], allProjects[12]],   // Row 1: peaq, KuCoin, FOGO, Aptos
+  [allProjects[1], allProjects[5], allProjects[9], allProjects[13]],   // Row 2: MANTRA, Sahara AI, Polygon, Kite
+  [allProjects[2], allProjects[6], allProjects[10], allProjects[14]],  // Row 3: BNB, OpenLedger, Tria, (wrap) peaq
+  [allProjects[3], allProjects[7], allProjects[11], allProjects[0]],   // Row 4: Bybit, MegaETH, SynFutures, (wrap) MANTRA
+].map(row => row.filter(Boolean));
 
 // Network Stats - Updated to reflect new messaging
 const networkStats = [
