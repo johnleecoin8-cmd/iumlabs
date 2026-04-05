@@ -108,10 +108,10 @@ const GTMService = () => {
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
         <img src={gtmHeroImage} alt="Korea" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.2)" }} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0A0A0A]" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 50% at 50% 60%, rgba(16,185,129,0.05) 0%, transparent 60%)" }} />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 50% at 50% 60%, rgba(255,255,255,0.03) 0%, transparent 60%)" }} />
         <div className="relative z-10 px-4 sm:px-8 text-center max-w-4xl mx-auto pt-24">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/[0.08] rounded-full mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
             <span className="text-[11px] font-mono text-white/40 tracking-wider uppercase">Accepting Q2 2026 Clients</span>
           </div>
           <h1 className="font-sans text-[2rem] sm:text-[3.5rem] md:text-[5.5rem] font-black text-white leading-[0.95] tracking-[-0.03em] mb-6">
@@ -171,7 +171,7 @@ const GTMService = () => {
 
       {/* ===== THE PROBLEM — center ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 text-center">
-        <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-4 block">The Problem</span>
+        <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-4 block">The Problem</span>
         <h2 className="text-2xl sm:text-4xl font-black text-white mb-5 leading-[1.05] tracking-tight">
           Most global projects <span className="text-white/30">fail in Korea.</span>
         </h2>
@@ -183,7 +183,7 @@ const GTMService = () => {
       {/* ===== SERVICES — numbered rows ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="text-center mb-12">
-          <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">What We Build</span>
+          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">What We Build</span>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
             End-to-end GTM <span className="text-white/30">infrastructure</span>
           </h2>
@@ -194,11 +194,11 @@ const GTMService = () => {
         <div className="flex flex-col">
           {services.map((item, i) => (
             <div key={i} className="group grid grid-cols-[48px_1fr] lg:grid-cols-[80px_1fr_1.2fr_200px] gap-3 lg:gap-8 items-center py-6 sm:py-8 border-t border-white/[0.06] last:border-b last:border-white/[0.06] relative cursor-default transition-all">
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <span className="font-mono text-xs text-white/15 group-hover:text-emerald-500 transition-colors relative z-10">
+              <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              <span className="font-mono text-xs text-white/15 group-hover:text-white/30 transition-colors relative z-10">
                 {String(i + 1).padStart(2, '0')}
               </span>
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:text-emerald-400 transition-colors relative z-10 tracking-tight">
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:text-white/50 transition-colors relative z-10 tracking-tight">
                 {item.title}
               </h3>
               <p className="hidden lg:block text-sm text-white/40 leading-relaxed relative z-10">
@@ -221,15 +221,15 @@ const GTMService = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0e0f12] to-[#0A0A0A] pointer-events-none" />
         <div className="relative z-10">
           <div className="text-center mb-10">
-            <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">Why Us</span>
+            <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Why Us</span>
             <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-              Not another agency. <span className="text-emerald-400">A growth system.</span>
+              Not another agency. <span className="text-white/50">A growth system.</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.04]">
             {approachCards.map((card, i) => (
               <div key={i} className="group bg-[#0e0f12] hover:bg-[#131419] p-6 sm:p-10 cursor-default transition-all relative overflow-hidden">
-                <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-emerald-500/[0.04] opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-white/[0.04] opacity-0 group-hover:opacity-100 transition-opacity" />
                 <span className="text-2xl sm:text-3xl block mb-5 grayscale group-hover:grayscale-0 transition-all">{card.icon}</span>
                 <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight relative z-10">{card.title}</h3>
                 <p className="text-sm text-white/40 leading-relaxed relative z-10">{card.desc}</p>
@@ -242,20 +242,20 @@ const GTMService = () => {
       {/* ===== PROCESS TIMELINE ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="text-center mb-12">
-          <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">How We Operate</span>
+          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">How We Operate</span>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-            Zero to <span className="text-emerald-400">dominance</span>
+            Zero to <span className="text-white/50">dominance</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 relative">
           <div className="hidden lg:block absolute top-5 left-0 right-0 h-px bg-white/[0.06]" />
           {processSteps.map((step, i) => (
             <div key={i} className="group lg:px-5 cursor-default relative text-center lg:text-left">
-              <div className="hidden lg:block w-3 h-3 rounded-full border-2 border-white/[0.08] bg-[#0A0A0A] mb-8 relative z-10 group-hover:border-emerald-500 group-hover:bg-emerald-500 group-hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all mx-auto lg:mx-0" />
-              <span className="font-mono text-[10px] text-white/20 tracking-[0.15em] uppercase mb-2 block group-hover:text-emerald-500 transition-colors">{step.phase}</span>
+              <div className="hidden lg:block w-3 h-3 rounded-full border-2 border-white/[0.08] bg-[#0A0A0A] mb-8 relative z-10 group-hover:border-white group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all mx-auto lg:mx-0" />
+              <span className="font-mono text-[10px] text-white/20 tracking-[0.15em] uppercase mb-2 block group-hover:text-white/30 transition-colors">{step.phase}</span>
               <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight">{step.title}</h3>
               <p className="text-sm text-white/35 leading-relaxed mb-3">{step.desc}</p>
-              <span className="inline-block font-mono text-[11px] text-emerald-500 px-2.5 py-1 border border-emerald-500/20 rounded-full">{step.time}</span>
+              <span className="inline-block font-mono text-[11px] text-white/30 px-2.5 py-1 border border-white/20 rounded-full">{step.time}</span>
             </div>
           ))}
         </div>
@@ -264,9 +264,9 @@ const GTMService = () => {
       {/* ===== CASE STUDIES ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 bg-[#0e0f12]">
         <div className="text-center mb-10">
-          <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">Proof of Work</span>
+          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Proof of Work</span>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-            Campaigns that <span className="text-emerald-400">moved markets</span>
+            Campaigns that <span className="text-white/50">moved markets</span>
           </h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -282,7 +282,7 @@ const GTMService = () => {
               className="group block border border-white/[0.06] rounded-2xl p-5 sm:p-7 bg-[#0A0A0A] hover:border-white/[0.12] hover:-translate-y-1 transition-all duration-300 text-center"
             >
               <span className="font-mono text-[10px] text-white/20 tracking-[0.12em] uppercase block pb-4 mb-4 border-b border-white/[0.06]">{cs.category}</span>
-              <div className="text-3xl sm:text-4xl font-black text-emerald-400 tracking-tight mb-2">{cs.metric}</div>
+              <div className="text-3xl sm:text-4xl font-black text-white/50 tracking-tight mb-2">{cs.metric}</div>
               <p className="text-sm text-white/50 leading-relaxed mb-4">{cs.metricLabel}</p>
               <div className="flex items-center justify-center gap-1.5 text-white/25 group-hover:text-white/60 transition-colors text-xs">
                 <span className="group-hover:underline underline-offset-4">View case</span>
@@ -301,7 +301,7 @@ const GTMService = () => {
       {/* ===== WHO THIS IS FOR ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="text-center mb-8">
-          <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">Who This Is For</span>
+          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Who This Is For</span>
           <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Three types of projects we work with</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -310,8 +310,8 @@ const GTMService = () => {
             { title: "Post-Launch Stalling", desc: "Launched globally but Korea traction is flat. Need local team, local KOLs, local strategy." },
             { title: "Scaling in Korea", desc: "Already have traction. Need to accelerate with events, partnerships, and deeper community." },
           ].map((item, i) => (
-            <div key={i} className="group p-5 sm:p-6 border border-white/[0.06] rounded-xl hover:border-emerald-500/30 hover:bg-emerald-500/[0.02] transition-all cursor-default text-center">
-              <h3 className="text-sm font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">{item.title}</h3>
+            <div key={i} className="group p-5 sm:p-6 border border-white/[0.06] rounded-xl hover:border-white/30 hover:bg-white/[0.02] transition-all cursor-default text-center">
+              <h3 className="text-sm font-bold text-white mb-2 group-hover:text-white/50 transition-colors">{item.title}</h3>
               <p className="text-[13px] text-white/35 leading-relaxed">{item.desc}</p>
             </div>
           ))}
@@ -321,7 +321,7 @@ const GTMService = () => {
       {/* ===== FAQ ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
         <div className="text-center mb-10">
-          <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-3 block">Common Questions</span>
+          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Common Questions</span>
           <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">FAQ</h2>
         </div>
         <div className="max-w-3xl mx-auto">
@@ -332,7 +332,7 @@ const GTMService = () => {
           ].map((item, i) => (
             <div key={i} className="group py-7 sm:py-9 border-b border-white/[0.06] first:border-t cursor-default">
               <div className="flex items-start gap-4">
-                <span className="font-mono text-xs text-white/10 group-hover:text-emerald-500 transition-colors pt-0.5 flex-shrink-0">
+                <span className="font-mono text-xs text-white/10 group-hover:text-white/30 transition-colors pt-0.5 flex-shrink-0">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <div>
@@ -347,10 +347,10 @@ const GTMService = () => {
 
       {/* ===== CTA ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-20 sm:py-32 relative overflow-hidden text-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-emerald-500/[0.04] pointer-events-none" />
-        <span className="text-[11px] font-mono text-emerald-500 tracking-[0.18em] uppercase mb-4 block relative z-10">Ready to Scale</span>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-white/[0.04] pointer-events-none" />
+        <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-4 block relative z-10">Ready to Scale</span>
         <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[0.95] tracking-[-0.03em] mb-4 relative z-10">
-          Let's build your<br /><span className="text-emerald-400">Korean market.</span>
+          Let's build your<br /><span className="text-white/50">Korean market.</span>
         </h2>
         <p className="text-sm sm:text-base text-white/35 max-w-md mx-auto mb-8 relative z-10 leading-relaxed">
           30-minute strategy call. We'll show you exactly how we'd attack the Korean market — no fluff, just signal.
