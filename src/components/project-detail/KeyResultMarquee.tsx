@@ -45,7 +45,7 @@ const KeyResultMarquee = () => {
       </div>
 
       <div className="flex items-center logo-marquee-slow ml-12 sm:ml-20">
-        {[...clientLogos, ...clientLogos].map((client, index) => (
+        {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
           <div 
             key={index} 
             className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300"
