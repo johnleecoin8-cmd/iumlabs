@@ -67,18 +67,18 @@ const InsightsSection = () => {
         </Link>
       </div>
 
-      {/* 4x2 Grid - hidden on mobile */}
+      {/* 4x2 Grid */}
       {insights.length === 0 ? (
-        <div className="hidden sm:block p-8 text-center text-white/30 text-sm">No articles yet.</div>
+        <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
       ) : (
-        <div className="hidden sm:grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
           {insights.slice(0, 8).map((article) => (
             <Link
               key={article.id}
               to={`/blog/${article.id}`}
               className="group block rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] transition-all"
             >
-              <div className="aspect-[16/10] overflow-hidden">
+              <div className="hidden sm:block aspect-[16/10] overflow-hidden">
                 {article.image ? (
                   <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 ) : (
