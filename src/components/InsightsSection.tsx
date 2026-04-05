@@ -86,9 +86,9 @@ const InsightsSection = () => {
                 )}
               </div>
               <div className="p-3">
-                <div className="hidden sm:flex items-center gap-2 text-[10px] text-white/30 mb-1.5">
-                  <span className="uppercase tracking-wider">{article.category}</span>
-                  <span>·</span>
+                <div className="flex items-center gap-2 text-[10px] text-white/30 mb-1.5">
+                  <span className="hidden sm:inline uppercase tracking-wider">{article.category}</span>
+                  <span className="hidden sm:inline">·</span>
                   <span>{article.date}</span>
                 </div>
                 <h3 className="text-xs sm:text-sm font-semibold text-white/80 group-hover:text-white transition-colors line-clamp-2 leading-snug">
