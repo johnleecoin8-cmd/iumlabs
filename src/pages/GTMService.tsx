@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, Search, Globe, Megaphone, Users, Rocket } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
 import gtmHeroImage from "@/assets/services/gtm-hero.avif";
-import { projectsData } from "@/data/projectsData";
-
-// Campaign images
-import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.png";
-import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.png";
-import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.png";
 
 // Client logos — same as home hero
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -46,51 +40,65 @@ const clientLogos = [
   { name: "Kite", logo: kiteLogo, noInvert: true, slug: "kite" },
 ];
 
-const services = [
+const allServices = [
   {
-    icon: Search,
-    title: "Market Intelligence",
-    desc: "Full scan of the Korean crypto landscape. Competitor share-of-voice, on-chain wallet profiling, opportunity mapping, and regulatory review.",
-    tags: ["Naver", "On-chain", "Dune"],
+    num: "01", title: "GTM Strategy", href: "/services/gtm",
+    desc: "Competitive landscape analysis, Korea-fit narrative, launch timeline, and full market entry roadmap.",
+    tags: ["Market Analysis", "Positioning", "Roadmap"],
   },
   {
-    icon: Globe,
-    title: "Brand Localization",
-    desc: "Your global narrative doesn't work here. We rebuild it. Korea-fit positioning, localized content across Naver and Kakao, community infra on Telegram and KakaoTalk.",
-    tags: ["Kakao", "Naver", "Telegram"],
+    num: "02", title: "KOL & Influencer", href: "/services/influencer",
+    desc: "170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
+    tags: ["YouTube", "X", "Naver"],
   },
   {
-    icon: Megaphone,
-    title: "KOL & Media Launch",
-    desc: "Tier-1 coverage through BlockMedia, CoinDesk Korea, TokenPost. Verified Korean KOL deployment across YouTube, X, Telegram. Structured AMAs that drive real engagement.",
-    tags: ["PR", "KOL", "AMA"],
+    num: "03", title: "PR & Media", href: "/services/pr",
+    desc: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. Press releases, crisis comms, narrative control.",
+    tags: ["CoinDesk KR", "BlockMedia", "TokenPost"],
   },
   {
-    icon: Users,
-    title: "Community Growth",
-    desc: "24/7 native Korean community managers. Telegram and Discord moderation, KakaoTalk open chat, sentiment monitoring, engagement programs that keep communities loyal.",
-    tags: ["TG", "Discord", "Kakao"],
+    num: "04", title: "Community Management", href: "/services/community",
+    desc: "24/7 native Korean managers. Telegram, Discord, KakaoTalk. Sentiment monitoring and engagement programs.",
+    tags: ["Telegram", "Discord", "KakaoTalk"],
   },
   {
-    icon: Rocket,
-    title: "Events & Scale",
-    desc: "Offline events in Seoul, KBW side events, VIP networking dinners. Ambassador programs, retention analytics, monthly performance reporting.",
-    tags: ["Offline", "KBW", "Growth"],
+    num: "05", title: "Offline Events", href: "/services/offline-event",
+    desc: "KBW side events, Seoul meetups, VIP dinners. Full logistics, venue sourcing, and post-event content.",
+    tags: ["KBW", "Seoul", "Networking"],
+  },
+  {
+    num: "06", title: "Deep Research", href: "/services/deep-research",
+    desc: "On-chain wallet profiling, competitor share-of-voice, market ecosystem mapping, investment thesis support.",
+    tags: ["On-chain", "Dune", "Analytics"],
+  },
+  {
+    num: "07", title: "SEO & Paid Ads", href: "/services/seo-ads",
+    desc: "Naver SEO, Google Ads, crypto ad networks. Keyword strategy, A/B testing, conversion optimization.",
+    tags: ["Naver SEO", "Google Ads", "Performance"],
+  },
+  {
+    num: "08", title: "AMA Hosting", href: "/services/ama",
+    desc: "Telegram, Discord, X Spaces AMAs. Native Korean hosts, question curation, post-AMA analytics.",
+    tags: ["Live AMA", "Korean Host", "Recap"],
+  },
+  {
+    num: "09", title: "Compliance", href: "/services/compliance",
+    desc: "VASP registration, PIPA compliance, regulatory landscape analysis, and compliance documentation.",
+    tags: ["VASP", "PIPA", "Regulatory"],
   },
 ];
 
 const processSteps = [
-  { phase: "Phase 01", title: "Market Intelligence", desc: "Deep-dive into your protocol, competitors, and the Korean landscape. Map narrative gaps and identify growth levers.", time: "Week 1–2" },
-  { phase: "Phase 02", title: "GTM Architecture", desc: "Custom playbook: channel strategy, KOL shortlists, content calendars, community scaffolding — all localized for Korea.", time: "Week 2–3" },
-  { phase: "Phase 03", title: "Campaign Execution", desc: "Multi-channel activation. KOL drops, community events, PR blitz — orchestrated for maximum narrative velocity.", time: "Week 3–8" },
-  { phase: "Phase 04", title: "Optimize & Scale", desc: "Weekly reports, A/B messaging, rotate KOLs, double down on winners. Continuous iteration until dominance.", time: "Ongoing" },
+  { num: "01", title: "Discovery", desc: "Protocol deep-dive, competitor mapping, Korean market landscape audit. We identify exactly where the opportunity is.", time: "Week 1" },
+  { num: "02", title: "Strategy", desc: "Custom GTM playbook. Channel strategy, KOL shortlists, content calendars, community scaffolding — localized end to end.", time: "Week 2" },
+  { num: "03", title: "Launch", desc: "Multi-channel activation. KOL drops, community events, PR blitz, paid campaigns — orchestrated for maximum impact.", time: "Week 3–6" },
+  { num: "04", title: "Scale", desc: "Performance analytics, A/B messaging, KOL rotation, double down on winners. Continuous iteration, monthly reporting.", time: "Ongoing" },
 ];
 
-const approachCards = [
-  { icon: "🧬", title: "Operator-led, not account-managed", desc: "Every campaign is run by operators who've held BD and marketing roles at exchanges and protocols. No juniors running your GTM." },
-  { icon: "🌏", title: "Native in every channel", desc: "Korean campaigns run by Koreans on Korean platforms. Not translated decks — localized strategy from people who live the ecosystem." },
-  { icon: "📊", title: "Data-driven decisions", desc: "On-chain analytics, community sentiment tracking, CT velocity metrics — combined for real-time campaign optimization." },
-  { icon: "🔄", title: "Retention, not just reach", desc: "We optimize for 30-day retention and community stickiness, not just impressions. Post-campaign engagement is measured, not assumed." },
+const caseStudies = [
+  { slug: "bnb-chain", category: "L1 Infrastructure", metric: "+420%", label: "Korean trading volume surge in 2 weeks through KOL blitz and Seoul networking events" },
+  { slug: "kucoin", category: "Exchange", metric: "35K", label: "New Korean users acquired via community airdrop, KOL campaigns, and Naver SEO" },
+  { slug: "mantra", category: "RWA Layer 1", metric: "$50M+", label: "Institutional pipeline built through Korean investor dinners and BD introductions" },
 ];
 
 const GTMService = () => {
@@ -98,221 +106,186 @@ const GTMService = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead
         title="Korea Web3 GTM Strategy | Go-To-Market Agency | ium Labs"
-        description="Full-stack Go-To-Market strategy for Web3 projects entering Korea. Market analysis, brand positioning, and actionable GTM roadmaps."
+        description="Full-stack Go-To-Market strategy for Web3 projects entering Korea. Market analysis, KOL, PR, community, events, compliance — 9 integrated services."
         path="/services/gtm"
         keywords={['Korea Web3 GTM', 'Go-To-Market Korea', 'Web3 Market Entry Korea', 'Crypto GTM Strategy']}
       />
       <Navbar />
 
-      {/* ===== HERO — center aligned ===== */}
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        <img src={gtmHeroImage} alt="Korea" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.2)" }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0A0A0A]" />
-        <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 50% at 50% 60%, rgba(255,255,255,0.03) 0%, transparent 60%)" }} />
-        <div className="relative z-10 px-4 sm:px-8 text-center max-w-4xl mx-auto pt-24">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-white/[0.08] rounded-full mb-6">
-            <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-            <span className="text-[11px] font-mono text-white/40 tracking-wider uppercase">Accepting Q2 2026 Clients</span>
-          </div>
-          <h1 className="font-sans text-[2rem] sm:text-[3.5rem] md:text-[5.5rem] font-black text-white leading-[0.95] tracking-[-0.03em] mb-6">
-            Korea Market<br />
-            <span className="text-white/40">Entry & Growth</span>
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <img src={gtmHeroImage} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ filter: "brightness(0.15)" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-[#0A0A0A]" />
+        <div className="relative z-10 px-4 sm:px-8 text-center max-w-5xl mx-auto pt-24">
+          <p className="text-[10px] text-white/20 tracking-[0.3em] uppercase mb-6">Go-To-Market Strategy</p>
+          <h1 className="font-sans text-[2.2rem] sm:text-[4rem] md:text-[6rem] font-black text-white leading-[0.92] tracking-[-0.04em] mb-6">
+            Enter Korea.<br />
+            <span className="text-white/30">Own the market.</span>
           </h1>
-          <p className="text-sm sm:text-lg text-white/45 max-w-xl mx-auto mb-8 font-light leading-relaxed">
-            Full-stack GTM for Web3 projects entering the #2 crypto market globally. From positioning to launch day — one partner, full execution.
+          <p className="text-sm sm:text-lg text-white/40 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+            9 integrated services. One partner. Full-stack execution for the #2 crypto market globally. From first contact to market dominance.
           </p>
-          <div className="flex items-center justify-center gap-3">
-            <CalendlyButton className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 hover:-translate-y-0.5 transition-all">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <CalendlyButton className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(255,255,255,0.12)] transition-all">
               Book Strategy Call
             </CalendlyButton>
-            <Link to="/projects" className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/[0.12] text-white/50 text-sm rounded-full hover:border-white/[0.2] hover:text-white transition-all">
-              View Case Studies
+            <Link to="/projects" className="inline-flex items-center gap-2 px-8 py-4 border border-white/[0.1] text-white/40 text-sm rounded-full hover:border-white/[0.2] hover:text-white/70 transition-all">
+              See Our Work <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ===== LOGO MARQUEE — same as home hero ===== */}
-      <div className="relative z-[14] py-4 sm:py-6 overflow-hidden border-b border-white/[0.06]">
+      {/* ===== LOGO MARQUEE ===== */}
+      <div className="py-4 sm:py-6 overflow-hidden border-y border-white/[0.04]">
         <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
             <Link key={index} to={`/projects/${client.slug}`} className="flex items-center gap-2 sm:gap-3 mx-1 sm:mx-2 px-4 sm:px-6 py-2.5 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0">
-              <img
-                src={client.logo}
-                alt={client.name}
-                loading="lazy"
-                decoding="async"
-                className={`h-4 sm:h-7 w-auto max-w-[70px] sm:max-w-[140px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
-              />
-              <span className="text-white/75 text-[11px] sm:text-sm font-medium whitespace-nowrap">
-                {client.name}
-              </span>
+              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" className={`h-4 sm:h-7 w-auto max-w-[70px] sm:max-w-[140px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+              <span className="text-white/75 text-[11px] sm:text-sm font-medium whitespace-nowrap">{client.name}</span>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* ===== STATS BAR ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-12 sm:py-16">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.04] rounded-2xl overflow-hidden">
+      {/* ===== STATS ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
           {[
             { value: "$7B+", label: "Client Valuation" },
             { value: "230+", label: "KOL Network" },
-            { value: "22+", label: "Korea Entries" },
+            { value: "22+", label: "Projects Launched" },
             { value: "70+", label: "Events Hosted" },
           ].map((stat, i) => (
-            <div key={i} className="bg-[#0A0A0A] p-6 sm:p-8 text-center">
-              <div className="text-2xl sm:text-4xl font-black text-white tracking-tight">{stat.value}</div>
-              <div className="text-[10px] sm:text-xs text-white/25 font-mono uppercase tracking-[0.15em] mt-2">{stat.label}</div>
+            <div key={i} className="py-8 sm:py-12 text-center border-r border-white/[0.04] last:border-r-0">
+              <div className="text-3xl sm:text-5xl font-black text-white tracking-tighter">{stat.value}</div>
+              <div className="text-[10px] text-white/20 tracking-[0.15em] uppercase mt-2">{stat.label}</div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== THE PROBLEM — center ===== */}
+      {/* ===== THE PROBLEM ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 text-center">
-        <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-4 block">The Problem</span>
-        <h2 className="text-2xl sm:text-4xl font-black text-white mb-5 leading-[1.05] tracking-tight">
-          Most global projects <span className="text-white/30">fail in Korea.</span>
+        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white mb-6 leading-[1.05] tracking-tight">
+          Most projects fail in Korea<br />
+          <span className="text-white/20">because they never truly enter it.</span>
         </h2>
-        <p className="text-sm sm:text-base text-white/40 leading-relaxed max-w-2xl mx-auto">
-          Korea has 16M active crypto users and Upbit processes $4B+ daily. But translated campaigns, global KOLs, and zero Korean presence don't work here. The market is trust-first, retail-driven, and brutally fast. We solve this from Seoul.
+        <p className="text-sm sm:text-base text-white/30 leading-relaxed max-w-2xl mx-auto">
+          16M active crypto users. $4B+ daily volume on Upbit alone. But translated decks and global KOLs don't work here. Korea is trust-first, community-driven, and moves faster than any other market. You need operators on the ground — not a deck from Singapore.
         </p>
       </section>
 
-      {/* ===== SERVICES — numbered rows ===== */}
+      {/* ===== 9 SERVICES — numbered rows ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="text-center mb-12">
-          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">What We Build</span>
+        <div className="text-center mb-14">
+          <p className="text-[10px] text-white/15 tracking-[0.3em] uppercase mb-4">Full-Stack Capabilities</p>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-            End-to-end GTM <span className="text-white/30">infrastructure</span>
+            9 services. <span className="text-white/20">One integrated team.</span>
           </h2>
-          <p className="text-sm text-white/35 max-w-md mx-auto mt-4 leading-relaxed">
-            Five core service pillars, each with dedicated operators who've shipped in-market for the chains that matter.
-          </p>
         </div>
         <div className="flex flex-col">
-          {services.map((item, i) => (
-            <div key={i} className="group grid grid-cols-[48px_1fr] lg:grid-cols-[80px_1fr_1.2fr_200px] gap-3 lg:gap-8 items-center py-6 sm:py-8 border-t border-white/[0.06] last:border-b last:border-white/[0.06] relative cursor-default transition-all">
-              <div className="absolute inset-0 bg-gradient-to-r from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              <span className="font-mono text-xs text-white/15 group-hover:text-white/30 transition-colors relative z-10">
-                {String(i + 1).padStart(2, '0')}
+          {allServices.map((svc) => (
+            <Link
+              key={svc.num}
+              to={svc.href}
+              className="group grid grid-cols-[40px_1fr] lg:grid-cols-[60px_240px_1fr_auto] gap-3 lg:gap-6 items-center py-5 sm:py-7 border-t border-white/[0.04] last:border-b last:border-white/[0.04] relative transition-all hover:bg-white/[0.015]"
+            >
+              <span className="text-[11px] text-white/10 font-mono group-hover:text-white/30 transition-colors">
+                {svc.num}
               </span>
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white group-hover:text-white/50 transition-colors relative z-10 tracking-tight">
-                {item.title}
+              <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white/80 group-hover:text-white transition-colors tracking-tight">
+                {svc.title}
               </h3>
-              <p className="hidden lg:block text-sm text-white/40 leading-relaxed relative z-10">
-                {item.desc}
+              <p className="hidden lg:block text-[13px] text-white/25 leading-relaxed group-hover:text-white/40 transition-colors">
+                {svc.desc}
               </p>
-              <div className="hidden lg:flex flex-wrap gap-1.5 justify-end relative z-10">
-                {item.tags.map(tag => (
-                  <span key={tag} className="font-mono text-[10px] px-2.5 py-1 border border-white/[0.06] rounded-full text-white/20 group-hover:border-white/[0.12] group-hover:text-white/40 transition-all">
+              <div className="hidden lg:flex items-center gap-2">
+                {svc.tags.map(tag => (
+                  <span key={tag} className="text-[9px] px-2 py-0.5 border border-white/[0.05] rounded-full text-white/15 group-hover:border-white/[0.1] group-hover:text-white/30 transition-all whitespace-nowrap">
                     {tag}
                   </span>
                 ))}
+                <ArrowRight className="w-4 h-4 text-white/10 group-hover:text-white/40 group-hover:translate-x-1 transition-all ml-2" />
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* ===== WHY US — 2x2 cards ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0e0f12] to-[#0A0A0A] pointer-events-none" />
-        <div className="relative z-10">
-          <div className="text-center mb-10">
-            <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Why Us</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-              Not another agency. <span className="text-white/50">A growth system.</span>
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.04]">
-            {approachCards.map((card, i) => (
-              <div key={i} className="group bg-[#0e0f12] hover:bg-[#131419] p-6 sm:p-10 cursor-default transition-all relative overflow-hidden">
-                <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-white/[0.04] opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="text-2xl sm:text-3xl block mb-5 grayscale group-hover:grayscale-0 transition-all">{card.icon}</span>
-                <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight relative z-10">{card.title}</h3>
-                <p className="text-sm text-white/40 leading-relaxed relative z-10">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PROCESS TIMELINE ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="text-center mb-12">
-          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">How We Operate</span>
+      {/* ===== PROCESS ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 bg-[#0c0c0e]">
+        <div className="text-center mb-14">
+          <p className="text-[10px] text-white/15 tracking-[0.3em] uppercase mb-4">How We Work</p>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-            Zero to <span className="text-white/50">dominance</span>
+            From zero to <span className="text-white/20">market presence</span>
           </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0 relative">
-          <div className="hidden lg:block absolute top-5 left-0 right-0 h-px bg-white/[0.06]" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 relative">
+          <div className="hidden lg:block absolute top-4 left-[60px] right-[60px] h-px bg-white/[0.04]" />
           {processSteps.map((step, i) => (
-            <div key={i} className="group lg:px-5 cursor-default relative text-center lg:text-left">
-              <div className="hidden lg:block w-3 h-3 rounded-full border-2 border-white/[0.08] bg-[#0A0A0A] mb-8 relative z-10 group-hover:border-white group-hover:bg-white group-hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all mx-auto lg:mx-0" />
-              <span className="font-mono text-[10px] text-white/20 tracking-[0.15em] uppercase mb-2 block group-hover:text-white/30 transition-colors">{step.phase}</span>
-              <h3 className="text-base sm:text-lg font-bold text-white mb-2 tracking-tight">{step.title}</h3>
-              <p className="text-sm text-white/35 leading-relaxed mb-3">{step.desc}</p>
-              <span className="inline-block font-mono text-[11px] text-white/30 px-2.5 py-1 border border-white/20 rounded-full">{step.time}</span>
+            <div key={i} className="group lg:px-6 relative">
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-2.5 h-2.5 rounded-full bg-white/10 group-hover:bg-white/40 transition-all relative z-10" />
+                <span className="text-[10px] text-white/15 tracking-[0.15em] uppercase group-hover:text-white/30 transition-colors">{step.num}</span>
+              </div>
+              <h3 className="text-lg font-bold text-white mb-2 tracking-tight">{step.title}</h3>
+              <p className="text-[13px] text-white/25 leading-relaxed mb-4">{step.desc}</p>
+              <span className="text-[10px] text-white/20 px-2.5 py-1 border border-white/[0.06] rounded-full">{step.time}</span>
             </div>
           ))}
         </div>
       </section>
 
       {/* ===== CASE STUDIES ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 bg-[#0e0f12]">
-        <div className="text-center mb-10">
-          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Proof of Work</span>
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
+        <div className="text-center mb-12">
+          <p className="text-[10px] text-white/15 tracking-[0.3em] uppercase mb-4">Results</p>
           <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
-            Campaigns that <span className="text-white/50">moved markets</span>
+            Campaigns that <span className="text-white/20">moved markets</span>
           </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          {[
-            { slug: "bnb-chain", category: "Infrastructure", metric: "+420%", metricLabel: "Korean volume surge in 2 weeks" },
-            { slug: "kucoin", category: "Exchange", metric: "35K", metricLabel: "New Korean users acquired" },
-            { slug: "mantra", category: "RWA L1", metric: "$50M+", metricLabel: "Pipeline through KR institutional entry" },
-          ].map((cs) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-10">
+          {caseStudies.map((cs) => (
             <Link
               key={cs.slug}
               to={`/projects/${cs.slug}`}
               onClick={() => window.scrollTo(0, 0)}
-              className="group block border border-white/[0.06] rounded-2xl p-5 sm:p-7 bg-[#0A0A0A] hover:border-white/[0.12] hover:-translate-y-1 transition-all duration-300 text-center"
+              className="group block border border-white/[0.04] rounded-2xl p-7 sm:p-9 hover:border-white/[0.08] hover:-translate-y-1 transition-all duration-300"
             >
-              <span className="font-mono text-[10px] text-white/20 tracking-[0.12em] uppercase block pb-4 mb-4 border-b border-white/[0.06]">{cs.category}</span>
-              <div className="text-3xl sm:text-4xl font-black text-white/50 tracking-tight mb-2">{cs.metric}</div>
-              <p className="text-sm text-white/50 leading-relaxed mb-4">{cs.metricLabel}</p>
-              <div className="flex items-center justify-center gap-1.5 text-white/25 group-hover:text-white/60 transition-colors text-xs">
-                <span className="group-hover:underline underline-offset-4">View case</span>
-                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-              </div>
+              <span className="text-[9px] text-white/15 tracking-[0.12em] uppercase block pb-5 mb-5 border-b border-white/[0.04]">{cs.category}</span>
+              <div className="text-4xl sm:text-5xl font-black text-white tracking-tighter mb-3">{cs.metric}</div>
+              <p className="text-[13px] text-white/30 leading-relaxed mb-5">{cs.label}</p>
+              <span className="text-[11px] text-white/15 group-hover:text-white/40 transition-colors">
+                Read case study →
+              </span>
             </Link>
           ))}
         </div>
         <div className="text-center">
-          <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-white/30 hover:text-white transition-colors">
-            View all 22+ projects <ArrowRight className="w-4 h-4" />
+          <Link to="/projects" className="text-sm text-white/20 hover:text-white/50 transition-colors">
+            View all 22+ projects →
           </Link>
         </div>
       </section>
 
-      {/* ===== WHO THIS IS FOR ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="text-center mb-8">
-          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Who This Is For</span>
-          <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Three types of projects we work with</h2>
+      {/* ===== WHY US ===== */}
+      <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20 bg-[#0c0c0e]">
+        <div className="text-center mb-12">
+          <h2 className="text-2xl sm:text-4xl font-black text-white leading-[1.05] tracking-tight">
+            Why ium Labs
+          </h2>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/[0.03] max-w-4xl mx-auto">
           {[
-            { title: "Pre-Launch", desc: "Building toward TGE. Need Korean positioning, narrative, and community before launch day." },
-            { title: "Post-Launch Stalling", desc: "Launched globally but Korea traction is flat. Need local team, local KOLs, local strategy." },
-            { title: "Scaling in Korea", desc: "Already have traction. Need to accelerate with events, partnerships, and deeper community." },
-          ].map((item, i) => (
-            <div key={i} className="group p-5 sm:p-6 border border-white/[0.06] rounded-xl hover:border-white/30 hover:bg-white/[0.02] transition-all cursor-default text-center">
-              <h3 className="text-sm font-bold text-white mb-2 group-hover:text-white/50 transition-colors">{item.title}</h3>
-              <p className="text-[13px] text-white/35 leading-relaxed">{item.desc}</p>
+            { title: "Operators, not account managers", desc: "Every campaign is run by people who've held BD and growth roles at exchanges and protocols. Your GTM isn't delegated to juniors." },
+            { title: "Native Korean team", desc: "Not translated decks. Localized strategy from people who live the ecosystem daily — Naver, KakaoTalk, Korean CT, DC Inside." },
+            { title: "Full-stack from day one", desc: "KOL, PR, community, events, SEO, research, compliance — 9 services under one roof. No vendor coordination overhead." },
+            { title: "Retention over reach", desc: "We optimize for 30-day community retention and on-chain stickiness. Vanity metrics don't build markets." },
+          ].map((card, i) => (
+            <div key={i} className="bg-[#0c0c0e] p-7 sm:p-10 group hover:bg-[#111] transition-all cursor-default">
+              <h3 className="text-sm sm:text-base font-bold text-white mb-3 tracking-tight">{card.title}</h3>
+              <p className="text-[13px] text-white/25 leading-relaxed">{card.desc}</p>
             </div>
           ))}
         </div>
@@ -320,48 +293,38 @@ const GTMService = () => {
 
       {/* ===== FAQ ===== */}
       <section className="px-4 sm:px-8 lg:px-14 py-14 sm:py-20">
-        <div className="text-center mb-10">
-          <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-3 block">Common Questions</span>
-          <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">FAQ</h2>
-        </div>
+        <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight text-center mb-10">FAQ</h2>
         <div className="max-w-3xl mx-auto">
           {[
             { q: "What makes Korean GTM different?", a: "Korea is trust-first, retail-driven. Projects need native community managers, localized narratives, local KOLs — not translated global campaigns. We handle all of this in-house from Seoul." },
-            { q: "How long does a Korea launch take?", a: "Focused launch: 2-3 weeks. Full GTM engagement: 2-3 months covering analysis, community, KOL, PR, and events." },
-            { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM (PR + community + KOL + events) runs $30K–$50K/month." },
+            { q: "How long does a Korea launch take?", a: "Focused launch: 2–3 weeks. Full GTM engagement: 2–3 months covering analysis, community, KOL, PR, events, and ongoing optimization." },
+            { q: "What's the budget range?", a: "Focused campaigns start at $15K/month. Full-stack GTM across all 9 services runs $30K–$50K/month." },
+            { q: "Do you work with pre-TGE projects?", a: "Yes. We help pre-launch projects with Korean positioning, narrative building, community scaffolding, and KOL pre-commitment before launch day." },
           ].map((item, i) => (
-            <div key={i} className="group py-7 sm:py-9 border-b border-white/[0.06] first:border-t cursor-default">
-              <div className="flex items-start gap-4">
-                <span className="font-mono text-xs text-white/10 group-hover:text-white/30 transition-colors pt-0.5 flex-shrink-0">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <p className="text-base sm:text-lg font-semibold text-white mb-2">{item.q}</p>
-                  <p className="text-sm text-white/40 leading-relaxed">{item.a}</p>
-                </div>
-              </div>
+            <div key={i} className="py-6 sm:py-8 border-b border-white/[0.04] first:border-t cursor-default">
+              <p className="text-sm sm:text-base font-semibold text-white mb-2">{item.q}</p>
+              <p className="text-[13px] text-white/25 leading-relaxed">{item.a}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="px-4 sm:px-8 lg:px-14 py-20 sm:py-32 relative overflow-hidden text-center">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-white/[0.04] pointer-events-none" />
-        <span className="text-[10px] text-white/25 tracking-[0.2em] uppercase font-medium mb-4 block relative z-10">Ready to Scale</span>
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[0.95] tracking-[-0.03em] mb-4 relative z-10">
-          Let's build your<br /><span className="text-white/50">Korean market.</span>
+      <section className="px-4 sm:px-8 lg:px-14 py-24 sm:py-36 text-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/[0.015] blur-3xl pointer-events-none" />
+        <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white leading-[0.92] tracking-[-0.04em] mb-5 relative z-10">
+          Ready to enter<br /><span className="text-white/25">Korea?</span>
         </h2>
-        <p className="text-sm sm:text-base text-white/35 max-w-md mx-auto mb-8 relative z-10 leading-relaxed">
-          30-minute strategy call. We'll show you exactly how we'd attack the Korean market — no fluff, just signal.
+        <p className="text-sm sm:text-base text-white/25 max-w-lg mx-auto mb-10 relative z-10 leading-relaxed">
+          30-minute strategy call. We'll map your market entry — channels, KOLs, timeline, budget. No fluff.
         </p>
-        <CalendlyButton className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 hover:-translate-y-0.5 hover:shadow-[0_8px_40px_rgba(255,255,255,0.15)] transition-all relative z-10">
+        <CalendlyButton className="inline-flex items-center gap-2 px-9 py-4 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 hover:-translate-y-0.5 hover:shadow-[0_8px_40px_rgba(255,255,255,0.1)] transition-all relative z-10">
           Book Strategy Call <ArrowRight className="w-4 h-4" />
         </CalendlyButton>
       </section>
 
       <FooterLinksSection />
-      <div className="border-t border-white/10"><Footer /></div>
+      <div className="border-t border-white/[0.04]"><Footer /></div>
     </div>
   );
 };
