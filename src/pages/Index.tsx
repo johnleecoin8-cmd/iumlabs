@@ -37,17 +37,6 @@ import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.png";
 import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.png";
 import seoulSkylineImg from "@/assets/campaigns/seoul-skyline.png";
 
-// Team photos
-import teamDavid from "@/assets/team/david-ceo.png";
-import teamBennet from "@/assets/team/rachel-design.png";
-import teamJ from "@/assets/team/j-cmo.png";
-import teamKevin from "@/assets/team/suki-partner.png";
-import teamLewis from "@/assets/team/lewis-pr.png";
-import teamRachel from "@/assets/team/bennet-coo.png";
-import teamSuki from "@/assets/team/kevin-bd.png";
-import teamHyukjae from "@/assets/team/hyukjae-bdm.png";
-import teamHelen from "@/assets/team/helen-cm.png";
-
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] sm:snap-y sm:snap-proximity sm:overflow-y-auto sm:h-screen scrollbar-hide">
       <SEOHead title="ium Labs | Korea Web3 Marketing & Crypto Agency" description="Seoul's leading Web3 growth agency since 2022. Full-stack GTM strategy, KOL marketing, community growth, and PR — 22+ projects launched including BNB, Bybit, and Mantra. One partner, full execution." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
@@ -60,42 +49,6 @@ const Index = () => {
           <HeroSection />
         </div>
       </main>
-
-      {/* Team Section */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06] relative" style={{ minHeight: 4200 }}>
-          <div className="sticky top-0 h-screen flex items-center justify-center pointer-events-none z-[1]">
-            <span className="font-sans font-extrabold text-white/[0.04] select-none" style={{ fontSize: "clamp(5rem,16vw,16rem)", letterSpacing: "-.05em", lineHeight: ".85" }}>Our Team</span>
-          </div>
-          <div className="absolute top-4 left-0 right-0 text-center z-10">
-            <span className="font-mono text-[11px] text-white/20 tracking-[0.15em] uppercase">[ Team of 10+ Operators ]</span>
-          </div>
-          <div className="relative z-[5] -mt-[100vh] max-w-[1400px] mx-auto px-4 sm:px-8" style={{ minHeight: 4200 }}>
-            {[
-              { name: "David", role: "CEO", img: teamHelen, top: 40, left: "5%", w: 340 },
-              { name: "Bennet", role: "COO", img: teamBennet, top: 300, left: "60%", w: 260 },
-              { name: "J", role: "CMO", img: teamJ, top: 700, left: "28%", w: 400 },
-              { name: "Kevin", role: "Head of BD", img: teamKevin, top: 1100, left: "2%", w: 220 },
-              { name: "Lewis", role: "PR Manager", img: teamLewis, top: 1200, left: "55%", w: 320 },
-              { name: "Rachel", role: "Designer", img: teamRachel, top: 1700, left: "12%", w: 280 },
-              { name: "Suki", role: "Managing Partner", img: teamSuki, top: 1800, left: "52%", w: 360 },
-              { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: 2400, left: "20%", w: 300 },
-              { name: "Helen", role: "Community Moderator", img: teamDavid, top: 2600, left: "58%", w: 260 },
-            ].map(m => (
-              <div key={m.name} className="absolute rounded-2xl overflow-hidden border border-white/[0.06] shadow-lg bg-[#0A0A0A]" style={{ top: m.top, left: m.left, width: m.w }}>
-                <div className="px-3 py-2">
-                  <h4 className="font-bold text-sm text-white/80">{m.name}</h4>
-                  <span className="text-[11px] text-blue-400 font-semibold">{m.role}</span>
-                </div>
-                <div className="w-full relative" style={{ aspectRatio: "1/1.15" }}>
-                  <img src={m.img} alt={m.name} loading="lazy" className="w-full h-full object-cover grayscale" style={{ mixBlendMode: "luminosity" }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 25%, rgba(45,91,255,.35) 100%)" }} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Launch CTA - Top */}
       <section className="sm:px-4 sm:pt-3 snap-start">
