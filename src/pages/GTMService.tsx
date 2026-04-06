@@ -22,18 +22,30 @@ gsap.registerPlugin(ScrollTrigger);
 const clients = ["BNB Chain","Sahara AI","PEAQ Network","Bybit","KuCoin","Polygon","Mantra","Ondo Finance","FOGO","Aptos","Kite","SynFutures"];
 
 const services = [
-  { num: "01", title: "Korean Market Activation", tagline: "Native-level market entry for the world's most concentrated retail crypto market. We don't translate your strategy, we rebuild it for Korea.",
-    desc: "Korea's crypto market operates on its own platforms, in its own language, with its own culture. Naver Blog SEO replaces Google. KakaoTalk Open Chat replaces Telegram. DC Inside replaces Reddit. Korean CT has its own opinion leaders, narratives, and velocity. We own these channels because we operate them daily.",
-    caps: ["Naver Blog SEO & Content Strategy","KakaoTalk Open Chat Management","DC Inside Community Operations","Korean Crypto Twitter Presence","Korean Media & Press Relations","Localized Landing Pages & Assets"] },
-  { num: "02", title: "KOL & Creator Operations", tagline: "Direct relationships with Korea's top crypto KOLs. No middlemen, no broker networks. Every placement is audience-verified and performance-tracked.",
-    desc: "170+ KOL network across Korea. S-tier thread writers, YouTube reviewers, Twitter Spaces hosts, AMA moderators. Every KOL is audience-verified with real engagement data. Full lifecycle management: briefing, content approval, scheduling, performance tracking, iteration.",
-    caps: ["S / A / B-Tier KOL Campaigns","Thread & Long-form Content","YouTube Review Placements","Twitter Spaces & AMA Hosting","Audience Verification & Fraud Filtering","Performance Analytics & Reporting"] },
-  { num: "03", title: "Community & Campaign Execution", tagline: "Full-cycle campaign design from pre-TGE narrative to post-launch retention. Multi-channel, multi-touch, all localized for Korea.",
-    desc: "24/7 Korean community managers across Telegram, Discord, KakaoTalk. End-to-end campaigns: pre-TGE hype building, airdrop design, quest campaigns via Galxe and Zealy, KOL thread sequences, community event programming. We stay through post-launch to optimize retention.",
-    caps: ["Telegram & Discord (Korean Mods)","KakaoTalk Open Chat","Pre-TGE Narrative & Hype Building","Quest Campaigns (Galxe / Zealy)","Airdrop Design & Distribution","Post-Launch Retention Mechanics"] },
-  { num: "04", title: "PR, Research & Compliance", tagline: "Korean media coverage, deep market research, and regulatory navigation. The complete intelligence and credibility layer.",
-    desc: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. On-chain wallet profiling, competitor share-of-voice analysis. VASP registration guidance, PIPA compliance, exchange listing documentation. In partnership with Law Office Asset and Freeman Law.",
-    caps: ["Korean Press & Media Relations","Deep Market Research Reports","On-chain Analytics & Intelligence","VASP & PIPA Compliance","Exchange Listing Documentation","Naver SEO & Paid Ads"] },
+  { num: "01", title: "GTM Strategy", tagline: "Full-stack Go-To-Market planning for Korean market entry. Competitive landscape, Korea-fit narrative, launch timeline.",
+    desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
+    caps: ["Competitive Landscape Analysis","Korea-fit Narrative & Positioning","Launch Timeline & Milestone Planning","Market Sizing & Opportunity Mapping","Audience Segmentation","GTM Roadmap & Playbook"], href: "/services/gtm" },
+  { num: "02", title: "KOL & Influencer", tagline: "170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
+    desc: "Korea's top crypto KOLs — direct relationships, not broker networks. S-tier thread campaigns, YouTube reviews, Twitter Spaces, AMA hosting. Every placement is audience-verified, content-approved, and performance-tracked.",
+    caps: ["S / A / B-Tier KOL Campaigns","YouTube Review Placements","Thread & Long-form Content","Twitter Spaces & AMA Hosting","Audience Verification & Fraud Filtering","Performance Analytics & Reporting"], href: "/services/influencer" },
+  { num: "03", title: "PR & Media", tagline: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. Press releases, thought leadership, crisis comms.",
+    desc: "Tier-1 Korean media coverage through direct journalist relationships. Korean press release writing, interview facilitation, thought leadership positioning, and crisis communication management.",
+    caps: ["CoinDesk Korea / Block Media / TokenPost","Korean Press Release Writing","Mainstream Media (Chosun, MBN)","Interview & Thought Leadership","Crisis Communication","Coverage Analytics & Reporting"], href: "/services/pr" },
+  { num: "04", title: "Community Management", tagline: "24/7 native Korean managers. Telegram, Discord, KakaoTalk. Sentiment monitoring and engagement programs.",
+    desc: "We design community culture. Korean Telegram groups, Discord servers, and local platforms with localized moderation, governance integration, and weekly event programming that keeps communities active and loyal.",
+    caps: ["Telegram & Discord (Korean Mods)","KakaoTalk Open Chat Management","24/7 Moderation & Support","Sentiment Monitoring & Reporting","Engagement Programs & Gamification","AMA & Event Programming"], href: "/services/community" },
+  { num: "05", title: "Offline Events", tagline: "KBW side events, Seoul meetups, VIP networking dinners. Full logistics, venue sourcing, and post-event content.",
+    desc: "End-to-end event production in Seoul. From 20-person VIP dinners to 500+ person parties during Korea Blockchain Week. Venue sourcing, speaker curation, full logistics management, and post-event content that outlasts the night.",
+    caps: ["Korea Blockchain Week Side Events","VIP Networking Dinners","Launch Parties & Meetups","Venue Sourcing & Full Logistics","Speaker & Guest Curation","Post-Event Content & Lead Capture"], href: "/services/offline-event" },
+  { num: "06", title: "Deep Research", tagline: "On-chain wallet profiling, competitor analysis, market ecosystem mapping. Reports in Korean and English.",
+    desc: "Data-driven market intelligence for Korean market entry. On-chain behavior analysis, competitor share-of-voice, investment thesis support. Reports delivered in both Korean and English, distributed through our media and KOL network.",
+    caps: ["Korean Market Ecosystem Mapping","On-chain Behavior & Wallet Profiling","Competitor Share-of-Voice Analysis","Investment Thesis & Due Diligence","Trend Reports & Forecasting","Distribution via Media & KOL Network"], href: "/services/deep-research" },
+  { num: "07", title: "SEO & Paid Ads", tagline: "Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified.",
+    desc: "Naver SEO and keyword strategy, Google Ads, X Ads, crypto-native ad networks like Coinzilla and Bitmedia. We handle platform certifications to prevent ad blocking and optimize for Korean search behavior.",
+    caps: ["Naver SEO & Keyword Strategy","Google Ads (Crypto Certified)","X / Twitter Ads","Crypto Ad Networks","A/B Testing & Conversion Optimization","Performance Tracking & ROI Reporting"], href: "/services/seo-ads" },
+  { num: "08", title: "AMA Hosting", tagline: "Telegram, Discord, X Spaces AMAs with native Korean-speaking hosts. Pre-event promotion, post-AMA recap.",
+    desc: "Structured AMA sessions that drive real engagement. Native Korean-speaking professional hosts, pre-event promotion and question curation, live moderation, and post-AMA recap content and analytics.",
+    caps: ["Telegram & Discord AMAs","X Spaces & YouTube Live","Native Korean-Speaking Hosts","Pre-Event Promotion & Question Curation","Live Moderation & Pacing","Post-AMA Recap & Analytics"], href: "/services/ama" },
 ];
 
 const workCards = [
@@ -63,7 +75,14 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .team-card,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
+      // Team cards parallax
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
+        gsap.from(card, { y: 80 + i * 20, opacity: 0, rotation: (i % 2 === 0 ? -5 : 5), duration: 1.2, ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
+        });
+      });
+
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
       });
 
@@ -141,7 +160,9 @@ const GTMService = () => {
           <div className="wk-grid">
             <div className="wk-item"><div className="wk-big">#3</div><div className="wk-sub">Global Crypto Market</div><div className="wk-note">By trading volume. Korea routinely outpaces entire continents in 24h CEX volume.</div></div>
             <div className="wk-item"><div className="wk-big">87%</div><div className="wk-sub">Retail-Driven</div><div className="wk-note">The most concentrated retail crypto audience globally.</div></div>
-            <div className="wk-item"><div className="wk-big">2</div><div className="wk-sub">Dominant Exchanges</div><div className="wk-note">Upbit and Bithumb. Listing on either can 10x Korean awareness overnight.</div></div>
+            <div className="wk-item"><div className="wk-big">16M</div><div className="wk-sub">Active Crypto Users</div><div className="wk-note">Korea has 16M+ active crypto traders. That's 30% of the adult population.</div></div>
+            <div className="wk-item"><div className="wk-big">2</div><div className="wk-sub">Dominant Exchanges</div><div className="wk-note">Upbit and Bithumb control the market. Listing on either can 10x awareness overnight.</div></div>
+            <div className="wk-item"><div className="wk-big">$4B+</div><div className="wk-sub">Daily Upbit Volume</div><div className="wk-note">Upbit alone processes more daily volume than most global exchanges combined.</div></div>
           </div>
         </div>
       </section>
@@ -166,7 +187,7 @@ const GTMService = () => {
                     <div className="svc-title">{svc.title}</div>
                     <div className="svc-tagline">{svc.tagline}</div>
                   </div>
-                  <div className="svc-toggle"><span className="svc-tog-i">+</span> Explore</div>
+                  <div className="svc-toggle"><span className="svc-tog-i">+</span> Details</div>
                 </div>
               </div>
               <div className="svc-expand">
@@ -224,16 +245,27 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TEAM */}
-      <section className="team-sec">
-        <div className="wrap">
-          <div className="lbl">Team</div>
-          <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(2rem,3.5vw,2.8rem)", letterSpacing: "-.02em" }}>Operators, not <strong>account managers.</strong></h2>
-          <div className="team-grid">
-            <div className="team-card"><div className="t-init">J</div><h4>J. Lee</h4><div className="t-role">CMO / Founder</div><p>Ex-KuCoin Korea BD Lead. Ex-Outlier Ventures. Ex-Camelot DEX APAC BD. Deep roots in Korean crypto ecosystem.</p></div>
-            <div className="team-card"><div className="t-init">KR</div><h4>Korea KOL Network</h4><div className="t-role">170+ Verified KOLs</div><p>Direct relationships with S/A/B-tier Korean crypto influencers. All performance-tracked.</p></div>
-            <div className="team-card"><div className="t-init">SG</div><h4>Singapore Hub</h4><div className="t-role">Operations & BD</div><p>Singapore-based ops for institutional BD, conference circuit, and regulatory bridge.</p></div>
-          </div>
+      {/* TEAM — SCATTER SCROLL */}
+      <section className="team-scatter">
+        <div className="wrap"><div className="lbl">Team</div></div>
+        <div className="tm-sub">[ Operators, not account managers ]</div>
+        <div className="team-big">Our Team</div>
+        <div className="team-cards" style={{ height: "200vh", position: "relative" }}>
+          {[
+            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "5%", left: "8%" },
+            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "8%", right: "12%" },
+            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "28%", right: "25%" },
+            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "35%", left: "5%" },
+            { name: "PR & Media", role: "Press Relations", init: "PR", top: "52%", left: "30%" },
+            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "55%", right: "8%" },
+            { name: "Events Team", role: "Seoul Production", init: "EV", top: "72%", left: "15%" },
+            { name: "SEO & Ads", role: "Performance Marketing", init: "AD", top: "75%", right: "20%" },
+          ].map((m, i) => (
+            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, right: (m as any).right, transform: `rotate(${(i % 2 === 0 ? -2 : 2) + i * 0.5}deg)` }}>
+              <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
+              <div className="tm-avatar"><span className="tm-init">{m.init}</span></div>
+            </div>
+          ))}
         </div>
       </section>
 
