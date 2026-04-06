@@ -85,28 +85,12 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // "Our Team" text — moves down slower than scroll (parallax)
-      const teamBig = document.querySelector(".gtm-ed .team-big");
-      if (teamBig) {
-        gsap.to(teamBig, {
-          y: "60vh",
-          ease: "none",
-          scrollTrigger: { trigger: ".gtm-ed .team-scatter", start: "top bottom", end: "bottom top", scrub: true }
-        });
-      }
-
-      // Team cards — scrub reveal as you scroll through
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
-        const dir = i % 2 === 0 ? -1 : 1;
-        gsap.set(card, { opacity: 0, y: 80, x: dir * 40 });
-        ScrollTrigger.create({
-          trigger: card, start: "top 95%", end: "top 50%", scrub: 1.2,
-          onUpdate: (self) => {
-            const p = self.progress;
-            gsap.set(card, { opacity: p, y: 80 * (1 - p), x: dir * 40 * (1 - p) });
-          }
-        });
-      });
+      // Team cards — IntersectionObserver (no GSAP, CSS transition)
+      const teamCards = document.querySelectorAll(".gtm-ed .tm-card");
+      const teamObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+      }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+      teamCards.forEach(c => teamObs.observe(c));
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
@@ -274,20 +258,21 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TEAM — natural scroll, same background */}
-      <section className="team-scatter">
-        <div className="team-inner">
-          <div className="team-big">Our Team</div>
+      {/* TEAM */}
+      <section className="team-section">
+        <div className="team-label">[ Team of 10+ Operators ]</div>
+        <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
+        <div className="team-cards" style={{ minHeight: 4200 }}>
           {[
-            { name: "David", role: "CEO", img: teamHelen, top: "1%", left: "0%", w: 320 },
-            { name: "Bennet", role: "COO", img: teamBennet, top: "3%", left: "72%", w: 240 },
-            { name: "J", role: "CMO", img: teamJ, top: "18%", left: "35%", w: 380 },
-            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "32%", left: "0%", w: 220 },
-            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "34%", left: "68%", w: 280 },
-            { name: "Rachel", role: "Designer", img: teamRachel, top: "50%", left: "8%", w: 260 },
-            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "52%", left: "58%", w: 320 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "68%", left: "30%", w: 280 },
-            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "70%", left: "72%", w: 220 },
+            { name: "David", role: "CEO", img: teamHelen, top: 40, left: "5%", w: 340 },
+            { name: "Bennet", role: "COO", img: teamBennet, top: 300, left: "60%", w: 260 },
+            { name: "J", role: "CMO", img: teamJ, top: 700, left: "28%", w: 400 },
+            { name: "Kevin", role: "Head of BD", img: teamKevin, top: 1100, left: "2%", w: 220 },
+            { name: "Lewis", role: "PR Manager", img: teamLewis, top: 1200, left: "55%", w: 320 },
+            { name: "Rachel", role: "Designer", img: teamRachel, top: 1700, left: "12%", w: 280 },
+            { name: "Suki", role: "Managing Partner", img: teamSuki, top: 1800, left: "52%", w: 360 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: 2400, left: "20%", w: 300 },
+            { name: "Helen", role: "Community Moderator", img: teamDavid, top: 2600, left: "58%", w: 260 },
           ].map(m => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
@@ -296,6 +281,7 @@ const GTMService = () => {
           ))}
         </div>
       </section>
+      <div style={{ height: "20vh" }} />
 
       {/* REGIONS */}
       <section className="regions-sec">
