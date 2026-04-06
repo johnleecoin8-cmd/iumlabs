@@ -75,11 +75,14 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team cards parallax
+      // Team cards — appear on scroll down, disappear on scroll up
       gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
-        gsap.from(card, { y: 80 + i * 20, opacity: 0, rotation: (i % 2 === 0 ? -5 : 5), duration: 1.2, ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 95%", toggleActions: "play none none none" }
-        });
+        gsap.fromTo(card,
+          { y: 100, opacity: 0, rotation: (i % 2 === 0 ? -6 : 6), scale: .9 },
+          { y: 0, opacity: 1, rotation: (i % 2 === 0 ? -2 : 2) + i * 0.5, scale: 1, duration: 1, ease: "power3.out",
+            scrollTrigger: { trigger: card, start: "top 95%", end: "top 20%", toggleActions: "play reverse play reverse" }
+          }
+        );
       });
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
