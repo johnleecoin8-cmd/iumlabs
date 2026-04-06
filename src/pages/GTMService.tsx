@@ -23,7 +23,7 @@ import teamKevin from "@/assets/team/kevin-bd-new.png";
 import teamLewis from "@/assets/team/lewis-pr.png";
 import teamRachel from "@/assets/team/bennet-coo.png";
 import teamSuki from "@/assets/team/kevin-bd.png";
-import teamHyukjae from "@/assets/team/hyukjae-bdm.png";
+import teamHyukjae from "@/assets/team/hyukjae-bdm-new.png";
 import teamHelen from "@/assets/team/helen-cm.png";
 import "./GTMService.css";
 
