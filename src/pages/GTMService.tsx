@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
@@ -44,43 +45,25 @@ const workCards = [
 
 const GTMService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const dotRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
   const workPinRef = useRef<HTMLDivElement>(null);
-  const loaderRef = useRef<HTMLDivElement>(null);
-  const loaderLogoRef = useRef<HTMLDivElement>(null);
-  const progRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLDivElement>(null);
   const [openSvc, setOpenSvc] = useState<number | null>(null);
-  const [mobOpen, setMobOpen] = useState(false);
-  const mousePos = useRef({ x: 0, y: 0, cx: 0, cy: 0 });
 
   const toggleSvc = useCallback((i: number) => setOpenSvc(p => p === i ? null : i), []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // LOADER
-      const tl = gsap.timeline();
-      tl.to(loaderLogoRef.current, { opacity: 1, duration: .6, delay: .2, ease: "power2.out" })
-        .to(loaderLogoRef.current, { opacity: 0, y: -20, duration: .4, delay: .3, ease: "power2.in" })
-        .to(loaderRef.current, { opacity: 0, duration: .5, ease: "power2.inOut", onComplete: () => {
-          loaderRef.current?.classList.add("done");
-          // Hero stagger
-          gsap.from(".gtm-ed .hero-tag", { y: 30, opacity: 0, duration: 1, ease: "power3.out" });
-          gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .2, ease: "power3.out" });
-          gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .6, ease: "power3.out" });
-        }});
+      // Hero
+      gsap.from(".gtm-ed .hero-tag", { y: 30, opacity: 0, duration: 1, delay: .2, ease: "power3.out" });
+      gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
+      gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // SCROLL PROGRESS
-      gsap.to(progRef.current, { width: "100%", ease: "none", scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: .3 }});
-
-      // REVEAL ANIMATIONS
+      // Reveal animations
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl, .gtm-ed .n-item, .gtm-ed .pill, .gtm-ed .proc-s, .gtm-ed .case-card, .gtm-ed .quote-ed blockquote, .gtm-ed .quote-ed cite, .gtm-ed .cta-ed h2, .gtm-ed .cta-ed > p, .gtm-ed .mag-btn, .gtm-ed .appr-l").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" }});
       });
 
-      // NUMBER COUNTERS
+      // Number counters
       document.querySelectorAll(".gtm-ed .n-val").forEach(el => {
         const target = el.getAttribute("data-count");
         if (!target) return;
@@ -100,7 +83,7 @@ const GTMService = () => {
         });
       });
 
-      // MANIFESTO WORD REVEAL
+      // Manifesto word reveal
       const mp = document.querySelector(".gtm-ed .manifesto p");
       if (mp) {
         const html = mp.innerHTML;
@@ -118,7 +101,7 @@ const GTMService = () => {
         });
       }
 
-      // HORIZONTAL SCROLL WORK
+      // Horizontal scroll work
       if (workPinRef.current && window.innerWidth > 768) {
         const totalW = workPinRef.current.scrollWidth - window.innerWidth;
         gsap.to(workPinRef.current, { x: -totalW, ease: "none",
@@ -127,38 +110,7 @@ const GTMService = () => {
       }
     }, containerRef);
 
-    // CURSOR
-    const isTouchDevice = "ontouchstart" in window;
-    if (!isTouchDevice && cursorRef.current) {
-      const onMove = (e: MouseEvent) => { mousePos.current.x = e.clientX; mousePos.current.y = e.clientY; };
-      document.addEventListener("mousemove", onMove);
-      const tick = gsap.ticker.add(() => {
-        mousePos.current.cx += (mousePos.current.x - mousePos.current.cx) * .09;
-        mousePos.current.cy += (mousePos.current.y - mousePos.current.cy) * .09;
-        gsap.set(cursorRef.current, { x: mousePos.current.cx, y: mousePos.current.cy });
-      });
-
-      const activateEls = containerRef.current?.querySelectorAll("a, button, .svc-head, .pill, .proc-s");
-      activateEls?.forEach(el => {
-        el.addEventListener("mouseenter", () => dotRef.current?.classList.add("active"));
-        el.addEventListener("mouseleave", () => { dotRef.current?.classList.remove("active"); if (labelRef.current) labelRef.current.style.opacity = "0"; });
-      });
-      const cursorEls = containerRef.current?.querySelectorAll("[data-cursor]");
-      cursorEls?.forEach(el => {
-        el.addEventListener("mouseenter", () => {
-          dotRef.current?.classList.add("active");
-          if (labelRef.current) { labelRef.current.textContent = (el as HTMLElement).dataset.cursor || ""; labelRef.current.style.opacity = "1"; }
-        });
-        el.addEventListener("mouseleave", () => {
-          dotRef.current?.classList.remove("active");
-          if (labelRef.current) labelRef.current.style.opacity = "0";
-        });
-      });
-
-      return () => { ctx.revert(); document.removeEventListener("mousemove", onMove); gsap.ticker.remove(tick); };
-    }
-
-    // CLOCK
+    // Clock
     const updateClock = () => {
       if (!clockRef.current) return;
       const kr = new Date().toLocaleString("en-US", { timeZone: "Asia/Seoul", hour: "2-digit", minute: "2-digit", hour12: false });
@@ -170,54 +122,10 @@ const GTMService = () => {
     return () => { ctx.revert(); clearInterval(ci); };
   }, []);
 
-  // MAGNETIC BUTTON
-  const handleMagMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - r.left - r.width / 2;
-    const y = e.clientY - r.top - r.height / 2;
-    gsap.to(e.currentTarget, { x: x * .3, y: y * .3, duration: .4, ease: "power2.out" });
-  }, []);
-  const handleMagLeave = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    gsap.to(e.currentTarget, { x: 0, y: 0, duration: .6, ease: "elastic.out(1,.4)" });
-  }, []);
-
   return (
     <div className="gtm-ed" ref={containerRef}>
       <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Full-stack GTM for Web3 projects entering Korea. 9 services, one partner." path="/services/gtm" keywords={["Korea Web3 GTM", "Go-To-Market Korea"]} />
-
-      {/* LOADER */}
-      <div className="loader" ref={loaderRef}><div className="loader-logo" ref={loaderLogoRef}>ium Labs</div></div>
-
-      {/* SCROLL PROGRESS */}
-      <div className="scroll-prog" ref={progRef} />
-
-      {/* CURSOR */}
-      <div className="cursor-wrap" ref={cursorRef}>
-        <div className="cursor-dot" ref={dotRef} />
-        <div className="cursor-label" ref={labelRef} />
-      </div>
-
-      {/* HEADER */}
-      <header className="ed-header">
-        <Link to="/" className="logo">ium Labs</Link>
-        <nav className="ed-nav">
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#approach">Approach</a>
-          <a href="#contact">Start a Project</a>
-        </nav>
-        <button className={`ham${mobOpen ? " open" : ""}`} onClick={() => setMobOpen(!mobOpen)} aria-label="Menu">
-          <span /><span /><span />
-        </button>
-      </header>
-
-      {/* MOBILE MENU */}
-      <div className={`mob-menu${mobOpen ? " open" : ""}`}>
-        <a href="#services" onClick={() => setMobOpen(false)}>Services</a>
-        <a href="#work" onClick={() => setMobOpen(false)}>Work</a>
-        <a href="#approach" onClick={() => setMobOpen(false)}>Approach</a>
-        <Link to="/contact" onClick={() => setMobOpen(false)}>Contact</Link>
-      </div>
+      <Navbar />
 
       {/* HERO */}
       <section className="hero-ed">
@@ -280,7 +188,7 @@ const GTMService = () => {
             <h2>Campaigns that <strong>moved markets.</strong></h2>
           </div>
           {workCards.map(card => (
-            <Link key={card.slug} to={`/projects/${card.slug}`} className="work-card" data-cursor="View" onClick={() => window.scrollTo(0,0)}>
+            <Link key={card.slug} to={`/projects/${card.slug}`} className="work-card" onClick={() => window.scrollTo(0,0)}>
               <div className="wc-img"><img src={card.img} alt={card.title} loading="lazy" /></div>
               <div className="wc-cat">{card.cat}</div>
               <div className="wc-metric">{card.metric}</div>
@@ -339,7 +247,7 @@ const GTMService = () => {
           <div className="lbl" style={{ justifyContent: "center" }}>Let's Talk</div>
           <h2>Your market <strong>is waiting.</strong></h2>
           <p>30-minute strategy call. We'll map out exactly how we'd approach your Korea market entry.</p>
-          <CalendlyButton className="mag-btn" onMouseMove={handleMagMove} onMouseLeave={handleMagLeave}>
+          <CalendlyButton className="mag-btn">
             <span>Book a Strategy Call →</span>
           </CalendlyButton>
         </div>
