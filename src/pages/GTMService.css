@@ -1,0 +1,190 @@
+/* ── GTM SERVICE PAGE — EDITORIAL STYLE ── */
+.gtm-ed {
+  --white: #FAFAF8; --off: #F2F0EB; --cream: #E8E5DD;
+  --black: #111; --ink: #1a1a1a; --char: #333;
+  --g1: #666; --g2: #999; --g3: #bbb; --g4: #ddd; --g5: #eee;
+  --warm: #C4501A; --warm-soft: rgba(196,80,26,.06);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Syne', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --ease: cubic-bezier(.16,1,.3,1);
+
+  font-family: var(--sans);
+  background: var(--white);
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+.gtm-ed ::selection { background: var(--black); color: var(--white) }
+.gtm-ed a { text-decoration: none; color: inherit }
+.gtm-ed img { display: block; max-width: 100% }
+
+/* WRAP */
+.gtm-ed .wrap { max-width: 1400px; margin: 0 auto; padding: 0 3rem }
+
+/* LABEL */
+.gtm-ed .lbl {
+  font-family: var(--mono); font-size: .58rem; font-weight: 500;
+  letter-spacing: .25em; text-transform: uppercase; color: var(--g2);
+  display: flex; align-items: center; gap: 1.5rem; margin-bottom: 4rem;
+}
+.gtm-ed .lbl::after { content: ''; flex: 1; height: 1px; background: var(--g4) }
+
+/* HERO */
+.gtm-ed .hero-ed {
+  height: 100vh; background: var(--black); color: var(--white);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 3rem; position: relative; overflow: hidden;
+}
+.gtm-ed .hero-wm {
+  position: absolute; bottom: -10%; right: -3%;
+  font-family: var(--sans); font-weight: 800; font-size: clamp(18rem,32vw,38rem);
+  line-height: .78; color: rgba(255,255,255,.015); letter-spacing: -.05em;
+  pointer-events: none; user-select: none;
+}
+.gtm-ed .hero-tag {
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .25em;
+  text-transform: uppercase; color: var(--g2); margin-bottom: 3rem;
+}
+.gtm-ed .hero-ed h1 {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(3rem,7.2vw,6.2rem); line-height: 1.08; letter-spacing: -.02em;
+  max-width: 1050px;
+}
+.gtm-ed .hero-ed h1 strong { font-weight: 600 }
+.gtm-ed .hero-ed h1 em { font-style: italic }
+.gtm-ed .hero-foot {
+  position: absolute; bottom: 3rem; left: 3rem; right: 3rem;
+  display: flex; justify-content: space-between; align-items: flex-end;
+}
+.gtm-ed .hero-foot p { font-size: .82rem; color: var(--g2); max-width: 380px; line-height: 1.7; font-weight: 300 }
+.gtm-ed .hero-scroll-v { font-family: var(--mono); font-size: .5rem; color: var(--g3); letter-spacing: .2em; text-transform: uppercase; writing-mode: vertical-rl }
+
+/* NUMBERS */
+.gtm-ed .numbers { padding: 6rem 0; border-bottom: 1px solid var(--g4) }
+.gtm-ed .n-grid { display: grid; grid-template-columns: repeat(4,1fr) }
+.gtm-ed .n-item { text-align: center; position: relative }
+.gtm-ed .n-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: var(--g4) }
+.gtm-ed .n-val { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem,5.5vw,5rem); letter-spacing: -.03em; line-height: 1 }
+.gtm-ed .n-sub { font-family: var(--mono); font-size: .5rem; color: var(--g2); letter-spacing: .15em; text-transform: uppercase; margin-top: .75rem }
+
+/* MANIFESTO */
+.gtm-ed .manifesto { padding: 10rem 0 }
+.gtm-ed .manifesto p {
+  font-family: var(--serif); font-weight: 400;
+  font-size: clamp(1.5rem,2.6vw,2.3rem); line-height: 1.6;
+  max-width: 860px; color: var(--char);
+}
+.gtm-ed .manifesto p strong { font-weight: 600; color: var(--black) }
+
+/* SERVICES ACCORDION */
+.gtm-ed .services-ed { padding: 0 0 8rem }
+.gtm-ed .svc { border-top: 1px solid var(--g4) }
+.gtm-ed .svc:last-child { border-bottom: 1px solid var(--g4) }
+.gtm-ed .svc-head {
+  display: grid; grid-template-columns: 50px 1fr auto; gap: 2rem; align-items: center;
+  padding: 2.25rem 0; cursor: pointer; transition: padding .4s var(--ease);
+}
+.gtm-ed .svc.open .svc-head { padding-bottom: .5rem }
+.gtm-ed .svc-head:hover .svc-t { color: var(--warm) }
+.gtm-ed .svc-i { font-family: var(--mono); font-size: .7rem; color: var(--g3) }
+.gtm-ed .svc-t { font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem,2vw,1.65rem); letter-spacing: -.01em; transition: color .3s }
+.gtm-ed .svc-x { font-family: var(--mono); font-size: 1.2rem; color: var(--g3); transition: transform .4s var(--ease), color .3s }
+.gtm-ed .svc.open .svc-x { transform: rotate(45deg); color: var(--warm) }
+.gtm-ed .svc-body { max-height: 0; overflow: hidden; transition: max-height .6s var(--ease) }
+.gtm-ed .svc.open .svc-body { max-height: 300px }
+.gtm-ed .svc-inner { display: grid; grid-template-columns: 50px 1fr 1fr; gap: 2rem; padding: 1rem 0 2.5rem }
+.gtm-ed .svc-desc { font-size: .86rem; color: var(--g1); line-height: 1.7; font-weight: 300 }
+.gtm-ed .svc-chips { display: flex; flex-wrap: wrap; gap: .35rem; align-items: flex-start; align-content: flex-start }
+.gtm-ed .chip { font-family: var(--mono); font-size: .52rem; padding: .22rem .55rem; border: 1px solid var(--g4); color: var(--g2); letter-spacing: .03em }
+
+/* APPROACH */
+.gtm-ed .approach-ed { padding: 10rem 0 }
+.gtm-ed .appr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem }
+.gtm-ed .appr-l h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem,3.8vw,3.2rem); line-height: 1.15; letter-spacing: -.02em }
+.gtm-ed .appr-l h2 strong { font-weight: 600 }
+.gtm-ed .appr-l > p { font-size: .9rem; color: var(--g1); line-height: 1.75; margin-top: 2rem; font-weight: 300 }
+.gtm-ed .pillars .pill { padding: 2.25rem 0; border-top: 1px solid var(--g4) }
+.gtm-ed .pillars .pill:last-child { border-bottom: 1px solid var(--g4) }
+.gtm-ed .pill-n { font-family: var(--serif); font-size: 2.2rem; font-weight: 300; color: var(--warm); line-height: 1; margin-bottom: .75rem }
+.gtm-ed .pill h4 { font-weight: 600; font-size: .92rem; margin-bottom: .5rem }
+.gtm-ed .pill p { font-size: .82rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
+
+/* PROCESS */
+.gtm-ed .process-ed { padding: 8rem 0; background: var(--off) }
+.gtm-ed .proc-row { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 4rem }
+.gtm-ed .proc-s { padding: 2rem; border-left: 1px solid var(--g4); position: relative; cursor: default }
+.gtm-ed .proc-s:first-child { border-left: none }
+.gtm-ed .proc-s:hover .proc-dot { background: var(--warm); border-color: var(--warm); box-shadow: 0 0 0 4px var(--warm-soft) }
+.gtm-ed .proc-dot { width: 8px; height: 8px; border: 1.5px solid var(--g3); border-radius: 50%; background: var(--off); margin-bottom: 2rem; transition: all .3s }
+.gtm-ed .proc-ph { font-family: var(--mono); font-size: .52rem; color: var(--g3); letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem }
+.gtm-ed .proc-t { font-family: var(--serif); font-weight: 600; font-size: 1.1rem; margin-bottom: .75rem }
+.gtm-ed .proc-p { font-size: .78rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
+.gtm-ed .proc-tm { font-family: var(--mono); font-size: .55rem; color: var(--warm); margin-top: 1rem }
+
+/* CASE STUDIES */
+.gtm-ed .cases-ed { padding: 8rem 0 }
+.gtm-ed .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 4rem }
+.gtm-ed .case-card { padding: 2.5rem; border: 1px solid var(--g4); transition: all .4s var(--ease); cursor: default }
+.gtm-ed .case-card:hover { border-color: var(--g3); transform: translateY(-4px) }
+.gtm-ed .case-cat { font-family: var(--mono); font-size: .52rem; color: var(--g2); letter-spacing: .15em; text-transform: uppercase; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--g4) }
+.gtm-ed .case-metric { font-family: var(--serif); font-weight: 300; font-size: clamp(2.5rem,4vw,3.5rem); letter-spacing: -.03em; line-height: 1; margin-bottom: .75rem; color: var(--warm) }
+.gtm-ed .case-title { font-weight: 600; font-size: 1rem; margin-bottom: .75rem }
+.gtm-ed .case-text { font-size: .82rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
+
+/* QUOTE */
+.gtm-ed .quote-ed { padding: 10rem 0; background: var(--black); color: var(--white); text-align: center }
+.gtm-ed .quote-ed blockquote {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: clamp(1.4rem,2.8vw,2.3rem); line-height: 1.55; max-width: 780px; margin: 0 auto;
+}
+.gtm-ed .quote-ed cite { display: block; margin-top: 2.5rem; font-style: normal; font-family: var(--mono); font-size: .55rem; color: var(--g2); letter-spacing: .15em; text-transform: uppercase }
+
+/* CTA */
+.gtm-ed .cta-ed { padding: 10rem 0; text-align: center }
+.gtm-ed .cta-ed h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem,7vw,5.5rem); line-height: 1; letter-spacing: -.03em }
+.gtm-ed .cta-ed h2 strong { font-weight: 600 }
+.gtm-ed .cta-ed > p { font-size: .95rem; color: var(--g1); max-width: 400px; margin: 2rem auto 3rem; line-height: 1.7; font-weight: 300 }
+.gtm-ed .mag-btn {
+  font-family: var(--mono); font-size: .68rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 1.1rem 2.8rem; border: 1.5px solid var(--black); color: var(--black);
+  display: inline-block; position: relative; overflow: hidden;
+  transition: color .4s; cursor: pointer; background: none;
+}
+.gtm-ed .mag-btn::before { content: ''; position: absolute; inset: 0; background: var(--black); transform: translateY(101%); transition: transform .4s var(--ease) }
+.gtm-ed .mag-btn:hover { color: var(--white) }
+.gtm-ed .mag-btn:hover::before { transform: translateY(0) }
+.gtm-ed .mag-btn span { position: relative; z-index: 1 }
+
+/* FOOTER (uses existing) */
+.gtm-ed .ft-ed { padding: 4rem 0 2.5rem; border-top: 1px solid var(--g4) }
+.gtm-ed .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem }
+.gtm-ed .ft-brand p { font-size: .8rem; color: var(--g1); line-height: 1.7; margin-top: 1rem; max-width: 280px; font-weight: 300 }
+.gtm-ed .ft-col h6 { font-family: var(--mono); font-size: .5rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--g3); margin-bottom: 1.2rem }
+.gtm-ed .ft-col a { display: block; font-size: .8rem; color: var(--g1); margin-bottom: .55rem; font-weight: 400; transition: color .2s }
+.gtm-ed .ft-col a:hover { color: var(--warm) }
+.gtm-ed .ft-bottom { display: flex; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--g4) }
+.gtm-ed .ft-cp { font-family: var(--mono); font-size: .5rem; color: var(--g3) }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .gtm-ed .n-grid { grid-template-columns: 1fr 1fr }
+  .gtm-ed .n-item:nth-child(2)::after { display: none }
+  .gtm-ed .appr-grid { grid-template-columns: 1fr; gap: 3rem }
+  .gtm-ed .svc-inner { grid-template-columns: 50px 1fr }
+  .gtm-ed .svc-chips { display: none }
+  .gtm-ed .proc-row { grid-template-columns: 1fr 1fr }
+  .gtm-ed .case-grid { grid-template-columns: 1fr 1fr }
+  .gtm-ed .ft-grid { grid-template-columns: 1fr 1fr }
+}
+@media (max-width: 768px) {
+  .gtm-ed .hero-ed { padding: 0 1.5rem }
+  .gtm-ed .hero-foot { position: relative; bottom: auto; left: auto; right: auto; flex-direction: column; gap: 2rem; margin-top: 3.5rem; padding: 0 }
+  .gtm-ed .hero-scroll-v { display: none }
+  .gtm-ed .wrap { padding: 0 1.5rem }
+  .gtm-ed .n-grid { grid-template-columns: 1fr 1fr }
+  .gtm-ed .proc-row { grid-template-columns: 1fr }
+  .gtm-ed .case-grid { grid-template-columns: 1fr }
+  .gtm-ed .ft-grid { grid-template-columns: 1fr }
+}
