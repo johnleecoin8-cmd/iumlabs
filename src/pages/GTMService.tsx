@@ -284,12 +284,12 @@ const GTMService = () => {
             <div className="tm-photo"><img src={teamLewis} alt="Lewis" /></div>
           </div>
           <div className="tm-card" style={{ top: 1700, left: "12%", width: 280 }}>
-            <div className="tm-info"><h4>Rachel</h4><span>Designer</span></div>
-            <div className="tm-photo"><img src={teamRachel} alt="Rachel" /></div>
+            <div className="tm-info"><h4>Suki</h4><span>Designer</span></div>
+            <div className="tm-photo"><img src={teamRachel} alt="Suki" /></div>
           </div>
           <div className="tm-card" style={{ top: 1800, left: "52%", width: 360 }}>
-            <div className="tm-info"><h4>Suki</h4><span>Managing Partner</span></div>
-            <div className="tm-photo"><img src={teamSuki} alt="Suki" /></div>
+            <div className="tm-info"><h4>Rachel</h4><span>Managing Partner</span></div>
+            <div className="tm-photo"><img src={teamSuki} alt="Rachel" /></div>
           </div>
           <div className="tm-card" style={{ top: 2400, left: "20%", width: 300 }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
