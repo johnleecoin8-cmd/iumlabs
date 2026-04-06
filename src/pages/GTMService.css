@@ -137,6 +137,12 @@
 .gtm-ed .t-role{font-family:var(--mono);font-size:.6rem;color:var(--g2);letter-spacing:.1em;text-transform:uppercase}
 .gtm-ed .team-card p{font-size:.8rem;color:var(--g1);line-height:1.6;font-weight:300;margin-top:1rem}
 
+/* SECTION TRANSITION GRADIENTS */
+.gtm-ed .fade-dark-to-light{height:30vh;background:linear-gradient(180deg,var(--black) 0%,var(--bg) 100%)}
+.gtm-ed .fade-light-to-off{height:20vh;background:linear-gradient(180deg,var(--bg) 0%,var(--off) 100%)}
+.gtm-ed .fade-off-to-dark{height:20vh;background:linear-gradient(180deg,var(--off) 0%,var(--black) 100%)}
+.gtm-ed .fade-dark-to-bg{height:25vh;background:linear-gradient(180deg,var(--black) 0%,var(--bg) 100%)}
+
 /* TEAM INTRO BRIDGE */
 .gtm-ed .team-intro{padding:10rem 0;background:var(--bg);text-align:center}
 

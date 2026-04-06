@@ -247,6 +247,9 @@ const GTMService = () => {
         </div>
       </section>
 
+      {/* TRANSITION: dark → light */}
+      <div className="fade-dark-to-light" />
+
       {/* APPROACH */}
       <section className="approach-ed" id="approach">
         <div className="wrap">
@@ -266,6 +269,9 @@ const GTMService = () => {
           </div>
         </div>
       </section>
+
+      {/* TRANSITION: light → off */}
+      <div className="fade-light-to-off" />
 
       {/* TEAM INTRO — bridge */}
       <section className="team-intro">
@@ -306,6 +312,9 @@ const GTMService = () => {
         </div>
       </section>
 
+      {/* TRANSITION: off → light */}
+      <div style={{ height: "15vh", background: `linear-gradient(180deg, var(--off) 0%, var(--bg) 100%)` }} />
+
       {/* REGIONS */}
       <section className="regions-sec">
         <div className="wrap">
@@ -331,6 +340,9 @@ const GTMService = () => {
       </section>
 
       {/* QUOTES */}
+      {/* TRANSITION: light → dark */}
+      <div style={{ height: "20vh", background: `linear-gradient(180deg, var(--bg) 0%, var(--black) 100%)` }} />
+
       <section className="quotes-sec">
         <div className="wrap">
           <div className="lbl" style={{ color: "var(--g2)" }}>Testimonials</div>
