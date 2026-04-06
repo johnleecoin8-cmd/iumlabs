@@ -75,11 +75,14 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team cards — fade in one by one as you scroll past each
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach(card => {
-        gsap.set(card, { opacity: 0, y: 40 });
-        gsap.to(card, { opacity: 1, y: 0, duration: 1, ease: "power3.out",
-          scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none reverse" }
+      // Team cards — slow parallax reveal like Lunar Strategy
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
+        const dir = i % 2 === 0 ? -1 : 1;
+        gsap.set(card, { opacity: 0, y: 120, x: dir * 60, scale: .85, rotation: dir * 8 });
+        gsap.to(card, {
+          opacity: 1, y: 0, x: 0, scale: 1, rotation: parseFloat(card.style.transform?.match(/rotate\((.+?)deg\)/)?.[1] || "0"),
+          duration: 1.8, ease: "power2.out",
+          scrollTrigger: { trigger: card, start: "top 100%", end: "top 40%", scrub: 1.5 }
         });
       });
 
@@ -253,15 +256,15 @@ const GTMService = () => {
         <div className="team-inner">
           <div className="team-big">Our Team</div>
           {[
-            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "3%", left: "5%", rot: -3 },
-            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "6%", left: "65%", rot: 2 },
-            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "25%", left: "35%", rot: -1 },
-            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "38%", left: "3%", rot: 3 },
-            { name: "PR & Media", role: "Press Relations", init: "PR", top: "45%", left: "60%", rot: -2 },
-            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "62%", left: "20%", rot: 1.5 },
-            { name: "Events Team", role: "Seoul Production", init: "EV", top: "72%", left: "55%", rot: -2.5 },
+            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "2%", left: "3%", rot: -4, w: "22vw" },
+            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "5%", left: "62%", rot: 2.5, w: "18vw" },
+            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "22%", left: "42%", rot: -1.5, w: "24vw" },
+            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "36%", left: "2%", rot: 3.5, w: "16vw" },
+            { name: "PR & Media", role: "Press Relations", init: "PR", top: "42%", left: "68%", rot: -3, w: "20vw" },
+            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "60%", left: "15%", rot: 2, w: "19vw" },
+            { name: "Events Team", role: "Seoul Production", init: "EV", top: "70%", left: "52%", rot: -2, w: "22vw" },
           ].map(m => (
-            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, transform: `rotate(${m.rot}deg)` }}>
+            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, transform: `rotate(${m.rot}deg)`, width: `clamp(160px,${m.w},300px)` }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
               <div className="tm-avatar"><span className="tm-init">{m.init}</span></div>
             </div>
