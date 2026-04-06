@@ -12,6 +12,10 @@ import bnbImg from "@/assets/campaigns/bnb-hanok-event.png";
 import kucoinImg from "@/assets/campaigns/kucoin-party-event.png";
 import peaqImg from "@/assets/campaigns/peaq-booth-event.png";
 import mantraImg from "@/assets/campaigns/mantra-party.jpg";
+import bybitImg from "@/assets/campaigns/bybit-event.jpg";
+import saharaImg from "@/assets/campaigns/sahara-ai-event.png";
+import polygonImg from "@/assets/campaigns/polygon-connect.png";
+import ondoImg from "@/assets/campaigns/ondo-seminar.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -32,6 +36,10 @@ const workCards = [
   { img: kucoinImg, cat: "Exchange — User Acquisition", metric: "35K", title: "New Korean users acquired", desc: "Community airdrop, KOL campaigns, and Naver SEO driving sustained user acquisition for KuCoin Korea.", tags: ["Community", "SEO", "KOL"], slug: "kucoin" },
   { img: peaqImg, cat: "DePIN — Market Entry", metric: "25K+", title: "Active wallets in 6 weeks", desc: "Converted community hype into actual on-chain users through targeted Korean community building.", tags: ["DePIN", "Community", "On-chain"], slug: "peaq" },
   { img: mantraImg, cat: "RWA Layer 1 — Institutional", metric: "$50M+", title: "Institutional pipeline", desc: "Korean investor dinners, BD introductions, and thought leadership establishing MANTRA's presence.", tags: ["RWA", "Institutional", "BD"], slug: "mantra" },
+  { img: bybitImg, cat: "Exchange — Brand Activation", metric: "#2", title: "Exchange traffic in Korea", desc: "150+ first-page SEO rankings and 850K monthly organic visitors through localized content strategy.", tags: ["SEO", "Content", "Growth"], slug: "bybit" },
+  { img: saharaImg, cat: "AI Infra — Thought Leadership", metric: "8K+", title: "Community built from zero", desc: "Developer outreach and thought leadership positioning Sahara AI as a leading data infrastructure in Korea.", tags: ["AI", "Developer", "Community"], slug: "sahara-ai" },
+  { img: polygonImg, cat: "L2 — Ecosystem Growth", metric: "280%", title: "TVL growth in Korean DeFi", desc: "Polygon Connect Seoul event and sustained KOL partnerships driving ecosystem adoption.", tags: ["L2", "DeFi", "Events"], slug: "polygon" },
+  { img: ondoImg, cat: "RWA — Market Education", metric: "12K+", title: "Seminar attendees reached", desc: "Ondo Finance Korea seminar series establishing RWA narrative with Korean institutional investors.", tags: ["RWA", "Education", "Institutional"], slug: "ondo" },
 ];
 
 const GTMService = () => {
