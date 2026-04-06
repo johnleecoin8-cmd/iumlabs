@@ -263,22 +263,42 @@ const GTMService = () => {
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
         <div className="team-cards" style={{ minHeight: 4200 }}>
-          {[
-            { name: "David", role: "CEO", img: teamHelen, top: 40, left: "5%", w: 340 },
-            { name: "Bennet", role: "COO", img: teamBennet, top: 300, left: "60%", w: 260 },
-            { name: "J", role: "CMO", img: teamJ, top: 700, left: "28%", w: 400 },
-            { name: "Kevin", role: "Head of BD", img: teamKevin, top: 1100, left: "2%", w: 220 },
-            { name: "Lewis", role: "PR Manager", img: teamLewis, top: 1200, left: "55%", w: 320 },
-            { name: "Rachel", role: "Designer", img: teamRachel, top: 1700, left: "12%", w: 280 },
-            { name: "Suki", role: "Managing Partner", img: teamSuki, top: 1800, left: "52%", w: 360 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: 2400, left: "20%", w: 300 },
-            { name: "Helen", role: "Community Moderator", img: teamDavid, top: 2600, left: "58%", w: 260 },
-          ].map(m => (
-            <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
-              <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
-              <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
-            </div>
-          ))}
+          <div className="tm-card" style={{ top: 40, left: "5%", width: 340 }}>
+            <div className="tm-info"><h4>David</h4><span>CEO</span></div>
+            <div className="tm-photo"><img src={teamHelen} alt="David" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 300, left: "60%", width: 260 }}>
+            <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
+            <div className="tm-photo"><img src={teamBennet} alt="Bennet" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 700, left: "28%", width: 400 }}>
+            <div className="tm-info"><h4>J</h4><span>CMO</span></div>
+            <div className="tm-photo"><img src={teamJ} alt="J" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 1100, left: "2%", width: 220 }}>
+            <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
+            <div className="tm-photo"><img src={teamKevin} alt="Kevin" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 1200, left: "55%", width: 320 }}>
+            <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
+            <div className="tm-photo"><img src={teamLewis} alt="Lewis" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 1700, left: "12%", width: 280 }}>
+            <div className="tm-info"><h4>Rachel</h4><span>Designer</span></div>
+            <div className="tm-photo"><img src={teamRachel} alt="Rachel" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 1800, left: "52%", width: 360 }}>
+            <div className="tm-info"><h4>Suki</h4><span>Managing Partner</span></div>
+            <div className="tm-photo"><img src={teamSuki} alt="Suki" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 2400, left: "20%", width: 300 }}>
+            <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
+            <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" /></div>
+          </div>
+          <div className="tm-card" style={{ top: 2600, left: "58%", width: 260 }}>
+            <div className="tm-info"><h4>Helen</h4><span>Community Moderator</span></div>
+            <div className="tm-photo"><img src={teamDavid} alt="Helen" /></div>
+          </div>
         </div>
       </section>
       <div style={{ height: "20vh" }} />
