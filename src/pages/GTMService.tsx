@@ -272,7 +272,7 @@ const GTMService = () => {
         <div className="team-inner">
           <div className="team-big">Our<br/>Team</div>
           {[
-            { name: "David", role: "CEO", img: teamDavid, top: "2%", left: "3%", w: 300 },
+            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "3%", w: 300 },
             { name: "Bennet", role: "COO", img: teamBennet, top: "5%", left: "68%", w: 200 },
             { name: "J", role: "CMO", img: teamJ, top: "22%", left: "38%", w: 340 },
             { name: "Kevin", role: "Head of BD", img: teamKevin, top: "35%", left: "1%", w: 170 },
@@ -280,7 +280,7 @@ const GTMService = () => {
             { name: "Rachel", role: "Designer", img: teamRachel, top: "56%", left: "15%", w: 220 },
             { name: "Suki", role: "Managing Partner", img: teamSuki, top: "58%", left: "58%", w: 280 },
             { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "72%", left: "30%", w: 260 },
-            { name: "Helen", role: "Community Moderator", img: teamHelen, top: "80%", left: "65%", w: 200 },
+            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "80%", left: "65%", w: 200 },
           ].map((m, i) => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
