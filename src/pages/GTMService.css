@@ -31,8 +31,16 @@
 .gtm-ed .lbl::after { content: ''; flex: 1; height: 1px; background: var(--g4) }
 
 /* HERO */
+.gtm-ed .hero-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.2); z-index: 0;
+}
+.gtm-ed .hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(10,10,11,.3) 0%, rgba(10,10,11,.5) 50%, #0A0A0B 100%);
+}
 .gtm-ed .hero-ed {
-  height: 100vh; background: linear-gradient(180deg, #0e0e10 0%, #0A0A0B 60%, #111113 100%); color: #d4d0c8;
+  height: 100vh; background: #0A0A0B; color: #d4d0c8;
   display: flex; flex-direction: column; justify-content: center;
   padding: 0 3rem; position: relative; overflow: hidden;
 }
@@ -40,22 +48,24 @@
   position: absolute; bottom: -10%; right: -3%;
   font-family: var(--sans); font-weight: 800; font-size: clamp(18rem,32vw,38rem);
   line-height: .78; color: rgba(255,255,255,.04); letter-spacing: -.05em;
-  pointer-events: none; user-select: none;
+  pointer-events: none; user-select: none; z-index: 2;
 }
 .gtm-ed .hero-tag {
   font-family: var(--mono); font-size: .58rem; letter-spacing: .25em;
   text-transform: uppercase; color: var(--g2); margin-bottom: 3rem;
+  position: relative; z-index: 2;
 }
 .gtm-ed .hero-ed h1 {
   font-family: var(--serif); font-weight: 300;
   font-size: clamp(3rem,7.2vw,6.2rem); line-height: 1.08; letter-spacing: -.02em;
-  max-width: 1050px;
+  max-width: 1050px; position: relative; z-index: 2;
 }
 .gtm-ed .hero-ed h1 strong { font-weight: 600 }
 .gtm-ed .hero-ed h1 em { font-style: italic }
 .gtm-ed .hero-foot {
   position: absolute; bottom: 3rem; left: 3rem; right: 3rem;
   display: flex; justify-content: space-between; align-items: flex-end;
+  z-index: 2;
 }
 .gtm-ed .hero-foot p { font-size: .82rem; color: var(--g2); max-width: 380px; line-height: 1.7; font-weight: 300 }
 .gtm-ed .hero-scroll-v { font-family: var(--mono); font-size: .5rem; color: var(--g3); letter-spacing: .2em; text-transform: uppercase; writing-mode: vertical-rl }

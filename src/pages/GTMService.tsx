@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gtmHeroImage from "@/assets/services/gtm-hero.avif";
 import "./GTMService.css";
 
 // Case study images
@@ -129,6 +130,8 @@ const GTMService = () => {
 
       {/* HERO */}
       <section className="hero-ed">
+        <img src={gtmHeroImage} alt="" className="hero-bg" />
+        <div className="hero-overlay" />
         <div className="hero-wm">ium</div>
         <div className="hero-tag">Korea Market Entry — Seoul</div>
         <h1>We help projects <em>enter</em> and <strong>own Korea's crypto market.</strong></h1>
