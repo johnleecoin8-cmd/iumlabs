@@ -85,6 +85,16 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
+      // "Our Team" text — moves down slower than scroll (parallax)
+      const teamBig = document.querySelector(".gtm-ed .team-big");
+      if (teamBig) {
+        gsap.to(teamBig, {
+          y: "60vh",
+          ease: "none",
+          scrollTrigger: { trigger: ".gtm-ed .team-scatter", start: "top bottom", end: "bottom top", scrub: true }
+        });
+      }
+
       // Team cards — scrub reveal as you scroll through
       gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
         const dir = i % 2 === 0 ? -1 : 1;
@@ -267,7 +277,7 @@ const GTMService = () => {
       {/* TEAM — natural scroll, same background */}
       <section className="team-scatter">
         <div className="team-inner">
-          <div className="team-big-wrap"><div className="team-big">Our Team</div></div>
+          <div className="team-big">Our Team</div>
           {[
             { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "3%", w: 380 },
             { name: "Bennet", role: "COO", img: teamBennet, top: "10%", left: "62%", w: 280 },

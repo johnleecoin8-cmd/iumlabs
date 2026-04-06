@@ -143,8 +143,7 @@
 /* TEAM — LUNAR SCATTER (no pin, natural scroll) */
 .gtm-ed .team-scatter{position:relative;background:var(--bg);overflow:visible;padding:0 0 6rem}
 .gtm-ed .team-inner{position:relative;max-width:1400px;margin:0 auto;padding:0 3rem;min-height:280vh}
-.gtm-ed .team-big-wrap{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0}
-.gtm-ed .team-big{font-family:var(--sans);font-weight:800;font-size:clamp(4rem,14vw,15rem);line-height:.82;letter-spacing:-.05em;color:var(--black);opacity:.05}
+.gtm-ed .team-big{position:absolute;top:10%;left:50%;transform:translateX(-50%);text-align:center;font-family:var(--sans);font-weight:800;font-size:clamp(4rem,14vw,15rem);line-height:.82;letter-spacing:-.05em;color:var(--black);opacity:.05;pointer-events:none;z-index:0;white-space:nowrap}
 .gtm-ed .tm-card{position:absolute;background:var(--bg);border-radius:14px;overflow:hidden;border:1px solid rgba(0,0,0,.06);box-shadow:0 8px 30px rgba(0,0,0,.08);z-index:1}
 .gtm-ed .tm-info{padding:.75rem 1rem .5rem}
 .gtm-ed .tm-info h4{font-weight:700;font-size:.85rem;margin-bottom:.15rem;color:var(--black)}
