@@ -72,7 +72,6 @@ const workCards = [
 const GTMService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const workPinRef = useRef<HTMLDivElement>(null);
-  const teamStripRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLSpanElement>(null);
   const [openSvc, setOpenSvc] = useState<number | null>(null);
 
@@ -86,23 +85,18 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team — pin section, scroll cards upward
-      if (teamStripRef.current && window.innerWidth > 768) {
-        const strip = teamStripRef.current;
-        const totalH = strip.scrollHeight - window.innerHeight;
-        gsap.to(strip, {
-          y: -totalH,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".gtm-ed .team-scatter",
-            start: "top top",
-            end: () => `+=${totalH + window.innerHeight}`,
-            scrub: 1.5,
-            pin: true,
-            anticipatePin: 1,
+      // Team cards — scrub reveal as you scroll through
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
+        const dir = i % 2 === 0 ? -1 : 1;
+        gsap.set(card, { opacity: 0, y: 80, x: dir * 40 });
+        ScrollTrigger.create({
+          trigger: card, start: "top 95%", end: "top 50%", scrub: 1.2,
+          onUpdate: (self) => {
+            const p = self.progress;
+            gsap.set(card, { opacity: p, y: 80 * (1 - p), x: dir * 40 * (1 - p) });
           }
         });
-      }
+      });
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
@@ -270,50 +264,28 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TRANSITION: light → off */}
-      <div className="fade-light-to-off" />
-
-      {/* TEAM INTRO — bridge */}
-      <section className="team-intro">
-        <div className="wrap" style={{ textAlign: "center" }}>
-          <div className="lbl" style={{ justifyContent: "center" }}>The People</div>
-          <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(2rem,4vw,3.5rem)", letterSpacing: "-.02em", maxWidth: 700, margin: "0 auto" }}>
-            Operators, not <strong>account managers.</strong>
-          </h2>
-          <p style={{ fontSize: ".9rem", color: "var(--g1)", lineHeight: 1.75, fontWeight: 300, maxWidth: 500, margin: "1.5rem auto 0" }}>
-            Every campaign is run by people who've held BD, marketing, and exchange roles inside the Korean crypto ecosystem.
-          </p>
-        </div>
-      </section>
-
-      {/* TEAM — PINNED SCROLL */}
+      {/* TEAM — natural scroll, same background */}
       <section className="team-scatter">
-        <div className="team-pin">
-          <div className="tm-sub">[ Team of 10+ Operators ]</div>
-          <div className="team-big">Our Team</div>
-          <div className="tm-strip" ref={teamStripRef}>
-            {[
-              { name: "David", role: "CEO", img: teamHelen, top: 60, left: "5%", w: 380 },
-              { name: "Bennet", role: "COO", img: teamBennet, top: 420, left: "62%", w: 280 },
-              { name: "J", role: "CMO", img: teamJ, top: 750, left: "28%", w: 440 },
-              { name: "Kevin", role: "Head of BD", img: teamKevin, top: 1100, left: "2%", w: 240 },
-              { name: "Lewis", role: "PR Manager", img: teamLewis, top: 1200, left: "58%", w: 340 },
-              { name: "Rachel", role: "Designer", img: teamRachel, top: 1600, left: "15%", w: 300 },
-              { name: "Suki", role: "Managing Partner", img: teamSuki, top: 1700, left: "52%", w: 380 },
-              { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: 2100, left: "22%", w: 340 },
-              { name: "Helen", role: "Community Moderator", img: teamDavid, top: 2250, left: "60%", w: 280 },
-            ].map(m => (
-              <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
-                <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
-                <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
-              </div>
-            ))}
-          </div>
+        <div className="team-inner">
+          <div className="team-big-wrap"><div className="team-big">Our Team</div></div>
+          {[
+            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "3%", w: 380 },
+            { name: "Bennet", role: "COO", img: teamBennet, top: "10%", left: "62%", w: 280 },
+            { name: "J", role: "CMO", img: teamJ, top: "22%", left: "28%", w: 440 },
+            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "35%", left: "2%", w: 240 },
+            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "38%", left: "58%", w: 340 },
+            { name: "Rachel", role: "Designer", img: teamRachel, top: "52%", left: "15%", w: 300 },
+            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "55%", left: "52%", w: 380 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "70%", left: "22%", w: 340 },
+            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "75%", left: "60%", w: 280 },
+          ].map(m => (
+            <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
+              <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
+              <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
+            </div>
+          ))}
         </div>
       </section>
-
-      {/* TRANSITION: off → light */}
-      <div style={{ height: "15vh", background: `linear-gradient(180deg, var(--off) 0%, var(--bg) 100%)` }} />
 
       {/* REGIONS */}
       <section className="regions-sec">
