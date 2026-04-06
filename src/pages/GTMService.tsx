@@ -92,7 +92,7 @@ const GTMService = () => {
         parts.forEach(part => {
           if (part.startsWith("<")) { result += part; return; }
           part.split(" ").forEach(w => {
-            if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15">${w}</span> `;
+            if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.25">${w}</span> `;
           });
         });
         mp.innerHTML = result;

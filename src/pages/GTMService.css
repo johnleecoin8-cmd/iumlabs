@@ -1,8 +1,8 @@
 /* ── GTM SERVICE PAGE — EDITORIAL STYLE ── */
 .gtm-ed {
-  --white: #0A0A0B; --off: #101012; --cream: #161618;
-  --black: #c8c4bc; --ink: #b0aca4; --char: #908c84;
-  --g1: #999; --g2: #666; --g3: #444; --g4: rgba(255,255,255,.08); --g5: rgba(255,255,255,.04);
+  --white: #0A0A0B; --off: #111113; --cream: #161618;
+  --black: #d4d0c8; --ink: #b8b4ac; --char: #999590;
+  --g1: #a09c94; --g2: #706c64; --g3: #4a4640; --g4: rgba(255,255,255,.1); --g5: rgba(255,255,255,.05);
   --warm: #C4501A; --warm-soft: rgba(196,80,26,.08);
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'DM Sans', 'Inter', sans-serif;
@@ -32,14 +32,14 @@
 
 /* HERO */
 .gtm-ed .hero-ed {
-  height: 100vh; background: #0A0A0B; color: #c8c4bc;
+  height: 100vh; background: linear-gradient(180deg, #0e0e10 0%, #0A0A0B 60%, #111113 100%); color: #d4d0c8;
   display: flex; flex-direction: column; justify-content: center;
   padding: 0 3rem; position: relative; overflow: hidden;
 }
 .gtm-ed .hero-wm {
   position: absolute; bottom: -10%; right: -3%;
   font-family: var(--sans); font-weight: 800; font-size: clamp(18rem,32vw,38rem);
-  line-height: .78; color: rgba(255,255,255,.015); letter-spacing: -.05em;
+  line-height: .78; color: rgba(255,255,255,.04); letter-spacing: -.05em;
   pointer-events: none; user-select: none;
 }
 .gtm-ed .hero-tag {
@@ -61,11 +61,11 @@
 .gtm-ed .hero-scroll-v { font-family: var(--mono); font-size: .5rem; color: var(--g3); letter-spacing: .2em; text-transform: uppercase; writing-mode: vertical-rl }
 
 /* NUMBERS */
-.gtm-ed .numbers { padding: 6rem 0; border-bottom: 1px solid var(--g4) }
+.gtm-ed .numbers { padding: 6rem 0; border-bottom: 1px solid var(--g4); background: #111113 }
 .gtm-ed .n-grid { display: grid; grid-template-columns: repeat(4,1fr) }
 .gtm-ed .n-item { text-align: center; position: relative }
-.gtm-ed .n-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: var(--g4) }
-.gtm-ed .n-val { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem,5.5vw,5rem); letter-spacing: -.03em; line-height: 1 }
+.gtm-ed .n-item:not(:last-child)::after { content: ''; position: absolute; right: 0; top: 10%; height: 80%; width: 1px; background: rgba(255,255,255,.12) }
+.gtm-ed .n-val { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem,5.5vw,5rem); letter-spacing: -.03em; line-height: 1; color: #ddd8d0 }
 .gtm-ed .n-sub { font-family: var(--mono); font-size: .5rem; color: var(--g2); letter-spacing: .15em; text-transform: uppercase; margin-top: .75rem }
 
 /* MANIFESTO */
@@ -78,9 +78,9 @@
 .gtm-ed .manifesto p strong { font-weight: 600; color: var(--black) }
 
 /* SERVICES ACCORDION */
-.gtm-ed .services-ed { padding: 0 0 8rem }
-.gtm-ed .svc { border-top: 1px solid var(--g4) }
-.gtm-ed .svc:last-child { border-bottom: 1px solid var(--g4) }
+.gtm-ed .services-ed { padding: 4rem 0 8rem; background: #0d0d0f }
+.gtm-ed .svc { border-top: 1px solid rgba(255,255,255,.1) }
+.gtm-ed .svc:last-child { border-bottom: 1px solid rgba(255,255,255,.1) }
 .gtm-ed .svc-head {
   display: grid; grid-template-columns: 50px 1fr auto; gap: 2rem; align-items: center;
   padding: 2.25rem 0; cursor: pointer; transition: padding .4s var(--ease);
@@ -99,7 +99,7 @@
 .gtm-ed .chip { font-family: var(--mono); font-size: .52rem; padding: .22rem .55rem; border: 1px solid rgba(255,255,255,.1); color: var(--g2); letter-spacing: .03em }
 
 /* APPROACH */
-.gtm-ed .approach-ed { padding: 10rem 0 }
+.gtm-ed .approach-ed { padding: 10rem 0; background: #0A0A0B }
 .gtm-ed .appr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem }
 .gtm-ed .appr-l h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(2rem,3.8vw,3.2rem); line-height: 1.15; letter-spacing: -.02em }
 .gtm-ed .appr-l h2 strong { font-weight: 600 }
@@ -111,7 +111,7 @@
 .gtm-ed .pill p { font-size: .82rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
 
 /* PROCESS */
-.gtm-ed .process-ed { padding: 8rem 0; background: var(--off) }
+.gtm-ed .process-ed { padding: 8rem 0; background: #141416 }
 .gtm-ed .proc-row { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 4rem }
 .gtm-ed .proc-s { padding: 2rem; border-left: 1px solid var(--g4); position: relative; cursor: default }
 .gtm-ed .proc-s:first-child { border-left: none }
@@ -123,7 +123,7 @@
 .gtm-ed .proc-tm { font-family: var(--mono); font-size: .55rem; color: var(--char); margin-top: 1rem }
 
 /* CASE STUDIES */
-.gtm-ed .cases-ed { padding: 8rem 0 }
+.gtm-ed .cases-ed { padding: 8rem 0; background: #0A0A0B }
 .gtm-ed .case-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 4rem }
 .gtm-ed .case-card { padding: 2.5rem; border: 1px solid rgba(255,255,255,.06); transition: all .4s var(--ease); cursor: default }
 .gtm-ed .case-card:hover { border-color: rgba(255,255,255,.12); transform: translateY(-4px) }
@@ -133,7 +133,7 @@
 .gtm-ed .case-text { font-size: .82rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
 
 /* QUOTE */
-.gtm-ed .quote-ed { padding: 10rem 0; background: #0e0e10; color: #c8c4bc; text-align: center }
+.gtm-ed .quote-ed { padding: 10rem 0; background: #161618; color: #d4d0c8; text-align: center }
 .gtm-ed .quote-ed blockquote {
   font-family: var(--serif); font-weight: 300; font-style: italic;
   font-size: clamp(1.4rem,2.8vw,2.3rem); line-height: 1.55; max-width: 780px; margin: 0 auto;
@@ -141,7 +141,7 @@
 .gtm-ed .quote-ed cite { display: block; margin-top: 2.5rem; font-style: normal; font-family: var(--mono); font-size: .55rem; color: var(--g2); letter-spacing: .15em; text-transform: uppercase }
 
 /* CTA */
-.gtm-ed .cta-ed { padding: 10rem 0; text-align: center }
+.gtm-ed .cta-ed { padding: 10rem 0; text-align: center; background: #111113 }
 .gtm-ed .cta-ed h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(3rem,7vw,5.5rem); line-height: 1; letter-spacing: -.03em }
 .gtm-ed .cta-ed h2 strong { font-weight: 600 }
 .gtm-ed .cta-ed > p { font-size: .95rem; color: var(--g1); max-width: 400px; margin: 2rem auto 3rem; line-height: 1.7; font-weight: 300 }
