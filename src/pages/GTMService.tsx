@@ -262,13 +262,14 @@ const GTMService = () => {
         <div className="team-inner">
           <div className="team-big">Our<br/>Team</div>
           {[
-            { name: "Heejun Lee", role: "CEO / Founder", img: "https://i.pravatar.cc/400?img=33", top: "2%", left: "3%", w: 280 },
-            { name: "David Kim", role: "Head of BD", img: "https://i.pravatar.cc/400?img=12", top: "4%", left: "65%", w: 200 },
-            { name: "Suki Park", role: "CMO", img: "https://i.pravatar.cc/400?img=47", top: "20%", left: "35%", w: 320 },
-            { name: "Jay Choi", role: "KOL Lead", img: "https://i.pravatar.cc/400?img=59", top: "32%", left: "1%", w: 160 },
-            { name: "Yuna Kang", role: "Community Manager", img: "https://i.pravatar.cc/400?img=23", top: "38%", left: "70%", w: 240 },
-            { name: "Alex Ryu", role: "Research Analyst", img: "https://i.pravatar.cc/400?img=68", top: "55%", left: "18%", w: 200 },
-            { name: "Chris Yoon", role: "Events & Ops", img: "https://i.pravatar.cc/400?img=52", top: "62%", left: "55%", w: 280 },
+            { name: "David", role: "CEO", img: "https://i.pravatar.cc/400?img=33", top: "2%", left: "3%", w: 300 },
+            { name: "Bennet", role: "COO", img: "https://i.pravatar.cc/400?img=12", top: "5%", left: "68%", w: 200 },
+            { name: "J", role: "CMO", img: "https://i.pravatar.cc/400?img=57", top: "22%", left: "38%", w: 340 },
+            { name: "Kevin", role: "Head of BD", img: "https://i.pravatar.cc/400?img=59", top: "35%", left: "1%", w: 170 },
+            { name: "Lewis", role: "PR Manager", img: "https://i.pravatar.cc/400?img=15", top: "40%", left: "72%", w: 240 },
+            { name: "Rachel", role: "Designer", img: "https://i.pravatar.cc/400?img=23", top: "56%", left: "15%", w: 220 },
+            { name: "Suki", role: "Managing Partner", img: "https://i.pravatar.cc/400?img=47", top: "58%", left: "58%", w: 280 },
+            { name: "Hyukjae", role: "BD Manager", img: "https://i.pravatar.cc/400?img=68", top: "75%", left: "35%", w: 260 },
           ].map((m, i) => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
