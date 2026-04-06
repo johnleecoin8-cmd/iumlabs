@@ -279,15 +279,15 @@ const GTMService = () => {
         <div className="team-inner">
           <div className="team-big">Our Team</div>
           {[
-            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "3%", w: 380 },
-            { name: "Bennet", role: "COO", img: teamBennet, top: "10%", left: "62%", w: 280 },
-            { name: "J", role: "CMO", img: teamJ, top: "22%", left: "28%", w: 440 },
-            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "35%", left: "2%", w: 240 },
-            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "38%", left: "58%", w: 340 },
-            { name: "Rachel", role: "Designer", img: teamRachel, top: "52%", left: "15%", w: 300 },
-            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "55%", left: "52%", w: 380 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "70%", left: "22%", w: 340 },
-            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "75%", left: "60%", w: 280 },
+            { name: "David", role: "CEO", img: teamHelen, top: "1%", left: "0%", w: 320 },
+            { name: "Bennet", role: "COO", img: teamBennet, top: "3%", left: "72%", w: 240 },
+            { name: "J", role: "CMO", img: teamJ, top: "18%", left: "35%", w: 380 },
+            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "32%", left: "0%", w: 220 },
+            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "34%", left: "68%", w: 280 },
+            { name: "Rachel", role: "Designer", img: teamRachel, top: "50%", left: "8%", w: 260 },
+            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "52%", left: "58%", w: 320 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "68%", left: "30%", w: 280 },
+            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "70%", left: "72%", w: 220 },
           ].map(m => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
