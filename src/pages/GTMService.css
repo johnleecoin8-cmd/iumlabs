@@ -1,7 +1,7 @@
 /* ── GTM SERVICE PAGE — EDITORIAL STYLE ── */
 .gtm-ed {
   --white: #0A0A0B; --off: #101012; --cream: #161618;
-  --black: #F0EDE8; --ink: #e8e5dd; --char: #ccc;
+  --black: #c8c4bc; --ink: #b0aca4; --char: #908c84;
   --g1: #999; --g2: #666; --g3: #444; --g4: rgba(255,255,255,.08); --g5: rgba(255,255,255,.04);
   --warm: #C4501A; --warm-soft: rgba(196,80,26,.08);
   --serif: 'Cormorant Garamond', Georgia, serif;
@@ -32,7 +32,7 @@
 
 /* HERO */
 .gtm-ed .hero-ed {
-  height: 100vh; background: var(--black); color: var(--white);
+  height: 100vh; background: #0A0A0B; color: #c8c4bc;
   display: flex; flex-direction: column; justify-content: center;
   padding: 0 3rem; position: relative; overflow: hidden;
 }
@@ -86,11 +86,11 @@
   padding: 2.25rem 0; cursor: pointer; transition: padding .4s var(--ease);
 }
 .gtm-ed .svc.open .svc-head { padding-bottom: .5rem }
-.gtm-ed .svc-head:hover .svc-t { color: #fff }
+.gtm-ed .svc-head:hover .svc-t { color: #ddd8d0 }
 .gtm-ed .svc-i { font-family: var(--mono); font-size: .7rem; color: var(--g3) }
 .gtm-ed .svc-t { font-family: var(--serif); font-weight: 600; font-size: clamp(1.3rem,2vw,1.65rem); letter-spacing: -.01em; transition: color .3s }
 .gtm-ed .svc-x { font-family: var(--mono); font-size: 1.2rem; color: var(--g3); transition: transform .4s var(--ease), color .3s }
-.gtm-ed .svc.open .svc-x { transform: rotate(45deg); color: #fff }
+.gtm-ed .svc.open .svc-x { transform: rotate(45deg); color: #ddd8d0 }
 .gtm-ed .svc-body { max-height: 0; overflow: hidden; transition: max-height .6s var(--ease) }
 .gtm-ed .svc.open .svc-body { max-height: 300px }
 .gtm-ed .svc-inner { display: grid; grid-template-columns: 50px 1fr 1fr; gap: 2rem; padding: 1rem 0 2.5rem }
@@ -133,7 +133,7 @@
 .gtm-ed .case-text { font-size: .82rem; color: var(--g1); line-height: 1.65; font-weight: 300 }
 
 /* QUOTE */
-.gtm-ed .quote-ed { padding: 10rem 0; background: var(--black); color: var(--white); text-align: center }
+.gtm-ed .quote-ed { padding: 10rem 0; background: #0e0e10; color: #c8c4bc; text-align: center }
 .gtm-ed .quote-ed blockquote {
   font-family: var(--serif); font-weight: 300; font-style: italic;
   font-size: clamp(1.4rem,2.8vw,2.3rem); line-height: 1.55; max-width: 780px; margin: 0 auto;
@@ -159,19 +159,19 @@
 
 /* LOADER */
 .gtm-ed .loader {
-  position: fixed; inset: 0; z-index: 100000; background: var(--black);
+  position: fixed; inset: 0; z-index: 100000; background: #0A0A0B;
   display: flex; align-items: center; justify-content: center;
   transition: opacity .6s .2s, visibility .6s .2s;
 }
 .gtm-ed .loader.done { opacity: 0; visibility: hidden; pointer-events: none }
 .gtm-ed .loader-logo {
-  font-family: var(--sans); font-weight: 800; font-size: 2rem; color: #fff;
+  font-family: var(--sans); font-weight: 800; font-size: 2rem; color: #ddd8d0;
   letter-spacing: .08em; opacity: 0;
 }
 
 /* SCROLL PROGRESS */
 .gtm-ed .scroll-prog {
-  position: fixed; top: 0; left: 0; height: 2px; background: rgba(255,255,255,.3);
+  position: fixed; top: 0; left: 0; height: 2px; background: rgba(200,196,188,.3);
   z-index: 9999; width: 0%; transform-origin: left;
 }
 
@@ -181,7 +181,7 @@
   mix-blend-mode: difference;
 }
 .gtm-ed .cursor-dot {
-  width: 10px; height: 10px; background: #fff; border-radius: 50%;
+  width: 10px; height: 10px; background: #d0ccc4; border-radius: 50%;
   position: absolute; transform: translate(-50%,-50%);
   transition: width .4s var(--ease), height .4s var(--ease), border-radius .4s;
 }
@@ -197,7 +197,7 @@
 /* HORIZONTAL WORK */
 .gtm-ed .work-sec { overflow: hidden }
 .gtm-ed .work-pin {
-  display: flex; align-items: stretch; background: var(--black); color: var(--white);
+  display: flex; align-items: stretch; background: #0e0e10; color: #c8c4bc;
   width: max-content;
 }
 .gtm-ed .work-intro {
@@ -244,14 +244,14 @@
 
 /* MOBILE MENU */
 .gtm-ed .mob-menu {
-  position: fixed; inset: 0; z-index: 8999; background: var(--black);
+  position: fixed; inset: 0; z-index: 8999; background: #0A0A0B;
   display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
   opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
 }
 .gtm-ed .mob-menu.open { opacity: 1; visibility: visible }
 .gtm-ed .mob-menu a {
   font-family: var(--serif); font-size: clamp(2rem,5vw,3.5rem); font-weight: 400;
-  color: var(--white); opacity: 0; transform: translateY(30px);
+  color: #c8c4bc; opacity: 0; transform: translateY(30px);
   transition: opacity .5s var(--ease), transform .5s var(--ease), color .3s;
 }
 .gtm-ed .mob-menu.open a { opacity: 1; transform: none }
@@ -292,7 +292,7 @@
 .gtm-ed .ft-brand p { font-size: .8rem; color: var(--g1); line-height: 1.7; margin-top: 1rem; max-width: 280px; font-weight: 300 }
 .gtm-ed .ft-col h6 { font-family: var(--mono); font-size: .5rem; font-weight: 500; letter-spacing: .2em; text-transform: uppercase; color: var(--g3); margin-bottom: 1.2rem }
 .gtm-ed .ft-col a { display: block; font-size: .8rem; color: var(--g1); margin-bottom: .55rem; font-weight: 400; transition: color .2s }
-.gtm-ed .ft-col a:hover { color: #fff }
+.gtm-ed .ft-col a:hover { color: #ddd8d0 }
 .gtm-ed .ft-bottom { display: flex; justify-content: space-between; padding-top: 2rem; border-top: 1px solid var(--g4) }
 .gtm-ed .ft-cp { font-family: var(--mono); font-size: .5rem; color: var(--g3) }
 
