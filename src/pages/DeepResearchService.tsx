@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -6,24 +6,26 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/deep-research.png";
-import "./GTMService.css";
+import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
-const clients = ["BNB Chain","Sahara AI","PEAQ Network","Bybit","KuCoin","Polygon","Mantra","Ondo Finance","FOGO","Aptos","Kite","SynFutures"];
 
 const DeepResearchService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLSpanElement>(null);
+  const [openCap, setOpenCap] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const toggleCap = useCallback((i: number) => setOpenCap(p => p === i ? null : i), []);
+  const toggleFaq = useCallback((i: number) => setOpenFaq(p => p === i ? null : i), []);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".gtm-ed .hero-tag", { y: 30, opacity: 0, duration: 1, delay: .2, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l").forEach(el => {
-        gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
+      gsap.from(".svc-detail .hero-back", { opacity: 0, x: -20, duration: .8, delay: .3 });
+      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .4 });
+      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 40, duration: 1, delay: .5, ease: "power3.out" });
+      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .9 });
+      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
+        gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
-      const mp = document.querySelector(".gtm-ed .manifesto p");
-      if (mp) { const html = mp.innerHTML; const parts = html.split(/(<[^>]+>)/); let r = ""; parts.forEach(p => { if (p.startsWith("<")) { r += p; return; } p.split(" ").forEach(w => { if (w.trim()) r += `<span class="mw" style="display:inline-block;opacity:.15">${w}</span> `; }); }); mp.innerHTML = r; gsap.utils.toArray<HTMLElement>(".gtm-ed .mw").forEach(w => { gsap.to(w, { opacity: 1, duration: .5, scrollTrigger: { trigger: w, start: "top 90%", end: "top 60%", scrub: 1 }}); }); }
     }, containerRef);
     const tick = () => { if (clockRef.current) clockRef.current.textContent = `Seoul ${new Date().toLocaleString("en-US",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",hour12:false})}`; };
     tick(); const ci = setInterval(tick, 60000);
@@ -31,58 +33,110 @@ const DeepResearchService = () => {
   }, []);
 
   return (
-    <div className="gtm-ed" ref={containerRef}>
+    <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Deep Research | ium Labs" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." path="/services/deep-research" keywords={["Korea Crypto Research","Web3 Market Intelligence"]} />
       <Navbar />
-      <section className="hero-ed">
-        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" /><div className="hero-grid" /><div className="hero-orb" />
-        <div className="hero-kr">리서</div><div className="hero-kr">치</div><div className="hero-kr">분석</div>
-        <div className="hero-wm">ium</div>
-        <div className="hero-tag">Deep Research — Seoul</div>
-        <h1>Know Korea. <strong>Before you enter it.</strong></h1>
-        <div className="hero-foot"><p>On-chain analytics, competitor analysis, market ecosystem mapping. Reports in Korean and English, distributed through our media network.</p><div className="hero-scroll">Scroll</div></div>
+
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-grid" /><div className="hero-orb" />
+        <div className="hero-num">06</div>
+        <div className="wrap">
+          <Link to="/services/gtm" className="hero-back">All Services</Link>
+          <div className="hero-label">Service 06 of 08</div>
+          <h1>Deep <strong>Research</strong></h1>
+          <p className="hero-desc">On-chain analytics, competitor analysis, market ecosystem mapping. Reports in Korean and English, distributed through our media network. Intelligence you can't get from a dashboard.</p>
+        </div>
       </section>
-      <section className="clients"><div className="cl-track">{[...clients,...clients,...clients].map((c,i) => <span key={i}>{c}</span>)}</div></section>
-      <section className="why-kr"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Output</div>
-        <div className="wk-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
-          <div className="wk-item"><div className="wk-big">47</div><div className="wk-sub">Reports Delivered</div><div className="wk-note">Market entry, competitor, tokenomics, investment thesis.</div></div>
-          <div className="wk-item"><div className="wk-big">12+</div><div className="wk-sub">Distribution Partners</div><div className="wk-note">Korean media and KOL network for report amplification.</div></div>
-          <div className="wk-item"><div className="wk-big">850K+</div><div className="wk-sub">Report Impressions</div><div className="wk-note">Average reach per distributed report.</div></div>
-          <div className="wk-item"><div className="wk-big">3.2%</div><div className="wk-sub">Engagement Rate</div><div className="wk-note">On distributed research content.</div></div>
-        </div>
-      </div></section>
-      <section className="manifesto"><div className="wrap">
-        <p>Global research firms don't understand Korean crypto. The <strong>Upbit premium</strong>, DC Inside sentiment, Naver search trends, KakaoTalk group dynamics — these signals are invisible to anyone not operating inside the ecosystem daily. Our research combines <strong>on-chain data</strong> with <strong>on-the-ground intelligence</strong> you can't get from a dashboard.</p>
-      </div></section>
-      <section className="approach-ed"><div className="wrap">
-        <div className="lbl">Methodology</div>
-        <div className="appr-grid">
-          <div className="appr-l">
-            <h2>Intelligence, not just <strong>data.</strong></h2>
-            <p>We don't just pull Dune dashboards. We combine on-chain analytics with local market intelligence — Korean media monitoring, community sentiment, exchange flow analysis.</p>
-            <div className="pull-q">"한국 시장은 데이터만으로는 이해할 수 없습니다."</div>
-          </div>
-          <div className="pillars">
-            <div className="pill"><div className="pill-n">I</div><h4>Korean market mapping</h4><p>Complete ecosystem analysis — exchanges, KOLs, media, communities, regulations, competitive positioning.</p></div>
-            <div className="pill"><div className="pill-n">II</div><h4>On-chain + off-chain</h4><p>Dune, Nansen, Arkham data combined with Korean social sentiment, Naver trends, and community signals.</p></div>
-            <div className="pill"><div className="pill-n">III</div><h4>Bilingual distribution</h4><p>Reports in Korean and English. Distributed through our media and KOL network for maximum reach.</p></div>
-            <div className="pill"><div className="pill-n">IV</div><h4>Investor-grade output</h4><p>Investment thesis support, due diligence packages, tokenomics reviews that institutional investors trust.</p></div>
+
+      {/* STATS */}
+      <section className="stats"><div className="wrap"><div className="stats-grid">
+        <div className="stat"><div className="stat-val">47</div><div className="stat-sub">Reports</div></div>
+        <div className="stat"><div className="stat-val">12+</div><div className="stat-sub">Partners</div></div>
+        <div className="stat"><div className="stat-val">850K+</div><div className="stat-sub">Impressions</div></div>
+        <div className="stat"><div className="stat-val">3.2%</div><div className="stat-sub">Engagement</div></div>
+      </div></div></section>
+
+      {/* PROBLEM */}
+      <section className="problem"><div className="wrap">
+        <div className="lbl">The Problem</div>
+        <div className="problem-grid">
+          <div className="problem-left"><h2>Global research firms don't understand <strong>Korean crypto.</strong></h2></div>
+          <div className="problem-right">
+            <p>The Upbit premium, DC Inside sentiment, Naver search trends, KakaoTalk group dynamics — these signals are invisible to anyone not operating inside the ecosystem daily. Global research firms give you generic Asia-Pacific reports that lump Korea in with Japan and Southeast Asia.</p>
+            <p>Korea is the third largest crypto market in the world. It deserves dedicated intelligence — not a footnote in a regional deck. Our research combines on-chain data with on-the-ground intelligence you can't get from a dashboard.</p>
+            <div className="highlight-box"><p>한국 시장은 데이터만으로는 이해할 수 없습니다. ium Labs는 온체인 분석과 현지 커뮤니티 인텔리전스를 결합하여 실행 가능한 인사이트를 제공합니다.</p></div>
           </div>
         </div>
       </div></section>
-      <section className="quotes-sec"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Testimonials</div>
-        <div className="quotes-grid">
-          <div className="q-card"><blockquote>"Their Korean market report revealed competitive dynamics we had no visibility into. It completely changed our market entry strategy."</blockquote><cite>Strategy Lead — L2 Protocol</cite></div>
-          <div className="q-card"><blockquote>"The combination of on-chain data with Korean community sentiment analysis was something no other research firm could provide."</blockquote><cite>Investment Manager — Crypto Fund</cite></div>
+
+      {/* CAPABILITIES */}
+      <section className="capabilities"><div className="wrap">
+        <div className="lbl">What We Do</div>
+        {[
+          { icon: "◎", title: "Market Mapping", desc: "Complete Korean ecosystem analysis — exchanges, KOLs, media outlets, communities, regulations, and competitive positioning. Understand the full landscape before you enter." },
+          { icon: "◉", title: "On-chain Analytics", desc: "Dune, Nansen, Arkham data combined with Korean-specific signals. Wallet analysis, flow tracking, and protocol usage patterns unique to the Korean market." },
+          { icon: "◈", title: "Competitor Analysis", desc: "Deep-dive into how competing protocols are positioned in Korea. Their KOL relationships, community size, exchange presence, and narrative strengths and weaknesses." },
+          { icon: "◆", title: "Investment Thesis", desc: "Investor-grade market entry analysis. Due diligence packages, TAM sizing for Korean market, regulatory landscape, and go-to-market feasibility assessments." },
+          { icon: "◇", title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
+          { icon: "◐", title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
+        ].map((cap, i) => (
+          <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
+            <div className="cap-head" onClick={() => toggleCap(i)}>
+              <div className="cap-icon">{cap.icon}</div>
+              <div className="cap-title">{cap.title}</div>
+              <div className="cap-toggle">+</div>
+            </div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+          </div>
+        ))}
+      </div></section>
+
+      {/* PROCESS */}
+      <section className="svc-process"><div className="wrap">
+        <div className="lbl">How It Works</div>
+        <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(1.8rem,3vw,2.5rem)", letterSpacing: "-.02em" }}>From question to <strong>actionable intelligence.</strong></h2>
+        <div className="proc-grid">
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase 1</div><div className="proc-title">Discovery</div><div className="proc-text">Define research objectives, scope, and key questions. Align on deliverable format and timeline.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase 2</div><div className="proc-title">Analysis</div><div className="proc-text">On-chain data collection, Korean media monitoring, community sentiment analysis, expert interviews.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase 3</div><div className="proc-title">Creation</div><div className="proc-text">Synthesize findings into investor-grade reports. Bilingual drafts reviewed by Korean market specialists.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase 4</div><div className="proc-title">Distribution</div><div className="proc-text">Publish through Korean media partners, KOL network, and client channels. Track reach and engagement.</div></div>
         </div>
       </div></section>
+
+      {/* REPORT TYPES */}
+      <section className="platforms"><div className="wrap">
+        <div className="lbl" style={{ color: "var(--g2)" }}>Report Types</div>
+        <div className="plat-grid">
+          <div className="plat"><div className="plat-name">Market Entry Thesis</div><div className="plat-desc">Full Korean market assessment — TAM, competition, regulatory, and recommended go-to-market strategy.</div><div className="plat-stat">40-60 page reports</div></div>
+          <div className="plat"><div className="plat-name">Competitor Deck</div><div className="plat-desc">Deep analysis of how competitors are positioned in Korea. KOL networks, community size, exchange presence.</div><div className="plat-stat">Actionable insights</div></div>
+          <div className="plat"><div className="plat-name">Tokenomics Review</div><div className="plat-desc">Korean retail sentiment analysis on token design. How Korean investors evaluate and discuss your tokenomics.</div><div className="plat-stat">Investor-grade</div></div>
+          <div className="plat"><div className="plat-name">Trend Report</div><div className="plat-desc">Monthly pulse on Korean crypto narratives, retail flows, community sentiment, and emerging opportunities.</div><div className="plat-stat">Monthly cadence</div></div>
+        </div>
+      </div></section>
+
+      {/* FAQ */}
+      <section className="faq"><div className="wrap">
+        <div className="lbl">FAQ</div>
+        {[
+          { q: "How long does a typical research report take?", a: "Market entry thesis reports take 3-4 weeks. Competitor decks and tokenomics reviews take 2-3 weeks. Monthly trend reports are delivered on a recurring schedule." },
+          { q: "Are reports delivered in both Korean and English?", a: "Yes. All reports are produced bilingually. The Korean version is optimized for local distribution, while the English version is structured for international stakeholders and investors." },
+          { q: "How do you distribute the research?", a: "Through our network of 12+ Korean media partners and KOL relationships. Reports are published as articles, thread summaries, and newsletter features for maximum reach." },
+          { q: "Can you produce custom research on specific topics?", a: "Absolutely. Most of our work is custom-scoped. Whether it's a specific competitor deep-dive, regulatory analysis, or community sentiment study, we tailor every engagement." },
+        ].map((faq, i) => (
+          <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
+            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-a"><p>{faq.a}</p></div>
+          </div>
+        ))}
+      </div></section>
+
+      {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Need Korean market <strong>intelligence?</strong></h2><div className="invite-kr">한국 시장을 데이터로 이해합니다</div></div>
-        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Research Briefing →</CalendlyButton><div className="invite-offices"><span>KR</span><span>SG</span></div></div>
+        <div><h2>Need Korean market <strong>intelligence?</strong></h2><div className="invite-kr">한국 시장을 데이터로 이해합니다.</div></div>
+        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Research Briefing →</CalendlyButton></div>
       </div></section>
-      <footer className="ft-ed"><div className="ft-inner"><div className="ft-cp">© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span className="ft-clock" ref={clockRef} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
+      <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
     </div>
   );
 };

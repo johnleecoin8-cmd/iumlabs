@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -6,114 +6,125 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/community-management.webp";
-import "./GTMService.css";
-
+import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
-
-const clients = ["BNB Chain","Sahara AI","PEAQ Network","Bybit","KuCoin","Polygon","Mantra","Ondo Finance","FOGO","Aptos","Kite","SynFutures"];
 
 const CommunityService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLSpanElement>(null);
+  const [openCap, setOpenCap] = useState<number | null>(null);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const toggleCap = useCallback((i: number) => setOpenCap(p => p === i ? null : i), []);
+  const toggleFaq = useCallback((i: number) => setOpenFaq(p => p === i ? null : i), []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".gtm-ed .hero-tag", { y: 30, opacity: 0, duration: 1, delay: .2, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
-
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .svc-block").forEach(el => {
-        gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
+      gsap.from(".svc-detail .hero-back", { opacity: 0, x: -20, duration: .8, delay: .3 });
+      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .4 });
+      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 40, duration: 1, delay: .5, ease: "power3.out" });
+      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .9 });
+      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .plat,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .highlight-box").forEach(el => {
+        gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
-
-      const mp = document.querySelector(".gtm-ed .manifesto p");
-      if (mp) {
-        const html = mp.innerHTML;
-        const parts = html.split(/(<[^>]+>)/);
-        let result = "";
-        parts.forEach(part => {
-          if (part.startsWith("<")) { result += part; return; }
-          part.split(" ").forEach(w => { if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15">${w}</span> `; });
-        });
-        mp.innerHTML = result;
-        gsap.utils.toArray<HTMLElement>(".gtm-ed .mw").forEach(w => {
-          gsap.to(w, { opacity: 1, duration: .5, scrollTrigger: { trigger: w, start: "top 90%", end: "top 60%", scrub: 1 }});
-        });
-      }
     }, containerRef);
-
     const tick = () => { if (clockRef.current) clockRef.current.textContent = `Seoul ${new Date().toLocaleString("en-US",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",hour12:false})}`; };
     tick(); const ci = setInterval(tick, 60000);
     return () => { ctx.revert(); clearInterval(ci); };
   }, []);
 
   return (
-    <div className="gtm-ed" ref={containerRef}>
+    <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" keywords={["Korea Community Management","Web3 Community Korea"]} />
       <Navbar />
 
-      <section className="hero-ed">
-        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" /><div className="hero-grid" /><div className="hero-orb" />
-        <div className="hero-kr">커뮤</div><div className="hero-kr">니티</div><div className="hero-kr">관리</div>
-        <div className="hero-wm">ium</div>
-        <div className="hero-tag">Community Management — Seoul</div>
-        <h1>Build the <em>community.</em> <strong>Own the culture.</strong></h1>
-        <div className="hero-foot"><p>24/7 native Korean community managers across Telegram, Discord, and KakaoTalk. We don't just moderate — we design community culture.</p><div className="hero-scroll">Scroll</div></div>
+      <section className="hero">
+        <div className="hero-grid" /><div className="hero-orb" /><div className="hero-num">04</div>
+        <div className="wrap">
+          <Link to="/services/gtm" className="hero-back">All Services</Link>
+          <div className="hero-label">Service 04 of 08</div>
+          <h1>Community <strong>Management</strong></h1>
+          <p className="hero-desc">24/7 native Korean community managers across Telegram, Discord, and KakaoTalk. We don't just moderate — we design community culture that retains and grows.</p>
+        </div>
       </section>
 
-      <section className="clients"><div className="cl-track">{[...clients,...clients,...clients].map((c,i) => <span key={i}>{c}</span>)}</div></section>
+      <section className="stats"><div className="wrap"><div className="stats-grid">
+        <div className="stat"><div className="stat-val">18</div><div className="stat-sub">Communities Managed</div></div>
+        <div className="stat"><div className="stat-val">127K+</div><div className="stat-sub">Members Engaged</div></div>
+        <div className="stat"><div className="stat-val">6.8%</div><div className="stat-sub">Daily Active Rate</div></div>
+        <div className="stat"><div className="stat-val">92%</div><div className="stat-sub">30-Day Retention</div></div>
+      </div></div></section>
 
-      <section className="why-kr"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Why This Matters</div>
-        <div className="wk-grid" style={{ gridTemplateColumns: "repeat(4,1fr)" }}>
-          <div className="wk-item"><div className="wk-big">18</div><div className="wk-sub">Communities Managed</div><div className="wk-note">Active Korean communities across platforms.</div></div>
-          <div className="wk-item"><div className="wk-big">127K+</div><div className="wk-sub">Members Engaged</div><div className="wk-note">Total members across all managed communities.</div></div>
-          <div className="wk-item"><div className="wk-big">6.8%</div><div className="wk-sub">Daily Active Rate</div><div className="wk-note">Industry average is under 3%.</div></div>
-          <div className="wk-item"><div className="wk-big">92%</div><div className="wk-sub">Member Retention</div><div className="wk-note">Members active after 30 days.</div></div>
-        </div>
-      </div></section>
-
-      <section className="manifesto"><div className="wrap">
-        <p>Korean communities don't run on the same platforms or rules as global ones. <strong>KakaoTalk Open Chat</strong> replaces Telegram for many users. <strong>Naver Cafe</strong> is where long-form discussion happens. DC Inside is where sentiment shifts. We operate all of these natively because we <strong>live inside</strong> the Korean crypto ecosystem.</p>
-      </div></section>
-
-      <section className="approach-ed"><div className="wrap">
-        <div className="lbl">How We Operate</div>
-        <div className="appr-grid">
-          <div className="appr-l">
-            <h2>Communities that <strong>retain and grow.</strong></h2>
-            <p>We design community culture — from onboarding flows to weekly event programming to governance structures that keep members engaged long after the initial hype.</p>
-            <div className="pull-q">"커뮤니티는 번역으로 만들 수 없습니다. 문화를 설계해야 합니다."</div>
-          </div>
-          <div className="pillars">
-            <div className="pill"><div className="pill-n">I</div><h4>24/7 Korean moderation</h4><p>Native Korean speakers around the clock. Holidays, 3AM, weekends — always covered.</p></div>
-            <div className="pill"><div className="pill-n">II</div><h4>Multi-platform native</h4><p>Telegram, Discord, KakaoTalk, Naver Cafe — each with its own culture, all operated natively.</p></div>
-            <div className="pill"><div className="pill-n">III</div><h4>Engagement programming</h4><p>AMAs, trivia, quests, ambassador programs — structured engagement that drives daily activity.</p></div>
-            <div className="pill"><div className="pill-n">IV</div><h4>Sentiment intelligence</h4><p>Real-time monitoring across Korean platforms. We catch issues before they become crises.</p></div>
+      <section className="problem"><div className="wrap">
+        <div className="lbl">The Problem</div>
+        <div className="problem-grid">
+          <div className="problem-left"><h2>Korean communities don't run on <strong>global rules.</strong></h2></div>
+          <div className="problem-right">
+            <p>KakaoTalk Open Chat replaces Telegram for many Korean users. Naver Cafe is where long-form discussion happens. DC Inside is where sentiment shifts. Each platform has its own culture, moderation norms, and engagement patterns.</p>
+            <p>A community manager who doesn't speak Korean natively, doesn't understand 24-hour crypto culture, and doesn't know the difference between KakaoTalk and Telegram culture will lose your members in weeks.</p>
+            <div className="highlight-box"><p>커뮤니티는 번역으로 만들 수 없습니다. 문화를 설계해야 합니다. ium Labs는 한국 크립토 생태계 안에서 커뮤니티를 운영합니다.</p></div>
           </div>
         </div>
       </div></section>
 
-      <section className="quotes-sec"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Testimonials</div>
-        <div className="quotes-grid">
-          <div className="q-card"><blockquote>"ium Labs didn't just moderate our Korean Telegram — they built a community culture from scratch. The engagement metrics were unlike anything we'd seen."</blockquote><cite>Community Lead — DePIN Protocol</cite></div>
-          <div className="q-card"><blockquote>"Native Korean moderators who understand crypto made all the difference. Our Korean community went from 200 to 8K in 6 weeks."</blockquote><cite>Head of Growth — AI Protocol</cite></div>
+      <section className="capabilities"><div className="wrap">
+        <div className="lbl">What We Do</div>
+        {[
+          { icon: "◎", title: "Telegram Management", desc: "Korean Telegram group setup, moderation, engagement programming. Bot configuration, anti-spam, welcome flows, daily engagement prompts. 24/7 coverage." },
+          { icon: "◉", title: "Discord Operations", desc: "Server architecture, role systems, channel structure, Korean localization. Event programming, ticketing, and moderation workflows." },
+          { icon: "◈", title: "KakaoTalk Open Chat", desc: "Korea's native messaging platform. Open chat room management, content sharing, real-time Q&A. The channel most global projects miss entirely." },
+          { icon: "◆", title: "Naver Cafe Management", desc: "Long-form Korean community platform. Post moderation, content curation, SEO-optimized community content that drives Naver search traffic." },
+          { icon: "◇", title: "Engagement Programming", desc: "Weekly AMAs, trivia nights, quest campaigns, ambassador programs, translation events. Structured engagement that drives daily activity metrics." },
+          { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards." },
+        ].map((cap, i) => (
+          <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
+            <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+          </div>
+        ))}
+      </div></section>
+
+      <section className="svc-process"><div className="wrap">
+        <div className="lbl">How It Works</div>
+        <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(1.8rem,3vw,2.5rem)", letterSpacing: "-.02em" }}>From setup to <strong>self-sustaining community.</strong></h2>
+        <div className="proc-grid">
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 1</div><div className="proc-title">Onboarding</div><div className="proc-text">Platform audit, channel setup, bot configuration, welcome flows, Korean localization.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 2–3</div><div className="proc-title">Infrastructure</div><div className="proc-text">Moderation workflows, content calendar, engagement event schedule, ambassador program design.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 3–6</div><div className="proc-title">Activation</div><div className="proc-text">Daily engagement, weekly events, KOL AMAs, quest campaigns. Active growth phase.</div></div>
+          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Ongoing</div><div className="proc-title">Optimization</div><div className="proc-text">Sentiment monitoring, engagement analytics, retention optimization, monthly community health reports.</div></div>
         </div>
+      </div></section>
+
+      <section className="platforms"><div className="wrap">
+        <div className="lbl" style={{ color: "var(--g2)" }}>Platforms</div>
+        <div className="plat-grid">
+          <div className="plat"><div className="plat-name">Telegram</div><div className="plat-desc">Primary crypto communication. Groups, channels, bots, AMAs.</div><div className="plat-stat">24/7 Korean mods</div></div>
+          <div className="plat"><div className="plat-name">Discord</div><div className="plat-desc">Deep engagement. Roles, channels, events, ticketing.</div><div className="plat-stat">Full server architecture</div></div>
+          <div className="plat"><div className="plat-name">KakaoTalk</div><div className="plat-desc">Korea's native messenger. Open chat rooms for real-time community.</div><div className="plat-stat">Korea-only channel</div></div>
+          <div className="plat"><div className="plat-name">Naver Cafe</div><div className="plat-desc">Long-form Korean community. SEO-optimized content and discussion.</div><div className="plat-stat">Search traffic driver</div></div>
+        </div>
+      </div></section>
+
+      <section className="faq"><div className="wrap">
+        <div className="lbl">FAQ</div>
+        {[
+          { q: "Do you provide 24/7 coverage?", a: "Yes. Native Korean speakers managing your community around the clock — holidays, 3AM, weekends. Crypto never sleeps, and neither do we." },
+          { q: "Can you manage multiple platforms simultaneously?", a: "Yes. Most clients use Telegram + Discord + at least one Korean platform (KakaoTalk or Naver Cafe). We handle all of them with a unified content and moderation strategy." },
+          { q: "How do you handle FUD and negative sentiment?", a: "Real-time monitoring with alert systems. Pre-approved response templates for common FUD scenarios. Escalation protocols for serious issues. We respond within minutes, not hours." },
+          { q: "What's the typical engagement improvement?", a: "Most communities see 2-3x increase in daily active rate within the first month. Our average across all managed communities is 6.8% DAR, compared to the industry average of under 3%." },
+        ].map((faq, i) => (
+          <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
+            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-a"><p>{faq.a}</p></div>
+          </div>
+        ))}
       </div></section>
 
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to build a Korean <strong>community that lasts?</strong></h2><div className="invite-kr">한국 커뮤니티를 설계합니다</div></div>
-        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Community Strategy Call →</CalendlyButton><div className="invite-offices"><span>KR</span><span>SG</span></div></div>
+        <div><h2>Ready to build a Korean <strong>community that lasts?</strong></h2><div className="invite-kr">한국 커뮤니티를 설계합니다.</div></div>
+        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Community Strategy Call →</CalendlyButton></div>
       </div></section>
-
-      <footer className="ft-ed"><div className="ft-inner">
-        <div className="ft-cp">© 2026 ium labs — Seoul</div>
-        <div style={{ display: "flex", alignItems: "center" }}><span className="ft-clock" ref={clockRef} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div>
-      </div></footer>
+      <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
     </div>
   );
 };
-
 export default CommunityService;
