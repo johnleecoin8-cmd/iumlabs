@@ -270,17 +270,17 @@ const GTMService = () => {
       <section className="team-scatter">
         <div className="tm-sub">[ Team of 10+ Operators ]</div>
         <div className="team-inner">
-          <div className="team-big">Our<br/>Team</div>
+          <div className="team-big-wrap"><div className="team-big">Our<br/>Team</div></div>
           {[
-            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "3%", w: 300 },
-            { name: "Bennet", role: "COO", img: teamBennet, top: "5%", left: "68%", w: 200 },
-            { name: "J", role: "CMO", img: teamJ, top: "22%", left: "38%", w: 340 },
-            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "35%", left: "1%", w: 170 },
-            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "40%", left: "72%", w: 240 },
-            { name: "Rachel", role: "Designer", img: teamRachel, top: "56%", left: "15%", w: 220 },
-            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "58%", left: "58%", w: 280 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "72%", left: "30%", w: 260 },
-            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "80%", left: "65%", w: 200 },
+            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "2%", w: 420 },
+            { name: "Bennet", role: "COO", img: teamBennet, top: "4%", left: "66%", w: 300 },
+            { name: "J", role: "CMO", img: teamJ, top: "18%", left: "32%", w: 480 },
+            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "32%", left: "0%", w: 250 },
+            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "36%", left: "68%", w: 360 },
+            { name: "Rachel", role: "Designer", img: teamRachel, top: "52%", left: "12%", w: 330 },
+            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "54%", left: "55%", w: 400 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "70%", left: "25%", w: 370 },
+            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "76%", left: "62%", w: 300 },
           ].map((m, i) => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
