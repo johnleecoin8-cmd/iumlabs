@@ -23,7 +23,7 @@ import teamKevin from "@/assets/team/kevin-bd-new.png";
 import teamLewis from "@/assets/team/lewis-pr.png";
 import teamRachel from "@/assets/team/bennet-coo.png";
 import teamSuki from "@/assets/team/kevin-bd.png";
-import teamHyukjae from "@/assets/team/hyukjae-bdm-new.png";
+import teamHyukjae from "@/assets/team/hyukjae-bdm.png";
 import teamHelen from "@/assets/team/helen-cm.png";
 import "./GTMService.css";
 
@@ -203,10 +203,7 @@ const GTMService = () => {
               <div className="svc-expand">
                 <div className="svc-exp-inner">
                   <div />
-                  <div className="svc-desc">
-                    {svc.desc}
-                    {svc.href && <Link to={svc.href} className="svc-link">View service details →</Link>}
-                  </div>
+                  <div className="svc-desc">{svc.desc}</div>
                   <div className="svc-subs">
                     <h5>Capabilities</h5>
                     <ul>{svc.caps.map(c => <li key={c}>{c}</li>)}</ul>
@@ -268,7 +265,7 @@ const GTMService = () => {
         <div className="team-cards" style={{ minHeight: 4200 }}>
           <div className="tm-card" style={{ top: 40, left: "5%", width: 340 }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
-            <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
+            <div className="tm-photo"><img src={teamHelen} alt="David" /></div>
           </div>
           <div className="tm-card" style={{ top: 300, left: "60%", width: 260 }}>
             <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
@@ -280,7 +277,7 @@ const GTMService = () => {
           </div>
           <div className="tm-card" style={{ top: 1100, left: "2%", width: 220 }}>
             <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
-            <div className="tm-photo"><img src={teamHelen} alt="Kevin" /></div>
+            <div className="tm-photo"><img src={teamKevin} alt="Kevin" /></div>
           </div>
           <div className="tm-card" style={{ top: 1200, left: "55%", width: 320 }}>
             <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>

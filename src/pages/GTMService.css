@@ -88,8 +88,6 @@
 .gtm-ed .svc-block.open .svc-expand{max-height:600px;opacity:1}
 .gtm-ed .svc-exp-inner{display:grid;grid-template-columns:100px 1fr 1fr;gap:3rem;padding:1.5rem 0 3.5rem}
 .gtm-ed .svc-desc{font-size:.84rem;color:var(--g1);line-height:1.7;font-weight:300}
-.gtm-ed .svc-link{display:inline-block;margin-top:1.5rem;font-family:var(--mono);font-size:.6rem;font-weight:500;letter-spacing:.08em;color:var(--blue);transition:opacity .3s}
-.gtm-ed .svc-link:hover{opacity:.7}
 .gtm-ed .svc-subs h5{font-family:var(--mono);font-size:.52rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:1.5rem}
 .gtm-ed .svc-subs ul{list-style:none}
 .gtm-ed .svc-subs li{font-size:.82rem;color:var(--char);font-weight:400;padding:.6rem 0;border-bottom:1px solid var(--g5);display:flex;align-items:center;gap:.75rem;transition:padding-left .3s var(--ease),color .3s;cursor:default}
