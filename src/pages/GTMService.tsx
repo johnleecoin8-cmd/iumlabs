@@ -253,18 +253,18 @@ const GTMService = () => {
         <div className="wrap"><div className="lbl">Team</div></div>
         <div className="tm-sub">[ Operators, not account managers ]</div>
         <div className="team-big">Our Team</div>
-        <div className="team-cards" style={{ height: "200vh", position: "relative" }}>
+        <div className="team-cards">
           {[
-            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "5%", left: "8%" },
-            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "8%", right: "12%" },
-            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "28%", right: "25%" },
-            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "35%", left: "5%" },
-            { name: "PR & Media", role: "Press Relations", init: "PR", top: "52%", left: "30%" },
-            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "55%", right: "8%" },
-            { name: "Events Team", role: "Seoul Production", init: "EV", top: "72%", left: "15%" },
-            { name: "SEO & Ads", role: "Performance Marketing", init: "AD", top: "75%", right: "20%" },
+            { name: "J. Lee", role: "CMO / Founder", init: "J" },
+            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR" },
+            { name: "Singapore Hub", role: "Operations & BD", init: "SG" },
+            { name: "Korean CM Team", role: "24/7 Community", init: "CM" },
+            { name: "PR & Media", role: "Press Relations", init: "PR" },
+            { name: "Research Desk", role: "Market Intelligence", init: "R" },
+            { name: "Events Team", role: "Seoul Production", init: "EV" },
+            { name: "SEO & Ads", role: "Performance Marketing", init: "AD" },
           ].map((m, i) => (
-            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, right: (m as any).right, transform: `rotate(${(i % 2 === 0 ? -2 : 2) + i * 0.5}deg)` }}>
+            <div key={m.init} className="tm-card" style={{ transform: `rotate(${(i % 2 === 0 ? -2 : 1.5)}deg)` }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
               <div className="tm-avatar"><span className="tm-init">{m.init}</span></div>
             </div>
