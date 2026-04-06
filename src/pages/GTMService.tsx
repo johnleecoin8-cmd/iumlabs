@@ -24,6 +24,7 @@ import teamLewis from "@/assets/team/lewis-pr.png";
 import teamRachel from "@/assets/team/bennet-coo.png";
 import teamSuki from "@/assets/team/kevin-bd.png";
 import teamHyukjae from "@/assets/team/hyukjae-bdm.png";
+import teamHelen from "@/assets/team/helen-cm.png";
 import "./GTMService.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -278,7 +279,8 @@ const GTMService = () => {
             { name: "Lewis", role: "PR Manager", img: teamLewis, top: "40%", left: "72%", w: 240 },
             { name: "Rachel", role: "Designer", img: teamRachel, top: "56%", left: "15%", w: 220 },
             { name: "Suki", role: "Managing Partner", img: teamSuki, top: "58%", left: "58%", w: 280 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "75%", left: "35%", w: 260 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "72%", left: "30%", w: 260 },
+            { name: "Helen", role: "Community Moderator", img: teamHelen, top: "80%", left: "65%", w: 200 },
           ].map((m, i) => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
