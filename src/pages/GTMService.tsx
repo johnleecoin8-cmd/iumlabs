@@ -15,6 +15,15 @@ import bybitImg from "@/assets/campaigns/bybit-event.jpg";
 import saharaImg from "@/assets/campaigns/sahara-ai-event.png";
 import polygonImg from "@/assets/campaigns/polygon-connect.png";
 import ondoImg from "@/assets/campaigns/ondo-seminar.jpg";
+// Team photos
+import teamDavid from "@/assets/team/david-ceo.png";
+import teamBennet from "@/assets/team/rachel-design.png";
+import teamJ from "@/assets/team/j-cmo.png";
+import teamKevin from "@/assets/team/suki-partner.png";
+import teamLewis from "@/assets/team/lewis-pr.png";
+import teamRachel from "@/assets/team/bennet-coo.png";
+import teamSuki from "@/assets/team/kevin-bd.png";
+import teamHyukjae from "@/assets/team/hyukjae-bdm.png";
 import "./GTMService.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -262,14 +271,14 @@ const GTMService = () => {
         <div className="team-inner">
           <div className="team-big">Our<br/>Team</div>
           {[
-            { name: "David", role: "CEO", img: "https://i.pravatar.cc/400?img=33", top: "2%", left: "3%", w: 300 },
-            { name: "Bennet", role: "COO", img: "https://i.pravatar.cc/400?img=12", top: "5%", left: "68%", w: 200 },
-            { name: "J", role: "CMO", img: "https://i.pravatar.cc/400?img=57", top: "22%", left: "38%", w: 340 },
-            { name: "Kevin", role: "Head of BD", img: "https://i.pravatar.cc/400?img=59", top: "35%", left: "1%", w: 170 },
-            { name: "Lewis", role: "PR Manager", img: "https://i.pravatar.cc/400?img=15", top: "40%", left: "72%", w: 240 },
-            { name: "Rachel", role: "Designer", img: "https://i.pravatar.cc/400?img=23", top: "56%", left: "15%", w: 220 },
-            { name: "Suki", role: "Managing Partner", img: "https://i.pravatar.cc/400?img=47", top: "58%", left: "58%", w: 280 },
-            { name: "Hyukjae", role: "BD Manager", img: "https://i.pravatar.cc/400?img=68", top: "75%", left: "35%", w: 260 },
+            { name: "David", role: "CEO", img: teamDavid, top: "2%", left: "3%", w: 300 },
+            { name: "Bennet", role: "COO", img: teamBennet, top: "5%", left: "68%", w: 200 },
+            { name: "J", role: "CMO", img: teamJ, top: "22%", left: "38%", w: 340 },
+            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "35%", left: "1%", w: 170 },
+            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "40%", left: "72%", w: 240 },
+            { name: "Rachel", role: "Designer", img: teamRachel, top: "56%", left: "15%", w: 220 },
+            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "58%", left: "58%", w: 280 },
+            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "75%", left: "35%", w: 260 },
           ].map((m, i) => (
             <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
