@@ -76,13 +76,26 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
       // Team cards — slow parallax reveal like Lunar Strategy
+      const cardRotations = [-4, 2.5, -1.5, 3.5, -3, 2, -2];
       gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
         const dir = i % 2 === 0 ? -1 : 1;
-        gsap.set(card, { opacity: 0, y: 120, x: dir * 60, scale: .85, rotation: dir * 8 });
-        gsap.to(card, {
-          opacity: 1, y: 0, x: 0, scale: 1, rotation: parseFloat(card.style.transform?.match(/rotate\((.+?)deg\)/)?.[1] || "0"),
-          duration: 1.8, ease: "power2.out",
-          scrollTrigger: { trigger: card, start: "top 100%", end: "top 40%", scrub: 1.5 }
+        const finalRot = cardRotations[i] || 0;
+        gsap.set(card, { opacity: 0, y: 150, x: dir * 80, scale: .8, rotation: dir * 12 });
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 105%",
+          end: "top 35%",
+          scrub: 2,
+          onUpdate: (self) => {
+            const p = self.progress;
+            gsap.set(card, {
+              opacity: p,
+              y: 150 * (1 - p),
+              x: dir * 80 * (1 - p),
+              scale: .8 + .2 * p,
+              rotation: (dir * 12) + (finalRot - dir * 12) * p,
+            });
+          }
         });
       });
 
