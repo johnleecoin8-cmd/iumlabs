@@ -75,18 +75,11 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team cards — appear on scroll down, disappear on scroll up
-      const tmCards = document.querySelectorAll(".gtm-ed .tm-card");
-      tmCards.forEach((card, i) => {
-        gsap.set(card, { y: 60, opacity: 0, scale: .92 });
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 92%",
-          end: "top 15%",
-          onEnter: () => gsap.to(card, { y: 0, opacity: 1, scale: 1, duration: .8, delay: i * .05, ease: "power3.out" }),
-          onLeaveBack: () => gsap.to(card, { y: 60, opacity: 0, scale: .92, duration: .5, ease: "power2.in" }),
-          onEnterBack: () => gsap.to(card, { y: 0, opacity: 1, scale: 1, duration: .6, ease: "power3.out" }),
-          onLeave: () => gsap.to(card, { y: -30, opacity: 0, scale: .95, duration: .5, ease: "power2.in" }),
+      // Team cards — fade in one by one as you scroll past each
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach(card => {
+        gsap.set(card, { opacity: 0, y: 40 });
+        gsap.to(card, { opacity: 1, y: 0, duration: 1, ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none reverse" }
         });
       });
 
@@ -257,19 +250,18 @@ const GTMService = () => {
       <section className="team-scatter">
         <div className="wrap"><div className="lbl">Team</div></div>
         <div className="tm-sub">[ Operators, not account managers ]</div>
-        <div className="team-big">Our Team</div>
-        <div className="team-cards">
+        <div className="team-inner">
+          <div className="team-big">Our Team</div>
           {[
-            { name: "J. Lee", role: "CMO / Founder", init: "J" },
-            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR" },
-            { name: "Singapore Hub", role: "Operations & BD", init: "SG" },
-            { name: "Korean CM Team", role: "24/7 Community", init: "CM" },
-            { name: "PR & Media", role: "Press Relations", init: "PR" },
-            { name: "Research Desk", role: "Market Intelligence", init: "R" },
-            { name: "Events Team", role: "Seoul Production", init: "EV" },
-            { name: "SEO & Ads", role: "Performance Marketing", init: "AD" },
-          ].map((m, i) => (
-            <div key={m.init} className="tm-card" style={{ transform: `rotate(${(i % 2 === 0 ? -2 : 1.5)}deg)` }}>
+            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "3%", left: "5%", rot: -3 },
+            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "6%", left: "65%", rot: 2 },
+            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "25%", left: "35%", rot: -1 },
+            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "38%", left: "3%", rot: 3 },
+            { name: "PR & Media", role: "Press Relations", init: "PR", top: "45%", left: "60%", rot: -2 },
+            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "62%", left: "20%", rot: 1.5 },
+            { name: "Events Team", role: "Seoul Production", init: "EV", top: "72%", left: "55%", rot: -2.5 },
+          ].map(m => (
+            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, transform: `rotate(${m.rot}deg)` }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
               <div className="tm-avatar"><span className="tm-init">{m.init}</span></div>
             </div>
