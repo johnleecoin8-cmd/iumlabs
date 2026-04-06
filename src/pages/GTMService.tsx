@@ -76,13 +76,18 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
       // Team cards — appear on scroll down, disappear on scroll up
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
-        gsap.fromTo(card,
-          { y: 100, opacity: 0, rotation: (i % 2 === 0 ? -6 : 6), scale: .9 },
-          { y: 0, opacity: 1, rotation: (i % 2 === 0 ? -2 : 2) + i * 0.5, scale: 1, duration: 1, ease: "power3.out",
-            scrollTrigger: { trigger: card, start: "top 95%", end: "top 20%", toggleActions: "play reverse play reverse" }
-          }
-        );
+      const tmCards = document.querySelectorAll(".gtm-ed .tm-card");
+      tmCards.forEach((card, i) => {
+        gsap.set(card, { y: 60, opacity: 0, scale: .92 });
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 92%",
+          end: "top 15%",
+          onEnter: () => gsap.to(card, { y: 0, opacity: 1, scale: 1, duration: .8, delay: i * .05, ease: "power3.out" }),
+          onLeaveBack: () => gsap.to(card, { y: 60, opacity: 0, scale: .92, duration: .5, ease: "power2.in" }),
+          onEnterBack: () => gsap.to(card, { y: 0, opacity: 1, scale: 1, duration: .6, ease: "power3.out" }),
+          onLeave: () => gsap.to(card, { y: -30, opacity: 0, scale: .95, duration: .5, ease: "power2.in" }),
+        });
       });
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
