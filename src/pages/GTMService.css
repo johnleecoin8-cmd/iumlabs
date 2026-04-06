@@ -137,6 +137,9 @@
 .gtm-ed .t-role{font-family:var(--mono);font-size:.6rem;color:var(--g2);letter-spacing:.1em;text-transform:uppercase}
 .gtm-ed .team-card p{font-size:.8rem;color:var(--g1);line-height:1.6;font-weight:300;margin-top:1rem}
 
+/* TEAM INTRO BRIDGE */
+.gtm-ed .team-intro{padding:10rem 0;background:var(--bg);text-align:center}
+
 /* TEAM — PINNED SCROLL */
 .gtm-ed .team-scatter{position:relative;background:var(--off);overflow:hidden}
 .gtm-ed .team-pin{position:relative;height:100vh;width:100%;overflow:hidden}

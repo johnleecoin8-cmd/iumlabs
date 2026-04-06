@@ -267,6 +267,19 @@ const GTMService = () => {
         </div>
       </section>
 
+      {/* TEAM INTRO — bridge */}
+      <section className="team-intro">
+        <div className="wrap" style={{ textAlign: "center" }}>
+          <div className="lbl" style={{ justifyContent: "center" }}>The People</div>
+          <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(2rem,4vw,3.5rem)", letterSpacing: "-.02em", maxWidth: 700, margin: "0 auto" }}>
+            Operators, not <strong>account managers.</strong>
+          </h2>
+          <p style={{ fontSize: ".9rem", color: "var(--g1)", lineHeight: 1.75, fontWeight: 300, maxWidth: 500, margin: "1.5rem auto 0" }}>
+            Every campaign is run by people who've held BD, marketing, and exchange roles inside the Korean crypto ecosystem.
+          </p>
+        </div>
+      </section>
+
       {/* TEAM — PINNED SCROLL */}
       <section className="team-scatter">
         <div className="team-pin">
