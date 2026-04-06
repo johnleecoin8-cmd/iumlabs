@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X, Send, Calendar } from "lucide-react";
+import { X, Send, Calendar, Mail } from "lucide-react";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 const FloatingContactButton = () => {
@@ -14,6 +14,11 @@ const FloatingContactButton = () => {
     label: "Free 30-min Call",
     href: "https://calendly.com/iumlabs/30min",
     color: "bg-primary"
+  }, {
+    icon: Mail,
+    label: "Email Us",
+    href: "mailto:admin@iumlabs.io",
+    color: "bg-[#EA4335]"
   }, {
     icon: Send,
     label: "Telegram",
