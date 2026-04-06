@@ -59,7 +59,7 @@ const services = [
 ];
 
 const workCards = [
-  { img: bnbImg, cat: "BNB Chain — Korea Ecosystem Growth", metric: "5 KOLs", title: "S-tier Korean KOL activation", desc: "Full-scale Korean market campaign with top-tier KOL placements, Naver SEO push, community building.", tags: ["Korea","KOL","Ecosystem"], slug: "bnb-chain" },
+  { img: bnbImg, cat: "BNB Chain — Korea Ecosystem Growth", metric: "40 KOLs", title: "Korean KOL activation", desc: "Full-scale Korean market campaign with top-tier KOL placements, Naver SEO push, community building.", tags: ["Korea","KOL","Ecosystem"], slug: "bnb-chain" },
   { img: saharaImg, cat: "Sahara AI — Korea Market Entry", metric: "4.2M", title: "Korean CT impressions, 6 weeks", desc: "AI×Crypto narrative positioning for Korean retail. KOL threads, AMA series, Kakao and Telegram activation.", tags: ["AI","Narrative","CT"], slug: "sahara-ai" },
   { img: peaqImg, cat: "PEAQ Network — PEAQ Loves Robots", metric: "7 Weeks", title: "5 S-tier KOL multi-touch campaign", desc: "$35K campaign: DePIN narrative education, weekly KOL thread drops, Korean community AMA series.", tags: ["DePIN","KOL","Campaign"], slug: "peaq" },
   { img: kucoinImg, cat: "KuCoin — User Acquisition", metric: "35K", title: "New Korean users acquired", desc: "Community airdrop, KOL campaigns, and Naver SEO driving sustained user acquisition.", tags: ["Exchange","Community","SEO"], slug: "kucoin" },
@@ -262,40 +262,40 @@ const GTMService = () => {
       <section className="team-section">
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
-        <div className="team-cards" style={{ minHeight: 4200 }}>
-          <div className="tm-card" style={{ top: 40, left: "2%", width: 500 }}>
+        <div className="team-cards" style={{ minHeight: 4600 }}>
+          <div className="tm-card" style={{ top: 40, left: "2%", width: 440 }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
             <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
           </div>
-          <div className="tm-card" style={{ top: 150, left: "65%", width: 280 }}>
+          <div className="tm-card" style={{ top: 100, left: "62%", width: 280 }}>
             <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
             <div className="tm-photo"><img src={teamBennet} alt="Bennet" /></div>
           </div>
-          <div className="tm-card" style={{ top: 700, left: "32%", width: 420 }}>
+          <div className="tm-card" style={{ top: 750, left: "30%", width: 380 }}>
             <div className="tm-info"><h4>J</h4><span>CMO</span></div>
             <div className="tm-photo"><img src={teamJ} alt="J" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1150, left: "0%", width: 250 }}>
+          <div className="tm-card" style={{ top: 1350, left: "0%", width: 260 }}>
             <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
             <div className="tm-photo"><img src={teamHelen} alt="Kevin" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1250, left: "5%", width: 380 }}>
+          <div className="tm-card" style={{ top: 1400, left: "58%", width: 340 }}>
             <div className="tm-info"><h4>Suki</h4><span>Designer</span></div>
             <div className="tm-photo"><img src={teamRachel} alt="Suki" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1750, left: "55%", width: 440 }}>
+          <div className="tm-card" style={{ top: 2000, left: "5%", width: 400 }}>
             <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
             <div className="tm-photo"><img src={teamLewis} alt="Lewis" /></div>
           </div>
-          <div className="tm-card" style={{ top: 2100, left: "48%", width: 320 }}>
+          <div className="tm-card" style={{ top: 2100, left: "55%", width: 300 }}>
             <div className="tm-info"><h4>Rachel</h4><span>Managing Partner</span></div>
             <div className="tm-photo"><img src={teamSuki} alt="Rachel" /></div>
           </div>
-          <div className="tm-card" style={{ top: 2550, left: "10%", width: 420 }}>
+          <div className="tm-card" style={{ top: 2750, left: "15%", width: 360 }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
             <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" /></div>
           </div>
-          <div className="tm-card" style={{ top: 2900, left: "58%", width: 260 }}>
+          <div className="tm-card" style={{ top: 3100, left: "55%", width: 260 }}>
             <div className="tm-info"><h4>Helen</h4><span>Community Moderator</span></div>
             <div className="tm-photo"><img src={teamDavid} alt="Helen" /></div>
           </div>
