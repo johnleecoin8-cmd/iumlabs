@@ -72,6 +72,7 @@ const workCards = [
 const GTMService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const workPinRef = useRef<HTMLDivElement>(null);
+  const teamStripRef = useRef<HTMLDivElement>(null);
   const clockRef = useRef<HTMLSpanElement>(null);
   const [openSvc, setOpenSvc] = useState<number | null>(null);
 
@@ -85,23 +86,23 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team cards — scrub parallax, each card rises from below
-      gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
-        const yStart = 200 + (i % 3) * 50;
-        gsap.set(card, { opacity: 0, y: yStart });
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 110%",
-          end: "top 40%",
-          scrub: 1.8,
-          onUpdate: (self) => {
-            gsap.set(card, {
-              opacity: Math.min(self.progress * 1.5, 1),
-              y: yStart * (1 - self.progress),
-            });
+      // Team — pin section, scroll cards upward
+      if (teamStripRef.current && window.innerWidth > 768) {
+        const strip = teamStripRef.current;
+        const totalH = strip.scrollHeight - window.innerHeight;
+        gsap.to(strip, {
+          y: -totalH,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".gtm-ed .team-scatter",
+            start: "top top",
+            end: () => `+=${totalH + window.innerHeight}`,
+            scrub: 1.5,
+            pin: true,
+            anticipatePin: 1,
           }
         });
-      });
+      }
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .wk-item,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .rg,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .reg-l,.gtm-ed .pull-q,.gtm-ed .svc-block").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
@@ -266,27 +267,29 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TEAM — SCATTER SCROLL */}
+      {/* TEAM — PINNED SCROLL */}
       <section className="team-scatter">
-        <div className="tm-sub">[ Team of 10+ Operators ]</div>
-        <div className="team-inner">
-          <div className="team-big-wrap"><div className="team-big">Our<br/>Team</div></div>
-          {[
-            { name: "David", role: "CEO", img: teamHelen, top: "2%", left: "2%", w: 420 },
-            { name: "Bennet", role: "COO", img: teamBennet, top: "4%", left: "66%", w: 300 },
-            { name: "J", role: "CMO", img: teamJ, top: "18%", left: "32%", w: 480 },
-            { name: "Kevin", role: "Head of BD", img: teamKevin, top: "32%", left: "0%", w: 250 },
-            { name: "Lewis", role: "PR Manager", img: teamLewis, top: "36%", left: "68%", w: 360 },
-            { name: "Rachel", role: "Designer", img: teamRachel, top: "52%", left: "12%", w: 330 },
-            { name: "Suki", role: "Managing Partner", img: teamSuki, top: "54%", left: "55%", w: 400 },
-            { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: "70%", left: "25%", w: 370 },
-            { name: "Helen", role: "Community Moderator", img: teamDavid, top: "76%", left: "62%", w: 300 },
-          ].map((m, i) => (
-            <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
-              <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
-              <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
-            </div>
-          ))}
+        <div className="team-pin">
+          <div className="tm-sub">[ Team of 10+ Operators ]</div>
+          <div className="team-big">Our Team</div>
+          <div className="tm-strip" ref={teamStripRef}>
+            {[
+              { name: "David", role: "CEO", img: teamHelen, top: 60, left: "5%", w: 380 },
+              { name: "Bennet", role: "COO", img: teamBennet, top: 420, left: "62%", w: 280 },
+              { name: "J", role: "CMO", img: teamJ, top: 750, left: "28%", w: 440 },
+              { name: "Kevin", role: "Head of BD", img: teamKevin, top: 1100, left: "2%", w: 240 },
+              { name: "Lewis", role: "PR Manager", img: teamLewis, top: 1200, left: "58%", w: 340 },
+              { name: "Rachel", role: "Designer", img: teamRachel, top: 1600, left: "15%", w: 300 },
+              { name: "Suki", role: "Managing Partner", img: teamSuki, top: 1700, left: "52%", w: 380 },
+              { name: "Hyukjae", role: "BD Manager", img: teamHyukjae, top: 2100, left: "22%", w: 340 },
+              { name: "Helen", role: "Community Moderator", img: teamDavid, top: 2250, left: "60%", w: 280 },
+            ].map(m => (
+              <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
+                <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
+                <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
