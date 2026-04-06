@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import heroImg from "@/assets/services/community-management.webp";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +39,7 @@ const CommunityService = () => {
       <Navbar />
 
       <section className="hero">
+        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
         <div className="hero-grid" /><div className="hero-orb" /><div className="hero-num">04</div>
         <div className="wrap">
           <Link to="/services/gtm" className="hero-back">All Services</Link>

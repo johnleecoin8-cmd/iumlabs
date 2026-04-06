@@ -7,6 +7,7 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import peaqImg from "@/assets/campaigns/peaq-booth-event.png";
+import heroImg from "@/assets/services/kol-network.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -40,6 +41,7 @@ const InfluencerService = () => {
 
       {/* HERO */}
       <section className="hero">
+        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
         <div className="hero-grid" /><div className="hero-orb" />
         <div className="hero-num">02</div>
         <div className="wrap">
