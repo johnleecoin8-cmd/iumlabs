@@ -157,6 +157,135 @@
 .gtm-ed .mag-btn:hover::before { transform: translateY(0) }
 .gtm-ed .mag-btn span { position: relative; z-index: 1 }
 
+/* LOADER */
+.gtm-ed .loader {
+  position: fixed; inset: 0; z-index: 100000; background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .6s .2s, visibility .6s .2s;
+}
+.gtm-ed .loader.done { opacity: 0; visibility: hidden; pointer-events: none }
+.gtm-ed .loader-logo {
+  font-family: var(--sans); font-weight: 800; font-size: 2rem; color: var(--white);
+  letter-spacing: .08em; opacity: 0;
+}
+
+/* SCROLL PROGRESS */
+.gtm-ed .scroll-prog {
+  position: fixed; top: 0; left: 0; height: 2px; background: var(--warm);
+  z-index: 9999; width: 0%; transform-origin: left;
+}
+
+/* CURSOR */
+.gtm-ed .cursor-wrap {
+  position: fixed; top: 0; left: 0; z-index: 9998; pointer-events: none;
+  mix-blend-mode: difference;
+}
+.gtm-ed .cursor-dot {
+  width: 10px; height: 10px; background: var(--white); border-radius: 50%;
+  position: absolute; transform: translate(-50%,-50%);
+  transition: width .4s var(--ease), height .4s var(--ease), border-radius .4s;
+}
+.gtm-ed .cursor-dot.active { width: 90px; height: 90px }
+.gtm-ed .cursor-label {
+  position: absolute; transform: translate(-50%,-50%);
+  font-family: var(--mono); font-size: .55rem; font-weight: 500;
+  color: var(--black); letter-spacing: .1em; text-transform: uppercase;
+  opacity: 0; transition: opacity .3s; pointer-events: none; white-space: nowrap;
+}
+.gtm-ed .cursor-dot.active + .cursor-label { opacity: 1 }
+
+/* HORIZONTAL WORK */
+.gtm-ed .work-sec { overflow: hidden }
+.gtm-ed .work-pin {
+  display: flex; align-items: stretch; background: var(--black); color: var(--white);
+  width: max-content;
+}
+.gtm-ed .work-intro {
+  width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 0 3rem; flex-shrink: 0;
+}
+.gtm-ed .work-intro .lbl { color: var(--g2) }
+.gtm-ed .work-intro .lbl::after { background: rgba(255,255,255,.08) }
+.gtm-ed .work-intro h2 {
+  font-family: var(--serif); font-weight: 300; font-size: clamp(2.5rem,5vw,4rem);
+  letter-spacing: -.02em; max-width: 600px;
+}
+.gtm-ed .work-intro h2 strong { font-weight: 600 }
+.gtm-ed .work-card {
+  width: 520px; height: 100vh; flex-shrink: 0;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 2rem; position: relative;
+  border-left: 1px solid rgba(255,255,255,.06);
+}
+.gtm-ed .wc-img {
+  width: 100%; aspect-ratio: 16/10; overflow: hidden; position: relative;
+  margin-bottom: 2rem; background: var(--ink);
+}
+.gtm-ed .wc-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.15); transition: transform .8s var(--ease);
+}
+.gtm-ed .work-card:hover .wc-img img { transform: scale(1) }
+.gtm-ed .wc-cat {
+  font-family: var(--mono); font-size: .52rem; color: var(--g2);
+  letter-spacing: .15em; text-transform: uppercase; margin-bottom: 1.5rem;
+}
+.gtm-ed .wc-metric {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(3rem,5vw,4rem); letter-spacing: -.03em; line-height: 1; margin-bottom: .5rem;
+}
+.gtm-ed .work-card h4 { font-weight: 600; font-size: .95rem; margin-bottom: .5rem }
+.gtm-ed .work-card p { font-size: .78rem; color: var(--g2); line-height: 1.65; font-weight: 300; max-width: 400px }
+.gtm-ed .wc-tags { margin-top: 1rem; display: flex; gap: .35rem; flex-wrap: wrap }
+.gtm-ed .wc-tag {
+  font-family: var(--mono); font-size: .48rem; padding: .2rem .5rem;
+  border: 1px solid rgba(255,255,255,.1); color: var(--g2);
+}
+
+/* MOBILE MENU */
+.gtm-ed .mob-menu {
+  position: fixed; inset: 0; z-index: 8999; background: var(--black);
+  display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 2rem;
+  opacity: 0; visibility: hidden; transition: opacity .4s, visibility .4s;
+}
+.gtm-ed .mob-menu.open { opacity: 1; visibility: visible }
+.gtm-ed .mob-menu a {
+  font-family: var(--serif); font-size: clamp(2rem,5vw,3.5rem); font-weight: 400;
+  color: var(--white); opacity: 0; transform: translateY(30px);
+  transition: opacity .5s var(--ease), transform .5s var(--ease), color .3s;
+}
+.gtm-ed .mob-menu.open a { opacity: 1; transform: none }
+.gtm-ed .mob-menu a:hover { color: var(--warm) }
+
+/* HAMBURGER */
+.gtm-ed .ham {
+  display: none; width: 28px; height: 18px; position: relative; cursor: pointer; z-index: 9999;
+  background: none; border: none; color: inherit;
+}
+.gtm-ed .ham span {
+  position: absolute; left: 0; width: 100%; height: 1.5px;
+  background: currentColor; transition: all .4s var(--ease);
+}
+.gtm-ed .ham span:nth-child(1) { top: 0 }
+.gtm-ed .ham span:nth-child(2) { top: 50%; transform: translateY(-50%) }
+.gtm-ed .ham span:nth-child(3) { bottom: 0 }
+.gtm-ed .ham.open span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg) }
+.gtm-ed .ham.open span:nth-child(2) { opacity: 0 }
+.gtm-ed .ham.open span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg) }
+
+/* HEADER */
+.gtm-ed .ed-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 9000;
+  padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+  mix-blend-mode: difference; color: var(--white);
+}
+.gtm-ed .ed-header .logo { font-family: var(--sans); font-weight: 800; font-size: 1.15rem; letter-spacing: .06em }
+.gtm-ed .ed-nav { display: flex; gap: 2.5rem; align-items: center }
+.gtm-ed .ed-nav a { font-size: .78rem; font-weight: 500; letter-spacing: .04em }
+
+/* CLOCK */
+.gtm-ed .ft-clock { font-family: var(--mono); font-size: .6rem; color: var(--g2); margin-top: 1.5rem; letter-spacing: .05em }
+
 /* FOOTER (uses existing) */
 .gtm-ed .ft-ed { padding: 4rem 0 2.5rem; border-top: 1px solid var(--g4) }
 .gtm-ed .ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem }
@@ -179,6 +308,9 @@
   .gtm-ed .ft-grid { grid-template-columns: 1fr 1fr }
 }
 @media (max-width: 768px) {
+  .gtm-ed .ed-header { padding: 1.2rem 1.5rem }
+  .gtm-ed .ed-nav { display: none }
+  .gtm-ed .ham { display: block }
   .gtm-ed .hero-ed { padding: 0 1.5rem }
   .gtm-ed .hero-foot { position: relative; bottom: auto; left: auto; right: auto; flex-direction: column; gap: 2rem; margin-top: 3.5rem; padding: 0 }
   .gtm-ed .hero-scroll-v { display: none }
@@ -187,4 +319,5 @@
   .gtm-ed .proc-row { grid-template-columns: 1fr }
   .gtm-ed .case-grid { grid-template-columns: 1fr }
   .gtm-ed .ft-grid { grid-template-columns: 1fr }
+  .gtm-ed .work-card { width: 85vw }
 }
