@@ -117,7 +117,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     preload = 'auto',
     playDelay = 0,
     qualityVariants,
-    forceFirstFrame = true,
+    forceFirstFrame = false,
     maxRetries = 3,
     loadTimeout = 8000,
   } = options;
@@ -207,20 +207,13 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return getVideoSource(baseSrc, forceFirstFrame);
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
-  // Retry play logic for mobile browsers - more aggressive
+  // Retry play logic for mobile browsers - immediate
   const tryPlay = useCallback((video: HTMLVideoElement) => {
-    const attempt = () => {
-      // Ensure video is muted (required for autoplay)
-      video.muted = true;
-      video.play().catch(() => {});
-    };
-    
-    // Multiple retry attempts with increasing delays
-    attempt();
-    setTimeout(attempt, 100);
-    setTimeout(attempt, 300);
-    setTimeout(attempt, 600);
-    setTimeout(attempt, 1000);
+    video.muted = true;
+    video.play().catch(() => {
+      // Single retry after 100ms
+      setTimeout(() => { video.muted = true; video.play().catch(() => {}); }, 100);
+    });
   }, []);
 
   // Handle network error with retry
@@ -354,19 +347,18 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     tabIndex: -1,
     style: {
       opacity: isVideoReady ? 1 : 0,
-      visibility: isVideoReady ? 'visible' : 'hidden',
-      pointerEvents: isVideoReady ? 'auto' : 'none',
-      transition: 'opacity 180ms ease, visibility 0s linear 0s',
+      transition: 'opacity 80ms ease',
     } as React.CSSProperties,
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
       setIsVideoReady(true);
       tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      if (!isVideoReady) setIsVideoReady(true);
       tryPlay(e.currentTarget);
     },
     onLoadedData: () => {
-      setIsVideoReady(true);
+      if (!isVideoReady) setIsVideoReady(true);
     },
     onError: handleError,
   };

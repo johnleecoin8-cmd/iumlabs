@@ -171,7 +171,7 @@ const SelectedWorkShowcase = () => {
                   isActive && isVideoReady ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <source src={`${project.video}#t=0.001`} type="video/mp4" />
+                <source src={`${project.video}`} type="video/mp4" />
               </video>
             )}
 

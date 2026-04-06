@@ -192,7 +192,7 @@ const HeroSection = () => {
           ...videoProps.style,
           WebkitAppearance: 'none'
         }}>
-            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
       }
       </div>
