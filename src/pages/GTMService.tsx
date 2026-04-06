@@ -19,7 +19,7 @@ import ondoImg from "@/assets/campaigns/ondo-seminar.jpg";
 import teamDavid from "@/assets/team/david-ceo.png";
 import teamBennet from "@/assets/team/rachel-design.png";
 import teamJ from "@/assets/team/j-cmo.png";
-import teamKevin from "@/assets/team/suki-partner.png";
+import teamKevin from "@/assets/team/kevin-bd-new.png";
 import teamLewis from "@/assets/team/lewis-pr.png";
 import teamRachel from "@/assets/team/bennet-coo.png";
 import teamSuki from "@/assets/team/kevin-bd.png";
