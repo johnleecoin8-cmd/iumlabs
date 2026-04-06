@@ -75,25 +75,19 @@ const GTMService = () => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .4, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-foot p", { y: 30, opacity: 0, duration: 1, delay: .7, ease: "power3.out" });
 
-      // Team cards — slow parallax reveal like Lunar Strategy
-      const cardRotations = [-4, 2.5, -1.5, 3.5, -3, 2, -2];
+      // Team cards — scrub parallax, each card rises from below
       gsap.utils.toArray<HTMLElement>(".gtm-ed .tm-card").forEach((card, i) => {
-        const dir = i % 2 === 0 ? -1 : 1;
-        const finalRot = cardRotations[i] || 0;
-        gsap.set(card, { opacity: 0, y: 150, x: dir * 80, scale: .8, rotation: dir * 12 });
+        const yStart = 200 + (i % 3) * 50;
+        gsap.set(card, { opacity: 0, y: yStart });
         ScrollTrigger.create({
           trigger: card,
-          start: "top 105%",
-          end: "top 35%",
-          scrub: 2,
+          start: "top 110%",
+          end: "top 40%",
+          scrub: 1.8,
           onUpdate: (self) => {
-            const p = self.progress;
             gsap.set(card, {
-              opacity: p,
-              y: 150 * (1 - p),
-              x: dir * 80 * (1 - p),
-              scale: .8 + .2 * p,
-              rotation: (dir * 12) + (finalRot - dir * 12) * p,
+              opacity: Math.min(self.progress * 1.5, 1),
+              y: yStart * (1 - self.progress),
             });
           }
         });
@@ -264,22 +258,21 @@ const GTMService = () => {
 
       {/* TEAM — SCATTER SCROLL */}
       <section className="team-scatter">
-        <div className="wrap"><div className="lbl">Team</div></div>
-        <div className="tm-sub">[ Operators, not account managers ]</div>
+        <div className="tm-sub">[ Team of 10+ Operators ]</div>
         <div className="team-inner">
-          <div className="team-big">Our Team</div>
+          <div className="team-big">Our<br/>Team</div>
           {[
-            { name: "J. Lee", role: "CMO / Founder", init: "J", top: "2%", left: "3%", rot: -4, w: "22vw" },
-            { name: "Korea KOL Network", role: "170+ Verified KOLs", init: "KR", top: "5%", left: "62%", rot: 2.5, w: "18vw" },
-            { name: "Singapore Hub", role: "Operations & BD", init: "SG", top: "22%", left: "42%", rot: -1.5, w: "24vw" },
-            { name: "Korean CM Team", role: "24/7 Community", init: "CM", top: "36%", left: "2%", rot: 3.5, w: "16vw" },
-            { name: "PR & Media", role: "Press Relations", init: "PR", top: "42%", left: "68%", rot: -3, w: "20vw" },
-            { name: "Research Desk", role: "Market Intelligence", init: "R", top: "60%", left: "15%", rot: 2, w: "19vw" },
-            { name: "Events Team", role: "Seoul Production", init: "EV", top: "70%", left: "52%", rot: -2, w: "22vw" },
-          ].map(m => (
-            <div key={m.init} className="tm-card" style={{ top: m.top, left: m.left, transform: `rotate(${m.rot}deg)`, width: `clamp(160px,${m.w},300px)` }}>
+            { name: "Heejun Lee", role: "CEO / Founder", img: "https://i.pravatar.cc/400?img=33", top: "2%", left: "3%", w: 280 },
+            { name: "David Kim", role: "Head of BD", img: "https://i.pravatar.cc/400?img=12", top: "4%", left: "65%", w: 200 },
+            { name: "Suki Park", role: "CMO", img: "https://i.pravatar.cc/400?img=47", top: "20%", left: "35%", w: 320 },
+            { name: "Jay Choi", role: "KOL Lead", img: "https://i.pravatar.cc/400?img=59", top: "32%", left: "1%", w: 160 },
+            { name: "Yuna Kang", role: "Community Manager", img: "https://i.pravatar.cc/400?img=23", top: "38%", left: "70%", w: 240 },
+            { name: "Alex Ryu", role: "Research Analyst", img: "https://i.pravatar.cc/400?img=68", top: "55%", left: "18%", w: 200 },
+            { name: "Chris Yoon", role: "Events & Ops", img: "https://i.pravatar.cc/400?img=52", top: "62%", left: "55%", w: 280 },
+          ].map((m, i) => (
+            <div key={m.name} className="tm-card" style={{ top: m.top, left: m.left, width: m.w }}>
               <div className="tm-info"><h4>{m.name}</h4><span>{m.role}</span></div>
-              <div className="tm-avatar"><span className="tm-init">{m.init}</span></div>
+              <div className="tm-photo"><img src={m.img} alt={m.name} loading="lazy" /></div>
             </div>
           ))}
         </div>
