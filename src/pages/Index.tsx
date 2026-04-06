@@ -50,32 +50,6 @@ const Index = () => {
         </div>
       </main>
 
-      {/* Launch CTA - Top */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-10 py-14 sm:py-20">
-            <div className="max-w-3xl mx-auto text-center">
-              <p className="text-[10px] sm:text-xs text-white/20 uppercase tracking-[0.3em] mb-4">22+ projects launched in Korea</p>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-4">
-                Be the next<br />
-                <span className="text-white/40">success story.</span>
-              </h2>
-              <p className="text-sm sm:text-base text-white/30 max-w-lg mx-auto mb-10">
-                From market analysis to launch day — one partner, full execution.
-              </p>
-              <div className="flex items-center justify-center gap-2 sm:gap-3">
-                <CalendlyButton className="inline-flex items-center px-7 py-3.5 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 hover:-translate-y-0.5 transition-all">
-                  Book a Meeting
-                </CalendlyButton>
-                <Link to="/contact" className="inline-flex items-center px-7 py-3.5 rounded-full border border-white/[0.1] text-white/50 text-sm font-medium hover:border-white/[0.2] hover:text-white transition-all">
-                  Send a Message
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* About */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="why-choose-us">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
