@@ -8,6 +8,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import peaqImg from "@/assets/campaigns/peaq-booth-event.png";
 import heroImg from "@/assets/services/kol-network.jpg";
+import ytImg from "@/assets/platforms/kol-youtube.jpg";
+import ctImg from "@/assets/platforms/kol-twitter.jpg";
+import tgImg from "@/assets/platforms/kol-telegram.jpg";
+import naverImg from "@/assets/platforms/kol-naver.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,12 +81,12 @@ const InfluencerService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "KOL Sourcing & Vetting", desc: "We identify the right KOLs for your narrative, token stage, and target audience. Every KOL is verified with real engagement data — follower analysis, historical performance, and fraud screening." },
-          { icon: "◉", title: "Campaign Design & Briefing", desc: "Custom briefs per KOL tailored to their style and audience. We align messaging with your GTM narrative. No copy-paste — every placement feels native." },
-          { icon: "◈", title: "Content Approval & QC", desc: "Every piece of content goes through our approval workflow. Draft → review → revision → approval → publish. No content goes live without our sign-off and yours." },
-          { icon: "◆", title: "Scheduling & Orchestration", desc: "We sequence KOL drops for maximum narrative velocity. First-mover threads set the frame, mid-campaign placements deepen coverage, closing posts drive urgency." },
-          { icon: "◇", title: "Performance Tracking", desc: "Weekly reports with impressions, engagements, click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign." },
-          { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%." },
+          { icon: "◎", title: "KOL Sourcing & Vetting", desc: "We identify the right KOLs for your narrative, token stage, and target audience. Every KOL is verified with real engagement data — follower analysis, historical performance, and fraud screening.", img: ytImg },
+          { icon: "◉", title: "Campaign Design & Briefing", desc: "Custom briefs per KOL tailored to their style and audience. We align messaging with your GTM narrative. No copy-paste — every placement feels native.", img: ctImg },
+          { icon: "◈", title: "Content Approval & QC", desc: "Every piece of content goes through our approval workflow. Draft → review → revision → approval → publish. No content goes live without our sign-off and yours.", img: tgImg },
+          { icon: "◆", title: "Scheduling & Orchestration", desc: "We sequence KOL drops for maximum narrative velocity. First-mover threads set the frame, mid-campaign placements deepen coverage, closing posts drive urgency.", img: naverImg },
+          { icon: "◇", title: "Performance Tracking", desc: "Weekly reports with impressions, engagements, click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", img: ytImg },
+          { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%.", img: ctImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>
@@ -90,7 +94,7 @@ const InfluencerService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -122,10 +126,10 @@ const InfluencerService = () => {
       <section className="platforms"><div className="wrap">
         <div className="lbl" style={{ color: "var(--g2)" }}>Platforms</div>
         <div className="plat-grid">
-          <div className="plat"><div className="plat-name">YouTube</div><div className="plat-desc">Long-form reviews and project deep-dives. Major retail discovery channel.</div><div className="plat-stat">10–30min reviews</div></div>
-          <div className="plat"><div className="plat-name">X (Korean CT)</div><div className="plat-desc">Thread campaigns, Spaces hosting. Real-time pulse of Korean crypto.</div><div className="plat-stat">Thread + QRT campaigns</div></div>
-          <div className="plat"><div className="plat-name">Telegram</div><div className="plat-desc">Channel placements, group AMAs. Korea's primary crypto layer.</div><div className="plat-stat">Channel + Group placement</div></div>
-          <div className="plat"><div className="plat-name">Naver Blog</div><div className="plat-desc">SEO-optimized posts for Korean search. If you're not on Naver, you don't exist.</div><div className="plat-stat">SEO blog content</div></div>
+          <div className="plat"><div className="plat-img"><img src={ytImg} alt="YouTube" /></div><div className="plat-body"><div className="plat-name">YouTube</div><div className="plat-desc">Long-form reviews and project deep-dives.</div><div className="plat-stat">10–30min reviews</div></div></div>
+          <div className="plat"><div className="plat-img"><img src={ctImg} alt="X" /></div><div className="plat-body"><div className="plat-name">X (Korean CT)</div><div className="plat-desc">Thread campaigns, Spaces hosting.</div><div className="plat-stat">Thread + QRT campaigns</div></div></div>
+          <div className="plat"><div className="plat-img"><img src={tgImg} alt="Telegram" /></div><div className="plat-body"><div className="plat-name">Telegram</div><div className="plat-desc">Channel placements, group AMAs.</div><div className="plat-stat">Channel + Group</div></div></div>
+          <div className="plat"><div className="plat-img"><img src={naverImg} alt="Naver" /></div><div className="plat-body"><div className="plat-name">Naver Blog</div><div className="plat-desc">SEO-optimized posts for Korean search.</div><div className="plat-stat">SEO blog content</div></div></div>
         </div>
       </div></section>
 

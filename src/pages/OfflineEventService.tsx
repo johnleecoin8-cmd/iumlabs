@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/offline-event.webp";
+import kbwImg from "@/assets/platforms/event-conference.jpg";
+import vipImg from "@/assets/platforms/event-dinner.jpg";
+import launchImg from "@/assets/platforms/event-party.jpg";
+import meetupImg from "@/assets/platforms/event-meetup.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -76,12 +80,10 @@ const OfflineEventService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "KBW Side Events", desc: "Korea Blockchain Week is the biggest moment of the year. We produce side events that become the talk of the conference — from venue selection to guest list curation to day-of execution." },
-          { icon: "◉", title: "VIP Dinners", desc: "Intimate 20-40 person dinners with curated guest lists. Korean exchange executives, fund managers, top KOLs. We handle the venue, menu, seating arrangement, and conversation flow." },
-          { icon: "◈", title: "Launch Parties", desc: "Mainnet launches, token listings, partnership announcements. We produce celebration events that generate buzz, attract media coverage, and create shareable content." },
-          { icon: "◆", title: "Venue Sourcing", desc: "40+ venue relationships across Seoul — rooftop bars, private dining rooms, conference halls, gallery spaces. We match the venue to your brand, budget, and audience size." },
-          { icon: "◇", title: "Speaker Curation", desc: "We source and coordinate Korean-speaking panelists, moderators, and keynote speakers. From exchange CEOs to prominent KOLs, we bring the voices that draw audiences." },
-          { icon: "◐", title: "Post-Event Content", desc: "Professional photography, videography, highlight reels, attendee testimonials, KOL recap threads. Every event produces content that extends ROI far beyond the night itself." },
+          { icon: "◎", title: "KBW Side Events", desc: "Korea Blockchain Week is the biggest moment of the year. We produce side events that become the talk of the conference — from venue selection to guest list curation to day-of execution.", img: kbwImg },
+          { icon: "◉", title: "VIP Dinners", desc: "Intimate 20-40 person dinners with curated guest lists. Korean exchange executives, fund managers, top KOLs. We handle the venue, menu, seating arrangement, and conversation flow.", img: vipImg },
+          { icon: "◈", title: "Launch Parties", desc: "Mainnet launches, token listings, partnership announcements. We produce celebration events that generate buzz, attract media coverage, and create shareable content.", img: launchImg },
+          { icon: "◆", title: "Venue Sourcing", desc: "40+ venue relationships across Seoul — rooftop bars, private dining rooms, conference halls, gallery spaces. We match the venue to your brand, budget, and audience size.", img: meetupImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>
@@ -89,7 +91,7 @@ const OfflineEventService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -106,16 +108,6 @@ const OfflineEventService = () => {
         </div>
       </div></section>
 
-      {/* EVENT TYPES */}
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Event Types</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">KBW Side Events</div><div className="plat-desc">200-500+ person events during Korea Blockchain Week. The marquee moment for Korean crypto.</div><div className="plat-stat">500+ capacity</div></div>
-          <div className="plat"><div className="plat-name">VIP Dinners</div><div className="plat-desc">Curated 20-40 person dinners with exchange execs, fund managers, and top Korean KOLs.</div><div className="plat-stat">Curated guest lists</div></div>
-          <div className="plat"><div className="plat-name">Launch Parties</div><div className="plat-desc">Mainnet launches, listing celebrations, partnership announcements. High-energy, high-content events.</div><div className="plat-stat">Full media coverage</div></div>
-          <div className="plat"><div className="plat-name">Community Meetups</div><div className="plat-desc">Regular community gatherings, AMAs, educational sessions. Build lasting relationships with Korean users.</div><div className="plat-stat">Recurring format</div></div>
-        </div>
-      </div></section>
 
       {/* FAQ */}
       <section className="faq"><div className="wrap">
