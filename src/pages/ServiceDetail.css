@@ -201,3 +201,6 @@
   .svc-detail .tier-grid{grid-template-columns:1fr}
   .svc-detail .invite-cta{font-size:.85rem;padding:1rem 2rem}
 }
+
+/* SERVICE PAGE FOOTER (matches home) */
+.svc-detail .svc-footer{background:#0A0A0A}

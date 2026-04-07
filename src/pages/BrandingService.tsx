@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
-import { brand } from "@/config/content";
+import ContactFormSection from "@/components/ContactFormSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import Footer from "@/components/Footer";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/compliance-hero.avif";
@@ -19,7 +19,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const BrandingService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const clockRef = useRef<HTMLSpanElement>(null);
   const [openCap, setOpenCap] = useState<number | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const toggleCap = useCallback((i: number) => setOpenCap(p => p === i ? null : i), []);
@@ -35,9 +34,7 @@ const BrandingService = () => {
         gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
     }, containerRef);
-    const tick = () => { if (clockRef.current) clockRef.current.textContent = `Seoul ${new Date().toLocaleString("en-US",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",hour12:false})}`; };
-    tick(); const ci = setInterval(tick, 60000);
-    return () => { ctx.revert(); clearInterval(ci); };
+    return () => { ctx.revert(); };
   }, []);
 
   return (
@@ -113,10 +110,11 @@ const BrandingService = () => {
         ))}
       </div></section>
 
-      <section className="invite" id="contact"><div className="invite-inner">
-        <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Compliance Call →</Link></div>
-      </div></section>
-      <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
+      <section className="svc-footer">
+        <ContactFormSection />
+        <FooterLinksSection />
+        <Footer />
+      </section>
     </div>
   );
 };
