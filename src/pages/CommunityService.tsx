@@ -63,7 +63,6 @@ const CommunityService = () => {
           <div className="problem-right">
             <p>KakaoTalk Open Chat replaces Telegram for many Korean users. Naver Cafe is where long-form discussion happens. DC Inside is where sentiment shifts. Each platform has its own culture, moderation norms, and engagement patterns.</p>
             <p>A community manager who doesn't speak Korean natively, doesn't understand 24-hour crypto culture, and doesn't know the difference between KakaoTalk and Telegram culture will lose your members in weeks.</p>
-            <div className="highlight-box"><p>커뮤니티는 번역으로 만들 수 없습니다. 문화를 설계해야 합니다. ium Labs는 한국 크립토 생태계 안에서 커뮤니티를 운영합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -122,7 +121,6 @@ const CommunityService = () => {
       </div></section>
 
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to build a Korean <strong>community that lasts?</strong></h2><div className="invite-kr">한국 커뮤니티를 설계합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Community Strategy Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

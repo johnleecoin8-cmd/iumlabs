@@ -63,7 +63,6 @@ const AMAService = () => {
           <div className="problem-right">
             <p>Generic questions, passive audiences, zero follow-up. The host stumbles through translations, the audience drops off after 5 minutes, and there's no content produced afterward. The AMA ends and nothing changes.</p>
             <p>Korean AMAs are especially tricky. The audience expects a native speaker who understands crypto deeply. Awkward translations kill engagement instantly. And the post-AMA window — when interest peaks — is completely wasted without recap content.</p>
-            <div className="highlight-box"><p>AMA는 이벤트가 아니라 커뮤니티 전환점입니다. ium Labs는 모든 AMA를 구조화된 캠페인으로 설계합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -122,7 +121,6 @@ const AMAService = () => {
       </div></section>
 
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to host an AMA <strong>that converts?</strong></h2><div className="invite-kr">한국어 AMA, 전문 호스트가 필요합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book an AMA Planning Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

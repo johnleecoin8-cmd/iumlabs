@@ -67,7 +67,6 @@ const DeepResearchService = () => {
           <div className="problem-right">
             <p>The Upbit premium, DC Inside sentiment, Naver search trends, KakaoTalk group dynamics — these signals are invisible to anyone not operating inside the ecosystem daily. Global research firms give you generic Asia-Pacific reports that lump Korea in with Japan and Southeast Asia.</p>
             <p>Korea is the third largest crypto market in the world. It deserves dedicated intelligence — not a footnote in a regional deck. Our research combines on-chain data with on-the-ground intelligence you can't get from a dashboard.</p>
-            <div className="highlight-box"><p>한국 시장은 데이터만으로는 이해할 수 없습니다. ium Labs는 온체인 분석과 현지 커뮤니티 인텔리전스를 결합하여 실행 가능한 인사이트를 제공합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -135,7 +134,6 @@ const DeepResearchService = () => {
 
       {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Need Korean market <strong>intelligence?</strong></h2><div className="invite-kr">한국 시장을 데이터로 이해합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Research Briefing →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

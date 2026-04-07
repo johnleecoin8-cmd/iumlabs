@@ -67,7 +67,6 @@ const SEOAdsService = () => {
           <div className="problem-right">
             <p>70% of Korean search traffic goes through Naver, and its algorithm rewards completely different content than Google. Naver Blog posts outrank traditional web pages. Naver Smart Blocks dominate the SERP. If you optimize for Google only, you're invisible to Korean users.</p>
             <p>Add crypto ad bans on most platforms, and the challenge compounds. Google requires a special crypto advertiser certification. Most ad networks reject crypto campaigns outright. You need someone who knows which networks accept crypto, how to navigate the certification process, and how to structure campaigns that actually convert Korean audiences.</p>
-            <div className="highlight-box"><p>한국에서는 네이버가 곧 검색입니다. ium Labs는 네이버 SEO, 구글 암호화폐 광고 인증, 크립토 전문 광고 네트워크를 모두 운영합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -135,7 +134,6 @@ const SEOAdsService = () => {
 
       {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to dominate <strong>Korean search?</strong></h2><div className="invite-kr">네이버에서 1페이지를 차지합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book an SEO Strategy Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

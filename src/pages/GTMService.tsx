@@ -142,9 +142,6 @@ const GTMService = () => {
         <div className="hero-overlay" />
         <div className="hero-grid" />
         <div className="hero-orb" />
-        <div className="hero-kr">한국</div>
-        <div className="hero-kr">시장</div>
-        <div className="hero-kr">진입</div>
         <div className="hero-wm">ium</div>
         <div className="hero-tag">Korea-Focused Web3 GTM Agency — Seoul</div>
         <h1>Your protocol's <em>gateway</em> into <strong>Korea's crypto market.</strong></h1>
@@ -246,7 +243,6 @@ const GTMService = () => {
             <div className="appr-l">
               <h2>Not another agency. <strong>A growth system.</strong></h2>
               <p>Every campaign is run by operators who've held BD and marketing roles at exchanges and protocols. We embed senior operators into your team.</p>
-              <div className="pull-q">"번역된 전략은 한국에서 통하지 않습니다. 우리는 처음부터 한국 시장을 위해 설계합니다."</div>
             </div>
             <div className="pillars">
               <div className="pill"><div className="pill-n">I</div><h4>Operator-led, Korea-native</h4><p>Ex-KuCoin Korea BD, ex-Outlier Ventures, ex-Camelot DEX APAC. We've been inside the Korean exchange ecosystem.</p></div>
@@ -346,7 +342,6 @@ const GTMService = () => {
         <div className="invite-inner">
           <div>
             <h2>If you're building for Korea,<br />we're here to <strong>make it happen.</strong></h2>
-            <div className="invite-kr">한국 시장을 여는 가장 확실한 방법</div>
           </div>
           <div className="invite-right">
             <Link to="/contact" className="invite-cta">Get in Touch →</Link>

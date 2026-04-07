@@ -63,7 +63,6 @@ const BrandingService = () => {
           <div className="problem-right">
             <p>The Virtual Asset User Protection Act, PIPA personal data requirements, and exchange-specific listing compliance create a regulatory maze that most global projects can't navigate alone.</p>
             <p>DeFi, NFT, and token projects each face different requirements. What worked for an L1 won't work for a DeFi protocol. And the regulations change quarterly — what was compliant 6 months ago might not be today.</p>
-            <div className="highlight-box"><p>한국 규제를 이해하는 것이 시장 진입의 첫걸음입니다. ium Labs는 법무법인 에셋과 Freeman Law와 협력하여 전략적 자문과 법률 가이드를 함께 제공합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -122,7 +121,6 @@ const BrandingService = () => {
       </div></section>
 
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Need Korean regulatory <strong>guidance?</strong></h2><div className="invite-kr">한국 규제, 전문가와 함께합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Compliance Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

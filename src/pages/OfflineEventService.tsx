@@ -71,7 +71,6 @@ const OfflineEventService = () => {
           <div className="problem-right">
             <p>You can't run a Web3 event in Seoul from a Notion doc. Venue contracts are in Korean. Catering companies need introductions. KOLs RSVP through KakaoTalk. AV teams expect Korean-language briefs. And the best venues book out months in advance.</p>
             <p>Without a local team, you end up overpaying for a mediocre venue, underwhelming turnout, and zero content to show for it. Korea's event scene rewards relationships and local knowledge — not Eventbrite links and cold emails.</p>
-            <div className="highlight-box"><p>서울에서의 이벤트는 현지 팀 없이는 불가능합니다. ium Labs는 베뉴 섭외부터 게스트 리스트, 촬영, 후속 콘텐츠까지 모든 것을 직접 운영합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -127,7 +126,6 @@ const OfflineEventService = () => {
 
       {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Planning an event <strong>in Seoul?</strong></h2><div className="invite-kr">서울 이벤트, 현지 팀이 필요합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Plan Your Event →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

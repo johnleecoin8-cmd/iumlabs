@@ -67,7 +67,6 @@ const PRService = () => {
           <div className="problem-right">
             <p>Korean crypto journalists don't read English press releases. They have their own editorial calendars, beat structures, and trust networks.</p>
             <p>Sending a translated press release to a generic Korea media list gets you zero coverage. The journalists who matter respond to relationships, not cold pitches.</p>
-            <div className="highlight-box"><p>ium Labs는 한국 기자들과 직접 관계를 맺고 있습니다. 번역된 보도자료가 아닌, 한국 언론이 원하는 스토리를 설계합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -116,7 +115,6 @@ const PRService = () => {
       </div></section>
 
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to get <strong>Korean press coverage?</strong></h2><div className="invite-kr">한국 미디어에 당신의 이야기를 전합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book a PR Strategy Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>

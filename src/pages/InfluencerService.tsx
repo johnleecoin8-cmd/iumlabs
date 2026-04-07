@@ -72,7 +72,6 @@ const InfluencerService = () => {
           <div className="problem-right">
             <p>Most agencies hand you a KOL list and disappear. The list is full of inflated follower counts, recycled audiences, and influencers who post once and forget your project exists.</p>
             <p>Korea makes this worse. The KOL landscape is fragmented across YouTube, X, Telegram, and Naver Blog — each with its own culture, audience behavior, and pricing norms. A KOL who's S-tier on Korean CT might have zero presence on Naver.</p>
-            <div className="highlight-box"><p>ium Labs는 한국 KOL 시장에서 직접 운영하는 팀입니다. 중개인 없이, 브로커 네트워크 없이 — KOL과 직접 관계를 맺고, 모든 캠페인을 직접 관리합니다.</p></div>
           </div>
         </div>
       </div></section>
@@ -171,7 +170,6 @@ const InfluencerService = () => {
 
       {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
-        <div><h2>Ready to activate <strong>Korea's KOL network?</strong></h2><div className="invite-kr">한국 KOL 캠페인, ium Labs가 설계하고 운영합니다.</div></div>
         <div className="invite-right"><Link to="/contact" className="invite-cta">Book a KOL Strategy Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
