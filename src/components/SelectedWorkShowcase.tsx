@@ -81,67 +81,49 @@ const projects = [
 
 const BUFFER_RANGE = 2;
 
-/* ─── Mobile horizontal-scroll gallery driven by vertical scroll ─── */
+/* ─── Mobile horizontal-scroll gallery (native touch swipe) ─── */
 const MobileShowcase = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Map vertical scroll to horizontal translation
-  const totalCards = projects.length;
-  const x = useTransform(
-    scrollYProgress,
-    [0, 1],
-    ["0%", `-${(totalCards - 1) * 80}%`]
-  );
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
-    <div ref={containerRef} style={{ height: `${totalCards * 60}vh` }} className="relative">
-      <div ref={sectionRef} className="sticky top-0 h-screen overflow-hidden bg-black">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          className="absolute top-0 left-0 right-0 z-20 px-5 pt-16 pb-4"
-        >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">
-            Selected Work
-          </span>
-        </motion.div>
+    <section ref={ref} className="relative bg-black py-12">
+      {/* Header */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="px-5 mb-6"
+      >
+        <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">
+          Selected Work
+        </span>
+      </motion.div>
 
-        {/* Horizontal scroll track */}
-        <motion.div
-          style={{ x }}
-          className="flex items-center h-full gap-4 pl-5 pt-8"
-        >
+      {/* Horizontal scroll container */}
+      <div className="overflow-x-auto scrollbar-hide">
+        <div className="flex gap-4 px-5" style={{ width: `${projects.length * 78 + 20}vw` }}>
           {projects.map((project, i) => (
             <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.06 }}
-              className="flex-shrink-0 w-[75vw] h-[70vh]"
+              transition={{ delay: i * 0.05 }}
+              className="flex-shrink-0"
+              style={{ width: '75vw', height: '65vh' }}
             >
               <Link
                 to={`/projects/${project.slug}`}
                 className="group relative block w-full h-full rounded-2xl overflow-hidden"
               >
-                {/* Image */}
                 <img
                   src={project.media}
                   alt={project.name}
                   loading={i <= 2 ? "eager" : "lazy"}
                   decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-500"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                {/* Info overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-5">
                   <span className="text-[10px] text-white/50 uppercase tracking-wider block mb-1">
                     {project.category}
@@ -161,19 +143,19 @@ const MobileShowcase = () => {
             </motion.div>
           ))}
 
-          {/* View All CTA card */}
-          <div className="flex-shrink-0 w-[75vw] h-[70vh] flex items-center justify-center">
+          {/* View All CTA */}
+          <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '60vw', height: '65vh' }}>
             <Link
               to="/projects"
-              className="flex flex-col items-center gap-4 text-white/40 hover:text-white transition-colors"
+              className="flex flex-col items-center gap-4 text-white/40"
             >
               <span className="text-lg font-semibold">View All Work</span>
               <ArrowRight className="w-6 h-6" />
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
