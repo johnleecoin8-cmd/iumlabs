@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const SEOAdsService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea SEO & Paid Ads | ium Labs" description="Naver SEO, Google Ads, crypto ad networks for Korean market." path="/services/seo-ads" keywords={["Korea Naver SEO","Crypto Ads Korea"]} />
+      <ServiceSchema name="Korea SEO & Paid Ads" description="Naver SEO, Google Ads, crypto ad networks for Korean market." url="/services/seo-ads" serviceType={["SEO", "Paid Advertising", "Search Engine Marketing"]} />
       <Navbar />
 
       {/* HERO */}
@@ -84,7 +86,7 @@ const SEOAdsService = () => {
           { icon: "◐", img: capImg6, title: "Performance Analytics", desc: "Weekly reporting with full attribution. Every dollar tracked from impression to click to conversion. Campaign-level and channel-level ROAS with actionable optimization recommendations." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
               <div className="cap-icon">{cap.icon}</div>
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
@@ -118,7 +120,7 @@ const SEOAdsService = () => {
           { q: "Do you handle creative production for ads?", a: "Yes. We produce all ad creatives, landing pages, and Naver Blog content in-house. Everything is produced in Korean by native speakers and optimized for each platform's specifications." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

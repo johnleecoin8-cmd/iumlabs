@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const AMAService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea AMA Hosting | ium Labs" description="Structured AMA sessions with native Korean hosts." path="/services/ama" keywords={["Korea AMA Hosting","Web3 AMA Korea"]} />
+      <ServiceSchema name="Korea AMA Hosting" description="Structured AMA sessions with native Korean hosts." url="/services/ama" serviceType={["AMA Hosting", "Live Events", "Community Engagement"]} />
       <Navbar />
 
       <section className="hero">
@@ -81,7 +83,7 @@ const AMAService = () => {
           { icon: "◐", img: capImg6, title: "Post-AMA Amplification", desc: "Written recaps, video highlights, key quote graphics, thread summaries, engagement analytics. The AMA keeps working for weeks after it ends." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
             <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
@@ -107,7 +109,7 @@ const AMAService = () => {
           { q: "How do you handle trolls and spam during live AMAs?", a: "Real-time moderation team filtering spam, managing question queue, and handling disruptive participants. The host never has to deal with moderation — that's our job." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

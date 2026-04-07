@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const BrandingService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Regulations & Compliance | ium Labs" description="VASP registration, PIPA compliance, regulatory advisory for Korean crypto market." path="/services/compliance" keywords={["Korea Crypto Compliance","VASP Registration Korea"]} />
+      <ServiceSchema name="Korea Regulations & Compliance" description="VASP registration, PIPA compliance, regulatory advisory for Korean crypto market." url="/services/compliance" serviceType={["Regulatory Compliance", "VASP Registration", "Legal Advisory"]} />
       <Navbar />
 
       <section className="hero">
@@ -81,7 +83,7 @@ const BrandingService = () => {
           { icon: "◐", img: capImg6, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
             <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
@@ -107,7 +109,7 @@ const BrandingService = () => {
           { q: "How often do Korean regulations change?", a: "Quarterly updates are common. We provide ongoing monitoring and alert you when regulatory changes affect your compliance status. Proactive updates, not reactive surprises." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

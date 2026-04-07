@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,6 +41,7 @@ const OfflineEventService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Offline Events | ium Labs" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." path="/services/offline-event" keywords={["Korea Web3 Events","Seoul Crypto Events"]} />
+      <ServiceSchema name="Korea Offline Events" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." url="/services/offline-event" serviceType={["Event Production", "Conference Events", "Networking Events"]} />
       <Navbar />
 
       {/* HERO */}
@@ -80,7 +82,7 @@ const OfflineEventService = () => {
           { icon: "◆", title: "Venue Sourcing", desc: "40+ venue relationships across Seoul — rooftop bars, private dining rooms, conference halls, gallery spaces. We match the venue to your brand, budget, and audience size.", img: meetupImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
               <div className="cap-icon">{cap.icon}</div>
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
@@ -113,7 +115,7 @@ const OfflineEventService = () => {
           { q: "Do you handle post-event content production?", a: "Every event includes professional photography, videography, highlight reels, and social media recap content. We also coordinate KOL attendees to post their own event content." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

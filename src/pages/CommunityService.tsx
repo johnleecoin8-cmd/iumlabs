@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const CommunityService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" keywords={["Korea Community Management","Web3 Community Korea"]} />
+      <ServiceSchema name="Korea Community Management" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." url="/services/community" serviceType={["Community Management", "Social Media Management"]} />
       <Navbar />
 
       <section className="hero">
@@ -81,7 +83,7 @@ const CommunityService = () => {
           { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards.", img: capImg6 },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
             <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
@@ -107,7 +109,7 @@ const CommunityService = () => {
           { q: "What's the typical engagement improvement?", a: "Most communities see 2-3x increase in daily active rate within the first month. Our average across all managed communities is 6.8% DAR, compared to the industry average of under 3%." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

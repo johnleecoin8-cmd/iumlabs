@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const DeepResearchService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Deep Research | ium Labs" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." path="/services/deep-research" keywords={["Korea Crypto Research","Web3 Market Intelligence"]} />
+      <ServiceSchema name="Korea Deep Research" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." url="/services/deep-research" serviceType={["Market Research", "On-chain Analytics", "Competitor Analysis"]} />
       <Navbar />
 
       {/* HERO */}
@@ -84,7 +86,7 @@ const DeepResearchService = () => {
           { icon: "◐", img: capImg6, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
               <div className="cap-icon">{cap.icon}</div>
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
@@ -118,7 +120,7 @@ const DeepResearchService = () => {
           { q: "Can you produce custom research on specific topics?", a: "Absolutely. Most of our work is custom-scoped. Whether it's a specific competitor deep-dive, regulatory analysis, or community sentiment study, we tailor every engagement." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

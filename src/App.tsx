@@ -3,46 +3,48 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
-import { useEffect, useState, useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import PageIntro from "@/components/PageIntro";
 import Index from "./pages/Index";
-
-import Projects from "./pages/Projects";
-import ProjectDetail from "./pages/ProjectDetail";
-import Contact from "./pages/Contact";
-import Blog from "./pages/Research";
-import BlogDetail from "./pages/ResearchDetail";
-import GTMService from "./pages/GTMService";
-import BrandingService from "./pages/BrandingService";
-import SEOAdsService from "./pages/SEOAdsService";
-import OfflineEventService from "./pages/OfflineEventService";
-import CommunityService from "./pages/CommunityService";
-import DeepResearchService from "./pages/DeepResearchService";
-import InfluencerService from "./pages/InfluencerService";
-import PRService from "./pages/PRService";
-import AMAService from "./pages/AMAService";
-import Terms from "./pages/Terms";
-import Privacy from "./pages/Privacy";
-import Transparency from "./pages/Transparency";
-import Jobs from "./pages/Jobs";
-import KInfluenceGrid from "./pages/KInfluenceGrid";
-import MobileServicesPage from "./pages/MobileServicesPage";
-import CryptoMarketingKorea from "./pages/CryptoMarketingKorea";
-import KOLMarketingKorea from "./pages/KOLMarketingKorea";
-import KoreaWeb3Guide from "./pages/KoreaWeb3Guide";
-import BookMeeting from "./pages/BookMeeting";
 import NotFound from "./pages/NotFound";
-// Admin pages
-import AdminLogin from "./pages/admin/AdminLogin";
-import AdminDashboard from "./pages/admin/AdminDashboard";
-import AdminProjects from "./pages/admin/AdminProjects";
-import ProjectForm from "./pages/admin/ProjectForm";
-import AdminBlog from "./pages/admin/AdminResearch";
-import BlogForm from "./pages/admin/ResearchForm";
-import AdminContacts from "./pages/admin/AdminContacts";
-import AdminJobApplications from "./pages/admin/AdminJobApplications";
 import logo from "@/assets/logo.png";
+
+// Lazy-loaded page components
+const Projects = React.lazy(() => import("./pages/Projects"));
+const ProjectDetail = React.lazy(() => import("./pages/ProjectDetail"));
+const Contact = React.lazy(() => import("./pages/Contact"));
+const Blog = React.lazy(() => import("./pages/Research"));
+const BlogDetail = React.lazy(() => import("./pages/ResearchDetail"));
+const GTMService = React.lazy(() => import("./pages/GTMService"));
+const BrandingService = React.lazy(() => import("./pages/BrandingService"));
+const SEOAdsService = React.lazy(() => import("./pages/SEOAdsService"));
+const OfflineEventService = React.lazy(() => import("./pages/OfflineEventService"));
+const CommunityService = React.lazy(() => import("./pages/CommunityService"));
+const DeepResearchService = React.lazy(() => import("./pages/DeepResearchService"));
+const InfluencerService = React.lazy(() => import("./pages/InfluencerService"));
+const PRService = React.lazy(() => import("./pages/PRService"));
+const AMAService = React.lazy(() => import("./pages/AMAService"));
+const Terms = React.lazy(() => import("./pages/Terms"));
+const Privacy = React.lazy(() => import("./pages/Privacy"));
+const Transparency = React.lazy(() => import("./pages/Transparency"));
+const Jobs = React.lazy(() => import("./pages/Jobs"));
+const KInfluenceGrid = React.lazy(() => import("./pages/KInfluenceGrid"));
+const MobileServicesPage = React.lazy(() => import("./pages/MobileServicesPage"));
+const CryptoMarketingKorea = React.lazy(() => import("./pages/CryptoMarketingKorea"));
+const KOLMarketingKorea = React.lazy(() => import("./pages/KOLMarketingKorea"));
+const KoreaWeb3Guide = React.lazy(() => import("./pages/KoreaWeb3Guide"));
+const BookMeeting = React.lazy(() => import("./pages/BookMeeting"));
+
+// Lazy-loaded admin pages
+const AdminLogin = React.lazy(() => import("./pages/admin/AdminLogin"));
+const AdminDashboard = React.lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminProjects = React.lazy(() => import("./pages/admin/AdminProjects"));
+const ProjectForm = React.lazy(() => import("./pages/admin/ProjectForm"));
+const AdminBlog = React.lazy(() => import("./pages/admin/AdminResearch"));
+const BlogForm = React.lazy(() => import("./pages/admin/ResearchForm"));
+const AdminContacts = React.lazy(() => import("./pages/admin/AdminContacts"));
+const AdminJobApplications = React.lazy(() => import("./pages/admin/AdminJobApplications"));
 
 const queryClient = new QueryClient();
 
@@ -147,6 +149,7 @@ const AppRoutes = () => {
 
   return (
     <PageTransitionWrapper key={location.pathname}>
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><img src={logo} alt="Loading" className="w-12 h-12 animate-pulse rounded-xl" /></div>}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
@@ -191,6 +194,7 @@ const AppRoutes = () => {
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+      </Suspense>
     </PageTransitionWrapper>
   );
 };

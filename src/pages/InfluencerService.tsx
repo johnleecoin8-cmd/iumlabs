@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -43,6 +44,7 @@ const InfluencerService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="170+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
+      <ServiceSchema name="Korea KOL & Influencer Marketing" description="170+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
       <Navbar />
 
       {/* HERO */}
@@ -85,7 +87,7 @@ const InfluencerService = () => {
           { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%.", img: fraudImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
               <div className="cap-icon">{cap.icon}</div>
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
@@ -151,7 +153,7 @@ const InfluencerService = () => {
           { q: "Can you run English-language KOL campaigns?", a: "Our core is Korean-language KOLs. For global campaigns, we partner with trusted agencies and coordinate bilingual execution." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}

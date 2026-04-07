@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -42,6 +43,7 @@ const PRService = () => {
   return (
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea PR & Media | ium Labs" description="Korean press coverage through CoinDesk Korea, Block Media, TokenPost." path="/services/pr" keywords={["Korea Crypto PR","Korean Media Relations"]} />
+      <ServiceSchema name="Korea PR & Media" description="Korean press coverage through CoinDesk Korea, Block Media, TokenPost." url="/services/pr" serviceType={["PR", "Media Relations", "Press Coverage"]} />
       <Navbar />
 
       <section className="hero">
@@ -81,7 +83,7 @@ const PRService = () => {
           { icon: "◐", title: "Coverage Analytics", desc: "Article reach tracking, sentiment analysis, share of voice measurement. Monthly reports on Korean media presence.", img: prAnalImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
+            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
             <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
@@ -107,7 +109,7 @@ const PRService = () => {
           { q: "Do you write in both Korean and English?", a: "All materials written natively in Korean. English versions also provided for your global team." },
         ].map((faq, i) => (
           <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" onClick={() => toggleFaq(i)}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
+            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
             <div className="faq-a"><p>{faq.a}</p></div>
           </div>
         ))}
