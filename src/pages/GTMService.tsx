@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ContactFormSection from "@/components/ContactFormSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import Footer from "@/components/Footer";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -78,7 +81,6 @@ const workCards = [
 const GTMService = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const workPinRef = useRef<HTMLDivElement>(null);
-  const clockRef = useRef<HTMLSpanElement>(null);
   const [openSvc, setOpenSvc] = useState<number | null>(null);
 
   const toggleSvc = useCallback((i: number) => {
@@ -127,14 +129,7 @@ const GTMService = () => {
       }
     }, containerRef);
 
-    const tick = () => {
-      if (!clockRef.current) return;
-      const sg = new Date().toLocaleString("en-US",{timeZone:"Asia/Singapore",hour:"2-digit",minute:"2-digit",hour12:false});
-      const kr = new Date().toLocaleString("en-US",{timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",hour12:false});
-      clockRef.current.textContent = `SG ${sg} / KR ${kr}`;
-    };
-    tick(); const ci = setInterval(tick, 60000);
-    return () => { ctx.revert(); clearInterval(ci); };
+    return () => { ctx.revert(); };
   }, []);
 
   return (
@@ -341,32 +336,12 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* INVITATION */}
-      <section className="invite" id="contact">
-        <div className="invite-inner">
-          <div>
-            <h2>If you're building for Korea,<br />we're here to <strong>make it happen.</strong></h2>
-          </div>
-          <div className="invite-right">
-            <Link to="/contact" className="invite-cta">Get in Touch →</Link>
-            <div className="invite-offices"><span>KR</span><span>SG</span></div>
-          </div>
-        </div>
-      </section>
-
       {/* FOOTER */}
-      <footer className="ft-ed">
-        <div className="ft-inner">
-          <div className="ft-cp">© 2026 ium labs — Seoul</div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <span className="ft-clock" ref={clockRef} />
-            <Link to="/privacy">Privacy</Link>
-            <Link to="/terms">Terms</Link>
-            <a href={brand.twitter} target="_blank" rel="noopener noreferrer">Twitter</a>
-            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a>
-          </div>
-        </div>
-      </footer>
+      <div style={{ background: '#0A0A0A' }}>
+        <ContactFormSection />
+        <FooterLinksSection />
+        <Footer />
+      </div>
     </div>
   );
 };
