@@ -13,6 +13,9 @@ import tpImg from "@/assets/platforms/pr-media.jpg";
 import msImg from "@/assets/platforms/pr-mainstream.jpg";
 import crisisImg from "@/assets/platforms/pr-crisis.jpg";
 import prAnalImg from "@/assets/platforms/pr-analytics.jpg";
+import teamJ from "@/assets/team/j-cmo.png";
+import teamDavid from "@/assets/team/kevin-bd-new.png";
+import teamSuki from "@/assets/team/bennet-coo.png";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +55,11 @@ const PRService = () => {
           <div className="hero-label">Service 03 of 08</div>
           <h1>PR & <strong>Media</strong></h1>
           <p className="hero-desc">Stories Korean journalists actually want to publish. CoinDesk Korea, Block Media, TokenPost, and mainstream outlets. Direct journalist relationships, not spray-and-pray pitching.</p>
+          <div className="hero-team">
+            <div className="hero-team-member"><img src={teamJ} alt="J" /><div className="hero-team-info"><span className="hero-team-name">J</span><span className="hero-team-role">CMO</span></div></div>
+            <div className="hero-team-member"><img src={teamDavid} alt="David" /><div className="hero-team-info"><span className="hero-team-name">David</span><span className="hero-team-role">CEO</span></div></div>
+            <div className="hero-team-member"><img src={teamSuki} alt="Suki" /><div className="hero-team-info"><span className="hero-team-name">Suki</span><span className="hero-team-role">Managing Partner</span></div></div>
+          </div>
         </div>
       </section>
 

@@ -13,6 +13,9 @@ import capImg3 from "@/assets/platforms/res-competitor.jpg";
 import capImg4 from "@/assets/platforms/res-trend.jpg";
 import capImg5 from "@/assets/platforms/res-thesis.jpg";
 import capImg6 from "@/assets/platforms/res-distribution.jpg";
+import teamJ from "@/assets/team/j-cmo.png";
+import teamDavid from "@/assets/team/kevin-bd-new.png";
+import teamSuki from "@/assets/team/bennet-coo.png";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,6 +57,11 @@ const DeepResearchService = () => {
           <div className="hero-label">Service 06 of 08</div>
           <h1>Deep <strong>Research</strong></h1>
           <p className="hero-desc">On-chain analytics, competitor analysis, market ecosystem mapping. Reports in Korean and English, distributed through our media network. Intelligence you can't get from a dashboard.</p>
+          <div className="hero-team">
+            <div className="hero-team-member"><img src={teamJ} alt="J" /><div className="hero-team-info"><span className="hero-team-name">J</span><span className="hero-team-role">CMO</span></div></div>
+            <div className="hero-team-member"><img src={teamDavid} alt="David" /><div className="hero-team-info"><span className="hero-team-name">David</span><span className="hero-team-role">CEO</span></div></div>
+            <div className="hero-team-member"><img src={teamSuki} alt="Suki" /><div className="hero-team-info"><span className="hero-team-name">Suki</span><span className="hero-team-role">Managing Partner</span></div></div>
+          </div>
         </div>
       </section>
 

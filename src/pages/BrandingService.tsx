@@ -13,6 +13,9 @@ import capImg3 from "@/assets/platforms/comp-aml.jpg";
 import capImg4 from "@/assets/platforms/comp-exchange.jpg";
 import capImg5 from "@/assets/platforms/comp-landscape.jpg";
 import capImg6 from "@/assets/platforms/comp-legal.jpg";
+import teamJ from "@/assets/team/j-cmo.png";
+import teamDavid from "@/assets/team/kevin-bd-new.png";
+import teamSuki from "@/assets/team/bennet-coo.png";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,6 +55,11 @@ const BrandingService = () => {
           <div className="hero-label">Service 09 of 09</div>
           <h1>Regulations & <strong>Compliance</strong></h1>
           <p className="hero-desc">In partnership with Law Office Asset and Freeman Law. VASP registration, PIPA compliance, regulatory landscape analysis, and exchange compliance documentation. Navigate Korea's regulations with confidence.</p>
+          <div className="hero-team">
+            <div className="hero-team-member"><img src={teamJ} alt="J" /><div className="hero-team-info"><span className="hero-team-name">J</span><span className="hero-team-role">CMO</span></div></div>
+            <div className="hero-team-member"><img src={teamDavid} alt="David" /><div className="hero-team-info"><span className="hero-team-name">David</span><span className="hero-team-role">CEO</span></div></div>
+            <div className="hero-team-member"><img src={teamSuki} alt="Suki" /><div className="hero-team-info"><span className="hero-team-name">Suki</span><span className="hero-team-role">Managing Partner</span></div></div>
+          </div>
         </div>
       </section>
 

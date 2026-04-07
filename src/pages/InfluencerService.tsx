@@ -14,6 +14,9 @@ import tgImg from "@/assets/platforms/kol-telegram.jpg";
 import naverImg from "@/assets/platforms/kol-naver.jpg";
 import perfImg from "@/assets/platforms/kol-performance.jpg";
 import fraudImg from "@/assets/platforms/kol-fraud.jpg";
+import teamJ from "@/assets/team/j-cmo.png";
+import teamDavid from "@/assets/team/kevin-bd-new.png";
+import teamSuki from "@/assets/team/bennet-coo.png";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -55,6 +58,11 @@ const InfluencerService = () => {
           <div className="hero-label">Service 02 of 08</div>
           <h1>KOL & <strong>Influencer</strong></h1>
           <p className="hero-desc">170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
+          <div className="hero-team">
+            <div className="hero-team-member"><img src={teamJ} alt="J" /><div className="hero-team-info"><span className="hero-team-name">J</span><span className="hero-team-role">CMO</span></div></div>
+            <div className="hero-team-member"><img src={teamDavid} alt="David" /><div className="hero-team-info"><span className="hero-team-name">David</span><span className="hero-team-role">CEO</span></div></div>
+            <div className="hero-team-member"><img src={teamSuki} alt="Suki" /><div className="hero-team-info"><span className="hero-team-name">Suki</span><span className="hero-team-role">Managing Partner</span></div></div>
+          </div>
         </div>
       </section>
 
