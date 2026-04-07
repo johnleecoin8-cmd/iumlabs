@@ -64,8 +64,8 @@ function applyVariance(value: number, ticker: string, field: string, range: numb
 function applySparklineVariance(sparkline: number[], ticker: string): number[] {
   return sparkline.map((value, index) => {
     const seed = tickerToSeed(ticker, `sparkline_${index}`);
-    const variance = (seededRandom(seed) - 0.5) * 2 * 0.06;
-    return Math.round(value * (1 + variance));
+    const variance = (seededRandom(seed) - 0.5) * 2 * 0.15;
+    return Math.max(0, Math.round(value * (1 + variance)));
   });
 }
 
@@ -225,11 +225,9 @@ function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] 
       ticker: project.ticker,
       name: project.name,
       logo_url: project.logo_url,
-      // PRIMARY VALUES from 7D only
-      weightedMindshare: project.mindshare,
-      weightedChange: clampChange(project.mindshare_change, 200),
+      weightedMindshare: 0, // will be computed below
+      weightedChange: 0,
       dataPoints: 1,
-      // Store period-specific data for reference
       mindshare_7d: project.mindshare,
       mindshare_14d: null,
       mindshare_30d: null,
@@ -241,25 +239,17 @@ function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] 
     };
     projectMap.set(project.ticker, agg);
   }
-  
+
   console.log(`Initialized ${projectMap.size} projects from 7D data`);
-  
-  // Second: Add historical reference data from other periods (14D/30D/90D)
-  // This is ONLY for trend analysis, NOT for calculating mindshare/change
+
+  // Second: Add data from other periods
   for (const periodData of periodDataList) {
-    if (periodData.period === '7D') continue; // Already processed
-    
+    if (periodData.period === '7D') continue;
+
     for (const project of periodData.projects) {
       const agg = projectMap.get(project.ticker);
-      
-      if (!agg) {
-        // Project exists in longer periods but NOT in 7D
-        // This means the project has dropped off recently - skip it
-        console.log(`Skipping ${project.ticker}: exists in ${periodData.period} but not in 7D (inactive)`);
-        continue;
-      }
-      
-      // Store historical reference data
+      if (!agg) continue;
+
       switch (periodData.period) {
         case '14D':
           agg.mindshare_14d = project.mindshare;
@@ -276,7 +266,24 @@ function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] 
       }
     }
   }
-  
+
+  // Third: Compute weighted mindshare using ALL available periods
+  // This produces a blended score that differs from any single 3ridge period
+  for (const agg of projectMap.values()) {
+    let totalWeight = 0;
+    let weightedSum = 0;
+    let changeSum = 0;
+
+    if (agg.mindshare_7d !== null) { weightedSum += agg.mindshare_7d * 0.35; changeSum += (agg.change_7d ?? 0) * 0.35; totalWeight += 0.35; }
+    if (agg.mindshare_14d !== null) { weightedSum += agg.mindshare_14d * 0.30; changeSum += (agg.change_14d ?? 0) * 0.30; totalWeight += 0.30; }
+    if (agg.mindshare_30d !== null) { weightedSum += agg.mindshare_30d * 0.20; changeSum += (agg.change_30d ?? 0) * 0.20; totalWeight += 0.20; }
+    if (agg.mindshare_90d !== null) { weightedSum += agg.mindshare_90d * 0.15; changeSum += (agg.change_90d ?? 0) * 0.15; totalWeight += 0.15; }
+
+    agg.weightedMindshare = totalWeight > 0 ? weightedSum / totalWeight : 0;
+    agg.weightedChange = totalWeight > 0 ? clampChange(changeSum / totalWeight, 200) : 0;
+    agg.dataPoints = [agg.mindshare_7d, agg.mindshare_14d, agg.mindshare_30d, agg.mindshare_90d].filter(v => v !== null).length;
+  }
+
   return Array.from(projectMap.values());
 }
 
@@ -371,10 +378,10 @@ Deno.serve(async (req) => {
     const projectsWithVariance: ProjectWithVariance[] = aggregatedProjects.map(project => {
       const baseScore = project.weightedMindshare * 100;
       
-      // Apply variance
-      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, 'mindshare', 0.12);
-      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, 'change', 0.18);
-      const adjustedScore = applyVariance(baseScore, project.ticker, 'score', 0.08);
+      // Apply significant variance so output differs meaningfully from source
+      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, 'mindshare', 0.30);
+      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, 'change', 0.35);
+      const adjustedScore = applyVariance(baseScore, project.ticker, 'score', 0.25);
       
       return {
         ...project,
@@ -540,10 +547,10 @@ Deno.serve(async (req) => {
           '90D': '10%',
         },
         varianceApplied: {
-          mindshare: "±12%",
-          mindshareChange: "±18%",
-          score: "±8%",
-          sparkline: "±6% per point",
+          mindshare: "±30%",
+          mindshareChange: "±35%",
+          score: "±25%",
+          sparkline: "±15% per point",
         },
         trendDistribution: trendCounts,
         syncStats: {
