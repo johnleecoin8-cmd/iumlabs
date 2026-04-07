@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { useMobileOptimization } from '@/hooks/useMobileOptimization';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Image imports
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -152,7 +152,7 @@ const MobileShowcase = () => {
   );
 };
 
-/* ─── Desktop layout (unchanged) ─── */
+/* ─── Desktop layout (used for all viewports) ─── */
 const DesktopShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
@@ -161,6 +161,7 @@ const DesktopShowcase = () => {
   const ref = useRef(null);
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const isInView = useInView(ref, { once: true, margin: "400px" });
+  const isMobile = useIsMobile();
 
   const getMountedIndices = useCallback((current: number) => {
     const indices = new Set<number>();
@@ -172,9 +173,10 @@ const DesktopShowcase = () => {
     return indices;
   }, [loadedSet]);
 
-  const mountedIndices = getMountedIndices(activeIndex);
+  const mountedIndices = isMobile ? new Set<number>() : getMountedIndices(activeIndex);
 
   useEffect(() => {
+    if (isMobile) return;
     Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
       if (!video) return;
       const idx = Number(idxStr);
@@ -185,7 +187,7 @@ const DesktopShowcase = () => {
         video.pause();
       }
     });
-  }, [activeIndex]);
+  }, [activeIndex, isMobile]);
 
   useEffect(() => {
     if (isHovering) return;
@@ -222,7 +224,7 @@ const DesktopShowcase = () => {
                 project.video && isActive && isVideoReady ? 'opacity-0' : 'opacity-100'
               }`}
             />
-            {project.video && shouldMountVideo && (
+            {project.video && shouldMountVideo && !isMobile && (
               <video
                 ref={el => { videoRefs.current[i] = el; }}
                 muted
@@ -242,9 +244,9 @@ const DesktopShowcase = () => {
         );
       })}
 
-      <div className="relative z-10 h-full flex">
+      <div className="relative z-10 h-full flex flex-col lg:flex-row">
         <div
-          className="w-2/5 h-full flex flex-col justify-center px-12 lg:px-16"
+          className="w-full lg:w-2/5 h-auto lg:h-full flex flex-col justify-center px-5 py-6 lg:px-12 lg:py-0 lg:px-16"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
@@ -273,10 +275,10 @@ const DesktopShowcase = () => {
                     <span className={`text-xs font-mono w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
+                    <span className={`flex-1 text-lg sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
-                    <span className={`text-xs uppercase tracking-wider transition-colors duration-300 w-28 text-left ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
+                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 w-20 lg:w-28 text-left hidden sm:block ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
                       {project.category}
                     </span>
                     <ArrowRight className={`w-4 h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
@@ -287,7 +289,7 @@ const DesktopShowcase = () => {
           </div>
         </div>
 
-        <div className="flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
+        <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -321,13 +323,6 @@ const DesktopShowcase = () => {
 };
 
 const SelectedWorkShowcase = () => {
-  const { isMobile } = useMobileOptimization();
-
-  // SSR-safe: default to desktop, switch on mount
-  if (typeof window !== 'undefined' && (window.innerWidth < 1024 || isMobile)) {
-    return <MobileShowcase />;
-  }
-
   return <DesktopShowcase />;
 };
 
