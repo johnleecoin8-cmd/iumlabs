@@ -321,13 +321,6 @@ const DesktopShowcase = () => {
 };
 
 const SelectedWorkShowcase = () => {
-  const { isMobile } = useMobileOptimization();
-
-  // SSR-safe: default to desktop, switch on mount
-  if (typeof window !== 'undefined' && (window.innerWidth < 1024 || isMobile)) {
-    return <MobileShowcase />;
-  }
-
   return <DesktopShowcase />;
 };
 
