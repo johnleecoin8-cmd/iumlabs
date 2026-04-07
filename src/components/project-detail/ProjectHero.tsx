@@ -48,8 +48,11 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
 
   const services = project.services || [];
 
-  // Use bgImage as fallback poster
-  const posterImage = project.bgImage || "/images/hero-poster.jpg";
+  // Use video first-frame poster if video exists, otherwise bgImage
+  const videoPoster = project.bgVideo
+    ? `/images/posters/${project.bgVideo.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '.jpg')}`
+    : null;
+  const posterImage = videoPoster || project.bgImage || "/images/hero-poster.jpg";
 
   const {
     videoRef,
