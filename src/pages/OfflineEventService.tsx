@@ -24,10 +24,10 @@ const OfflineEventService = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".svc-detail .hero-back", { opacity: 0, x: -20, duration: .8, delay: .3 });
-      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .4 });
-      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 40, duration: 1, delay: .5, ease: "power3.out" });
-      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .9 });
+      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .2 });
+      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 50, duration: 1.2, delay: .3, ease: "power3.out" });
+      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .7 });
+      gsap.from(".svc-detail .hero-stats-bar .stat", { opacity: 0, y: 20, duration: .8, delay: .9, stagger: .1 });
       gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
         gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
@@ -45,22 +45,18 @@ const OfflineEventService = () => {
       {/* HERO */}
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
-        <div className="hero-grid" /><div className="hero-orb" />
-        <div className="hero-num">05</div>
-        <div className="wrap">
-          <Link to="/services/gtm" className="hero-back">All Services</Link>
+        <div className="hero-center">
           <div className="hero-label">Service 05 of 08</div>
           <h1>Offline <strong>Events</strong></h1>
-          <p className="hero-desc">From 20-person VIP dinners to 500+ person parties during KBW. Full logistics, venue sourcing, speaker curation, and post-event content. Events in Seoul, run by locals.</p>        </div>
+          <p className="hero-desc">From 20-person VIP dinners to 500+ person parties during KBW. Full logistics, venue sourcing, speaker curation, and post-event content. Events in Seoul, run by locals.</p>
+        </div>
+        <div className="hero-stats-bar">
+          <div className="stat"><div className="stat-val">23</div><div className="stat-sub">Events</div></div>
+          <div className="stat"><div className="stat-val">2,847</div><div className="stat-sub">Attendees</div></div>
+          <div className="stat"><div className="stat-val">156</div><div className="stat-sub">KOLs / VIPs</div></div>
+          <div className="stat"><div className="stat-val">94%</div><div className="stat-sub">Satisfaction</div></div>
+        </div>
       </section>
-
-      {/* STATS */}
-      <section className="stats"><div className="wrap"><div className="stats-grid">
-        <div className="stat"><div className="stat-val">23</div><div className="stat-sub">Events</div></div>
-        <div className="stat"><div className="stat-val">2,847</div><div className="stat-sub">Attendees</div></div>
-        <div className="stat"><div className="stat-val">156</div><div className="stat-sub">KOLs / VIPs</div></div>
-        <div className="stat"><div className="stat-val">94%</div><div className="stat-sub">Satisfaction</div></div>
-      </div></div></section>
 
       {/* PROBLEM */}
       <section className="problem"><div className="wrap">

@@ -26,10 +26,10 @@ const SEOAdsService = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".svc-detail .hero-back", { opacity: 0, x: -20, duration: .8, delay: .3 });
-      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .4 });
-      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 40, duration: 1, delay: .5, ease: "power3.out" });
-      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .9 });
+      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .2 });
+      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 50, duration: 1.2, delay: .3, ease: "power3.out" });
+      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .7 });
+      gsap.from(".svc-detail .hero-stats-bar .stat", { opacity: 0, y: 20, duration: .8, delay: .9, stagger: .1 });
       gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
         gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
@@ -47,22 +47,18 @@ const SEOAdsService = () => {
       {/* HERO */}
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
-        <div className="hero-grid" /><div className="hero-orb" />
-        <div className="hero-num">07</div>
-        <div className="wrap">
-          <Link to="/services/gtm" className="hero-back">All Services</Link>
+        <div className="hero-center">
           <div className="hero-label">Service 07 of 08</div>
           <h1>SEO & <strong>Paid Ads</strong></h1>
-          <p className="hero-desc">Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified for the ones that don't. Be found where Korea searches.</p>        </div>
+          <p className="hero-desc">Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified for the ones that don't. Be found where Korea searches.</p>
+        </div>
+        <div className="hero-stats-bar">
+          <div className="stat"><div className="stat-val">287%</div><div className="stat-sub">Traffic Growth</div></div>
+          <div className="stat"><div className="stat-val">19</div><div className="stat-sub">Campaigns</div></div>
+          <div className="stat"><div className="stat-val">3.4x</div><div className="stat-sub">ROAS</div></div>
+          <div className="stat"><div className="stat-val">42%</div><div className="stat-sub">Lower CPA</div></div>
+        </div>
       </section>
-
-      {/* STATS */}
-      <section className="stats"><div className="wrap"><div className="stats-grid">
-        <div className="stat"><div className="stat-val">287%</div><div className="stat-sub">Traffic Growth</div></div>
-        <div className="stat"><div className="stat-val">19</div><div className="stat-sub">Campaigns</div></div>
-        <div className="stat"><div className="stat-val">3.4x</div><div className="stat-sub">ROAS</div></div>
-        <div className="stat"><div className="stat-val">42%</div><div className="stat-sub">Lower CPA</div></div>
-      </div></div></section>
 
       {/* PROBLEM */}
       <section className="problem"><div className="wrap">
