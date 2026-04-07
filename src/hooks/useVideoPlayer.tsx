@@ -282,6 +282,13 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const video = videoRef.current;
     if (!video) return;
 
+    // If video is already cached/loaded (e.g. returning to page), play immediately
+    if (video.readyState >= 3) {
+      setIsVideoReady(true);
+      tryPlay(video);
+      return;
+    }
+
     // Initial play attempt
     const timer = setTimeout(() => {
       tryPlay(video);
