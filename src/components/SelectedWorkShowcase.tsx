@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { useMobileOptimization } from '@/hooks/useMobileOptimization';
 
 // Image imports
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -78,9 +79,106 @@ const projects = [
   }
 ];
 
-const BUFFER_RANGE = 2; // preload 2 ahead, keep 2 behind
+const BUFFER_RANGE = 2;
 
-const SelectedWorkShowcase = () => {
+/* ─── Mobile horizontal-scroll gallery driven by vertical scroll ─── */
+const MobileShowcase = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "200px" });
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Map vertical scroll to horizontal translation
+  const totalCards = projects.length;
+  const x = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", `-${(totalCards - 1) * 80}%`]
+  );
+
+  return (
+    <div ref={containerRef} style={{ height: `${totalCards * 60}vh` }} className="relative">
+      <div ref={sectionRef} className="sticky top-0 h-screen overflow-hidden bg-black">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          className="absolute top-0 left-0 right-0 z-20 px-5 pt-16 pb-4"
+        >
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">
+            Selected Work
+          </span>
+        </motion.div>
+
+        {/* Horizontal scroll track */}
+        <motion.div
+          style={{ x }}
+          className="flex items-center h-full gap-4 pl-5 pt-8"
+        >
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.06 }}
+              className="flex-shrink-0 w-[75vw] h-[70vh]"
+            >
+              <Link
+                to={`/projects/${project.slug}`}
+                className="group relative block w-full h-full rounded-2xl overflow-hidden"
+              >
+                {/* Image */}
+                <img
+                  src={project.media}
+                  alt={project.name}
+                  loading={i <= 2 ? "eager" : "lazy"}
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover group-active:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+                {/* Info overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <span className="text-[10px] text-white/50 uppercase tracking-wider block mb-1">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-bold text-white mb-1">
+                    {project.name}
+                  </h3>
+                  <span className="text-sm text-violet-400 font-medium">
+                    {project.result}
+                  </span>
+                  <div className="flex items-center gap-1.5 mt-3 text-white/50 text-xs">
+                    <span>View case</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {/* View All CTA card */}
+          <div className="flex-shrink-0 w-[75vw] h-[70vh] flex items-center justify-center">
+            <Link
+              to="/projects"
+              className="flex flex-col items-center gap-4 text-white/40 hover:text-white transition-colors"
+            >
+              <span className="text-lg font-semibold">View All Work</span>
+              <ArrowRight className="w-6 h-6" />
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
+
+/* ─── Desktop layout (unchanged) ─── */
+const DesktopShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [videoReady, setVideoReady] = useState<Record<number, boolean>>({});
@@ -89,21 +187,18 @@ const SelectedWorkShowcase = () => {
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const isInView = useInView(ref, { once: true, margin: "400px" });
 
-  // Determine which indices should have video elements mounted
   const getMountedIndices = useCallback((current: number) => {
     const indices = new Set<number>();
     for (let offset = -BUFFER_RANGE; offset <= BUFFER_RANGE; offset++) {
       const idx = (current + offset + projects.length) % projects.length;
       if (projects[idx].video) indices.add(idx);
     }
-    // Also keep any previously loaded videos mounted (cache)
     loadedSet.forEach(idx => indices.add(idx));
     return indices;
   }, [loadedSet]);
 
   const mountedIndices = getMountedIndices(activeIndex);
 
-  // Play active video, pause others
   useEffect(() => {
     Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
       if (!video) return;
@@ -117,7 +212,6 @@ const SelectedWorkShowcase = () => {
     });
   }, [activeIndex]);
 
-  // Auto-rotate
   useEffect(() => {
     if (isHovering) return;
     const interval = setInterval(() => {
@@ -131,11 +225,8 @@ const SelectedWorkShowcase = () => {
     setLoadedSet(prev => new Set(prev).add(index));
   };
 
-  const currentProject = projects[activeIndex];
-
   return (
-    <section ref={ref} className="relative h-[80vh] md:h-screen bg-black overflow-hidden">
-      {/* All media layers - always mounted, opacity controlled */}
+    <section ref={ref} className="relative h-screen bg-black overflow-hidden">
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
         const shouldMountVideo = mountedIndices.has(i);
@@ -147,7 +238,6 @@ const SelectedWorkShowcase = () => {
             className="absolute inset-0 transition-opacity duration-700"
             style={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 1 : 0 }}
           >
-            {/* Poster image - always visible as fallback */}
             <img
               src={project.media}
               alt={project.name}
@@ -157,8 +247,6 @@ const SelectedWorkShowcase = () => {
                 project.video && isActive && isVideoReady ? 'opacity-0' : 'opacity-100'
               }`}
             />
-
-            {/* Video - mounted for buffered range + cached, hidden when not active */}
             {project.video && shouldMountVideo && (
               <video
                 ref={el => { videoRefs.current[i] = el; }}
@@ -171,27 +259,24 @@ const SelectedWorkShowcase = () => {
                   isActive && isVideoReady ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <source src={`${project.video}`} type="video/mp4" />
+                <source src={project.video} type="video/mp4" />
               </video>
             )}
-
             <div className="absolute inset-0 bg-black/50" />
           </div>
         );
       })}
 
-      {/* Content Grid */}
       <div className="relative z-10 h-full flex">
-        {/* Left - Project List */}
         <div
-          className="w-full lg:w-2/5 h-full flex flex-col justify-center px-6 md:px-12 lg:px-16"
+          className="w-2/5 h-full flex flex-col justify-center px-12 lg:px-16"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           <motion.span
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-6 md:mb-8"
+            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8"
           >
             Selected Work
           </motion.span>
@@ -206,17 +291,17 @@ const SelectedWorkShowcase = () => {
               >
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="group block py-3 md:py-4 border-b border-white/10 hover:border-white/20 transition-colors"
+                  className="group block py-4 border-b border-white/10 hover:border-white/20 transition-colors"
                   onMouseEnter={() => setActiveIndex(i)}
                 >
                   <div className="flex items-center gap-4">
                     <span className={`text-xs font-mono w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-lg md:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
+                    <span className={`flex-1 text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
-                    <span className={`hidden md:block text-xs uppercase tracking-wider transition-colors duration-300 w-28 text-left ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
+                    <span className={`text-xs uppercase tracking-wider transition-colors duration-300 w-28 text-left ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
                       {project.category}
                     </span>
                     <ArrowRight className={`w-4 h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
@@ -225,32 +310,16 @@ const SelectedWorkShowcase = () => {
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mt-8 lg:hidden"
-          >
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2 text-sm text-white border border-white/30 px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
-            >
-              <span>View Our Work</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </motion.div>
         </div>
 
-        {/* Right - About Content (Desktop) */}
-        <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
+        <div className="flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
             className="max-w-3xl text-right"
           >
-            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-6 md:mb-8 block">
+            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8 block">
               Our Mission
             </span>
             <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white mb-6">
@@ -262,7 +331,6 @@ const SelectedWorkShowcase = () => {
             <p className="text-violet-400 text-xs md:text-base xl:text-lg mb-10">
               Founded by former Binance & KuCoin executives
             </p>
-
             <Link
               to="/projects"
               className="inline-flex items-center gap-3 text-lg xl:text-xl text-white border border-white/30 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300"
@@ -275,6 +343,17 @@ const SelectedWorkShowcase = () => {
       </div>
     </section>
   );
+};
+
+const SelectedWorkShowcase = () => {
+  const { isMobile } = useMobileOptimization();
+
+  // SSR-safe: default to desktop, switch on mount
+  if (typeof window !== 'undefined' && (window.innerWidth < 1024 || isMobile)) {
+    return <MobileShowcase />;
+  }
+
+  return <DesktopShowcase />;
 };
 
 export default SelectedWorkShowcase;
