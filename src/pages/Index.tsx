@@ -71,6 +71,15 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Selected Work */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
+        <div className="sm:rounded-3xl overflow-hidden">
+          <Suspense fallback={<SectionLoader />}>
+            <SelectedWorkShowcase />
+          </Suspense>
+        </div>
+      </section>
+
       {/* Cases */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="cases">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
