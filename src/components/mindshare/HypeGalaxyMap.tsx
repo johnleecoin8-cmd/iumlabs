@@ -169,19 +169,23 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       return { ...project, normalizedSparkline: interpolated };
     });
 
-    // 모든 sparkline 값의 최대값을 구해서 0~100 정규화
+    // 95th percentile 기반 정규화 (이상치가 차트를 압도하지 않도록)
     const allValues: number[] = [];
     normalizedProjects.forEach(p => {
       (p.normalizedSparkline || []).forEach(v => { if (v > 0) allValues.push(v); });
     });
-    const maxVal = allValues.length > 0 ? Math.max(...allValues) : 1;
+    allValues.sort((a, b) => a - b);
+    const p95Idx = Math.floor(allValues.length * 0.95);
+    const p95Val = allValues.length > 0 ? allValues[Math.min(p95Idx, allValues.length - 1)] : 1;
+    const ceiling = Math.max(p95Val * 1.2, 1); // 95th percentile + 20% headroom
 
     return timeLabels.map((time, timeIdx) => {
       const point: Record<string, string | number> = { time };
       normalizedProjects.forEach(project => {
         const raw = project.normalizedSparkline[timeIdx] || 0;
-        // 정규화: 0~100 범위로 스케일링
-        point[project.ticker] = Math.round((raw / maxVal) * 100 * 100) / 100;
+        // 정규화: ceiling 기준으로 0~100, 초과분은 cap
+        const scaled = Math.min((raw / ceiling) * 100, 100);
+        point[project.ticker] = Math.round(scaled * 100) / 100;
       });
       return point;
     });
@@ -196,13 +200,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     return map;
   }, [projects]);
 
-  // 현재 값 기준 정렬 (사이드바용)
+  // 현재 값 기준 정렬 (사이드바용) - score 기준
   const sortedByCurrentValue = useMemo(() => {
-    return [...projects].sort((a, b) => {
-      const aVal = a.sparkline?.[a.sparkline.length - 1] ?? 0;
-      const bVal = b.sparkline?.[b.sparkline.length - 1] ?? 0;
-      return bVal - aVal;
-    });
+    return [...projects].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
   }, [projects]);
 
   // 범례 클릭 핸들러
@@ -409,7 +409,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
             {sortedByCurrentValue.slice(0, 20).map((project, index) => {
               const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
               const isHovered = hoveredTicker === project.ticker;
-              const currentValue = project.sparkline?.[project.sparkline.length - 1] ?? 0;
+              const currentValue = project.mindshare ?? (project.score ? project.score / 100 : 0);
               
               return (
                 <button
@@ -442,7 +442,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                     {project.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
                     {project.trend === 'down' && <TrendingDown className="w-3 h-3 text-rose-500 flex-shrink-0" />}
                     <span className="font-mono text-[10px] text-muted-foreground/50 flex-shrink-0">
-                      {currentValue.toFixed(1)}
+                      {currentValue.toFixed(1)}%
                     </span>
                   </div>
                 </button>
