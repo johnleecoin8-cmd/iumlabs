@@ -11,6 +11,8 @@ import cdImg from "@/assets/platforms/pr-newsroom.jpg";
 import bmImg from "@/assets/platforms/pr-interview.jpg";
 import tpImg from "@/assets/platforms/pr-media.jpg";
 import msImg from "@/assets/platforms/pr-mainstream.jpg";
+import crisisImg from "@/assets/platforms/pr-crisis.jpg";
+import prAnalImg from "@/assets/platforms/pr-analytics.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,8 +80,8 @@ const PRService = () => {
           { icon: "◉", title: "Direct Journalist Outreach", desc: "Personal relationships with reporters at CoinDesk Korea, Block Media, TokenPost, BloomingBit, Hankyung. We pitch stories, not press releases.", img: bmImg },
           { icon: "◈", title: "Thought Leadership", desc: "Interview placement, bylined articles, expert commentary. Positioning your founders as credible voices in the Korean crypto narrative.", img: tpImg },
           { icon: "◆", title: "Mainstream Media", desc: "Beyond crypto — Chosun Ilbo, MBN, Maeil Business. For stories with broader financial relevance.", img: msImg },
-          { icon: "◇", title: "Crisis Communication", desc: "Korean CT moves fast. Pre-drafted statement templates, rapid response protocols, real-time monitoring.", img: cdImg },
-          { icon: "◐", title: "Coverage Analytics", desc: "Article reach tracking, sentiment analysis, share of voice measurement. Monthly reports on Korean media presence.", img: bmImg },
+          { icon: "◇", title: "Crisis Communication", desc: "Korean CT moves fast. Pre-drafted statement templates, rapid response protocols, real-time monitoring.", img: crisisImg },
+          { icon: "◐", title: "Coverage Analytics", desc: "Article reach tracking, sentiment analysis, share of voice measurement. Monthly reports on Korean media presence.", img: prAnalImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>

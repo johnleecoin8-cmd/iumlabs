@@ -11,6 +11,8 @@ import capImg1 from "@/assets/platforms/comm-telegram.jpg";
 import capImg2 from "@/assets/platforms/comm-discord.jpg";
 import capImg3 from "@/assets/platforms/comm-kakao.jpg";
 import capImg4 from "@/assets/platforms/comm-naver.jpg";
+import capImg5 from "@/assets/platforms/comm-engage.jpg";
+import capImg6 from "@/assets/platforms/comm-sentiment.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,8 +80,8 @@ const CommunityService = () => {
           { icon: "◉", title: "Discord Operations", desc: "Server architecture, role systems, channel structure, Korean localization. Event programming, ticketing, and moderation workflows.", img: capImg2 },
           { icon: "◈", title: "KakaoTalk Open Chat", desc: "Korea's native messaging platform. Open chat room management, content sharing, real-time Q&A. The channel most global projects miss entirely.", img: capImg3 },
           { icon: "◆", title: "Naver Cafe Management", desc: "Long-form Korean community platform. Post moderation, content curation, SEO-optimized community content that drives Naver search traffic.", img: capImg4 },
-          { icon: "◇", title: "Engagement Programming", desc: "Weekly AMAs, trivia nights, quest campaigns, ambassador programs, translation events. Structured engagement that drives daily activity metrics.", img: capImg1 },
-          { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards.", img: capImg2 },
+          { icon: "◇", title: "Engagement Programming", desc: "Weekly AMAs, trivia nights, quest campaigns, ambassador programs, translation events. Structured engagement that drives daily activity metrics.", img: capImg5 },
+          { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards.", img: capImg6 },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>

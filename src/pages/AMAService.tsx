@@ -11,6 +11,8 @@ import capImg1 from "@/assets/platforms/ama-telegram.jpg";
 import capImg2 from "@/assets/platforms/ama-discord.jpg";
 import capImg3 from "@/assets/platforms/ama-spaces.jpg";
 import capImg4 from "@/assets/platforms/ama-youtube.jpg";
+import capImg5 from "@/assets/platforms/ama-moderation.jpg";
+import capImg6 from "@/assets/platforms/ama-content.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,8 +80,8 @@ const AMAService = () => {
           { icon: "◉", img: capImg2, title: "Pre-Event Hype Building", desc: "2-3 weeks of promotion across Korean channels. Teaser content, question seeding, community priming. By the time the AMA starts, the audience is ready." },
           { icon: "◈", img: capImg3, title: "Question Curation", desc: "We seed intelligent questions that drive the conversation toward your key narratives. No awkward silences, no off-topic tangents. Every question is strategic." },
           { icon: "◆", img: capImg4, title: "Multi-Platform Hosting", desc: "Telegram, Discord, X Spaces, KakaoTalk Live, YouTube Live. We host on whatever platform your audience uses. Simultaneous multi-platform when needed." },
-          { icon: "◇", img: capImg1, title: "Live Moderation", desc: "Real-time spam filtering, question prioritization, engagement prompts, and audience management. The host focuses on the conversation — we handle everything else." },
-          { icon: "◐", img: capImg2, title: "Post-AMA Amplification", desc: "Written recaps, video highlights, key quote graphics, thread summaries, engagement analytics. The AMA keeps working for weeks after it ends." },
+          { icon: "◇", img: capImg5, title: "Live Moderation", desc: "Real-time spam filtering, question prioritization, engagement prompts, and audience management. The host focuses on the conversation — we handle everything else." },
+          { icon: "◐", img: capImg6, title: "Post-AMA Amplification", desc: "Written recaps, video highlights, key quote graphics, thread summaries, engagement analytics. The AMA keeps working for weeks after it ends." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>

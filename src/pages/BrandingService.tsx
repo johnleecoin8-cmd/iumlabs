@@ -11,6 +11,8 @@ import capImg1 from "@/assets/platforms/comp-vasp.jpg";
 import capImg2 from "@/assets/platforms/comp-pipa.jpg";
 import capImg3 from "@/assets/platforms/comp-aml.jpg";
 import capImg4 from "@/assets/platforms/comp-exchange.jpg";
+import capImg5 from "@/assets/platforms/comp-landscape.jpg";
+import capImg6 from "@/assets/platforms/comp-legal.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,8 +80,8 @@ const BrandingService = () => {
           { icon: "◉", img: capImg2, title: "PIPA Compliance", desc: "Personal Information Protection Act strategy. Data handling procedures, consent flows, privacy policy drafting, and compliance documentation for Korean law." },
           { icon: "◈", img: capImg3, title: "Exchange Listing Compliance", desc: "Upbit, Bithumb, Coinone listing requirements. Due diligence preparation, compliance documentation, and regulatory review to meet exchange standards." },
           { icon: "◆", img: capImg4, title: "AML/KYC Advisory", desc: "Anti-money laundering and Know Your Customer framework design. Transaction monitoring procedures, suspicious activity reporting, and compliance training." },
-          { icon: "◇", img: capImg1, title: "Regulatory Landscape Analysis", desc: "Comprehensive mapping of Korean crypto regulations as they apply to your specific project type. DeFi, NFT, token, and infrastructure projects all face different requirements." },
-          { icon: "◐", img: capImg2, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
+          { icon: "◇", img: capImg5, title: "Regulatory Landscape Analysis", desc: "Comprehensive mapping of Korean crypto regulations as they apply to your specific project type. DeFi, NFT, token, and infrastructure projects all face different requirements." },
+          { icon: "◐", img: capImg6, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>

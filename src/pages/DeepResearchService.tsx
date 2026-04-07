@@ -11,6 +11,8 @@ import capImg1 from "@/assets/platforms/res-market.jpg";
 import capImg2 from "@/assets/platforms/res-onchain.jpg";
 import capImg3 from "@/assets/platforms/res-competitor.jpg";
 import capImg4 from "@/assets/platforms/res-trend.jpg";
+import capImg5 from "@/assets/platforms/res-thesis.jpg";
+import capImg6 from "@/assets/platforms/res-distribution.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -83,8 +85,8 @@ const DeepResearchService = () => {
           { icon: "◉", img: capImg2, title: "On-chain Analytics", desc: "Dune, Nansen, Arkham data combined with Korean-specific signals. Wallet analysis, flow tracking, and protocol usage patterns unique to the Korean market." },
           { icon: "◈", img: capImg3, title: "Competitor Analysis", desc: "Deep-dive into how competing protocols are positioned in Korea. Their KOL relationships, community size, exchange presence, and narrative strengths and weaknesses." },
           { icon: "◆", img: capImg4, title: "Investment Thesis", desc: "Investor-grade market entry analysis. Due diligence packages, TAM sizing for Korean market, regulatory landscape, and go-to-market feasibility assessments." },
-          { icon: "◇", img: capImg1, title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
-          { icon: "◐", img: capImg2, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
+          { icon: "◇", img: capImg5, title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
+          { icon: "◐", img: capImg6, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>

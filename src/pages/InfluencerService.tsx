@@ -12,6 +12,8 @@ import ytImg from "@/assets/platforms/kol-youtube.jpg";
 import ctImg from "@/assets/platforms/kol-twitter.jpg";
 import tgImg from "@/assets/platforms/kol-telegram.jpg";
 import naverImg from "@/assets/platforms/kol-naver.jpg";
+import perfImg from "@/assets/platforms/kol-performance.jpg";
+import fraudImg from "@/assets/platforms/kol-fraud.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -84,8 +86,8 @@ const InfluencerService = () => {
           { icon: "◉", title: "Campaign Design & Briefing", desc: "Custom briefs per KOL tailored to their style and audience. We align messaging with your GTM narrative. No copy-paste — every placement feels native.", img: ctImg },
           { icon: "◈", title: "Content Approval & QC", desc: "Every piece of content goes through our approval workflow. Draft → review → revision → approval → publish. No content goes live without our sign-off and yours.", img: tgImg },
           { icon: "◆", title: "Scheduling & Orchestration", desc: "We sequence KOL drops for maximum narrative velocity. First-mover threads set the frame, mid-campaign placements deepen coverage, closing posts drive urgency.", img: naverImg },
-          { icon: "◇", title: "Performance Tracking", desc: "Weekly reports with impressions, engagements, click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", img: ytImg },
-          { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%.", img: ctImg },
+          { icon: "◇", title: "Performance Tracking", desc: "Weekly reports with impressions, engagements, click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", img: perfImg },
+          { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%.", img: fraudImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>
