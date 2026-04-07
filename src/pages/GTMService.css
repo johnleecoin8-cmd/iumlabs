@@ -28,11 +28,11 @@
 .gtm-ed .hero-accent{background:linear-gradient(135deg,#b48cde,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .gtm-ed .hero-desc{font-size:clamp(.9rem,1.4vw,1.1rem);color:rgba(255,255,255,.8);line-height:1.75;font-weight:300;margin-top:2rem;max-width:700px;margin-left:auto;margin-right:auto}
 .gtm-ed .hero-desc strong{font-weight:600;color:#fff}
-.gtm-ed .hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.1);background:rgba(10,10,11,.5);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.gtm-ed .hero-stat{padding:2rem;text-align:center;border-right:1px solid rgba(255,255,255,.08)}
-.gtm-ed .hero-stat:last-child{border-right:none}
-.gtm-ed .hero-stat-big{font-family:var(--sans);font-weight:700;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.03em;line-height:1;color:#fff}
-.gtm-ed .hero-stat-sub{font-family:var(--mono);font-size:.65rem;color:var(--g2);letter-spacing:.12em;text-transform:uppercase;margin-top:.6rem}
+.gtm-ed .hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.12);background:rgba(8,8,8,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.gtm-ed .hero-stat{padding:2.2rem 1.5rem;text-align:center;position:relative}
+.gtm-ed .hero-stat:not(:last-child)::after{content:'';position:absolute;right:0;top:18%;height:64%;width:1px;background:rgba(255,255,255,.12)}
+.gtm-ed .hero-stat-big{font-family:var(--sans);font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1;color:#fff}
+.gtm-ed .hero-stat-sub{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-top:.6rem}
 
 /* CLIENT MARQUEE */
 .gtm-ed .clients{padding:2rem 0;border-bottom:1px solid var(--g4);overflow:hidden;position:relative}
@@ -220,9 +220,9 @@
   .gtm-ed .hero-desc{font-size:.88rem;margin-top:1.5rem}
   .gtm-ed .hero-stats{grid-template-columns:repeat(2,1fr)}
   .gtm-ed .hero-stat{padding:1.2rem 1rem}
-  .gtm-ed .hero-stat-big{font-size:clamp(1.6rem,6vw,2.2rem)}
-  .gtm-ed .hero-stat-sub{font-size:.5rem}
-  .gtm-ed .hero-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.08)}
+  .gtm-ed .hero-stat-big{font-size:clamp(1.5rem,6vw,2rem)}
+  .gtm-ed .hero-stat-sub{font-size:.45rem}
+  .gtm-ed .hero-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
 
   /* Why Korea */
   .gtm-ed .wk-grid{grid-template-columns:1fr 1fr;gap:0}
