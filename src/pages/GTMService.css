@@ -56,7 +56,7 @@
 
 /* MANIFESTO */
 .gtm-ed .manifesto{padding:10rem 0}
-.gtm-ed .manifesto p{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.3rem);line-height:1.6;max-width:960px;color:var(--char)}
+.gtm-ed .manifesto p{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,2.6vw,2.3rem);line-height:1.6;max-width:960px;color:var(--char);word-spacing:.08em;overflow-wrap:break-word;word-break:normal}
 .gtm-ed .manifesto p strong{font-weight:600;color:var(--black)}
 
 /* SERVICES — R/GA MEGA BLOCKS */
