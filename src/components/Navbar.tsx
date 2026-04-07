@@ -69,7 +69,7 @@ const Navbar = () => {
                         <Linkedin className="w-5 h-5 text-[#0A66C2]" /><span>LinkedIn</span>
                       </a>
                       <a href={`mailto:${brand.email}`} className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-base">
-                        <Mail className="w-5 h-5 text-white/50" /><span>{brand.email}</span>
+                        <Mail className="w-5 h-5 text-white/50" /><span>Email</span>
                       </a>
                     </div>
                     <div className="flex items-start gap-2.5 text-white/40 text-sm">
