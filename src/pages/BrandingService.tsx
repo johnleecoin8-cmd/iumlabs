@@ -123,7 +123,7 @@ const BrandingService = () => {
 
       <section className="invite" id="contact"><div className="invite-inner">
         <div><h2>Need Korean regulatory <strong>guidance?</strong></h2><div className="invite-kr">한국 규제, 전문가와 함께합니다.</div></div>
-        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Compliance Call →</CalendlyButton></div>
+        <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Compliance Call →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
     </div>

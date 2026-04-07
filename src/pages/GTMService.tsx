@@ -349,7 +349,7 @@ const GTMService = () => {
             <div className="invite-kr">한국 시장을 여는 가장 확실한 방법</div>
           </div>
           <div className="invite-right">
-            <CalendlyButton className="invite-cta">Book a Korea Strategy Call →</CalendlyButton>
+            <Link to="/contact" className="invite-cta">Get in Touch →</Link>
             <div className="invite-offices"><span>KR</span><span>SG</span></div>
           </div>
         </div>

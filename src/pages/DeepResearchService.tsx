@@ -136,7 +136,7 @@ const DeepResearchService = () => {
       {/* INVITE */}
       <section className="invite" id="contact"><div className="invite-inner">
         <div><h2>Need Korean market <strong>intelligence?</strong></h2><div className="invite-kr">한국 시장을 데이터로 이해합니다.</div></div>
-        <div className="invite-right"><CalendlyButton className="invite-cta">Book a Research Briefing →</CalendlyButton></div>
+        <div className="invite-right"><Link to="/contact" className="invite-cta">Book a Research Briefing →</Link></div>
       </div></section>
       <footer className="ft-ed"><div className="ft-inner"><div>© 2026 ium labs — Seoul</div><div style={{ display: "flex", alignItems: "center" }}><span ref={clockRef} style={{ marginRight: 12 }} /><Link to="/privacy">Privacy</Link><Link to="/terms">Terms</Link><a href={brand.telegramLink} target="_blank" rel="noopener noreferrer">Telegram</a></div></div></footer>
     </div>
