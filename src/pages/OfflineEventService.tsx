@@ -40,7 +40,7 @@ const OfflineEventService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Offline Events | ium Labs" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." path="/services/offline-event" keywords={["Korea Web3 Events","Seoul Crypto Events"]} />
+      <SEOHead title="Korea Offline Events | ium Labs" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." path="/services/offline-event" image={heroImg} keywords={["Korea Web3 Events","Seoul Crypto Events"]} />
       <ServiceSchema name="Korea Offline Events" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." url="/services/offline-event" serviceType={["Event Production", "Conference Events", "Networking Events"]} />
       <Navbar />
 

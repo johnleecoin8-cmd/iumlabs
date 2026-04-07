@@ -42,7 +42,7 @@ const CommunityService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" keywords={["Korea Community Management","Web3 Community Korea"]} />
+      <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" image={heroImg} keywords={["Korea Community Management","Web3 Community Korea"]} />
       <ServiceSchema name="Korea Community Management" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." url="/services/community" serviceType={["Community Management", "Social Media Management"]} />
       <Navbar />
 

@@ -141,7 +141,7 @@ const GTMService = () => {
 
   return (
     <div className="gtm-ed" ref={containerRef}>
-      <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Korea-focused Web3 GTM agency. Korean market activation, KOL management, and campaign execution." path="/services/gtm" keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
+      <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Korea-focused Web3 GTM agency. Korean market activation, KOL management, and campaign execution." path="/services/gtm" image={gtmHeroImage} keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
       <Navbar />
 
       {/* HERO */}

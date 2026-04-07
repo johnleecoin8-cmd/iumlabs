@@ -42,7 +42,7 @@ const DeepResearchService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Deep Research | ium Labs" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." path="/services/deep-research" keywords={["Korea Crypto Research","Web3 Market Intelligence"]} />
+      <SEOHead title="Korea Deep Research | ium Labs" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." path="/services/deep-research" image={heroImg} keywords={["Korea Crypto Research","Web3 Market Intelligence"]} />
       <ServiceSchema name="Korea Deep Research" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." url="/services/deep-research" serviceType={["Market Research", "On-chain Analytics", "Competitor Analysis"]} />
       <Navbar />
 
