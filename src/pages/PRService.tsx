@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/pr-media.webp";
+import cdImg from "@/assets/platforms/pr-newsroom.jpg";
+import bmImg from "@/assets/platforms/pr-interview.jpg";
+import tpImg from "@/assets/platforms/pr-media.jpg";
+import msImg from "@/assets/platforms/pr-mainstream.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,16 +75,16 @@ const PRService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "Korean Press Release Writing", desc: "Native Korean writers who understand crypto terminology and Korean media conventions. Press releases that read naturally, not translated corporate speak." },
-          { icon: "◉", title: "Direct Journalist Outreach", desc: "Personal relationships with reporters at CoinDesk Korea, Block Media, TokenPost, BloomingBit, Hankyung. We pitch stories, not press releases." },
-          { icon: "◈", title: "Thought Leadership", desc: "Interview placement, bylined articles, expert commentary. Positioning your founders as credible voices in the Korean crypto narrative." },
-          { icon: "◆", title: "Mainstream Media", desc: "Beyond crypto — Chosun Ilbo, MBN, Maeil Business. For stories with broader financial relevance." },
-          { icon: "◇", title: "Crisis Communication", desc: "Korean CT moves fast. Pre-drafted statement templates, rapid response protocols, real-time monitoring." },
-          { icon: "◐", title: "Coverage Analytics", desc: "Article reach tracking, sentiment analysis, share of voice measurement. Monthly reports on Korean media presence." },
+          { icon: "◎", title: "Korean Press Release Writing", desc: "Native Korean writers who understand crypto terminology and Korean media conventions. Press releases that read naturally, not translated corporate speak.", img: cdImg },
+          { icon: "◉", title: "Direct Journalist Outreach", desc: "Personal relationships with reporters at CoinDesk Korea, Block Media, TokenPost, BloomingBit, Hankyung. We pitch stories, not press releases.", img: bmImg },
+          { icon: "◈", title: "Thought Leadership", desc: "Interview placement, bylined articles, expert commentary. Positioning your founders as credible voices in the Korean crypto narrative.", img: tpImg },
+          { icon: "◆", title: "Mainstream Media", desc: "Beyond crypto — Chosun Ilbo, MBN, Maeil Business. For stories with broader financial relevance.", img: msImg },
+          { icon: "◇", title: "Crisis Communication", desc: "Korean CT moves fast. Pre-drafted statement templates, rapid response protocols, real-time monitoring.", img: cdImg },
+          { icon: "◐", title: "Coverage Analytics", desc: "Article reach tracking, sentiment analysis, share of voice measurement. Monthly reports on Korean media presence.", img: bmImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -93,16 +97,6 @@ const PRService = () => {
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase II</div><div className="proc-title">Media Outreach</div><div className="proc-text">Direct pitching to relevant journalists. Personalized angles per outlet.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase III</div><div className="proc-title">Distribution</div><div className="proc-text">Coordinated publishing. Embargo management. Social amplification.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase IV</div><div className="proc-title">Impact Tracking</div><div className="proc-text">Article performance, reach analytics, sentiment monitoring. Monthly reports.</div></div>
-        </div>
-      </div></section>
-
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Media Partners</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">CoinDesk Korea</div><div className="plat-desc">Korea's #1 crypto media. Direct relationships with editorial team.</div><div className="plat-stat">Premium placement</div></div>
-          <div className="plat"><div className="plat-name">Block Media</div><div className="plat-desc">Fast-breaking Korean crypto news. Strong retail readership.</div><div className="plat-stat">Breaking news</div></div>
-          <div className="plat"><div className="plat-name">TokenPost</div><div className="plat-desc">In-depth analysis and project coverage. Institutional readership.</div><div className="plat-stat">Deep-dive articles</div></div>
-          <div className="plat"><div className="plat-name">Mainstream</div><div className="plat-desc">Chosun, MBN, Hankyung. For broader financial relevance.</div><div className="plat-stat">Financial press</div></div>
         </div>
       </div></section>
 
