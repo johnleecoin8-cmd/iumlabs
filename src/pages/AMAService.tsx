@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/ama-spaces.png";
+import capImg1 from "@/assets/platforms/ama-telegram.jpg";
+import capImg2 from "@/assets/platforms/ama-discord.jpg";
+import capImg3 from "@/assets/platforms/ama-spaces.jpg";
+import capImg4 from "@/assets/platforms/ama-youtube.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,16 +74,16 @@ const AMAService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "Native Korean Hosts", desc: "Professional hosts who speak crypto fluently in Korean. No awkward translations, no lost nuance. They manage pacing, drive engagement, and keep the audience hooked." },
-          { icon: "◉", title: "Pre-Event Hype Building", desc: "2-3 weeks of promotion across Korean channels. Teaser content, question seeding, community priming. By the time the AMA starts, the audience is ready." },
-          { icon: "◈", title: "Question Curation", desc: "We seed intelligent questions that drive the conversation toward your key narratives. No awkward silences, no off-topic tangents. Every question is strategic." },
-          { icon: "◆", title: "Multi-Platform Hosting", desc: "Telegram, Discord, X Spaces, KakaoTalk Live, YouTube Live. We host on whatever platform your audience uses. Simultaneous multi-platform when needed." },
-          { icon: "◇", title: "Live Moderation", desc: "Real-time spam filtering, question prioritization, engagement prompts, and audience management. The host focuses on the conversation — we handle everything else." },
-          { icon: "◐", title: "Post-AMA Amplification", desc: "Written recaps, video highlights, key quote graphics, thread summaries, engagement analytics. The AMA keeps working for weeks after it ends." },
+          { icon: "◎", img: capImg1, title: "Native Korean Hosts", desc: "Professional hosts who speak crypto fluently in Korean. No awkward translations, no lost nuance. They manage pacing, drive engagement, and keep the audience hooked." },
+          { icon: "◉", img: capImg2, title: "Pre-Event Hype Building", desc: "2-3 weeks of promotion across Korean channels. Teaser content, question seeding, community priming. By the time the AMA starts, the audience is ready." },
+          { icon: "◈", img: capImg3, title: "Question Curation", desc: "We seed intelligent questions that drive the conversation toward your key narratives. No awkward silences, no off-topic tangents. Every question is strategic." },
+          { icon: "◆", img: capImg4, title: "Multi-Platform Hosting", desc: "Telegram, Discord, X Spaces, KakaoTalk Live, YouTube Live. We host on whatever platform your audience uses. Simultaneous multi-platform when needed." },
+          { icon: "◇", img: capImg1, title: "Live Moderation", desc: "Real-time spam filtering, question prioritization, engagement prompts, and audience management. The host focuses on the conversation — we handle everything else." },
+          { icon: "◐", img: capImg2, title: "Post-AMA Amplification", desc: "Written recaps, video highlights, key quote graphics, thread summaries, engagement analytics. The AMA keeps working for weeks after it ends." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -92,16 +96,6 @@ const AMAService = () => {
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 2–3</div><div className="proc-title">Promotion</div><div className="proc-text">Teaser content, community announcements, KOL amplification, question collection.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Event Day</div><div className="proc-title">Live Execution</div><div className="proc-text">Native Korean host, live moderation, engagement prompts, real-time Q&A management.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Post-Event</div><div className="proc-title">Amplification</div><div className="proc-text">Written recap, video highlights, analytics report. Content distribution across channels.</div></div>
-        </div>
-      </div></section>
-
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Platforms</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">Telegram</div><div className="plat-desc">Text-based AMAs in Korean Telegram groups. High engagement, easy participation.</div><div className="plat-stat">Most popular format</div></div>
-          <div className="plat"><div className="plat-name">Discord</div><div className="plat-desc">Voice channel AMAs with stage channels. Good for deeper technical discussions.</div><div className="plat-stat">Voice + text hybrid</div></div>
-          <div className="plat"><div className="plat-name">X Spaces</div><div className="plat-desc">Live audio sessions on X. Great for reach and discoverability beyond existing community.</div><div className="plat-stat">Maximum reach</div></div>
-          <div className="plat"><div className="plat-name">YouTube Live</div><div className="plat-desc">Video AMAs with screen sharing. Best for product demos and visual presentations.</div><div className="plat-stat">Video format</div></div>
         </div>
       </div></section>
 

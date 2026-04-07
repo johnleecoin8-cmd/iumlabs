@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/vasp-compliance.jpg";
+import capImg1 from "@/assets/platforms/comp-vasp.jpg";
+import capImg2 from "@/assets/platforms/comp-pipa.jpg";
+import capImg3 from "@/assets/platforms/comp-aml.jpg";
+import capImg4 from "@/assets/platforms/comp-exchange.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,16 +74,16 @@ const BrandingService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "VASP Registration", desc: "Full support for Korean Virtual Asset Service Provider registration. Documentation preparation, application submission, and follow-up with regulatory authorities." },
-          { icon: "◉", title: "PIPA Compliance", desc: "Personal Information Protection Act strategy. Data handling procedures, consent flows, privacy policy drafting, and compliance documentation for Korean law." },
-          { icon: "◈", title: "Exchange Listing Compliance", desc: "Upbit, Bithumb, Coinone listing requirements. Due diligence preparation, compliance documentation, and regulatory review to meet exchange standards." },
-          { icon: "◆", title: "AML/KYC Advisory", desc: "Anti-money laundering and Know Your Customer framework design. Transaction monitoring procedures, suspicious activity reporting, and compliance training." },
-          { icon: "◇", title: "Regulatory Landscape Analysis", desc: "Comprehensive mapping of Korean crypto regulations as they apply to your specific project type. DeFi, NFT, token, and infrastructure projects all face different requirements." },
-          { icon: "◐", title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
+          { icon: "◎", img: capImg1, title: "VASP Registration", desc: "Full support for Korean Virtual Asset Service Provider registration. Documentation preparation, application submission, and follow-up with regulatory authorities." },
+          { icon: "◉", img: capImg2, title: "PIPA Compliance", desc: "Personal Information Protection Act strategy. Data handling procedures, consent flows, privacy policy drafting, and compliance documentation for Korean law." },
+          { icon: "◈", img: capImg3, title: "Exchange Listing Compliance", desc: "Upbit, Bithumb, Coinone listing requirements. Due diligence preparation, compliance documentation, and regulatory review to meet exchange standards." },
+          { icon: "◆", img: capImg4, title: "AML/KYC Advisory", desc: "Anti-money laundering and Know Your Customer framework design. Transaction monitoring procedures, suspicious activity reporting, and compliance training." },
+          { icon: "◇", img: capImg1, title: "Regulatory Landscape Analysis", desc: "Comprehensive mapping of Korean crypto regulations as they apply to your specific project type. DeFi, NFT, token, and infrastructure projects all face different requirements." },
+          { icon: "◐", img: capImg2, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -92,16 +96,6 @@ const BrandingService = () => {
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 2–4</div><div className="proc-title">Strategy</div><div className="proc-text">Develop compliance roadmap. Documentation plan, timeline, and resource requirements.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 4–8</div><div className="proc-title">Implementation</div><div className="proc-text">Prepare documentation, submit applications, coordinate with legal partners and regulators.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Ongoing</div><div className="proc-title">Monitoring</div><div className="proc-text">Regulatory change tracking, quarterly compliance reviews, ongoing advisory as regulations evolve.</div></div>
-        </div>
-      </div></section>
-
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Regulatory Frameworks</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">Virtual Asset Act</div><div className="plat-desc">Korea's primary crypto regulation. User protection, reporting requirements, and operational standards.</div><div className="plat-stat">가상자산법</div></div>
-          <div className="plat"><div className="plat-name">PIPA</div><div className="plat-desc">Personal Information Protection Act. Data handling, consent, and cross-border transfer rules.</div><div className="plat-stat">개인정보보호법</div></div>
-          <div className="plat"><div className="plat-name">AML/KYC</div><div className="plat-desc">Anti-money laundering and identity verification. Transaction monitoring and suspicious activity reporting.</div><div className="plat-stat">자금세탁방지</div></div>
-          <div className="plat"><div className="plat-name">Exchange Rules</div><div className="plat-desc">Exchange-specific listing and compliance requirements. Upbit, Bithumb, Coinone each have unique standards.</div><div className="plat-stat">거래소 규정</div></div>
         </div>
       </div></section>
 

@@ -122,15 +122,6 @@ const InfluencerService = () => {
       </div></section>
 
       {/* PLATFORMS */}
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Platforms</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-img"><img src={ytImg} alt="YouTube" /></div><div className="plat-body"><div className="plat-name">YouTube</div><div className="plat-desc">Long-form reviews and project deep-dives.</div><div className="plat-stat">10–30min reviews</div></div></div>
-          <div className="plat"><div className="plat-img"><img src={ctImg} alt="X" /></div><div className="plat-body"><div className="plat-name">X (Korean CT)</div><div className="plat-desc">Thread campaigns, Spaces hosting.</div><div className="plat-stat">Thread + QRT campaigns</div></div></div>
-          <div className="plat"><div className="plat-img"><img src={tgImg} alt="Telegram" /></div><div className="plat-body"><div className="plat-name">Telegram</div><div className="plat-desc">Channel placements, group AMAs.</div><div className="plat-stat">Channel + Group</div></div></div>
-          <div className="plat"><div className="plat-img"><img src={naverImg} alt="Naver" /></div><div className="plat-body"><div className="plat-name">Naver Blog</div><div className="plat-desc">SEO-optimized posts for Korean search.</div><div className="plat-stat">SEO blog content</div></div></div>
-        </div>
-      </div></section>
 
       {/* CASE STUDY */}
       <section className="case"><div className="wrap">

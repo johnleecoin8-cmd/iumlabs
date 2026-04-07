@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/seo-ads.webp";
+import capImg1 from "@/assets/platforms/seo-naver.jpg";
+import capImg2 from "@/assets/platforms/seo-google.jpg";
+import capImg3 from "@/assets/platforms/seo-twitter.jpg";
+import capImg4 from "@/assets/platforms/seo-analytics.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,12 +79,12 @@ const SEOAdsService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "Naver SEO", desc: "Blog content strategy, keyword research, and Naver-specific optimization. Naver's algorithm is completely different from Google — different ranking factors, different content formats, different link structures." },
-          { icon: "◉", title: "Google Ads (Crypto Certified)", desc: "We handle Google's crypto advertiser certification process end-to-end. Most agencies can't even get approved. We run search, display, and YouTube campaigns for crypto projects." },
-          { icon: "◈", title: "X Ads", desc: "Promoted posts, follower campaigns, and engagement campaigns targeting Korean crypto Twitter. We A/B test creatives and optimize for cost-per-engagement across Korean CT audiences." },
-          { icon: "◆", title: "Crypto Ad Networks", desc: "Coinzilla, Bitmedia, and crypto-native ad networks that actually accept crypto campaigns. We know which ones convert for Korean audiences and which are wasted spend." },
-          { icon: "◇", title: "A/B Testing", desc: "Systematic creative and landing page testing across all channels. We test headlines, visuals, CTAs, and audience segments to continuously improve campaign performance." },
-          { icon: "◐", title: "Performance Analytics", desc: "Weekly reporting with full attribution. Every dollar tracked from impression to click to conversion. Campaign-level and channel-level ROAS with actionable optimization recommendations." },
+          { icon: "◎", img: capImg1, title: "Naver SEO", desc: "Blog content strategy, keyword research, and Naver-specific optimization. Naver's algorithm is completely different from Google — different ranking factors, different content formats, different link structures." },
+          { icon: "◉", img: capImg2, title: "Google Ads (Crypto Certified)", desc: "We handle Google's crypto advertiser certification process end-to-end. Most agencies can't even get approved. We run search, display, and YouTube campaigns for crypto projects." },
+          { icon: "◈", img: capImg3, title: "X Ads", desc: "Promoted posts, follower campaigns, and engagement campaigns targeting Korean crypto Twitter. We A/B test creatives and optimize for cost-per-engagement across Korean CT audiences." },
+          { icon: "◆", img: capImg4, title: "Crypto Ad Networks", desc: "Coinzilla, Bitmedia, and crypto-native ad networks that actually accept crypto campaigns. We know which ones convert for Korean audiences and which are wasted spend." },
+          { icon: "◇", img: capImg1, title: "A/B Testing", desc: "Systematic creative and landing page testing across all channels. We test headlines, visuals, CTAs, and audience segments to continuously improve campaign performance." },
+          { icon: "◐", img: capImg2, title: "Performance Analytics", desc: "Weekly reporting with full attribution. Every dollar tracked from impression to click to conversion. Campaign-level and channel-level ROAS with actionable optimization recommendations." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>
@@ -88,7 +92,7 @@ const SEOAdsService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -106,15 +110,6 @@ const SEOAdsService = () => {
       </div></section>
 
       {/* CHANNELS */}
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Channels</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">Naver</div><div className="plat-desc">Korea's dominant search engine. Blog SEO, Smart Blocks, and Naver Ads for maximum Korean visibility.</div><div className="plat-stat">70% of Korean search</div></div>
-          <div className="plat"><div className="plat-name">Google</div><div className="plat-desc">Search, Display, and YouTube campaigns. Crypto advertiser certification handled by our team.</div><div className="plat-stat">Crypto certified</div></div>
-          <div className="plat"><div className="plat-name">X / Twitter</div><div className="plat-desc">Promoted posts and follower campaigns targeting Korean crypto Twitter. Real-time engagement optimization.</div><div className="plat-stat">Korean CT targeting</div></div>
-          <div className="plat"><div className="plat-name">Crypto Networks</div><div className="plat-desc">Coinzilla, Bitmedia, and crypto-native networks. Direct placements on Korean crypto media sites.</div><div className="plat-stat">Crypto-native reach</div></div>
-        </div>
-      </div></section>
 
       {/* FAQ */}
       <section className="faq"><div className="wrap">

@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/deep-research.png";
+import capImg1 from "@/assets/platforms/res-market.jpg";
+import capImg2 from "@/assets/platforms/res-onchain.jpg";
+import capImg3 from "@/assets/platforms/res-competitor.jpg";
+import capImg4 from "@/assets/platforms/res-trend.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,12 +79,12 @@ const DeepResearchService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "Market Mapping", desc: "Complete Korean ecosystem analysis — exchanges, KOLs, media outlets, communities, regulations, and competitive positioning. Understand the full landscape before you enter." },
-          { icon: "◉", title: "On-chain Analytics", desc: "Dune, Nansen, Arkham data combined with Korean-specific signals. Wallet analysis, flow tracking, and protocol usage patterns unique to the Korean market." },
-          { icon: "◈", title: "Competitor Analysis", desc: "Deep-dive into how competing protocols are positioned in Korea. Their KOL relationships, community size, exchange presence, and narrative strengths and weaknesses." },
-          { icon: "◆", title: "Investment Thesis", desc: "Investor-grade market entry analysis. Due diligence packages, TAM sizing for Korean market, regulatory landscape, and go-to-market feasibility assessments." },
-          { icon: "◇", title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
-          { icon: "◐", title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
+          { icon: "◎", img: capImg1, title: "Market Mapping", desc: "Complete Korean ecosystem analysis — exchanges, KOLs, media outlets, communities, regulations, and competitive positioning. Understand the full landscape before you enter." },
+          { icon: "◉", img: capImg2, title: "On-chain Analytics", desc: "Dune, Nansen, Arkham data combined with Korean-specific signals. Wallet analysis, flow tracking, and protocol usage patterns unique to the Korean market." },
+          { icon: "◈", img: capImg3, title: "Competitor Analysis", desc: "Deep-dive into how competing protocols are positioned in Korea. Their KOL relationships, community size, exchange presence, and narrative strengths and weaknesses." },
+          { icon: "◆", img: capImg4, title: "Investment Thesis", desc: "Investor-grade market entry analysis. Due diligence packages, TAM sizing for Korean market, regulatory landscape, and go-to-market feasibility assessments." },
+          { icon: "◇", img: capImg1, title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
+          { icon: "◐", img: capImg2, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}>
@@ -88,7 +92,7 @@ const DeepResearchService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -106,15 +110,6 @@ const DeepResearchService = () => {
       </div></section>
 
       {/* REPORT TYPES */}
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Report Types</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">Market Entry Thesis</div><div className="plat-desc">Full Korean market assessment — TAM, competition, regulatory, and recommended go-to-market strategy.</div><div className="plat-stat">40-60 page reports</div></div>
-          <div className="plat"><div className="plat-name">Competitor Deck</div><div className="plat-desc">Deep analysis of how competitors are positioned in Korea. KOL networks, community size, exchange presence.</div><div className="plat-stat">Actionable insights</div></div>
-          <div className="plat"><div className="plat-name">Tokenomics Review</div><div className="plat-desc">Korean retail sentiment analysis on token design. How Korean investors evaluate and discuss your tokenomics.</div><div className="plat-stat">Investor-grade</div></div>
-          <div className="plat"><div className="plat-name">Trend Report</div><div className="plat-desc">Monthly pulse on Korean crypto narratives, retail flows, community sentiment, and emerging opportunities.</div><div className="plat-stat">Monthly cadence</div></div>
-        </div>
-      </div></section>
 
       {/* FAQ */}
       <section className="faq"><div className="wrap">

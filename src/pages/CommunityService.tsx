@@ -7,6 +7,10 @@ import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import heroImg from "@/assets/services/community-management.webp";
+import capImg1 from "@/assets/platforms/comm-telegram.jpg";
+import capImg2 from "@/assets/platforms/comm-discord.jpg";
+import capImg3 from "@/assets/platforms/comm-kakao.jpg";
+import capImg4 from "@/assets/platforms/comm-naver.jpg";
 import "./ServiceDetail.css";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,16 +74,16 @@ const CommunityService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "Telegram Management", desc: "Korean Telegram group setup, moderation, engagement programming. Bot configuration, anti-spam, welcome flows, daily engagement prompts. 24/7 coverage." },
-          { icon: "◉", title: "Discord Operations", desc: "Server architecture, role systems, channel structure, Korean localization. Event programming, ticketing, and moderation workflows." },
-          { icon: "◈", title: "KakaoTalk Open Chat", desc: "Korea's native messaging platform. Open chat room management, content sharing, real-time Q&A. The channel most global projects miss entirely." },
-          { icon: "◆", title: "Naver Cafe Management", desc: "Long-form Korean community platform. Post moderation, content curation, SEO-optimized community content that drives Naver search traffic." },
-          { icon: "◇", title: "Engagement Programming", desc: "Weekly AMAs, trivia nights, quest campaigns, ambassador programs, translation events. Structured engagement that drives daily activity metrics." },
-          { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards." },
+          { icon: "◎", title: "Telegram Management", desc: "Korean Telegram group setup, moderation, engagement programming. Bot configuration, anti-spam, welcome flows, daily engagement prompts. 24/7 coverage.", img: capImg1 },
+          { icon: "◉", title: "Discord Operations", desc: "Server architecture, role systems, channel structure, Korean localization. Event programming, ticketing, and moderation workflows.", img: capImg2 },
+          { icon: "◈", title: "KakaoTalk Open Chat", desc: "Korea's native messaging platform. Open chat room management, content sharing, real-time Q&A. The channel most global projects miss entirely.", img: capImg3 },
+          { icon: "◆", title: "Naver Cafe Management", desc: "Long-form Korean community platform. Post moderation, content curation, SEO-optimized community content that drives Naver search traffic.", img: capImg4 },
+          { icon: "◇", title: "Engagement Programming", desc: "Weekly AMAs, trivia nights, quest campaigns, ambassador programs, translation events. Structured engagement that drives daily activity metrics.", img: capImg1 },
+          { icon: "◐", title: "Sentiment Monitoring", desc: "Real-time monitoring across all Korean platforms. Negative sentiment alerts, FUD response protocols, community health dashboards.", img: capImg2 },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" onClick={() => toggleCap(i)}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
@@ -92,16 +96,6 @@ const CommunityService = () => {
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 2–3</div><div className="proc-title">Infrastructure</div><div className="proc-text">Moderation workflows, content calendar, engagement event schedule, ambassador program design.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 3–6</div><div className="proc-title">Activation</div><div className="proc-text">Daily engagement, weekly events, KOL AMAs, quest campaigns. Active growth phase.</div></div>
           <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Ongoing</div><div className="proc-title">Optimization</div><div className="proc-text">Sentiment monitoring, engagement analytics, retention optimization, monthly community health reports.</div></div>
-        </div>
-      </div></section>
-
-      <section className="platforms"><div className="wrap">
-        <div className="lbl" style={{ color: "var(--g2)" }}>Platforms</div>
-        <div className="plat-grid">
-          <div className="plat"><div className="plat-name">Telegram</div><div className="plat-desc">Primary crypto communication. Groups, channels, bots, AMAs.</div><div className="plat-stat">24/7 Korean mods</div></div>
-          <div className="plat"><div className="plat-name">Discord</div><div className="plat-desc">Deep engagement. Roles, channels, events, ticketing.</div><div className="plat-stat">Full server architecture</div></div>
-          <div className="plat"><div className="plat-name">KakaoTalk</div><div className="plat-desc">Korea's native messenger. Open chat rooms for real-time community.</div><div className="plat-stat">Korea-only channel</div></div>
-          <div className="plat"><div className="plat-name">Naver Cafe</div><div className="plat-desc">Long-form Korean community. SEO-optimized content and discussion.</div><div className="plat-stat">Search traffic driver</div></div>
         </div>
       </div></section>
 
