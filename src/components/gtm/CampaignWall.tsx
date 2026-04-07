@@ -9,7 +9,7 @@ import synfuturesBillboard from '@/assets/campaigns/synfutures-billboard.jpg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
 import storyWorkshop from '@/assets/campaigns/story-workshop.jpg';
 import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
-import polygonConnect from '@/assets/campaigns/polygon-connect.png';
+import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import polygonHackathon from '@/assets/campaigns/polygon-hackathon.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
 import mantraParty from '@/assets/campaigns/mantra-party.jpg';

@@ -9,7 +9,7 @@ import storyBg from '@/assets/projects/story-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
 import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
-import openledgerHero from '@/assets/campaigns/openledger-hero-official.png';
+import openledgerHero from '@/assets/campaigns/openledger-hero-official.jpg';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
 import bnbBg from '@/assets/projects/bnb-bg.jpg';

@@ -5,7 +5,7 @@ import { MessageCircle, Megaphone, Users, Calendar, Search, ArrowRight, ChevronR
 
 // Service images
 import communityGrowth from '@/assets/services/community-growth.jpg';
-import prMedia from '@/assets/services/pr-coindesk.png';
+import prMedia from '@/assets/services/pr-coindesk.jpg';
 import kolNetwork from '@/assets/services/kol-network.jpg';
 import seoAds from '@/assets/services/seo-ads.jpg';
 import events from '@/assets/services/events.jpg';
@@ -21,7 +21,7 @@ import kucoinCampaign from '@/assets/campaigns/kucoin-campaign.jpg';
 import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
 import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
-import polygonConnect from '@/assets/campaigns/polygon-connect.png';
+import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
 import bybitEvent from '@/assets/campaigns/bybit-event.jpg';
 

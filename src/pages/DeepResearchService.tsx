@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/deep-research.png";
+import heroImg from "@/assets/services/deep-research-blog.jpg";
 import capImg1 from "@/assets/platforms/res-market.jpg";
 import capImg2 from "@/assets/platforms/res-onchain.jpg";
 import capImg3 from "@/assets/platforms/res-competitor.jpg";

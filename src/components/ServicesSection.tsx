@@ -4,12 +4,12 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
 import websiteImage from "@/assets/services/website-creative.webp";
 import eventsImage from "@/assets/services/offline-event.webp";
-import communityImage from "@/assets/services/community-management.png";
+import communityImage from "@/assets/services/community-management.jpg";
 import kolImage from "@/assets/services/kol-avatars.webp";
-import prImage from "@/assets/services/pr-coindesk.png";
-import seoAdsImage from "@/assets/services/seo-naver.png";
-import deepResearchImage from "@/assets/services/deep-research-blog.png";
-import amaImage from "@/assets/services/ama-spaces.png";
+import prImage from "@/assets/services/pr-coindesk.jpg";
+import seoAdsImage from "@/assets/services/seo-naver.jpg";
+import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
+import amaImage from "@/assets/services/ama-spaces.jpg";
 
 const services = [
   {

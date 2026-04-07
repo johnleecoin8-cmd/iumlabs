@@ -51,7 +51,7 @@ import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
 // Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
-import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.png";
+import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
 import kucoinNew from "@/assets/campaigns/kucoin-new.jpg";
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
@@ -65,7 +65,7 @@ const campaignAssetByFile: Record<string, string> = {
   "story-origin-summit.jpg": storyBg,
   "story-workshop.jpg": storyWorkshop,
   "openledger-interview.jpg": openledgerInterview,
-  "openledger-hero-official.png": openledgerHeroOfficial,
+  "openledger-hero-official.jpg": openledgerHeroOfficial,
   "peaq-summit.jpg": peaqBg,
   "bybit-event.jpg": bybitBg,
   "mantra-party.jpg": mantraBg,

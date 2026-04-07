@@ -5,11 +5,11 @@ import { MessageCircle, Megaphone, Users, Calendar, Search, ArrowRight, Check, X
 
 // Service images
 import communityGrowth from '@/assets/services/community-growth.jpg';
-import prMedia from '@/assets/services/pr-coindesk.png';
+import prMedia from '@/assets/services/pr-coindesk.jpg';
 import kolNetwork from '@/assets/services/kol-network.jpg';
 import seoAds from '@/assets/services/seo-ads.jpg';
 import events from '@/assets/services/events.jpg';
-import brandingWebsite from '@/assets/services/branding-website.png';
+import brandingWebsite from '@/assets/services/branding-website.jpg';
 
 // Campaign preview images
 import mantraParty from '@/assets/campaigns/mantra-party.jpg';

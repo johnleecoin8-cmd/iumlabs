@@ -6,8 +6,8 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import peaqImg from "@/assets/campaigns/peaq-booth-event.png";
-import heroImg from "@/assets/services/kol-network.jpg";
+import peaqImg from "@/assets/campaigns/peaq-booth-event.jpg";
+import heroImg from "@/assets/services/kol-avatars.webp";
 import ytImg from "@/assets/platforms/kol-youtube.jpg";
 import ctImg from "@/assets/platforms/kol-twitter.jpg";
 import tgImg from "@/assets/platforms/kol-telegram.jpg";
@@ -27,11 +27,11 @@ const InfluencerService = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".svc-detail .hero-back", { opacity: 0, x: -20, duration: .8, delay: .3 });
-      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .4 });
-      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 40, duration: 1, delay: .5, ease: "power3.out" });
-      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .9 });
-      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
+      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .2 });
+      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 50, duration: 1.2, delay: .3, ease: "power3.out" });
+      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .7 });
+      gsap.from(".svc-detail .hero-stats-bar .stat", { opacity: 0, y: 20, duration: .8, delay: .9, stagger: .1 });
+      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-grid,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
         gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
       });
     }, containerRef);
@@ -48,22 +48,18 @@ const InfluencerService = () => {
       {/* HERO */}
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
-        <div className="hero-grid" /><div className="hero-orb" />
-        <div className="hero-num">02</div>
-        <div className="wrap">
-          <Link to="/services/gtm" className="hero-back">All Services</Link>
+        <div className="hero-center">
           <div className="hero-label">Service 02 of 08</div>
           <h1>KOL & <strong>Influencer</strong></h1>
-          <p className="hero-desc">170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>        </div>
+          <p className="hero-desc">170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
+        </div>
+        <div className="hero-stats-bar">
+          <div className="stat"><div className="stat-val">170+</div><div className="stat-sub">Vetted Korean KOLs</div></div>
+          <div className="stat"><div className="stat-val">4</div><div className="stat-sub">Platforms Covered</div></div>
+          <div className="stat"><div className="stat-val">0%</div><div className="stat-sub">Fake Follower Tolerance</div></div>
+          <div className="stat"><div className="stat-val">Weekly</div><div className="stat-sub">Performance Reports</div></div>
+        </div>
       </section>
-
-      {/* STATS */}
-      <section className="stats"><div className="wrap"><div className="stats-grid">
-        <div className="stat"><div className="stat-val">170+</div><div className="stat-sub">Vetted Korean KOLs</div></div>
-        <div className="stat"><div className="stat-val">4</div><div className="stat-sub">Platforms Covered</div></div>
-        <div className="stat"><div className="stat-val">0%</div><div className="stat-sub">Fake Follower Tolerance</div></div>
-        <div className="stat"><div className="stat-val">Weekly</div><div className="stat-sub">Performance Reports</div></div>
-      </div></div></section>
 
       {/* PROBLEM */}
       <section className="problem"><div className="wrap">
@@ -116,9 +112,10 @@ const InfluencerService = () => {
         <div className="lbl">KOL Tiers</div>
         <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(1.8rem,3vw,2.5rem)", letterSpacing: "-.02em" }}>The right tier for <strong>the right objective.</strong></h2>
         <div className="tier-grid">
-          <div className="tier-card"><div className="tier-badge">S</div><h4>S-Tier</h4><div className="tier-range">50K+ Followers · Top 20 Korean CT</div><p>Market-moving opinion leaders. A single thread can shift retail sentiment overnight.</p><ul className="tier-list"><li>Narrative authority</li><li>High signal-to-noise</li><li>Premium pricing, max impact</li></ul></div>
-          <div className="tier-card"><div className="tier-badge">A</div><h4>A-Tier</h4><div className="tier-range">15K–50K · Niche Authority</div><p>Deep expertise in DeFi, DePIN, AI×Crypto. Highly engaged audiences that trust their analysis.</p><ul className="tier-list"><li>Sector credibility</li><li>High engagement rates</li><li>Strong comment quality</li></ul></div>
-          <div className="tier-card"><div className="tier-badge">B</div><h4>B-Tier</h4><div className="tier-range">5K–15K · Volume & Reach</div><p>Emerging voices with authentic growing audiences. Used for volume and broadening awareness.</p><ul className="tier-list"><li>Cost-efficient reach</li><li>Authentic audiences</li><li>Thread relay campaigns</li></ul></div>
+          <div className="tier-card"><div className="tier-badge tier-s">S</div><h4>S-Tier</h4><div className="tier-range">30K+ Followers · Top Korean CT</div><p>Market-moving opinion leaders. A single thread can shift retail sentiment overnight.</p><ul className="tier-list"><li>Narrative authority</li><li>High signal-to-noise</li><li>Premium pricing, max impact</li></ul></div>
+          <div className="tier-card"><div className="tier-badge tier-a">A</div><h4>A-Tier</h4><div className="tier-range">10K+ · Niche Authority</div><p>Deep expertise in DeFi, DePIN, AI×Crypto. Highly engaged audiences that trust their analysis.</p><ul className="tier-list"><li>Sector credibility</li><li>High engagement rates</li><li>Strong comment quality</li></ul></div>
+          <div className="tier-card"><div className="tier-badge tier-b">B</div><h4>B-Tier</h4><div className="tier-range">5K–10K · Volume & Reach</div><p>Emerging voices with authentic growing audiences. Used for volume and broadening awareness.</p><ul className="tier-list"><li>Cost-efficient reach</li><li>Authentic audiences</li><li>Thread relay campaigns</li></ul></div>
+          <div className="tier-card"><div className="tier-badge tier-c">C</div><h4>C-Tier</h4><div className="tier-range">1K–5K · Micro & Seeding</div><p>Micro-influencers for grassroots seeding. High authenticity, low cost. Used to flood timelines during launch windows.</p><ul className="tier-list"><li>Lowest cost per post</li><li>Organic-feeling exposure</li><li>Launch wave campaigns</li></ul></div>
         </div>
       </div></section>
 

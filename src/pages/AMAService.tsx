@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/ama-spaces.png";
+import heroImg from "@/assets/services/ama-spaces.jpg";
 import capImg1 from "@/assets/platforms/ama-telegram.jpg";
 import capImg2 from "@/assets/platforms/ama-discord.jpg";
 import capImg3 from "@/assets/platforms/ama-spaces.jpg";

@@ -14,7 +14,7 @@ import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
 import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
 import openledgerInterview from '@/assets/campaigns/openledger-interview.jpg';
 import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
-import polygonConnect from '@/assets/campaigns/polygon-connect.png';
+import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import polygonHackathon from '@/assets/campaigns/polygon-hackathon.jpg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
 import storyWorkshop from '@/assets/campaigns/story-workshop.jpg';

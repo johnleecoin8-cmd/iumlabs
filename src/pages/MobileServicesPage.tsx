@@ -25,12 +25,12 @@ import { brand } from "@/config/content";
 
 // Import service poster images from home page
 import gtmImage from "@/assets/services/gtm-ecosystem.png";
-import brandingImage from "@/assets/services/branding-website.png";
+import brandingImage from "@/assets/services/branding-website.jpg";
 import seoAdsImage from "@/assets/services/seo-ads.jpg";
 import eventsImage from "@/assets/services/events.jpg";
-import communityImage from "@/assets/services/community-management.png";
+import communityImage from "@/assets/services/community-management.jpg";
 import kolImage from "@/assets/services/kol-network.jpg";
-import prImage from "@/assets/services/pr-coindesk.png";
+import prImage from "@/assets/services/pr-coindesk.jpg";
 
 const services = [
   {

@@ -28,7 +28,7 @@ import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
 import bybitCampaign from "@/assets/campaigns/bybit-event.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-new.jpg";
-import polygonConnect from "@/assets/campaigns/polygon-connect.png";
+import polygonConnect from "@/assets/campaigns/polygon-connect.jpg";
 import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
 import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
 import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
@@ -38,14 +38,14 @@ import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
 import openledgerHero from "@/assets/campaigns/openledger-hero.jpg";
 import openledgerHeroNew from "@/assets/campaigns/openledger-hero-new.jpg";
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
-import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.png";
+import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.jpg";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets
 const campaignAssetByFile: Record<string, string> = {
   "bnb-event.jpg": bnbCampaign,
   "kucoin-campaign.jpg": kucoinCampaign,
   "ondo-seminar.jpg": ondoCampaign,
-  "polygon-connect.png": polygonConnect,
+  "polygon-connect.jpg": polygonConnect,
   "sahara-ai.jpg": saharaCampaign,
   "story-origin-summit.jpg": storyCampaign,
   "peaq-summit.jpg": peaqCampaign,
@@ -60,7 +60,7 @@ const campaignAssetByFile: Record<string, string> = {
   "openledger-hero.jpg": openledgerHeroOfficial,
   "openledger-hero-new.jpg": openledgerHeroNew,
   "openledger-event.jpg": openledgerEvent,
-  "openledger-hero-official.png": openledgerHeroOfficial
+  "openledger-hero-official.jpg": openledgerHeroOfficial
 };
 const resolveGallerySrcToAsset = (src?: string | null) => {
   if (!src) return null;

@@ -18,7 +18,7 @@ import megaethLogo from '@/assets/logos/megaeth.png';
 import fogoLogo from '@/assets/logos/fogo.png';
 import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
-import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
+import openledgerLogo from '@/assets/campaigns/openledger-hero-official.jpg';
 import synfuturesLogo from '@/assets/logos/synfutures.png';
 import spacecoinLogo from '@/assets/logos/spacecoin.png';
 import aptosLogo from '@/assets/logos/aptos.png';

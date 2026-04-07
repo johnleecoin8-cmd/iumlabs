@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/seo-ads.webp";
+import heroImg from "@/assets/services/seo-naver.jpg";
 import capImg1 from "@/assets/platforms/seo-naver.jpg";
 import capImg2 from "@/assets/platforms/seo-google.jpg";
 import capImg3 from "@/assets/platforms/seo-twitter.jpg";

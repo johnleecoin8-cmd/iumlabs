@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/vasp-compliance.jpg";
+import heroImg from "@/assets/services/compliance-hero.avif";
 import capImg1 from "@/assets/platforms/comp-vasp.jpg";
 import capImg2 from "@/assets/platforms/comp-pipa.jpg";
 import capImg3 from "@/assets/platforms/comp-aml.jpg";

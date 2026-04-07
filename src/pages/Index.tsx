@@ -1,5 +1,4 @@
 import { lazy, Suspense } from "react";
-import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
@@ -26,16 +25,15 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 
-import ctaBgImage from "@/assets/campaigns/event-fisheye.png";
+import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
 import { ArrowRight } from "lucide-react";
 import { projectsData } from "@/data/projectsData";
 
-import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.png";
-import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.png";
-import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.png";
-import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.png";
-import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.png";
-import seoulSkylineImg from "@/assets/campaigns/seoul-skyline.png";
+import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.jpg";
+import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.jpg";
+import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.jpg";
+import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.jpg";
+import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] sm:snap-y sm:snap-proximity sm:overflow-y-auto sm:h-screen scrollbar-hide">

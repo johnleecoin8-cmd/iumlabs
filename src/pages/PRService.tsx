@@ -6,7 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/pr-media.webp";
+import heroImg from "@/assets/services/pr-coindesk.jpg";
 import cdImg from "@/assets/platforms/pr-newsroom.jpg";
 import bmImg from "@/assets/platforms/pr-interview.jpg";
 import tpImg from "@/assets/platforms/pr-media.jpg";

@@ -15,7 +15,7 @@ import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
 import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
-import polygonConnect from "@/assets/campaigns/polygon-connect.png";
+import polygonConnect from "@/assets/campaigns/polygon-connect.jpg";
 import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
 import mantraParty from "@/assets/campaigns/mantra-party.jpg";
 import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
@@ -26,7 +26,7 @@ const campaignAssetByFile: Record<string, string> = {
   "bnb-event.jpg": bnbEvent,
   "kucoin-campaign.jpg": kucoinCampaign,
   "ondo-seminar.jpg": ondoSeminar,
-  "polygon-connect.png": polygonConnect,
+  "polygon-connect.jpg": polygonConnect,
   "sahara-ai.jpg": saharaAi,
   "story-origin-summit.jpg": storyOriginSummit,
   "peaq-summit.jpg": peaqSummit,
