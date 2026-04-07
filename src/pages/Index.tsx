@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
@@ -19,6 +19,7 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
 
+import "@/pages/GTMService.css";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -34,7 +35,27 @@ import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.jpg";
 import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.jpg";
 import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
+// Team photos
+import teamDavid from "@/assets/team/david-ceo.jpg";
+import teamBennet from "@/assets/team/rachel-design.jpg";
+import teamJ from "@/assets/team/j-cmo.jpg";
+import teamKevin from "@/assets/team/kevin-bd-new.jpg";
+import teamLewis from "@/assets/team/lewis-pr.jpg";
+import teamRachel from "@/assets/team/bennet-coo.jpg";
+import teamSuki from "@/assets/team/kevin-bd.jpg";
+import teamHyukjae from "@/assets/team/hyukjae-bdm-new.jpg";
+import teamHelen from "@/assets/team/helen-cm.jpg";
+
 const Index = () => {
+  useEffect(() => {
+    const teamCards = document.querySelectorAll(".gtm-ed .tm-card");
+    const teamObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+    teamCards.forEach(c => teamObs.observe(c));
+    return () => teamObs.disconnect();
+  }, []);
+
   return <div className="min-h-screen bg-[#0A0A0A] sm:snap-y sm:snap-proximity sm:overflow-y-auto sm:h-screen scrollbar-hide">
       <SEOHead title="ium Labs | Korea Web3 Marketing & Crypto Agency" description="Seoul's leading Web3 growth agency since 2022. Full-stack GTM strategy, KOL marketing, community growth, and PR — 22+ projects launched including BNB, Bybit, and Mantra. One partner, full execution." path="/" keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 GTM Korea', 'Korean Crypto Marketing', 'Blockchain Marketing Korea', 'Web3 Agency Seoul']} />
       
@@ -56,6 +77,15 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Selected Work */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
+        <div className="sm:rounded-3xl overflow-hidden">
+          <Suspense fallback={<SectionLoader />}>
+            <SelectedWorkShowcase />
+          </Suspense>
+        </div>
+      </section>
+
       {/* Services */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="services">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
@@ -67,30 +97,7 @@ const Index = () => {
           </AnimatedSection>
         </div>
       </section>
-      
-      {/* Selected Work */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
-        <div className="sm:rounded-3xl overflow-hidden">
-          <Suspense fallback={<SectionLoader />}>
-            <SelectedWorkShowcase />
-          </Suspense>
-        </div>
-      </section>
 
-      {/* Cases */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="cases">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
-            <h2 className="text-xl sm:text-2xl font-bold text-white">Case Studies</h2>
-          </div>
-          <AnimatedSection delay={100}>
-            <Suspense fallback={<SectionLoader />}>
-              <PerformanceSection />
-            </Suspense>
-          </AnimatedSection>
-        </div>
-      </section>
-      
       {/* Insights */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
@@ -108,70 +115,6 @@ const Index = () => {
 
 
       
-      {/* ===== Project Cards Grid ===== */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl sm:text-2xl font-bold text-white">Real Campaign, and Next?</h2>
-              <Link to="/projects" className="text-xs text-white/30 hover:text-white transition-colors">
-                View all <ArrowRight className="w-3 h-3 inline" />
-              </Link>
-            </div>
-          </div>
-          <div className="p-3 sm:p-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/[0.04] rounded-xl overflow-hidden">
-              {[
-                { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
-                { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
-                { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
-                { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
-              ].map((cs) => {
-                const project = projectsData[cs.slug];
-                const cardImage = cs.customImg || project?.bgImage || '';
-                return (
-                  <Link
-                    key={cs.slug}
-                    to={`/projects/${cs.slug}`}
-                    onClick={() => window.scrollTo(0, 0)}
-                    className="group block bg-[#0A0A0A] p-2.5 sm:p-4 transition-all duration-300 hover:bg-white/[0.03]"
-                  >
-                    <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-2.5 sm:mb-3">
-                      <img src={cardImage} alt={project?.name || ''} loading="eager" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    </div>
-                    <div className="space-y-1">
-                      <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">{cs.category}</span>
-                      <h3 className="text-xs sm:text-base font-semibold text-white group-hover:text-white/80 transition-colors line-clamp-1">
-                        {project?.name}
-                      </h3>
-                      <p className="text-white/35 text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
-                        {project?.description?.slice(0, 100)}...
-                      </p>
-                      <div className="flex items-center gap-1.5 mt-1.5 sm:mt-2 text-white/30 group-hover:text-white/60 transition-colors text-[9px] sm:text-xs">
-                        <span className="group-hover:underline underline-offset-4">View case</span>
-                        <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-
-              {/* 6th card — ? CTA */}
-              <div className="block bg-[#0A0A0A] p-2.5 sm:p-4">
-                <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-2.5 sm:mb-3 bg-white/[0.03] border border-dashed border-white/[0.1] flex items-center justify-center">
-                  <span className="text-4xl sm:text-6xl font-bold text-white/10">?</span>
-                </div>
-                <div className="space-y-1">
-                  <span className="text-white/30 text-[8px] sm:text-[10px] uppercase tracking-wider">Next</span>
-                  <h3 className="text-xs sm:text-base font-semibold text-white/50">
-                    Your Project
-                  </h3>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Launch CTA */}
       <section className="sm:px-4 sm:pt-3 snap-start">

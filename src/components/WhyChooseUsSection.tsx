@@ -61,6 +61,7 @@ const fadeUpVariants = {
 const WhyChooseUsSection = () => {
   const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
+    poster: '/images/posters/about-background-poster.jpg',
     forceFirstFrame: true
   });
 
@@ -88,7 +89,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline — each line slides in separately */}
-          <h2 className="font-sans text-[1.75rem] sm:text-5xl md:text-6xl lg:text-[5.5rem] font-bold text-white mb-6 sm:mb-10 tracking-[-0.03em] leading-[1.05] sm:whitespace-nowrap">
+          <h2 className="font-sans text-[clamp(1.5rem,6vw,5.5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.03em] leading-[1.05] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -102,7 +103,7 @@ const WhyChooseUsSection = () => {
 
           {/* Description — blur reveal */}
           <motion.p
-            className="text-white/80 leading-relaxed text-[13px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
+            className="text-white/80 leading-relaxed text-[14px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
             variants={descriptionVariants}>
             Korea doesn't work like any other market. Retail-driven, trust-first, and brutally fast. Most agencies translate your global deck and call it localization. We don't. We rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, build <span className="text-white font-semibold">communities that stay</span>, and run <span className="text-white font-semibold">events that convert</span>. 22+ projects. Zero recycled playbooks.
           </motion.p>

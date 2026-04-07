@@ -13,7 +13,7 @@
 }
 .svc-detail ::selection{background:var(--black);color:var(--bg)}
 .svc-detail a{text-decoration:none;color:inherit}
-.svc-detail .wrap{max-width:1200px;margin:0 auto;padding:0 3rem}
+.svc-detail .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(1.25rem,4vw,3rem)}
 .svc-detail .lbl{font-family:var(--mono);font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--g1);display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem}
 .svc-detail .lbl::after{content:'';flex:1;height:1px;background:var(--g4)}
 

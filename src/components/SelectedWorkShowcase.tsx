@@ -55,18 +55,20 @@ const projects = [
     slug: "kite"
   },
   {
-    name: "FOGO",
-    category: "L1 Chain",
-    result: "Market Entry",
-    media: storyBg,
-    slug: "fogo"
+    name: "Sahara AI",
+    category: "AI Infrastructure",
+    result: "4.2M Impressions",
+    media: "/images/projects/sahara-bg.jpg",
+    video: "/videos/projects/sahara-hero.mp4",
+    slug: "sahara-ai"
   },
   {
-    name: "OpenLedger",
-    category: "Data Infra",
-    result: "Market Entry",
-    media: openledgerHero,
-    slug: "openledger"
+    name: "PEAQ",
+    category: "DePIN",
+    result: "5 S-tier KOLs",
+    media: "/images/projects/peaq-bg.jpg",
+    video: "/videos/projects/peaq-hero.mp4",
+    slug: "peaq"
   }
 ];
 

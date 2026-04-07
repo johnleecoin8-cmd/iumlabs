@@ -161,68 +161,73 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] hover:border-white/[0.12] hover:bg-[#151515] hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)] transition-all duration-500"
+        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden hover:-translate-y-1 transition-all duration-500"
+        style={{ minHeight: 'clamp(380px, 70vh, 520px)' }}
       >
-        {/* Image — large */}
-        <div className="relative aspect-[16/9] overflow-hidden">
-          <img
-            src={service.image}
-            alt={service.title}
-            loading="eager"
-            decoding="sync"
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-black/30 to-transparent" />
+        {/* Full bleed background image */}
+        <img
+          src={service.image}
+          alt={service.title}
+          loading="eager"
+          decoding="sync"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+        />
 
-          {/* Number + Icon floating on image */}
-          <div className="absolute top-4 sm:top-5 left-4 sm:left-6 flex items-center gap-3">
-            <span className="text-[10px] sm:text-xs font-mono font-bold tracking-widest" style={{ color: service.accent }}>
-              [ {service.number} ]
-            </span>
-          </div>
+        {/* Multi-layer overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${service.accent}10, transparent 60%)` }} />
+
+        {/* Top bar */}
+        <div className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex items-center justify-between z-10">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.3em] text-white/60">
+            {service.number}
+          </span>
           <div
-            className="absolute top-4 sm:top-5 right-4 sm:right-6 w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center backdrop-blur-sm border transition-transform duration-300 group-hover:scale-110"
-            style={{ backgroundColor: `${service.accent}15`, borderColor: `${service.accent}30` }}
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 group-hover:scale-110 group-hover:border-opacity-60"
+            style={{ backgroundColor: `${service.accent}15`, borderColor: `${service.accent}25` }}
           >
             <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: service.accent }} />
           </div>
         </div>
 
-        {/* Content */}
-        <div className="p-5 sm:p-6 lg:p-8">
-          <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 group-hover:text-white/90 transition-colors">
+        {/* Content — bottom aligned */}
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 z-10">
+          <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">
             {service.title}
           </h3>
-          <p className="text-sm text-white/40 mb-5 leading-relaxed">
+          <p className="text-sm text-white/50 mb-4 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
 
-          {/* Detail list with dashes */}
-          <ul className="space-y-2 mb-6">
-            {service.details.map((detail, i) => (
-              <li key={i} className="flex items-start gap-3 text-[13px] sm:text-sm text-white/55 group-hover:text-white/65 transition-colors">
-                <span className="text-white/20 mt-0.5 flex-shrink-0">—</span>
-                <span>{detail}</span>
-              </li>
-            ))}
-          </ul>
+          {/* Details — revealed on hover */}
+          <div className="max-h-0 group-hover:max-h-[300px] overflow-hidden transition-all duration-500 ease-out">
+            <ul className="space-y-1.5 mb-5 pt-3 border-t border-white/10">
+              {service.details.map((detail, i) => (
+                <li key={i} className="flex items-start gap-3 text-[12px] sm:text-[13px] text-white/60">
+                  <span className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: service.accent }} />
+                  <span>{detail}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-2">
-            <span className="text-xs sm:text-[13px] font-medium" style={{ color: service.accent }}>
-              Learn more
+          <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+            <span className="text-xs sm:text-sm font-semibold tracking-wide" style={{ color: service.accent }}>
+              Explore
             </span>
             <ArrowRight
-              className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform duration-300"
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
               style={{ color: service.accent }}
             />
           </div>
         </div>
 
-        {/* Bottom accent line on hover */}
-        <div className="absolute bottom-0 left-0 right-0 h-[2px]">
+        {/* Side accent line */}
+        <div className="absolute top-0 left-0 bottom-0 w-[3px]">
           <div
-            className="h-full w-0 group-hover:w-full transition-all duration-600 ease-out"
+            className="w-full h-0 group-hover:h-full transition-all duration-700 ease-out"
             style={{ backgroundColor: service.accent }}
           />
         </div>

@@ -354,7 +354,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     tabIndex: -1,
     style: {
       opacity: isVideoReady ? 1 : 0,
-      transition: 'opacity 80ms ease',
+      transition: 'opacity 300ms ease',
     } as React.CSSProperties,
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
       setIsVideoReady(true);
@@ -378,7 +378,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     loading: 'eager' as const,
     style: {
       opacity: shouldDisableVideo || hasVideoError || !isVideoReady ? 1 : 0,
-      transition: 'opacity 180ms ease',
+      transition: 'opacity 400ms ease',
     } as React.CSSProperties,
   };
 

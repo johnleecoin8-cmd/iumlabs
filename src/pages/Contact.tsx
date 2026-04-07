@@ -66,7 +66,9 @@ const ContactHeroVideo = () => {
     ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/contact-hero.mp4',
-    poster: '/images/contact-hero-poster.jpg',
+    poster: '/images/posters/contact-hero-poster.jpg',
+    preload: window.innerWidth <= 768 ? 'none' : 'metadata',
+    loadTimeout: 5000,
   });
 
   return (

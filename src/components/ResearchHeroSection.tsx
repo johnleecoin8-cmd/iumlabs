@@ -75,7 +75,7 @@ const ResearchHeroSection = () => {
     ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/research-background.mp4',
-    poster: '/images/posters/research-hero.jpg',
+    poster: '/images/posters/research-background-poster.jpg',
     autoPlay: true,
     preload: 'auto',
   });
