@@ -17,7 +17,6 @@ import bnbEvent from '@/assets/campaigns/bnb-event.jpg';
 import seoulMetroBillboard from '@/assets/campaigns/seoul-metro-billboard-new.jpeg';
 import openledgerInterview from '@/assets/campaigns/openledger-interview.jpg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
-import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
 
 interface Service {
   id: string;
@@ -89,7 +88,7 @@ const services: Service[] = [
     mainImage: events,
     description: "서울 프리미엄 베뉴에서 밋업, 컨퍼런스, 프라이빗 디너 기획",
     features: ["Premium Venues", "Conference", "Private Dinners", "Production"],
-    gallery: [storyOriginSummit, peaqSummit],
+    gallery: [storyOriginSummit],
     link: "/services/offline-event",
     color: "from-emerald-500 to-teal-500"
   },

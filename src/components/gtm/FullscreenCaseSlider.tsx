@@ -6,7 +6,6 @@ import { ArrowRight, TrendingUp, ChevronLeft, ChevronRight, Play, Pause } from '
 // Project assets
 import storyLogo from '@/assets/logos/story-protocol.png';
 import mantraLogo from '@/assets/logos/mantra.png';
-import peaqLogo from '@/assets/logos/peaq.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
 import bybitLogo from '@/assets/logos/bybit.png';
@@ -14,7 +13,6 @@ import bybitLogo from '@/assets/logos/bybit.png';
 // Background images
 import storyBg from '@/assets/projects/story-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
-import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
@@ -45,18 +43,6 @@ const cases: CaseStudy[] = [
     result: "+500%",
     resultSub: "Volume Growth",
     category: "RWA"
-  },
-  {
-    name: "peaq",
-    slug: "peaq",
-    logo: peaqLogo,
-    image: peaqBg,
-    video: "/videos/projects/peaq-hero.mp4",
-    challenge: "DePIN 시장 선점 필요",
-    solution: "선제적 미디어 + 파트너십 구축",
-    result: "#1",
-    resultSub: "DePIN in Korea",
-    category: "DePIN L1"
   },
   {
     name: "Sahara AI",

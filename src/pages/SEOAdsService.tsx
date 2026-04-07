@@ -81,8 +81,6 @@ const SEOAdsService = () => {
           { icon: "◎", img: capImg1, title: "Naver SEO", desc: "Blog content strategy, keyword research, and Naver-specific optimization. Naver's algorithm is completely different from Google — different ranking factors, different content formats, different link structures." },
           { icon: "◉", img: capImg2, title: "Google Ads (Crypto Certified)", desc: "We handle Google's crypto advertiser certification process end-to-end. Most agencies can't even get approved. We run search, display, and YouTube campaigns for crypto projects." },
           { icon: "◈", img: capImg3, title: "X Ads", desc: "Promoted posts, follower campaigns, and engagement campaigns targeting Korean crypto Twitter. We A/B test creatives and optimize for cost-per-engagement across Korean CT audiences." },
-          { icon: "◆", img: capImg4, title: "Crypto Ad Networks", desc: "Coinzilla, Bitmedia, and crypto-native ad networks that actually accept crypto campaigns. We know which ones convert for Korean audiences and which are wasted spend." },
-          { icon: "◇", img: capImg5, title: "A/B Testing", desc: "Systematic creative and landing page testing across all channels. We test headlines, visuals, CTAs, and audience segments to continuously improve campaign performance." },
           { icon: "◐", img: capImg6, title: "Performance Analytics", desc: "Weekly reporting with full attribution. Every dollar tracked from impression to click to conversion. Campaign-level and channel-level ROAS with actionable optimization recommendations." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>

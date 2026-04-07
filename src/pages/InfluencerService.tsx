@@ -7,7 +7,6 @@ import ServiceSchema from "@/components/ServiceSchema";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import peaqImg from "@/assets/campaigns/peaq-booth-event.jpg";
 import heroImg from "@/assets/services/kol-avatars.webp";
 import ytImg from "@/assets/platforms/kol-youtube.jpg";
 import ctImg from "@/assets/platforms/kol-twitter.jpg";
@@ -81,10 +80,7 @@ const InfluencerService = () => {
         {[
           { icon: "◎", title: "KOL Sourcing & Vetting", desc: "We identify the right KOLs for your narrative, token stage, and target audience. Every KOL is verified with real engagement data — follower analysis, historical performance, and fraud screening.", img: ytImg },
           { icon: "◉", title: "Campaign Design & Briefing", desc: "Custom briefs per KOL tailored to their style and audience. We align messaging with your GTM narrative. No copy-paste — every placement feels native.", img: ctImg },
-          { icon: "◈", title: "Content Approval & QC", desc: "Every piece of content goes through our approval workflow. Draft → review → revision → approval → publish. No content goes live without our sign-off and yours.", img: tgImg },
-          { icon: "◆", title: "Scheduling & Orchestration", desc: "We sequence KOL drops for maximum narrative velocity. First-mover threads set the frame, mid-campaign placements deepen coverage, closing posts drive urgency.", img: naverImg },
           { icon: "◇", title: "Performance Tracking", desc: "Weekly reports with impressions, engagements, click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", img: perfImg },
-          { icon: "◐", title: "Fraud Filtering", desc: "Engagement authenticity checks before onboarding any KOL. Suspicious growth, bot patterns, geography mismatches — all flagged. Our fraud rate is under 2%.", img: fraudImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
@@ -123,24 +119,7 @@ const InfluencerService = () => {
 
       {/* PLATFORMS */}
 
-      {/* CASE STUDY */}
-      <section className="case"><div className="wrap">
-        <div className="lbl">Case Study</div>
-        <div className="case-split">
-          <div className="case-img"><img src={peaqImg} alt="PEAQ" /></div>
-          <div>
-            <div className="case-meta">PEAQ Network — "PEAQ Loves Robots" Campaign</div>
-            <div className="case-title">7-week multi-touch KOL relay across Korean CT and Naver</div>
-            <div className="case-text">$35K campaign: DePIN narrative education, weekly KOL thread drops, Korean community AMA series, Naver Blog SEO push. Each placement sequenced to build compounding awareness.</div>
-            <div className="case-results">
-              <div className="case-result"><div className="cr-val">40</div><div className="cr-label">KOL Placements</div></div>
-              <div className="case-result"><div className="cr-val">7 Wks</div><div className="cr-label">Campaign Duration</div></div>
-              <div className="case-result"><div className="cr-val">$35K</div><div className="cr-label">Total Budget</div></div>
-              <div className="case-result"><div className="cr-val">4.2M</div><div className="cr-label">Korean CT Impressions</div></div>
-            </div>
-          </div>
-        </div>
-      </div></section>
+      {/* CASE STUDY - removed */}
 
       {/* FAQ */}
       <section className="faq"><div className="wrap">

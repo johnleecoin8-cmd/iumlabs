@@ -457,11 +457,6 @@ export const projectColors = {
     glow: "rgba(59, 130, 246, 0.5)",
     name: "Ondo Finance",
   },
-  "peaq": {
-    primary: "#00CED1",
-    glow: "rgba(0, 206, 209, 0.5)",
-    name: "Peaq",
-  },
   "story-protocol": {
     primary: "#FF6B9D",
     glow: "rgba(255, 107, 157, 0.5)",

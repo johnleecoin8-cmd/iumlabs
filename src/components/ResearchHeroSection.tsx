@@ -11,7 +11,6 @@ import kucoinLogo from "@/assets/logos/kucoin-mono.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
@@ -44,7 +43,6 @@ const clientLogos = [
   { name: "Polygon", logo: polygonLogo, noInvert: false },
   { name: "Ondo Finance", logo: ondoLogo, noInvert: false },
   { name: "Bybit", logo: bybitLogo, noInvert: false },
-  { name: "Peaq", logo: peaqLogo, noInvert: false },
   { name: "Story Protocol", logo: storyProtocolLogo, noInvert: true },
   { name: "Spacecoin", logo: spacecoinLogo, noInvert: true },
   { name: "Tria", logo: triaLogo, noInvert: true },

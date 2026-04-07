@@ -9,7 +9,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gtmHeroImage from "@/assets/services/gtm-strategy.webp";
 import bnbImg from "@/assets/campaigns/bnb-hanok-event.jpg";
 import kucoinImg from "@/assets/campaigns/kucoin-party-event.jpg";
-import peaqImg from "@/assets/campaigns/peaq-booth-event.jpg";
 import mantraImg from "@/assets/campaigns/mantra-party.jpg";
 import bybitImg from "@/assets/campaigns/bybit-event.jpg";
 import saharaImg from "@/assets/campaigns/sahara-ai-event.jpg";
@@ -38,7 +37,7 @@ import "./GTMService.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const clients = ["BNB Chain","Sahara AI","PEAQ Network","Bybit","KuCoin","Polygon","Mantra","Ondo Finance","FOGO","Aptos","Kite","SynFutures"];
+const clients = ["BNB Chain","Sahara AI","Bybit","KuCoin","Polygon","Mantra","Ondo Finance","FOGO","Aptos","Kite","SynFutures"];
 
 const services = [
   { num: "01", title: "GTM Strategy", tagline: "Full-stack Go-To-Market planning for Korean market entry. Competitive landscape, Korea-fit narrative, launch timeline.",
@@ -70,7 +69,6 @@ const services = [
 const workCards = [
   { img: bnbImg, cat: "BNB Chain — Korea Ecosystem Growth", metric: "40 KOLs", title: "Korean KOL activation", desc: "Full-scale Korean market campaign with top-tier KOL placements, Naver SEO push, community building.", tags: ["Korea","KOL","Ecosystem"], slug: "bnb-chain" },
   { img: saharaImg, cat: "Sahara AI — Korea Market Entry", metric: "4.2M", title: "Korean CT impressions, 6 weeks", desc: "AI×Crypto narrative positioning for Korean retail. KOL threads, AMA series, Kakao and Telegram activation.", tags: ["AI","Narrative","CT"], slug: "sahara-ai" },
-  { img: peaqImg, cat: "PEAQ Network — PEAQ Loves Robots", metric: "7 Weeks", title: "5 S-tier KOL multi-touch campaign", desc: "$35K campaign: DePIN narrative education, weekly KOL thread drops, Korean community AMA series.", tags: ["DePIN","KOL","Campaign"], slug: "peaq" },
   { img: kucoinImg, cat: "KuCoin — User Acquisition", metric: "35K", title: "New Korean users acquired", desc: "Community airdrop, KOL campaigns, and Naver SEO driving sustained user acquisition.", tags: ["Exchange","Community","SEO"], slug: "kucoin" },
   { img: mantraImg, cat: "MANTRA — Institutional Entry", metric: "$50M+", title: "Institutional pipeline", desc: "Korean investor dinners, BD introductions, and thought leadership.", tags: ["RWA","Institutional","BD"], slug: "mantra" },
   { img: bybitImg, cat: "Bybit — Brand Activation", metric: "#2", title: "Exchange traffic in Korea", desc: "150+ first-page SEO rankings and 850K monthly organic visitors.", tags: ["SEO","Content","Growth"], slug: "bybit" },

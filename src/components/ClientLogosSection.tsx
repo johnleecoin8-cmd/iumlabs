@@ -6,7 +6,6 @@ import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria-official.png";
@@ -32,7 +31,6 @@ export const allClientLogos: ClientLogo[] = [
   { name: "Polygon", logo: polygonLogo, services: ["kol", "events", "research"] },
   { name: "Ondo Finance", logo: ondoLogo, services: ["kol", "pr", "research"] },
   { name: "Bybit", logo: bybitLogo, services: ["kol", "events", "pr"] },
-  { name: "Peaq", logo: peaqLogo, services: ["pr", "events", "community"] },
   // { name: "Story Protocol", logo: storyProtocolLogo, services: ["kol", "community"] }, // Hidden
   { name: "MegaETH", logo: megaethLogo, noInvert: true, services: ["kol", "community"] },
   { name: "Tria", logo: triaLogo, noInvert: true, services: ["community"] },

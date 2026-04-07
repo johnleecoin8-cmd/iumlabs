@@ -108,7 +108,7 @@ const services = [
     description: "Navigate Korea's crypto regulations with confidence.",
     link: "/services/compliance",
     icon: Compass,
-    image: "/images/posters/compliance-hero.png",
+    image: "/images/posters/compliance-hero.avif",
     accent: "#A855F7",
     details: [
       "VASP registration & licensing guidance",

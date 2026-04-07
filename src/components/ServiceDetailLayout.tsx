@@ -12,7 +12,6 @@ import bnbLogo from "@/assets/logos/bnb.png";
 import kucoinLogo from "@/assets/logos/kucoin.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
-import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
@@ -75,7 +74,6 @@ const clientLogos = [
   { src: kucoinLogo, alt: "KuCoin" },
   { src: polygonLogo, alt: "Polygon" },
   { src: ondoLogo, alt: "Ondo Finance" },
-  { src: peaqLogo, alt: "Peaq" },
   { src: storyLogo, alt: "Story Protocol" },
   { src: megaethLogo, alt: "MegaETH" },
   { src: triaLogo, alt: "Tria" },

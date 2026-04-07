@@ -5,7 +5,6 @@ import { Quote, ChevronLeft, ChevronRight, Star } from 'lucide-react';
 // Client logos
 import storyLogo from '@/assets/logos/story-protocol.png';
 import mantraLogo from '@/assets/logos/mantra.png';
-import peaqLogo from '@/assets/logos/peaq.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
 interface Testimonial {
@@ -26,14 +25,6 @@ const testimonials: Testimonial[] = [
   company: "MANTRA",
   logo: mantraLogo,
   result: "500K+ Community",
-  rating: 5
-}, {
-  quote: "Working with ium Labs gave us a significant first-mover advantage in the Korean market. Their deep understanding of the local crypto ecosystem is unmatched.",
-  author: "David Park",
-  role: "CEO",
-  company: "peaq Network",
-  logo: peaqLogo,
-  result: "#1 DePIN in Korea",
   rating: 5
 }, {
   quote: "ium Labs transformed our Korea strategy completely. Their community management and KOL network helped us build genuine connections with Korean users.",

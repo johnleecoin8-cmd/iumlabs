@@ -8,7 +8,6 @@ import { supabase } from "@/integrations/supabase/client";
 // Import logos as fallback
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
-import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
@@ -24,7 +23,6 @@ import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
 import storyCampaign from "@/assets/campaigns/story-origin-summit.jpg";
 import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
 import mantraCampaign from "@/assets/campaigns/mantra-party.jpg";
-import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
 import bybitCampaign from "@/assets/campaigns/bybit-event.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-new.jpg";
@@ -48,7 +46,6 @@ const campaignAssetByFile: Record<string, string> = {
   "polygon-connect.jpg": polygonConnect,
   "sahara-ai.jpg": saharaCampaign,
   "story-origin-summit.jpg": storyCampaign,
-  "peaq-summit.jpg": peaqCampaign,
   "bybit-event.jpg": bybitCampaign,
   "mantra-party.jpg": mantraCampaign,
   "megaeth-launch.jpg": megaethCampaign,
@@ -113,10 +110,6 @@ const fallbackImages: Record<string, {
   'zkpass': {
     logo: zkpassLogo,
     bgImage: zkpassCampaign
-  },
-  'peaq': {
-    logo: peaqLogo,
-    bgImage: peaqCampaign
   },
   'tria': {
     logo: triaLogo,

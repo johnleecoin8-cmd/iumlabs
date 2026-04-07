@@ -8,7 +8,6 @@ import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
 import synfuturesBillboard from '@/assets/campaigns/synfutures-billboard.jpg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
 import storyWorkshop from '@/assets/campaigns/story-workshop.jpg';
-import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
 import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import polygonHackathon from '@/assets/campaigns/polygon-hackathon.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
@@ -49,7 +48,6 @@ const categories: CampaignCategory[] = [
     labelKo: '서밋 & 컨퍼런스',
     images: [
       { src: storyOriginSummit, title: 'Story Origin Summit' },
-      { src: peaqSummit, title: 'peaq Korea Summit' },
       { src: polygonConnect, title: 'Polygon Connect' },
       { src: polygonHackathon, title: 'Polygon Hackathon' },
       { src: ondoSeminar, title: 'Ondo Seminar' },

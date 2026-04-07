@@ -31,7 +31,6 @@ import { projectsData } from "@/data/projectsData";
 
 import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.jpg";
 import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.jpg";
-import peaqBoothEventImg from "@/assets/campaigns/peaq-booth-event.jpg";
 import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.jpg";
 import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
@@ -125,7 +124,6 @@ const Index = () => {
               {[
                 { slug: "bnb-chain", category: "Infrastructure", customImg: bnbHanokEventImg },
                 { slug: "kucoin", category: "Exchange", customImg: kucoinPartyEventImg },
-                { slug: "peaq", category: "DePIN", customImg: peaqBoothEventImg },
                 { slug: "aptos", category: "Layer 1", customImg: aptosSeoulEventImg },
                 { slug: "sahara-ai", category: "AI", customImg: saharaAiEventImg },
               ].map((cs) => {

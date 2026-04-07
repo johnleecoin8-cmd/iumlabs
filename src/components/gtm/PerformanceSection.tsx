@@ -9,7 +9,6 @@ import { Progress } from '@/components/ui/progress';
 // Project logos
 import mantraLogo from '@/assets/logos/mantra.png';
 import storyLogo from '@/assets/logos/story-protocol.png';
-import peaqLogo from '@/assets/logos/peaq.png';
 import bnbLogo from '@/assets/logos/bnb.png';
 import bybitLogo from '@/assets/logos/bybit.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
@@ -28,20 +27,6 @@ import kiteLogo from '@/assets/logos/kite.png';
 const allProjects = [
   // Row 1 (→ right) - Featured Case Studies
   // Story Protocol hidden
-  {
-    name: 'peaq',
-    slug: 'peaq',
-    logo: peaqLogo,
-    bgImage: '/images/projects/peaq-bg.jpg',
-    bgVideo: '/videos/projects/peaq-hero.mp4',
-    category: 'DePIN',
-    strategy: 'User Acquisition',
-    metric: { value: 25, suffix: 'K+', label: 'Active Wallets' },
-    result: 'Converted community hype into actual on-chain users',
-    color: 'cyan',
-    glowColor: 'rgba(34,211,238,0.5)',
-    progress: 88
-  },
   {
     name: 'MANTRA',
     slug: 'mantra',
@@ -233,10 +218,10 @@ const allProjects = [
 
 // Split into 4 rows, 4 per row, interleaved from allProjects
 const projectRows = [
-  [allProjects[0], allProjects[4], allProjects[8], allProjects[12]],   // Row 1: peaq, KuCoin, FOGO, Aptos
-  [allProjects[1], allProjects[5], allProjects[9], allProjects[13]],   // Row 2: MANTRA, Sahara AI, Polygon, Kite
-  [allProjects[2], allProjects[6], allProjects[10], allProjects[14]],  // Row 3: BNB, OpenLedger, Tria, (wrap) peaq
-  [allProjects[3], allProjects[7], allProjects[11], allProjects[0]],   // Row 4: Bybit, MegaETH, SynFutures, (wrap) MANTRA
+  [allProjects[0], allProjects[4], allProjects[8], allProjects[12]],   // Row 1: MANTRA, KuCoin, FOGO, Aptos
+  [allProjects[1], allProjects[5], allProjects[9], allProjects[13]],   // Row 2: BNB, Sahara AI, Polygon, Kite
+  [allProjects[2], allProjects[6], allProjects[10], allProjects[14]],  // Row 3: Bybit, OpenLedger, Tria, Spacecoin
+  [allProjects[3], allProjects[7], allProjects[11], allProjects[0]],   // Row 4: MegaETH, SynFutures, Spacecoin, (wrap) MANTRA
 ].map(row => row.filter(Boolean));
 
 // Network Stats - Updated to reflect new messaging

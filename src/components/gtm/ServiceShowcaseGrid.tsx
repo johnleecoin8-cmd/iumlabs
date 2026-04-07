@@ -20,7 +20,6 @@ import openledgerInterview from '@/assets/campaigns/openledger-interview.jpg';
 import kucoinCampaign from '@/assets/campaigns/kucoin-campaign.jpg';
 import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
-import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
 import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
 import bybitEvent from '@/assets/campaigns/bybit-event.jpg';
@@ -107,7 +106,7 @@ const services: Service[] = [
     features: ["Premium Venues", "Conference Organization", "Private Dinners", "Full Production"],
     gallery: [
       { src: storyOriginSummit, title: "Story Origin Summit" },
-      { src: peaqSummit, title: "peaq Summit" },
+      { src: polygonConnect, title: "Polygon Connect" },
       { src: polygonConnect, title: "Polygon Connect" },
       { src: ondoSeminar, title: "Ondo Seminar" },
     ],

@@ -13,7 +13,6 @@ import megaethLaunch from '@/assets/campaigns/megaeth-launch.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
 import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
 import openledgerInterview from '@/assets/campaigns/openledger-interview.jpg';
-import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
 import polygonConnect from '@/assets/campaigns/polygon-connect.jpg';
 import polygonHackathon from '@/assets/campaigns/polygon-hackathon.jpg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
@@ -37,7 +36,6 @@ const galleryImages: GalleryImage[] = [
   { src: storyOriginSummit, title: "Story Origin Summit", category: "event", size: "wide" },
   { src: seoulMetroBillboard, title: "Seoul Metro Billboard", category: "media", size: "tall" },
   { src: mantraParty, title: "MANTRA Party", category: "event", size: "normal" },
-  { src: peaqSummit, title: "peaq Summit", category: "event", size: "normal" },
   { src: synfuturesBillboard, title: "SynFutures Billboard", category: "media", size: "tall" },
   { src: bnbEvent, title: "BNB Chain Event", category: "event", size: "normal" },
   { src: polygonConnect, title: "Polygon Connect", category: "event", size: "wide" },

@@ -13,7 +13,6 @@ import kucoinLogo from "@/assets/logos/kucoin-mono.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.png";
 // Story Protocol removed per client visibility restrictions
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
@@ -49,11 +48,6 @@ const clientLogos = [{
   logo: bybitLogo,
   noInvert: false,
   slug: "bybit"
-}, {
-  name: "Peaq",
-  logo: peaqLogo,
-  noInvert: true,
-  slug: "peaq"
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,

@@ -63,7 +63,7 @@ const stats = [
   { value: "44+", label: "Events" },
 ];
 
-const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI", "Peaq"];
+const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI"];
 
 const steps = [
   { number: "01", title: "Discovery", description: "We audit your project, tokenomics, and current Korean presence. We identify gaps, opportunities, and competitive positioning." },

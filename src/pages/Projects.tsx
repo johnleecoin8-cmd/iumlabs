@@ -21,7 +21,6 @@ import { cn } from "@/lib/utils";
 // Import logos as fallbacks
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
-import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria-official.png";
@@ -36,7 +35,6 @@ import spacecoinLogo from "@/assets/logos/spacecoin.png";
 // Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
 import kucoinBg from "@/assets/campaigns/kucoin-oldschool.jpg";
-import peaqBg from "@/assets/campaigns/peaq-summit.jpg";
 import storyBg from "@/assets/campaigns/story-origin-summit.jpg";
 import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaBg from "@/assets/campaigns/tria-launch.jpg";
@@ -66,7 +64,6 @@ const campaignAssetByFile: Record<string, string> = {
   "story-workshop.jpg": storyWorkshop,
   "openledger-interview.jpg": openledgerInterview,
   "openledger-hero-official.jpg": openledgerHeroOfficial,
-  "peaq-summit.jpg": peaqBg,
   "bybit-event.jpg": bybitBg,
   "mantra-party.jpg": mantraBg,
   "megaeth-launch.jpg": megaethBg,
@@ -92,7 +89,6 @@ const fallbackCases = [
   { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "50K+ New Korean Users", category: "Exchange", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
   { name: "Sahara AI", logo: saharaAiLogo, bgImage: saharaAiBg, slug: "sahara-ai", result: "Korean AI x Web3 Launch", category: "AI", description: "AI blockchain platform launch with Korean developer community and enterprise partnerships." },
   { name: "Mantra", logo: mantraLogo, bgImage: mantraBg, slug: "mantra", result: "Korean RWA Expansion", category: "RWA", description: "Real World Assets platform expansion targeting Korean institutional investors." },
-  { name: "Peaq", logo: peaqLogo, bgImage: peaqBg, slug: "peaq", result: "#1 DePIN in Korea", category: "DePIN", description: "Established thought leadership in DePIN space with IoT partnerships and developer community." },
   // { name: "Story Protocol", logo: storyLogo, bgImage: storyBg, slug: "story-protocol", result: "5K+ Korean Creators", category: "IP Protocol", description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists." }, // Hidden
   { name: "MegaETH", logo: megaethLogo, bgImage: megaethBg, slug: "megaeth", result: "+500% Korean Engagement", category: "Layer 2", description: "Pre-launch hype building and community engagement ahead of mainnet launch." },
   { name: "Tria", logo: triaLogo, bgImage: triaBg, slug: "tria", result: "30K+ Korean Wallets", category: "Wallet", description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users." },
@@ -293,7 +289,6 @@ const logoMap: Record<string, string | null> = {
   "kucoin": kucoinLogo,
   "sahara-ai": saharaAiLogo,
   "mantra": mantraLogo,
-  "peaq": peaqLogo,
   "story-protocol": storyLogo,
   "megaeth": megaethLogo,
   "tria": triaLogo,
@@ -309,7 +304,6 @@ const videoMap: Record<string, string | null> = {
   "story-protocol": "/videos/projects/story-hero.mp4",
   "mantra": "/videos/projects/mantra-hero.mp4",
   "bybit": "/videos/projects/bybit-hero.mp4",
-  "peaq": "/videos/projects/peaq-hero.mp4",
   "bnb-chain": "/videos/projects/bnb-hero.mp4",
   "sahara-ai": "/videos/projects/sahara-hero.mp4",
   "kucoin": "/videos/projects/kucoin-hero.mp4",

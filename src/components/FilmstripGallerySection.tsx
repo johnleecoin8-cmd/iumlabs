@@ -7,7 +7,6 @@ import { supabase } from "@/integrations/supabase/client";
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import fogoFest from "@/assets/campaigns/fogo-fest.avif";
-import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-new.jpg";
@@ -29,7 +28,6 @@ const campaignAssetByFile: Record<string, string> = {
   "polygon-connect.jpg": polygonConnect,
   "sahara-ai.jpg": saharaAi,
   "story-origin-summit.jpg": storyOriginSummit,
-  "peaq-summit.jpg": peaqSummit,
   "bybit-event.jpg": bybitEvent,
   "mantra-party.jpg": mantraParty,
   "megaeth-launch.jpg": megaethLaunch,
@@ -53,7 +51,6 @@ const fallbackImages = [
   { src: bnbEvent, alt: "BNB Chain Event", title: "BNB Chain", subtitle: "Korea Launch Event 2024" },
   { src: ondoSeminar, alt: "Ondo Finance", title: "Ondo Finance", subtitle: "Origin Summit 2025" },
   { src: fogoFest, alt: "FOGO Fest", title: "FOGO", subtitle: "Fogo Fest 2025" },
-  { src: peaqSummit, alt: "Peaq Summit", title: "Peaq", subtitle: "KBW 2025" },
   { src: triaLaunch, alt: "Tria Launch", title: "Tria", subtitle: "Korea Media Interview" },
   { src: lbankFestival, alt: "Lbank Festival", title: "Lbank", subtitle: "1001 Festival Seoul" },
 ];

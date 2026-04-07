@@ -76,10 +76,8 @@ const BrandingService = () => {
         <div className="lbl">What We Do</div>
         {[
           { icon: "◎", img: capImg1, title: "VASP Registration", desc: "Full support for Korean Virtual Asset Service Provider registration. Documentation preparation, application submission, and follow-up with regulatory authorities." },
-          { icon: "◉", img: capImg2, title: "PIPA Compliance", desc: "Personal Information Protection Act strategy. Data handling procedures, consent flows, privacy policy drafting, and compliance documentation for Korean law." },
           { icon: "◈", img: capImg3, title: "Exchange Listing Compliance", desc: "Upbit, Bithumb, Coinone listing requirements. Due diligence preparation, compliance documentation, and regulatory review to meet exchange standards." },
           { icon: "◆", img: capImg4, title: "AML/KYC Advisory", desc: "Anti-money laundering and Know Your Customer framework design. Transaction monitoring procedures, suspicious activity reporting, and compliance training." },
-          { icon: "◇", img: capImg5, title: "Regulatory Landscape Analysis", desc: "Comprehensive mapping of Korean crypto regulations as they apply to your specific project type. DeFi, NFT, token, and infrastructure projects all face different requirements." },
           { icon: "◐", img: capImg6, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>

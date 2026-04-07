@@ -3,7 +3,6 @@ import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
-import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
@@ -20,7 +19,6 @@ import kucoinOldschoolImg from "@/assets/campaigns/kucoin-oldschool.jpg";
 import polygonHackathonImg from "@/assets/campaigns/polygon-hackathon.jpg";
 import polygonConnectImg from "@/assets/campaigns/polygon-connect.jpg";
 import ondoSeminarImg from "@/assets/campaigns/ondo-seminar.jpg";
-import peaqSummitImg from "@/assets/campaigns/peaq-summit.jpg";
 import storyWorkshopImg from "@/assets/campaigns/story-workshop.jpg";
 import storyOriginSummitImg from "@/assets/campaigns/story-origin-summit.jpg";
 import megaethLaunchImg from "@/assets/campaigns/megaeth-launch.jpg";
@@ -43,8 +41,6 @@ import bnbBg from "@/assets/projects/bnb-bg.jpg";
 import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
 import polygonBg from "@/assets/projects/polygon-bg.jpg";
 import ondoBg from "@/assets/projects/ondo-bg.jpg";
-import peaqBg from "@/assets/projects/peaq-bg.jpg";
-import peaqFeatureImg from "@/assets/projects/peaq-feature.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
 import megaethBg from "@/assets/projects/megaeth-bg.jpg";
 import triaBg from "@/assets/projects/tria-bg.jpg";
@@ -249,44 +245,6 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["KOLs", "PR"],
     gallery: [
       { src: ondoSeminarImg, title: "RWA Seminar", description: "Educational events for institutional investors at Korea Finance Center" }
-    ],
-    news: []
-  },
-  "peaq": {
-    name: "Peaq",
-    logo: peaqLogo,
-    bgImage: peaqBg,
-    bgVideo: "/videos/projects/peaq-hero.mp4",
-    featureImage: peaqFeatureImg,
-    category: "Robotics",
-    result: "#1 Machine Economy Brand in Korea",
-    glowColor: "#00CED1",
-    description: "Peaq is the Layer 1 blockchain powering the Machine Economy, enabling autonomous machines, vehicles, and robots to provide real-world goods and services. As the backbone of decentralized robotics infrastructure, Peaq connects physical devices to Web3, unlocking new economic models for the future of automation.",
-    challenge: "Despite global momentum in the Machine Economy narrative, Korean awareness of blockchain-powered robotics remained minimal. The market lacked a clear leader, and Peaq needed to establish dominance—not just participate, but define the category itself in Korea.",
-    whatWeDid: "We executed an aggressive, multi-channel strategy to crown Peaq as Korea's undisputed No. 1 Robotics project. Through strategic AMAs with top Korean crypto communities, targeted PR placements in major tech and crypto media, and comprehensive deep research reports, we shifted the narrative from generic infrastructure to tangible robotics leadership.",
-    metrics: [
-      { value: "500+", label: "Offline Participants" },
-      { value: "200K+", label: "Total Impressions" },
-      { value: "13+", label: "PR Media Features" },
-      { value: "500+", label: "Original Content Pieces" }
-    ],
-    strategy: [
-      "Launched Korea's first Machine Economy education campaign",
-      "Partnered with Korean robotics and mobility enterprises",
-      "Built developer community for decentralized robotics applications",
-      "Created Korean-language use case demonstrations and research",
-      "Organized robotics-focused meetups and conference panels"
-    ],
-    results: [
-      { metric: "Korea Market Position", value: "#1 Robotics" },
-      { metric: "Offline Participants", value: "500+" },
-      { metric: "Media Features", value: "13+" },
-      { metric: "Total Impressions", value: "200K+" }
-    ],
-    services: ["AMA", "PR Strategy", "Brand Positioning", "Deep Research"],
-    shortServices: ["AMA", "PR", "Research"],
-    gallery: [
-      { src: peaqSummitImg, title: "Robotics Summit", description: "Korea's first Machine Economy conference at Gangnam" }
     ],
     news: []
   },

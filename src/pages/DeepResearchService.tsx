@@ -80,10 +80,10 @@ const DeepResearchService = () => {
         {[
           { icon: "◎", img: capImg1, title: "Market Mapping", desc: "Complete Korean ecosystem analysis — exchanges, KOLs, media outlets, communities, regulations, and competitive positioning. Understand the full landscape before you enter." },
           { icon: "◉", img: capImg2, title: "On-chain Analytics", desc: "Dune, Nansen, Arkham data combined with Korean-specific signals. Wallet analysis, flow tracking, and protocol usage patterns unique to the Korean market." },
-          { icon: "◈", img: capImg3, title: "Competitor Analysis", desc: "Deep-dive into how competing protocols are positioned in Korea. Their KOL relationships, community size, exchange presence, and narrative strengths and weaknesses." },
+          { icon: "◈", img: capImg3, title: "Competitor Analysis & K-Mindshare", desc: "Deep-dive into how competing protocols are positioned in Korea. K-Mindshare tracking across Korean CT, Telegram, and Naver to measure real-time share-of-voice. KOL relationships, community size, exchange presence, and narrative strengths mapped against your competitors." },
           { icon: "◆", img: capImg4, title: "Investment Thesis", desc: "Investor-grade market entry analysis. Due diligence packages, TAM sizing for Korean market, regulatory landscape, and go-to-market feasibility assessments." },
           { icon: "◇", img: capImg5, title: "Trend Reports", desc: "Monthly and quarterly reports on Korean crypto trends — what's gaining traction, which narratives are resonating, where retail attention is flowing." },
-          { icon: "◐", img: capImg6, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences." },
+          { icon: "◐", img: capImg6, title: "Distribution", desc: "Reports distributed through our Korean media and KOL network. Bilingual publication ensures maximum reach across both Korean and international audiences.", link: "/services/pr" },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
@@ -91,7 +91,7 @@ const DeepResearchService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}{"link" in cap && cap.link && <><br /><Link to={cap.link} style={{ display: "inline-block", marginTop: "1rem", fontFamily: "var(--mono)", fontSize: ".7rem", fontWeight: 500, letterSpacing: ".08em", textTransform: "uppercase" as const, color: "var(--blue)" }} onClick={() => window.scrollTo(0,0)}>View PR & Media Service →</Link></>}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
           </div>
         ))}
       </div></section>
