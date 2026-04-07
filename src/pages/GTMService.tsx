@@ -110,7 +110,7 @@ const GTMService = () => {
         let result = "";
         parts.forEach(part => {
           if (part.startsWith("<")) { result += part; return; }
-          part.split(" ").forEach(w => { if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15">${w}</span> `; });
+          part.split(" ").forEach(w => { if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15;margin-right:.3em">${w}</span>`; });
         });
         mp.innerHTML = result;
         gsap.utils.toArray<HTMLElement>(".gtm-ed .mw").forEach(w => {
