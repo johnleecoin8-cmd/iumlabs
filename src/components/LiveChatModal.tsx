@@ -2,8 +2,8 @@ import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand } from "@/config/content";
 import jPhoto from "@/assets/team/j-cmo.png";
-import davidPhoto from "@/assets/team/david-bd.png";
-import sukiPhoto from "@/assets/team/suki-partner.png";
+import davidPhoto from "@/assets/team/kevin-bd-new.png";
+import sukiPhoto from "@/assets/team/bennet-coo.png";
 
 interface LiveChatModalProps {
   isOpen: boolean;
