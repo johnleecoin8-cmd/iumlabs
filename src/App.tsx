@@ -155,7 +155,7 @@ const AppRoutes = () => {
 
   return (
     <PageTransitionWrapper key={location.pathname}>
-      <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><img src={logo} alt="Loading" className="w-12 h-12 animate-pulse rounded-xl" /></div>}>
+      <Suspense fallback={<div className="min-h-screen bg-[#0A0A0A]" />}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
