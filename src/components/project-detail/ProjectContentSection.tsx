@@ -1,53 +1,7 @@
 import { motion } from "framer-motion";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
-import { useCountUp } from "@/hooks/useCountUp";
 import ProjectStrategy from "./ProjectStrategy";
-
-interface MetricCardProps {
-  metric: ProjectMetric;
-  index: number;
-  glowColor: string;
-}
-
-const MetricCard = ({ metric, index, glowColor }: MetricCardProps) => {
-  const numericMatch = metric.value.match(/^([^\d]*)([\d,.]+)(.*)$/);
-  const prefix = numericMatch ? numericMatch[1] : '';
-  const numericValue = numericMatch ? parseFloat(numericMatch[2].replace(/,/g, '')) : 0;
-  const suffix = numericMatch ? numericMatch[3] : metric.value;
-  
-  const displayValue = useCountUp({
-    end: numericValue,
-    duration: 2000,
-    prefix,
-    suffix,
-    isVisible: true
-  });
-
-  return (
-    <motion.div 
-      className="bg-[#111111] rounded-xl p-4 md:p-5 relative min-h-[100px] flex flex-col justify-between border border-white/[0.06]"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-    >
-      <div>
-        <span className="text-2xl md:text-3xl font-normal text-white block">
-          {numericMatch ? displayValue : metric.value}
-        </span>
-        <span 
-          className="text-xs block mt-1.5"
-          style={{ color: glowColor }}
-        >
-          {metric.label}
-        </span>
-      </div>
-      <span className="text-[10px] text-white/20 mt-2 font-mono">
-        {String(index + 1).padStart(2, '0')}.
-      </span>
-    </motion.div>
-  );
-};
+import ProjectResults from "./ProjectResults";
 
 interface ProjectContentSectionProps {
   project: ProjectData & { client_name?: string; duration?: string; featureImage?: string };
@@ -129,21 +83,6 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             </div>
           </motion.div>
           
-          {/* Metrics Grid */}
-          {displayMetrics && displayMetrics.length > 0 && (
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {displayMetrics.map((metric, idx) => (
-                <MetricCard key={idx} metric={metric} index={idx} glowColor={project.glowColor} />
-              ))}
-            </motion.div>
-          )}
-          
           {/* Scope of Work & What We Did */}
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-2 gap-4"
@@ -172,7 +111,16 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         </div>
       </section>
 
-      {/* ===== SECTION 2: APPROACH ===== */}
+      {/* ===== SECTION 2: RESULTS ===== */}
+      {displayMetrics && displayMetrics.length > 0 && (
+        <ProjectResults
+          metrics={displayMetrics}
+          glowColor={project.glowColor}
+          timeline={project.duration}
+        />
+      )}
+
+      {/* ===== SECTION 3: APPROACH ===== */}
       {project.strategy && project.strategy.length > 0 && (
         <ProjectStrategy strategy={project.strategy} glowColor={project.glowColor} />
       )}

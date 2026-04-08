@@ -57,6 +57,18 @@ const Index = () => {
         </div>
       </section>
       
+      {/* As Featured In */}
+      <section className="sm:px-4 sm:pt-3 snap-start">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] py-8 sm:py-10">
+          <p className="text-center font-mono text-[10px] sm:text-xs text-white/25 uppercase tracking-[0.3em] mb-5">As Featured In</p>
+          <div className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap px-4">
+            {["CoinDesk Korea", "Block Media", "TokenPost", "Naver", "Bloomberg"].map(name => (
+              <span key={name} className="text-white/[0.4] hover:text-white/[0.7] transition-opacity text-sm sm:text-base font-bold tracking-wide cursor-default">{name}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Selected Work */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
         <div className="sm:rounded-3xl overflow-hidden">

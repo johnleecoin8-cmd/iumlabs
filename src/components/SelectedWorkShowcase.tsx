@@ -257,7 +257,7 @@ const DesktopShowcase = () => {
 
       <div className="relative z-10 h-full flex flex-col lg:flex-row">
         <div
-          className="w-full lg:w-2/5 h-auto lg:h-full flex flex-col justify-center px-5 py-6 lg:px-12 lg:py-0 lg:px-16"
+          className="w-full lg:w-2/5 h-full flex flex-col justify-center px-5 py-6 lg:px-12 lg:py-0 lg:px-16"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
@@ -300,8 +300,8 @@ const DesktopShowcase = () => {
             ))}
           </div>
 
-          <Link to="/projects" className="lg:hidden inline-flex items-center gap-2 mt-6 text-sm font-medium text-white/50 border border-white/15 rounded-full px-5 py-2.5 hover:border-white/30 transition-colors">
-            View Our Work <ArrowRight className="w-4 h-4" />
+          <Link to="/projects" className="lg:hidden inline-flex items-center justify-center gap-3 mt-8 text-base font-light text-white/80 border border-white/25 px-8 py-4 hover:border-white/40 hover:text-white transition-all">
+            View Our Work <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
 
