@@ -56,7 +56,7 @@ const InsightsSection = () => {
     }
   };
 
-  const articles = insights.filter(a => !a.title.includes('Kalshi') && !a.title.includes('Deconstruction')).slice(0, 6);
+  const articles = insights.slice(0, 6);
 
   if (articles.length === 0) {
     return (
