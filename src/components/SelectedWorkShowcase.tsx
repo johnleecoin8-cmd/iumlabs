@@ -307,7 +307,7 @@ const DesktopShowcase = () => {
         </div>
 
         {/* Right panel — mission + map, bottom-aligned */}
-        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[55%] z-10 flex-col justify-end p-10 xl:p-14">
+        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[55%] z-10 flex-col justify-center p-10 xl:p-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
