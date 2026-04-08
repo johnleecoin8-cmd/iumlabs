@@ -3,21 +3,14 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-// Image imports
-import storyBg from '@/assets/projects/story-bg.jpg';
-import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
-import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
-import openledgerHero from '@/assets/campaigns/openledger-hero-official.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import bybitBg from '@/assets/projects/bybit-bg.jpg';
-import bnbBg from '@/assets/projects/bnb-bg.jpg';
+// All project media uses video first-frame posters from /images/posters/
 
 const projects = [
   {
     name: "BNB Chain",
     category: "Infrastructure",
     result: "+340% Volume",
-    media: bnbBg,
+    media: "/images/posters/bnb-hero-poster.jpg",
     video: "/videos/projects/bnb-hero.mp4",
     slug: "bnb-chain"
   },
@@ -25,7 +18,7 @@ const projects = [
     name: "Aptos",
     category: "Layer 1",
     result: "Ecosystem Growth",
-    media: "/images/projects/aptos-bg.jpg",
+    media: "/images/posters/aptos-hero-poster.jpg",
     video: "/videos/projects/aptos-hero.mp4",
     slug: "aptos"
   },
@@ -33,7 +26,7 @@ const projects = [
     name: "Sahara AI",
     category: "AI Infrastructure",
     result: "4.2M Impressions",
-    media: "/images/projects/sahara-bg.jpg",
+    media: "/images/posters/sahara-hero-poster.jpg",
     video: "/videos/projects/sahara-hero.mp4",
     slug: "sahara-ai"
   },
@@ -41,7 +34,7 @@ const projects = [
     name: "MANTRA",
     category: "L1 Infrastructure",
     result: "500% Growth",
-    media: mantraBg,
+    media: "/images/posters/mantra-hero-poster.jpg",
     video: "/videos/projects/mantra-hero.mp4",
     slug: "mantra"
   },
@@ -49,7 +42,7 @@ const projects = [
     name: "Bybit",
     category: "Exchange",
     result: "#2 Traffic",
-    media: bybitBg,
+    media: "/images/posters/bybit-hero-poster.jpg",
     video: "/videos/projects/bybit-hero.mp4",
     slug: "bybit"
   },
@@ -57,7 +50,7 @@ const projects = [
     name: "Kite AI",
     category: "AI",
     result: "Market Entry",
-    media: "/images/projects/kite-bg.jpg",
+    media: "/images/posters/kite-hero-poster.jpg",
     video: "/videos/projects/kite-hero.mp4",
     slug: "kite"
   },
@@ -65,7 +58,7 @@ const projects = [
     name: "PEAQ",
     category: "DePIN",
     result: "5 S-tier KOLs",
-    media: "/images/projects/peaq-bg.jpg",
+    media: "/images/posters/peaq-hero-poster.jpg",
     video: "/videos/projects/peaq-hero.mp4",
     slug: "peaq"
   }
