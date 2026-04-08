@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { Expand } from "lucide-react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
-import Lightbox from "@/components/Lightbox";
+import ProjectStrategy from "./ProjectStrategy";
+import ProjectResults from "./ProjectResults";
 
 interface ProjectContentSectionProps {
   project: ProjectData & { client_name?: string; duration?: string; featureImage?: string };
@@ -12,182 +11,122 @@ interface ProjectContentSectionProps {
 
 const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
-  const displayGallery = gallery || project.gallery;
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  };
-
-  const lightboxImages = (displayGallery || []).map(item => ({
-    src: item.src,
-    title: item.title || "",
-    description: item.description || ""
-  }));
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* ===== META BAR ===== */}
-      <section className="border-b border-white/[0.08]">
-        <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-10 md:py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6">
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }}>
-              <span className="font-mono text-[9px] text-white/25 uppercase tracking-[0.2em] block mb-2">Category</span>
-              <span className="text-base font-semibold text-white/90">{project.category}</span>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.05 }}>
-              <span className="font-mono text-[9px] text-white/25 uppercase tracking-[0.2em] block mb-2">Duration</span>
-              <span className="text-base font-semibold text-white/90">{project.duration || "Ongoing"}</span>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}>
-              <span className="font-mono text-[9px] text-white/25 uppercase tracking-[0.2em] block mb-2">Key Result</span>
-              <span className="text-base font-semibold text-white/90">{project.result}</span>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }}>
-              <span className="font-mono text-[9px] text-white/25 uppercase tracking-[0.2em] block mb-2">Services</span>
-              <span className="text-base font-semibold text-white/90">
-                {(project.shortServices || project.services || []).join(" · ")}
-              </span>
-            </motion.div>
-          </div>
+      {/* ===== SECTION 1: PROJECT INFO ===== */}
+      <section className="py-12 md:py-20">
+        <div className="px-4 md:px-8 lg:px-12">
+          {/* Section Header */}
+          <motion.div 
+            className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-10 md:mb-14"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="flex items-baseline gap-4 md:gap-6">
+              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Overview</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block px-3 py-1 border border-white/10 rounded-full">
+              Project Info
+            </span>
+          </motion.div>
+          
+          {/* Project Info - 2 Column Layout */}
+          <motion.div 
+            className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Left: Meta Info Panel */}
+            <div className="bg-[#111111] rounded-xl border border-white/[0.06] overflow-hidden">
+              <div className="p-4 md:p-5 border-b border-white/[0.06]">
+                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Client</span>
+                <span className="text-base md:text-lg font-semibold text-white block">{project.client_name || project.name}</span>
+              </div>
+              <div className="p-4 md:p-5 border-b border-white/[0.06]">
+                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Category</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor || '#00CED1' }} />
+                  <span className="text-base md:text-lg font-semibold text-white">{project.category}</span>
+                </div>
+              </div>
+              <div className="p-4 md:p-5 border-b border-white/[0.06]">
+                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Year</span>
+                <span className="text-base md:text-lg font-semibold text-white block">2025</span>
+              </div>
+              {project.result && (
+                <div className="p-4 md:p-5">
+                  <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Key Result</span>
+                  <span className="text-base md:text-lg font-bold block" style={{ color: project.glowColor || '#00CED1' }}>
+                    {project.result}
+                  </span>
+                </div>
+              )}
+            </div>
+            
+            {/* Right: About & Challenge */}
+            <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
+              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06] flex-1">
+                <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">About the Project</h3>
+                <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.description}</p>
+              </div>
+              {project.challenge && (
+                <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
+                  <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">The Challenge</h3>
+                  <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.challenge}</p>
+                </div>
+              )}
+            </div>
+          </motion.div>
+          
+          {/* Scope of Work & What We Did */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            {project.services && project.services.length > 0 && (
+              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
+                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
+                <ul className="space-y-2">
+                  {project.services.map((service, idx) => (
+                    <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {(project.whatWeDid || project.challenge) && (
+              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
+                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
+                <p className="text-sm md:text-base text-white leading-relaxed">{project.whatWeDid || project.challenge}</p>
+              </div>
+            )}
+          </motion.div>
         </div>
       </section>
 
-      {/* ===== WHAT WE DID (full width) ===== */}
-      <section className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-24">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2
-            className="mb-10 max-w-3xl"
-            style={{
-              fontFamily: "'Cormorant Garamond', Georgia, serif",
-              fontWeight: 300,
-              fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
-              letterSpacing: "-0.02em",
-              lineHeight: 1.3,
-              color: "rgba(255,255,255,0.95)",
-            }}
-            dangerouslySetInnerHTML={{
-              __html: (project.whatWeDid || project.challenge || project.description || "").replace(
-                /\*\*(.*?)\*\*/g,
-                '<strong style="font-weight:600">$1</strong>'
-              ),
-            }}
-          />
-
-          {project.description && (project.whatWeDid || project.challenge) && (
-            <div className="max-w-3xl space-y-5">
-              <p className="text-[15px] leading-[1.8] text-white/50 font-light">{project.description}</p>
-            </div>
-          )}
-        </motion.div>
-
-        {/* Deliverables - list with border lines */}
-        {project.services && project.services.length > 0 && (
-          <div className="mt-14 max-w-3xl">
-            <div className="border-t border-white/[0.06]">
-              {project.services.map((service, idx) => (
-                <motion.div
-                  key={idx}
-                  className="flex items-center gap-4 py-4 border-b border-white/[0.06]"
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
-                >
-                  <span className="w-[6px] h-[6px] rounded-full flex-shrink-0 bg-[#4A7CFF]" />
-                  <span className="text-[15px] text-white/70">{service}</span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
-      </section>
-
-      {/* ===== RESULTS (full width, large) ===== */}
+      {/* ===== SECTION 2: RESULTS ===== */}
       {displayMetrics && displayMetrics.length > 0 && (
-        <section className="border-t border-white/[0.06]">
-          <div className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-24">
-            <div className="border-t border-white/[0.08]">
-              {displayMetrics.map((metric, idx) => (
-                <motion.div
-                  key={idx}
-                  className="flex items-center justify-between py-8 md:py-10 border-b border-white/[0.08]"
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                >
-                  <div>
-                    <span className="text-base md:text-lg font-semibold text-white/85 block">
-                      {metric.label}
-                    </span>
-                    {metric.note && (
-                      <span className="text-xs text-white/30 mt-1 block">{metric.note}</span>
-                    )}
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: "'Cormorant Garamond', Georgia, serif",
-                      fontWeight: 300,
-                      fontSize: "clamp(2.5rem, 6vw, 4.5rem)",
-                      letterSpacing: "-0.03em",
-                      lineHeight: 1,
-                      color: "#4A7CFF",
-                    }}
-                  >
-                    {metric.value}
-                  </span>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ProjectResults
+          metrics={displayMetrics}
+          glowColor={project.glowColor}
+          timeline={project.duration}
+        />
       )}
 
-      {/* ===== GALLERY ===== */}
-      {displayGallery && displayGallery.length > 0 && (
-        <section className="max-w-[1100px] mx-auto px-6 md:px-10 py-16 md:py-24 border-t border-white/[0.06]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {displayGallery.map((item, i) => (
-              <motion.div
-                key={i}
-                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer bg-white/[0.02]"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                onClick={() => openLightbox(i)}
-              >
-                <img
-                  src={item.src}
-                  alt={item.title || ""}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors" />
-                <div className="absolute top-4 right-4 w-9 h-9 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-white/90">
-                  <Expand className="w-4 h-4 text-gray-700" />
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
+      {/* ===== SECTION 3: APPROACH ===== */}
+      {project.strategy && project.strategy.length > 0 && (
+        <ProjectStrategy strategy={project.strategy} glowColor={project.glowColor} />
       )}
 
-      <Lightbox
-        images={lightboxImages}
-        isOpen={lightboxOpen}
-        currentIndex={lightboxIndex}
-        onClose={() => setLightboxOpen(false)}
-        onNavigate={setLightboxIndex}
-      />
+
+      <div className="h-8 md:h-10" />
     </div>
   );
 };
