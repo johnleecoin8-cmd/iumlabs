@@ -15,28 +15,12 @@ import bnbBg from '@/assets/projects/bnb-bg.jpg';
 
 const projects = [
   {
-    name: "MANTRA",
-    category: "L1 Infrastructure",
-    result: "500% Growth",
-    media: mantraBg,
-    video: "/videos/projects/mantra-hero.mp4",
-    slug: "mantra"
-  },
-  {
     name: "BNB Chain",
     category: "Infrastructure",
     result: "+340% Volume",
     media: bnbBg,
     video: "/videos/projects/bnb-hero.mp4",
     slug: "bnb-chain"
-  },
-  {
-    name: "Bybit",
-    category: "Exchange",
-    result: "#2 Traffic",
-    media: bybitBg,
-    video: "/videos/projects/bybit-hero.mp4",
-    slug: "bybit"
   },
   {
     name: "Aptos",
@@ -47,20 +31,36 @@ const projects = [
     slug: "aptos"
   },
   {
-    name: "Kite AI",
-    category: "AI",
-    result: "Market Entry",
-    media: "/images/projects/kite-bg.jpg",
-    video: "/videos/projects/kite-hero.mp4",
-    slug: "kite"
-  },
-  {
     name: "Sahara AI",
     category: "AI Infrastructure",
     result: "4.2M Impressions",
     media: "/images/projects/sahara-bg.jpg",
     video: "/videos/projects/sahara-hero.mp4",
     slug: "sahara-ai"
+  },
+  {
+    name: "MANTRA",
+    category: "L1 Infrastructure",
+    result: "500% Growth",
+    media: mantraBg,
+    video: "/videos/projects/mantra-hero.mp4",
+    slug: "mantra"
+  },
+  {
+    name: "Bybit",
+    category: "Exchange",
+    result: "#2 Traffic",
+    media: bybitBg,
+    video: "/videos/projects/bybit-hero.mp4",
+    slug: "bybit"
+  },
+  {
+    name: "Kite AI",
+    category: "AI",
+    result: "Market Entry",
+    media: "/images/projects/kite-bg.jpg",
+    video: "/videos/projects/kite-hero.mp4",
+    slug: "kite"
   },
   {
     name: "PEAQ",
