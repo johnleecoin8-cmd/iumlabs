@@ -214,7 +214,7 @@ const DesktopShowcase = () => {
   };
 
   return (
-    <section ref={ref} className="relative h-screen bg-black overflow-hidden">
+    <section ref={ref} className="relative bg-black overflow-hidden" style={{ height: '80vh' }}>
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
         const shouldMountVideo = mountedIndices.has(i);
@@ -300,18 +300,6 @@ const DesktopShowcase = () => {
             ))}
           </div>
 
-          {/* Mobile ium intro */}
-          <div className="lg:hidden mt-8 pt-6 border-t border-white/10">
-            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block">Our Mission</span>
-            <h3 className="text-2xl font-bold text-white mb-4">Real results, not just promises.</h3>
-            <p className="text-sm text-white/50 leading-relaxed mb-4">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry.
-            </p>
-            <p className="text-violet-400 text-sm mb-6">Founded by former Binance & KuCoin executives</p>
-            <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-white/60 border border-white/15 rounded-full px-5 py-2.5 hover:border-white/30 transition-colors">
-              View Our Work <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
 
         <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
