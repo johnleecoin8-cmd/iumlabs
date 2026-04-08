@@ -193,12 +193,12 @@ const DesktopShowcase = () => {
   }, [activeIndex, isMobile]);
 
   useEffect(() => {
-    if (isHovering) return;
+    if (isHovering || !isInView) return;
     const interval = setInterval(() => {
       setActiveIndex(prev => (prev + 1) % projects.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [isHovering]);
+  }, [isHovering, isInView]);
 
   const handleVideoReady = (index: number) => {
     setVideoReady(prev => ({ ...prev, [index]: true }));
