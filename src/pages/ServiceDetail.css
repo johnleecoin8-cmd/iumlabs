@@ -177,8 +177,10 @@
   .svc-detail .hero-stats-bar .stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
   .svc-detail .wrap{padding:0 1.5rem}
   .svc-detail .stats-grid,.svc-detail .proc-grid,.svc-detail .plat-grid{grid-template-columns:1fr}
+  .svc-detail .cap-title{font-size:1.2rem}
   .svc-detail .cap-inner{grid-template-columns:1fr}
   .svc-detail .cap-img{max-width:100%}
+  .svc-detail .faq-q h4{font-size:1.15rem}
   .svc-detail .case-results{grid-template-columns:1fr}
   .svc-detail .invite{padding:5rem 1.5rem}
   .svc-detail .ft-ed{padding:2rem 1.5rem}
@@ -192,12 +194,12 @@
   .svc-detail .hero-stats-bar .stat-sub{font-size:.45rem;letter-spacing:.08em}
   .svc-detail .wrap{padding:0 1.25rem}
   .svc-detail .problem-left h2{font-size:clamp(1.3rem,5vw,1.8rem)}
-  .svc-detail .cap-head{padding:1rem 1.25rem}
-  .svc-detail .cap-title{font-size:.85rem}
-  .svc-detail .proc-title{font-size:1.1rem}
-  .svc-detail .proc-text{font-size:.82rem}
-  .svc-detail .faq-q h4{font-size:.88rem}
-  .svc-detail .faq-a p{font-size:.82rem}
+  .svc-detail .cap-head{padding:1.2rem 1.25rem}
+  .svc-detail .cap-title{font-size:1.1rem}
+  .svc-detail .proc-title{font-size:1.15rem}
+  .svc-detail .proc-text{font-size:.88rem}
+  .svc-detail .faq-q h4{font-size:1.1rem}
+  .svc-detail .faq-a p{font-size:.88rem}
   .svc-detail .tier-grid{grid-template-columns:1fr}
   .svc-detail .invite-cta{font-size:.85rem;padding:1rem 2rem}
 }
