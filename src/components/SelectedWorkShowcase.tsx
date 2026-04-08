@@ -290,17 +290,25 @@ const DesktopShowcase = () => {
                     <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
-                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 w-20 lg:w-28 text-left hidden sm:block ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
+                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 text-left ${activeIndex === i ? 'text-white/50' : 'text-white/15'}`}>
                       {project.category}
-                    </span>
-                    <span className={`text-[11px] sm:hidden font-medium transition-all duration-300 ${activeIndex === i ? 'text-violet-400 opacity-100' : 'opacity-0'}`}>
-                      {project.result}
                     </span>
                     <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
                   </div>
                 </Link>
               </motion.div>
             ))}
+          </div>
+
+          {/* Mobile ium intro */}
+          <div className="lg:hidden mt-8 pt-6 border-t border-white/10">
+            <h3 className="text-lg font-bold text-white mb-2">Real results, not just promises.</h3>
+            <p className="text-[13px] text-white/45 leading-relaxed mb-3">
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. Founded by former Binance & KuCoin executives.
+            </p>
+            <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-violet-400">
+              View Our Work <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
 
