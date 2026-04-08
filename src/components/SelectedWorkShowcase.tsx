@@ -3,8 +3,6 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import EastAsiaMap from '@/components/EastAsiaMap';
-
 // Image imports
 import storyBg from '@/assets/projects/story-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
@@ -306,44 +304,25 @@ const DesktopShowcase = () => {
           </Link>
         </div>
 
-        {/* Right panel — mission + map, bottom-aligned */}
-        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[55%] z-10 flex-col justify-center p-10 xl:p-14">
+        {/* Right panel — clean text only */}
+        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[50%] z-10 flex-col justify-end p-10 xl:p-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-lg ml-auto"
           >
-            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block text-right">Our Mission</span>
-            <h3 className="text-xl xl:text-2xl 2xl:text-3xl font-bold mb-3 text-right">
-              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results. No Recycled Playbooks.</span>
+            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">Our Mission</span>
+            <h3 className="text-2xl xl:text-3xl 2xl:text-4xl font-bold mb-4 text-right leading-tight">
+              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results.<br />No Recycled Playbooks.</span>
             </h3>
-            <p className="text-white/40 text-xs xl:text-sm leading-relaxed mb-6 text-right max-w-xl ml-auto">
+            <p className="text-white/40 text-sm xl:text-base leading-relaxed mb-8 text-right">
               With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.
             </p>
-
-            <div className="flex items-end gap-5 justify-end">
-              <div className="w-[220px] xl:w-[260px] flex-shrink-0">
-                <EastAsiaMap />
-              </div>
-              <div className="w-[190px] xl:w-[210px] flex-shrink-0">
-                {[
-                  { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver" },
-                  { name: "Japan", tag: "ACTIVE", desc: "LINE, bitFlyer" },
-                  { name: "Taiwan", tag: "ACTIVE", desc: "KOL, exchange ops" },
-                  { name: "China", tag: "ACTIVE", desc: "BD, investor network" },
-                ].map(c => (
-                  <div key={c.name} className="py-1.5 border-b border-white/[0.06]">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[11px] font-semibold text-white">{c.name}</span>
-                      <span className={`text-[7px] tracking-wider uppercase px-1.5 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/8 text-white/30"}`}>{c.tag}</span>
-                    </div>
-                    <p className="text-[10px] text-white/30">{c.desc}</p>
-                  </div>
-                ))}
-                <Link to="/projects" className="inline-flex items-center gap-1.5 mt-3 text-[11px] text-white/40 hover:text-white transition-colors">
-                  View Our Work <ArrowRight className="w-3 h-3" />
-                </Link>
-              </div>
+            <div className="flex justify-end">
+              <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors border border-white/15 hover:border-white/30 rounded-full px-6 py-2.5">
+                View Our Work <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </motion.div>
         </div>

@@ -5,7 +5,6 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
-import ClientSegments from "@/components/ClientSegments";
 
 // Lazy load heavy components for faster initial page load
 const CasesSection = lazy(() => import("@/components/CasesSection"));
@@ -57,9 +56,6 @@ const Index = () => {
           </AnimatedSection>
         </div>
       </section>
-
-      {/* Client Segments */}
-      <ClientSegments />
 
       {/* Selected Work */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
