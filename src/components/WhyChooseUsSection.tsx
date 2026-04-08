@@ -129,13 +129,14 @@ const WhyChooseUsSection = () => {
         </div>
 
       {/* Stats bar */}
-      <div className="relative z-10 border-t border-white/[0.08] py-8 sm:py-12 md:py-14">
+      <div className="relative z-10 py-8 sm:py-12 md:py-14">
         <div className="container mx-auto px-6 sm:px-10 md:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 md:gap-14">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-10 md:gap-14">
             {[
               { value: "$7B+", label: "Client Valuation" },
               { value: "230+", label: "KOL Network" },
               { value: "22+", label: "Korea Entries" },
+              { value: "$30M+", label: "Revenue Generated" },
               { value: "70+", label: "Events Hosted" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
@@ -160,11 +161,11 @@ const WhyChooseUsSection = () => {
         </div>
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black/60 to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black/60 to-transparent z-10" />
-        <div className="flex items-center gap-8 sm:gap-12 md:gap-16 py-3 sm:py-4 logo-marquee-slow">
+        <div className="flex items-center py-3 sm:py-4 logo-marquee-slow">
           {[...mediaLogos, ...mediaLogos, ...mediaLogos, ...mediaLogos].map((media, index) => (
-            <div key={`${media.name}-${index}`} className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0">
-              <img src={media.logo} alt={media.name} loading="lazy" decoding="async" className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain rounded-full opacity-80" />
-              <span className="text-white/60 text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">{media.name}</span>
+            <div key={`${media.name}-${index}`} className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0">
+              <img src={media.logo} alt={media.name} loading="lazy" decoding="async" className="h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain rounded-full opacity-85" />
+              <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">{media.name}</span>
             </div>
           ))}
         </div>

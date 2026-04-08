@@ -35,23 +35,23 @@ const MediaPartnersSection = () => {
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-base to-transparent z-10" />
 
         {/* Marquee */}
-        <div className="flex items-center gap-8 sm:gap-12 md:gap-16 py-3 sm:py-4 logo-marquee-slow">
+        <div className="flex items-center py-3 sm:py-4 logo-marquee-slow">
           {tripled.map((media, index) => (
             <a
               key={`${media.name}-${index}`}
               href={media.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-shrink-0 hover:opacity-100 transition-opacity"
+              className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0"
             >
               <img
                 src={media.logo}
                 alt={media.name}
                 loading="lazy"
                 decoding="async"
-                className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain rounded-full opacity-80"
+                className="h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain rounded-full opacity-85"
               />
-              <span className="text-white/60 hover:text-white text-xs sm:text-sm md:text-base font-medium whitespace-nowrap transition-colors">
+              <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">
                 {media.name}
               </span>
             </a>

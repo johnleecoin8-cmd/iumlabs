@@ -200,16 +200,16 @@ const ResearchHeroSection = () => {
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div
               key={index}
-              className="flex items-center gap-1 sm:gap-2.5 mx-1 sm:mx-2.5 px-2.5 sm:px-5 py-1 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0"
+              className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0"
             >
               <img
                 src={client.logo}
                 alt={client.name}
                 loading="lazy"
                 decoding="async"
-                className={`h-3.5 sm:h-5 w-auto max-w-[92px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
+                className={`h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
               />
-              <span className="text-white/75 text-[9px] sm:text-caption font-medium whitespace-nowrap">
+              <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>

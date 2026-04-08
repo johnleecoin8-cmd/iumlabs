@@ -47,7 +47,6 @@ const InfluencerService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 02 of 08</div>
           <h1>KOL & <strong>Influencer</strong></h1>
           <p className="hero-desc">170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
         </div>

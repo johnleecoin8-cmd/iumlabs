@@ -47,7 +47,6 @@ const SEOAdsService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 07 of 08</div>
           <h1>SEO & <strong>Paid Ads</strong></h1>
           <p className="hero-desc">Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified for the ones that don't. Be found where Korea searches.</p>
         </div>

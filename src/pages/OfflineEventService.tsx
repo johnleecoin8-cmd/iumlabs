@@ -45,7 +45,6 @@ const OfflineEventService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 05 of 08</div>
           <h1>Offline <strong>Events</strong></h1>
           <p className="hero-desc">From 20-person VIP dinners to 500+ person parties during KBW. Full logistics, venue sourcing, speaker curation, and post-event content. Events in Seoul, run by locals.</p>
         </div>

@@ -46,7 +46,6 @@ const AMAService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 08 of 08</div>
           <h1>AMA <strong>Hosting</strong></h1>
           <p className="hero-desc">Structured AMA sessions with native Korean-speaking hosts. Pre-event promotion, live moderation, post-AMA recap content and analytics. AMAs that move communities, not just timelines.</p>
         </div>

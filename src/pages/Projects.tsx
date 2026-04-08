@@ -143,11 +143,11 @@ const StatItem = ({
   });
   
   return (
-    <div className="text-center group">
-      <div className="text-lg sm:text-xl md:text-3xl font-bold text-white mb-0.5 group-hover:text-primary transition-colors">
+    <div className="text-center cursor-default select-none">
+      <div className="text-2xl sm:text-4xl md:text-5xl font-black text-white mb-1 sm:mb-2 tracking-tighter leading-none">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-caption text-white/50 font-light group-hover:text-white/70 transition-colors">
+      <div className="text-[11px] sm:text-sm md:text-base text-white/50 font-medium">
         {label}
       </div>
     </div>
@@ -711,7 +711,7 @@ const Projects = () => {
       {/* Hero Section - Homepage Style */}
       <main className="bg-background" id="hero">
         <div className="overflow-hidden">
-          <div className="relative min-h-[80vh] flex flex-col justify-between overflow-hidden">
+          <div className="relative min-h-[100vh] sm:min-h-[80vh] flex flex-col justify-between overflow-hidden">
             {/* Background Layer - Video with poster fallback */}
             <div className="absolute inset-0 overflow-hidden">
               {/* Poster image shown while video loads */}
@@ -749,15 +749,14 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6 mt-8 sm:mt-12">
-                  <span className="text-white">Web3 Project </span>
-                  <span className="text-white/90">Case </span>
-                  <span className="text-white">Studies</span>
+                <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white">
+                  <span className="block">Web3 Project</span>
+                  <span className="block">Case Studies</span>
                 </h1>
 
                 {/* Subtext */}
-                <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
-                  Real results from <span className="text-white font-medium">22+ global Web3 projects</span> successfully entering and scaling in the Korean market.
+                <p className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
+                  Real results from <span className="text-white font-medium">22+ global Web3 projects</span><br className="hidden sm:block" /><span className="sm:hidden"> </span>successfully entering and scaling in the Korean market.
                 </p>
 
                 {/* CTA Button */}
@@ -766,14 +765,15 @@ const Projects = () => {
                     href={brand.calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group primary-cta-dark inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full active:scale-[0.98] min-h-[48px]"
+                    className="group inline-flex items-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
                   >
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>Discuss Your Project</span>
                   </a>
-                  <p className="text-xs text-white/50">
+                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-sm text-white/40">
+                    <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                     Free consultation • Want results like these?
-                  </p>
+                  </span>
                 </div>
               </div>
             </div>
@@ -798,9 +798,16 @@ const Projects = () => {
             </div>
 
             {/* Scroll Indicator */}
-            <div className="absolute bottom-8 sm:bottom-12 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3">
-              <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
-              <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
+            <div
+              className="absolute bottom-4 sm:bottom-8 right-3 sm:right-8 z-10 flex items-center gap-2 group cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
+            >
+              <span className="text-white/40 text-[10px] sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
+              <div className="relative flex flex-col items-center">
+                <div className="w-4 h-6 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1">
+                  <div className="w-1 h-1 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
+                </div>
+              </div>
             </div>
           </div>
         </div>

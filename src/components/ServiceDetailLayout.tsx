@@ -215,18 +215,21 @@ const ServiceDetailLayout = ({
           </div>
 
           {/* Client Logo Marquee */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm border-t border-white/10 py-5 overflow-hidden">
-            <div className="flex animate-marquee whitespace-nowrap">
+          <div className="absolute bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+            <div className="flex items-center logo-marquee-slow">
               {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
                 <div
                   key={index}
-                  className="flex-shrink-0 mx-8 flex items-center justify-center"
+                  className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0"
                 >
                   <img
                     src={logo.src}
                     alt={logo.alt}
-                    className="h-6 md:h-8 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+                    className="h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain brightness-0 invert opacity-85"
                   />
+                  <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">
+                    {logo.alt}
+                  </span>
                 </div>
               ))}
             </div>

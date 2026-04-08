@@ -36,7 +36,37 @@ import svcResearchImg from "@/assets/services/deep-research-blog.jpg";
 import svcSeoImg from "@/assets/services/seo-naver.jpg";
 import svcAmaImg from "@/assets/services/ama-spaces.jpg";
 import EastAsiaMap from "@/components/EastAsiaMap";
+// Client logos (same as HeroSection)
+import bnbLogo from "@/assets/logos/bnb.png";
+import kucoinLogo from "@/assets/logos/kucoin-mono.png";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import bybitLogo from "@/assets/logos/bybit.png";
+import spacecoinLogo from "@/assets/logos/spacecoin.png";
+import triaLogo from "@/assets/logos/tria-mono.png";
+import mantraLogo from "@/assets/logos/mantra-mono.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
+import fogoLogo from "@/assets/logos/fogo.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
+import aptosLogo from "@/assets/logos/aptos-round.png";
+import kiteLogo from "@/assets/logos/kite.png";
 import "./GTMService.css";
+
+const clientLogos = [
+  { name: "BNB Chain", logo: bnbLogo, noInvert: false, slug: "bnb-chain" },
+  { name: "KuCoin", logo: kucoinLogo, noInvert: true, slug: "kucoin" },
+  { name: "Polygon", logo: polygonLogo, noInvert: false, slug: "polygon" },
+  { name: "Ondo Finance", logo: ondoLogo, noInvert: false, slug: "ondo-finance" },
+  { name: "Bybit", logo: bybitLogo, noInvert: false, slug: "bybit" },
+  { name: "SpaceCoin", logo: spacecoinLogo, noInvert: true, slug: "spacecoin" },
+  { name: "Tria", logo: triaLogo, noInvert: true, slug: "tria" },
+  { name: "Mantra", logo: mantraLogo, noInvert: true, slug: "mantra" },
+  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true, slug: "sahara-ai" },
+  { name: "FOGO", logo: fogoLogo, noInvert: true, slug: "fogo" },
+  { name: "SynFutures", logo: synfuturesLogo, noInvert: true, slug: "synfutures" },
+  { name: "Aptos", logo: aptosLogo, noInvert: true, slug: "aptos" },
+  { name: "Kite", logo: kiteLogo, noInvert: true, slug: "kite" },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -149,21 +179,30 @@ const GTMService = () => {
           <div className="hero-stat"><div className="hero-stat-big">$7B+</div><div className="hero-stat-sub">Client Valuation</div></div>
           <div className="hero-stat"><div className="hero-stat-big">230+</div><div className="hero-stat-sub">KOL Network</div></div>
           <div className="hero-stat"><div className="hero-stat-big">22+</div><div className="hero-stat-sub">Korea Entries</div></div>
+          <div className="hero-stat"><div className="hero-stat-big">$30M+</div><div className="hero-stat-sub">Revenue Generated</div></div>
           <div className="hero-stat"><div className="hero-stat-big">70+</div><div className="hero-stat-sub">Events Hosted</div></div>
         </div>
       </section>
 
-      {/* HERO → CLIENTS transition */}
-      <div style={{ height: "6vh", background: `linear-gradient(180deg, rgba(10,10,11,.9) 0%, #0A0A0A 100%)` }} />
-
-      {/* CLIENT MARQUEE */}
-      <section className="clients">
-        <div className="cl-track">
-          {[...clients,...clients,...clients].map((c,i) => (
-            <span key={i}>{i > 0 && i % clients.length !== 0 ? <><div className="cl-sep" />{c}</> : c}</span>
+      {/* CLIENT LOGO MARQUEE */}
+      <div className="relative z-[14] py-3 sm:py-6 overflow-hidden" style={{ background: '#0A0A0A' }}>
+        <div className="flex items-center logo-marquee-slow">
+          {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
+            <Link key={index} to={`/projects/${client.slug}`} className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0">
+              <img
+                src={client.logo}
+                alt={client.name}
+                loading="lazy"
+                decoding="async"
+                className={`h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
+              />
+              <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">
+                {client.name}
+              </span>
+            </Link>
           ))}
         </div>
-      </section>
+      </div>
 
       {/* MANIFESTO */}
       <section className="manifesto">
@@ -225,8 +264,6 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TRANSITION: dark → light */}
-      <div className="fade-dark-to-light" />
 
       {/* APPROACH */}
       <section className="approach-ed" id="approach">
@@ -248,49 +285,30 @@ const GTMService = () => {
       </section>
 
       {/* TEAM */}
-      <section className="team-section">
-        <div className="team-label">[ Team of 10+ Operators ]</div>
-        <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
-        <div className="team-cards" style={{ minHeight: 4400 }}>
-          <div className="tm-card" style={{ top: 20, left: "5%", width: 380, transform: "rotate(-2deg)" }}>
-            <div className="tm-info"><h4>David</h4><span>CEO</span></div>
-            <div className="tm-photo"><img src={teamKevin} alt="David" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 180, left: "62%", width: 240 }}>
-            <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
-            <div className="tm-photo"><img src={teamBennet} alt="Bennet" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 580, left: "38%", width: 460, transform: "rotate(1.5deg)" }}>
-            <div className="tm-info"><h4>J</h4><span>CMO</span></div>
-            <div className="tm-photo"><img src={teamJ} alt="J" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 950, left: "72%", width: 190, transform: "rotate(-1deg)" }}>
-            <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
-            <div className="tm-photo"><img src={teamHelen} alt="Kevin" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 1350, left: "2%", width: 320, transform: "rotate(2deg)" }}>
-            <div className="tm-info"><h4>Suki</h4><span>Designer</span></div>
-            <div className="tm-photo"><img src={teamRachel} alt="Suki" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 1650, left: "55%", width: 280, transform: "rotate(-1.5deg)" }}>
-            <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
-            <div className="tm-photo"><img src={teamLewis} alt="Lewis" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 2050, left: "15%", width: 440, transform: "rotate(1deg)" }}>
-            <div className="tm-info"><h4>Rachel</h4><span>Managing Partner</span></div>
-            <div className="tm-photo"><img src={teamSuki} alt="Rachel" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 2600, left: "60%", width: 220, transform: "rotate(-2.5deg)" }}>
-            <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
-            <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" width={400} height={400} /></div>
-          </div>
-          <div className="tm-card" style={{ top: 2900, left: "8%", width: 380, transform: "rotate(1.5deg)" }}>
-            <div className="tm-info"><h4>Helen</h4><span>Community Moderator</span></div>
-            <div className="tm-photo"><img src={teamDavid} alt="Helen" width={400} height={400} /></div>
+      <section className="team-sec">
+        <div className="wrap">
+          <div className="lbl">Team</div>
+          <div className="team-grid">
+            {[
+              { name: "David", role: "CEO", img: teamKevin },
+              { name: "Bennet", role: "COO", img: teamBennet },
+              { name: "J", role: "CMO", img: teamJ },
+              { name: "Kevin", role: "Head of BD", img: teamHelen },
+              { name: "Rachel", role: "Managing Partner", img: teamSuki },
+              { name: "Lewis", role: "PR Manager", img: teamLewis },
+              { name: "Suki", role: "Designer", img: teamRachel },
+              { name: "Hyukjae", role: "BD Manager", img: teamHyukjae },
+              { name: "Helen", role: "Community Moderator", img: teamDavid },
+            ].map((m) => (
+              <div key={m.name} className="team-card">
+                <div className="tc-photo"><img src={m.img} alt={m.name} width={400} height={400} /></div>
+                <h4>{m.name}</h4>
+                <span className="t-role">{m.role}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-      <div style={{ height: "20vh" }} />
 
       {/* REGIONS */}
       <section className="regions-sec">
@@ -323,9 +341,6 @@ const GTMService = () => {
       </section>
 
       {/* QUOTES */}
-      {/* TRANSITION: light → dark */}
-      <div style={{ height: "20vh", background: `linear-gradient(180deg, #0A0A0A 0%, #111 100%)` }} />
-
       <section className="quotes-sec">
         <div className="wrap">
           <div className="lbl" style={{ color: "var(--g2)" }}>Testimonials</div>

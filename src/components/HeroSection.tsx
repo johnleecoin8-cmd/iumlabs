@@ -109,6 +109,12 @@ const defaultStats = [{
   prefix: "",
   suffix: "+"
 }, {
+  id: "revenue_generated",
+  value: 30,
+  label: "Revenue Generated",
+  prefix: "$",
+  suffix: "M+"
+}, {
   id: "events_hosted",
   value: 70,
   label: "Events Hosted",
@@ -137,7 +143,7 @@ const HeroSection = () => {
 
   // Fetch dynamic brand stats
   const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
-  "client_valuation", "kol_network", "projects_launched", "events_hosted"]
+  "client_valuation", "kol_network", "projects_launched", "revenue_generated", "events_hosted"]
   );
 
   // Merge dynamic stats with fallback defaults

@@ -46,7 +46,6 @@ const PRService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 03 of 08</div>
           <h1>PR & <strong>Media</strong></h1>
           <p className="hero-desc">Stories Korean journalists actually want to publish. CoinDesk Korea, Block Media, TokenPost, and mainstream outlets. Direct journalist relationships, not spray-and-pray pitching.</p>
         </div>

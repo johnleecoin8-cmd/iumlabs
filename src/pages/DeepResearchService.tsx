@@ -48,7 +48,6 @@ const DeepResearchService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 06 of 08</div>
           <h1>Deep <strong>Research</strong></h1>
           <p className="hero-desc">On-chain analytics, competitor analysis, market ecosystem mapping. Reports in Korean and English, distributed through our media network. Intelligence you can't get from a dashboard.</p>
         </div>

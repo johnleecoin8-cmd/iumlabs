@@ -46,7 +46,6 @@ const CommunityService = () => {
       <section className="hero">
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
-          <div className="hero-label">Service 04 of 08</div>
           <h1>Community <strong>Management</strong></h1>
           <p className="hero-desc">24/7 native Korean community managers across Telegram, Discord, and KakaoTalk. We don't just moderate — we design community culture that retains and grows.</p>
         </div>
