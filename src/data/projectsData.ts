@@ -52,6 +52,7 @@ import mantraBg from "@/assets/projects/mantra-bg.jpg";
 export interface ProjectMetric {
   value: string;
   label: string;
+  note?: string;
 }
 
 export interface ProjectResult {
