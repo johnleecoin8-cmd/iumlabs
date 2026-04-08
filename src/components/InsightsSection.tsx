@@ -4,6 +4,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
 
 const calculateReadTime = (content: string | null): string => {
   if (!content) return "5 min";
@@ -14,6 +15,7 @@ const calculateReadTime = (content: string | null): string => {
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
 
   const { data: insights = [] } = useQuery({
     queryKey: ['insights-research-posts'],
@@ -23,7 +25,7 @@ const InsightsSection = () => {
         .select('*')
         .eq('is_published', true)
         .order('display_order', { ascending: true })
-        .limit(8);
+        .limit(6);
       if (error) throw error;
       return (data || []).map(post => ({
         id: post.slug,
@@ -54,53 +56,103 @@ const InsightsSection = () => {
     }
   };
 
+  const articles = insights.filter(a => !a.title.includes('Kalshi') && !a.title.includes('Deconstruction')).slice(0, 6);
+
+  if (articles.length === 0) {
+    return (
+      <section className="p-4 sm:p-6 md:p-8">
+        <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
+      </section>
+    );
+  }
+
   return (
     <section className="p-4 sm:p-6 md:p-8">
       {/* Header */}
       <div className="flex items-end justify-between mb-5">
-        <div>
-          <p className="text-xs sm:text-sm text-white/35">Deep research on the Korean crypto market.</p>
-        </div>
-
+        <p className="text-xs sm:text-sm text-white/35">Deep research on the Korean crypto market.</p>
         <Link to="/blog" className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors flex-shrink-0">
           All articles <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
 
-      {/* 4x2 Grid */}
-      {insights.length === 0 ? (
-        <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
-          {insights.filter(a => !a.title.includes('Kalshi') && !a.title.includes('Deconstruction')).slice(0, 6).map((article) => (
-            <Link
+      {/* Filmstrip Gallery */}
+      <div className="flex w-full items-center gap-2 sm:gap-3 lg:gap-4" style={{ height: 'clamp(280px, 50vh, 480px)' }}>
+        {articles.map((article, index) => {
+          const isActive = activeIndex === index;
+          return (
+            <motion.div
               key={article.id}
-              to={`/blog/${article.id}`}
-              className="group block rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05] hover:border-white/[0.1] transition-all"
+              className="relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl h-full"
+              animate={{
+                flex: isActive ? 4 : 1,
+              }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setActiveIndex(index)}
+              onHoverStart={() => setActiveIndex(index)}
             >
-              <div className="aspect-[16/10] overflow-hidden">
+              <Link to={`/blog/${article.id}`} className="block w-full h-full">
                 {article.image ? (
-                  <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 ) : (
-                  <div className="w-full h-full bg-white/[0.03]" />
+                  <div className="absolute inset-0 bg-white/[0.05]" />
                 )}
-              </div>
-              <div className="p-3">
-                <div className="flex items-center gap-2 text-[10px] text-white/30 mb-1.5">
-                  <span className="hidden sm:inline uppercase tracking-wider">{article.category}</span>
-                  <span className="hidden sm:inline">·</span>
-                  <span>{article.date}</span>
-                </div>
-                <h3 className="text-xs sm:text-sm font-semibold text-white/80 group-hover:text-white transition-colors line-clamp-2 leading-snug">
-                  {article.title}
-                </h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
 
-      {/* Subscribe row - hidden on mobile */}
+                {/* Overlay */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
+                    />
+                  )}
+                </AnimatePresence>
+
+                {/* Content — visible when active */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="absolute bottom-0 left-0 right-0 p-4 sm:p-5"
+                    >
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-[9px] sm:text-[10px] text-white/50 uppercase tracking-wider">{article.category}</span>
+                        <span className="text-white/20">·</span>
+                        <span className="text-[9px] sm:text-[10px] text-white/40">{article.date}</span>
+                      </div>
+                      <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-white leading-snug line-clamp-2">
+                        {article.title}
+                      </h3>
+                      <div className="flex items-center gap-1.5 mt-2 text-white/50 text-[10px] sm:text-xs">
+                        <span>{article.readTime} read</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Collapsed state — no overlay, just dark tint */}
+                {!isActive && (
+                  <div className="absolute inset-0 bg-black/30" />
+                )}
+              </Link>
+            </motion.div>
+          );
+        })}
+      </div>
+
+      {/* Subscribe row */}
       <form onSubmit={handleSubscribe} className="hidden sm:flex mt-5 flex-col sm:flex-row items-center gap-3 justify-center">
         <p className="text-[11px] text-white/25 hidden sm:block">Join 500+ Web3 founders</p>
         <div className="flex gap-1.5">
