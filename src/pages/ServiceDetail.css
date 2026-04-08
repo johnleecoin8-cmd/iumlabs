@@ -47,7 +47,7 @@
 .svc-detail .problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem}
 .svc-detail .problem-left h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,3.5vw,3rem);line-height:1.2;letter-spacing:-.02em}
 .svc-detail .problem-left h2 strong{font-weight:600}
-.svc-detail .problem-right{font-size:.95rem;color:var(--ink);line-height:1.8;font-weight:300}
+.svc-detail .problem-right{font-size:1.05rem;color:var(--ink);line-height:1.8;font-weight:300}
 .svc-detail .problem-right p+p{margin-top:1.25rem}
 .svc-detail .highlight-box{margin-top:2rem;padding:1.5rem 2rem;border-left:2px solid var(--blue);background:rgba(74,124,255,.04)}
 .svc-detail .highlight-box p{font-family:var(--kr);font-size:.85rem;color:var(--ink);line-height:1.65;font-weight:400}
@@ -63,14 +63,14 @@
 .svc-detail .cap-block.open .cap-head{padding-bottom:.5rem}
 .svc-detail .cap-icon{font-size:1.1rem;opacity:.6;transition:opacity .3s}
 .svc-detail .cap-block:hover .cap-icon{opacity:1}
-.svc-detail .cap-title{font-family:var(--serif);font-weight:600;font-size:1.4rem;letter-spacing:-.01em;transition:color .3s}
+.svc-detail .cap-title{font-family:var(--serif);font-weight:600;font-size:1.6rem;letter-spacing:-.01em;transition:color .3s}
 .svc-detail .cap-block:hover .cap-title{color:var(--blue)}
 .svc-detail .cap-toggle{font-family:var(--mono);font-size:1rem;color:var(--g3);transition:transform .4s var(--ease),color .3s}
 .svc-detail .cap-block.open .cap-toggle{transform:rotate(45deg);color:var(--blue)}
 .svc-detail .cap-body{max-height:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .4s;opacity:0}
 .svc-detail .cap-block.open .cap-body{max-height:400px;opacity:1}
 .svc-detail .cap-inner{display:grid;grid-template-columns:48px 1fr 280px;gap:1.5rem;padding:.5rem 0 2rem}
-.svc-detail .cap-desc{font-size:.95rem;color:var(--ink);line-height:1.75;font-weight:300}
+.svc-detail .cap-desc{font-size:1.05rem;color:var(--ink);line-height:1.75;font-weight:300}
 .svc-detail .cap-img{border-radius:8px;overflow:hidden;aspect-ratio:16/10}
 .svc-detail .cap-img img{width:100%;height:100%;object-fit:cover;filter:brightness(.85);transition:transform .5s var(--ease)}
 .svc-detail .cap-block:hover .cap-img img{transform:scale(1.03)}
@@ -83,8 +83,8 @@
 .svc-detail .proc-step:hover .proc-dot{background:var(--blue);border-color:var(--blue)}
 .svc-detail .proc-dot{width:8px;height:8px;border:1.5px solid var(--g3);border-radius:50%;background:var(--off);margin-bottom:2rem;transition:all .3s}
 .svc-detail .proc-ph{font-family:var(--mono);font-size:.6rem;color:var(--g2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem}
-.svc-detail .proc-title{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin-bottom:.75rem}
-.svc-detail .proc-text{font-size:.9rem;color:var(--ink);line-height:1.7;font-weight:300}
+.svc-detail .proc-title{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin-bottom:.75rem}
+.svc-detail .proc-text{font-size:1.05rem;color:var(--ink);line-height:1.7;font-weight:300}
 
 /* TIERS / FEATURE CARDS */
 .svc-detail .tiers{padding:8rem 0}
@@ -137,12 +137,12 @@
 .svc-detail .faq-item:last-child{border-bottom:1px solid var(--g4)}
 .svc-detail .faq-q{display:flex;justify-content:space-between;align-items:center;padding:1.75rem 0;cursor:pointer;transition:color .3s}
 .svc-detail .faq-q:hover{color:var(--blue)}
-.svc-detail .faq-q h4{font-family:var(--serif);font-weight:500;font-size:1.25rem}
+.svc-detail .faq-q h4{font-family:var(--serif);font-weight:500;font-size:1.45rem}
 .svc-detail .faq-q .fq-t{font-family:var(--mono);font-size:1rem;color:var(--g3);transition:transform .4s var(--ease)}
 .svc-detail .faq-item.open .fq-t{transform:rotate(45deg);color:var(--blue)}
 .svc-detail .faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
 .svc-detail .faq-item.open .faq-a{max-height:300px}
-.svc-detail .faq-a p{font-size:.95rem;color:var(--ink);line-height:1.75;font-weight:300;padding:0 0 2rem}
+.svc-detail .faq-a p{font-size:1.05rem;color:var(--ink);line-height:1.75;font-weight:300;padding:0 0 2rem}
 
 /* INVITE */
 .svc-detail .invite{padding:8rem 3rem;background:var(--ink);color:#fff}
