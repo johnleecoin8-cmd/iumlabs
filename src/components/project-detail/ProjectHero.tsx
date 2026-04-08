@@ -51,7 +51,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
 
   // Use video first-frame poster if video exists, otherwise bgImage
   const videoPoster = hasVideo
-    ? `/images/posters/${project.bgVideo!.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '.jpg')}`
+    ? `/images/posters/${project.bgVideo!.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '-poster.jpg')}`
     : null;
   const posterImage = videoPoster || project.bgImage || "/images/hero-poster.jpg";
 
