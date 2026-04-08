@@ -749,7 +749,7 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white">
+                <h1 className="font-sans text-[clamp(2.5rem,10vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white">
                   <span className="block">Web3 Project</span>
                   <span className="block">Case Studies</span>
                 </h1>
@@ -760,17 +760,17 @@ const Projects = () => {
                 </p>
 
                 {/* CTA Button */}
-                <div className="flex flex-col items-center gap-3">
+                <div className="flex flex-col items-center gap-2 mt-2 sm:mt-0">
                   <a
                     href={brand.calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3.5 bg-white text-black font-semibold text-[12px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
                   >
-                    <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     <span>Discuss Your Project</span>
                   </a>
-                  <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-sm text-white/40">
+                  <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-white/40">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
                     Free consultation • Want results like these?
                   </span>
