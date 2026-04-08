@@ -300,6 +300,9 @@ const DesktopShowcase = () => {
             ))}
           </div>
 
+          <Link to="/projects" className="lg:hidden inline-flex items-center gap-2 mt-6 text-sm font-medium text-white/50 border border-white/15 rounded-full px-5 py-2.5 hover:border-white/30 transition-colors">
+            View Our Work <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
         <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
