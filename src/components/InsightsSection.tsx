@@ -25,7 +25,7 @@ const InsightsSection = () => {
         .select('*')
         .eq('is_published', true)
         .order('display_order', { ascending: true })
-        .limit(6);
+        .limit(8);
       if (error) throw error;
       return (data || []).map(post => ({
         id: post.slug,
@@ -56,7 +56,8 @@ const InsightsSection = () => {
     }
   };
 
-  const articles = insights.slice(0, 6);
+  const hideSlugs = ['megaeth-the-real-time-paradox-structural-arbitrage-in-the-high-frequency-era', 'monetizing-chaos-how-ethgas-turns-l2-volatility-into-institutional-yield'];
+  const articles = insights.filter(a => !hideSlugs.includes(a.id)).slice(0, 6);
 
   if (articles.length === 0) {
     return (
