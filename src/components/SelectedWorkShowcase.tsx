@@ -318,11 +318,8 @@ const DesktopShowcase = () => {
             <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white mb-6">
               Real results, not just promises.
             </h3>
-            <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry.
-            </p>
-            <p className="text-violet-400 text-xs md:text-base xl:text-lg mb-10">
-              Founded by former Binance & KuCoin executives
+            <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-10">
+              Most agencies hand you a KOL list and a translated pitch deck. ium Labs operates differently. We come from Binance, KuCoin, and Upbit — we've sat on the other side of the listing table. We run 220+ direct KOL relationships, native community ops across Telegram, Discord, KakaoTalk, and Naver, and full event production in Seoul. 'ium,' from the Korean word "to connect," reflects what we built this company to do: be the bridge between global protocols and Korea's concentrated retail market.
             </p>
             <Link
               to="/projects"
