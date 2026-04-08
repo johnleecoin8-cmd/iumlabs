@@ -244,33 +244,35 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
   );
 };
 
+// Fixed filter categories
+const filterCategories = ["All", "Infrastructure", "Exchange", "DePIN", "AI", "L1/L2", "RWA", "DeFi"];
+
+// Map filter labels to matching project category values
+const categoryFilterMap: Record<string, string[]> = {
+  "Infrastructure": ["Infrastructure"],
+  "Exchange": ["Exchange"],
+  "DePIN": ["DePIN"],
+  "AI": ["AI"],
+  "L1/L2": ["Layer 1", "Layer 2", "L1", "L2", "L1/L2"],
+  "RWA": ["RWA"],
+  "DeFi": ["DeFi"],
+};
+
 // Category Filter Component
-const CategoryFilter = ({ 
-  categories, 
-  activeCategory, 
-  onCategoryChange 
-}: { 
-  categories: string[]; 
-  activeCategory: string; 
+const CategoryFilter = ({
+  activeCategory,
+  onCategoryChange
+}: {
+  activeCategory: string;
   onCategoryChange: (category: string) => void;
 }) => {
   return (
-    <div className="flex flex-wrap gap-1.5 sm:gap-2 md:gap-3">
-      <button
-        onClick={() => onCategoryChange("All")}
-        className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
-          activeCategory === "All"
-            ? "bg-foreground text-background border-foreground"
-            : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
-        }`}
-      >
-        All
-      </button>
-      {categories.map((category) => (
+    <div className="flex gap-1.5 sm:gap-2 md:gap-3 overflow-x-auto scrollbar-hide pb-1 -mb-1">
+      {filterCategories.map((category) => (
         <button
           key={category}
           onClick={() => onCategoryChange(category)}
-          className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] ${
+          className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] whitespace-nowrap flex-shrink-0 ${
             activeCategory === category
               ? "bg-foreground text-background border-foreground"
               : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
@@ -689,16 +691,11 @@ const Projects = () => {
     video: videoMap[c.slug] || null,
   }));
 
-  // Get unique categories
-  const categories = useMemo(() => {
-    const cats = [...new Set(cases.map(c => c.category))].filter(Boolean);
-    return cats.sort();
-  }, [cases]);
-
-  // Filter projects by category
+  // Filter projects by category using the mapping
   const filteredCases = useMemo(() => {
     if (activeCategory === "All") return cases;
-    return cases.filter(c => c.category === activeCategory);
+    const matchValues = categoryFilterMap[activeCategory] || [activeCategory];
+    return cases.filter(c => matchValues.includes(c.category));
   }, [cases, activeCategory]);
 
   return (
@@ -824,10 +821,9 @@ const Projects = () => {
           
           {/* Category Filter - integrated below header */}
           <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-border/50">
-            <CategoryFilter 
-              categories={categories} 
-              activeCategory={activeCategory} 
-              onCategoryChange={setActiveCategory} 
+            <CategoryFilter
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
             />
           </div>
           

@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// Contact form section - cleaned up version
-import { 
-  Mail, 
-  MapPin, 
-  Send, 
-  ArrowRight, 
-  Calendar, 
-  MessageCircle, 
+import {
+  Mail,
+  MapPin,
+  Send,
+  ArrowRight,
+  Calendar,
+  MessageCircle,
   Sparkles,
   ChevronRight,
+  ChevronLeft,
   Check
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -19,7 +19,19 @@ import confetti from "canvas-confetti";
 import CalendlyButton from "./CalendlyButton";
 import Logo3D from "@/components/Logo3D";
 
-const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
+const serviceOptions = [
+  "GTM Strategy",
+  "KOL Marketing",
+  "PR & Media",
+  "Community",
+  "Events",
+  "Research",
+  "SEO",
+  "AMA",
+  "Compliance",
+];
+
+const budgetOptions = ["$5K-10K", "$10K-25K", "$25K-50K", "$50K+"];
 
 interface ContactFormSectionProps {
   sectionNumber?: string;
@@ -35,21 +47,28 @@ const ContactFormSection = ({
     name: "",
     email: "",
     company: "",
-    website: "",
     message: "",
-    budget: ""
+    budget: "",
+    services: [] as string[],
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  // Step 1 completion (Name, Email, Budget)
-  const step1Complete = formData.name && formData.email && formData.budget;
-  // Step 2 completion (Project Details)
-  const step2Complete = formData.message;
-  
-  const totalSteps = 2;
-  const overallProgress = currentStep === 1 ? (step1Complete ? 50 : 0) : (step2Complete ? 100 : 50);
+  const totalSteps = 3;
+
+  const step1Complete = formData.services.length > 0;
+  const step2Complete = !!formData.budget;
+  const step3Complete = !!formData.name && !!formData.email;
+
+  const toggleService = (service: string) => {
+    setFormData(prev => ({
+      ...prev,
+      services: prev.services.includes(service)
+        ? prev.services.filter(s => s !== service)
+        : [...prev.services, service],
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,16 +78,17 @@ const ContactFormSection = ({
       const { error } = await supabase.from('contact_submissions').insert({
         name: formData.name,
         email: formData.email,
-        comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`
+        comments: `Company: ${formData.company}\nServices: ${formData.services.join(", ")}\nBudget: ${formData.budget}\n\n${formData.message}`
       });
       if (error) throw error;
-      
+
       supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
           company: formData.company,
           budget: formData.budget,
+          services: formData.services,
           message: formData.message
         }
       }).catch(console.error);
@@ -78,21 +98,21 @@ const ContactFormSection = ({
         spread: 70,
         origin: { y: 0.6 }
       });
-      
+
       setIsSuccess(true);
       toast({
         title: "Message sent!",
         description: "We'll get back to you within 24 hours."
       });
-      
+
       setTimeout(() => {
         setFormData({
           name: "",
           email: "",
           company: "",
-          website: "",
           message: "",
-          budget: ""
+          budget: "",
+          services: [],
         });
         setCurrentStep(1);
         setIsSuccess(false);
@@ -139,7 +159,7 @@ const ContactFormSection = ({
             <div className="hidden lg:block lg:w-1/3 p-8 lg:p-10 border-r border-white/15">
               <div className="sticky top-24">
                 <span className="text-[10px] uppercase tracking-wider text-white/40 mb-4 block">Contact Info</span>
-                
+
                 {/* Office */}
                 <div className="mb-8 pb-8 border-b border-white/15">
                   <div className="flex items-start gap-4">
@@ -187,7 +207,7 @@ const ContactFormSection = ({
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
                 </a>
-                
+
                 {/* 3D Bridge Logo */}
                 <div className="w-full h-28 flex items-center justify-center mt-4">
                   <div className="w-full h-full">
@@ -235,32 +255,173 @@ const ContactFormSection = ({
                         <span className="text-xs sm:text-sm text-white/50">
                           Step {currentStep} of {totalSteps}
                         </span>
-                        <span className="text-xs sm:text-sm text-white/50">{overallProgress}%</span>
                       </div>
-                      
+
                       {/* Progress Steps */}
                       <div className="flex items-center gap-2 mb-2">
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step1Complete ? 'bg-emerald-500' : 'bg-white/20'}`} />
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step2Complete ? 'bg-emerald-500' : 'bg-white/20'}`} />
+                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step1Complete ? 'bg-emerald-500' : currentStep >= 1 ? 'bg-white/20' : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step2Complete ? 'bg-emerald-500' : currentStep >= 2 ? 'bg-white/20' : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step3Complete ? 'bg-emerald-500' : currentStep >= 3 ? 'bg-white/20' : 'bg-white/10'}`} />
                       </div>
-                      
+
                       <div className="flex justify-between text-[10px] sm:text-xs text-white/40">
-                        <span className={step1Complete ? 'text-emerald-400' : ''}>Contact Info</span>
-                        <span className={step2Complete ? 'text-emerald-400' : ''}>Project Details</span>
+                        <span className={step1Complete ? 'text-emerald-400' : ''}>Services</span>
+                        <span className={step2Complete ? 'text-emerald-400' : ''}>Budget</span>
+                        <span className={step3Complete ? 'text-emerald-400' : ''}>Contact Info</span>
                       </div>
                     </div>
 
                     <form onSubmit={handleSubmit}>
                       <AnimatePresence mode="wait">
+                        {/* Step 1: Service Selection */}
                         {currentStep === 1 && (
                           <motion.div
                             key="step1"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.2 }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.25 }}
+                            className="space-y-4 sm:space-y-5"
+                          >
+                            <div className="mb-3">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">What service are you interested in?</h4>
+                              <p className="text-xs sm:text-sm text-white/50">Select all that apply.</p>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2">
+                              {serviceOptions.map(service => (
+                                <button
+                                  key={service}
+                                  type="button"
+                                  onClick={() => toggleService(service)}
+                                  className={`px-4 py-2.5 text-[11px] sm:text-xs rounded-full border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
+                                    formData.services.includes(service)
+                                      ? 'bg-white/20 border-white text-white'
+                                      : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
+                                  }`}
+                                >
+                                  {formData.services.includes(service) && (
+                                    <Check className="w-3 h-3 inline-block mr-1.5 -mt-0.5" />
+                                  )}
+                                  {service}
+                                </button>
+                              ))}
+                            </div>
+
+                            {/* Next Button */}
+                            <button
+                              type="button"
+                              onClick={() => setCurrentStep(2)}
+                              disabled={!step1Complete}
+                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
+                                step1Complete
+                                  ? 'bg-white text-black hover:bg-white/90'
+                                  : 'bg-white/10 text-white/40 cursor-not-allowed'
+                              }`}
+                            >
+                              Next
+                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                            </button>
+                          </motion.div>
+                        )}
+
+                        {/* Step 2: Budget Selection */}
+                        {currentStep === 2 && (
+                          <motion.div
+                            key="step2"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.25 }}
+                            className="space-y-4 sm:space-y-5"
+                          >
+                            <div className="mb-3">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">What's your estimated budget?</h4>
+                              <p className="text-xs sm:text-sm text-white/50">Select your range.</p>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-2">
+                              {budgetOptions.map(option => (
+                                <button
+                                  key={option}
+                                  type="button"
+                                  onClick={() => setFormData({ ...formData, budget: option })}
+                                  className={`px-3 py-3 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
+                                    formData.budget === option
+                                      ? 'bg-white/20 border-white text-white'
+                                      : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
+                                  }`}
+                                >
+                                  {option}
+                                </button>
+                              ))}
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex gap-3">
+                              <button
+                                type="button"
+                                onClick={() => setCurrentStep(1)}
+                                className="px-6 py-3 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[44px] flex items-center gap-1.5"
+                              >
+                                <ChevronLeft className="w-4 h-4" />
+                                Back
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setCurrentStep(3)}
+                                disabled={!step2Complete}
+                                className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
+                                  step2Complete
+                                    ? 'bg-white text-black hover:bg-white/90'
+                                    : 'bg-white/10 text-white/40 cursor-not-allowed'
+                                }`}
+                              >
+                                Next
+                                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                              </button>
+                            </div>
+                          </motion.div>
+                        )}
+
+                        {/* Step 3: Contact Form */}
+                        {currentStep === 3 && (
+                          <motion.div
+                            key="step3"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.25 }}
                             className="space-y-3 sm:space-y-4"
                           >
+                            <div className="mb-3">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about your project</h4>
+                              <p className="text-xs sm:text-sm text-white/50">How can we reach you?</p>
+                            </div>
+
+                            {/* Summary Card */}
+                            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
+                              <div className="flex items-center justify-between mb-3">
+                                <span className="text-xs text-white/50">Your Selections</span>
+                                <button
+                                  type="button"
+                                  onClick={() => setCurrentStep(1)}
+                                  className="text-xs text-white/50 hover:text-white transition-colors"
+                                >
+                                  Edit
+                                </button>
+                              </div>
+                              <div className="grid grid-cols-2 gap-3 text-sm">
+                                <div>
+                                  <span className="text-white/40 text-xs">Services</span>
+                                  <p className="text-white text-xs leading-relaxed">{formData.services.join(", ")}</p>
+                                </div>
+                                <div>
+                                  <span className="text-white/40 text-xs">Budget</span>
+                                  <p className="text-white">{formData.budget}</p>
+                                </div>
+                              </div>
+                            </div>
 
                             {/* Name & Email */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
@@ -288,131 +449,31 @@ const ContactFormSection = ({
                               </div>
                             </div>
 
-                            {/* Company & Website (Optional) */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                              <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                  Company <span className="text-white/30">(Optional)</span>
-                                </label>
-                                <input
-                                  type="text"
-                                  placeholder="Company name"
-                                  value={formData.company}
-                                  onChange={e => setFormData({ ...formData, company: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
-                                />
-                              </div>
-                              <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                  Website <span className="text-white/30">(Optional)</span>
-                                </label>
-                                <input
-                                  type="url"
-                                  placeholder="https://..."
-                                  value={formData.website}
-                                  onChange={e => setFormData({ ...formData, website: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
-                                />
-                              </div>
-                            </div>
-
-                            {/* Budget */}
-                            <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2">Budget *</label>
-                              <div className="grid grid-cols-2 gap-2">
-                                {budgetOptions.map(option => (
-                                  <button
-                                    key={option}
-                                    type="button"
-                                    onClick={() => setFormData({ ...formData, budget: option })}
-                                    className={`px-3 py-2.5 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[44px] font-medium active:scale-[0.97] ${
-                                      formData.budget === option
-                                        ? 'bg-white/20 border-white text-white'
-                                        : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
-                                    }`}
-                                  >
-                                    {option}
-                                  </button>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Next Button */}
-                            <button
-                              type="button"
-                              onClick={() => setCurrentStep(2)}
-                              disabled={!step1Complete}
-                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
-                                step1Complete
-                                  ? 'bg-white text-black hover:bg-white/90'
-                                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-                              }`}
-                            >
-                              Continue
-                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                            </button>
-                          </motion.div>
-                        )}
-
-                        {currentStep === 2 && (
-                          <motion.div
-                            key="step2"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.2 }}
-                            className="space-y-3 sm:space-y-4"
-                          >
-                            <div className="mb-3">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about your project</h4>
-                              <p className="text-xs sm:text-sm text-white/50">What are you looking to achieve?</p>
-                            </div>
-
-                            {/* Summary Card */}
-                            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
-                              <div className="flex items-center justify-between mb-3">
-                                <span className="text-xs text-white/50">Contact Info</span>
-                                <button
-                                  type="button"
-                                  onClick={() => setCurrentStep(1)}
-                                  className="text-xs text-white/50 hover:text-white transition-colors"
-                                >
-                                  Edit
-                                </button>
-                              </div>
-                              <div className="grid grid-cols-2 gap-3 text-sm">
-                                <div>
-                                  <span className="text-white/40 text-xs">Name</span>
-                                  <p className="text-white truncate">{formData.name}</p>
-                                </div>
-                                <div>
-                                  <span className="text-white/40 text-xs">Email</span>
-                                  <p className="text-white truncate">{formData.email}</p>
-                                </div>
-                                <div>
-                                  <span className="text-white/40 text-xs">Budget</span>
-                                  <p className="text-white">{formData.budget}</p>
-                                </div>
-                                {formData.company && (
-                                  <div>
-                                    <span className="text-white/40 text-xs">Company</span>
-                                    <p className="text-white truncate">{formData.company}</p>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-
-                            {/* Project Details */}
+                            {/* Company (Optional) */}
                             <div>
                               <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                Project Details *
+                                Company <span className="text-white/30">(Optional)</span>
+                              </label>
+                              <input
+                                type="text"
+                                placeholder="Company name"
+                                value={formData.company}
+                                onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                              />
+                            </div>
+
+                            {/* Message */}
+                            <div>
+                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
+                                Message <span className="text-white/30">(Optional)</span>
                               </label>
                               <textarea
                                 placeholder="Tell us about your project, goals, and timeline..."
                                 value={formData.message}
                                 onChange={e => setFormData({ ...formData, message: e.target.value })}
-                                rows={5}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[140px]"
+                                rows={4}
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[120px]"
                               />
                             </div>
 
@@ -420,16 +481,17 @@ const ContactFormSection = ({
                             <div className="flex flex-col sm:flex-row gap-3">
                               <button
                                 type="button"
-                                onClick={() => setCurrentStep(1)}
-                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px]"
+                                onClick={() => setCurrentStep(2)}
+                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px] flex items-center gap-1.5"
                               >
+                                <ChevronLeft className="w-4 h-4" />
                                 Back
                               </button>
                               <button
                                 type="submit"
-                                disabled={isSubmitting || !step2Complete}
+                                disabled={isSubmitting || !step3Complete}
                                 className={`flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] ${
-                                  step2Complete
+                                  step3Complete
                                     ? 'bg-white text-black hover:bg-white/90'
                                     : 'bg-white/10 text-white/40 cursor-not-allowed'
                                 }`}
@@ -468,7 +530,7 @@ const ContactFormSection = ({
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
             <span className="font-mono">{getSeoulTime()}</span>
           </div>
-          
+
           {/* Contact buttons - Compact grid */}
           <div className="grid grid-cols-3 gap-2">
             <a

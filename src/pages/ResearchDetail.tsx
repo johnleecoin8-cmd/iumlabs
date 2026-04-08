@@ -168,9 +168,10 @@ const ResearchDetail = () => {
         description={seoDescription}
         path={`/blog/${slug}`}
         image={seoImage}
+        type="article"
         keywords={[post?.category || 'Web3', 'Korea', 'Blog', 'Research'].filter(Boolean)}
         publishedTime={post?.date}
-        author="ium Labs"
+        author={post?.author || "ium Labs"}
       />
       <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />

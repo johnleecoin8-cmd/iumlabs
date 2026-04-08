@@ -154,7 +154,7 @@ const GTMService = () => {
       </section>
 
       {/* HERO → CLIENTS transition */}
-      <div style={{ height: "6vh", background: `linear-gradient(180deg, rgba(10,10,11,.9) 0%, var(--bg) 100%)` }} />
+      <div style={{ height: "6vh", background: `linear-gradient(180deg, rgba(10,10,11,.9) 0%, #0A0A0A 100%)` }} />
 
       {/* CLIENT MARQUEE */}
       <section className="clients">
@@ -324,7 +324,7 @@ const GTMService = () => {
 
       {/* QUOTES */}
       {/* TRANSITION: light → dark */}
-      <div style={{ height: "20vh", background: `linear-gradient(180deg, var(--bg) 0%, var(--black) 100%)` }} />
+      <div style={{ height: "20vh", background: `linear-gradient(180deg, #0A0A0A 0%, #111 100%)` }} />
 
       <section className="quotes-sec">
         <div className="wrap">
