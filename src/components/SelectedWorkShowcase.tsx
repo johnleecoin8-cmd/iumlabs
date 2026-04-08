@@ -80,12 +80,12 @@ const MobileShowcase = () => {
   const isInView = useInView(ref, { once: true, margin: "100px" });
 
   return (
-    <section ref={ref} className="relative bg-black py-12">
+    <section ref={ref} className="relative bg-black py-10">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="px-5 mb-6"
+        className="px-4 mb-5"
       >
         <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">
           Selected Work
@@ -93,20 +93,20 @@ const MobileShowcase = () => {
       </motion.div>
 
       {/* Horizontal scroll container */}
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex gap-4 px-5" style={{ width: `${projects.length * 78 + 20}vw` }}>
+      <div className="overflow-x-auto scrollbar-hide -mx-0">
+        <div className="flex gap-3 px-4" style={{ width: `${projects.length * 72 + 25}vw` }}>
           {projects.map((project, i) => (
             <motion.div
               key={project.slug}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.05 }}
+              transition={{ delay: i * 0.04 }}
               className="flex-shrink-0"
-              style={{ width: '75vw', height: '65vh' }}
+              style={{ width: '70vw', height: '55vh', minHeight: '320px' }}
             >
               <Link
                 to={`/projects/${project.slug}`}
-                className="group relative block w-full h-full rounded-2xl overflow-hidden"
+                className="group relative block w-full h-full rounded-xl overflow-hidden"
               >
                 <img
                   src={project.media}
@@ -115,19 +115,19 @@ const MobileShowcase = () => {
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
 
-                <div className="absolute bottom-0 left-0 right-0 p-5">
-                  <span className="text-[10px] text-white/50 uppercase tracking-wider block mb-1">
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <span className="text-[9px] text-white/45 uppercase tracking-[0.15em] block mb-1">
                     {project.category}
                   </span>
-                  <h3 className="text-2xl font-bold text-white mb-1">
+                  <h3 className="text-xl font-bold text-white mb-0.5 tracking-tight">
                     {project.name}
                   </h3>
-                  <span className="text-sm text-violet-400 font-medium">
+                  <span className="text-[13px] text-violet-400 font-medium">
                     {project.result}
                   </span>
-                  <div className="flex items-center gap-1.5 mt-3 text-white/50 text-xs">
+                  <div className="flex items-center gap-1.5 mt-2.5 text-white/45 text-[11px]">
                     <span>View case</span>
                     <ArrowRight className="w-3 h-3" />
                   </div>
@@ -137,13 +137,13 @@ const MobileShowcase = () => {
           ))}
 
           {/* View All CTA */}
-          <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '60vw', height: '65vh' }}>
+          <div className="flex-shrink-0 flex items-center justify-center" style={{ width: '50vw', height: '55vh', minHeight: '320px' }}>
             <Link
               to="/projects"
-              className="flex flex-col items-center gap-4 text-white/40"
+              className="flex flex-col items-center gap-3 text-white/35"
             >
-              <span className="text-lg font-semibold">View All Work</span>
-              <ArrowRight className="w-6 h-6" />
+              <span className="text-base font-semibold">View All</span>
+              <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
         </div>

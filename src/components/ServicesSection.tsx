@@ -200,9 +200,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             {service.description}
           </p>
 
-          {/* Details — revealed on hover */}
-          <div className="max-h-0 group-hover:max-h-[300px] overflow-hidden transition-all duration-500 ease-out">
-            <ul className="space-y-1.5 mb-5 pt-3 border-t border-white/10">
+          {/* Details — always visible on mobile, hover reveal on desktop */}
+          <div className="max-h-[300px] sm:max-h-0 sm:group-hover:max-h-[300px] overflow-hidden sm:transition-all sm:duration-500 sm:ease-out">
+            <ul className="space-y-1.5 mb-4 sm:mb-5 pt-2 sm:pt-3 border-t border-white/10">
               {service.details.map((detail, i) => (
                 <li key={i} className="flex items-start gap-3 text-[12px] sm:text-[13px] text-white/60">
                   <span className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: service.accent }} />

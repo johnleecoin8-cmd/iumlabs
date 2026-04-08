@@ -139,10 +139,10 @@ const WhyChooseUsSection = () => {
               { value: "70+", label: "Events Hosted" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-2xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
+                <div className="text-xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
                   {stat.value}
                 </div>
-                <div className="text-[11px] sm:text-sm md:text-base text-white/45 font-medium">
+                <div className="text-[10px] sm:text-sm md:text-base text-white/45 font-medium">
                   {stat.label}
                 </div>
               </div>

@@ -139,7 +139,7 @@ const GTMService = () => {
 
       {/* HERO */}
       <section className="hero-ed">
-        <img src={gtmHeroImage} alt="" className="hero-bg" />
+        <img src={gtmHeroImage} alt="" className="hero-bg" width={1200} height={800} />
         <div className="hero-overlay" />
         <div className="hero-center">
           <h1>Seoul Moves Fast.<br /><span className="hero-accent">We Make You Land.</span></h1>
@@ -214,7 +214,7 @@ const GTMService = () => {
           </div>
           {workCards.map(card => (
             <Link key={card.slug} to={`/projects/${card.slug}`} className="work-card" onClick={() => window.scrollTo(0,0)}>
-              <div className="wc-img"><img src={card.img} alt={card.title} loading="lazy" /></div>
+              <div className="wc-img"><img src={card.img} alt={card.title} loading="lazy" width={600} height={400} /></div>
               <div className="wc-cat">{card.cat}</div>
               <div className="wc-metric">{card.metric}</div>
               <h4>{card.title}</h4>
@@ -254,39 +254,39 @@ const GTMService = () => {
         <div className="team-cards" style={{ minHeight: 4400 }}>
           <div className="tm-card" style={{ top: 20, left: "5%", width: 380, transform: "rotate(-2deg)" }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
-            <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
+            <div className="tm-photo"><img src={teamKevin} alt="David" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 180, left: "62%", width: 240 }}>
             <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
-            <div className="tm-photo"><img src={teamBennet} alt="Bennet" /></div>
+            <div className="tm-photo"><img src={teamBennet} alt="Bennet" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 580, left: "38%", width: 460, transform: "rotate(1.5deg)" }}>
             <div className="tm-info"><h4>J</h4><span>CMO</span></div>
-            <div className="tm-photo"><img src={teamJ} alt="J" /></div>
+            <div className="tm-photo"><img src={teamJ} alt="J" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 950, left: "72%", width: 190, transform: "rotate(-1deg)" }}>
             <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
-            <div className="tm-photo"><img src={teamHelen} alt="Kevin" /></div>
+            <div className="tm-photo"><img src={teamHelen} alt="Kevin" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 1350, left: "2%", width: 320, transform: "rotate(2deg)" }}>
             <div className="tm-info"><h4>Suki</h4><span>Designer</span></div>
-            <div className="tm-photo"><img src={teamRachel} alt="Suki" /></div>
+            <div className="tm-photo"><img src={teamRachel} alt="Suki" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 1650, left: "55%", width: 280, transform: "rotate(-1.5deg)" }}>
             <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
-            <div className="tm-photo"><img src={teamLewis} alt="Lewis" /></div>
+            <div className="tm-photo"><img src={teamLewis} alt="Lewis" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 2050, left: "15%", width: 440, transform: "rotate(1deg)" }}>
             <div className="tm-info"><h4>Rachel</h4><span>Managing Partner</span></div>
-            <div className="tm-photo"><img src={teamSuki} alt="Rachel" /></div>
+            <div className="tm-photo"><img src={teamSuki} alt="Rachel" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 2600, left: "60%", width: 220, transform: "rotate(-2.5deg)" }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
-            <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" /></div>
+            <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" width={400} height={400} /></div>
           </div>
           <div className="tm-card" style={{ top: 2900, left: "8%", width: 380, transform: "rotate(1.5deg)" }}>
             <div className="tm-info"><h4>Helen</h4><span>Community Moderator</span></div>
-            <div className="tm-photo"><img src={teamDavid} alt="Helen" /></div>
+            <div className="tm-photo"><img src={teamDavid} alt="Helen" width={400} height={400} /></div>
           </div>
         </div>
       </section>

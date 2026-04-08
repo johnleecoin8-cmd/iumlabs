@@ -96,9 +96,11 @@ const ClientLogosSection = ({
               transition={{ delay: index * 0.05 }}
               className="group flex items-center gap-2 px-4 py-2.5 bg-white/5 rounded-xl border border-white/10 hover:border-white/20 hover:bg-white/10 transition-all duration-300"
             >
-              <img 
-                src={client.logo} 
-                alt={client.name} 
+              <img
+                src={client.logo}
+                alt={client.name}
+                width={20}
+                height={20}
                 loading="lazy"
                 decoding="async"
                 className={`h-5 w-5 object-contain flex-shrink-0 ${

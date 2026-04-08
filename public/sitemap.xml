@@ -256,6 +256,38 @@
     <priority>0.85</priority>
   </url>
 
+  <!-- SEO Landing Pages (new) -->
+  <url>
+    <loc>https://iumlabs.io/korea-community-management</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/korea-pr-media</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/korea-event-marketing</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/korea-seo-naver</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/korea-exchange-listing</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
   <!-- New Pages -->
   <url>
     <loc>https://iumlabs.io/book-a-meeting</loc>

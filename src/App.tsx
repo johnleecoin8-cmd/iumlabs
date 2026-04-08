@@ -34,6 +34,11 @@ const MobileServicesPage = React.lazy(() => import("./pages/MobileServicesPage")
 const CryptoMarketingKorea = React.lazy(() => import("./pages/CryptoMarketingKorea"));
 const KOLMarketingKorea = React.lazy(() => import("./pages/KOLMarketingKorea"));
 const KoreaWeb3Guide = React.lazy(() => import("./pages/KoreaWeb3Guide"));
+const KoreaCommunityManagement = React.lazy(() => import("./pages/seo-landing/KoreaCommunityManagement"));
+const KoreaPRMedia = React.lazy(() => import("./pages/seo-landing/KoreaPRMedia"));
+const KoreaEventMarketing = React.lazy(() => import("./pages/seo-landing/KoreaEventMarketing"));
+const KoreaSEONaver = React.lazy(() => import("./pages/seo-landing/KoreaSEONaver"));
+const KoreaExchangeListing = React.lazy(() => import("./pages/seo-landing/KoreaExchangeListing"));
 const BookMeeting = React.lazy(() => import("./pages/BookMeeting"));
 
 // Lazy-loaded admin pages
@@ -180,6 +185,11 @@ const AppRoutes = () => {
         <Route path="/crypto-marketing-korea" element={<CryptoMarketingKorea />} />
         <Route path="/kol-marketing-korea" element={<KOLMarketingKorea />} />
         <Route path="/korea-web3-guide" element={<KoreaWeb3Guide />} />
+        <Route path="/korea-community-management" element={<KoreaCommunityManagement />} />
+        <Route path="/korea-pr-media" element={<KoreaPRMedia />} />
+        <Route path="/korea-event-marketing" element={<KoreaEventMarketing />} />
+        <Route path="/korea-seo-naver" element={<KoreaSEONaver />} />
+        <Route path="/korea-exchange-listing" element={<KoreaExchangeListing />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />

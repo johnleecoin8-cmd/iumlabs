@@ -45,7 +45,7 @@ const InfluencerService = () => {
 
       {/* HERO */}
       <section className="hero">
-        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
+        <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
           <div className="hero-label">Service 02 of 08</div>
           <h1>KOL & <strong>Influencer</strong></h1>
@@ -85,7 +85,7 @@ const InfluencerService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} width={600} height={400} /></div></div></div>
           </div>
         ))}
       </div></section>

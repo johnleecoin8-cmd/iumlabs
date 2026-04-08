@@ -46,7 +46,7 @@ const DeepResearchService = () => {
 
       {/* HERO */}
       <section className="hero">
-        <img src={heroImg} alt="" className="hero-bg" /><div className="hero-overlay" />
+        <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
           <div className="hero-label">Service 06 of 08</div>
           <h1>Deep <strong>Research</strong></h1>
@@ -89,7 +89,7 @@ const DeepResearchService = () => {
               <div className="cap-title">{cap.title}</div>
               <div className="cap-toggle">+</div>
             </div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}{"link" in cap && cap.link && <><br /><Link to={cap.link} style={{ display: "inline-block", marginTop: "1rem", fontFamily: "var(--mono)", fontSize: ".7rem", fontWeight: 500, letterSpacing: ".08em", textTransform: "uppercase" as const, color: "var(--blue)" }} onClick={() => window.scrollTo(0,0)}>View PR & Media Service →</Link></>}</div><div className="cap-img"><img src={cap.img} alt={cap.title} /></div></div></div>
+            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}{"link" in cap && cap.link && <><br /><Link to={cap.link} style={{ display: "inline-block", marginTop: "1rem", fontFamily: "var(--mono)", fontSize: ".7rem", fontWeight: 500, letterSpacing: ".08em", textTransform: "uppercase" as const, color: "var(--blue)" }} onClick={() => window.scrollTo(0,0)}>View PR & Media Service →</Link></>}</div><div className="cap-img"><img src={cap.img} alt={cap.title} width={600} height={400} /></div></div></div>
           </div>
         ))}
       </div></section>
