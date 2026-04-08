@@ -322,21 +322,21 @@ const DesktopShowcase = () => {
               With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand. The bridge between global protocols and Korean liquidity.
             </p>
 
-            {/* Stats */}
+            {/* Stats — execution-focused, different from About section */}
             <div className="flex items-center gap-6 xl:gap-10 mb-8 justify-end">
               <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">220+</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">KOLs</div>
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">70+</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Events Hosted</div>
               </div>
               <div className="w-px h-10 bg-white/10" />
               <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">22+</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Projects</div>
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">4</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Countries</div>
               </div>
               <div className="w-px h-10 bg-white/10" />
               <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">$7B+</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Client Valuation</div>
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">100%</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Retention Rate</div>
               </div>
             </div>
 
