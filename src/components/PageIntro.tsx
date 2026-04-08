@@ -4,8 +4,9 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 800;
-const MAX_LOAD_TIME = 3000;
+const MIN_DISPLAY_TIME = 1500;
+const MAX_LOAD_TIME = 12000;
+const IMG_POLL_INTERVAL = 300;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
@@ -24,56 +25,83 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 400);
+      }, 500);
     }, remaining);
   }, [startTime, onComplete]);
 
-  // Track real loading progress — wait for ALL page images
   useEffect(() => {
-    let loadedCount = 0;
-    let totalTasks = 1; // fonts only
+    let totalTasks = 0;
+    let completedTasks = 0;
+    let pollTimer: ReturnType<typeof setInterval> | null = null;
 
     const updateReal = () => {
-      realProgress.current = Math.min((loadedCount / totalTasks) * 100, 100);
+      if (totalTasks === 0) return;
+      realProgress.current = Math.min((completedTasks / totalTasks) * 100, 100);
     };
 
-    // 1. Fonts ready
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => {
-        loadedCount++;
-        updateReal();
-      });
-    } else {
-      loadedCount++;
+    const markDone = () => {
+      completedTasks++;
       updateReal();
+    };
+
+    // 1. Fonts
+    totalTasks++;
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(markDone);
+    } else {
+      markDone();
     }
 
-    // 2. Wait for visible images (eager only, skip lazy)
-    const waitForAllImages = () => {
-      const eagerImages = document.querySelectorAll('img[loading="eager"]');
-      const pendingImages = Array.from(eagerImages).filter(img => !(img as HTMLImageElement).complete);
+    // 2. Hero video
+    totalTasks++;
+    const video = document.createElement('video');
+    video.src = '/videos/hero-background.mp4#t=0.001';
+    video.preload = 'auto';
+    video.muted = true;
+    video.playsInline = true;
+    video.load();
+    const onVideoReady = () => { markDone(); };
+    video.addEventListener('canplaythrough', onVideoReady, { once: true });
+    video.addEventListener('loadeddata', onVideoReady, { once: true });
+    // Video timeout — don't block forever
+    const videoTimeout = setTimeout(() => {
+      if (completedTasks < totalTasks) markDone();
+    }, 5000);
 
-      if (pendingImages.length === 0) {
-        realProgress.current = 100;
-        return;
-      }
+    // 3. Poll for ALL images on the page (including lazy-loaded ones from Suspense)
+    const trackedImages = new Set<HTMLImageElement>();
 
-      totalTasks = 1 + pendingImages.length;
-      let imgLoadedCount = 0;
+    const pollImages = () => {
+      const allImages = document.querySelectorAll('img[src]');
+      allImages.forEach((el) => {
+        const img = el as HTMLImageElement;
+        if (trackedImages.has(img)) return;
+        if (!img.src || img.src.startsWith('data:')) return;
 
-      pendingImages.forEach((img) => {
-        const onDone = () => {
-          imgLoadedCount++;
-          loadedCount++;
-          updateReal();
-        };
-        img.addEventListener('load', onDone, { once: true });
-        img.addEventListener('error', onDone, { once: true });
+        trackedImages.add(img);
+        totalTasks++;
+
+        if (img.complete && img.naturalWidth > 0) {
+          markDone();
+        } else {
+          img.addEventListener('load', markDone, { once: true });
+          img.addEventListener('error', markDone, { once: true });
+        }
+        updateReal();
       });
     };
 
-    // Wait a tick for React to render images to DOM
-    const imgTimer = setTimeout(waitForAllImages, 500);
+    // Start polling after React renders
+    const startPoll = setTimeout(() => {
+      pollImages();
+      pollTimer = setInterval(pollImages, IMG_POLL_INTERVAL);
+    }, 200);
+
+    // Stop polling after a while (all lazy components should be loaded by then)
+    const stopPoll = setTimeout(() => {
+      if (pollTimer) clearInterval(pollTimer);
+      pollImages(); // one final check
+    }, 6000);
 
     // Max timeout fallback
     const maxTimer = setTimeout(() => {
@@ -81,12 +109,19 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, MAX_LOAD_TIME);
 
     return () => {
+      video.removeEventListener('canplaythrough', onVideoReady);
+      video.removeEventListener('loadeddata', onVideoReady);
+      video.pause();
+      video.src = '';
+      clearTimeout(videoTimeout);
+      clearTimeout(startPoll);
+      clearTimeout(stopPoll);
       clearTimeout(maxTimer);
-      clearTimeout(imgTimer);
+      if (pollTimer) clearInterval(pollTimer);
     };
   }, []);
 
-  // Smooth display counter that chases real progress
+  // Smooth display counter
   useEffect(() => {
     const animate = () => {
       const target = realProgress.current;
@@ -94,13 +129,12 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
       if (current < target) {
         const gap = target - current;
-        const speed = gap > 20 ? 2.5 : gap > 5 ? 1.2 : 0.5;
+        const speed = gap > 30 ? 3 : gap > 10 ? 1.5 : 0.6;
         displayProgress.current = Math.min(current + speed, 100);
         setProgress(Math.floor(displayProgress.current));
       } else if (target < 100) {
-        // Slow steady climb until everything loads — never stops
-        const slowdown = current > 80 ? 0.05 : current > 60 ? 0.1 : 0.2;
-        displayProgress.current = Math.min(current + slowdown, 99.5);
+        const slowdown = current > 85 ? 0.03 : current > 70 ? 0.08 : 0.15;
+        displayProgress.current = Math.min(current + slowdown, 99);
         setProgress(Math.floor(displayProgress.current));
       }
 
@@ -118,7 +152,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     };
   }, []);
 
-  // When progress hits 100, trigger completion
   useEffect(() => {
     if (progress >= 100) {
       handleComplete();
@@ -129,18 +162,14 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
   return (
     <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-background">
-      {/* White overlay that expands on complete */}
       <div
         className={`absolute inset-0 bg-white transition-opacity duration-700 ${
           phase === 'whiteout' ? 'opacity-100' : 'opacity-0'
         }`}
       />
-
-      {/* Content - fades out during whiteout */}
       <div className={`relative z-10 flex flex-col items-center transition-opacity duration-500 ${
         phase === 'whiteout' ? 'opacity-0' : 'opacity-100'
       }`}>
-        {/* Counter */}
         <div className="mb-8">
           <span
             className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-foreground tabular-nums"
@@ -149,8 +178,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
             {String(Math.floor(progress)).padStart(3, '0')}
           </span>
         </div>
-
-        {/* Progress bar */}
         <div className="w-48 sm:w-64 md:w-80 h-[2px] bg-border/30 rounded-full overflow-hidden">
           <div
             className="h-full bg-foreground rounded-full transition-all duration-150 ease-out"
