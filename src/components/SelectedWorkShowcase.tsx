@@ -306,52 +306,51 @@ const DesktopShowcase = () => {
           </Link>
         </div>
 
-        <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-12 xl:p-16">
+        <div className="hidden lg:flex w-3/5 h-full flex-col justify-center p-8 xl:p-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-3xl text-right"
           >
-            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8 block">
+            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block">
               Our Mission
             </span>
-            <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-6">
+            <h3 className="text-xl xl:text-2xl 2xl:text-3xl font-bold mb-3">
               <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results. No Recycled Playbooks.</span>
             </h3>
-            <p className="text-white/45 text-sm md:text-base xl:text-lg leading-relaxed mb-8">
-              With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand. The bridge between global protocols and Korean liquidity.
+            <p className="text-white/45 text-xs xl:text-sm leading-relaxed mb-6 max-w-lg">
+              With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.
             </p>
 
-            {/* Coverage Map */}
-            <div className="mb-6">
-              <EastAsiaMap />
-            </div>
-
-            {/* Countries */}
-            <div className="space-y-0">
-              {[
-                { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao, DC Inside, Korean CT" },
-                { name: "Japan", tag: "ACTIVE", desc: "Regulated entry, LINE ecosystem, bitFlyer, Coincheck" },
-                { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL network, exchange partnerships, community ops" },
-                { name: "China", tag: "ACTIVE", desc: "Mainland BD, institutional investor network, WeChat CT" },
-              ].map(c => (
-                <div key={c.name} className="py-3 border-b border-white/[0.08]">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm font-semibold text-white">{c.name}</span>
-                    <span className={`text-[9px] tracking-wider uppercase px-2 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/10 text-white/40"}`}>{c.tag}</span>
+            {/* Map + Countries side by side */}
+            <div className="grid grid-cols-2 gap-6 items-start">
+              <div>
+                <EastAsiaMap />
+              </div>
+              <div className="space-y-0">
+                {[
+                  { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao" },
+                  { name: "Japan", tag: "ACTIVE", desc: "LINE ecosystem, bitFlyer" },
+                  { name: "Taiwan", tag: "ACTIVE", desc: "KOL network, exchange ops" },
+                  { name: "China", tag: "ACTIVE", desc: "BD, investor network" },
+                ].map(c => (
+                  <div key={c.name} className="py-2 border-b border-white/[0.06]">
+                    <div className="flex items-center gap-1.5 mb-0.5">
+                      <span className="text-xs font-semibold text-white">{c.name}</span>
+                      <span className={`text-[8px] tracking-wider uppercase px-1.5 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/10 text-white/35"}`}>{c.tag}</span>
+                    </div>
+                    <p className="text-[11px] text-white/35">{c.desc}</p>
                   </div>
-                  <p className="text-xs text-white/40">{c.desc}</p>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
 
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 mt-6 text-sm text-white/60 hover:text-white transition-colors border-b border-white/20 hover:border-white/50 pb-1"
+              className="inline-flex items-center gap-2 mt-5 text-xs text-white/50 hover:text-white transition-colors"
             >
               <span>View Our Work</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight className="w-3 h-3" />
             </Link>
           </motion.div>
         </div>
