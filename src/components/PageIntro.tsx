@@ -4,8 +4,8 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 1500;
-const MAX_LOAD_TIME = 12000;
+const MIN_DISPLAY_TIME = 1200;
+const MAX_LOAD_TIME = 6000;
 const IMG_POLL_INTERVAL = 300;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
@@ -52,21 +52,21 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       markDone();
     }
 
-    // 2. Hero video
+    // 2. Hero video (with error fallback)
     totalTasks++;
     const video = document.createElement('video');
     video.src = '/videos/hero-background.mp4#t=0.001';
     video.preload = 'auto';
     video.muted = true;
     video.playsInline = true;
-    video.load();
     const onVideoReady = () => { markDone(); };
     video.addEventListener('canplaythrough', onVideoReady, { once: true });
     video.addEventListener('loadeddata', onVideoReady, { once: true });
-    // Video timeout — don't block forever
+    video.addEventListener('error', onVideoReady, { once: true });
+    try { video.load(); } catch { markDone(); }
     const videoTimeout = setTimeout(() => {
       if (completedTasks < totalTasks) markDone();
-    }, 5000);
+    }, 3000);
 
     // 3. Poll for ALL images on the page (including lazy-loaded ones from Suspense)
     const trackedImages = new Set<HTMLImageElement>();
