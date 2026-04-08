@@ -306,33 +306,47 @@ const DesktopShowcase = () => {
           </Link>
         </div>
 
-        {/* Right bottom — map + countries */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="hidden lg:flex absolute bottom-6 right-6 xl:bottom-10 xl:right-10 z-10 items-end gap-6"
-        >
-          <div className="w-[240px] xl:w-[280px]">
-            <EastAsiaMap />
-          </div>
-          <div className="space-y-0 w-[200px] xl:w-[220px]">
-            {[
-              { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao" },
-              { name: "Japan", tag: "ACTIVE", desc: "LINE ecosystem, bitFlyer" },
-              { name: "Taiwan", tag: "ACTIVE", desc: "KOL network, exchange ops" },
-              { name: "China", tag: "ACTIVE", desc: "BD, investor network" },
-            ].map(c => (
-              <div key={c.name} className="py-1.5 border-b border-white/[0.06]">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-[11px] font-semibold text-white">{c.name}</span>
-                  <span className={`text-[7px] tracking-wider uppercase px-1.5 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/8 text-white/30"}`}>{c.tag}</span>
-                </div>
-                <p className="text-[10px] text-white/30">{c.desc}</p>
+        {/* Right panel — mission + map, bottom-aligned */}
+        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[55%] z-10 flex-col justify-end p-10 xl:p-14">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block text-right">Our Mission</span>
+            <h3 className="text-xl xl:text-2xl 2xl:text-3xl font-bold mb-3 text-right">
+              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results. No Recycled Playbooks.</span>
+            </h3>
+            <p className="text-white/40 text-xs xl:text-sm leading-relaxed mb-6 text-right max-w-xl ml-auto">
+              With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.
+            </p>
+
+            <div className="flex items-end gap-5 justify-end">
+              <div className="w-[220px] xl:w-[260px] flex-shrink-0">
+                <EastAsiaMap />
               </div>
-            ))}
-          </div>
-        </motion.div>
+              <div className="w-[190px] xl:w-[210px] flex-shrink-0">
+                {[
+                  { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver" },
+                  { name: "Japan", tag: "ACTIVE", desc: "LINE, bitFlyer" },
+                  { name: "Taiwan", tag: "ACTIVE", desc: "KOL, exchange ops" },
+                  { name: "China", tag: "ACTIVE", desc: "BD, investor network" },
+                ].map(c => (
+                  <div key={c.name} className="py-1.5 border-b border-white/[0.06]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[11px] font-semibold text-white">{c.name}</span>
+                      <span className={`text-[7px] tracking-wider uppercase px-1.5 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/8 text-white/30"}`}>{c.tag}</span>
+                    </div>
+                    <p className="text-[10px] text-white/30">{c.desc}</p>
+                  </div>
+                ))}
+                <Link to="/projects" className="inline-flex items-center gap-1.5 mt-3 text-[11px] text-white/40 hover:text-white transition-colors">
+                  View Our Work <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
