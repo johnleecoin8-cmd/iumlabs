@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import EastAsiaMap from '@/components/EastAsiaMap';
 
 // Image imports
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -322,27 +323,32 @@ const DesktopShowcase = () => {
               With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand. The bridge between global protocols and Korean liquidity.
             </p>
 
-            {/* Stats — execution-focused, different from About section */}
-            <div className="flex items-center gap-6 xl:gap-10 mb-8 justify-end">
-              <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">70+</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Events Hosted</div>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">4</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Countries</div>
-              </div>
-              <div className="w-px h-10 bg-white/10" />
-              <div className="text-right">
-                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">100%</div>
-                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Retention Rate</div>
-              </div>
+            {/* Coverage Map */}
+            <div className="mb-6">
+              <EastAsiaMap />
+            </div>
+
+            {/* Countries */}
+            <div className="space-y-0">
+              {[
+                { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao, DC Inside, Korean CT" },
+                { name: "Japan", tag: "ACTIVE", desc: "Regulated entry, LINE ecosystem, bitFlyer, Coincheck" },
+                { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL network, exchange partnerships, community ops" },
+                { name: "China", tag: "ACTIVE", desc: "Mainland BD, institutional investor network, WeChat CT" },
+              ].map(c => (
+                <div key={c.name} className="py-3 border-b border-white/[0.08]">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-sm font-semibold text-white">{c.name}</span>
+                    <span className={`text-[9px] tracking-wider uppercase px-2 py-0.5 rounded ${c.tag === "HOME" ? "bg-violet-500 text-white" : "bg-white/10 text-white/40"}`}>{c.tag}</span>
+                  </div>
+                  <p className="text-xs text-white/40">{c.desc}</p>
+                </div>
+              ))}
             </div>
 
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors border-b border-white/20 hover:border-white/50 pb-1"
+              className="inline-flex items-center gap-2 mt-6 text-sm text-white/60 hover:text-white transition-colors border-b border-white/20 hover:border-white/50 pb-1"
             >
               <span>View Our Work</span>
               <ArrowRight className="w-3.5 h-3.5" />
