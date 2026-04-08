@@ -167,40 +167,87 @@
   .svc-detail .invite-inner{grid-template-columns:1fr}.svc-detail .invite-right{text-align:left}
 }
 @media(max-width:768px){
+  /* Hero */
   .svc-detail .hero{height:100vh;padding-bottom:0}
   .svc-detail .hero-center{padding:0 1.5rem}
-  .svc-detail .hero h1{font-size:clamp(2rem,9vw,3rem)}
-  .svc-detail .hero-desc{font-size:.88rem}
+  .svc-detail .hero h1{font-size:clamp(2.2rem,9vw,3.2rem)}
+  .svc-detail .hero-desc{font-size:.95rem;line-height:1.7;max-width:100%}
+  .svc-detail .hero-label{font-size:.6rem;margin-bottom:1rem}
   .svc-detail .hero-stats-bar{grid-template-columns:repeat(2,1fr)}
   .svc-detail .hero-stats-bar .stat{padding:1.2rem 1rem}
   .svc-detail .hero-stats-bar .stat-val{font-size:clamp(1.5rem,6vw,2rem)}
   .svc-detail .hero-stats-bar .stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
+  /* Layout */
   .svc-detail .wrap{padding:0 1.5rem}
   .svc-detail .stats-grid,.svc-detail .proc-grid,.svc-detail .plat-grid{grid-template-columns:1fr}
+  /* Problem */
+  .svc-detail .problem{padding:5rem 0}
+  .svc-detail .problem-left h2{font-size:clamp(1.6rem,5vw,2.2rem);margin-bottom:1.5rem}
+  .svc-detail .problem-right{font-size:1rem;line-height:1.75}
+  /* Capabilities */
+  .svc-detail .capabilities{padding:0 0 5rem}
+  .svc-detail .cap-head{grid-template-columns:36px 1fr auto;gap:1rem;padding:1.5rem 0}
   .svc-detail .cap-title{font-size:1.2rem}
   .svc-detail .cap-inner{grid-template-columns:1fr}
-  .svc-detail .cap-img{max-width:100%}
-  .svc-detail .faq-q h4{font-size:1.15rem}
+  .svc-detail .cap-desc{font-size:.95rem}
+  .svc-detail .cap-img{max-width:100%;margin-top:1rem}
+  /* Process */
+  .svc-detail .svc-process{padding:5rem 0}
+  .svc-detail .proc-step{padding:1.5rem 1rem;border-left:none;border-top:1px solid var(--g4)}
+  .svc-detail .proc-step:first-child{border-top:none}
+  .svc-detail .proc-title{font-size:1.2rem}
+  .svc-detail .proc-text{font-size:.95rem}
+  .svc-detail .proc-dot{margin-bottom:1.25rem}
+  /* FAQ */
+  .svc-detail .faq{padding:5rem 0}
+  .svc-detail .faq-q{padding:1.5rem 0}
+  .svc-detail .faq-q h4{font-size:1.15rem;line-height:1.4;padding-right:1rem}
+  .svc-detail .faq-a p{font-size:.95rem;line-height:1.7}
+  /* Tiers */
+  .svc-detail .tier-grid{grid-template-columns:1fr}
+  .svc-detail .tier-card{padding:2rem}
+  /* Case */
   .svc-detail .case-results{grid-template-columns:1fr}
+  .svc-detail .case{padding:5rem 0}
+  /* Labels */
+  .svc-detail .lbl{margin-bottom:2rem;font-size:.6rem}
+  /* Footer */
   .svc-detail .invite{padding:5rem 1.5rem}
   .svc-detail .ft-ed{padding:2rem 1.5rem}
 }
 @media(max-width:480px){
+  /* Hero */
   .svc-detail .hero{height:100svh}
   .svc-detail .hero h1{font-size:clamp(1.8rem,8vw,2.5rem)}
-  .svc-detail .hero-desc{font-size:.82rem;line-height:1.65}
+  .svc-detail .hero-desc{font-size:.88rem;line-height:1.65}
   .svc-detail .hero-stats-bar .stat{padding:1rem .75rem}
   .svc-detail .hero-stats-bar .stat-val{font-size:clamp(1.2rem,5vw,1.6rem)}
   .svc-detail .hero-stats-bar .stat-sub{font-size:.45rem;letter-spacing:.08em}
+  /* Layout */
   .svc-detail .wrap{padding:0 1.25rem}
-  .svc-detail .problem-left h2{font-size:clamp(1.3rem,5vw,1.8rem)}
-  .svc-detail .cap-head{padding:1.2rem 1.25rem}
+  /* Problem */
+  .svc-detail .problem{padding:3.5rem 0}
+  .svc-detail .problem-left h2{font-size:clamp(1.4rem,5.5vw,1.8rem)}
+  .svc-detail .problem-right{font-size:.92rem}
+  /* Capabilities */
+  .svc-detail .cap-head{padding:1.2rem 0;grid-template-columns:28px 1fr auto;gap:.75rem}
   .svc-detail .cap-title{font-size:1.1rem}
-  .svc-detail .proc-title{font-size:1.15rem}
+  .svc-detail .cap-icon{font-size:.9rem}
+  .svc-detail .cap-desc{font-size:.88rem}
+  /* Process */
+  .svc-detail .svc-process{padding:3.5rem 0}
+  .svc-detail .proc-step{padding:1.25rem .75rem}
+  .svc-detail .proc-title{font-size:1.1rem}
   .svc-detail .proc-text{font-size:.88rem}
-  .svc-detail .faq-q h4{font-size:1.1rem}
+  /* FAQ */
+  .svc-detail .faq{padding:3.5rem 0}
+  .svc-detail .faq-q h4{font-size:1.05rem}
   .svc-detail .faq-a p{font-size:.88rem}
+  /* Tiers */
   .svc-detail .tier-grid{grid-template-columns:1fr}
+  .svc-detail .tier-card{padding:1.5rem}
+  .svc-detail .tier-badge{font-size:2.2rem}
+  /* CTA */
   .svc-detail .invite-cta{font-size:.85rem;padding:1rem 2rem}
 }
 
