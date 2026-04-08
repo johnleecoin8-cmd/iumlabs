@@ -53,14 +53,6 @@ const projects = [
     media: "/images/posters/kite-hero-poster.jpg",
     video: "/videos/projects/kite-hero.mp4",
     slug: "kite"
-  },
-  {
-    name: "PEAQ",
-    category: "DePIN",
-    result: "5 S-tier KOLs",
-    media: "/images/posters/peaq-hero-poster.jpg",
-    video: "/videos/projects/peaq-hero.mp4",
-    slug: "peaq"
   }
 ];
 
