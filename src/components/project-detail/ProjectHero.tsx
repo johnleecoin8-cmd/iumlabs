@@ -47,10 +47,11 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   }, []);
 
   const services = project.services || [];
+  const hasVideo = !!project.bgVideo;
 
   // Use video first-frame poster if video exists, otherwise bgImage
-  const videoPoster = project.bgVideo
-    ? `/images/posters/${project.bgVideo.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '.jpg')}`
+  const videoPoster = hasVideo
+    ? `/images/posters/${project.bgVideo!.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '.jpg')}`
     : null;
   const posterImage = videoPoster || project.bgImage || "/images/hero-poster.jpg";
 
@@ -65,21 +66,33 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   } = useVideoPlayer({
     src: project.bgVideo || '',
     poster: posterImage,
+    autoPlay: hasVideo,
   });
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Fallback poster - always visible as base layer */}
-      <img
-        {...posterProps}
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+      {/* Background - static image (no video) or poster (with video) */}
+      {hasVideo ? (
+        <img
+          {...posterProps}
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        />
+      ) : (
+        <img
+          src={project.bgImage || "/images/hero-poster.jpg"}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          loading="eager"
+          width={1920}
+          height={1080}
+        />
+      )}
 
-      {/* Shimmer loading overlay */}
-      <ShimmerOverlay />
-      
+      {/* Shimmer loading overlay - only for video pages */}
+      {hasVideo && <ShimmerOverlay />}
+
       {/* Background Layer - Video */}
-      {project.bgVideo && !shouldDisableVideo && !hasVideoError && (
+      {hasVideo && !shouldDisableVideo && !hasVideoError && (
         <video
           ref={videoRef}
           {...videoProps}
