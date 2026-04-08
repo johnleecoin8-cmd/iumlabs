@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-route
 import React, { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import PageIntro from "@/components/PageIntro";
+import RouteProgressBar from "@/components/RouteProgressBar";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import logo from "@/assets/logo.png";
@@ -227,6 +228,7 @@ const AppContent = () => {
   return (
     <>
       {showIntro && <PageIntro onComplete={handleIntroComplete} />}
+      <RouteProgressBar />
       <ScrollToTop />
       <AppRoutes />
     </>
