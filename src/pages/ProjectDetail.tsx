@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
@@ -164,9 +164,9 @@ const ProjectDetail = () => {
       )}
 
 
-      {/* Footer Links */}
+      {/* Contact + Footer */}
+      <ContactFormSection />
       <FooterLinksSection />
-
       <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
       <CaseStudySchema
