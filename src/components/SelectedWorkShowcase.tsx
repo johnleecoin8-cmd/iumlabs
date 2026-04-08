@@ -316,10 +316,10 @@ const DesktopShowcase = () => {
               Our Mission
             </span>
             <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real results, not just promises.</span>
+              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results. No Recycled Playbooks.</span>
             </h3>
             <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-10">
-              Most agencies hand you a KOL list and a translated pitch deck. ium Labs operates differently. We come from Binance, KuCoin, and Upbit — we've sat on the other side of the listing table. We run 220+ direct KOL relationships, native community ops across Telegram, Discord, KakaoTalk, and Naver, and full event production in Seoul. 'ium,' from the Korean word "to connect," reflects what we built this company to do: be the bridge between global protocols and Korea's concentrated retail market.
+              While others offer simple translations, we offer an insider's perspective. With a team from Binance, KuCoin, and Upbit, we've sat on the other side of the listing table. ium Labs doesn't just 'introduce' you to Korea; we engineer your success using the same logic that global exchanges and top-tier retail investors demand. We are the bridge that speaks the language of both global protocols and Korean liquidity.
             </p>
             <Link
               to="/projects"
