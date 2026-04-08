@@ -305,7 +305,7 @@ const DesktopShowcase = () => {
             <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block">Our Mission</span>
             <h3 className="text-2xl font-bold text-white mb-4">Real results, not just promises.</h3>
             <p className="text-sm text-white/50 leading-relaxed mb-4">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry.
             </p>
             <p className="text-violet-400 text-sm mb-6">Founded by former Binance & KuCoin executives</p>
             <Link to="/projects" className="inline-flex items-center gap-2 text-sm font-medium text-white/60 border border-white/15 rounded-full px-5 py-2.5 hover:border-white/30 transition-colors">
@@ -328,7 +328,7 @@ const DesktopShowcase = () => {
               Real results, not just promises.
             </h3>
             <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 'ium' Derived from the Korean word "to connect," we function as your foundational layer for market entry.
             </p>
             <p className="text-violet-400 text-xs md:text-base xl:text-lg mb-10">
               Founded by former Binance & KuCoin executives
