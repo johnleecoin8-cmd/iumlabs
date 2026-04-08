@@ -299,9 +299,15 @@ const DesktopShowcase = () => {
             ))}
           </div>
 
-          <Link to="/projects" className="lg:hidden inline-flex items-center gap-1.5 mt-6 text-[11px] font-medium text-violet-400">
-            View Our Work <ArrowRight className="w-3 h-3" />
-          </Link>
+          {/* Mobile mission + CTA */}
+          <div className="lg:hidden mt-6 pt-5 border-t border-white/[0.08]">
+            <p className="text-[13px] text-white/35 leading-relaxed mb-4">
+              Former Binance, KuCoin, Upbit operators. We engineer your Korea market entry.
+            </p>
+            <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-violet-400">
+              View Our Work <ArrowRight className="w-3 h-3" />
+            </Link>
+          </div>
         </div>
 
         {/* Right panel — clean text only */}
