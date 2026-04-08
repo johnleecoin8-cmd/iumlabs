@@ -51,9 +51,7 @@ const Index = () => {
       {/* About */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="why-choose-us">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <AnimatedSection delay={100}>
-            <WhyChooseUsSection />
-          </AnimatedSection>
+          <WhyChooseUsSection />
         </div>
       </section>
 
@@ -72,9 +70,7 @@ const Index = () => {
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
           </div>
-          <AnimatedSection delay={100}>
-            <ServicesSection />
-          </AnimatedSection>
+          <ServicesSection />
         </div>
       </section>
 
@@ -84,11 +80,9 @@ const Index = () => {
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-xl sm:text-2xl font-bold text-white">Blog</h2>
           </div>
-          <AnimatedSection delay={100}>
-            <Suspense fallback={<SectionLoader />}>
-              <InsightsSection />
-            </Suspense>
-          </AnimatedSection>
+          <Suspense fallback={<SectionLoader />}>
+            <InsightsSection />
+          </Suspense>
         </div>
       </section>
       
@@ -127,9 +121,7 @@ const Index = () => {
       {/* Contact - 05 */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="contact">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <AnimatedSection>
-            <ContactFormSection />
-          </AnimatedSection>
+          <ContactFormSection />
         </div>
       </section>
 
