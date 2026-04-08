@@ -10,29 +10,6 @@ interface AnimatedSectionProps {
   threshold?: number;
 }
 
-const directionStyles = {
-  up: {
-    hidden: 'translate-y-8 opacity-0',
-    visible: 'translate-y-0 opacity-100',
-  },
-  down: {
-    hidden: '-translate-y-8 opacity-0',
-    visible: 'translate-y-0 opacity-100',
-  },
-  left: {
-    hidden: 'translate-x-8 opacity-0',
-    visible: 'translate-x-0 opacity-100',
-  },
-  right: {
-    hidden: '-translate-x-8 opacity-0',
-    visible: 'translate-x-0 opacity-100',
-  },
-  none: {
-    hidden: 'opacity-0',
-    visible: 'opacity-100',
-  },
-};
-
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   delay = 0,
@@ -40,24 +17,30 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   className,
   threshold = 0.1,
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ 
-    threshold, 
-    rootMargin: '50px',
-    triggerOnce: true 
+  const { ref, isVisible } = useScrollAnimation({
+    threshold,
+    rootMargin: '80px',
+    triggerOnce: true
   });
-
-  const styles = directionStyles[direction];
 
   return (
     <div
       ref={ref}
       className={cn(
-        'transition-all duration-700 ease-out will-change-transform',
-        isVisible ? styles.visible : styles.hidden,
+        'transition-[opacity,transform] ease-out',
         className
       )}
-      style={{ 
+      style={{
         transitionDelay: `${delay}ms`,
+        transitionDuration: '600ms',
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible
+          ? 'translate3d(0,0,0)'
+          : direction === 'up' ? 'translate3d(0,20px,0)'
+          : direction === 'down' ? 'translate3d(0,-20px,0)'
+          : direction === 'left' ? 'translate3d(20px,0,0)'
+          : direction === 'right' ? 'translate3d(-20px,0,0)'
+          : 'none',
       }}
     >
       {children}
@@ -79,31 +62,37 @@ interface StaggeredChildrenProps {
 export const StaggeredChildren: React.FC<StaggeredChildrenProps> = ({
   children,
   baseDelay = 0,
-  staggerDelay = 50,
+  staggerDelay = 40,
   direction = 'up',
   className,
   childClassName,
   threshold = 0.1,
 }) => {
-  const { ref, isVisible } = useScrollAnimation({ 
+  const { ref, isVisible } = useScrollAnimation({
     threshold,
-    rootMargin: '50px',
-    triggerOnce: true 
+    rootMargin: '80px',
+    triggerOnce: true
   });
-
-  const styles = directionStyles[direction];
 
   return (
     <div ref={ref} className={className}>
       {React.Children.map(children, (child, index) => (
         <div
           className={cn(
-            'transition-all duration-500 ease-out will-change-transform',
-            isVisible ? styles.visible : styles.hidden,
+            'transition-[opacity,transform] ease-out',
             childClassName
           )}
-          style={{ 
+          style={{
             transitionDelay: `${baseDelay + index * staggerDelay}ms`,
+            transitionDuration: '500ms',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible
+              ? 'translate3d(0,0,0)'
+              : direction === 'up' ? 'translate3d(0,16px,0)'
+              : direction === 'down' ? 'translate3d(0,-16px,0)'
+              : direction === 'left' ? 'translate3d(16px,0,0)'
+              : direction === 'right' ? 'translate3d(-16px,0,0)'
+              : 'none',
           }}
         >
           {child}

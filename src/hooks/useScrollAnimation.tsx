@@ -7,9 +7,13 @@ interface UseScrollAnimationOptions {
 }
 
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
-  const { threshold = 0.05, rootMargin = '50px', triggerOnce = true } = options;
+  const { threshold = 0.05, triggerOnce = true } = options;
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  // Use wider rootMargin on mobile so animations trigger earlier (smoother feel)
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  const rootMargin = options.rootMargin || (isMobile ? '120px' : '50px');
 
   useEffect(() => {
     const element = ref.current;
@@ -17,7 +21,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
 
     // Immediately check if element is already in viewport
     const rect = element.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
+    if (rect.top < window.innerHeight * 1.1 && rect.bottom > 0) {
       setIsVisible(true);
       if (triggerOnce) return;
     }
@@ -33,7 +37,7 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
           setIsVisible(false);
         }
       },
-      { threshold: Math.max(threshold, 0.01), rootMargin: rootMargin || '50px' }
+      { threshold: Math.max(threshold, 0.01), rootMargin }
     );
 
     observer.observe(element);

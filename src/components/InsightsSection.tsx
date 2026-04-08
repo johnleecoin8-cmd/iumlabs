@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
@@ -56,8 +56,20 @@ const InsightsSection = () => {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
   const hideSlugs = ['deconstruction-of-move-vm-layer-1s-sui-vs-aptos', 'strategic-intelligence-report-the-structural-arbitrage-of-information-markets'];
-  const articles = insights.filter(a => !hideSlugs.includes(a.id)).slice(0, 6);
+  const mobileKeywords = ['monetizing', 'megaeth', 'forensic', 'death of'];
+  const allArticles = insights.filter(a => !hideSlugs.includes(a.id)).slice(0, 6);
+  const articles = isMobile
+    ? allArticles.filter(a => mobileKeywords.some(k => a.title.toLowerCase().includes(k) || a.id.toLowerCase().includes(k))).slice(0, 4)
+    : allArticles;
 
   if (articles.length === 0) {
     return (

@@ -1303,50 +1303,45 @@ video {
   .will-change-transform {
     will-change: auto !important;
   }
-  
-  /* Disable transitions on mobile for better perf */
-  .transition-all {
-    transition-duration: 0.15s !important;
-  }
 }
 
-/* Ultra-low power mode for mobile touch devices */
+/* Mobile touch device optimizations */
 @media (max-width: 767px) and (pointer: coarse) {
-  /* Mobile touch marquee - 0.6x speed */
-  .logo-marquee {
-    animation-duration: 75s !important;
+  /* Smooth native scroll */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
-  .logo-marquee-slow {
-    animation-duration: 100s !important;
-  }
-  .logo-marquee-fast {
-    animation-duration: 83s !important;
-  }
-  
-  /* Disable floating animations completely */
-  .animate-float {
-    animation: none !important;
-  }
-  
-  /* Static floating tags on mobile */
+
+  /* Mobile marquee - gentle speed */
+  .logo-marquee { animation-duration: 75s !important; }
+  .logo-marquee-slow { animation-duration: 100s !important; }
+  .logo-marquee-fast { animation-duration: 83s !important; }
+
+  /* Disable floating animations */
+  .animate-float,
   [style*="float-gentle"] {
     animation: none !important;
   }
-  
-  /* Disable backdrop blur completely on low-end */
-  .backdrop-blur-sm,
+
+  /* Disable infinite glow/pulse animations */
+  .animate-logo-pulse,
+  .glow-breathe {
+    animation: none !important;
+  }
+
+  /* Lighter backdrop blur */
   .backdrop-blur-md,
   .backdrop-blur-lg,
   .backdrop-blur-xl {
-    backdrop-filter: none !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
   }
-  
-  /* Disable all hover transforms */
-  .hover\:scale-105:hover,
-  .hover\:scale-110:hover,
-  .hover\:-translate-y-1:hover,
-  .hover\:-translate-y-2:hover {
-    transform: none !important;
+
+  /* Softer transitions instead of disabling */
+  .transition-all {
+    transition-duration: 0.3s !important;
+    transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1) !important;
   }
 }
 
