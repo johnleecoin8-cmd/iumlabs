@@ -56,7 +56,7 @@ const InsightsSection = () => {
     }
   };
 
-  const hideSlugs = ['megaeth-the-real-time-paradox-structural-arbitrage-in-the-high-frequency-era', 'monetizing-chaos-how-ethgas-turns-l2-volatility-into-institutional-yield'];
+  const hideSlugs = ['megaeth-the-real-time-paradox-structural-arbitrage-in-the-high-frequency-era', 'strategic-intelligence-report-the-structural-arbitrage-of-information-markets'];
   const articles = insights.filter(a => !hideSlugs.includes(a.id)).slice(0, 6);
 
   if (articles.length === 0) {
