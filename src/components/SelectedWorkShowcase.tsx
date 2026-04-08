@@ -115,6 +115,18 @@ const MobileShowcase = () => {
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
+                {project.video && (
+                  <video
+                    muted
+                    loop
+                    playsInline
+                    autoPlay
+                    preload={i <= 1 ? "auto" : "none"}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  >
+                    <source src={project.video} type="video/mp4" />
+                  </video>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
 
                 <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -173,10 +185,9 @@ const DesktopShowcase = () => {
     return indices;
   }, [loadedSet]);
 
-  const mountedIndices = isMobile ? new Set<number>() : getMountedIndices(activeIndex);
+  const mountedIndices = getMountedIndices(activeIndex);
 
   useEffect(() => {
-    if (isMobile) return;
     Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
       if (!video) return;
       const idx = Number(idxStr);
@@ -224,7 +235,7 @@ const DesktopShowcase = () => {
                 project.video && isActive && isVideoReady ? 'opacity-0' : 'opacity-100'
               }`}
             />
-            {project.video && shouldMountVideo && !isMobile && (
+            {project.video && shouldMountVideo && (
               <video
                 ref={el => { videoRefs.current[i] = el; }}
                 muted
@@ -268,20 +279,24 @@ const DesktopShowcase = () => {
               >
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="group block py-4 border-b border-white/10 hover:border-white/20 transition-colors"
+                  className="group block py-3 sm:py-4 border-b border-white/10 hover:border-white/20 transition-colors"
                   onMouseEnter={() => setActiveIndex(i)}
+                  onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
                 >
-                  <div className="flex items-center gap-4">
-                    <span className={`text-xs font-mono w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-lg sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
+                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
                     <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 w-20 lg:w-28 text-left hidden sm:block ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
                       {project.category}
                     </span>
-                    <ArrowRight className={`w-4 h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
+                    <span className={`text-[11px] sm:hidden font-medium transition-all duration-300 ${activeIndex === i ? 'text-violet-400 opacity-100' : 'opacity-0'}`}>
+                      {project.result}
+                    </span>
+                    <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
                   </div>
                 </Link>
               </motion.div>
@@ -323,8 +338,7 @@ const DesktopShowcase = () => {
 };
 
 const SelectedWorkShowcase = () => {
-  const isMobile = useIsMobile();
-  return isMobile ? <MobileShowcase /> : <DesktopShowcase />;
+  return <DesktopShowcase />;
 };
 
 export default SelectedWorkShowcase;
