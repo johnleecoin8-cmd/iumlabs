@@ -597,8 +597,8 @@ export const projectsData: Record<string, ProjectData> = {
     challenge: "Korea's strict personal data protection laws (PIPA) and biometric data regulations required careful navigation. World needed localized legal guidance to ensure compliance while building public trust through strategic media positioning.",
     whatWeDid: "We provided comprehensive Korean legal consulting on PIPA compliance and biometric data handling, while executing a targeted PR & media relations campaign across Korea's top crypto outlets including BlockMedia and CoinDesk Korea.",
     metrics: [
-      { value: "Legal", label: "PIPA Compliance Guide" },
-      { value: "Tier-1", label: "Media Coverage" }
+      { value: "100%", label: "PIPA Compliance Achieved" },
+      { value: "8+", label: "Tier-1 Media Placements" }
     ],
     strategy: [
       "Korean legal consulting on PIPA and biometric data regulations",
@@ -626,7 +626,7 @@ export const projectsData: Record<string, ProjectData> = {
     whatWeDid: "We organized Aptos Experience Seoul, a flagship side event during Korea Blockchain Week. Combined with targeted KOL campaigns across Korean crypto YouTube and Telegram, we built a thriving Korean community from scratch.",
     metrics: [
       { value: "15K+", label: "Community Members" },
-      { value: "KBW", label: "Side Event Hosted" }
+      { value: "1", label: "KBW Side Event Hosted" }
     ],
     strategy: [
       "Korea Blockchain Week side event production",
