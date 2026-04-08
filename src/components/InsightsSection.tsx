@@ -56,7 +56,7 @@ const InsightsSection = () => {
     }
   };
 
-  const hideSlugs = ['megaeth-the-real-time-paradox-structural-arbitrage-in-the-high-frequency-era', 'strategic-intelligence-report-the-structural-arbitrage-of-information-markets'];
+  const hideSlugs = ['deconstruction-of-move-vm-layer-1s-sui-vs-aptos', 'strategic-intelligence-report-the-structural-arbitrage-of-information-markets'];
   const articles = insights.filter(a => !hideSlugs.includes(a.id)).slice(0, 6);
 
   if (articles.length === 0) {
