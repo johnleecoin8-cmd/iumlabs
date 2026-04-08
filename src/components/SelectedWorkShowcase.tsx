@@ -9,7 +9,7 @@ const projects = [
   {
     name: "BNB Chain",
     category: "Infrastructure",
-    result: "+340% Volume",
+    result: "2M+ Social Impressions",
     media: "/images/posters/bnb-hero-poster.jpg",
     video: "/videos/projects/bnb-hero.mp4",
     slug: "bnb-chain"

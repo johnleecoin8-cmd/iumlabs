@@ -27,7 +27,7 @@ const services = [
   {
     icon: Users,
     title: "KOL & Influencer Marketing",
-    description: "Access our network of 170+ vetted Korean crypto KOLs. Authentic endorsements that drive real community trust and engagement.",
+    description: "Access our network of 230+ vetted Korean crypto KOLs. Authentic endorsements that drive real community trust and engagement.",
     link: "/services/influencer",
   },
   {
@@ -57,10 +57,10 @@ const services = [
 ];
 
 const stats = [
-  { value: "22+", label: "Projects" },
-  { value: "170+", label: "KOL Network" },
-  { value: "$7M+", label: "Token Sales" },
-  { value: "44+", label: "Events" },
+  { value: "22+", label: "Korea Entries" },
+  { value: "230+", label: "KOL Network" },
+  { value: "$30M+", label: "Revenue Generated" },
+  { value: "70+", label: "Events Hosted" },
 ];
 
 const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI"];

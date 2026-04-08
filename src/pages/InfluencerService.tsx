@@ -39,8 +39,8 @@ const InfluencerService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="170+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
-      <ServiceSchema name="Korea KOL & Influencer Marketing" description="170+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
+      <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="230+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
+      <ServiceSchema name="Korea KOL & Influencer Marketing" description="230+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
       <Navbar />
 
       {/* HERO */}
@@ -48,10 +48,10 @@ const InfluencerService = () => {
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
           <h1>KOL & <strong>Influencer</strong></h1>
-          <p className="hero-desc">170+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
+          <p className="hero-desc">230+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
         </div>
         <div className="hero-stats-bar">
-          <div className="stat"><div className="stat-val">170+</div><div className="stat-sub">Vetted Korean KOLs</div></div>
+          <div className="stat"><div className="stat-val">230+</div><div className="stat-sub">Vetted Korean KOLs</div></div>
           <div className="stat"><div className="stat-val">4</div><div className="stat-sub">Platforms Covered</div></div>
           <div className="stat"><div className="stat-val">0%</div><div className="stat-sub">Fake Follower Tolerance</div></div>
           <div className="stat"><div className="stat-val">Weekly</div><div className="stat-sub">Performance Reports</div></div>

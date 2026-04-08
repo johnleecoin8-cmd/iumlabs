@@ -4,15 +4,15 @@ import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
 import { motion } from "framer-motion";
 
 const stats = [{
-  value: 18,
+  value: 22,
   suffix: "+",
   prefix: "",
-  label: "Projects Launched",
+  label: "Korea Entries",
   icon: TrendingUp,
   description: "Successfully launched in Korea",
   glowColor: "from-emerald-500/20 to-cyan-500/10"
 }, {
-  value: 120,
+  value: 230,
   suffix: "+",
   prefix: "",
   label: "KOL Network",
@@ -20,15 +20,15 @@ const stats = [{
   description: "Influencers & creators",
   glowColor: "from-primary/20 to-purple-500/10"
 }, {
-  value: 2.5,
+  value: 30,
   suffix: "M+",
   prefix: "$",
-  label: "Token Sales",
+  label: "Revenue Generated",
   icon: Building2,
-  description: "Total token sales supported",
+  description: "Total revenue generated",
   glowColor: "from-cyan-500/20 to-blue-500/10"
 }, {
-  value: 38,
+  value: 70,
   suffix: "+",
   prefix: "",
   label: "AMA Hosting",
