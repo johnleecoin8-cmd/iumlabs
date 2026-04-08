@@ -146,7 +146,7 @@ const ContactFormSection = ({
     <section className="bg-[#0A0A0A]">
       <div className="border-t border-white/15">
         {/* Section Header */}
-        <div className="px-4 md:px-10 pt-8 pb-4">
+        <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10 pb-4">
           <h2 className="text-xl sm:text-2xl font-bold text-white">Contact</h2>
         </div>
 

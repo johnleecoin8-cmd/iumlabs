@@ -126,7 +126,7 @@ const Index = () => {
 
       {/* Contact - 05 */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="contact">
-        <div className="sm:rounded-3xl overflow-hidden">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <AnimatedSection>
             <ContactFormSection />
           </AnimatedSection>
