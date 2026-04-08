@@ -17,7 +17,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import confetti from "canvas-confetti";
 import CalendlyButton from "./CalendlyButton";
-import Logo3D from "@/components/Logo3D";
 
 const serviceOptions = [
   "GTM Strategy",
@@ -208,12 +207,6 @@ const ContactFormSection = ({
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
                 </a>
 
-                {/* 3D Bridge Logo */}
-                <div className="w-full h-28 flex items-center justify-center mt-4">
-                  <div className="w-full h-full">
-                    <Logo3D />
-                  </div>
-                </div>
               </div>
             </div>
 
