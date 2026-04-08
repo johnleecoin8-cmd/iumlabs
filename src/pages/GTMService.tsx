@@ -180,7 +180,7 @@ const GTMService = () => {
           <div className="hero-stat"><div className="hero-stat-big">230+</div><div className="hero-stat-sub">KOL Network</div></div>
           <div className="hero-stat"><div className="hero-stat-big">22+</div><div className="hero-stat-sub">Korea Entries</div></div>
           <div className="hero-stat"><div className="hero-stat-big">$30M+</div><div className="hero-stat-sub">Revenue Generated</div></div>
-          <div className="hero-stat"><div className="hero-stat-big">70+</div><div className="hero-stat-sub">Events Hosted</div></div>
+          <div className="hero-stat hidden md:block"><div className="hero-stat-big">70+</div><div className="hero-stat-sub">Events Hosted</div></div>
         </div>
       </section>
 
