@@ -455,6 +455,7 @@ const MobileServicesPage = () => {
         title="All Services | ium Labs — Korea Web3 Marketing Agency"
         description="Full-stack Web3 marketing services for Korea market entry. GTM strategy, KOL marketing, PR, community management, events, SEO, and more."
         path="/services/all"
+        canonicalPath="/"
         keywords={['Korea Web3 Services', 'Web3 Marketing Korea', 'Crypto Agency Services', 'Korea GTM']}
       />
       <Navbar />
