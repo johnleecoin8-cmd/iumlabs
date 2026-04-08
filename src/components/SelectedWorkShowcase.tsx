@@ -315,18 +315,18 @@ const DesktopShowcase = () => {
             <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8 block">
               Our Mission
             </span>
-            <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white mb-6">
-              Real results, not just promises.
+            <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real results, not just promises.</span>
             </h3>
             <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-10">
               Most agencies hand you a KOL list and a translated pitch deck. ium Labs operates differently. We come from Binance, KuCoin, and Upbit — we've sat on the other side of the listing table. We run 220+ direct KOL relationships, native community ops across Telegram, Discord, KakaoTalk, and Naver, and full event production in Seoul. 'ium,' from the Korean word "to connect," reflects what we built this company to do: be the bridge between global protocols and Korea's concentrated retail market.
             </p>
             <Link
               to="/projects"
-              className="inline-flex items-center gap-3 text-lg xl:text-xl text-white border border-white/30 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300"
+              className="inline-flex items-center gap-2 text-xs text-white/50 hover:text-white transition-colors"
             >
               <span>View Our Work</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-3 h-3" />
             </Link>
           </motion.div>
         </div>
