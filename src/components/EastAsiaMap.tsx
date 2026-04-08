@@ -16,7 +16,7 @@ const seoulCoords: [number, number] = [127.0, 37.5];
 const EastAsiaMap = () => (
   <ComposableMap
     projection="geoMercator"
-    projectionConfig={{ center: [122, 32], scale: 600 }}
+    projectionConfig={{ center: [128, 34], scale: 900 }}
     width={600}
     height={500}
     style={{ width: "100%", height: "auto" }}
