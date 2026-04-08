@@ -126,69 +126,6 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       )}
 
 
-      {/* ===== CTA SECTION ===== */}
-      <section className="py-8 md:py-12">
-        <div className="px-4 md:px-8 lg:px-12">
-          <motion.div 
-            className="rounded-2xl overflow-hidden h-[400px] md:h-[500px] relative group"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div 
-              className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
-              style={{
-                backgroundImage: `url(${gallery?.[0]?.src || project.bgImage || project.featureImage})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            />
-            <div className="absolute inset-0 bg-black/60" />
-            
-            <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
-              <motion.p
-                className="text-sm md:text-base text-white/60 uppercase tracking-widest mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-              >
-                Connect with Korea
-              </motion.p>
-              <motion.h3 
-                className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Ready to Bridge Your Project?
-              </motion.h3>
-              <motion.p
-                className="text-base md:text-lg text-white/70 mb-8 max-w-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                Let Ium Labs be your gateway to the Korean Web3 ecosystem.
-              </motion.p>
-              <motion.a 
-                href="/contact"
-                className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors text-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-              >
-                Start Your Journey
-              </motion.a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       <div className="h-8 md:h-10" />
     </div>
   );
