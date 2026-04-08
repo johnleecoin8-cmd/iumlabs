@@ -318,15 +318,34 @@ const DesktopShowcase = () => {
             <h3 className="text-2xl md:text-3xl xl:text-4xl 2xl:text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results. No Recycled Playbooks.</span>
             </h3>
-            <p className="text-white/50 text-sm md:text-lg xl:text-xl leading-relaxed mb-10">
-              While others offer simple translations, we offer an insider's perspective. With a team from Binance, KuCoin, and Upbit, we've sat on the other side of the listing table. ium Labs doesn't just 'introduce' you to Korea; we engineer your success using the same logic that global exchanges and top-tier retail investors demand. We are the bridge that speaks the language of both global protocols and Korean liquidity.
+            <p className="text-white/45 text-sm md:text-base xl:text-lg leading-relaxed mb-8">
+              With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand. The bridge between global protocols and Korean liquidity.
             </p>
+
+            {/* Stats */}
+            <div className="flex items-center gap-6 xl:gap-10 mb-8 justify-end">
+              <div className="text-right">
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">220+</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">KOLs</div>
+              </div>
+              <div className="w-px h-10 bg-white/10" />
+              <div className="text-right">
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">22+</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Projects</div>
+              </div>
+              <div className="w-px h-10 bg-white/10" />
+              <div className="text-right">
+                <div className="text-2xl xl:text-3xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">$7B+</div>
+                <div className="text-[10px] xl:text-xs text-white/30 uppercase tracking-wider mt-1">Client Valuation</div>
+              </div>
+            </div>
+
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-xs text-white/50 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors border-b border-white/20 hover:border-white/50 pb-1"
             >
               <span>View Our Work</span>
-              <ArrowRight className="w-3 h-3" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </motion.div>
         </div>
