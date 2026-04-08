@@ -148,19 +148,19 @@ const ResearchHeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline */}
-          <h1 className="font-sans text-[1.4rem] sm:text-[2.5rem] md:text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
+          <h1 className="font-sans text-[clamp(2rem,8vw,4rem)] font-bold leading-[1.05] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
             <span className="text-white font-sans leading-tight">Web3 Market Insights &<br />Data-Driven Blog</span>
           </h1>
 
           {/* Subtext */}
-          <p className="text-xs sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
+          <p className="text-[14px] sm:text-lg md:text-xl text-white/75 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-light tracking-wide leading-relaxed px-4 sm:px-2">
             Explore our comprehensive <span className="text-white font-medium">market analysis</span> and <span className="text-white font-medium">data-driven insights</span> to stay ahead in the rapidly evolving Web3 landscape.
           </p>
 
           {/* CTA Button */}
           <button
             onClick={() => document.getElementById('articles')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30"
+            className="group inline-flex items-center gap-2 sm:gap-2.5 px-5 py-3 sm:px-6 sm:py-3.5 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97] min-h-[44px] sm:min-h-[48px]"
           >
             <BookOpen className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Explore Blog</span>

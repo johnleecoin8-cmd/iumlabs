@@ -336,20 +336,20 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
-                <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold text-white leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-6">
+                <h1 className="font-sans text-[clamp(2.25rem,8vw,7.5rem)] font-bold text-white leading-[0.95] tracking-[-0.03em] mb-4 sm:mb-6">
                   We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
-              
+
               <AnimatedSection delay={200}>
-                <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-6 sm:mb-10 font-light tracking-wide leading-relaxed px-4">
+                <p className="text-[14px] sm:text-lg md:text-xl text-white/75 max-w-2xl mx-auto mb-5 sm:mb-10 font-light tracking-wide leading-[1.6] px-4">
                   한국 Web3 시장의 미래를 함께 만들 뛰어난 인재를 찾습니다.<br />
                   Your next chapter starts here.
                 </p>
               </AnimatedSection>
-              
+
               <AnimatedSection delay={300}>
-                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-5 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white/90 transition-colors active:scale-95 min-h-[44px]">
+                <a href="#positions" className="inline-flex items-center gap-2.5 bg-white text-black px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-semibold text-[13px] sm:text-sm hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97] min-h-[44px] sm:min-h-[48px]">
                   Explore Opportunities
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>

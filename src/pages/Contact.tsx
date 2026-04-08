@@ -204,18 +204,18 @@ const Contact = () => {
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
               {/* Main Headline - Single Line */}
-              <h1 className="font-sans text-[2rem] sm:text-[4rem] md:text-[6rem] font-bold leading-[0.95] tracking-[-0.04em] mb-5 sm:mb-8 text-white sm:whitespace-nowrap">
+              <h1 className="font-sans text-[clamp(2rem,8vw,6rem)] font-bold leading-[0.95] tracking-[-0.04em] mb-4 sm:mb-8 text-white sm:whitespace-nowrap">
                 Let's Build in Korea
               </h1>
 
               {/* Subtext */}
-              <p className="text-sm sm:text-lg md:text-[22px] text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
+              <p className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-3xl mx-auto mb-6 sm:mb-8 font-light tracking-wide leading-relaxed">
                 Drop us a line. We respond within 24 hours with a full Korea entry plan.
               </p>
 
               {/* CTA Button */}
-              <div className="mb-10">
-                <CalendlyButton className="group relative inline-flex items-center gap-2 px-8 py-4 bg-white text-black font-semibold text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[48px]">
+              <div className="mb-8 sm:mb-10">
+                <CalendlyButton className="group relative inline-flex items-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[44px] sm:min-h-[48px]">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>

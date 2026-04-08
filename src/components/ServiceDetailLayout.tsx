@@ -183,13 +183,13 @@ const ServiceDetailLayout = ({
           {/* Content */}
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 pt-32 pb-16 relative z-10">
             <div className="max-w-3xl">
-              <h1 className="text-white mb-6">
-                <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
+              <h1 className="text-white mb-4 sm:mb-6">
+                <span className="block text-[clamp(2rem,8vw,4.5rem)] md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
                   {title}
                 </span>
                 {titleHighlight && (
-                  <span 
-                    className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
+                  <span
+                    className="block text-[clamp(2rem,8vw,4.5rem)] md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
                     style={{ color: themeConfig.accentColor }}
                   >
                     {titleHighlight}
@@ -197,12 +197,12 @@ const ServiceDetailLayout = ({
                 )}
               </h1>
 
-              <p className="text-white/70 text-lg max-w-xl mb-8 font-light leading-relaxed">
+              <p className="text-white/70 text-[14px] sm:text-base md:text-lg max-w-xl mb-6 sm:mb-8 font-light leading-relaxed">
                 {subtitle}
               </p>
 
-              <CalendlyButton 
-                className="inline-flex items-center gap-3 px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105"
+              <CalendlyButton
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-[13px] sm:text-sm transition-all duration-300 hover:scale-105"
                 style={{ 
                   backgroundColor: themeConfig.accentColor,
                   color: '#fff',
