@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import ProjectStrategy from "./ProjectStrategy";
-import ProjectResults from "./ProjectResults";
 
 interface ProjectContentSectionProps {
   project: ProjectData & { client_name?: string; duration?: string; featureImage?: string };
@@ -14,117 +13,186 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* ===== SECTION 1: PROJECT INFO ===== */}
-      <section className="py-12 md:py-20">
-        <div className="px-4 md:px-8 lg:px-12">
-          {/* Section Header */}
-          <motion.div 
-            className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-10 md:mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-baseline gap-4 md:gap-6">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Overview</h2>
-            </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block px-3 py-1 border border-white/10 rounded-full">
-              Project Info
-            </span>
-          </motion.div>
-          
-          {/* Project Info - 2 Column Layout */}
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10"
-            initial={{ opacity: 0, y: 20 }}
+      {/* ===== META BAR ===== */}
+      <section className="border-b border-white/10">
+        <div className="px-6 md:px-10 lg:px-16 py-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6">
+            {/* Category */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-2">
+                Category
+              </span>
+              <span className="text-sm font-medium text-white/80">{project.category}</span>
+            </motion.div>
+
+            {/* Duration */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-2">
+                Duration
+              </span>
+              <span className="text-sm font-medium text-white/80">
+                {project.duration || "Ongoing"}
+              </span>
+            </motion.div>
+
+            {/* Key Result */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-2">
+                Key Result
+              </span>
+              <span className="text-sm font-medium text-white/80">{project.result}</span>
+            </motion.div>
+
+            {/* Services Used */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+            >
+              <span className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-2">
+                Services Used
+              </span>
+              <span className="text-sm font-medium text-white/80">
+                {project.shortServices?.join(", ") || project.services?.join(", ")}
+              </span>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== CORE: WHAT WE DID + RESULTS ===== */}
+      <section className="px-6 md:px-10 lg:px-16 py-16 md:py-24">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
+          {/* Left Column: What We Did */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            {/* Left: Meta Info Panel */}
-            <div className="bg-[#111111] rounded-xl border border-white/[0.06] overflow-hidden">
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Client</span>
-                <span className="text-base md:text-lg font-semibold text-white block">{project.client_name || project.name}</span>
-              </div>
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Category</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor || '#00CED1' }} />
-                  <span className="text-base md:text-lg font-semibold text-white">{project.category}</span>
-                </div>
-              </div>
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Year</span>
-                <span className="text-base md:text-lg font-semibold text-white block">2025</span>
-              </div>
-              {project.result && (
-                <div className="p-4 md:p-5">
-                  <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Key Result</span>
-                  <span className="text-base md:text-lg font-bold block" style={{ color: project.glowColor || '#00CED1' }}>
-                    {project.result}
-                  </span>
-                </div>
+            <h2
+              className="mb-8"
+              style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontWeight: 300,
+                fontSize: "2rem",
+                letterSpacing: "-0.02em",
+                lineHeight: 1.2,
+                color: "rgba(255,255,255,0.95)",
+              }}
+            >
+              What We Did
+            </h2>
+
+            <div className="space-y-5">
+              {(project.whatWeDid || project.challenge) && (
+                <p className="text-[15px] leading-[1.75] text-white/60">
+                  {project.whatWeDid || project.challenge}
+                </p>
+              )}
+              {project.description && !project.whatWeDid && !project.challenge && (
+                <p className="text-[15px] leading-[1.75] text-white/60">
+                  {project.description}
+                </p>
               )}
             </div>
-            
-            {/* Right: About & Challenge */}
-            <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06] flex-1">
-                <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">About the Project</h3>
-                <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.description}</p>
-              </div>
-              {project.challenge && (
-                <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                  <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">The Challenge</h3>
-                  <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.challenge}</p>
-                </div>
-              )}
-            </div>
-          </motion.div>
-          
-          {/* Scope of Work & What We Did */}
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
+
+            {/* Deliverables List */}
             {project.services && project.services.length > 0 && (
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
-                <ul className="space-y-2">
+              <div className="mt-10">
+                <span className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-4">
+                  Deliverables
+                </span>
+                <ul className="space-y-3">
                   {project.services.map((service, idx) => (
-                    <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
+                    <motion.li
+                      key={idx}
+                      className="flex items-center gap-3 text-sm text-white/70"
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: idx * 0.06 }}
+                    >
+                      <span
+                        className="w-[6px] h-[6px] rounded-full flex-shrink-0"
+                        style={{ backgroundColor: "#4A7CFF" }}
+                      />
+                      {service}
+                    </motion.li>
                   ))}
                 </ul>
               </div>
             )}
-            {(project.whatWeDid || project.challenge) && (
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
-                <p className="text-sm md:text-base text-white leading-relaxed">{project.whatWeDid || project.challenge}</p>
-              </div>
-            )}
           </motion.div>
+
+          {/* Right Column: Results Stack */}
+          {displayMetrics && displayMetrics.length > 0 && (
+            <div>
+              <motion.span
+                className="font-mono text-[10px] text-white/30 uppercase tracking-wider block mb-6"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                Results
+              </motion.span>
+
+              <div className="border-t border-white/10">
+                {displayMetrics.map((metric, idx) => (
+                  <motion.div
+                    key={idx}
+                    className="flex items-center justify-between py-6 border-b border-white/10"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  >
+                    <div>
+                      <span className="text-[0.88rem] font-medium text-white/80 block">
+                        {metric.label}
+                      </span>
+                    </div>
+                    <span
+                      style={{
+                        fontFamily: "'Cormorant Garamond', Georgia, serif",
+                        fontWeight: 300,
+                        fontSize: "3rem",
+                        letterSpacing: "-0.03em",
+                        lineHeight: 1,
+                        color: "#4A7CFF",
+                      }}
+                    >
+                      {metric.value}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* ===== SECTION 2: RESULTS ===== */}
-      {displayMetrics && displayMetrics.length > 0 && (
-        <ProjectResults
-          metrics={displayMetrics}
-          glowColor={project.glowColor}
-          timeline={project.duration}
-        />
-      )}
-
-      {/* ===== SECTION 3: APPROACH ===== */}
+      {/* ===== SECTION: APPROACH / STRATEGY ===== */}
       {project.strategy && project.strategy.length > 0 && (
         <ProjectStrategy strategy={project.strategy} glowColor={project.glowColor} />
       )}
-
 
       <div className="h-8 md:h-10" />
     </div>
