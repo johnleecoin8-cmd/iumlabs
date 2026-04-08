@@ -4,8 +4,8 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 2000;
-const MAX_LOAD_TIME = 8000;
+const MIN_DISPLAY_TIME = 800;
+const MAX_LOAD_TIME = 3000;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
@@ -24,35 +24,20 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 800);
+      }, 400);
     }, remaining);
   }, [startTime, onComplete]);
 
   // Track real loading progress — wait for ALL page images
   useEffect(() => {
     let loadedCount = 0;
-    let totalTasks = 2; // start with video + fonts, images added dynamically
+    let totalTasks = 1; // fonts only
 
     const updateReal = () => {
       realProgress.current = Math.min((loadedCount / totalTasks) * 100, 100);
     };
 
-    // 1. Hero video preload
-    const video = document.createElement('video');
-    video.src = '/videos/hero-background.mp4#t=0.001';
-    video.preload = 'auto';
-    video.muted = true;
-    video.playsInline = true;
-    video.load();
-
-    const onVideoReady = () => {
-      loadedCount++;
-      updateReal();
-    };
-    video.addEventListener('canplaythrough', onVideoReady, { once: true });
-    video.addEventListener('loadeddata', onVideoReady, { once: true });
-
-    // 2. Fonts ready
+    // 1. Fonts ready
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => {
         loadedCount++;
@@ -63,20 +48,17 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       updateReal();
     }
 
-    // 3. Wait for ALL images on the page to load
+    // 2. Wait for visible images (eager only, skip lazy)
     const waitForAllImages = () => {
-      const allImages = document.querySelectorAll('img[src]');
-      const pendingImages = Array.from(allImages).filter(img => !(img as HTMLImageElement).complete);
+      const eagerImages = document.querySelectorAll('img[loading="eager"]');
+      const pendingImages = Array.from(eagerImages).filter(img => !(img as HTMLImageElement).complete);
 
       if (pendingImages.length === 0) {
-        // All images already loaded
-        totalTasks = 3;
-        loadedCount = 3;
-        updateReal();
+        realProgress.current = 100;
         return;
       }
 
-      totalTasks = 2 + pendingImages.length;
+      totalTasks = 1 + pendingImages.length;
       let imgLoadedCount = 0;
 
       pendingImages.forEach((img) => {
@@ -99,10 +81,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     }, MAX_LOAD_TIME);
 
     return () => {
-      video.removeEventListener('canplaythrough', onVideoReady);
-      video.removeEventListener('loadeddata', onVideoReady);
-      video.pause();
-      video.src = '';
       clearTimeout(maxTimer);
       clearTimeout(imgTimer);
     };
