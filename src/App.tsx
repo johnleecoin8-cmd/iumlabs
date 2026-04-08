@@ -159,7 +159,7 @@ const AppRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
-        <Route path="/services/all" element={<MobileServicesPage />} />
+        <Route path="/services/all" element={<Navigate to="/services/gtm" replace />} />
         <Route path="/services/gtm" element={<GTMService />} />
         <Route path="/services/compliance" element={<BrandingService />} />
         <Route path="/services/branding" element={<Navigate to="/services/compliance" replace />} />
