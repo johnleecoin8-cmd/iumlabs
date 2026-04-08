@@ -25,10 +25,10 @@ const ResultCard = ({ metric, index, glowColor }: { metric: ProjectMetric; index
       transition={{ duration: 0.5, delay: index * 0.08 }}
     >
       <div className="absolute top-0 left-0 h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${glowColor}, transparent)` }} />
-      <span className="block text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-none">
+      <span className="block text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-tight leading-none">
         {numericMatch ? displayValue : metric.value}
       </span>
-      <span className="block text-xs md:text-sm text-white/50 mt-2 tracking-wide">{metric.label}</span>
+      <span className="block text-[10px] md:text-xs text-white/50 mt-2 tracking-wide">{metric.label}</span>
     </motion.div>
   );
 };
