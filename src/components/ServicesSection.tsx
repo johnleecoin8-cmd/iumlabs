@@ -151,13 +151,14 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.01, rootMargin: '100px', triggerOnce: true });
 
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-      style={{ transitionDelay: `${(index % 3) * 80}ms` }}
+      className={`transition-all duration-700 ease-out ${isMobile || isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+      style={{ transitionDelay: isMobile ? '0ms' : `${(index % 3) * 80}ms` }}
     >
       <Link
         to={service.link}
