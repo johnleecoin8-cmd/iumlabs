@@ -56,7 +56,18 @@ const Index = () => {
           </AnimatedSection>
         </div>
       </section>
-      
+
+      {/* As Featured In */}
+      <section className="sm:px-4 sm:pt-3 snap-start">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] py-8 sm:py-10">
+          <p className="text-[10px] text-white/25 uppercase tracking-[0.25em] text-center mb-5 font-mono">As Featured In</p>
+          <div className="flex items-center justify-center gap-6 sm:gap-10 flex-wrap px-6">
+            {["CoinDesk Korea", "Block Media", "TokenPost", "Naver", "Bloomberg"].map(name => (
+              <span key={name} className="text-white/30 hover:text-white/60 transition-colors text-xs sm:text-sm font-bold tracking-wide cursor-default">{name}</span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Selected Work */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
