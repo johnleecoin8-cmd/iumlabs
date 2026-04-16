@@ -116,9 +116,9 @@ const KInfluenceGrid = () => {
       return true;
     });
 
-    // Sort by rank and slice to top 20
-    const sorted = filtered.sort((a, b) => a.rank - b.rank);
-    const sliced = sorted.slice(0, 20);
+    // Sort by score (descending) to get true top 20, then reassign clean ranks
+    const sorted = filtered.sort((a, b) => b.score - a.score);
+    const sliced = sorted.slice(0, 20).map((p, i) => ({ ...p, rank: i + 1 }));
 
     const totalScore = sliced.reduce((sum, p) => sum + Number(p.score), 0);
     

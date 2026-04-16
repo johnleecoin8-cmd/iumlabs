@@ -57,16 +57,24 @@ export const useHypeProjects = () => {
         .order('rank', { ascending: true });
       
       if (error) throw error;
-      
+
+      // Filter out invalid/unwanted projects and stale data
+      const EXCLUDED_TICKERS = ['PEAQ'];
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      const filtered = (data as HypeProject[]).filter(p =>
+        !EXCLUDED_TICKERS.includes(p.ticker) &&
+        new Date(p.updated_at) >= sevenDaysAgo
+      );
+
       // Set last update time from most recent project
-      if (data && data.length > 0) {
-        const mostRecent = data.reduce((latest, p) => 
+      if (filtered.length > 0) {
+        const mostRecent = filtered.reduce((latest, p) =>
           new Date(p.updated_at) > new Date(latest.updated_at) ? p : latest
-        , data[0]);
+        , filtered[0]);
         setLastUpdate(new Date(mostRecent.updated_at));
       }
-      
-      return data as HypeProject[];
+
+      return filtered;
     },
     refetchInterval: 60000, // Refetch every minute as backup
   });
