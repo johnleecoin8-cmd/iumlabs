@@ -207,14 +207,14 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
-            <span className="block">Your Web3 Ecosystem</span>
-            <span className="block">Growth Partner</span>
+            <span className="block">Korea Crypto KOL &</span>
+            <span className="block">Influencer Marketing Agency</span>
           </h1>
 
           {/* Subtext */}
-          <p className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide sm:whitespace-nowrap leading-[1.6] px-1 sm:px-0">
-            22+ projects trusted us to land in Korea.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Yours is next.
-          </p>
+          <h2 className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
+            Crypto marketing agency in Korea specializing in Korean KOL networks,<br className="hidden sm:block" /><span className="sm:hidden"> </span>community management, and GTM strategy. Trusted by 22+ Web3 projects<br className="hidden sm:block" /><span className="sm:hidden"> </span>including BNB Chain, Bybit, KuCoin, and Sahara AI.
+          </h2>
 
           {/* CTA */}
           <div className="flex flex-col items-center gap-3">
