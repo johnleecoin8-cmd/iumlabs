@@ -130,14 +130,14 @@
 .gtm-ed .team-title-wrap{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
 .gtm-ed .team-title{font-family:var(--sans);font-weight:800;font-size:clamp(6rem,20vw,22rem);line-height:.85;letter-spacing:-.05em;color:var(--black);opacity:.08;white-space:nowrap;user-select:none}
 .gtm-ed .team-cards{position:relative;max-width:1400px;margin:0 auto;margin-top:-100vh;padding:0 2rem;z-index:5}
-.gtm-ed .tm-card{position:absolute;background:var(--bg);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);box-shadow:0 8px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(60px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.gtm-ed .tm-card{position:absolute;background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 30px rgba(0,0,0,.12);opacity:0;transform:translateY(60px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .gtm-ed .tm-card.visible{opacity:1;transform:translateY(0)}
 .gtm-ed .tm-info{padding:.75rem 1rem .5rem}
-.gtm-ed .tm-info h4{font-weight:700;font-size:.88rem;margin-bottom:.15rem;color:var(--white)}
+.gtm-ed .tm-info h4{font-weight:700;font-size:.88rem;margin-bottom:.15rem;color:#111}
 .gtm-ed .tm-info span{font-size:.6rem;color:var(--blue);letter-spacing:.04em;font-weight:600}
-.gtm-ed .tm-photo{width:100%;aspect-ratio:1/1.15;position:relative;overflow:hidden}
-.gtm-ed .tm-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);mix-blend-mode:multiply}
-.gtm-ed .tm-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 25%,rgba(45,91,255,.4) 100%);pointer-events:none}
+.gtm-ed .tm-photo{width:100%;aspect-ratio:1/1.15;position:relative;overflow:hidden;background:#fff}
+.gtm-ed .tm-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.gtm-ed .tm-photo::after{content:none}
 
 /* SECTION TRANSITION GRADIENTS */
 .gtm-ed .fade-dark-to-light{display:none}
