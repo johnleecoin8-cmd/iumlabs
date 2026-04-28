@@ -81,7 +81,9 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                         <span className="text-[#3B82F6] font-medium">looking for support</span>, or just want to get a sense of{" "}
                         <span className="text-[#3B82F6] font-medium">how we work</span>, reach out.{" "}
                         <a
-                          href={`mailto:${brand.email}`}
+                          href={brand.telegramLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="text-[#3B82F6] underline hover:no-underline font-medium"
                         >
                           We're easy to talk to.
@@ -100,10 +102,12 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                         <p className="text-black text-base font-medium">Mon–Fri 09:00 — 18:00 KST</p>
                       </div>
                       <a
-                        href={`mailto:${brand.email}`}
+                        href={brand.telegramLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-black text-white text-sm font-semibold rounded-full hover:bg-black/80 transition-all"
                       >
-                        Send us an Email
+                        Chat on Telegram
                       </a>
                     </motion.div>
                   </motion.div>
@@ -113,7 +117,9 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                     {teamMembers.map((member, i) => (
                       <motion.a
                         key={member.name}
-                        href={`mailto:${brand.email}`}
+                        href={brand.telegramLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="group text-center"
                         initial={{ opacity: 0, y: 30, scale: 0.9 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
