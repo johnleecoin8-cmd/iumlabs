@@ -288,7 +288,7 @@ const GTMService = () => {
       <section className="team-section">
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
-        <div className="team-cards" style={{ minHeight: 4400 }}>
+        <div className="team-cards" style={{ minHeight: 3400 }}>
           <div className="tm-card" style={{ top: 40, left: "0%", width: 400 }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
             <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
@@ -320,10 +320,6 @@ const GTMService = () => {
           <div className="tm-card" style={{ top: 2700, left: "0%", width: 220 }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
             <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" /></div>
-          </div>
-          <div className="tm-card" style={{ top: 2800, left: "56%", width: 380 }}>
-            <div className="tm-info"><h4>Helen</h4><span>Community Moderator</span></div>
-            <div className="tm-photo"><img src={teamDavid} alt="Helen" /></div>
           </div>
         </div>
       </section>
