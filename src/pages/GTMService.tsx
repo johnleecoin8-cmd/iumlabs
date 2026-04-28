@@ -290,19 +290,19 @@ const GTMService = () => {
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
         <div className="team-cards" style={{ minHeight: 3400 }}>
           <div className="tm-card" style={{ top: 40, left: "0%", width: 400 }}>
-            <div className="tm-info"><h4>David</h4><span>CEO</span><span className="tm-tg">david@iumlabs.io</span></div>
+            <div className="tm-info"><h4>David</h4><span>CEO</span><span className="tm-tg">@shinkimsangyeol</span></div>
             <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
           </div>
           <div className="tm-card" style={{ top: 100, left: "74%", width: 240 }}>
-            <div className="tm-info"><h4>Bennet</h4><span>COO</span><span className="tm-tg">bennet@iumlabs.io</span></div>
+            <div className="tm-info"><h4>Bennet</h4><span>COO</span><span className="tm-tg">@Bennet_12</span></div>
             <div className="tm-photo"><img src={teamBennet} alt="Bennet" /></div>
           </div>
           <div className="tm-card" style={{ top: 650, left: "52%", width: 460 }}>
-            <div className="tm-info"><h4>J</h4><span>CMO</span><span className="tm-tg">j@iumlabs.io</span></div>
+            <div className="tm-info"><h4>J</h4><span>CMO</span><span className="tm-tg">@krkrjnjn</span></div>
             <div className="tm-photo"><img src={teamJ} alt="J" /></div>
           </div>
           <div className="tm-card" style={{ top: 1050, left: "0%", width: 190 }}>
-            <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span><span className="tm-tg">kevin@iumlabs.io</span></div>
+            <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span><span className="tm-tg">@iumlabskevin</span></div>
             <div className="tm-photo"><img src={teamHelen} alt="Kevin" /></div>
           </div>
           <div className="tm-card" style={{ top: 1500, left: "18%", width: 320 }}>
