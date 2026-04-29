@@ -213,7 +213,7 @@ const HeroSection = () => {
 
           {/* Subtext */}
           <h2 className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
-            Crypto marketing agency in Korea specializing in Korean KOL networks,<br className="hidden sm:block" /><span className="sm:hidden"> </span>community management, and GTM strategy. Trusted by 22+ Web3 projects<br className="hidden sm:block" /><span className="sm:hidden"> </span>including BNB Chain, Bybit, KuCoin, and Sahara AI.
+We don't pitch decks. We run campaigns.<br className="hidden sm:block" /><span className="sm:hidden"> </span>KOL networks, GTM, community — built and operated across Korea and Asia<br className="hidden sm:block" /><span className="sm:hidden"> </span>for the projects that actually move markets.
           </h2>
 
           {/* CTA */}
