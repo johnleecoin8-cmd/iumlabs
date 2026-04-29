@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import CalendlyButton from "./CalendlyButton";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/ium-logo.png";
 
 const serviceItems = [
   { name: "Web3 GTM Strategy", href: "/services/gtm" },

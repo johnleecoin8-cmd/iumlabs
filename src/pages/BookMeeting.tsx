@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { brand } from "@/config/content";
-import logoImage from "@/assets/logo.png";
+import logoImage from "@/assets/ium-logo.png";
 import SEOHead from "@/components/SEOHead";
 
 const BookMeeting = () => {
