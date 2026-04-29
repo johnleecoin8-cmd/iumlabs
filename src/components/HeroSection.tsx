@@ -213,7 +213,7 @@ const HeroSection = () => {
 
           {/* Subtext */}
           <h2 className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
-We don't pitch decks. We run campaigns.<br className="hidden sm:block" /><span className="sm:hidden"> </span>KOL networks, GTM, community — built and operated across Korea and Asia<br className="hidden sm:block" /><span className="sm:hidden"> </span>for the projects that actually move markets.
+Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide — KOL, GTM, and community run by people<br className="hidden sm:block" /><span className="sm:hidden"> </span>who've done it from inside the exchanges.
           </h2>
 
           {/* CTA */}
