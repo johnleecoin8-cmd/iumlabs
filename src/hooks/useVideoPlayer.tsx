@@ -263,8 +263,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     timeoutRef.current = setTimeout(() => {
       if (!isVideoReady) {
-        console.warn(`Video load timeout after ${loadTimeout}ms, showing poster`);
-        setIsVideoReady(true); // Allow graceful fallback
+        console.warn(`Video load timeout after ${loadTimeout}ms, falling back to poster`);
+        setHasVideoError(true); // show poster, don't fake isVideoReady
       }
     }, loadTimeout);
 
@@ -357,15 +357,19 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       transition: 'opacity 300ms ease',
     } as React.CSSProperties,
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
-      setIsVideoReady(true);
+      // Don't set isVideoReady here — wait for onPlaying so the video is
+      // actually running before we swap poster → video (iOS autoplay fix)
       tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
-      if (!isVideoReady) setIsVideoReady(true);
       tryPlay(e.currentTarget);
     },
+    onPlaying: () => {
+      // Only mark ready when the video is genuinely playing
+      setIsVideoReady(true);
+    },
     onLoadedData: () => {
-      if (!isVideoReady) setIsVideoReady(true);
+      // no-op: isVideoReady is set by onPlaying instead
     },
     onError: handleError,
   };
