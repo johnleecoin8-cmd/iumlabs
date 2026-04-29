@@ -207,8 +207,8 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
-            <span className="block">Korea Crypto KOL &</span>
-            <span className="block">Influencer Marketing Agency</span>
+            <span className="block">Your APAC Crypto</span>
+            <span className="block">Ecosystem Growth Agency</span>
           </h1>
 
           {/* Subtext */}
