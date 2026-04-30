@@ -208,12 +208,21 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
   // Retry play logic for mobile browsers - immediate
-  const tryPlay = useCallback((video: HTMLVideoElement) => {
+  const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     video.muted = true;
-    video.play().catch(() => {
+    try {
+      await video.play();
+      setIsVideoReady(true);
+    } catch {
       // Single retry after 100ms
-      setTimeout(() => { video.muted = true; video.play().catch(() => {}); }, 100);
-    });
+      setTimeout(async () => {
+        try {
+          video.muted = true;
+          await video.play();
+          setIsVideoReady(true);
+        } catch {}
+      }, 100);
+    }
   }, []);
 
   // Handle network error with retry
