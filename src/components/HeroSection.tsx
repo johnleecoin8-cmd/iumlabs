@@ -207,13 +207,13 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
-            <span className="block">Your APAC Crypto</span>
-            <span className="block">Ecosystem Growth Agency</span>
+            <span className="block">our APAC Crypto Ecosystem</span>
+            <span className="block">Growth Agency</span>
           </h1>
 
           {/* Subtext */}
           <h2 className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
-Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide — KOL, GTM, and community run by people<br className="hidden sm:block" /><span className="sm:hidden"> </span>who've done it from inside the exchanges.
+Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide.
           </h2>
 
           {/* CTA */}
