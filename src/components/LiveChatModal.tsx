@@ -11,8 +11,8 @@ interface LiveChatModalProps {
 }
 
 const teamMembers = [
-  { name: "J", role: "CMO", image: jPhoto },
   { name: "David", role: "CEO", image: davidPhoto },
+  { name: "J", role: "CMO", image: jPhoto },
   { name: "Suki", role: "Managing Partner", image: sukiPhoto },
 ];
 

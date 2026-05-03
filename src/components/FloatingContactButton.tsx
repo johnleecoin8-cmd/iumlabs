@@ -17,7 +17,7 @@ const FloatingContactButton = () => {
   }, {
     icon: Mail,
     label: "Email Us",
-    href: "mailto:admin@iumlabs.io",
+    href: "mailto:info@iumlabs.io",
     color: "bg-[#EA4335]"
   }, {
     icon: Send,
