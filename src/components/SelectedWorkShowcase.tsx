@@ -172,6 +172,7 @@ const DesktopShowcase = () => {
   const mountedIndices = getMountedIndices(activeIndex);
 
   useEffect(() => {
+    if (isMobile) return; // Don't play videos on mobile to avoid resource overload
     Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
       if (!video) return;
       const idx = Number(idxStr);
@@ -196,6 +197,7 @@ const DesktopShowcase = () => {
     setVideoReady(prev => ({ ...prev, [index]: true }));
     setLoadedSet(prev => new Set(prev).add(index));
   };
+
 
   return (
     <section ref={ref} className="relative bg-black overflow-hidden h-[80vh] lg:h-[90vh]">
