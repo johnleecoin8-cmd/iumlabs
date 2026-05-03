@@ -172,6 +172,7 @@ const DesktopShowcase = () => {
   const mountedIndices = getMountedIndices(activeIndex);
 
   useEffect(() => {
+    if (isMobile) return; // Don't play videos on mobile to avoid resource overload
     Object.entries(videoRefs.current).forEach(([idxStr, video]) => {
       if (!video) return;
       const idx = Number(idxStr);
@@ -197,11 +198,12 @@ const DesktopShowcase = () => {
     setLoadedSet(prev => new Set(prev).add(index));
   };
 
+
   return (
     <section ref={ref} className="relative bg-black overflow-hidden h-[80vh] lg:h-[90vh]">
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
-        const shouldMountVideo = mountedIndices.has(i);
+        const shouldMountVideo = !isMobile && mountedIndices.has(i);
         const isVideoReady = videoReady[i];
 
         return (
@@ -216,7 +218,7 @@ const DesktopShowcase = () => {
               loading={Math.abs(i - activeIndex) <= BUFFER_RANGE ? "eager" : "lazy"}
               decoding="async"
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                project.video && isActive && isVideoReady ? 'opacity-0' : 'opacity-100'
+                project.video && isActive && isVideoReady && !isMobile ? 'opacity-0' : 'opacity-100'
               }`}
             />
             {project.video && shouldMountVideo && (
