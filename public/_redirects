@@ -14,11 +14,6 @@
 /community-growth  /services/community  301
 /research-data  /services/deep-research  301
 
-# 301 Redirects for removed/non-existent project pages (prevent Soft 404)
-/projects/ondo  /projects  301
-/projects/zkpass  /projects  301
-/projects/story-protocol  /projects  301
-
 # 301 Redirect for legacy service routes (prevent Soft 404)
 /services/social-media  /services/community  301
 
