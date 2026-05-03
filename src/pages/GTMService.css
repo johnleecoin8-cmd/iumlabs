@@ -55,8 +55,11 @@
 
 /* MANIFESTO */
 .gtm-ed .manifesto{padding:10rem 0}
+.gtm-ed .manifesto-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 .gtm-ed .manifesto p{font-family:var(--sans);font-weight:300;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.7;max-width:960px;color:var(--char);letter-spacing:-.01em;overflow-wrap:break-word;word-break:normal}
 .gtm-ed .manifesto p strong{font-weight:600;color:var(--black)}
+.gtm-ed .manifesto-video{border-radius:16px;overflow:hidden;aspect-ratio:9/16;max-height:600px;width:auto;margin:0 auto}
+.gtm-ed .manifesto-video video{width:100%;height:100%;object-fit:cover}
 
 /* SERVICES — R/GA MEGA BLOCKS */
 .gtm-ed .svc-sec{padding:0 0 8rem}
@@ -218,7 +221,9 @@
 
   /* Manifesto */
   .gtm-ed .manifesto{padding:5rem 0}
+  .gtm-ed .manifesto-grid{grid-template-columns:1fr;gap:2.5rem}
   .gtm-ed .manifesto p{font-size:clamp(1.3rem,5vw,1.8rem)}
+  .gtm-ed .manifesto-video{max-height:450px}
 
   /* Services */
   .gtm-ed .svc-main{grid-template-columns:40px 1fr}
@@ -283,6 +288,7 @@
   .gtm-ed .svc-toggle{font-size:.6rem}
   .gtm-ed .svc-cta{font-size:.6rem;padding:.5rem 1rem}
   .gtm-ed .manifesto p{font-size:clamp(1.15rem,4.5vw,1.5rem)}
+  .gtm-ed .manifesto-video{max-height:380px}
   .gtm-ed .pill h4{font-size:.9rem}
   .gtm-ed .pill p{font-size:.82rem}
   .gtm-ed .reg-country-name{font-size:.88rem}
