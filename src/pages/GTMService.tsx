@@ -18,14 +18,13 @@ import saharaImg from "@/assets/campaigns/sahara-ai-event.jpg";
 import polygonImg from "@/assets/campaigns/polygon-connect.jpg";
 // Team photos
 import teamDavid from "@/assets/team/david-ceo.jpg";
-import teamBennet from "@/assets/team/rachel-design.jpg";
+import teamBennet from "@/assets/team/bennet-coo.jpg";
 import teamJ from "@/assets/team/j-cmo.jpg";
 import teamKevin from "@/assets/team/kevin-bd-new.jpg";
+import teamSuki from "@/assets/team/suki-partner.jpg";
 import teamLewis from "@/assets/team/lewis-pr.jpg";
-import teamRachel from "@/assets/team/bennet-coo.jpg";
-import teamSuki from "@/assets/team/kevin-bd.jpg";
+import teamRachel from "@/assets/team/rachel-design.jpg";
 import teamHyukjae from "@/assets/team/hyukjae-bdm-new.jpg";
-import teamHelen from "@/assets/team/helen-cm.jpg";
 // Service images
 import svcGtmImg from "@/assets/services/gtm-strategy.jpg";
 import svcKolImg from "@/assets/services/kol-network.jpg";
@@ -291,7 +290,7 @@ const GTMService = () => {
         <div className="team-cards" style={{ minHeight: 3400 }}>
           <div className="tm-card" style={{ top: 40, left: "0%", width: 400 }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
-            <div className="tm-photo"><img src={teamKevin} alt="David" /></div>
+            <div className="tm-photo"><img src={teamDavid} alt="David" /></div>
           </div>
           <div className="tm-card" style={{ top: 100, left: "74%", width: 240 }}>
             <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
@@ -303,11 +302,11 @@ const GTMService = () => {
           </div>
           <div className="tm-card" style={{ top: 1050, left: "0%", width: 190 }}>
             <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
-            <div className="tm-photo"><img src={teamHelen} alt="Kevin" /></div>
+            <div className="tm-photo"><img src={teamKevin} alt="Kevin" /></div>
           </div>
           <div className="tm-card" style={{ top: 1500, left: "18%", width: 320 }}>
             <div className="tm-info"><h4>Suki</h4><span>Managing Partner</span></div>
-            <div className="tm-photo"><img src={teamRachel} alt="Suki" /></div>
+            <div className="tm-photo"><img src={teamSuki} alt="Suki" /></div>
           </div>
           <div className="tm-card" style={{ top: 1550, left: "68%", width: 280 }}>
             <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
@@ -315,7 +314,7 @@ const GTMService = () => {
           </div>
           <div className="tm-card" style={{ top: 2100, left: "35%", width: 440 }}>
             <div className="tm-info"><h4>Rachel</h4><span>Designer</span></div>
-            <div className="tm-photo"><img src={teamSuki} alt="Rachel" /></div>
+            <div className="tm-photo"><img src={teamRachel} alt="Rachel" /></div>
           </div>
           <div className="tm-card" style={{ top: 2700, left: "0%", width: 220 }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
