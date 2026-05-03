@@ -283,8 +283,8 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TEAM — scatter / lunarstrategy layout */}
-      <section className="team-section">
+      {/* TEAM — hidden via display:none (kept in code) */}
+      <section className="team-section" style={{ display: 'none' }}>
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
         <div className="team-cards" style={{ minHeight: 3400 }}>
@@ -322,7 +322,7 @@ const GTMService = () => {
           </div>
         </div>
       </section>
-      <div style={{ height: "20vh" }} />
+
 
       {/* REGIONS */}
       <section className="regions-sec">
