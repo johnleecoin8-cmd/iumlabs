@@ -117,18 +117,6 @@ const GTMService = () => {
   }, []);
 
   useEffect(() => {
-    // Team cards — IntersectionObserver (separate from GSAP to avoid revert conflicts)
-    const teamCards = document.querySelectorAll(".gtm-ed .tm-card");
-    const teamObs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); teamObs.unobserve(e.target); } });
-    }, { threshold: 0.05, rootMargin: "0px 0px 200px 0px" });
-    teamCards.forEach(c => teamObs.observe(c));
-
-    // Fallback: ensure cards are visible even if observer fails
-    const fallbackTimer = setTimeout(() => {
-      teamCards.forEach(c => c.classList.add("visible"));
-    }, 3000);
-
     const ctx = gsap.context(() => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .2, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-desc", { y: 30, opacity: 0, duration: 1, delay: .6, ease: "power3.out" });
@@ -163,7 +151,7 @@ const GTMService = () => {
       }
     }, containerRef);
 
-    return () => { clearTimeout(fallbackTimer); teamObs.disconnect(); ctx.revert(); };
+    return () => { ctx.revert(); };
   }, []);
 
   return (

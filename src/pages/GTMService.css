@@ -133,8 +133,7 @@
 .gtm-ed .team-title-wrap{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
 .gtm-ed .team-title{font-family:var(--sans);font-weight:800;font-size:clamp(6rem,20vw,22rem);line-height:.85;letter-spacing:-.05em;color:#000;opacity:.04;white-space:nowrap;user-select:none}
 .gtm-ed .team-cards{position:relative;max-width:1400px;margin:0 auto;margin-top:-100vh;padding:0 2rem;z-index:5}
-.gtm-ed .tm-card{position:absolute;background:#ffffff !important;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 40px rgba(0,0,0,.1);opacity:0;transform:translateY(60px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.gtm-ed .tm-card.visible{opacity:1;transform:translateY(0)}
+.gtm-ed .tm-card{position:absolute;background:#ffffff !important;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 40px rgba(0,0,0,.1);opacity:1;transform:translateY(0)}
 .gtm-ed .tm-info{padding:.75rem 1rem .5rem;background:#ffffff}
 .gtm-ed .tm-info h4{font-weight:700;font-size:.88rem;margin-bottom:.15rem;color:#111 !important}
 .gtm-ed .tm-info span{font-size:.6rem;color:#2d5bff;letter-spacing:.04em;font-weight:600}
