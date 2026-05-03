@@ -91,7 +91,7 @@ const fallbackImages: Record<string, {
     logo: polygonLogo,
     bgImage: polygonConnect
   },
-  'ondo-finance': {
+  'ondo': {
     logo: ondoLogo,
     bgImage: ondoCampaign
   },

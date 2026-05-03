@@ -18,7 +18,7 @@ const founders = [
     background: "Ex-Korea Lead @ KuCoin, Ex-VC @ Outlier Ventures",
     image: images.team.james,
     linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
-    telegram: "https://t.me/cryptobridgekorea",
+    telegram: "https://t.me/iumlabs",
     color: "border-red-200 hover:border-red-400",
   },
   {
@@ -26,8 +26,8 @@ const founders = [
     role: "Co-Founder",
     background: "Ex-Head of BD @ Binance, Ex-Analyst @ 21shares",
     image: images.team.david,
-    linkedin: "https://www.linkedin.com/company/cryptobridge",
-    telegram: "https://t.me/cryptobridgekorea",
+    linkedin: "https://www.linkedin.com/company/iumlabs",
+    telegram: "https://t.me/iumlabs",
     color: "border-blue-200 hover:border-blue-400",
   },
 ];

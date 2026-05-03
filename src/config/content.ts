@@ -17,7 +17,7 @@ export const brand = {
   telegramLink: "https://t.me/iumlabs",
   linkedin: "https://www.linkedin.com/company/iumlabs",
   twitter: "https://x.com/iumlabs",
-  calendlyUrl: "https://calendly.com/cryptobridgekorea/30min",
+  calendlyUrl: "https://calendly.com/iumlabs/30min",
   copyright: `© ${new Date().getFullYear()} ium Labs`,
 };
 
@@ -304,7 +304,7 @@ export const footer = {
 // =====================================================
 export const about = {
   pageTitle: "About Us",
-  pageDescription: "CryptoBridge is Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
+  pageDescription: "ium Labs is Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
   
   mission: {
     title: "Our <highlight>Mission</highlight>",
@@ -367,7 +367,7 @@ export const contact = {
     emailLabel: "Email *",
     emailPlaceholder: "hello@example.com",
     companyLabel: "Company/Project",
-    companyPlaceholder: "CryptoBridge",
+    companyPlaceholder: "Your Project",
     messageLabel: "Message *",
     messagePlaceholder: "Tell us about your project...",
     submitButton: "Send Message",
@@ -452,7 +452,7 @@ export const projectColors = {
     glow: "rgba(130, 71, 229, 0.5)",
     name: "Polygon",
   },
-  "ondo-finance": {
+  "ondo": {
     primary: "#3B82F6",
     glow: "rgba(59, 130, 246, 0.5)",
     name: "Ondo Finance",

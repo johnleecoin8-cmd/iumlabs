@@ -56,7 +56,7 @@ const clientLogos = [
   { name: "BNB Chain", logo: bnbLogo, noInvert: false, slug: "bnb-chain" },
   { name: "KuCoin", logo: kucoinLogo, noInvert: true, slug: "kucoin" },
   { name: "Polygon", logo: polygonLogo, noInvert: false, slug: "polygon" },
-  { name: "Ondo Finance", logo: ondoLogo, noInvert: false, slug: "ondo-finance" },
+  { name: "Ondo Finance", logo: ondoLogo, noInvert: false, slug: "ondo" },
   { name: "Bybit", logo: bybitLogo, noInvert: false, slug: "bybit" },
   { name: "SpaceCoin", logo: spacecoinLogo, noInvert: true, slug: "spacecoin" },
   { name: "Tria", logo: triaLogo, noInvert: true, slug: "tria" },

@@ -129,6 +129,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [quality, setQuality] = useState<'low' | 'high' | 'auto'>('auto');
   const [retryCount, setRetryCount] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const playingRef = useRef(false);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -207,22 +208,23 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return getVideoSource(baseSrc, forceFirstFrame);
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
-  // Retry play logic for mobile browsers - immediate
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
+    if (playingRef.current || !video.paused) return;
+    playingRef.current = true;
     video.muted = true;
     try {
       await video.play();
-      setIsVideoReady(true);
     } catch {
-      // Single retry after 100ms
       setTimeout(async () => {
         try {
           video.muted = true;
           await video.play();
-          setIsVideoReady(true);
-        } catch {}
-      }, 100);
+        } catch { /* onError handles real failures */ }
+        playingRef.current = false;
+      }, 200);
+      return;
     }
+    playingRef.current = false;
   }, []);
 
   // Handle network error with retry
@@ -271,9 +273,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     if (shouldDisableVideo || hasVideoError || isVideoReady) return;
 
     timeoutRef.current = setTimeout(() => {
-      if (!isVideoReady) {
-        console.warn(`Video load timeout after ${loadTimeout}ms, falling back to poster`);
-        setHasVideoError(true); // show poster, don't fake isVideoReady
+      if (!isVideoReady && videoRef.current) {
+        playingRef.current = false;
+        tryPlay(videoRef.current);
       }
     }, loadTimeout);
 
@@ -282,7 +284,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout]);
+  }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout, tryPlay]);
 
   // Auto-play on mount if enabled - with visibility detection
   useEffect(() => {
@@ -366,12 +368,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       transition: 'opacity 300ms ease',
     } as React.CSSProperties,
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
-      // Don't set isVideoReady here — wait for onPlaying so the video is
-      // actually running before we swap poster → video (iOS autoplay fix)
-      tryPlay(e.currentTarget);
+      if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
-      tryPlay(e.currentTarget);
+      if (e.currentTarget.paused && !isVideoReady) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
       // Only mark ready when the video is genuinely playing
