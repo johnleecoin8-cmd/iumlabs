@@ -241,8 +241,10 @@
   .gtm-ed .appr-l h2{font-size:clamp(1.6rem,5vw,2.2rem)}
   .gtm-ed .pill-n{font-size:1.6rem}
 
-  /* Team — use same scatter layout as desktop */
-  .gtm-ed .team-cards{padding:0 1rem}
+  /* Team — scale desktop scatter to fit mobile viewport */
+  .gtm-ed .team-section{overflow:hidden}
+  .gtm-ed .team-title-wrap{height:50vh}
+  .gtm-ed .team-cards{padding:0;transform:scale(0.35);transform-origin:top left;width:286%;margin-top:-50vh;margin-bottom:-2210px}
 
   /* Regions */
   .gtm-ed .regions-sec{padding:5rem 0}
