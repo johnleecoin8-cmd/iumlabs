@@ -29,7 +29,6 @@ Disallow: /*?s=
 Disallow: /*?search=
 Disallow: /*?filter=
 Disallow: /*?sort=
-Disallow: /*?page=
 
 # Sitemap location
 Sitemap: https://iumlabs.io/sitemap.xml

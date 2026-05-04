@@ -531,6 +531,50 @@ const ResearchDetail = () => {
       )}
 
 
+      {/* Related Services */}
+      <section className="bg-[#111] py-20 border-t border-white/10">
+        <div className="container mx-auto max-w-7xl px-4">
+          <h2 className="text-2xl md:text-3xl font-light text-white mb-4">
+            Explore Our Services
+          </h2>
+          <p className="text-white/50 mb-10 max-w-2xl">
+            Discover how ium Labs helps Web3 projects succeed in the Korean market with tailored marketing strategies.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { to: "/services/gtm", label: "GTM Strategy", desc: "Go-to-market strategy for Korea's Web3 ecosystem" },
+              { to: "/services/kol-marketing", label: "KOL Marketing", desc: "Influencer partnerships that drive real engagement" },
+              { to: "/services/seo-ads", label: "SEO & Naver Ads", desc: "Search visibility on Korea's dominant platforms" },
+              { to: "/services/community", label: "Community Management", desc: "Build and grow loyal Korean communities" },
+            ].map((service) => (
+              <Link
+                key={service.to}
+                to={service.to}
+                className="group block p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/25 hover:bg-white/[0.06] transition-all duration-300"
+              >
+                <h3 className="text-lg font-medium text-white mb-2 group-hover:text-primary transition-colors">
+                  {service.label}
+                </h3>
+                <p className="text-sm text-white/40 leading-relaxed">
+                  {service.desc}
+                </p>
+                <span className="inline-flex items-center gap-1 mt-4 text-sm text-white/30 group-hover:text-primary/80 group-hover:gap-2 transition-all">
+                  Learn more <ChevronRight className="w-3.5 h-3.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-black font-medium hover:bg-primary/90 transition-colors"
+            >
+              Get a Consultation <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Footer Links */}
       <FooterLinksSection />
 

@@ -42,6 +42,13 @@ const KoreaSEONaver = React.lazy(() => import("./pages/seo-landing/KoreaSEONaver
 const KoreaExchangeListing = React.lazy(() => import("./pages/seo-landing/KoreaExchangeListing"));
 const BookMeeting = React.lazy(() => import("./pages/BookMeeting"));
 
+// SEO Article Pages
+const HowToLaunchTokenInKorea = React.lazy(() => import("./pages/seo-articles/how-to-launch-token-in-korea"));
+const KoreanCryptoKOLMarketingGuide = React.lazy(() => import("./pages/seo-articles/korean-crypto-kol-marketing-guide"));
+const NaverSEOForCryptoProjects = React.lazy(() => import("./pages/seo-articles/naver-seo-for-crypto-projects"));
+const KoreaCryptoCommunityBuilding = React.lazy(() => import("./pages/seo-articles/korea-crypto-community-building"));
+const Web3EventMarketingKorea = React.lazy(() => import("./pages/seo-articles/web3-event-marketing-korea"));
+
 // Lazy-loaded admin pages
 const AdminLogin = React.lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = React.lazy(() => import("./pages/admin/AdminDashboard"));
@@ -175,6 +182,12 @@ const AppRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/book-a-meeting" element={<BookMeeting />} />
         <Route path="/blog" element={<Blog />} />
+        {/* SEO Article Pages (static routes before dynamic :slug) */}
+        <Route path="/blog/how-to-launch-token-in-korea" element={<HowToLaunchTokenInKorea />} />
+        <Route path="/blog/korean-crypto-kol-marketing-guide" element={<KoreanCryptoKOLMarketingGuide />} />
+        <Route path="/blog/naver-seo-for-crypto-projects" element={<NaverSEOForCryptoProjects />} />
+        <Route path="/blog/korea-crypto-community-building" element={<KoreaCryptoCommunityBuilding />} />
+        <Route path="/blog/web3-event-marketing-korea" element={<Web3EventMarketingKorea />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/research" element={<Navigate to="/blog" replace />} />
         <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />

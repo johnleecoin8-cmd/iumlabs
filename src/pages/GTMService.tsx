@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
+import ServiceSchema from "@/components/ServiceSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -158,6 +159,7 @@ const GTMService = () => {
   return (
     <div className="gtm-ed" ref={containerRef}>
       <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Korea-focused Web3 GTM agency. Korean market activation, KOL management, and campaign execution." path="/services/gtm" image={gtmHeroImage} keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
+      <ServiceSchema name="Korea Web3 GTM Strategy" description="Korea-focused Web3 GTM agency. Full-stack Go-To-Market planning, Korean market activation, KOL management, and campaign execution." url="/services/gtm" serviceType={["Go-To-Market Strategy", "Market Entry Consulting", "Web3 Marketing"]} />
       <Navbar />
 
       {/* HERO */}
