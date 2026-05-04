@@ -169,7 +169,7 @@ const GTMService = () => {
         <div className="hero-overlay" />
         <div className="hero-center">
           <h1>Seoul Moves Fast.<br /><span className="hero-accent">We Make You Land.</span></h1>
-          <p className="hero-desc">Korea doesn't work like any other market. Retail-driven, trust-first, and brutally fast. Most agencies translate your global deck and call it localization. We don't. We rebuild your <strong>narrative</strong>, activate <strong>real KOLs</strong>, build <strong>communities that stay</strong>, and run <strong>events that convert</strong>.</p>
+          <p className="hero-desc">Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <strong>narrative</strong>, activate <strong>real KOLs</strong>, and run <strong>campaigns that convert</strong>.</p>
         </div>
         <div className="hero-stats">
           <div className="hero-stat"><div className="hero-stat-big">$7B+</div><div className="hero-stat-sub">Client Valuation</div></div>
