@@ -203,11 +203,10 @@
   .gtm-ed .hero-ed h1{font-size:clamp(2.4rem,10vw,3.5rem)}
   .gtm-ed .hero-center{padding:0 1.5rem}
   .gtm-ed .hero-desc{font-size:.88rem;margin-top:1.5rem}
-  .gtm-ed .hero-stats{grid-template-columns:repeat(2,1fr)}
-  .gtm-ed .hero-stat{padding:1.2rem 1rem}
-  .gtm-ed .hero-stat-big{font-size:clamp(1.5rem,6vw,2rem)}
+  .gtm-ed .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .gtm-ed .hero-stat{padding:1.2rem .5rem}
+  .gtm-ed .hero-stat-big{font-size:clamp(1.3rem,5vw,1.8rem)}
   .gtm-ed .hero-stat-sub{font-size:.45rem}
-  .gtm-ed .hero-stat:nth-child(n+3){border-top:1px solid rgba(255,255,255,.1)}
 
   /* Why Korea */
   .gtm-ed .wk-grid{grid-template-columns:1fr 1fr;gap:0}
@@ -289,10 +288,10 @@
 @media(max-width:480px){
   .gtm-ed .hero-center{padding:0 1rem}
   .gtm-ed .hero-ed h1{font-size:clamp(2rem,9vw,3rem)}
-  .gtm-ed .hero-stats{grid-template-columns:repeat(2,1fr)}
-  .gtm-ed .hero-stat{padding:1rem .75rem}
-  .gtm-ed .hero-stat-big{font-size:clamp(1.3rem,5vw,1.8rem)}
-  .gtm-ed .hero-stat-sub{font-size:.45rem;letter-spacing:.08em}
+  .gtm-ed .hero-stats{grid-template-columns:repeat(3,1fr)}
+  .gtm-ed .hero-stat{padding:.8rem .5rem}
+  .gtm-ed .hero-stat-big{font-size:clamp(1.1rem,4.5vw,1.5rem)}
+  .gtm-ed .hero-stat-sub{font-size:.4rem;letter-spacing:.08em}
   .gtm-ed .svc-main{grid-template-columns:32px 1fr;padding:2rem 0}
   .gtm-ed .svc-num{font-size:1.5rem}
   .gtm-ed .svc-title{font-size:1.1rem}
