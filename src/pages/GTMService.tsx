@@ -281,8 +281,8 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* TEAM — hidden via display:none (kept in code) */}
-      <section className="team-section" style={{ display: 'none' }}>
+      {/* TEAM — scatter layout */}
+      <section className="team-section">
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
         <div className="team-cards" style={{ minHeight: 3400 }}>
