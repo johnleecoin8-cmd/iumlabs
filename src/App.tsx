@@ -211,7 +211,34 @@ const AppRoutes = () => {
 };
 
 // Main App component with intro handling
+const useGlobalAutoplay = () => {
+  useEffect(() => {
+    const playAll = () => {
+      document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach(v => {
+        if (v.paused) v.play().catch(() => {});
+      });
+    };
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting && v.paused) v.play().catch(() => {});
+      });
+    }, { threshold: 0.1 });
+    const observe = () => {
+      document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach(v => io.observe(v));
+    };
+    observe();
+    const mo = new MutationObserver(observe);
+    mo.observe(document.body, { childList: true, subtree: true });
+    const events = ["touchstart", "click", "scroll", "mousemove"] as const;
+    const kick = () => { playAll(); events.forEach(e => document.removeEventListener(e, kick)); };
+    events.forEach(e => document.addEventListener(e, kick, { once: true, passive: true }));
+    return () => { io.disconnect(); mo.disconnect(); events.forEach(e => document.removeEventListener(e, kick)); };
+  }, []);
+};
+
 const AppContent = () => {
+  useGlobalAutoplay();
   const location = useLocation();
   const [showIntro, setShowIntro] = useState(() => {
     // Only show intro on first visit in session and on home page
