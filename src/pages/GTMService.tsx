@@ -118,40 +118,37 @@ const GTMService = () => {
 
   useEffect(() => {
     const isDesktop = window.innerWidth > 768;
+    if (!isDesktop) return;
 
     const ctx = gsap.context(() => {
       gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .2, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-desc", { y: 30, opacity: 0, duration: 1, delay: .6, ease: "power3.out" });
       gsap.from(".gtm-ed .hero-stat", { y: 20, opacity: 0, duration: .8, delay: .9, stagger: .1, ease: "power3.out" });
 
-      if (isDesktop) {
-        gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .pull-q,.gtm-ed .svc-block,.gtm-ed .reg-country,.gtm-ed .reg-map").forEach(el => {
-          gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
+      gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .pull-q,.gtm-ed .svc-block,.gtm-ed .reg-country,.gtm-ed .reg-map").forEach(el => {
+        gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
+      });
+
+      const mp = document.querySelector(".gtm-ed .manifesto p");
+      if (mp) {
+        const html = mp.innerHTML;
+        const parts = html.split(/(<[^>]+>)/);
+        let result = "";
+        parts.forEach(part => {
+          if (part.startsWith("<")) { result += part; return; }
+          part.split(" ").forEach(w => { if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15;margin-right:.3em">${w}</span>`; });
         });
+        mp.innerHTML = result;
+        gsap.utils.toArray<HTMLElement>(".gtm-ed .mw").forEach(w => {
+          gsap.to(w, { opacity: 1, duration: .5, scrollTrigger: { trigger: w, start: "top 90%", end: "top 60%", scrub: 1 }});
+        });
+      }
 
-        // Manifesto word reveal
-        const mp = document.querySelector(".gtm-ed .manifesto p");
-        if (mp) {
-          const html = mp.innerHTML;
-          const parts = html.split(/(<[^>]+>)/);
-          let result = "";
-          parts.forEach(part => {
-            if (part.startsWith("<")) { result += part; return; }
-            part.split(" ").forEach(w => { if (w.trim()) result += `<span class="mw" style="display:inline-block;opacity:.15;margin-right:.3em">${w}</span>`; });
-          });
-          mp.innerHTML = result;
-          gsap.utils.toArray<HTMLElement>(".gtm-ed .mw").forEach(w => {
-            gsap.to(w, { opacity: 1, duration: .5, scrollTrigger: { trigger: w, start: "top 90%", end: "top 60%", scrub: 1 }});
-          });
-        }
-
-        // Horizontal scroll
-        if (workPinRef.current) {
-          const totalW = workPinRef.current.scrollWidth - window.innerWidth;
-          gsap.to(workPinRef.current, { x: -totalW, ease: "none",
-            scrollTrigger: { trigger: ".gtm-ed .work-sec", start: "top top", end: () => `+=${totalW}`, scrub: 1, pin: true, anticipatePin: 1 }
-          });
-        }
+      if (workPinRef.current) {
+        const totalW = workPinRef.current.scrollWidth - window.innerWidth;
+        gsap.to(workPinRef.current, { x: -totalW, ease: "none",
+          scrollTrigger: { trigger: ".gtm-ed .work-sec", start: "top top", end: () => `+=${totalW}`, scrub: 1, pin: true, anticipatePin: 1 }
+        });
       }
     }, containerRef);
 

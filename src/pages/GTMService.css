@@ -236,6 +236,24 @@
   .gtm-ed .work-card{width:100%;height:auto;padding:2.5rem 1.5rem;border-left:none;border-top:1px solid var(--g4)}
   .gtm-ed .wc-metric{font-size:clamp(2rem,8vw,3rem)}
 
+  /* Force all sections visible on mobile (prevent GSAP residuals) */
+  .gtm-ed .approach-ed,
+  .gtm-ed .team-section,
+  .gtm-ed .regions-sec,
+  .gtm-ed .quotes-sec,
+  .gtm-ed .invite{opacity:1 !important;visibility:visible !important;transform:none !important}
+  .gtm-ed .lbl,
+  .gtm-ed .manifesto p,
+  .gtm-ed .pill,
+  .gtm-ed .q-card,
+  .gtm-ed .invite h2,
+  .gtm-ed .invite-kr,
+  .gtm-ed .appr-l,
+  .gtm-ed .pull-q,
+  .gtm-ed .svc-block,
+  .gtm-ed .reg-country,
+  .gtm-ed .reg-map{opacity:1 !important;visibility:visible !important;transform:none !important}
+
   /* Approach */
   .gtm-ed .approach-ed{padding:5rem 0}
   .gtm-ed .appr-l h2{font-size:clamp(1.6rem,5vw,2.2rem)}
@@ -244,9 +262,9 @@
   /* Team — grid layout on mobile */
   .gtm-ed .team-section{overflow:hidden}
   .gtm-ed .team-title-wrap{position:relative;height:auto;padding:3rem 0 1rem}
-  .gtm-ed .team-title{font-size:clamp(3rem,12vw,5rem);opacity:.06}
+  .gtm-ed .team-title{font-size:clamp(3rem,12vw,5rem);opacity:.06 !important}
   .gtm-ed .team-cards{display:grid !important;grid-template-columns:1fr 1fr;gap:12px;padding:0 1rem;margin-top:0;min-height:auto !important;max-width:100%}
-  .gtm-ed .tm-card{position:relative !important;top:auto !important;left:auto !important;width:100% !important;opacity:1}
+  .gtm-ed .tm-card{position:relative !important;top:auto !important;left:auto !important;width:100% !important;opacity:1 !important}
 
   /* Regions */
   .gtm-ed .regions-sec{padding:5rem 0}
