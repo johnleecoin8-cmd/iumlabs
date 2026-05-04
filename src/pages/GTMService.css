@@ -28,7 +28,7 @@
 .gtm-ed .hero-accent{background:linear-gradient(135deg,#b48cde,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 .gtm-ed .hero-desc{font-size:clamp(.88rem,2.5vw,1.1rem);color:rgba(255,255,255,.8);line-height:1.75;font-weight:300;margin-top:2rem;max-width:700px;margin-left:auto;margin-right:auto}
 .gtm-ed .hero-desc strong{font-weight:600;color:#fff}
-.gtm-ed .hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:3;display:grid;grid-template-columns:repeat(5,1fr);background:transparent}
+.gtm-ed .hero-stats{position:absolute;bottom:0;left:0;right:0;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);background:transparent}
 .gtm-ed .hero-stat{padding:2.2rem 1.5rem;text-align:center}
 .gtm-ed .hero-stat-big{font-family:var(--sans);font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.03em;line-height:1;color:#fff}
 .gtm-ed .hero-stat-sub{font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-top:.6rem}
