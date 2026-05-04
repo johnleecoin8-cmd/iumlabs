@@ -231,6 +231,7 @@
   .gtm-ed .svc-desc{font-size:.88rem}
 
   /* Selected Work — vertical stack on mobile */
+  .gtm-ed .work-sec{overflow:visible}
   .gtm-ed .work-pin{display:flex;flex-direction:column;width:100%}
   .gtm-ed .work-intro{width:100%;height:auto;padding:4rem 1.5rem;min-height:0}
   .gtm-ed .work-card{width:100%;height:auto;padding:2.5rem 1.5rem;border-left:none;border-top:1px solid var(--g4)}
