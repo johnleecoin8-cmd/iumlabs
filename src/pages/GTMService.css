@@ -222,7 +222,7 @@
   .gtm-ed .manifesto{padding:5rem 0}
   .gtm-ed .manifesto-grid{grid-template-columns:1fr;gap:2.5rem}
   .gtm-ed .manifesto p{font-size:clamp(1.3rem,5vw,1.8rem)}
-  .gtm-ed .manifesto-video{max-height:450px}
+  .gtm-ed .manifesto-video{max-height:450px;width:100%;aspect-ratio:auto}
 
   /* Services */
   .gtm-ed .svc-main{grid-template-columns:40px 1fr}
@@ -287,7 +287,7 @@
   .gtm-ed .svc-toggle{font-size:.6rem}
   .gtm-ed .svc-cta{font-size:.6rem;padding:.5rem 1rem}
   .gtm-ed .manifesto p{font-size:clamp(1.15rem,4.5vw,1.5rem)}
-  .gtm-ed .manifesto-video{max-height:380px}
+  .gtm-ed .manifesto-video{max-height:380px;width:100%;aspect-ratio:auto}
   .gtm-ed .pill h4{font-size:.9rem}
   .gtm-ed .pill p{font-size:.82rem}
   .gtm-ed .reg-country-name{font-size:.88rem}
