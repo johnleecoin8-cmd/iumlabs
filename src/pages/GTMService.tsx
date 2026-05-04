@@ -17,13 +17,13 @@ import bybitImg from "@/assets/campaigns/bybit-event.jpg";
 import saharaImg from "@/assets/campaigns/sahara-ai-event.jpg";
 import polygonImg from "@/assets/campaigns/polygon-connect.jpg";
 // Team photos
-import teamDavid from "@/assets/team/david-ceo.jpg";
-import teamBennet from "@/assets/team/bennet-coo.jpg";
+import teamDavid from "@/assets/team/kevin-bd-new.jpg";
+import teamBennet from "@/assets/team/rachel-design.jpg";
 import teamJ from "@/assets/team/j-cmo.jpg";
-import teamKevin from "@/assets/team/kevin-bd-new.jpg";
-import teamSuki from "@/assets/team/suki-partner.jpg";
+import teamKevin from "@/assets/team/helen-cm.jpg";
+import teamSuki from "@/assets/team/bennet-coo.jpg";
 import teamLewis from "@/assets/team/lewis-pr.jpg";
-import teamRachel from "@/assets/team/rachel-design.jpg";
+import teamRachel from "@/assets/team/kevin-bd.jpg";
 import teamHyukjae from "@/assets/team/hyukjae-bdm-new.jpg";
 // Service images
 import svcGtmImg from "@/assets/services/gtm-strategy.jpg";
