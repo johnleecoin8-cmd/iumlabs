@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
@@ -71,6 +71,25 @@ const InsightsSection = () => {
     ? allArticles.filter(a => mobileKeywords.some(k => a.title.toLowerCase().includes(k) || a.id.toLowerCase().includes(k))).slice(0, 4)
     : allArticles;
 
+  const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const resetAutoRotate = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    if (articles.length === 0) return;
+    timerRef.current = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % articles.length);
+    }, 2000);
+  }, [articles.length]);
+
+  useEffect(() => {
+    resetAutoRotate();
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [resetAutoRotate]);
+
+  const handleSelect = useCallback((index: number) => {
+    setActiveIndex(index);
+    resetAutoRotate();
+  }, [resetAutoRotate]);
+
   if (articles.length === 0) {
     return (
       <section className="p-4 sm:p-6 md:p-8">
@@ -101,8 +120,8 @@ const InsightsSection = () => {
                 flex: isActive ? 4 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              onClick={() => setActiveIndex(index)}
-              onHoverStart={() => setActiveIndex(index)}
+              onClick={() => handleSelect(index)}
+              onHoverStart={() => handleSelect(index)}
             >
               <Link to={`/blog/${article.id}`} className="block w-full h-full">
                 {article.image ? (
