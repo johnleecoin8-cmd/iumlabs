@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
+import ArticleSchema from "@/components/ArticleSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CalendlyButton from "@/components/CalendlyButton";
 
 const fadeInUp = {
@@ -35,6 +37,21 @@ const HowToLaunchTokenInKorea = () => {
         ]}
         author="ium Labs"
         publishedTime="2026-04-15"
+      />
+
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "Blog", url: "https://iumlabs.io/blog" },
+        { name: "How to Launch a Token in Korea", url: "https://iumlabs.io/blog/how-to-launch-token-in-korea" },
+      ]} />
+      <ArticleSchema
+        title="How to Launch a Token in Korea"
+        description="Complete guide to launching a crypto token in Korea. Covers regulatory landscape, exchange listing, KOL activation, and community building on Korean platforms."
+        image="/images/share-og.jpeg"
+        author="ium Labs"
+        datePublished="2026-04-15"
+        url="https://iumlabs.io/blog/how-to-launch-token-in-korea"
+        tags={["token launch Korea", "crypto listing Korea", "Korean exchange listing", "Upbit listing guide"]}
       />
 
       <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -142,7 +159,7 @@ const HowToLaunchTokenInKorea = () => {
               </h3>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                A listing alone does not guarantee trading volume or community growth. The most successful token launches in Korea involve 8 to 12 weeks of pre-listing market preparation. This includes building awareness through <Link to="/services/kol-marketing" className="text-primary hover:underline">KOL marketing campaigns</Link>, establishing official Korean social channels, and creating a narrative that resonates with Korean investors.
+                A listing alone does not guarantee trading volume or community growth. The most successful token launches in Korea involve 8 to 12 weeks of pre-listing market preparation. This includes building awareness through <Link to="/services/influencer" className="text-primary hover:underline">KOL marketing campaigns</Link>, establishing official Korean social channels, and creating a narrative that resonates with Korean investors.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
@@ -202,7 +219,7 @@ const HowToLaunchTokenInKorea = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Another critical mistake is ignoring Naver. While Google dominates search globally, Naver holds roughly 60% of Korean search market share. Projects that optimize only for Google miss the majority of Korean organic search traffic. A comprehensive <Link to="/services/seo" className="text-primary hover:underline">Korean SEO strategy</Link> must include Naver Blog and Naver Cafe content alongside traditional search optimization.
+                Another critical mistake is ignoring Naver. While Google dominates search globally, Naver holds roughly 60% of Korean search market share. Projects that optimize only for Google miss the majority of Korean organic search traffic. A comprehensive <Link to="/services/seo-ads" className="text-primary hover:underline">Korean SEO strategy</Link> must include Naver Blog and Naver Cafe content alongside traditional search optimization.
               </p>
 
               <h2 className="text-2xl md:text-3xl font-medium text-white mt-12 mb-6">

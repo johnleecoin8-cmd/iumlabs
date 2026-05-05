@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
+import ArticleSchema from "@/components/ArticleSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CalendlyButton from "@/components/CalendlyButton";
 
 const fadeInUp = {
@@ -35,6 +37,21 @@ const KoreaCryptoCommunityBuilding = () => {
         ]}
         author="ium Labs"
         publishedTime="2026-03-18"
+      />
+
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "Blog", url: "https://iumlabs.io/blog" },
+        { name: "Korea Crypto Community Building Guide", url: "https://iumlabs.io/blog/korea-crypto-community-building" },
+      ]} />
+      <ArticleSchema
+        title="Korea Crypto Community Building Guide"
+        description="Build a thriving crypto community in Korea. Learn platform strategies for Telegram, KakaoTalk, Discord, and Naver Cafe with Korean community culture best practices."
+        image="/images/share-og.jpeg"
+        author="ium Labs"
+        datePublished="2026-03-18"
+        url="https://iumlabs.io/blog/korea-crypto-community-building"
+        tags={["Korea crypto community", "KakaoTalk crypto marketing", "Korean Telegram crypto", "crypto community building Korea"]}
       />
 
       <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -190,7 +207,7 @@ const KoreaCryptoCommunityBuilding = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Having a crisis communication playbook specific to the Korean market is essential. This includes pre-approved Korean-language responses for common FUD scenarios, a rapid escalation process for novel issues, and relationships with <Link to="/services/kol-marketing" className="text-primary hover:underline">trusted KOLs</Link> who can help counter misinformation with credible, independent analysis.
+                Having a crisis communication playbook specific to the Korean market is essential. This includes pre-approved Korean-language responses for common FUD scenarios, a rapid escalation process for novel issues, and relationships with <Link to="/services/influencer" className="text-primary hover:underline">trusted KOLs</Link> who can help counter misinformation with credible, independent analysis.
               </p>
 
               <h2 className="text-2xl md:text-3xl font-medium text-white mt-12 mb-6">

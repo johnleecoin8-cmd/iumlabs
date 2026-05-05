@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
+import ArticleSchema from "@/components/ArticleSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CalendlyButton from "@/components/CalendlyButton";
 
 const fadeInUp = {
@@ -35,6 +37,21 @@ const NaverSEOForCryptoProjects = () => {
         ]}
         author="ium Labs"
         publishedTime="2026-03-25"
+      />
+
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "Blog", url: "https://iumlabs.io/blog" },
+        { name: "Naver SEO for Crypto Projects", url: "https://iumlabs.io/blog/naver-seo-for-crypto-projects" },
+      ]} />
+      <ArticleSchema
+        title="Naver SEO for Crypto Projects"
+        description="Why Google is not enough in Korea. Learn Naver SEO strategies for crypto projects including Naver Blog, Cafe marketing, keyword optimization, and content localization."
+        image="/images/share-og.jpeg"
+        author="ium Labs"
+        datePublished="2026-03-25"
+        url="https://iumlabs.io/blog/naver-seo-for-crypto-projects"
+        tags={["Naver SEO crypto", "Korean search engine crypto", "Naver blog marketing Web3", "Korean SEO for blockchain"]}
       />
 
       <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -202,7 +219,7 @@ const NaverSEOForCryptoProjects = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                At ium Labs, our <Link to="/services/seo" className="text-primary hover:underline">Korean SEO service</Link> covers both Naver and Google optimization, ensuring complete search visibility for your project in Korea. We handle keyword research, content production, blog management, and performance tracking across both search ecosystems.
+                At ium Labs, our <Link to="/services/seo-ads" className="text-primary hover:underline">Korean SEO service</Link> covers both Naver and Google optimization, ensuring complete search visibility for your project in Korea. We handle keyword research, content production, blog management, and performance tracking across both search ecosystems.
               </p>
 
             </div>
@@ -235,7 +252,7 @@ const NaverSEOForCryptoProjects = () => {
                 Book a Free Strategy Call
               </CalendlyButton>
               <Link
-                to="/services/seo"
+                to="/services/seo-ads"
                 className="inline-flex items-center justify-center px-6 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors text-sm"
               >
                 SEO Service Details <ArrowRight className="w-4 h-4 ml-2" />

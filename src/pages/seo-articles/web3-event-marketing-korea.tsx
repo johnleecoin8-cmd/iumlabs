@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
+import ArticleSchema from "@/components/ArticleSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CalendlyButton from "@/components/CalendlyButton";
 
 const fadeInUp = {
@@ -35,6 +37,21 @@ const Web3EventMarketingKorea = () => {
         ]}
         author="ium Labs"
         publishedTime="2026-03-10"
+      />
+
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "Blog", url: "https://iumlabs.io/blog" },
+        { name: "Web3 Event Marketing in Korea", url: "https://iumlabs.io/blog/web3-event-marketing-korea" },
+      ]} />
+      <ArticleSchema
+        title="Web3 Event Marketing in Korea"
+        description="Guide to Web3 event marketing in Korea. Major crypto conferences, side event strategy, venue selection, post-event engagement, and case studies from Seoul's blockchain scene."
+        image="/images/share-og.jpeg"
+        author="ium Labs"
+        datePublished="2026-03-10"
+        url="https://iumlabs.io/blog/web3-event-marketing-korea"
+        tags={["Web3 events Korea", "crypto conference Seoul", "blockchain event marketing Korea", "Korea Blockchain Week"]}
       />
 
       <div className="min-h-screen bg-[#0A0A0A] text-white">

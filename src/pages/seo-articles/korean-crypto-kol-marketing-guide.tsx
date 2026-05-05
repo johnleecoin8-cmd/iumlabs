@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
+import ArticleSchema from "@/components/ArticleSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CalendlyButton from "@/components/CalendlyButton";
 
 const fadeInUp = {
@@ -35,6 +37,21 @@ const KoreanCryptoKOLMarketingGuide = () => {
         ]}
         author="ium Labs"
         publishedTime="2026-04-08"
+      />
+
+      <BreadcrumbSchema items={[
+        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "Blog", url: "https://iumlabs.io/blog" },
+        { name: "Korean Crypto KOL Marketing Guide", url: "https://iumlabs.io/blog/korean-crypto-kol-marketing-guide" },
+      ]} />
+      <ArticleSchema
+        title="Korean Crypto KOL Marketing Guide"
+        description="The definitive guide to Korean crypto KOL marketing. Learn how Korean influencers work, pricing tiers, platform landscape, how to avoid scams, and ROI measurement."
+        image="/images/share-og.jpeg"
+        author="ium Labs"
+        datePublished="2026-04-08"
+        url="https://iumlabs.io/blog/korean-crypto-kol-marketing-guide"
+        tags={["Korean crypto KOL", "Korea influencer marketing crypto", "Web3 KOL Korea", "KOL marketing agency Korea"]}
       />
 
       <div className="min-h-screen bg-[#0A0A0A] text-white">
@@ -218,7 +235,7 @@ const KoreanCryptoKOLMarketingGuide = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Understanding these nuances is what makes the difference between a KOL campaign that generates real community growth and one that just burns budget. Whether you manage your Korean KOL strategy in-house or work with a <Link to="/services/kol-marketing" className="text-primary hover:underline">specialized Korean agency</Link>, investing in cultural expertise is not optional.
+                Understanding these nuances is what makes the difference between a KOL campaign that generates real community growth and one that just burns budget. Whether you manage your Korean KOL strategy in-house or work with a <Link to="/services/influencer" className="text-primary hover:underline">specialized Korean agency</Link>, investing in cultural expertise is not optional.
               </p>
 
             </div>
