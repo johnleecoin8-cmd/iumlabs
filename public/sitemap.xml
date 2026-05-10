@@ -290,6 +290,24 @@
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-memecoin-paradox-4-7b-volume-zero-organic-projects</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
 
   <!-- SEO Landing Pages -->
   <url>

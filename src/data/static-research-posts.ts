@@ -1,14 +1,62 @@
 import stablecoinImg from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import defiImg from "@/assets/blog/defai-ai-agents.jpg";
+import memecoinImg from "@/assets/blog/memecoin-marketing.jpg";
+import exchangeImg from "@/assets/blog/korea-exchange-listing.jpg";
+import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
 
 export const staticResearchPosts = [
+  {
+    id: "static-upbit-dominance",
+    slug: "upbit-dominance-how-78-percent-market-share-reshapes-token-economics",
+    title: "The CEX Power Map: How Upbit's 78% Dominance Reshapes Token Economics",
+    image: exchangeImg,
+    date: "May 11, 2026",
+    readTime: "19 min read",
+    category: "Exchange, Korea, Token Economics",
+    author: "James",
+    authorRole: "Co-founder",
+    excerpt: "Upbit processes 78% of Korean crypto volume. A forensic analysis of how this monopolistic concentration distorts token economics, creates listing premiums of 340%, and forces projects into a $2M pay-to-play corridor.",
+    tags: ["Upbit", "Bithumb", "Korea", "exchange", "token economics"],
+    content: "",
+    isFeatured: true,
+  },
+  {
+    id: "static-memecoin-paradox",
+    slug: "korea-memecoin-paradox-4-7b-volume-zero-organic-projects",
+    title: "Korea's Memecoin Paradox: $4.7B Volume, Zero Organic Projects",
+    image: memecoinImg,
+    date: "May 11, 2026",
+    readTime: "16 min read",
+    category: "Memecoins, Korea, Market Structure",
+    author: "Julian",
+    authorRole: "Senior Researcher",
+    excerpt: "Korean exchanges process $4.7B daily memecoin volume — yet zero successful memecoins have originated from Korean communities. A structural analysis of why Korea is perpetually exit liquidity for Western meme narratives.",
+    tags: ["memecoin", "Korea", "Upbit", "market structure", "retail"],
+    content: "",
+    isFeatured: false,
+  },
+  {
+    id: "static-ai-depin-korea",
+    slug: "ai-crypto-korea-why-800m-depin-narrative-hasnt-landed",
+    title: "AI × Crypto in Korea: Why the $800M DePIN Narrative Hasn't Landed",
+    image: aiAgentsImg,
+    date: "May 11, 2026",
+    readTime: "15 min read",
+    category: "AI, DePIN, Korea, Market Analysis",
+    author: "Julian",
+    authorRole: "Senior Researcher",
+    excerpt: "AI tokens globally represent $800M+ in daily volume. In Korea, AI/DePIN tokens trade at 60-70% lower engagement ratios. The Samsung Paradox: why the world's semiconductor capital ignores decentralized compute.",
+    tags: ["AI", "DePIN", "Korea", "narrative", "infrastructure"],
+    content: "",
+    isFeatured: false,
+  },
   {
     id: "static-stablecoin-siege",
     slug: "the-stablecoin-siege-usdt-vs-usdc-in-asia",
     title: "The Stablecoin Siege: USDT vs USDC in Asia's $1.2T Settlement Layer",
     image: stablecoinImg,
     date: "May 11, 2026",
-    readTime: "13 min read",
+    readTime: "18 min read",
     category: "Stablecoins, Asia, USDT, USDC",
     author: "James",
     authorRole: "Co-founder",
