@@ -48,6 +48,8 @@ const KoreanCryptoKOLMarketingGuide = React.lazy(() => import("./pages/seo-artic
 const NaverSEOForCryptoProjects = React.lazy(() => import("./pages/seo-articles/naver-seo-for-crypto-projects"));
 const KoreaCryptoCommunityBuilding = React.lazy(() => import("./pages/seo-articles/korea-crypto-community-building"));
 const Web3EventMarketingKorea = React.lazy(() => import("./pages/seo-articles/web3-event-marketing-korea"));
+const KoreaCryptoPRMediaGuide = React.lazy(() => import("./pages/seo-articles/korea-crypto-pr-media-guide"));
+const UnderstandingKoreanCryptoInvestors = React.lazy(() => import("./pages/seo-articles/understanding-korean-crypto-investors"));
 
 // Lazy-loaded admin pages
 const AdminLogin = React.lazy(() => import("./pages/admin/AdminLogin"));
@@ -188,6 +190,8 @@ const AppRoutes = () => {
         <Route path="/blog/naver-seo-for-crypto-projects" element={<NaverSEOForCryptoProjects />} />
         <Route path="/blog/korea-crypto-community-building" element={<KoreaCryptoCommunityBuilding />} />
         <Route path="/blog/web3-event-marketing-korea" element={<Web3EventMarketingKorea />} />
+        <Route path="/blog/korea-crypto-pr-media-guide" element={<KoreaCryptoPRMediaGuide />} />
+        <Route path="/blog/understanding-korean-crypto-investors" element={<UnderstandingKoreanCryptoInvestors />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/research" element={<Navigate to="/blog" replace />} />
         <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />
