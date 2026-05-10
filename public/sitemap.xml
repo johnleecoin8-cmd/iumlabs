@@ -278,6 +278,18 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://iumlabs.io/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain</loc>
+    <lastmod>2026-05-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
   <!-- SEO Landing Pages -->
   <url>

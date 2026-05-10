@@ -14,6 +14,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useQuery } from "@tanstack/react-query";
+import { staticResearchPosts } from "@/data/static-research-posts";
 const categories = ["All", "Market Research", "Strategy", "DeFi", "Marketing", "Technology", "Industry"];
 
 // Helper function to calculate read time from content
@@ -51,8 +52,8 @@ const Research = () => {
     }
   });
 
-  // Transform DB data to display format
-  const posts = (dbPosts || []).map(post => ({
+  // Transform DB data to display format and merge with static posts
+  const dbTransformed = (dbPosts || []).map(post => ({
     id: post.id,
     slug: post.slug,
     title: post.title,
@@ -71,6 +72,7 @@ const Research = () => {
     content: post.content || '',
     isFeatured: (post as any).is_featured || false
   }));
+  const posts = [...staticResearchPosts, ...dbTransformed];
 
   // Get featured post (is_featured: true, or most recent if none featured)
   const featuredPost = posts.find(p => p.isFeatured) || posts[0];

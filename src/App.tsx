@@ -51,6 +51,10 @@ const Web3EventMarketingKorea = React.lazy(() => import("./pages/seo-articles/we
 const KoreaCryptoPRMediaGuide = React.lazy(() => import("./pages/seo-articles/korea-crypto-pr-media-guide"));
 const UnderstandingKoreanCryptoInvestors = React.lazy(() => import("./pages/seo-articles/understanding-korean-crypto-investors"));
 
+// Static research articles (no Supabase)
+const StablecoinSiege = React.lazy(() => import("./pages/research-static/stablecoin-siege"));
+const KoreaDefiParadox = React.lazy(() => import("./pages/research-static/korea-defi-paradox"));
+
 // Lazy-loaded admin pages
 const AdminLogin = React.lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = React.lazy(() => import("./pages/admin/AdminDashboard"));
@@ -192,6 +196,8 @@ const AppRoutes = () => {
         <Route path="/blog/web3-event-marketing-korea" element={<Web3EventMarketingKorea />} />
         <Route path="/blog/korea-crypto-pr-media-guide" element={<KoreaCryptoPRMediaGuide />} />
         <Route path="/blog/understanding-korean-crypto-investors" element={<UnderstandingKoreanCryptoInvestors />} />
+        <Route path="/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia" element={<StablecoinSiege />} />
+        <Route path="/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain" element={<KoreaDefiParadox />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/research" element={<Navigate to="/blog" replace />} />
         <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />
