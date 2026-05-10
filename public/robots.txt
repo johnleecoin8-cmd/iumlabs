@@ -5,35 +5,26 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /ium-admin/
-Crawl-delay: 1
 
 # Naver
 User-agent: Yeti
 Allow: /
 Disallow: /ium-admin/
-Crawl-delay: 1
 
 # Bing
 User-agent: Bingbot
 Allow: /
 Disallow: /ium-admin/
-Crawl-delay: 1
 
 # All crawlers
 User-agent: *
 Allow: /
 Disallow: /ium-admin/
-
-# Block internal search/filter parameter URLs (prevent duplicate content)
 Disallow: /*?s=
 Disallow: /*?search=
 Disallow: /*?filter=
 Disallow: /*?sort=
+Disallow: /*?page=
 
-# Sitemap location
+# Sitemap
 Sitemap: https://iumlabs.io/sitemap.xml
-
-# Allow important assets
-Allow: /images/
-Allow: /videos/
-Allow: /assets/

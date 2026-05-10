@@ -116,7 +116,6 @@ const SEOHead = ({
 
       {/* Hreflang */}
       <link rel="alternate" hrefLang="en" href={canonicalUrl} />
-      <link rel="alternate" hrefLang="ko" href={canonicalUrl} />
       <link rel="alternate" hrefLang="x-default" href={canonicalUrl} />
     </Helmet>
   );
