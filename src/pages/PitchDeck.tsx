@@ -93,6 +93,12 @@ const PitchDeck = () => {
         .dk .hero-stat-n{font-family:var(--sans);font-weight:700;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.03em;line-height:1}
         .dk .hero-stat-l{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:.5rem}
 
+        /* EDITORIAL STATEMENT */
+        .dk .stmt{padding:10rem 0;text-align:center}
+        .dk .stmt-text{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.15;letter-spacing:-.03em;max-width:900px;margin:0 auto}
+        .dk .stmt-text strong{font-weight:600;color:var(--accent)}
+        .dk .stmt-sub{font-family:var(--mono);font-size:.7rem;color:var(--g3);letter-spacing:.2em;text-transform:uppercase;margin-top:3rem}
+
         /* SECTION */
         .dk .sec{padding:8rem 0}
         .dk .sec-compact{padding:5rem 0}
@@ -136,11 +142,13 @@ const PitchDeck = () => {
         .dk .cs-vid-stat-n{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-.02em;line-height:1}
         .dk .cs-vid-stat-l{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
 
-        /* SERVICES LIST */
-        .dk .svc-item{display:grid;grid-template-columns:60px 1fr;gap:0;padding:1.8rem 0;border-bottom:1px solid var(--g4)}
-        .dk .svc-item:first-child{border-top:1px solid var(--g4)}
-        .dk .svc-n{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--g4)}
-        .dk .svc-t{font-weight:600;font-size:1rem;margin-bottom:.35rem}
+        /* SERVICES GRID */
+        .dk .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;border-radius:12px;overflow:hidden}
+        .dk .svc-card{background:var(--off);padding:2.5rem 2rem;position:relative}
+        .dk .svc-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--accent);transition:height .4s}
+        .dk .svc-card:hover::before{height:100%}
+        .dk .svc-n{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--g4);line-height:1;margin-bottom:1.2rem}
+        .dk .svc-t{font-weight:600;font-size:1rem;margin-bottom:.5rem}
         .dk .svc-d{font-size:.82rem;color:var(--g2);line-height:1.6;font-weight:300}
 
         /* TEAM — larger photos, rounded rect */
@@ -188,6 +196,9 @@ const PitchDeck = () => {
           .dk .cs-vid-grid{grid-template-columns:1fr}
           .dk .team-grid{grid-template-columns:repeat(2,1fr)}
           .dk .photo-grid{grid-template-columns:repeat(2,1fr)}
+          .dk .svc-grid{grid-template-columns:1fr}
+          .dk .stmt{padding:6rem 0}
+          .dk .stmt-text{font-size:clamp(1.8rem,6vw,2.5rem)}
           .dk .geo-strip{grid-template-columns:repeat(2,1fr)}
           .dk .press-logos{gap:2rem;flex-wrap:wrap}
         }
@@ -221,6 +232,12 @@ const PitchDeck = () => {
               </div>
             ))}
           </div>
+        </section>
+
+        {/* EDITORIAL STATEMENT */}
+        <section className="stmt wrap dk-reveal">
+          <p className="stmt-text">Korea is the world's third-largest crypto market by trading volume, but it's also the <strong>hardest to crack.</strong> Unique platforms, aggressive regulators, and cultural nuances that no translated deck will overcome.</p>
+          <div className="stmt-sub">This is why we exist</div>
         </section>
 
         {/* 02 — PROBLEM */}
@@ -303,6 +320,12 @@ const PitchDeck = () => {
             </div>
           </div>
           <div className="wrap"><div className="sn">04 / 08</div></div>
+        </section>
+
+        {/* EDITORIAL BREAK */}
+        <section className="stmt wrap dk-reveal">
+          <p className="stmt-text">We don't localize decks.<br />We <strong>rebuild narratives</strong> and deploy operators.</p>
+          <div className="stmt-sub">22 projects launched in Korea</div>
         </section>
 
         {/* 05 — CASE STUDIES */}
@@ -388,7 +411,7 @@ const PitchDeck = () => {
               <div className="lbl">Full-Stack Services</div>
               <h2 className="hed">Everything you need to <strong className="hed-accent">land in Korea.</strong></h2>
             </div>
-            <div style={{ marginTop: "2rem" }}>
+            <div className="svc-grid dk-reveal dk-d1">
               {([["01","GTM Strategy","Competitive analysis, Korea-fit narrative, audience segmentation, launch roadmap."],
                 ["02","KOL & Influencer","230+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers."],
                 ["03","PR & Media","CoinDesk Korea, Block Media, TokenPost. 87% placement rate."],
@@ -397,13 +420,11 @@ const PitchDeck = () => {
                 ["06","Deep Research","On-chain analytics, competitor mapping, sentiment tracking. 47 reports."],
                 ["07","SEO & Paid Ads","Naver SEO, Google/X Ads, crypto ad networks. 287% traffic growth."],
                 ["08","AMA Hosting","Native Korean hosts. 200+ AMAs, 50K+ live participants."],
-                ["09","Regulatory & Compliance","VASP registration, PIPA, AML/KYC. Partnership with Freeman Law."]] as const).map(([n,t,d], idx)=>(
-                <div key={n} className={`svc-item dk-reveal${idx < 3 ? "" : idx < 6 ? " dk-d1" : " dk-d2"}`}>
+                ["09","Compliance","VASP registration, PIPA, AML/KYC. Partnership with Freeman Law."]] as const).map(([n,t,d])=>(
+                <div key={n} className="svc-card">
                   <div className="svc-n">{n}</div>
-                  <div>
-                    <div className="svc-t">{t}</div>
-                    <div className="svc-d">{d}</div>
-                  </div>
+                  <div className="svc-t">{t}</div>
+                  <div className="svc-d">{d}</div>
                 </div>
               ))}
             </div>
@@ -497,8 +518,8 @@ const PitchDeck = () => {
               From strategy to execution. One call to align on your Korea market entry. Free 30-minute discovery. 24-hour response guarantee.
             </p>
             <div className="cta-btns">
-              <a href="https://iumlabs.io/book-a-meeting" className="cta-btn-w">Book a Meeting</a>
-              <a href="https://iumlabs.io/contact" className="cta-btn-o">Send a Message</a>
+              <a href="/book-a-meeting" className="cta-btn-w">Book a Meeting</a>
+              <a href="/contact" className="cta-btn-o">Send a Message</a>
             </div>
             <div style={{ display: "flex", gap: "3rem", justifyContent: "center", flexWrap: "wrap", marginTop: "3rem" }}>
               {([["Email","hello@iumlabs.io"],["Web","iumlabs.io"],["Location","Seoul · Singapore"]] as const).map(([l,v])=>(
