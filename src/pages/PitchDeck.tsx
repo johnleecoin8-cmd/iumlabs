@@ -1,25 +1,8 @@
-import { useEffect, useRef } from "react";
 import logo from "@/assets/logo.png";
 
 import seoulCta from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 import asiaGlobe from "@/assets/maps/asia-globe.png";
 
-import logoBnb from "@/assets/logos/bnb.png";
-import logoKucoin from "@/assets/logos/kucoin-mono.png";
-import logoPolygon from "@/assets/logos/polygon.svg";
-import logoOndo from "@/assets/logos/ondo.svg";
-import logoMantra from "@/assets/logos/mantra-mono.png";
-import logoSahara from "@/assets/logos/sahara-ai-mono.png";
-import logoFogo from "@/assets/logos/fogo.png";
-import logoSynfutures from "@/assets/logos/synfutures.png";
-import logoAptos from "@/assets/logos/aptos-round.png";
-import logoKite from "@/assets/logos/kite.png";
-import logoBybit from "@/assets/logos/bybit.png";
-import logoStory from "@/assets/logos/story-protocol-mono.png";
-import logoMegaeth from "@/assets/logos/megaeth.png";
-import logoTria from "@/assets/logos/tria-mono.png";
-import logoSpacecoin from "@/assets/logos/spacecoin.png";
-import logoPeaq from "@/assets/logos/peaq.png";
 
 import logoCoindesk from "@/assets/logos/coindesk.png";
 import logoBlockmedia from "@/assets/logos/blockmedia-new.png";
@@ -49,60 +32,6 @@ import teamLewis from "@/assets/team/lewis-pr.jpg";
 import teamRachel from "@/assets/team/kevin-bd.jpg";
 import teamHyukjae from "@/assets/team/hyukjae-bdm-new.jpg";
 
-const clientLogos = [
-  { name: "BNB Chain", logo: logoBnb, noInvert: false },
-  { name: "KuCoin", logo: logoKucoin, noInvert: true },
-  { name: "Polygon", logo: logoPolygon, noInvert: false },
-  { name: "Ondo Finance", logo: logoOndo, noInvert: false },
-  { name: "Bybit", logo: logoBybit, noInvert: false },
-  { name: "SpaceCoin", logo: logoSpacecoin, noInvert: true },
-  { name: "Tria", logo: logoTria, noInvert: true },
-  { name: "Mantra", logo: logoMantra, noInvert: true },
-  { name: "Sahara AI", logo: logoSahara, noInvert: true },
-  { name: "FOGO", logo: logoFogo, noInvert: true },
-  { name: "SynFutures", logo: logoSynfutures, noInvert: true },
-  { name: "Aptos", logo: logoAptos, noInvert: true },
-  { name: "Kite", logo: logoKite, noInvert: true },
-  { name: "MegaETH", logo: logoMegaeth, noInvert: true },
-  { name: "Story", logo: logoStory, noInvert: true },
-  { name: "peaq", logo: logoPeaq, noInvert: true },
-];
-
-const Marquee = () => {
-  const trackRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    let raf: number;
-    let x = 0;
-    const speed = 0.4;
-    const tick = () => {
-      x -= speed;
-      if (Math.abs(x) >= el.scrollWidth / 2) x = 0;
-      el.style.transform = `translateX(${x}px)`;
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const items = [...clientLogos, ...clientLogos];
-  return (
-    <div className="dk-marquee">
-      <div ref={trackRef} className="dk-mq-track">
-        {items.map((c, i) => (
-          <span key={`${c.name}-${i}`} className="dk-mq-item">
-            <img
-              src={c.logo}
-              alt={c.name}
-              className="dk-mq-logo"
-              style={!c.noInvert ? { filter: "brightness(0) invert(1)" } : undefined}
-            />
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const PitchDeck = () => (
   <>
@@ -133,15 +62,7 @@ const PitchDeck = () => (
       .dk .hero-stat-n{font-family:var(--sans);font-weight:700;font-size:clamp(1.8rem,3.5vw,2.8rem);letter-spacing:-.03em;line-height:1}
       .dk .hero-stat-l{font-family:var(--mono);font-size:.55rem;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin-top:.5rem}
 
-      /* MARQUEE */
-      .dk-marquee{padding:1.8rem 0;border-bottom:1px solid var(--g4);overflow:hidden;position:relative}
-      .dk-marquee::before,.dk-marquee::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2}
-      .dk-marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
-      .dk-marquee::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
-      .dk-mq-track{display:flex;gap:3.5rem;width:max-content;align-items:center}
-      .dk-mq-item{flex-shrink:0;display:flex;align-items:center}
-      .dk-mq-logo{height:22px;width:auto;opacity:.4;transition:opacity .3s}
-      .dk-mq-item:hover .dk-mq-logo{opacity:.8}
+      /* (marquee removed) */
 
       /* SECTION */
       .dk .sec{padding:8rem 0}
@@ -194,12 +115,7 @@ const PitchDeck = () => (
       .dk .cs-vid-stat-n{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-.02em;line-height:1}
       .dk .cs-vid-stat-l{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
 
-      /* MINI VIDEO REEL */
-      .dk .vid-reel{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3rem;border-radius:12px;overflow:hidden}
-      .dk .vid-reel-item{position:relative;aspect-ratio:9/12;overflow:hidden}
-      .dk .vid-reel-item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-      .dk .vid-reel-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.75) 100%);z-index:2}
-      .dk .vid-reel-lbl{position:absolute;bottom:1.5rem;left:1.5rem;z-index:3;font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase}
+      /* (vid-reel removed) */
 
       /* SERVICES LIST */
       .dk .svc-item{display:grid;grid-template-columns:60px 1fr;gap:0;padding:1.8rem 0;border-bottom:1px solid var(--g4)}
@@ -256,9 +172,7 @@ const PitchDeck = () => (
         .dk .photo-grid{grid-template-columns:repeat(2,1fr)}
         .dk .geo-cards{grid-template-columns:1fr}
         .dk .press-logos{gap:2rem;flex-wrap:wrap}
-        .dk .vid-reel{grid-template-columns:1fr 1fr}
-        .dk .vid-reel-item:last-child{display:none}
-        .dk .vid-break{height:40vh}
+.dk .vid-break{height:40vh}
       }
     `}</style>
 
@@ -292,8 +206,6 @@ const PitchDeck = () => (
         </div>
       </section>
 
-      {/* CLIENT MARQUEE */}
-      <Marquee />
 
       {/* 02 — PROBLEM */}
       <section className="sec wrap">
@@ -459,35 +371,6 @@ const PitchDeck = () => (
         <div className="sn">05 / 10</div>
       </section>
 
-      {/* VIDEO REEL — Project Highlights */}
-      <section className="sec-compact sec-alt">
-        <div className="wrap">
-          <div className="lbl">Project Reel</div>
-          <div className="vid-reel">
-            <div className="vid-reel-item">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/kucoin-hero.jpg">
-                <source src="/videos/projects/kucoin-hero.mp4" type="video/mp4" />
-              </video>
-              <div className="vid-reel-ov" />
-              <div className="vid-reel-lbl">KuCoin Korea</div>
-            </div>
-            <div className="vid-reel-item">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/aptos-hero.jpg">
-                <source src="/videos/projects/aptos-hero.mp4" type="video/mp4" />
-              </video>
-              <div className="vid-reel-ov" />
-              <div className="vid-reel-lbl">Aptos Seoul</div>
-            </div>
-            <div className="vid-reel-item">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/spacecoin-hero.jpg">
-                <source src="/videos/projects/spacecoin-hero.mp4" type="video/mp4" />
-              </video>
-              <div className="vid-reel-ov" />
-              <div className="vid-reel-lbl">SpaceCoin</div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* 06 — SERVICES */}
       <section className="sec wrap">
