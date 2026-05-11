@@ -184,6 +184,18 @@ const DesktopShowcase = () => {
     });
   }, [activeIndex]);
 
+  // iOS Safari: retry play on first user interaction
+  useEffect(() => {
+    if (!isMobile) return;
+    const tryPlay = () => {
+      const video = videoRefs.current[activeIndex];
+      if (video && video.paused) video.play().catch(() => {});
+    };
+    const events = ['touchstart', 'click', 'scroll'] as const;
+    events.forEach(e => document.addEventListener(e, tryPlay, { once: true, passive: true }));
+    return () => { events.forEach(e => document.removeEventListener(e, tryPlay)); };
+  }, [isMobile, activeIndex]);
+
   useEffect(() => {
     if (isHovering || !isInView) return;
     const interval = setInterval(() => {
@@ -202,7 +214,7 @@ const DesktopShowcase = () => {
     <section ref={ref} className="relative bg-black overflow-hidden h-[80vh] lg:h-[90vh]">
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
-        const shouldMountVideo = isMobile ? isActive : mountedIndices.has(i);
+        const shouldMountVideo = mountedIndices.has(i);
         const isVideoReady = videoReady[i];
 
         return (
@@ -228,12 +240,13 @@ const DesktopShowcase = () => {
                 playsInline
                 autoPlay
                 preload={Math.abs(((i - activeIndex + projects.length) % projects.length)) <= 1 ? "auto" : "metadata"}
+                onLoadedData={() => handleVideoReady(i)}
                 onCanPlayThrough={() => handleVideoReady(i)}
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                   isActive && isVideoReady ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <source src={project.video} type="video/mp4" />
+                <source src={`${project.video}#t=0.001`} type="video/mp4" />
               </video>
             )}
             <div className="absolute inset-0 bg-black/50" />
