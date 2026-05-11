@@ -300,7 +300,7 @@ const DesktopShowcase = () => {
           </div>
 
           {/* Mobile mission + CTA */}
-          <div className="lg:hidden mt-6 pt-5 border-t border-white/[0.08]">
+          <div className="lg:hidden mt-6 pt-5">
             <p className="text-[13px] text-white/35 leading-relaxed mb-4">
               Former Binance, KuCoin, Upbit operators. We engineer your Korea market entry.
             </p>
