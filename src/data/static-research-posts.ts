@@ -1,8 +1,8 @@
 import stablecoinImg from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import defiImg from "@/assets/blog/defai-ai-agents.jpg";
-import memecoinImg from "@/assets/blog/memecoin-marketing.jpg";
-import exchangeImg from "@/assets/blog/korea-exchange-listing.jpg";
-import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
+import memecoinImg from "@/assets/blog/sui-chart-tvl-price.jpg";
+import exchangeImg from "@/assets/blog/ecosystem-chart-market-growth.jpg";
+import aiAgentsImg from "@/assets/blog/kaito-mindshare.jpg";
 
 export const staticResearchPosts = [
   {

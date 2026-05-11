@@ -9,7 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
 import { toast } from "sonner";
-import heroImg from "@/assets/blog/ai-agents-defi.jpg";
+import heroImg from "@/assets/blog/kaito-mindshare.jpg";
 
 const slug = "ai-crypto-korea-why-800m-depin-narrative-hasnt-landed";
 const title = "AI × Crypto in Korea: Why the $800M DePIN Narrative Hasn't Landed";

@@ -9,7 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
 import { toast } from "sonner";
-import heroImg from "@/assets/blog/memecoin-marketing.jpg";
+import heroImg from "@/assets/blog/sui-chart-tvl-price.jpg";
 
 const slug = "korea-memecoin-paradox-4-7b-volume-zero-organic-projects";
 const title = "Korea's Memecoin Paradox: $4.7B Volume, Zero Organic Projects";

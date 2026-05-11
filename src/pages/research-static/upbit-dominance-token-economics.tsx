@@ -9,7 +9,7 @@ import SEOHead from "@/components/SEOHead";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
 import { toast } from "sonner";
-import heroImg from "@/assets/blog/korea-exchange-listing.jpg";
+import heroImg from "@/assets/blog/ecosystem-chart-market-growth.jpg";
 
 const slug = "upbit-dominance-how-78-percent-market-share-reshapes-token-economics";
 const title = "The CEX Power Map: How Upbit's 78% Dominance Reshapes Token Economics";
