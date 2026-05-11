@@ -35,6 +35,7 @@ const sections = [
       { name: "Terms", href: "/terms" },
       { name: "Privacy", href: "/privacy" },
       { name: "Transparency", href: "/transparency" },
+      { name: "Company Deck", href: "/deck" },
     ],
   },
 ];
