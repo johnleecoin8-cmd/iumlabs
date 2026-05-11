@@ -19,17 +19,26 @@ import logoStory from "@/assets/logos/story-protocol-mono.png";
 import logoMegaeth from "@/assets/logos/megaeth.png";
 import logoTria from "@/assets/logos/tria-mono.png";
 import logoSpacecoin from "@/assets/logos/spacecoin.png";
+import logoPeaq from "@/assets/logos/peaq.png";
 
 import logoCoindesk from "@/assets/logos/coindesk.png";
 import logoBlockmedia from "@/assets/logos/blockmedia-new.png";
 import logoHankyung from "@/assets/logos/hankyung-new.png";
 
+import logoSaharaColor from "@/assets/logos/sahara-ai.png";
+import logoStoryColor from "@/assets/logos/story-protocol-new.png";
+import logoBnbColor from "@/assets/logos/bnb.png";
+import logoMantraColor from "@/assets/logos/mantra.png";
+
 import eventSahara from "@/assets/campaigns/sahara-ai-event.jpg";
-import eventBybit from "@/assets/campaigns/bybit-event.jpg";
 import eventBnb from "@/assets/campaigns/bnb-hanok-event.jpg";
-import eventKucoin from "@/assets/campaigns/kucoin-party-event.jpg";
 import eventStory from "@/assets/campaigns/story-origin-summit.jpg";
-import eventPolygon from "@/assets/campaigns/polygon-connect.jpg";
+import eventMantra from "@/assets/campaigns/mantra-party.jpg";
+import eventAptos from "@/assets/campaigns/aptos-seoul-event.jpg";
+import eventPeaq from "@/assets/campaigns/peaq-summit.jpg";
+import eventSynfutures from "@/assets/campaigns/synfutures-billboard.jpg";
+import eventMegaeth from "@/assets/campaigns/megaeth-launch.jpg";
+import eventTria from "@/assets/campaigns/tria-launch.jpg";
 
 import teamDavid from "@/assets/team/kevin-bd-new.jpg";
 import teamBennet from "@/assets/team/rachel-design.jpg";
@@ -56,6 +65,7 @@ const clientLogos = [
   { name: "Kite", logo: logoKite, noInvert: true },
   { name: "MegaETH", logo: logoMegaeth, noInvert: true },
   { name: "Story", logo: logoStory, noInvert: true },
+  { name: "peaq", logo: logoPeaq, noInvert: true },
 ];
 
 const Marquee = () => {
@@ -156,27 +166,40 @@ const PitchDeck = () => (
       .dk .prob-t{font-weight:600;font-size:1rem;margin-bottom:.75rem}
       .dk .prob-d{font-size:.88rem;color:var(--g1);line-height:1.65;font-weight:300}
 
+      /* VIDEO BREAK */
+      .dk .vid-break{position:relative;height:50vh;overflow:hidden}
+      .dk .vid-break video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .dk .vid-break-ov{position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(10,10,11,.3) 20%,rgba(10,10,11,.3) 80%,var(--bg) 100%);z-index:2}
+      .dk .vid-break-c{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 2rem}
+      .dk .vid-break-c h2{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4vw,3rem);line-height:1.15;letter-spacing:-.02em}
+      .dk .vid-break-c p{font-size:.9rem;color:rgba(255,255,255,.5);font-weight:300;margin-top:1rem;max-width:500px}
+
       /* WORK PHOTOS */
       .dk .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3rem;border-radius:12px;overflow:hidden}
       .dk .photo-grid img{width:100%;aspect-ratio:16/10;object-fit:cover;filter:brightness(.85);transition:filter .4s}
       .dk .photo-grid img:hover{filter:brightness(1)}
       .dk .photo-cap{font-family:var(--mono);font-size:.55rem;color:var(--g3);text-align:center;padding:.5rem;letter-spacing:.08em;text-transform:uppercase}
 
-      /* CASE STUDY */
-      .dk .cs-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
-      .dk .cs-img{border-radius:12px;overflow:hidden;aspect-ratio:16/10}
-      .dk .cs-img img{width:100%;height:100%;object-fit:cover}
-      .dk .cs-stats{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--g4);border-radius:12px;overflow:hidden}
-      .dk .cs-stat{padding:2rem 2.5rem;border-bottom:1px solid var(--g4);display:flex;align-items:baseline;gap:1.5rem}
-      .dk .cs-stat:last-child{border-bottom:none}
-      .dk .cs-stat-n{font-family:var(--serif);font-weight:300;font-size:2.5rem;letter-spacing:-.03em;line-height:1;color:var(--accent);min-width:100px}
-      .dk .cs-stat-l{font-size:.85rem;color:var(--g1);font-weight:300}
-      .dk .cs-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--g4);border-radius:12px;overflow:hidden;margin-top:3rem}
-      .dk .cs-step{padding:2rem;border-right:1px solid var(--g4)}
-      .dk .cs-step:last-child{border-right:none}
-      .dk .cs-step-n{font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--accent);line-height:1;margin-bottom:.75rem}
-      .dk .cs-step h4{font-weight:600;font-size:.9rem;margin-bottom:.5rem}
-      .dk .cs-step p{font-size:.78rem;color:var(--g2);line-height:1.55;font-weight:300}
+      /* CASE STUDY VIDEO CARDS */
+      .dk .cs-vid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;margin-top:3rem;border-radius:12px;overflow:hidden}
+      .dk .cs-vid-card{position:relative;aspect-ratio:16/9;overflow:hidden}
+      .dk .cs-vid-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .dk .cs-vid-card img.cs-vid-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .dk .cs-vid-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.7) 100%);z-index:2}
+      .dk .cs-vid-c{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:2rem 2.5rem}
+      .dk .cs-vid-logo{height:20px;width:auto;margin-bottom:1rem;opacity:.9}
+      .dk .cs-vid-title{font-weight:700;font-size:1.1rem;margin-bottom:.5rem}
+      .dk .cs-vid-desc{font-size:.78rem;color:rgba(255,255,255,.65);font-weight:300;line-height:1.5}
+      .dk .cs-vid-stats{display:flex;gap:2rem;margin-top:1.25rem}
+      .dk .cs-vid-stat-n{font-family:var(--sans);font-weight:700;font-size:1.3rem;letter-spacing:-.02em;line-height:1}
+      .dk .cs-vid-stat-l{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
+
+      /* MINI VIDEO REEL */
+      .dk .vid-reel{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3rem;border-radius:12px;overflow:hidden}
+      .dk .vid-reel-item{position:relative;aspect-ratio:9/12;overflow:hidden}
+      .dk .vid-reel-item video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+      .dk .vid-reel-ov{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.75) 100%);z-index:2}
+      .dk .vid-reel-lbl{position:absolute;bottom:1.5rem;left:1.5rem;z-index:3;font-family:var(--mono);font-size:.6rem;color:rgba(255,255,255,.6);letter-spacing:.12em;text-transform:uppercase}
 
       /* SERVICES LIST */
       .dk .svc-item{display:grid;grid-template-columns:60px 1fr;gap:0;padding:1.8rem 0;border-bottom:1px solid var(--g4)}
@@ -226,18 +249,22 @@ const PitchDeck = () => (
       @media(max-width:768px){
         .dk .hero h1{font-size:clamp(2.2rem,10vw,3.5rem)}
         .dk .hero-stats{grid-template-columns:repeat(2,1fr)}
-        .dk .stat-grid,.dk .prob-grid,.dk .cs-steps,.dk .press-stats{grid-template-columns:repeat(2,1fr)}
-        .dk .cs-grid,.dk .geo-grid{grid-template-columns:1fr;gap:2rem}
+        .dk .stat-grid,.dk .prob-grid,.dk .press-stats{grid-template-columns:repeat(2,1fr)}
+        .dk .cs-vid-grid{grid-template-columns:1fr}
+        .dk .geo-grid{grid-template-columns:1fr;gap:2rem}
         .dk .team-grid{grid-template-columns:repeat(2,1fr)}
         .dk .photo-grid{grid-template-columns:repeat(2,1fr)}
         .dk .geo-cards{grid-template-columns:1fr}
         .dk .press-logos{gap:2rem;flex-wrap:wrap}
+        .dk .vid-reel{grid-template-columns:1fr 1fr}
+        .dk .vid-reel-item:last-child{display:none}
+        .dk .vid-break{height:40vh}
       }
     `}</style>
 
     <div className="dk">
 
-      {/* 01 — HERO (same as homepage) */}
+      {/* 01 — HERO */}
       <section className="hero">
         <img src="/images/posters/hero-background-poster.jpg" alt="" className="hero-poster" />
         <video autoPlay muted loop playsInline preload="auto">
@@ -289,11 +316,23 @@ const PitchDeck = () => (
         <div className="sn">02 / 10</div>
       </section>
 
+      {/* VIDEO BREAK — Manifesto */}
+      <section className="vid-break">
+        <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/services-hero.jpg">
+          <source src="/videos/manifesto.mp4" type="video/mp4" />
+        </video>
+        <div className="vid-break-ov" />
+        <div className="vid-break-c">
+          <h2>We don't localize decks.<br />We <strong style={{ fontWeight: 600, color: "var(--accent)" }}>rebuild narratives.</strong></h2>
+          <p>Built by exchange alumni. Native to platforms foreigners can't touch.</p>
+        </div>
+      </section>
+
       {/* 03 — SOLUTION */}
       <section className="sec wrap">
         <div className="lbl">The Solution</div>
-        <h2 className="hed">We don't localize decks. We <strong className="hed-accent">rebuild narratives</strong> and deploy operators.</h2>
-        <p className="sub">ium Labs is Korea's dedicated growth engine for global Web3 projects. Built by exchange alumni. Native to platforms foreigners can't touch.</p>
+        <h2 className="hed">Korea's dedicated <strong className="hed-accent">growth engine</strong> for global Web3.</h2>
+        <p className="sub">ium Labs deploys operators, not consultants. Founded by Binance, KuCoin, and Upbit alumni who scaled exchanges to millions.</p>
         <div className="stat-grid" style={{ marginTop: "3rem" }}>
           {([["Operator Model","Founded by Binance, KuCoin, and Upbit operators. Same playbooks that scaled exchanges to millions."],
             ["Direct Access","230+ KOLs. Every one audience-verified, fraud-filtered. No broker markup."],
@@ -328,10 +367,13 @@ const PitchDeck = () => (
             {([
               [eventSahara, "Sahara AI · 400+ Attendees"],
               [eventBnb, "BNB Chain · VIP Hanok Dinner"],
-              [eventPolygon, "Polygon Connect · Panel"],
-              [eventKucoin, "KuCoin · Networking Night"],
+              [eventAptos, "Aptos · Seoul Meetup"],
+              [eventMantra, "Mantra · Networking Night"],
               [eventStory, "Story · Origin Summit 2025"],
-              [eventBybit, "Bybit · Korea Activation"],
+              [eventPeaq, "peaq · Korea Summit"],
+              [eventSynfutures, "SynFutures · Seoul Billboard"],
+              [eventMegaeth, "MegaETH · Launch Event"],
+              [eventTria, "Tria · Korea Launch"],
             ] as const).map(([img, cap]) => (
               <div key={cap}>
                 <img src={img} alt={cap} />
@@ -343,35 +385,108 @@ const PitchDeck = () => (
         <div className="wrap"><div className="sn">04 / 10</div></div>
       </section>
 
-      {/* 05 — CASE STUDY */}
+      {/* 05 — CASE STUDIES (Multi-project with video) */}
       <section className="sec wrap">
-        <div className="lbl">Case Study — Bybit</div>
-        <h2 className="hed">How we took Bybit to <strong className="hed-accent">#2 in Korea.</strong></h2>
-        <p className="sub">Bybit entered Korea as an unknown global exchange. We deployed a 6-month embedded campaign combining KOL seeding, community building, premium events, and Naver SEO.</p>
-        <div className="cs-grid">
-          <div className="cs-img"><img src={eventBybit} alt="Bybit Korea Activation" /></div>
-          <div className="cs-stats">
-            {[["#2","Exchange Traffic Position in Korea"],["$1.5B+","Total Value Locked"],["1,200+","VIP Korean Users"],["50+","S/A-Tier KOLs Activated"]].map(([n,l])=>(
-              <div key={l} className="cs-stat">
-                <div className="cs-stat-n">{n}</div>
-                <div className="cs-stat-l">{l}</div>
+        <div className="lbl">Case Studies</div>
+        <h2 className="hed">Projects we <strong className="hed-accent">launched in Korea.</strong></h2>
+        <p className="sub">From AI infrastructure to IP protocols, each entry required a tailored Korea playbook.</p>
+        <div className="cs-vid-grid">
+          <div className="cs-vid-card">
+            <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/sahara-hero.jpg">
+              <source src="/videos/projects/sahara-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="cs-vid-ov" />
+            <div className="cs-vid-c">
+              <img src={logoSaharaColor} alt="Sahara AI" className="cs-vid-logo" />
+              <div className="cs-vid-title">AI Infrastructure Launch</div>
+              <div className="cs-vid-desc">400-person Seoul flagship event, KOL blitz across Korean CT, Naver SEO + PR campaign.</div>
+              <div className="cs-vid-stats">
+                <div><div className="cs-vid-stat-n">400+</div><div className="cs-vid-stat-l">Event Attendees</div></div>
+                <div><div className="cs-vid-stat-n">2.8M</div><div className="cs-vid-stat-l">Impressions</div></div>
+                <div><div className="cs-vid-stat-n">15K</div><div className="cs-vid-stat-l">KR Community</div></div>
               </div>
-            ))}
+            </div>
+          </div>
+          <div className="cs-vid-card">
+            <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/story-hero.jpg">
+              <source src="/videos/projects/story-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="cs-vid-ov" />
+            <div className="cs-vid-c">
+              <img src={logoStoryColor} alt="Story Protocol" className="cs-vid-logo" />
+              <div className="cs-vid-title">Origin Summit Seoul</div>
+              <div className="cs-vid-desc">Full Korea GTM: Origin Summit co-production, 50+ KOL activations, #1 trending on Korean CT.</div>
+              <div className="cs-vid-stats">
+                <div><div className="cs-vid-stat-n">#1</div><div className="cs-vid-stat-l">Korean CT Trending</div></div>
+                <div><div className="cs-vid-stat-n">50+</div><div className="cs-vid-stat-l">KOLs Activated</div></div>
+                <div><div className="cs-vid-stat-n">4.2M</div><div className="cs-vid-stat-l">Media Reach</div></div>
+              </div>
+            </div>
+          </div>
+          <div className="cs-vid-card">
+            <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/bnb-hero.jpg">
+              <source src="/videos/projects/bnb-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="cs-vid-ov" />
+            <div className="cs-vid-c">
+              <img src={logoBnbColor} alt="BNB Chain" className="cs-vid-logo" />
+              <div className="cs-vid-title">Ecosystem Growth Korea</div>
+              <div className="cs-vid-desc">VIP Hanok dinner series, institutional BD, ongoing community ops and quarterly events.</div>
+              <div className="cs-vid-stats">
+                <div><div className="cs-vid-stat-n">30+</div><div className="cs-vid-stat-l">Partnerships</div></div>
+                <div><div className="cs-vid-stat-n">5</div><div className="cs-vid-stat-l">Seoul Events</div></div>
+                <div><div className="cs-vid-stat-n">$1.5B</div><div className="cs-vid-stat-l">TVL</div></div>
+              </div>
+            </div>
+          </div>
+          <div className="cs-vid-card">
+            <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/mantra-hero.jpg">
+              <source src="/videos/projects/mantra-hero.mp4" type="video/mp4" />
+            </video>
+            <div className="cs-vid-ov" />
+            <div className="cs-vid-c">
+              <img src={logoMantraColor} alt="Mantra" className="cs-vid-logo" />
+              <div className="cs-vid-title">RWA Protocol Korea Entry</div>
+              <div className="cs-vid-desc">Community launch, KOL campaign, exchange listing support, and ongoing PR in Korean media.</div>
+              <div className="cs-vid-stats">
+                <div><div className="cs-vid-stat-n">25+</div><div className="cs-vid-stat-l">KOLs Activated</div></div>
+                <div><div className="cs-vid-stat-n">12</div><div className="cs-vid-stat-l">Press Articles</div></div>
+                <div><div className="cs-vid-stat-n">8K</div><div className="cs-vid-stat-l">KR Community</div></div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="cs-steps">
-          {([["1","Narrative Rebuild","Repositioned from 'foreign exchange' to 'global platform with Korea-first features.'"],
-            ["2","KOL Blitz","50+ S/A-tier KOLs with authentic reviews and dedicated onboarding."],
-            ["3","VIP Community","1,200+ VIP users with exclusive perks and KakaoTalk engagement."],
-            ["4","Sustained Presence","Monthly events, weekly AMAs, ongoing PR compounding into organic growth."]] as const).map(([n,t,d])=>(
-            <div key={n} className="cs-step">
-              <div className="cs-step-n">{n}</div>
-              <h4>{t}</h4>
-              <p>{d}</p>
-            </div>
-          ))}
-        </div>
         <div className="sn">05 / 10</div>
+      </section>
+
+      {/* VIDEO REEL — Project Highlights */}
+      <section className="sec-compact sec-alt">
+        <div className="wrap">
+          <div className="lbl">Project Reel</div>
+          <div className="vid-reel">
+            <div className="vid-reel-item">
+              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/kucoin-hero.jpg">
+                <source src="/videos/projects/kucoin-hero.mp4" type="video/mp4" />
+              </video>
+              <div className="vid-reel-ov" />
+              <div className="vid-reel-lbl">KuCoin Korea</div>
+            </div>
+            <div className="vid-reel-item">
+              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/aptos-hero.jpg">
+                <source src="/videos/projects/aptos-hero.mp4" type="video/mp4" />
+              </video>
+              <div className="vid-reel-ov" />
+              <div className="vid-reel-lbl">Aptos Seoul</div>
+            </div>
+            <div className="vid-reel-item">
+              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/spacecoin-hero.jpg">
+                <source src="/videos/projects/spacecoin-hero.mp4" type="video/mp4" />
+              </video>
+              <div className="vid-reel-ov" />
+              <div className="vid-reel-lbl">SpaceCoin</div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 06 — SERVICES */}
@@ -400,8 +515,19 @@ const PitchDeck = () => (
         <div className="sn">06 / 10</div>
       </section>
 
+      {/* VIDEO BREAK — Services */}
+      <section className="vid-break">
+        <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/gtm-hero.jpg">
+          <source src="/videos/services-hero.mp4" type="video/mp4" />
+        </video>
+        <div className="vid-break-ov" />
+        <div className="vid-break-c">
+          <h2>9 services.<br />One team. <strong style={{ fontWeight: 600, color: "var(--accent)" }}>30-day launch.</strong></h2>
+        </div>
+      </section>
+
       {/* 07 — GEOGRAPHY */}
-      <section className="sec sec-alt">
+      <section className="sec">
         <div className="wrap">
           <div className="lbl">Coverage</div>
           <h2 className="hed">Korea-native. <strong className="hed-accent">Asia-wide reach.</strong></h2>
