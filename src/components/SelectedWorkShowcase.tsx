@@ -211,7 +211,7 @@ const DesktopShowcase = () => {
 
 
   return (
-    <section ref={ref} className="relative bg-black overflow-hidden h-[80vh] lg:h-[90vh]">
+    <section ref={ref} className="relative bg-black overflow-hidden h-[100vh]">
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
         const shouldMountVideo = mountedIndices.has(i);
