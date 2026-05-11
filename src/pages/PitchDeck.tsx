@@ -1,5 +1,41 @@
 import logo from "@/assets/logo.png";
 
+import seoulBg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import asiaGlobe from "@/assets/maps/asia-globe.png";
+
+import logoBnb from "@/assets/logos/bnb.svg";
+import logoKucoin from "@/assets/logos/kucoin.png";
+import logoSahara from "@/assets/logos/sahara-ai.png";
+import logoPolygon from "@/assets/logos/polygon.svg";
+import logoMantra from "@/assets/logos/mantra.png";
+import logoStory from "@/assets/logos/story-protocol-mono.png";
+import logoOndo from "@/assets/logos/ondo.svg";
+import logoAptos from "@/assets/logos/aptos-round.png";
+import logoMegaeth from "@/assets/logos/megaeth.png";
+import logoFogo from "@/assets/logos/fogo-mono.png";
+import logoSynfutures from "@/assets/logos/synfutures-mono.png";
+import logoTria from "@/assets/logos/tria-official.png";
+import logoCoindesk from "@/assets/logos/coindesk.png";
+import logoBlockmedia from "@/assets/logos/blockmedia-new.png";
+import logoHankyung from "@/assets/logos/hankyung-new.png";
+
+import eventSahara from "@/assets/campaigns/sahara-ai-event.jpg";
+import eventBybit from "@/assets/campaigns/bybit-event.jpg";
+import eventBnb from "@/assets/campaigns/bnb-hanok-event.jpg";
+import eventKucoin from "@/assets/campaigns/kucoin-party-event.jpg";
+import eventStory from "@/assets/campaigns/story-origin-summit.jpg";
+import eventOndo from "@/assets/campaigns/ondo-seminar.jpg";
+
+import teamDavid from "@/assets/team/david-ceo.jpg";
+import teamBennet from "@/assets/team/bennet-coo.jpg";
+import teamJ from "@/assets/team/j-cmo.jpg";
+import teamKevin from "@/assets/team/kevin-bd-new.jpg";
+import teamSuki from "@/assets/team/suki-partner.jpg";
+import teamLewis from "@/assets/team/lewis-pr.jpg";
+import teamHyukjae from "@/assets/team/hyukjae-bdm-new.jpg";
+
+const TOTAL = 14;
+
 const s = {
   slide: "min-h-screen flex flex-col justify-center px-6 sm:px-10 lg:px-24 py-16 relative overflow-hidden border-t border-white/[0.04] first:border-t-0",
   label: "text-[10px] tracking-[0.35em] uppercase text-white/25 font-medium",
@@ -28,14 +64,22 @@ const Bar = ({ pct }: { pct: number }) => (
   </div>
 );
 
+const SN = ({ n }: { n: number }) => (
+  <span className={s.sn}>{String(n).padStart(2, "0")} / {TOTAL}</span>
+);
+
 const PitchDeck = () => (
   <div className="min-h-screen bg-[#09090B] text-white font-sans" style={{ fontFamily: "'Inter', system-ui, sans-serif" }}>
 
-    {/* 01 — COVER */}
+    {/* 01 — COVER with Seoul background */}
     <section className={s.slide} style={{ alignItems: "center", textAlign: "center" }}>
-      <div className={s.glow} style={{ background: "#a78bfa", top: "20%", left: "50%", transform: "translateX(-50%)" }} />
+      <div className="absolute inset-0">
+        <img src={seoulBg} alt="" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-[#09090B]/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-transparent to-[#09090B]/60" />
+      </div>
       <div className="relative z-10">
-        <img src={logo} alt="ium Labs" className="w-12 h-12 rounded-[14px] mx-auto mb-6" />
+        <img src={logo} alt="ium Labs" className="w-14 h-14 rounded-[14px] mx-auto mb-6 ring-1 ring-white/10" />
         <p className={`${s.labelAccent} mb-4`}>Korea's Web3 Growth Engine</p>
         <h1 className={`${s.hxl} mb-6`}>
           Seoul Moves Fast.<br /><span className={s.grad}>We Make You Land.</span>
@@ -51,7 +95,7 @@ const PitchDeck = () => (
         </div>
         <p className={`${s.bodySm} mt-8`}>Confidential — Q2 2026</p>
       </div>
-      <span className={s.sn}>01 / 13</span>
+      <SN n={1} />
     </section>
 
     {/* 02 — OPPORTUNITY */}
@@ -73,7 +117,7 @@ const PitchDeck = () => (
           <p className={s.body}><strong className="text-white">The Korea Premium:</strong> Korean retail consistently pays 3–8% above global spot prices. Projects that land correctly in Korea unlock a pricing multiplier that doesn't exist in any other market.</p>
         </div>
       </div>
-      <span className={s.sn}>02 / 13</span>
+      <SN n={2} />
     </section>
 
     {/* 03 — PROBLEM */}
@@ -96,7 +140,7 @@ const PitchDeck = () => (
           ))}
         </div>
       </div>
-      <span className={s.sn}>03 / 13</span>
+      <SN n={3} />
     </section>
 
     {/* 04 — SOLUTION */}
@@ -118,10 +162,10 @@ const PitchDeck = () => (
           ))}
         </div>
       </div>
-      <span className={s.sn}>04 / 13</span>
+      <SN n={4} />
     </section>
 
-    {/* 05 — TRACTION */}
+    {/* 05 — TRACTION + PROOF OF WORK */}
     <section className={s.slide}>
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <p className={`${s.labelAccent} mb-3`}>Traction</p>
@@ -134,7 +178,7 @@ const PitchDeck = () => (
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {[["PR Coverage Rate",87],["Community 30-Day Retention",92],["AMA Session Retention",85]].map(([l,p])=>(
             <div key={String(l)} className={s.cardSm}>
               <div className="flex justify-between items-baseline">
@@ -145,69 +189,104 @@ const PitchDeck = () => (
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {[["70+","Events Hosted"],["127K+","Community Members"],["64+","Press Articles"],["47","Research Reports"]].map(([n,l])=>(
-            <div key={l} className="text-center py-4">
-              <div className="text-xl font-bold">{n}</div>
-              <div className={s.bodySm}>{l}</div>
-            </div>
-          ))}
+
+        {/* Event photo strip — visual proof */}
+        <div className="mt-4">
+          <p className={`${s.label} mb-4`}>Selected Events & Activations</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+            {([
+              [eventSahara, "Sahara AI · 400+ Attendees"],
+              [eventBnb, "BNB Chain · VIP Hanok Dinner"],
+              [eventBybit, "Bybit · Korea Activation"],
+              [eventKucoin, "KuCoin · Networking Night"],
+              [eventStory, "Story · Origin Summit 2025"],
+              [eventOndo, "Ondo · Institutional Seminar"],
+            ] as const).map(([img, caption]) => (
+              <div key={caption} className="relative group">
+                <div className="aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.06]">
+                  <img src={img} alt={caption} className="w-full h-full object-cover" />
+                </div>
+                <p className="text-[10px] text-white/30 mt-1.5 leading-tight">{caption}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <span className={s.sn}>05 / 13</span>
+      <SN n={5} />
     </section>
 
-    {/* 06 — CLIENTS */}
+    {/* 06 — CLIENTS with logos */}
     <section className={s.slide}>
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <p className={`${s.labelAccent} mb-3`}>Selected Work</p>
         <h2 className={`${s.hlg} mb-10`}>Trusted by <span className={s.grad}>category leaders.</span></h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {([["Infrastructure","BNB Chain","2M+ Impressions · 150+ VIP Ambassadors","Full Korea ecosystem activation including KOL network, community build, and VIP ambassador program."],
-            ["Exchange","KuCoin","$550M+ TVL · +600% SEO Growth","Comprehensive Korea expansion with exchange partnerships, SEO dominance, and premium events."],
-            ["Exchange","Bybit","#2 Traffic Position · $1.5B+ TVL","Achieved #2 exchange traffic in Korea through integrated KOL, community, and PR campaigns."],
-            ["RWA","Ondo Finance","100K+ Community · 5M+ Media Reach","Built Korea's largest RWA community from zero with institutional PR and targeted KOL campaigns."],
-            ["Layer 2","MegaETH","$3M+ ICO Contributions · 2M+ Impressions","Pre-launch hype driving Korean retail participation in ICO with 2K+ testnet onboarding."],
-            ["AI Infrastructure","Sahara AI","400+ Event Attendees · 25+ Partnerships","Korea market entry with multi-event strategy, KOL integration, and institutional BD pipeline."],
-            ["Layer 1","Polygon","$2M Korean TVL (30d) · 200+ Hackathon Devs","Developer ecosystem growth with hackathons, university partnerships, and builder community."],
-            ["RWA · L1","MANTRA","$50M+ Institutional Pipeline · CEX Listed","End-to-end Korea launch: institutional BD, exchange listing support, and community activation."],
-            ["IP Protocol","Story Protocol","500+ Workshop Attendees · 13+ Media","Creator economy narrative positioning with workshop events and strategic media placements."]] as const).map(([tag,name,stat,desc])=>(
-            <div key={name} className="bg-[#111113] border border-white/[0.06] rounded-xl p-6 flex flex-col gap-2.5">
-              <span className="text-[10px] text-white/25 tracking-[0.1em] uppercase">{tag}</span>
-              <span className="text-lg font-bold">{name}</span>
+          {([
+            [logoBnb, "BNB Chain", "Infrastructure", "2M+ Impressions · 150+ VIP Ambassadors", false],
+            [logoKucoin, "KuCoin", "Exchange", "$550M+ TVL · +600% SEO Growth", false],
+            [null, "Bybit", "Exchange", "#2 Traffic Position · $1.5B+ TVL", false],
+            [logoOndo, "Ondo Finance", "RWA", "100K+ Community · 5M+ Media Reach", true],
+            [logoMegaeth, "MegaETH", "Layer 2", "$3M+ ICO Contributions · 2M+ Impressions", true],
+            [logoSahara, "Sahara AI", "AI Infra", "400+ Event Attendees · 25+ Partnerships", false],
+            [logoPolygon, "Polygon", "Layer 1", "$2M Korean TVL (30d) · 200+ Hackathon Devs", false],
+            [logoMantra, "MANTRA", "RWA · L1", "$50M+ Institutional Pipeline · CEX Listed", false],
+            [logoStory, "Story Protocol", "IP Protocol", "500+ Workshop Attendees · 13+ Media", false],
+          ] as const).map(([logoImg, name, tag, stat, needsInvert]) => (
+            <div key={name} className="bg-[#111113] border border-white/[0.06] rounded-xl p-6 flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                {logoImg ? (
+                  <img
+                    src={logoImg}
+                    alt={name}
+                    className="w-9 h-9 rounded-lg object-contain"
+                    style={needsInvert ? { filter: "brightness(0) invert(1)" } : undefined}
+                  />
+                ) : (
+                  <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#f7931a] to-[#f7931a]/70 flex items-center justify-center text-sm font-bold">B</div>
+                )}
+                <div>
+                  <span className="text-lg font-bold leading-tight block">{name}</span>
+                  <span className="text-[10px] text-white/25 tracking-[0.1em] uppercase">{tag}</span>
+                </div>
+              </div>
               <span className="text-xs text-[#a78bfa] font-semibold">{stat}</span>
-              <p className={s.bodySm}>{desc}</p>
             </div>
           ))}
         </div>
-        <p className={`${s.bodySm} mt-8 text-center`}>Also: Aptos · SynFutures · FOGO · Tria · OpenLedger · Kite AI · Spacecoin · World (WLD) and more</p>
+
+        {/* Additional client logo bar */}
+        <div className="mt-8 flex items-center gap-3 flex-wrap justify-center">
+          <span className={`${s.bodySm} mr-2`}>Also:</span>
+          {([
+            [logoAptos, "Aptos", true],
+            [logoSynfutures, "SynFutures", true],
+            [logoFogo, "FOGO", true],
+            [logoTria, "Tria", true],
+          ] as const).map(([img, name, inv]) => (
+            <div key={name} className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-white/[0.06] bg-white/[0.02]">
+              <img src={img} alt={name} className="w-4 h-4 object-contain" style={inv ? { filter: "brightness(0) invert(1)" } : undefined} />
+              <span className="text-[11px] text-white/40">{name}</span>
+            </div>
+          ))}
+          <span className="text-[11px] text-white/25">OpenLedger · Kite AI · Spacecoin · World (WLD) and more</span>
+        </div>
       </div>
-      <span className={s.sn}>06 / 13</span>
+      <SN n={6} />
     </section>
 
-    {/* 07 — CASE STUDY */}
+    {/* 07 — CASE STUDY with photo */}
     <section className={s.slide}>
       <div className={s.glow} style={{ background: "#6366f1", top: "50%", right: "-15%" }} />
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <p className={`${s.labelAccent} mb-3`}>Case Study</p>
-        <h2 className={`${s.hlg} mb-10`}>How we took Bybit to <span className={s.grad}>#2 in Korea.</span></h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <p className={`${s.bodyLg} mb-6`}>Bybit entered Korea as an unknown global exchange. We deployed a 6-month embedded campaign combining KOL seeding, community building, premium events, and Naver SEO.</p>
-            {([["1","Narrative Rebuild","Repositioned from 'foreign exchange' to 'global platform with Korea-first features.' Korean-language strategy across Naver, KakaoTalk, YouTube."],
-              ["2","KOL Blitz","Activated 50+ S/A-tier KOLs with authentic product reviews. Each KOL received dedicated onboarding for genuine content."],
-              ["3","VIP Community","Built 1,200+ VIP user community with exclusive perks, early feature access, and KakaoTalk-native engagement loops."],
-              ["4","Sustained Presence","Monthly events, weekly AMAs, ongoing PR — creating sustained visibility that compounded into organic traffic growth."]] as const).map(([n,t,d])=>(
-              <div key={n} className="flex gap-5 py-5 border-b border-white/[0.06] last:border-b-0">
-                <div className="w-9 h-9 rounded-[10px] bg-[#a78bfa]/[0.08] border border-[#a78bfa]/20 flex items-center justify-center text-sm font-bold text-[#a78bfa] shrink-0">{n}</div>
-                <div>
-                  <div className={s.hsm}>{t}</div>
-                  <p className={`${s.bodySm} mt-1`}>{d}</p>
-                </div>
-              </div>
-            ))}
+        <h2 className={`${s.hlg} mb-8`}>How we took Bybit to <span className={s.grad}>#2 in Korea.</span></h2>
+
+        {/* Photo + Stats hero */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
+          <div className="lg:col-span-3 rounded-2xl overflow-hidden border border-white/[0.06]">
+            <img src={eventBybit} alt="Bybit Korea Activation" className="w-full h-full object-cover min-h-[240px]" />
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="lg:col-span-2 flex flex-col gap-4">
             {[["#2","Exchange Traffic Position in Korea"],["$1.5B+","Total Value Locked"],["1,200+","VIP Korean Users"]].map(([n,l])=>(
               <div key={l} className={`${s.card} text-center flex-1 flex flex-col justify-center`}>
                 <div className={`${s.statNum} ${s.grad}`}>{n}</div>
@@ -216,8 +295,22 @@ const PitchDeck = () => (
             ))}
           </div>
         </div>
+
+        {/* Steps */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {([["1","Narrative Rebuild","Repositioned from 'foreign exchange' to 'global platform with Korea-first features.' Korean-language strategy across Naver, KakaoTalk, YouTube."],
+            ["2","KOL Blitz","Activated 50+ S/A-tier KOLs with authentic product reviews. Each KOL received dedicated onboarding for genuine content."],
+            ["3","VIP Community","Built 1,200+ VIP user community with exclusive perks, early feature access, and KakaoTalk-native engagement loops."],
+            ["4","Sustained Presence","Monthly events, weekly AMAs, ongoing PR — creating sustained visibility that compounded into organic traffic growth."]] as const).map(([n,t,d])=>(
+            <div key={n} className={s.cardSm}>
+              <div className="w-8 h-8 rounded-[10px] bg-[#a78bfa]/[0.08] border border-[#a78bfa]/20 flex items-center justify-center text-sm font-bold text-[#a78bfa] mb-3">{n}</div>
+              <div className={`${s.hsm} mb-1.5`}>{t}</div>
+              <p className={s.bodySm}>{d}</p>
+            </div>
+          ))}
+        </div>
       </div>
-      <span className={s.sn}>07 / 13</span>
+      <SN n={7} />
     </section>
 
     {/* 08 — SERVICES */}
@@ -245,7 +338,7 @@ const PitchDeck = () => (
           ))}
         </div>
       </div>
-      <span className={s.sn}>08 / 13</span>
+      <SN n={8} />
     </section>
 
     {/* 09 — KOL NETWORK */}
@@ -275,7 +368,7 @@ const PitchDeck = () => (
           ))}
         </div>
       </div>
-      <span className={s.sn}>09 / 13</span>
+      <SN n={9} />
     </section>
 
     {/* 10 — PROCESS */}
@@ -297,27 +390,34 @@ const PitchDeck = () => (
           ))}
         </div>
       </div>
-      <span className={s.sn}>10 / 13</span>
+      <SN n={10} />
     </section>
 
-    {/* 11 — GEOGRAPHY */}
+    {/* 11 — GEOGRAPHY with map */}
     <section className={s.slide}>
       <div className="relative z-10 max-w-7xl mx-auto w-full">
         <p className={`${s.labelAccent} mb-3`}>Coverage</p>
         <h2 className={`${s.hlg} mb-10`}>Korea-native. <span className={s.grad}>Asia-wide reach.</span></h2>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className={s.card} style={{ borderColor: "rgba(167,139,250,0.2)", background: "linear-gradient(180deg, rgba(167,139,250,0.04), transparent)" }}>
-            <span className={`${s.pillAccent} mb-3`}>HQ</span>
-            <div className={`${s.hmd} mb-2`}>South Korea</div>
-            <p className={s.bodySm}>Upbit, Bithumb, Korean CT, Naver, Kakao, DC Inside. Full native team.</p>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* Map */}
+          <div className="lg:col-span-2 flex items-center justify-center">
+            <img src={asiaGlobe} alt="Asia coverage" className="w-full max-w-[280px] opacity-60" style={{ filter: "hue-rotate(240deg) saturate(0.5) brightness(1.5)" }} />
           </div>
-          {([["Japan","LINE ecosystem, bitFlyer, Coincheck. Regulated entry."],["Taiwan","Local KOL network, exchange partnerships, community ops."],["China","Mainland BD, institutional network, WeChat CT."]] as const).map(([c,d])=>(
-            <div key={c} className={s.card}>
-              <span className={`${s.pill} mb-3`}>Active</span>
-              <div className={`${s.hmd} mb-2`}>{c}</div>
-              <p className={s.bodySm}>{d}</p>
+          {/* Country cards */}
+          <div className="lg:col-span-3 grid grid-cols-2 gap-4">
+            <div className={s.card} style={{ borderColor: "rgba(167,139,250,0.2)", background: "linear-gradient(180deg, rgba(167,139,250,0.04), transparent)" }}>
+              <span className={`${s.pillAccent} mb-3`}>HQ</span>
+              <div className={`${s.hmd} mb-2`}>South Korea</div>
+              <p className={s.bodySm}>Upbit, Bithumb, Korean CT, Naver, Kakao, DC Inside. Full native team.</p>
             </div>
-          ))}
+            {([["Japan","LINE ecosystem, bitFlyer, Coincheck. Regulated entry."],["Taiwan","Local KOL network, exchange partnerships, community ops."],["China","Mainland BD, institutional network, WeChat CT."]] as const).map(([c,d])=>(
+              <div key={c} className={s.card}>
+                <span className={`${s.pill} mb-3`}>Active</span>
+                <div className={`${s.hmd} mb-2`}>{c}</div>
+                <p className={s.bodySm}>{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <div className={`${s.card} mt-8 text-center`}>
           <p className={`${s.label} mb-3`}>Offices</p>
@@ -327,10 +427,10 @@ const PitchDeck = () => (
           </div>
         </div>
       </div>
-      <span className={s.sn}>11 / 13</span>
+      <SN n={11} />
     </section>
 
-    {/* 12 — TEAM */}
+    {/* 12 — TEAM with real headshots */}
     <section className={s.slide}>
       <div className={s.glow} style={{ background: "#a78bfa", top: "-20%", left: "20%" }} />
       <div className="relative z-10 max-w-7xl mx-auto w-full">
@@ -338,17 +438,27 @@ const PitchDeck = () => (
         <h2 className={`${s.hlg} mb-3`}>Built by operators, <span className={s.grad}>not consultants.</span></h2>
         <p className={`${s.bodyLg} max-w-3xl mb-10`}>Every member has lived inside the Korean crypto ecosystem — operating exchanges, managing communities, running campaigns, and navigating regulations firsthand.</p>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-          {([["D","David","Chief Executive Officer"],["B","Bennet","Chief Operating Officer"],["J","J","Chief Marketing Officer"]] as const).map(([i,n,r])=>(
+          {([
+            [teamDavid, "David", "Chief Executive Officer"],
+            [teamBennet, "Bennet", "Chief Operating Officer"],
+            [teamJ, "J", "Chief Marketing Officer"],
+          ] as const).map(([img, n, r]) => (
             <div key={n} className={`${s.card} text-center`}>
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#a78bfa] to-[#c084fc] mx-auto mb-4 flex items-center justify-center text-xl font-extrabold">{i}</div>
+              <img src={img} alt={n} className="w-20 h-20 rounded-full mx-auto mb-4 object-cover ring-2 ring-white/[0.08] grayscale" />
               <div className={s.hsm}>{n}</div>
               <p className={s.bodySm}>{r}</p>
             </div>
           ))}
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {([["Kevin","Head of BD"],["Suki","Managing Partner"],["Lewis","PR Manager"],["Hyukjae","BD Manager"]] as const).map(([n,r])=>(
+          {([
+            [teamKevin, "Kevin", "Head of BD"],
+            [teamSuki, "Suki", "Managing Partner"],
+            [teamLewis, "Lewis", "PR Manager"],
+            [teamHyukjae, "Hyukjae", "BD Manager"],
+          ] as const).map(([img, n, r]) => (
             <div key={n} className={`${s.cardSm} text-center`}>
+              <img src={img} alt={n} className="w-14 h-14 rounded-full mx-auto mb-3 object-cover ring-1 ring-white/[0.08] grayscale" />
               <div className={s.hsm}>{n}</div>
               <p className={s.bodySm}>{r}</p>
             </div>
@@ -358,14 +468,47 @@ const PitchDeck = () => (
           <p className={s.body}><strong className="text-white">10+ operators</strong> across strategy, BD, community, PR, research, design, and compliance. Currently hiring <strong className="text-[#a78bfa]">Researchers</strong> and <strong className="text-[#a78bfa]">Growth Managers</strong>.</p>
         </div>
       </div>
-      <span className={s.sn}>12 / 13</span>
+      <SN n={12} />
     </section>
 
-    {/* 13 — CTA */}
+    {/* 13 — PRESS & MEDIA COVERAGE */}
+    <section className={s.slide}>
+      <div className="relative z-10 max-w-7xl mx-auto w-full">
+        <p className={`${s.labelAccent} mb-3`}>Press & Media</p>
+        <h2 className={`${s.hlg} mb-10`}>Featured in Korea's <span className={s.grad}>top publications.</span></h2>
+        <div className="flex flex-wrap items-center justify-center gap-10 mb-10">
+          {([
+            [logoCoindesk, "CoinDesk Korea"],
+            [logoBlockmedia, "Block Media"],
+            [logoHankyung, "Hankyung"],
+          ] as const).map(([img, name]) => (
+            <img key={name} src={img} alt={name} className="h-8 sm:h-10 object-contain opacity-50" style={{ filter: "brightness(0) invert(1)" }} />
+          ))}
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {[["64+","Press Articles Published"],["87%","Placement Success Rate"],["47","Research Reports"],["5M+","Total Media Reach"]].map(([n,l])=>(
+            <div key={l} className="text-center py-4">
+              <div className="text-2xl font-extrabold">{n}</div>
+              <div className={s.bodySm}>{l}</div>
+            </div>
+          ))}
+        </div>
+        <div className={`${s.card}`} style={{ background: "linear-gradient(135deg, rgba(167,139,250,0.04), transparent)", borderColor: "rgba(167,139,250,0.1)" }}>
+          <p className={s.body}><strong className="text-white">Earned media, not paid placement.</strong> Our PR team maintains direct relationships with editors at CoinDesk Korea, Block Media, TokenPost, Hankyung, and 30+ publications. Native Korean press releases, thought leadership pieces, and exclusive interviews — not wire service blasts.</p>
+        </div>
+      </div>
+      <SN n={13} />
+    </section>
+
+    {/* 14 — CTA with Seoul background */}
     <section className={s.slide} style={{ alignItems: "center", textAlign: "center" }}>
-      <div className={s.glow} style={{ background: "#a78bfa", top: "40%", left: "50%", transform: "translateX(-50%)" }} />
+      <div className="absolute inset-0">
+        <img src={seoulBg} alt="" className="w-full h-full object-cover" style={{ transform: "scaleX(-1)" }} />
+        <div className="absolute inset-0 bg-[#09090B]/85" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#09090B] via-transparent to-[#09090B]/70" />
+      </div>
       <div className="relative z-10">
-        <img src={logo} alt="ium Labs" className="w-12 h-12 rounded-[14px] mx-auto mb-6" />
+        <img src={logo} alt="ium Labs" className="w-14 h-14 rounded-[14px] mx-auto mb-6 ring-1 ring-white/10" />
         <p className={`${s.labelAccent} mb-4`}>Let's Talk</p>
         <h2 className={`${s.hxl} mb-4`}>Ready to land<br /><span className={s.grad}>in Korea?</span></h2>
         <p className={`${s.bodyLg} max-w-2xl mx-auto mb-8`}>From strategy to execution. One call to align on your Korea market entry. Free 30-minute discovery. 24-hour response guarantee.</p>
@@ -381,7 +524,7 @@ const PitchDeck = () => (
         <div className="w-12 h-0.5 bg-[#a78bfa]/40 rounded-full mx-auto mt-10 mb-4" />
         <p className={s.bodySm}>Confidential — ium Labs Q2 2026</p>
       </div>
-      <span className={s.sn}>13 / 13</span>
+      <SN n={14} />
     </section>
   </div>
 );
