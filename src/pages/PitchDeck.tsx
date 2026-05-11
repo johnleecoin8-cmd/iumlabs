@@ -20,6 +20,16 @@ import eventMantra from "@/assets/campaigns/mantra-party.jpg";
 import eventAptos from "@/assets/campaigns/aptos-seoul-event.jpg";
 import eventPeaq from "@/assets/campaigns/peaq-summit.jpg";
 
+import svcGtm from "@/assets/services/gtm-strategy.webp";
+import svcKol from "@/assets/services/kol-avatars.webp";
+import svcPr from "@/assets/services/pr-coindesk.jpg";
+import svcCommunity from "@/assets/services/community-management.jpg";
+import svcEvents from "@/assets/services/offline-event.webp";
+import svcResearch from "@/assets/services/deep-research-blog.jpg";
+import svcSeo from "@/assets/services/seo-naver.jpg";
+import svcAma from "@/assets/services/ama-spaces.jpg";
+import svcCompliance from "@/assets/services/vasp-compliance.jpg";
+
 import teamDavid from "@/assets/team/kevin-bd-new.jpg";
 import teamBennet from "@/assets/team/rachel-design.jpg";
 import teamJ from "@/assets/team/j-cmo.jpg";
@@ -143,13 +153,15 @@ const PitchDeck = () => {
         .dk .cs-vid-stat-l{font-family:var(--mono);font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
 
         /* SERVICES GRID */
-        .dk .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:3rem;border-radius:12px;overflow:hidden}
-        .dk .svc-card{background:var(--off);padding:2.5rem 2rem;position:relative}
-        .dk .svc-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:0;background:var(--accent);transition:height .4s}
-        .dk .svc-card:hover::before{height:100%}
-        .dk .svc-n{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:var(--g4);line-height:1;margin-bottom:1.2rem}
-        .dk .svc-t{font-weight:600;font-size:1rem;margin-bottom:.5rem}
-        .dk .svc-d{font-size:.82rem;color:var(--g2);line-height:1.6;font-weight:300}
+        .dk .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:3rem;border-radius:12px;overflow:hidden}
+        .dk .svc-card{position:relative;overflow:hidden;min-height:280px;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem 2rem;cursor:default}
+        .dk .svc-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s;z-index:0}
+        .dk .svc-card:hover img{transform:scale(1.06)}
+        .dk .svc-card-ov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,.78) 100%);z-index:1}
+        .dk .svc-card-c{position:relative;z-index:2}
+        .dk .svc-n{font-family:var(--serif);font-size:2.2rem;font-weight:300;color:rgba(255,255,255,.2);line-height:1;margin-bottom:.8rem}
+        .dk .svc-t{font-weight:600;font-size:1.05rem;margin-bottom:.4rem}
+        .dk .svc-d{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.55;font-weight:300}
 
         /* TEAM — larger photos, rounded rect */
         .dk .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:3rem;border-radius:12px;overflow:hidden}
@@ -196,7 +208,8 @@ const PitchDeck = () => {
           .dk .cs-vid-grid{grid-template-columns:1fr}
           .dk .team-grid{grid-template-columns:repeat(2,1fr)}
           .dk .photo-grid{grid-template-columns:repeat(2,1fr)}
-          .dk .svc-grid{grid-template-columns:1fr}
+          .dk .svc-grid{grid-template-columns:1fr 1fr}
+          .dk .svc-card{min-height:220px}
           .dk .stmt{padding:6rem 0}
           .dk .stmt-text{font-size:clamp(1.8rem,6vw,2.5rem)}
           .dk .geo-strip{grid-template-columns:repeat(2,1fr)}
@@ -412,19 +425,23 @@ const PitchDeck = () => {
               <h2 className="hed">Everything you need to <strong className="hed-accent">land in Korea.</strong></h2>
             </div>
             <div className="svc-grid dk-reveal dk-d1">
-              {([["01","GTM Strategy","Competitive analysis, Korea-fit narrative, audience segmentation, launch roadmap."],
-                ["02","KOL & Influencer","230+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers."],
-                ["03","PR & Media","CoinDesk Korea, Block Media, TokenPost. 87% placement rate."],
-                ["04","Community","24/7 native managers. Telegram, Discord, KakaoTalk. 92% retention."],
-                ["05","Offline Events","KBW side events, VIP dinners, launch parties. 40+ Seoul venue relationships."],
-                ["06","Deep Research","On-chain analytics, competitor mapping, sentiment tracking. 47 reports."],
-                ["07","SEO & Paid Ads","Naver SEO, Google/X Ads, crypto ad networks. 287% traffic growth."],
-                ["08","AMA Hosting","Native Korean hosts. 200+ AMAs, 50K+ live participants."],
-                ["09","Compliance","VASP registration, PIPA, AML/KYC. Partnership with Freeman Law."]] as const).map(([n,t,d])=>(
+              {([["01","GTM Strategy","Competitive analysis, Korea-fit narrative, audience segmentation, launch roadmap.",svcGtm],
+                ["02","KOL & Influencer","230+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers.",svcKol],
+                ["03","PR & Media","CoinDesk Korea, Block Media, TokenPost. 87% placement rate.",svcPr],
+                ["04","Community","24/7 native managers. Telegram, Discord, KakaoTalk. 92% retention.",svcCommunity],
+                ["05","Offline Events","KBW side events, VIP dinners, launch parties. 40+ Seoul venue relationships.",svcEvents],
+                ["06","Deep Research","On-chain analytics, competitor mapping, sentiment tracking. 47 reports.",svcResearch],
+                ["07","SEO & Paid Ads","Naver SEO, Google/X Ads, crypto ad networks. 287% traffic growth.",svcSeo],
+                ["08","AMA Hosting","Native Korean hosts. 200+ AMAs, 50K+ live participants.",svcAma],
+                ["09","Compliance","VASP registration, PIPA, AML/KYC. Partnership with Freeman Law.",svcCompliance]] as const).map(([n,t,d,img])=>(
                 <div key={n} className="svc-card">
-                  <div className="svc-n">{n}</div>
-                  <div className="svc-t">{t}</div>
-                  <div className="svc-d">{d}</div>
+                  <img src={img} alt={t} />
+                  <div className="svc-card-ov" />
+                  <div className="svc-card-c">
+                    <div className="svc-n">{n}</div>
+                    <div className="svc-t">{t}</div>
+                    <div className="svc-d">{d}</div>
+                  </div>
                 </div>
               ))}
             </div>
