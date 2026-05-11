@@ -41,6 +41,7 @@ const KoreaEventMarketing = React.lazy(() => import("./pages/seo-landing/KoreaEv
 const KoreaSEONaver = React.lazy(() => import("./pages/seo-landing/KoreaSEONaver"));
 const KoreaExchangeListing = React.lazy(() => import("./pages/seo-landing/KoreaExchangeListing"));
 const BookMeeting = React.lazy(() => import("./pages/BookMeeting"));
+const PitchDeck = React.lazy(() => import("./pages/PitchDeck"));
 
 // SEO Article Pages
 const HowToLaunchTokenInKorea = React.lazy(() => import("./pages/seo-articles/how-to-launch-token-in-korea"));
@@ -220,6 +221,7 @@ const AppRoutes = () => {
         <Route path="/korea-event-marketing" element={<KoreaEventMarketing />} />
         <Route path="/korea-seo-naver" element={<KoreaSEONaver />} />
         <Route path="/korea-exchange-listing" element={<KoreaExchangeListing />} />
+        <Route path="/deck" element={<PitchDeck />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />
