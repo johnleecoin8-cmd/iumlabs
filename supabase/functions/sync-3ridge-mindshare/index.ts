@@ -296,6 +296,16 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
+  // Require API key auth — expensive Firecrawl operation
+  const apiKey = req.headers.get('x-api-key');
+  const expectedKey = Deno.env.get('CRAWLER_API_KEY');
+  if (!expectedKey || apiKey !== expectedKey) {
+    return new Response(
+      JSON.stringify({ error: 'Unauthorized' }),
+      { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+
   try {
     console.log("Starting multi-period 3ridge mindshare sync...");
     
