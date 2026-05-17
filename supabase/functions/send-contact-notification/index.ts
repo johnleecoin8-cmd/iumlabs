@@ -23,7 +23,27 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, company, budget, message }: ContactNotificationRequest = await req.json();
+    const body: ContactNotificationRequest = await req.json();
+    const name = (body.name ?? "").trim();
+    const email = (body.email ?? "").trim();
+    const company = (body.company ?? "").trim();
+    const budget = (body.budget ?? "").trim();
+    const message = (body.message ?? "").trim();
+
+    // Server-side input validation (defense in depth)
+    const emailRe = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (
+      !name || name.length > 100 ||
+      !email || email.length > 255 || !emailRe.test(email) ||
+      company.length > 200 ||
+      budget.length > 100 ||
+      message.length > 5000
+    ) {
+      return new Response(
+        JSON.stringify({ error: "Invalid input" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
     console.log("Processing contact notification for:", name, email);
 
     // Send notification email to Ium Labs team
