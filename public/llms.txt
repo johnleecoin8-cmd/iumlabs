@@ -1,0 +1,43 @@
+# ium Labs
+
+> Korea crypto marketing agency for global Web3 projects. Full-stack KOL, community, PR, and GTM strategy for Korea market entry.
+
+ium Labs (이음 랩스) bridges global Web3 projects with the Korean market through data-driven research and strategic GTM marketing. We operate as embedded Korea-native operators, not a vendor list, and have supported 22+ launches with partners including BNB Chain, KuCoin, Polygon, Aptos, Mantra, Sahara AI, and Ondo.
+
+## Pages
+
+- [Home](/): Korea crypto marketing agency overview.
+- [Projects](/projects): Case studies from 22+ Web3 launches in Korea.
+- [Blog](/blog): Korea Web3 market research and GTM insights.
+- [Contact](/contact): Get in touch for Korea market entry consultation.
+- [Careers](/jobs): Open roles at ium Labs in Seoul.
+- [K-Leaderboard](/k-leaderboard): Korean crypto influence and project rankings.
+
+## Services
+
+- [GTM Strategy](/services/gtm): Full-stack Go-To-Market for Korea market entry.
+- [KOL & Influencer Marketing](/services/influencer): 170+ vetted Korean crypto KOLs.
+- [Community Management](/services/community): Telegram, Discord, KakaoTalk, Naver Cafe.
+- [PR & Media Relations](/services/pr): CoinDesk Korea, Block Media, TokenPost coverage.
+- [Deep Research](/services/deep-research): Data-driven Korean market intelligence.
+- [AMA Hosting](/services/ama): Native Korean-hosted AMA sessions for Web3 projects.
+- [SEO & Paid Ads](/services/seo-ads): Naver SEO and crypto ad networks.
+- [Offline Events](/services/offline-event): Crypto meetups and conferences in Seoul.
+- [Branding & Website](/services/compliance): Web3 brand identity and localized landing pages.
+
+## Guides
+
+- [Korea Web3 Market Guide](/korea-web3-guide): Complete guide to entering Korea's crypto market.
+- [Crypto Marketing Korea](/crypto-marketing-korea): Full-stack crypto marketing for Korea.
+- [KOL Marketing Korea](/kol-marketing-korea): Korean KOL network for Web3 campaigns.
+- [Korea Community Management](/korea-community-management): Korean community building playbook.
+- [Korea PR & Media](/korea-pr-media): Korean crypto press strategy.
+- [Korea Event Marketing](/korea-event-marketing): Web3 events and side events in Seoul.
+- [Korea Naver SEO](/korea-seo-naver): Naver-first SEO for crypto projects.
+- [Korea Exchange Listing](/korea-exchange-listing): Upbit, Bithumb, Coinone listing strategy.
+
+## Optional
+
+- [Privacy](/privacy)
+- [Terms](/terms)
+- [Transparency](/transparency)

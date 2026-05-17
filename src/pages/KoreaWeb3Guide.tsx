@@ -61,7 +61,7 @@ const KoreaWeb3Guide = () => {
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       <SEOHead
         title="Korea Crypto Market Entry Guide | How to Launch Web3 in Korea | ium Labs"
-        description="Complete guide to entering the Korean crypto market in 2026. Learn about regulations, KOL marketing, community building, exchange listings, and GTM strategies for Web3 projects."
+        description="Complete 2026 guide to entering Korea's crypto market: regulations, KOL marketing, community, exchange listings, and GTM strategy for Web3 projects."
         path="/korea-web3-guide"
         keywords={[
           'Korea crypto market entry',
