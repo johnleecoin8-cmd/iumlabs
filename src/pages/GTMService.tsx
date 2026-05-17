@@ -118,13 +118,13 @@ const GTMService = () => {
   }, []);
 
   useEffect(() => {
-    const isDesktop = window.innerWidth > 768;
+    const isDesktop = window.innerWidth >= 1024;
     if (!isDesktop) return;
 
     const ctx = gsap.context(() => {
-      gsap.from(".gtm-ed .hero-ed h1", { y: 60, opacity: 0, duration: 1.2, delay: .2, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-desc", { y: 30, opacity: 0, duration: 1, delay: .6, ease: "power3.out" });
-      gsap.from(".gtm-ed .hero-stat", { y: 20, opacity: 0, duration: .8, delay: .9, stagger: .1, ease: "power3.out" });
+      gsap.fromTo(".gtm-ed .hero-ed h1", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, delay: .2, ease: "power3.out" });
+      gsap.fromTo(".gtm-ed .hero-desc", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1, delay: .6, ease: "power3.out" });
+      gsap.fromTo(".gtm-ed .hero-stat", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: .8, delay: .9, stagger: .1, ease: "power3.out" });
 
       gsap.utils.toArray<HTMLElement>(".gtm-ed .lbl,.gtm-ed .manifesto p,.gtm-ed .pill,.gtm-ed .q-card,.gtm-ed .invite h2,.gtm-ed .invite-kr,.gtm-ed .appr-l,.gtm-ed .pull-q,.gtm-ed .svc-block,.gtm-ed .reg-country,.gtm-ed .reg-map").forEach(el => {
         gsap.from(el, { y: 50, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 88%" }});
@@ -287,36 +287,36 @@ const GTMService = () => {
       <section className="team-section">
         <div className="team-label">[ Team of 10+ Operators ]</div>
         <div className="team-title-wrap"><div className="team-title">Our Team</div></div>
-        <div className="team-cards" style={{ minHeight: 3400 }}>
-          <div className="tm-card" style={{ top: 40, left: "0%", width: 400 }}>
+        <div className="team-cards" style={{ minHeight: 2400 }}>
+          <div className="tm-card" style={{ top: 40, left: "0%", width: 340 }}>
             <div className="tm-info"><h4>David</h4><span>CEO</span></div>
             <div className="tm-photo"><img src={teamDavid} alt="David" /></div>
           </div>
-          <div className="tm-card" style={{ top: 100, left: "74%", width: 240 }}>
+          <div className="tm-card" style={{ top: 80, left: "72%", width: 220 }}>
             <div className="tm-info"><h4>Bennet</h4><span>COO</span></div>
             <div className="tm-photo"><img src={teamBennet} alt="Bennet" /></div>
           </div>
-          <div className="tm-card" style={{ top: 650, left: "52%", width: 460 }}>
+          <div className="tm-card" style={{ top: 420, left: "48%", width: 400 }}>
             <div className="tm-info"><h4>J</h4><span>CMO</span></div>
             <div className="tm-photo"><img src={teamJ} alt="J" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1050, left: "0%", width: 190 }}>
+          <div className="tm-card" style={{ top: 750, left: "0%", width: 180 }}>
             <div className="tm-info"><h4>Kevin</h4><span>Head of BD</span></div>
             <div className="tm-photo"><img src={teamKevin} alt="Kevin" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1500, left: "18%", width: 320 }}>
+          <div className="tm-card" style={{ top: 1050, left: "16%", width: 300 }}>
             <div className="tm-info"><h4>Suki</h4><span>Managing Partner</span></div>
             <div className="tm-photo"><img src={teamSuki} alt="Suki" /></div>
           </div>
-          <div className="tm-card" style={{ top: 1550, left: "68%", width: 280 }}>
+          <div className="tm-card" style={{ top: 1080, left: "66%", width: 260 }}>
             <div className="tm-info"><h4>Lewis</h4><span>PR Manager</span></div>
             <div className="tm-photo"><img src={teamLewis} alt="Lewis" /></div>
           </div>
-          <div className="tm-card" style={{ top: 2100, left: "35%", width: 440 }}>
+          <div className="tm-card" style={{ top: 1500, left: "32%", width: 380 }}>
             <div className="tm-info"><h4>Rachel</h4><span>Designer</span></div>
             <div className="tm-photo"><img src={teamRachel} alt="Rachel" /></div>
           </div>
-          <div className="tm-card" style={{ top: 2700, left: "0%", width: 220 }}>
+          <div className="tm-card" style={{ top: 1900, left: "0%", width: 200 }}>
             <div className="tm-info"><h4>Hyukjae</h4><span>BD Manager</span></div>
             <div className="tm-photo"><img src={teamHyukjae} alt="Hyukjae" /></div>
           </div>

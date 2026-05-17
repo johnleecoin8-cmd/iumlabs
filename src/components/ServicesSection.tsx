@@ -177,8 +177,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         />
 
         {/* Multi-layer overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${service.accent}10, transparent 60%)` }} />
 
         {/* Top bar */}
@@ -199,7 +199,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">
             {service.title}
           </h3>
-          <p className="text-sm text-white/50 mb-4 leading-relaxed max-w-[90%]">
+          <p className="text-sm text-white/60 mb-4 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
 

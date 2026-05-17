@@ -68,6 +68,7 @@ const AdminBlog = React.lazy(() => import("./pages/admin/AdminResearch"));
 const BlogForm = React.lazy(() => import("./pages/admin/ResearchForm"));
 const AdminContacts = React.lazy(() => import("./pages/admin/AdminContacts"));
 const AdminJobApplications = React.lazy(() => import("./pages/admin/AdminJobApplications"));
+const AdminGSC = React.lazy(() => import("./pages/admin/AdminGSC"));
 
 const queryClient = new QueryClient();
 
@@ -233,6 +234,7 @@ const AppRoutes = () => {
         <Route path="/ium-admin/blog/:id/edit" element={<BlogForm />} />
         <Route path="/ium-admin/contacts" element={<AdminContacts />} />
         <Route path="/ium-admin/jobs" element={<AdminJobApplications />} />
+        <Route path="/ium-admin/gsc" element={<AdminGSC />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

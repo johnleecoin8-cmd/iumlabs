@@ -116,8 +116,9 @@ const InsightsSection = () => {
             <motion.div
               key={article.id}
               className="relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-3xl h-full"
+              style={{ flexBasis: 0, flexShrink: 1 }}
               animate={{
-                flex: isActive ? 4 : 1,
+                flexGrow: isActive ? 4 : 1,
               }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => handleSelect(index)}

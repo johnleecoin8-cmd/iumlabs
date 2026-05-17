@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, FolderKanban, FileText, Mail, Briefcase, LogOut, ChevronLeft } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, FileText, Mail, Briefcase, LogOut, ChevronLeft, BarChart3 } from 'lucide-react';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
@@ -28,6 +28,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
     { path: '/ium-admin/blog', label: 'Blog', icon: FileText },
     { path: '/ium-admin/contacts', label: 'Contacts', icon: Mail },
     { path: '/ium-admin/jobs', label: 'Job Applications', icon: Briefcase },
+    { path: '/ium-admin/gsc', label: 'Search Console', icon: BarChart3 },
   ];
 
   return (

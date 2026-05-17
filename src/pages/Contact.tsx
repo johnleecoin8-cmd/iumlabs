@@ -26,7 +26,7 @@ const contactInfo = [{
 }, {
   icon: Mail,
   label: "Email",
-  value: "Email",
+  value: brand.email,
   link: `mailto:${brand.email}`
 }];
 

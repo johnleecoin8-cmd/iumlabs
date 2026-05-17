@@ -338,7 +338,8 @@ const DesktopShowcase = () => {
 };
 
 const SelectedWorkShowcase = () => {
-  return <DesktopShowcase />;
+  const isMobile = useIsMobile();
+  return isMobile ? <MobileShowcase /> : <DesktopShowcase />;
 };
 
 export default SelectedWorkShowcase;

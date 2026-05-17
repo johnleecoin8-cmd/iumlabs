@@ -24,7 +24,9 @@
 .gtm-ed .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.35);z-index:0}
 .gtm-ed .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,11,.3) 0%,rgba(10,10,11,.15) 40%,rgba(10,10,11,.7) 100%)}
 .gtm-ed .hero-center{position:relative;z-index:2;text-align:center;max-width:900px;padding:0 2rem}
-.gtm-ed .hero-ed h1{font-family:var(--sans);font-weight:800;font-size:clamp(3.2rem,9vw,7rem);line-height:1.05;letter-spacing:-.03em}
+.gtm-ed .hero-ed h1{font-family:var(--sans);font-weight:800;font-size:clamp(3.2rem,9vw,7rem);line-height:1.05;letter-spacing:-.03em;opacity:1}
+.gtm-ed .hero-desc{opacity:1}
+.gtm-ed .hero-stat{opacity:1}
 .gtm-ed .hero-accent{background:linear-gradient(135deg,#b48cde,#a78bfa,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 .gtm-ed .hero-desc{font-size:clamp(.88rem,2.5vw,1.1rem);color:rgba(255,255,255,.8);line-height:1.75;font-weight:300;margin-top:2rem;max-width:700px;margin-left:auto;margin-right:auto}
 .gtm-ed .hero-desc strong{font-weight:600;color:#fff}
@@ -128,17 +130,17 @@
 .gtm-ed .pill p{font-size:.95rem;color:var(--g1);line-height:1.65;font-weight:300}
 
 /* TEAM — scatter layout */
-.gtm-ed .team-section{position:relative;background:#f5f5f5;overflow:visible}
-.gtm-ed .team-label{position:sticky;top:1.5rem;z-index:10;text-align:center;font-family:var(--mono);font-size:.65rem;color:#999;letter-spacing:.15em;padding:1rem 0}
+.gtm-ed .team-section{position:relative;background:#111113;overflow:visible}
+.gtm-ed .team-label{position:sticky;top:1.5rem;z-index:10;text-align:center;font-family:var(--mono);font-size:.65rem;color:#666;letter-spacing:.15em;padding:1rem 0}
 .gtm-ed .team-title-wrap{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
-.gtm-ed .team-title{font-family:var(--sans);font-weight:800;font-size:clamp(6rem,20vw,22rem);line-height:.85;letter-spacing:-.05em;color:#000;opacity:.04;white-space:nowrap;user-select:none}
+.gtm-ed .team-title{font-family:var(--sans);font-weight:800;font-size:clamp(6rem,20vw,22rem);line-height:.85;letter-spacing:-.05em;color:#fff;opacity:.04;white-space:nowrap;user-select:none}
 .gtm-ed .team-cards{position:relative;max-width:1400px;margin:0 auto;margin-top:-100vh;padding:0 2rem;z-index:5}
-.gtm-ed .tm-card{position:absolute;background:#ffffff !important;border-radius:16px;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 8px 40px rgba(0,0,0,.1);opacity:1;transform:translateY(0)}
-.gtm-ed .tm-info{padding:.75rem 1rem .5rem;background:#ffffff}
-.gtm-ed .tm-info h4{font-weight:700;font-size:.88rem;margin-bottom:.15rem;color:#111 !important}
-.gtm-ed .tm-info span{font-size:.6rem;color:#2d5bff;letter-spacing:.04em;font-weight:600}
-.gtm-ed .tm-info .tm-tg{display:block;font-family:var(--mono);font-size:.55rem;color:#999;letter-spacing:.02em;font-weight:400;margin-top:.2rem}
-.gtm-ed .tm-photo{width:100%;aspect-ratio:1/1.15;position:relative;overflow:hidden;background:#ffffff}
+.gtm-ed .tm-card{position:absolute;background:#1a1a1c !important;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.08);box-shadow:0 8px 40px rgba(0,0,0,.3);opacity:1;transform:translateY(0)}
+.gtm-ed .tm-info{padding:.75rem 1rem .5rem;background:#1a1a1c}
+.gtm-ed .tm-info h4{font-weight:700;font-size:.88rem;margin-bottom:.15rem;color:#eae7e0 !important}
+.gtm-ed .tm-info span{font-size:.6rem;color:#a78bfa;letter-spacing:.04em;font-weight:600}
+.gtm-ed .tm-info .tm-tg{display:block;font-family:var(--mono);font-size:.55rem;color:#666;letter-spacing:.02em;font-weight:400;margin-top:.2rem}
+.gtm-ed .tm-photo{width:100%;aspect-ratio:1/1.15;position:relative;overflow:hidden;background:#1a1a1c}
 .gtm-ed .tm-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);mix-blend-mode:normal !important}
 .gtm-ed .tm-photo::after{content:'' !important;position:absolute;inset:0;background:none !important;pointer-events:none}
 
@@ -194,6 +196,30 @@
   .gtm-ed .svc-exp-inner{margin-left:60px;grid-template-columns:1fr}
   .gtm-ed .invite-inner{grid-template-columns:1fr}.gtm-ed .invite-right{text-align:left}.gtm-ed .invite-offices{justify-content:flex-start}
   .gtm-ed .team-title{font-size:clamp(3rem,14vw,6rem)}
+  /* Selected Work — vertical stack on tablet */
+  .gtm-ed .work-sec{overflow:visible}
+  .gtm-ed .work-pin{display:flex;flex-direction:column;width:100%}
+  .gtm-ed .work-intro{width:100%;height:auto;padding:4rem 1.5rem;min-height:0}
+  .gtm-ed .work-card{width:100%;height:auto;padding:2.5rem 1.5rem;border-left:none;border-top:1px solid var(--g4)}
+  .gtm-ed .wc-metric{font-size:clamp(2rem,8vw,3rem)}
+  .gtm-ed .manifesto-grid{grid-template-columns:1fr;gap:2.5rem}
+  /* Force all sections visible (prevent GSAP residuals) */
+  .gtm-ed .approach-ed,
+  .gtm-ed .team-section,
+  .gtm-ed .regions-sec,
+  .gtm-ed .quotes-sec,
+  .gtm-ed .invite{opacity:1 !important;visibility:visible !important;transform:none !important}
+  .gtm-ed .lbl,
+  .gtm-ed .manifesto p,
+  .gtm-ed .pill,
+  .gtm-ed .q-card,
+  .gtm-ed .invite h2,
+  .gtm-ed .invite-kr,
+  .gtm-ed .appr-l,
+  .gtm-ed .pull-q,
+  .gtm-ed .svc-block,
+  .gtm-ed .reg-country,
+  .gtm-ed .reg-map{opacity:1 !important;visibility:visible !important;transform:none !important}
 }
 @media(max-width:768px){
   /* Base */
@@ -229,31 +255,6 @@
   .gtm-ed .svc-exp-inner{margin-left:0;grid-template-columns:1fr;gap:2rem}
   .gtm-ed .svc-desc{font-size:.88rem}
 
-  /* Selected Work — vertical stack on mobile */
-  .gtm-ed .work-sec{overflow:visible}
-  .gtm-ed .work-pin{display:flex;flex-direction:column;width:100%}
-  .gtm-ed .work-intro{width:100%;height:auto;padding:4rem 1.5rem;min-height:0}
-  .gtm-ed .work-card{width:100%;height:auto;padding:2.5rem 1.5rem;border-left:none;border-top:1px solid var(--g4)}
-  .gtm-ed .wc-metric{font-size:clamp(2rem,8vw,3rem)}
-
-  /* Force all sections visible on mobile (prevent GSAP residuals) */
-  .gtm-ed .approach-ed,
-  .gtm-ed .team-section,
-  .gtm-ed .regions-sec,
-  .gtm-ed .quotes-sec,
-  .gtm-ed .invite{opacity:1 !important;visibility:visible !important;transform:none !important}
-  .gtm-ed .lbl,
-  .gtm-ed .manifesto p,
-  .gtm-ed .pill,
-  .gtm-ed .q-card,
-  .gtm-ed .invite h2,
-  .gtm-ed .invite-kr,
-  .gtm-ed .appr-l,
-  .gtm-ed .pull-q,
-  .gtm-ed .svc-block,
-  .gtm-ed .reg-country,
-  .gtm-ed .reg-map{opacity:1 !important;visibility:visible !important;transform:none !important}
-
   /* Approach */
   .gtm-ed .approach-ed{padding:5rem 0}
   .gtm-ed .appr-l h2{font-size:clamp(1.6rem,5vw,2.2rem)}
@@ -262,7 +263,7 @@
   /* Team — grid layout on mobile */
   .gtm-ed .team-section{overflow:hidden}
   .gtm-ed .team-title-wrap{position:relative;height:auto;padding:3rem 0 1rem}
-  .gtm-ed .team-title{font-size:clamp(3rem,12vw,5rem);opacity:.06 !important}
+  .gtm-ed .team-title{font-size:clamp(3rem,12vw,5rem);opacity:.06 !important;color:#fff}
   .gtm-ed .team-cards{display:grid !important;grid-template-columns:1fr 1fr;gap:12px;padding:0 1rem;margin-top:0;min-height:auto !important;max-width:100%}
   .gtm-ed .tm-card{position:relative !important;top:auto !important;left:auto !important;width:100% !important;opacity:1 !important}
 
