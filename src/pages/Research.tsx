@@ -1,12 +1,12 @@
-import { useState, useMemo } from "react";
-import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, ArrowUpRight, TrendingUp } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, ArrowUpRight, TrendingUp, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -25,12 +25,23 @@ const calculateReadTime = (content: string | null): string => {
 };
 
 const Research = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
   const postsPerPage = 9;
+
+  useEffect(() => {
+    const tagParam = searchParams.get('tag');
+    if (tagParam) {
+      setSelectedTag(tagParam);
+      setSelectedCategory("All");
+      setCurrentPage(1);
+    }
+  }, [searchParams]);
 
   const { data: dbPosts, isLoading } = useQuery({
     queryKey: ['research-posts'],
@@ -68,15 +79,17 @@ const Research = () => {
 
   const filteredPosts = useMemo(() => {
     return posts.filter(post => {
-      if (post === featuredPost && currentPage === 1 && selectedCategory === "All" && !searchQuery) return false;
-      if (secondaryPosts.includes(post) && currentPage === 1 && selectedCategory === "All" && !searchQuery) return false;
+      const isFiltering = searchQuery || selectedCategory !== "All" || selectedTag;
+      if (!isFiltering && post === featuredPost && currentPage === 1) return false;
+      if (!isFiltering && secondaryPosts.includes(post) && currentPage === 1) return false;
       const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCategory = selectedCategory === "All" ||
         (post.category && post.category.toLowerCase().includes(selectedCategory.toLowerCase()));
-      return matchesSearch && matchesCategory;
+      const matchesTag = !selectedTag || (post.tags && post.tags.some(t => t.toLowerCase() === selectedTag.toLowerCase()));
+      return matchesSearch && matchesCategory && matchesTag;
     });
-  }, [posts, searchQuery, selectedCategory, currentPage, featuredPost, secondaryPosts]);
+  }, [posts, searchQuery, selectedCategory, selectedTag, currentPage, featuredPost, secondaryPosts]);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const currentPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
@@ -143,9 +156,9 @@ const Research = () => {
             {categories.map(cat => (
               <button
                 key={cat}
-                onClick={() => { setSelectedCategory(cat); setCurrentPage(1); }}
+                onClick={() => { setSelectedCategory(cat); setSelectedTag(null); setSearchParams({}); setCurrentPage(1); }}
                 className={`whitespace-nowrap px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-200 shrink-0 ${
-                  selectedCategory === cat
+                  selectedCategory === cat && !selectedTag
                     ? "bg-white text-black"
                     : "bg-white/[0.04] text-white/50 border border-white/[0.08] hover:bg-white/[0.08] hover:text-white/70"
                 }`}
@@ -154,11 +167,27 @@ const Research = () => {
               </button>
             ))}
           </div>
+
+          {/* Active tag filter */}
+          {selectedTag && (
+            <div className="mt-4 flex items-center gap-2">
+              <span className="text-xs text-white/30">Filtered by tag:</span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#b48cde]/15 border border-[#b48cde]/25 text-[#d8b4fe] text-xs font-medium">
+                {selectedTag}
+                <button
+                  onClick={() => { setSelectedTag(null); setSearchParams({}); }}
+                  className="hover:text-white transition-colors"
+                >
+                  <X className="w-3 h-3" />
+                </button>
+              </span>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Featured Bento Section */}
-      {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost && (
+      {currentPage === 1 && selectedCategory === "All" && !searchQuery && !selectedTag && featuredPost && (
         <section className="px-4 sm:px-6 lg:px-10 pb-6 sm:pb-10">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">

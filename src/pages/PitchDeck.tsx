@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import logo from "@/assets/logo.png";
+import Navbar from "@/components/Navbar";
 import FooterLinksSection from "@/components/FooterLinksSection";
 
 import seoulCta from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
@@ -217,6 +218,7 @@ const PitchDeck = () => {
         }
       `}</style>
 
+      <Navbar />
       <div className="dk">
 
         {/* 01 — HERO */}

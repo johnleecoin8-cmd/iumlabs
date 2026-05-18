@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useMemo } from "react";
-import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight, Tag } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
@@ -11,6 +11,9 @@ import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
 import SEOHead from "@/components/SEOHead";
+import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
+import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
+import { staticResearchPosts } from "@/data/static-research-posts";
 
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
@@ -76,8 +79,26 @@ const ResearchDetail = () => {
     enabled: !!dbPost?.id,
   });
 
-  // Transform DB data to display format
-  const post = dbPost ? {
+  // Static posts with curated content take priority over DB
+  const staticPost = staticResearchPosts.find(p => p.slug === slug);
+  const useStatic = !!(staticPost && staticPost.content && staticPost.content.length > 0);
+
+  const post = useStatic ? {
+    id: staticPost!.id,
+    slug: staticPost!.slug,
+    title: staticPost!.title,
+    image: staticPost!.image,
+    date: staticPost!.date,
+    readTime: staticPost!.readTime,
+    category: staticPost!.category,
+    author: staticPost!.author,
+    authorRole: staticPost!.authorRole,
+    authorImage: '',
+    excerpt: staticPost!.excerpt,
+    tags: staticPost!.tags,
+    content: staticPost!.content,
+    chartImages: (staticPost as any).chartImages as Record<string, string> | undefined,
+  } : dbPost ? {
     id: dbPost.id,
     slug: dbPost.slug,
     title: dbPost.title,
@@ -94,14 +115,23 @@ const ResearchDetail = () => {
     chartImages: undefined as Record<string, string> | undefined,
   } : null;
   
-  const relatedPosts = (dbRelatedPosts || []).map(p => ({
-    id: p.id,
-    slug: p.slug,
-    title: p.title,
-    image: p.image || '',
-    readTime: p.read_time || calculateReadTime(p.content),
-    category: p.category || 'Blog',
-  }));
+  const staticRelated = staticPost
+    ? staticResearchPosts
+        .filter(p => p.slug !== slug)
+        .slice(0, 3)
+        .map(p => ({ id: p.id, slug: p.slug, title: p.title, image: p.image, readTime: p.readTime, category: p.category }))
+    : [];
+
+  const relatedPosts = dbRelatedPosts && dbRelatedPosts.length > 0
+    ? dbRelatedPosts.map(p => ({
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        image: p.image || '',
+        readTime: p.read_time || calculateReadTime(p.content),
+        category: p.category || 'Blog',
+      }))
+    : staticRelated;
 
   // SEO meta computed from post data
   const seoTitle = post ? `${post.title} | ium Labs Blog` : "Blog | ium Labs";
@@ -133,7 +163,7 @@ const ResearchDetail = () => {
     window.open(shareUrls[platform], "_blank", "width=600,height=400");
   };
 
-  if (isLoading) {
+  if (isLoading && !useStatic) {
     return (
       <div className="min-h-screen bg-[#0A0A0A]">
         <Navbar />
@@ -163,13 +193,14 @@ const ResearchDetail = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+      <ReadingProgressBar />
       <SEOHead
         title={seoTitle}
         description={seoDescription}
         path={`/blog/${slug}`}
         image={seoImage}
         type="article"
-        keywords={[post?.category || 'Web3', 'Korea', 'Blog', 'Research'].filter(Boolean)}
+        keywords={[post?.category || 'Web3', 'Korea', 'Blog', 'Research', ...(post?.tags || [])].filter(Boolean)}
         publishedTime={post?.date}
         author={post?.author || "ium Labs"}
       />
@@ -210,22 +241,25 @@ const ResearchDetail = () => {
             {post.title}
           </h1>
           
-          {/* Author */}
+          {/* Author & Share */}
           <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
-                {post.author.split(' ').map(n => n[0]).join('')}
-              </div>
+              {post.authorImage ? (
+                <img src={post.authorImage} alt={post.author} className="w-12 h-12 rounded-full object-cover ring-2 ring-white/10" />
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
+                  {post.author.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
               <div>
                 <p className="text-white font-medium">{post.author}</p>
                 <p className="text-white/40 text-sm">{post.authorRole}</p>
               </div>
             </div>
-            
-            {/* Share */}
+
             <div className="flex items-center gap-2">
               <span className="text-white/40 text-sm mr-2">Share:</span>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleShare("twitter")}
@@ -233,7 +267,7 @@ const ResearchDetail = () => {
               >
                 <Twitter className="w-4 h-4" />
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleShare("linkedin")}
@@ -241,7 +275,7 @@ const ResearchDetail = () => {
               >
                 <Linkedin className="w-4 h-4" />
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleCopyLink}
@@ -251,6 +285,22 @@ const ResearchDetail = () => {
               </motion.button>
             </div>
           </div>
+
+          {/* Tags */}
+          {post.tags && post.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 pt-5">
+              <Tag className="w-3.5 h-3.5 text-white/25" />
+              {post.tags.map((tag) => (
+                <Link
+                  key={tag}
+                  to={`/blog?tag=${encodeURIComponent(tag)}`}
+                  className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs hover:bg-white/[0.08] hover:text-white/70 transition-colors"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -267,205 +317,269 @@ const ResearchDetail = () => {
 
       {/* Content */}
       <section className="container mx-auto max-w-4xl px-4 pb-20">
+        <TableOfContents content={post.content} />
         <div className="prose prose-invert prose-lg max-w-none">
-          <div className="text-white/80 leading-relaxed">
-            {post.content.split('\n').map((line, index) => {
-              // Handle standard markdown images ![alt](url)
-              if (line.startsWith('![') && line.includes('](')) {
-                const imageMatch = line.match(/\!\[([^\]]*)\]\(([^)]+)\)/);
-                if (imageMatch) {
-                  const [, altText, imageUrl] = imageMatch;
-                  // Skip chart: protocol images if no chartImages available
-                  if (imageUrl.startsWith('chart:')) {
-                    if (post.chartImages) {
-                      const chartKey = imageUrl.replace('chart:', '');
-                      const chartImage = post.chartImages[chartKey as keyof typeof post.chartImages];
-                      if (chartImage) {
-                        return (
-                          <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
-                            <img 
-                              src={chartImage} 
-                              alt={altText}
-                              className="w-full h-auto"
-                            />
-                          </div>
-                        );
-                      }
-                    }
-                    return null;
+          <div className="text-white/80 leading-[1.8] text-[16px] sm:text-[17px]">
+            {(() => {
+              const lines = post.content.split('\n');
+              const rendered: React.ReactNode[] = [];
+              let i = 0;
+
+              const renderInline = (text: string) => {
+                if (!text.includes('**')) return text;
+                return text.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
+                  part.startsWith('**') && part.endsWith('**')
+                    ? <strong key={j} className="text-white font-semibold">{part.replace(/\*\*/g, '')}</strong>
+                    : part
+                );
+              };
+
+              while (i < lines.length) {
+                const line = lines[i];
+                const key = i;
+
+                // Callout blocks: >! prefix — collect consecutive lines
+                if (line.startsWith('>! ')) {
+                  const calloutLines: string[] = [];
+                  while (i < lines.length && lines[i].startsWith('>! ')) {
+                    calloutLines.push(lines[i].replace(/^>!\s*/, ''));
+                    i++;
                   }
-                  // Regular image URL
-                  return (
-                    <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
-                      <img 
-                        src={imageUrl} 
-                        alt={altText}
-                        className="w-full h-auto"
-                      />
-                    </div>
-                  );
-                }
-              }
-              // Handle blockquotes (lines starting with >)
-              if (line.startsWith('> ')) {
-                const quoteContent = line.replace(/^>\s*/, '');
-                // Check if it's a bold header inside quote
-                if (quoteContent.startsWith('**') && quoteContent.includes('**')) {
-                  return (
-                    <div key={index} className="border-l-4 border-primary/50 pl-4 my-4 bg-primary/5 py-3 rounded-r">
-                      <p className="text-white/80 font-medium">{quoteContent.replace(/\*\*/g, '')}</p>
-                    </div>
-                  );
-                }
-                return (
-                  <div key={index} className="border-l-4 border-primary/50 pl-4 ml-0 bg-primary/5 py-2 rounded-r">
-                    <p className="text-white/70 italic">{quoteContent}</p>
-                  </div>
-                );
-              }
-              if (line.startsWith('## ')) {
-                return (
-                  <h2 key={index} className="text-2xl md:text-3xl font-medium text-white mt-12 mb-6">
-                    {line.replace('## ', '')}
-                  </h2>
-                );
-              }
-              if (line.startsWith('### ')) {
-                return (
-                  <h3 key={index} className="text-xl md:text-2xl font-medium text-white mt-8 mb-4">
-                    {line.replace('### ', '')}
-                  </h3>
-                );
-              }
-              if (line.startsWith('#### ')) {
-                return (
-                  <h4 key={index} className="text-lg md:text-xl font-medium text-white mt-6 mb-3">
-                    {line.replace('#### ', '')}
-                  </h4>
-                );
-              }
-              if (line.startsWith('**') && line.endsWith('**')) {
-                return (
-                  <p key={index} className="font-semibold text-white mt-6 mb-2">
-                    {line.replace(/\*\*/g, '')}
-                  </p>
-                );
-              }
-              // Handle inline bold text
-              if (line.includes('**')) {
-                const parts = line.split(/(\*\*[^*]+\*\*)/g);
-                return (
-                  <p key={index} className="text-white/70 mb-4 leading-relaxed">
-                    {parts.map((part, i) => {
-                      if (part.startsWith('**') && part.endsWith('**')) {
-                        return <strong key={i} className="text-white font-semibold">{part.replace(/\*\*/g, '')}</strong>;
-                      }
-                      return part;
-                    })}
-                  </p>
-                );
-              }
-              if (line.startsWith('- ')) {
-                return (
-                  <li key={index} className="text-white/70 ml-6 mb-2">
-                    {line.replace('- ', '')}
-                  </li>
-                );
-              }
-              // Handle table - collect consecutive table rows
-              if (line.startsWith('| ') && !line.includes('---')) {
-                const lines = post.content.split('\n');
-                
-                // Check if this is the first row of a table
-                const prevLine = index > 0 ? lines[index - 1] : '';
-                if (prevLine.startsWith('| ') || prevLine.includes('---')) {
-                  // This row was already rendered as part of the table
-                  return null;
-                }
-                
-                // Collect all table rows
-                const tableRows: string[] = [];
-                let i = index;
-                while (i < lines.length && (lines[i].startsWith('| ') || lines[i].includes('|---'))) {
-                  if (!lines[i].includes('|---')) {
-                    tableRows.push(lines[i]);
-                  }
-                  i++;
-                }
-                
-                if (tableRows.length === 0) return null;
-                
-                // Parse and render table
-                const headerRow = tableRows[0];
-                const bodyRows = tableRows.slice(1);
-                const headerCells = headerRow.split('|').filter(cell => cell.trim()).map(cell => cell.trim());
-                
-                return (
-                  <div key={index} className="my-6 overflow-x-auto rounded-lg border border-white/10">
-                    <table className="w-full text-sm">
-                      <thead className="bg-white/5">
-                        <tr>
-                          {headerCells.map((cell, i) => (
-                            <th key={i} className="px-4 py-3 text-left text-white font-semibold border-b border-white/10">
-                              {cell}
-                            </th>
+                  const title = calloutLines[0];
+                  const body = calloutLines.slice(1);
+                  const isKeyTakeaways = title.toLowerCase().includes('key takeaway') || title.toLowerCase().includes('tl;dr');
+                  rendered.push(
+                    <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-gradient-to-br from-[#b48cde]/[0.08] via-[#0f0f0f] to-transparent border-[#b48cde]/20' : 'bg-white/[0.02] border-white/10'}`}>
+                      {title.startsWith('**') ? (
+                        <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-[#d8b4fe]' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
+                      ) : (
+                        <p className="text-white/80 mb-4 font-medium">{title}</p>
+                      )}
+                      {body.length > 0 && (
+                        <ul className="space-y-3">
+                          {body.map((item, j) => (
+                            <li key={j} className="flex items-start gap-3 text-[15px] text-white/65 leading-relaxed">
+                              <span className={`w-1.5 h-1.5 rounded-full mt-[9px] flex-shrink-0 ${isKeyTakeaways ? 'bg-[#b48cde]' : 'bg-white/30'}`} />
+                              <span>{renderInline(item.replace(/^-\s*/, ''))}</span>
+                            </li>
                           ))}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {bodyRows.map((row, rowIdx) => {
-                          const cells = row.split('|').filter(cell => cell.trim()).map(cell => cell.trim());
-                          return (
-                            <tr key={rowIdx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                              {cells.map((cell, cellIdx) => (
-                                <td key={cellIdx} className="px-4 py-3 text-white/70">
-                                  {cell}
-                                </td>
-                              ))}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
-                  </div>
+                        </ul>
+                      )}
+                    </div>
+                  );
+                  continue;
+                }
+
+                // Stat highlight: %%NUMBER::LABEL%%
+                if (line.startsWith('%%') && line.endsWith('%%')) {
+                  const inner = line.slice(2, -2);
+                  const sepIdx = inner.indexOf('::');
+                  if (sepIdx !== -1) {
+                    const stat = inner.slice(0, sepIdx);
+                    const label = inner.slice(sepIdx + 2);
+                    rendered.push(
+                      <div key={key} className="my-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
+                        <span className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent whitespace-nowrap">{stat}</span>
+                        <span className="text-white/50 text-sm sm:text-[15px] leading-relaxed">{label}</span>
+                      </div>
+                    );
+                    i++;
+                    continue;
+                  }
+                }
+
+                // Images with optional caption
+                if (line.startsWith('![') && line.includes('](')) {
+                  const imageMatch = line.match(/\!\[([^\]]*)\]\(([^)]+)\)/);
+                  if (imageMatch) {
+                    const [, altText, imageUrl] = imageMatch;
+                    let imgSrc: string | null = null;
+
+                    if (imageUrl.startsWith('chart:')) {
+                      if (post.chartImages) {
+                        const chartKey = imageUrl.replace('chart:', '');
+                        imgSrc = post.chartImages[chartKey as keyof typeof post.chartImages] || null;
+                      }
+                    } else {
+                      imgSrc = imageUrl;
+                    }
+
+                    if (imgSrc) {
+                      const nextLine = i + 1 < lines.length ? lines[i + 1] : '';
+                      const hasCaption = nextLine.startsWith('*') && nextLine.endsWith('*') && !nextLine.startsWith('**');
+                      const caption = hasCaption ? nextLine.replace(/^\*|\*$/g, '') : null;
+
+                      rendered.push(
+                        <figure key={key} className="my-10">
+                          <div className="rounded-xl overflow-hidden border border-white/10">
+                            <img src={imgSrc} alt={altText} className="w-full h-auto" loading="lazy" />
+                          </div>
+                          {caption && (
+                            <figcaption className="mt-3 text-center text-xs text-white/30 italic">{caption}</figcaption>
+                          )}
+                        </figure>
+                      );
+                      i += hasCaption ? 2 : 1;
+                    } else {
+                      i++;
+                    }
+                    continue;
+                  }
+                }
+
+                // Grouped blockquotes: collect consecutive > lines
+                if (line.startsWith('> ')) {
+                  const quoteLines: string[] = [];
+                  while (i < lines.length && lines[i].startsWith('> ')) {
+                    quoteLines.push(lines[i].replace(/^>\s*/, ''));
+                    i++;
+                  }
+                  const firstLine = quoteLines[0];
+                  const isCitation = firstLine.startsWith('**') && firstLine.includes('**');
+
+                  rendered.push(
+                    <blockquote key={key} className="my-8 border-l-[3px] border-[#b48cde]/40 pl-5 sm:pl-6 py-4 bg-white/[0.02] rounded-r-xl">
+                      {quoteLines.map((ql, j) => {
+                        if (ql.startsWith('**') && ql.includes('**')) {
+                          return <p key={j} className="text-white/80 font-medium mb-1">{ql.replace(/\*\*/g, '')}</p>;
+                        }
+                        if (ql.startsWith('— ') || ql.startsWith('- ') && isCitation) {
+                          return <p key={j} className="text-white/40 text-sm mt-2">{ql}</p>;
+                        }
+                        return <p key={j} className="text-white/60 italic leading-relaxed">{renderInline(ql)}</p>;
+                      })}
+                    </blockquote>
+                  );
+                  continue;
+                }
+
+                // Headings
+                if (line.startsWith('## ') && !line.startsWith('### ')) {
+                  const text = line.replace('## ', '');
+                  rendered.push(
+                    <h2 key={key} id={slugify(text)} className="text-2xl md:text-3xl font-semibold text-white mt-16 mb-6 scroll-mt-24">{text}</h2>
+                  );
+                  i++; continue;
+                }
+                if (line.startsWith('### ')) {
+                  const text = line.replace('### ', '');
+                  rendered.push(
+                    <h3 key={key} id={slugify(text)} className="text-xl md:text-2xl font-medium text-white mt-10 mb-4 scroll-mt-24">{text}</h3>
+                  );
+                  i++; continue;
+                }
+                if (line.startsWith('#### ')) {
+                  rendered.push(
+                    <h4 key={key} className="text-lg md:text-xl font-medium text-white mt-8 mb-3">{line.replace('#### ', '')}</h4>
+                  );
+                  i++; continue;
+                }
+
+                // Standalone bold line
+                if (line.startsWith('**') && line.endsWith('**') && !line.includes('** ')) {
+                  rendered.push(
+                    <p key={key} className="font-semibold text-white mt-6 mb-2">{line.replace(/\*\*/g, '')}</p>
+                  );
+                  i++; continue;
+                }
+
+                // Inline bold
+                if (line.includes('**')) {
+                  rendered.push(
+                    <p key={key} className="text-white/70 mb-4 leading-relaxed">{renderInline(line)}</p>
+                  );
+                  i++; continue;
+                }
+
+                // Unordered list items
+                if (line.startsWith('- ')) {
+                  rendered.push(
+                    <li key={key} className="text-white/70 ml-6 mb-2 leading-relaxed">{line.replace('- ', '')}</li>
+                  );
+                  i++; continue;
+                }
+
+                // Tables
+                if (line.startsWith('| ') && !line.includes('---')) {
+                  const prevLine = i > 0 ? lines[i - 1] : '';
+                  if (prevLine.startsWith('| ') || prevLine.includes('---')) { i++; continue; }
+
+                  const tableRows: string[] = [];
+                  let ti = i;
+                  while (ti < lines.length && (lines[ti].startsWith('| ') || lines[ti].includes('|---'))) {
+                    if (!lines[ti].includes('|---')) tableRows.push(lines[ti]);
+                    ti++;
+                  }
+                  if (tableRows.length === 0) { i++; continue; }
+
+                  const headerCells = tableRows[0].split('|').filter(c => c.trim()).map(c => c.trim());
+                  const bodyRows = tableRows.slice(1);
+
+                  rendered.push(
+                    <div key={key} className="my-8 overflow-x-auto rounded-xl border border-white/[0.08]">
+                      <table className="w-full text-sm">
+                        <thead className="bg-white/[0.04]">
+                          <tr>
+                            {headerCells.map((cell, ci) => (
+                              <th key={ci} className="px-5 py-3.5 text-left text-white/90 font-semibold text-xs uppercase tracking-wider border-b border-white/[0.08]">{cell}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {bodyRows.map((row, ri) => {
+                            const cells = row.split('|').filter(c => c.trim()).map(c => c.trim());
+                            return (
+                              <tr key={ri} className="border-b border-white/[0.04] hover:bg-white/[0.03] transition-colors">
+                                {cells.map((cell, ci) => (
+                                  <td key={ci} className="px-5 py-3.5 text-white/60 text-[13px]">{renderInline(cell)}</td>
+                                ))}
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  );
+                  i = ti; continue;
+                }
+                if (line.includes('|---')) { i++; continue; }
+
+                // Ordered list
+                if (/^\d+\.\s/.test(line)) {
+                  rendered.push(
+                    <li key={key} className="text-white/70 ml-6 mb-2 list-decimal leading-relaxed">{line.replace(/^\d+\.\s/, '')}</li>
+                  );
+                  i++; continue;
+                }
+
+                // Horizontal rule
+                if (line.startsWith('---')) {
+                  rendered.push(<hr key={key} className="border-white/[0.06] my-14" />);
+                  i++; continue;
+                }
+
+                // Italic line (caption or emphasis)
+                if (line.startsWith('*') && line.endsWith('*') && !line.startsWith('**')) {
+                  rendered.push(
+                    <p key={key} className="text-white/40 italic text-sm my-2">{line.replace(/^\*|\*$/g, '')}</p>
+                  );
+                  i++; continue;
+                }
+
+                // Empty line
+                if (line.trim() === '') {
+                  rendered.push(<div key={key} className="h-2" />);
+                  i++; continue;
+                }
+
+                // Default paragraph
+                rendered.push(
+                  <p key={key} className="text-white/70 mb-5 leading-[1.85]">{line}</p>
                 );
+                i++;
               }
-              if (line.includes('|---')) {
-                return null;
-              }
-              if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ')) {
-                return (
-                  <li key={index} className="text-white/70 ml-6 mb-2 list-decimal">
-                    {line.replace(/^\d+\.\s/, '')}
-                  </li>
-                );
-              }
-              if (line.startsWith('✅') || line.startsWith('❌')) {
-                return (
-                  <p key={index} className="text-white/70 mb-2">
-                    {line}
-                  </p>
-                );
-              }
-              if (line.startsWith('---')) {
-                return <hr key={index} className="border-white/10 my-12" />;
-              }
-              if (line.startsWith('*') && line.endsWith('*') && !line.startsWith('**')) {
-                return (
-                  <p key={index} className="text-white/50 italic my-8">
-                    {line.replace(/\*/g, '')}
-                  </p>
-                );
-              }
-              if (line.trim() === '') {
-                return <br key={index} />;
-              }
-              return (
-                <p key={index} className="text-white/70 mb-4 leading-relaxed">
-                  {line}
-                </p>
-              );
-            })}
+              return rendered;
+            })()}
           </div>
         </div>
 

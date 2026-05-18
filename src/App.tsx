@@ -52,12 +52,7 @@ const Web3EventMarketingKorea = React.lazy(() => import("./pages/seo-articles/we
 const KoreaCryptoPRMediaGuide = React.lazy(() => import("./pages/seo-articles/korea-crypto-pr-media-guide"));
 const UnderstandingKoreanCryptoInvestors = React.lazy(() => import("./pages/seo-articles/understanding-korean-crypto-investors"));
 
-// Static research articles (no Supabase)
-const StablecoinSiege = React.lazy(() => import("./pages/research-static/stablecoin-siege"));
-const KoreaDefiParadox = React.lazy(() => import("./pages/research-static/korea-defi-paradox"));
-const KoreaMemecoinParadox = React.lazy(() => import("./pages/research-static/korea-memecoin-paradox"));
-const UpbitDominanceTokenEconomics = React.lazy(() => import("./pages/research-static/upbit-dominance-token-economics"));
-const AiCryptoKoreaDepin = React.lazy(() => import("./pages/research-static/ai-crypto-korea-depin"));
+// Static research articles now served by ResearchDetail via static-research-posts.ts
 
 // Lazy-loaded admin pages
 const AdminLogin = React.lazy(() => import("./pages/admin/AdminLogin"));
@@ -201,11 +196,7 @@ const AppRoutes = () => {
         <Route path="/blog/web3-event-marketing-korea" element={<Web3EventMarketingKorea />} />
         <Route path="/blog/korea-crypto-pr-media-guide" element={<KoreaCryptoPRMediaGuide />} />
         <Route path="/blog/understanding-korean-crypto-investors" element={<UnderstandingKoreanCryptoInvestors />} />
-        <Route path="/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia" element={<StablecoinSiege />} />
-        <Route path="/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain" element={<KoreaDefiParadox />} />
-        <Route path="/blog/korea-memecoin-paradox-4-7b-volume-zero-organic-projects" element={<KoreaMemecoinParadox />} />
-        <Route path="/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics" element={<UpbitDominanceTokenEconomics />} />
-        <Route path="/blog/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed" element={<AiCryptoKoreaDepin />} />
+        {/* Static research articles now handled by /blog/:slug via ResearchDetail + static-research-posts.ts */}
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/research" element={<Navigate to="/blog" replace />} />
         <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />
