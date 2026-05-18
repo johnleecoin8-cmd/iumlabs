@@ -94,6 +94,7 @@ const ResearchDetail = () => {
     author: staticPost!.author,
     authorRole: staticPost!.authorRole,
     authorImage: '',
+    authorBio: (staticPost as any).authorBio || '',
     excerpt: staticPost!.excerpt,
     tags: staticPost!.tags,
     content: staticPost!.content,
@@ -109,6 +110,7 @@ const ResearchDetail = () => {
     author: dbPost.author || 'Ium Labs',
     authorRole: dbPost.author_role || 'Ium Labs Team',
     authorImage: (dbPost as any).author_image || '',
+    authorBio: '',
     excerpt: dbPost.excerpt || (dbPost.content ? dbPost.content.substring(0, 150) + '...' : ''),
     tags: dbPost.tags || [],
     content: dbPost.content || '',
@@ -118,6 +120,11 @@ const ResearchDetail = () => {
   const staticRelated = staticPost
     ? staticResearchPosts
         .filter(p => p.slug !== slug)
+        .sort((a, b) => {
+          const aScore = a.tags.filter(t => staticPost.tags.includes(t)).length + (a.category === staticPost.category ? 2 : 0);
+          const bScore = b.tags.filter(t => staticPost.tags.includes(t)).length + (b.category === staticPost.category ? 2 : 0);
+          return bScore - aScore;
+        })
         .slice(0, 3)
         .map(p => ({ id: p.id, slug: p.slug, title: p.title, image: p.image, readTime: p.readTime, category: p.category }))
     : [];
@@ -222,7 +229,7 @@ const ResearchDetail = () => {
           </div>
           
           {/* Meta */}
-          <div className="flex flex-wrap items-center gap-4 mb-6">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
             <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
               {post.category}
             </span>
@@ -234,6 +241,11 @@ const ResearchDetail = () => {
               <Calendar className="w-4 h-4" />
               {post.date}
             </span>
+            {post.content && (
+              <span className="text-white/25 text-xs hidden sm:block">
+                {Math.round(post.content.split(/\s+/).length / 100) / 10}k words
+              </span>
+            )}
           </div>
           
           {/* Title */}
@@ -318,6 +330,14 @@ const ResearchDetail = () => {
       {/* Content */}
       <section className="container mx-auto max-w-4xl px-4 pb-20">
         <TableOfContents content={post.content} />
+
+        {/* Excerpt / Lead Paragraph */}
+        {post.excerpt && (
+          <div className="mb-12 text-lg sm:text-xl text-white/60 leading-relaxed font-light border-l-2 border-[#b48cde]/30 pl-6">
+            {post.excerpt}
+          </div>
+        )}
+
         <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-[1.8] text-[16px] sm:text-[17px]">
             {(() => {
@@ -325,13 +345,22 @@ const ResearchDetail = () => {
               const rendered: React.ReactNode[] = [];
               let i = 0;
 
-              const renderInline = (text: string) => {
-                if (!text.includes('**')) return text;
-                return text.split(/(\*\*[^*]+\*\*)/g).map((part, j) =>
-                  part.startsWith('**') && part.endsWith('**')
-                    ? <strong key={j} className="text-white font-semibold">{part.replace(/\*\*/g, '')}</strong>
-                    : part
-                );
+              const renderInline = (text: string): React.ReactNode => {
+                if (!text.includes('**') && !text.includes('[')) return text;
+                return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g).map((part, j) => {
+                  if (part.startsWith('**') && part.endsWith('**')) {
+                    return <strong key={j} className="text-white font-semibold">{part.replace(/\*\*/g, '')}</strong>;
+                  }
+                  const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+                  if (linkMatch) {
+                    const [, linkText, linkUrl] = linkMatch;
+                    if (linkUrl.startsWith('/')) {
+                      return <Link key={j} to={linkUrl} className="text-[#b48cde] hover:text-[#d8b4fe] underline underline-offset-2 decoration-[#b48cde]/30 hover:decoration-[#d8b4fe]/50 transition-colors">{linkText}</Link>;
+                    }
+                    return <a key={j} href={linkUrl} target="_blank" rel="noopener noreferrer" className="text-[#b48cde] hover:text-[#d8b4fe] underline underline-offset-2 decoration-[#b48cde]/30 hover:decoration-[#d8b4fe]/50 transition-colors">{linkText}</a>;
+                  }
+                  return part;
+                });
               };
 
               while (i < lines.length) {
@@ -494,7 +523,7 @@ const ResearchDetail = () => {
                 // Unordered list items
                 if (line.startsWith('- ')) {
                   rendered.push(
-                    <li key={key} className="text-white/70 ml-6 mb-2 leading-relaxed">{line.replace('- ', '')}</li>
+                    <li key={key} className="text-white/70 ml-6 mb-2 leading-relaxed">{renderInline(line.replace('- ', ''))}</li>
                   );
                   i++; continue;
                 }
@@ -547,7 +576,7 @@ const ResearchDetail = () => {
                 // Ordered list
                 if (/^\d+\.\s/.test(line)) {
                   rendered.push(
-                    <li key={key} className="text-white/70 ml-6 mb-2 list-decimal leading-relaxed">{line.replace(/^\d+\.\s/, '')}</li>
+                    <li key={key} className="text-white/70 ml-6 mb-2 list-decimal leading-relaxed">{renderInline(line.replace(/^\d+\.\s/, ''))}</li>
                   );
                   i++; continue;
                 }
@@ -574,7 +603,7 @@ const ResearchDetail = () => {
 
                 // Default paragraph
                 rendered.push(
-                  <p key={key} className="text-white/70 mb-5 leading-[1.85]">{line}</p>
+                  <p key={key} className="text-white/70 mb-5 leading-[1.85]">{renderInline(line)}</p>
                 );
                 i++;
               }
@@ -582,6 +611,58 @@ const ResearchDetail = () => {
             })()}
           </div>
         </div>
+
+        {/* Bottom Share Bar */}
+        <div className="mt-16 pt-8 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+          <p className="text-white/30 text-sm">Found this useful? Share it with your network.</p>
+          <div className="flex items-center gap-2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleShare("twitter")}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all text-sm"
+            >
+              <Twitter className="w-4 h-4" /> Twitter
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleShare("linkedin")}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all text-sm"
+            >
+              <Linkedin className="w-4 h-4" /> LinkedIn
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={handleCopyLink}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all text-sm"
+            >
+              <Copy className="w-4 h-4" /> Copy Link
+            </motion.button>
+          </div>
+        </div>
+
+        {/* Author Bio Card */}
+        {post.authorBio && (
+          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+            <div className="flex items-start gap-5">
+              {post.authorImage ? (
+                <img src={post.authorImage} alt={post.author} className="w-16 h-16 rounded-full object-cover ring-2 ring-white/10 flex-shrink-0" />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#b48cde]/20 to-[#6d28d9]/20 flex items-center justify-center text-xl font-medium text-[#b48cde] flex-shrink-0 ring-2 ring-[#b48cde]/10">
+                  {post.author.split(' ').map(n => n[0]).join('')}
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-white/30 uppercase tracking-wider mb-1">Written by</p>
+                <p className="text-lg font-medium text-white">{post.author}</p>
+                <p className="text-sm text-[#b48cde]/80 mb-3">{post.authorRole} at ium Labs</p>
+                <p className="text-sm text-white/50 leading-relaxed">{post.authorBio}</p>
+              </div>
+            </div>
+          </div>
+        )}
 
       </section>
 
@@ -657,7 +738,7 @@ const ResearchDetail = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {[
               { to: "/services/gtm", label: "GTM Strategy", desc: "Go-to-market strategy for Korea's Web3 ecosystem" },
-              { to: "/services/kol-marketing", label: "KOL Marketing", desc: "Influencer partnerships that drive real engagement" },
+              { to: "/services/influencer", label: "KOL Marketing", desc: "Influencer partnerships that drive real engagement" },
               { to: "/services/seo-ads", label: "SEO & Naver Ads", desc: "Search visibility on Korea's dominant platforms" },
               { to: "/services/community", label: "Community Management", desc: "Build and grow loyal Korean communities" },
             ].map((service) => (

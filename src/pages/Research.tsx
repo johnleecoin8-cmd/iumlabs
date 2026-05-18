@@ -183,6 +183,24 @@ const Research = () => {
               </span>
             </div>
           )}
+
+          {/* Stats bar */}
+          {!searchQuery && !selectedTag && selectedCategory === "All" && (
+            <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-t border-white/[0.04]">
+              <div>
+                <span className="text-xl sm:text-2xl font-bold text-white">{posts.length}</span>
+                <span className="text-xs text-white/30 ml-2">Articles</span>
+              </div>
+              <div>
+                <span className="text-xl sm:text-2xl font-bold text-white">{categories.length - 1}</span>
+                <span className="text-xs text-white/30 ml-2">Categories</span>
+              </div>
+              <div>
+                <span className="text-xl sm:text-2xl font-bold text-white">{new Set(posts.flatMap(p => p.tags || [])).size}</span>
+                <span className="text-xs text-white/30 ml-2">Topics</span>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
