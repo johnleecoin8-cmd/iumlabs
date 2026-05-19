@@ -417,6 +417,81 @@ const ResearchDetail = () => {
                   }
                 }
 
+                // YouTube embed: {{youtube:VIDEO_ID}}
+                if (line.startsWith('{{youtube:') && line.endsWith('}}')) {
+                  const videoId = line.slice(10, -2);
+                  rendered.push(
+                    <figure key={key} className="my-10">
+                      <div className="rounded-xl overflow-hidden border border-white/10 aspect-video">
+                        <iframe
+                          src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+                          title="YouTube video"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                          loading="lazy"
+                        />
+                      </div>
+                    </figure>
+                  );
+                  i++; continue;
+                }
+
+                // Tweet/X embed screenshot: {{tweet:IMAGE_URL::@handle — tweet text}}
+                if (line.startsWith('{{tweet:') && line.endsWith('}}')) {
+                  const inner = line.slice(8, -2);
+                  const sepIdx = inner.indexOf('::');
+                  if (sepIdx !== -1) {
+                    const tweetImg = inner.slice(0, sepIdx);
+                    const tweetCaption = inner.slice(sepIdx + 2);
+                    let imgSrc: string | null = null;
+                    if (tweetImg.startsWith('chart:') && post.chartImages) {
+                      imgSrc = post.chartImages[tweetImg.replace('chart:', '') as keyof typeof post.chartImages] || null;
+                    } else {
+                      imgSrc = tweetImg;
+                    }
+                    rendered.push(
+                      <figure key={key} className="my-10 max-w-lg mx-auto">
+                        <div className="rounded-xl overflow-hidden border border-white/10 bg-[#15202b]">
+                          {imgSrc && <img src={imgSrc} alt="Tweet screenshot" className="w-full h-auto" loading="lazy" />}
+                          <div className="px-4 py-3 text-white/50 text-xs italic border-t border-white/[0.06]">{renderInline(tweetCaption)}</div>
+                        </div>
+                      </figure>
+                    );
+                    i++; continue;
+                  }
+                }
+
+                // External image with source: {{source:IMAGE_URL::Source attribution text}}
+                if (line.startsWith('{{source:') && line.endsWith('}}')) {
+                  const inner = line.slice(9, -2);
+                  const sepIdx = inner.indexOf('::');
+                  if (sepIdx !== -1) {
+                    const srcImg = inner.slice(0, sepIdx);
+                    const srcCaption = inner.slice(sepIdx + 2);
+                    let imgSrc: string | null = null;
+                    if (srcImg.startsWith('chart:') && post.chartImages) {
+                      imgSrc = post.chartImages[srcImg.replace('chart:', '') as keyof typeof post.chartImages] || null;
+                    } else {
+                      imgSrc = srcImg;
+                    }
+                    if (imgSrc) {
+                      rendered.push(
+                        <figure key={key} className="my-10">
+                          <div className="rounded-xl overflow-hidden border border-white/10">
+                            <img src={imgSrc} alt={srcCaption} className="w-full h-auto" loading="lazy" />
+                          </div>
+                          <figcaption className="mt-3 flex items-center gap-2 text-xs text-white/30 italic">
+                            <span className="inline-block w-3 h-3 rounded-full bg-white/10 flex-shrink-0" />
+                            <span>Source: {srcCaption}</span>
+                          </figcaption>
+                        </figure>
+                      );
+                    }
+                    i++; continue;
+                  }
+                }
+
                 // Images with optional caption
                 if (line.startsWith('![') && line.includes('](')) {
                   const imageMatch = line.match(/\!\[([^\]]*)\]\(([^)]+)\)/);

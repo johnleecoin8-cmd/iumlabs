@@ -116,6 +116,8 @@ Korea's crypto exchange landscape isn't competitive — it's a monopoly with dec
 
 This report maps the precise financial mechanics of Upbit dominance: how listing premiums form, what the real cost of market access looks like, and why projects that ignore this structure burn capital on strategies designed for markets that don't exist in Korea.
 
+{{youtube:Z3p7k1vRBYc}}
+
 ## The Volume Hierarchy
 
 Korean exchange volume follows a power-law distribution that leaves no room for a "second player" narrative.
@@ -292,6 +294,8 @@ Korean retail traders process $4.7B in daily memecoin volume across Upbit and Bi
 
 The paradox isn't cultural — it's structural.
 
+{{youtube:QKaoyXOucBg}}
+
 %%$4.7B::Daily memecoin volume on Korean exchanges — yet zero organic memecoin projects have originated from Korean communities%%
 
 ## Why Korea Consumes But Doesn't Create
@@ -443,6 +447,8 @@ For deeper context on how exchange structure amplifies these dynamics, see [How 
 
 Korea manufactures 63% of the world's memory chips and hosts three of the top ten semiconductor companies globally. Samsung, SK Hynix, and their supply chains represent the physical backbone of AI computation. Yet Korean crypto traders show remarkably low engagement with AI and DePIN tokens.
 
+{{youtube:_gFNXyPrCVw}}
+
 ![Korea's semiconductor capital — home to Samsung and SK Hynix, yet absent from decentralized compute](chart:samsungParadox)
 *Korea's tech-forward infrastructure creates AI hardware but its investors ignore AI tokens — the Samsung Paradox in visual form*
 
@@ -567,6 +573,8 @@ For more on Korean trading culture and why short holding periods dominate, see [
 ## The $1.2T Battlefield
 
 Asia processes approximately $1.2T in annual stablecoin settlement volume. This encompasses cross-border remittances, OTC trading desks, DeFi settlements, and increasingly, traditional trade finance.
+
+{{youtube:EKC9Zbap_4Q}}
 
 %%$1.2T::Annual stablecoin settlement volume across Asia — the single largest non-banking financial plumbing system on the continent%%
 
@@ -703,6 +711,8 @@ For the regulatory framework shaping stablecoin policy in Korea, see [Korea Cryp
 Korea has 14 million registered crypto investors — 27% of the adult population. Daily trading volume reaches $12.8B across major exchanges. By any measure, this is one of the most active retail trading markets on Earth.
 
 Yet DeFi wallet activity from Korean IPs represents only 2.3% of global DeFi TVL participation.
+
+{{youtube:ePK6O1URfyQ}}
 
 %%2.3%::Korean share of global DeFi participation — despite being the world's 3rd largest crypto trading market by volume%%
 
@@ -848,6 +858,8 @@ For why Korean exchange dominance reinforces CEX loyalty, see [How Upbit's 78% D
 ## The Platform Hierarchy
 
 Western crypto influence flows through Twitter (X) and Telegram. Korean crypto influence operates on a completely different stack, with different reach mechanics and conversion patterns.
+
+{{youtube:C3zG77IJFZs}}
 
 ![Korean Crypto Influence Platform Stack](chart:platformStack)
 *Source: ium Labs KOL database, 230+ vetted Korean crypto influencers*
@@ -1016,6 +1028,8 @@ For how KOL campaigns integrate with exchange listing strategy, see our [Korean 
 
 Korean exchange listing dynamics have shifted significantly since VAUPA enforcement began in July 2024. Both Upbit and Bithumb have formalized their listing review processes, increased compliance requirements, and — critically — become more transparent about rejection criteria.
 
+{{youtube:PeMPMSIDRTw}}
+
 ## Upbit Listing Requirements
 
 ![Upbit's listing review infrastructure — the most rigorous exchange due diligence process in Asia](chart:upbitHardReq)
@@ -1167,6 +1181,8 @@ For the volume dynamics that make Upbit the decisive listing target, see [How Up
 >! Projects that proactively align with Korean regulatory requirements gain measurable advantages in exchange listings, institutional partnerships, and media positioning
 
 ## Current Regulatory Framework
+
+{{youtube:iM3Gkr1f1Gg}}
 
 Korea's crypto regulation operates through three primary legislative instruments, enforced by the Financial Services Commission (FSC) and the Financial Intelligence Unit (KoFIU).
 
@@ -1364,6 +1380,8 @@ For the exchange listing implications of regulatory compliance, see our [Korean 
 
 Korea's institutional crypto landscape has undergone a structural transformation since VAUPA provided regulatory clarity in July 2024. What was previously a retail-dominated market is developing a meaningful institutional layer.
 
+{{youtube:FCBWt2U_bmQ}}
+
 %%340%::Growth in Korean institutional crypto AUM since VAUPA enforcement — regulatory clarity unlocked capital that was waiting on the sidelines%%
 
 ![Korean Institutional Capital Flow into Crypto, 2023-2026](chart:capitalFlow)
@@ -1511,6 +1529,8 @@ For how institutional dynamics intersect with exchange listing strategy, see our
 
 Korea is the only major digital economy where Google is not the dominant search engine. Naver, founded in 1999, captures 62% of all Korean search traffic. For crypto projects, this creates a discovery dynamic that has no parallel in any other market.
 
+{{youtube:82Uz331KZqE}}
+
 %%62%::Naver's share of Korean search — making Korea the only major market where Google isn't the default discovery engine%%
 
 ![Search Market Share: Naver vs Google in Korea](chart:searchShare)
@@ -1654,6 +1674,8 @@ For how Naver SEO integrates with KOL campaigns, see our [KOL Marketing Landscap
 
 Korean crypto Telegram differs structurally from global crypto Telegram. While global channels function primarily as announcement boards, Korean channels operate as active trading communities with real-time sentiment dynamics.
 
+{{youtube:lSKybRhXUa0}}
+
 %%200K+::Premium Korean crypto Telegram members across paid alpha channels — a signal-driven ecosystem with no global equivalent%%
 
 ![Korean Crypto Telegram Ecosystem Overview](chart:ecosystem)
@@ -1792,6 +1814,8 @@ For how community building connects to KOL campaigns, see our [KOL Marketing Lan
 ## The Quarterly Rhythm
 
 Korean crypto markets are not random. Volume, engagement, and listing success rates follow predictable quarterly patterns driven by institutional calendars, cultural events, and regulatory cycles.
+
+{{youtube:BqI7NPZCFUo}}
 
 %%+32%::Q1 volume premium vs annual average on Korean exchanges — January-March consistently outperforms all other quarters%%
 
@@ -1964,6 +1988,8 @@ For the exchange listing process detail, see our [Korean Exchange Listing Playbo
 
 Korea and Japan share regulatory seriousness about crypto but produce structurally opposite market dynamics. Understanding these differences is essential for projects planning Asian expansion.
 
+{{youtube:yk0DBtxLzCA}}
+
 ![Korea vs Japan: Market Overview](chart:marketOverview)
 *Source: CoinGecko, JFSA, KoFIU, Q1 2026*
 
@@ -2129,6 +2155,8 @@ For Korea-specific exchange listing strategy, see our [Korean Exchange Listing P
 ## What the Premium Actually Is
 
 The "kimchi premium" refers to the price differential between crypto assets on Korean exchanges (trading against KRW) and global exchanges (trading against USD/USDT). When BTC trades at $65,000 on Binance but $67,500 on Upbit, the kimchi premium is +3.8%.
+
+{{youtube:dPByvnOQOJ8}}
 
 %%3-5%::Average kimchi premium in normal market conditions — the "base rate" premium driven by structural capital controls%%
 
