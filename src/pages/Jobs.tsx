@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
 import SEOHead from "@/components/SEOHead";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
@@ -226,6 +227,7 @@ const Jobs = () => {
   const talentMarquee = "Talent Wanted ".repeat(20);
   return <div className="min-h-screen bg-surface-base flex flex-col">
       <SEOHead title="Korea Web3 & Crypto Careers | Join ium Labs" description="Join Korea's fastest-growing Web3 marketing and crypto agency. Hiring researchers, growth managers, and crypto-native talent in Seoul." path="/jobs" keywords={['Korea Web3', 'Korea Crypto', 'Web3 Jobs Korea', 'Crypto Careers Seoul', 'Blockchain Jobs Korea']} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Careers", url: "https://iumlabs.io/jobs" }]} />
       <Navbar />
 
       {/* Hero Section with Video Background */}

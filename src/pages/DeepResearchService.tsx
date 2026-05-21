@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -42,6 +43,7 @@ const DeepResearchService = () => {
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Deep Research | ium Labs" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." path="/services/deep-research" image={heroImg} keywords={["Korea Crypto Research","Web3 Market Intelligence"]} />
       <ServiceSchema name="Korea Deep Research" description="Data-driven Korean market intelligence. On-chain analytics, competitor analysis, market reports." url="/services/deep-research" serviceType={["Market Research", "On-chain Analytics", "Competitor Analysis"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Deep Research", url: "https://iumlabs.io/services/deep-research" }]} />
       <Navbar />
 
       {/* HERO */}

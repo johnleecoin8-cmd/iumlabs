@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
-import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw } from 'lucide-react';
+import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw, Search, Globe, Send, CheckCircle2, XCircle, Clock, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { supabase } from '@/integrations/supabase/client';
 
 const MOCK_DAILY = [
   { date: '05/04', clicks: 42, impressions: 1820, ctr: 2.3, position: 18.4 },
@@ -50,11 +51,57 @@ const MOCK_ERRORS = [
   { url: '/research/some-slug', type: 'Redirect (301)', detected: '2026-05-10', status: 'Warning' },
 ];
 
-type Tab = 'overview' | 'queries' | 'pages' | 'errors';
+const KEY_URLS = [
+  'https://iumlabs.io/',
+  'https://iumlabs.io/blog',
+  'https://iumlabs.io/services/gtm',
+  'https://iumlabs.io/services/influencer',
+  'https://iumlabs.io/projects',
+  'https://iumlabs.io/contact',
+  'https://iumlabs.io/crypto-marketing-korea',
+  'https://iumlabs.io/kol-marketing-korea',
+  'https://iumlabs.io/korea-web3-guide',
+];
+
+interface InspectionResult {
+  url: string;
+  verdict?: string;
+  indexingState?: string;
+  lastCrawlTime?: string;
+  crawledAs?: string;
+  pageFetchState?: string;
+  richResults?: number;
+  mobile?: string;
+  error?: string;
+}
+
+type Tab = 'overview' | 'queries' | 'pages' | 'errors' | 'inspection' | 'sitemaps';
+
+function VerdictBadge({ value }: { value: string }) {
+  const colors: Record<string, string> = {
+    PASS: 'bg-green-500/10 text-green-400',
+    VERDICT_UNSPECIFIED: 'bg-white/5 text-white/40',
+    PARTIAL: 'bg-amber-500/10 text-amber-400',
+    FAIL: 'bg-red-500/10 text-red-400',
+    NEUTRAL: 'bg-blue-500/10 text-blue-400',
+    UNKNOWN: 'bg-white/5 text-white/30',
+  };
+  return (
+    <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${colors[value] || colors.UNKNOWN}`}>
+      {value}
+    </span>
+  );
+}
 
 export default function AdminGSC() {
   const [activeTab, setActiveTab] = useState<Tab>('overview');
   const [isConnected] = useState(false);
+  const [inspectionResults, setInspectionResults] = useState<InspectionResult[]>([]);
+  const [inspecting, setInspecting] = useState(false);
+  const [inspectError, setInspectError] = useState<string | null>(null);
+  const [lastChecked, setLastChecked] = useState<string | null>(null);
+  const [submittingSitemap, setSubmittingSitemap] = useState(false);
+  const [sitemapStatus, setSitemapStatus] = useState<string | null>(null);
 
   const totalClicks = MOCK_DAILY.reduce((s, d) => s + d.clicks, 0);
   const totalImpressions = MOCK_DAILY.reduce((s, d) => s + d.impressions, 0);
@@ -72,8 +119,52 @@ export default function AdminGSC() {
     { id: 'overview', label: 'Overview' },
     { id: 'queries', label: 'Top Queries' },
     { id: 'pages', label: 'Top Pages' },
+    { id: 'inspection', label: 'URL Inspection' },
+    { id: 'sitemaps', label: 'Sitemaps' },
     { id: 'errors', label: 'Crawl Errors' },
   ];
+
+  async function runInspection() {
+    setInspecting(true);
+    setInspectError(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('gsc-inspect', {
+        body: { action: 'inspect', urls: KEY_URLS },
+      });
+      if (error) throw error;
+      if (data.error) {
+        setInspectError(data.error);
+        if (data.setup) setInspectError(`${data.error}\n\n${data.setup.join('\n')}`);
+        return;
+      }
+      setInspectionResults(data.results || []);
+      setLastChecked(data.checkedAt || new Date().toISOString());
+    } catch (e: any) {
+      setInspectError(e.message || 'Failed to run inspection');
+    } finally {
+      setInspecting(false);
+    }
+  }
+
+  async function submitSitemap() {
+    setSubmittingSitemap(true);
+    setSitemapStatus(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('gsc-inspect', {
+        body: { action: 'submit-sitemap' },
+      });
+      if (error) throw error;
+      if (data.error) {
+        setSitemapStatus(`Error: ${data.error}`);
+        return;
+      }
+      setSitemapStatus(data.submitted ? 'Sitemap submitted successfully' : `Failed (status ${data.status})`);
+    } catch (e: any) {
+      setSitemapStatus(`Error: ${e.message}`);
+    } finally {
+      setSubmittingSitemap(false);
+    }
+  }
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (!active || !payload) return null;
@@ -116,9 +207,6 @@ export default function AdminGSC() {
               >
                 Open GSC <ExternalLink className="w-3.5 h-3.5" />
               </a>
-              <Button variant="ghost" size="sm" className="text-white/40 hover:text-white">
-                <RefreshCw className="w-4 h-4" />
-              </Button>
             </div>
           </div>
 
@@ -137,12 +225,12 @@ export default function AdminGSC() {
           </div>
 
           {/* Tab Navigation */}
-          <div className="flex gap-1 mb-6 bg-[#111] border border-white/10 rounded-lg p-1 w-fit">
+          <div className="flex gap-1 mb-6 bg-[#111] border border-white/10 rounded-lg p-1 w-fit overflow-x-auto">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap ${
                   activeTab === tab.id
                     ? 'bg-primary/20 text-primary'
                     : 'text-white/50 hover:text-white'
@@ -263,6 +351,191 @@ export default function AdminGSC() {
             </div>
           )}
 
+          {activeTab === 'inspection' && (
+            <div className="space-y-6">
+              <div className="bg-[#111] border border-white/10 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-white font-semibold flex items-center gap-2">
+                      <Search className="w-4 h-4 text-primary" />
+                      URL Inspection
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1">
+                      Check indexing status for key pages via GSC API
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    {lastChecked && (
+                      <span className="text-xs text-white/30 flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {new Date(lastChecked).toLocaleString()}
+                      </span>
+                    )}
+                    <Button
+                      onClick={runInspection}
+                      disabled={inspecting}
+                      size="sm"
+                      className="bg-primary/20 text-primary hover:bg-primary/30 border border-primary/20"
+                    >
+                      {inspecting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <RefreshCw className="w-4 h-4 mr-2" />}
+                      {inspecting ? 'Inspecting...' : 'Run Inspection'}
+                    </Button>
+                  </div>
+                </div>
+
+                {inspectError && (
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-4 mb-4">
+                    <pre className="text-red-400 text-xs whitespace-pre-wrap">{inspectError}</pre>
+                  </div>
+                )}
+
+                {inspectionResults.length > 0 ? (
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-white/10">
+                          <th className="text-left px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">URL</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Verdict</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Indexing</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Crawled As</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Last Crawl</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Rich Results</th>
+                          <th className="text-center px-3 py-2 text-white/40 text-xs font-medium uppercase tracking-wider">Mobile</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {inspectionResults.map((r) => (
+                          <tr key={r.url} className="border-b border-white/5 hover:bg-white/[0.02]">
+                            <td className="px-3 py-2 text-white text-xs font-mono max-w-[200px] truncate">
+                              {r.url.replace('https://iumlabs.io', '')}
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              {r.error ? (
+                                <span className="text-red-400 text-xs">{r.error}</span>
+                              ) : (
+                                <VerdictBadge value={r.verdict || 'UNKNOWN'} />
+                              )}
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              <span className="text-white/60 text-xs">{r.indexingState || '—'}</span>
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              <span className="text-white/60 text-xs">{r.crawledAs || '—'}</span>
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              <span className="text-white/40 text-xs">
+                                {r.lastCrawlTime ? new Date(r.lastCrawlTime).toLocaleDateString() : '—'}
+                              </span>
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              {(r.richResults ?? 0) > 0 ? (
+                                <span className="text-green-400 text-xs flex items-center justify-center gap-1">
+                                  <CheckCircle2 className="w-3 h-3" /> {r.richResults}
+                                </span>
+                              ) : (
+                                <span className="text-white/30 text-xs">—</span>
+                              )}
+                            </td>
+                            <td className="px-3 py-2 text-center">
+                              <VerdictBadge value={r.mobile || 'UNKNOWN'} />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : !inspecting && !inspectError ? (
+                  <div className="text-center py-12 text-white/30">
+                    <Search className="w-8 h-8 mx-auto mb-3 opacity-30" />
+                    <p>Click "Run Inspection" to check indexing status for {KEY_URLS.length} key URLs</p>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="bg-[#111] border border-white/10 rounded-xl p-4">
+                <p className="text-xs text-white/30">
+                  Requires GSC_SERVICE_ACCOUNT_JSON secret in Supabase.
+                  Create a Google Cloud service account → enable Search Console API → add as user in GSC for sc-domain:iumlabs.io →
+                  run: supabase secrets set GSC_SERVICE_ACCOUNT_JSON='...'
+                </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'sitemaps' && (
+            <div className="space-y-6">
+              <div className="bg-[#111] border border-white/10 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-6">
+                  <div>
+                    <h3 className="text-white font-semibold flex items-center gap-2">
+                      <Globe className="w-4 h-4 text-primary" />
+                      Sitemap Management
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1">
+                      Sitemaps are auto-generated on every build. Submit to GSC manually or via API.
+                    </p>
+                  </div>
+                  <Button
+                    onClick={submitSitemap}
+                    disabled={submittingSitemap}
+                    size="sm"
+                    className="bg-primary/20 text-primary hover:bg-primary/30 border border-primary/20"
+                  >
+                    {submittingSitemap ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <Send className="w-4 h-4 mr-2" />}
+                    {submittingSitemap ? 'Submitting...' : 'Submit to GSC'}
+                  </Button>
+                </div>
+
+                {sitemapStatus && (
+                  <div className={`rounded-lg p-3 mb-4 text-xs ${
+                    sitemapStatus.startsWith('Error') ? 'bg-red-500/5 border border-red-500/20 text-red-400' : 'bg-green-500/5 border border-green-500/20 text-green-400'
+                  }`}>
+                    {sitemapStatus}
+                  </div>
+                )}
+
+                <div className="space-y-3">
+                  {[
+                    { name: 'sitemap-index.xml', desc: 'Index of all sitemaps', urls: '2 sitemaps' },
+                    { name: 'sitemap.xml', desc: 'Main pages, services, projects', urls: '45 URLs' },
+                    { name: 'sitemap-blog.xml', desc: 'Blog articles and research posts', urls: '22 URLs' },
+                  ].map((sm) => (
+                    <div key={sm.name} className="flex items-center justify-between p-4 bg-[#0a0a0a] rounded-lg border border-white/5">
+                      <div className="flex items-center gap-3">
+                        <CheckCircle2 className="w-4 h-4 text-green-400" />
+                        <div>
+                          <p className="text-white text-sm font-mono">{sm.name}</p>
+                          <p className="text-white/40 text-xs">{sm.desc}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-4">
+                        <span className="text-white/50 text-xs">{sm.urls}</span>
+                        <a
+                          href={`https://iumlabs.io/${sm.name}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary text-xs hover:underline flex items-center gap-1"
+                        >
+                          View <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 p-4 bg-[#0a0a0a] rounded-lg border border-white/5">
+                  <h4 className="text-white/60 text-xs font-medium uppercase tracking-wider mb-3">Build Pipeline</h4>
+                  <div className="space-y-2 text-xs text-white/40">
+                    <p className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-green-400" /> vite build compiles the app</p>
+                    <p className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-green-400" /> generate-sitemaps.mjs extracts all routes + blog slugs</p>
+                    <p className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-green-400" /> Writes sitemap.xml, sitemap-blog.xml, sitemap-index.xml to dist/</p>
+                    <p className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-green-400" /> Pings Google and Bing with updated sitemap URL</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {activeTab === 'errors' && (
             <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
               <div className="p-4 border-b border-white/10 flex items-center justify-between">
@@ -302,7 +575,6 @@ export default function AdminGSC() {
               <div className="p-4 border-t border-white/10 bg-[#0a0a0a]">
                 <p className="text-xs text-white/30">
                   Connect the Google Search Console API to see live crawl and indexing errors.
-                  Requires a service account with Search Console API access for sc-domain:iumlabs.io
                 </p>
               </div>
             </div>

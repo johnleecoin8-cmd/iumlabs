@@ -261,7 +261,7 @@ const KoreanCryptoKOLMarketingGuide = () => {
               variants={fadeInUp}
               className="text-white/50 mb-8 max-w-2xl mx-auto"
             >
-              Our network of 230+ vetted Korean crypto KOLs spans YouTube, Telegram, and Naver. Let us design a campaign tailored to your project.
+              Our network of 250+ vetted Korean crypto KOLs spans YouTube, Telegram, and Naver. Let us design a campaign tailored to your project.
             </motion.p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalendlyButton size="lg" className="bg-white text-black hover:bg-white/90 text-base px-8 py-6 rounded-full">

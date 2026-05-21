@@ -36,7 +36,7 @@ const services = [
     image: kolImage,
     accent: "#FACC15",
     details: [
-      "230+ vetted Korean KOL network",
+      "250+ vetted Korean KOL network",
       "YouTube, Twitter, Telegram, Naver",
       "Campaign management & ROI tracking",
       "Ambassador & long-term partnerships",

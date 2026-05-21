@@ -862,7 +862,7 @@ Western crypto influence flows through Twitter (X) and Telegram. Korean crypto i
 {{youtube:C3zG77IJFZs}}
 
 ![Korean Crypto Influence Platform Stack](chart:platformStack)
-*Source: ium Labs KOL database, 230+ vetted Korean crypto influencers*
+*Source: ium Labs KOL database, 250+ vetted Korean crypto influencers*
 
 | Platform | Role | Reach Potential | Conversion Power |
 |---|---|---|---|

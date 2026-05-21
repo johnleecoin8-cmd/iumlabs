@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
+import AutoFAQSchema from "@/components/AutoFAQSchema";
 import SEOHead from "@/components/SEOHead";
 import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
@@ -860,6 +861,7 @@ const ResearchDetail = () => {
         url={`https://iumlabs.io/blog/${slug}`}
         tags={post.tags}
       />
+      {post.content && <AutoFAQSchema content={post.content} url={`https://iumlabs.io/blog/${slug}`} />}
       </div>
     </div>
   );

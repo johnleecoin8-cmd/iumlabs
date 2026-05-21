@@ -45,6 +45,9 @@ const SEOHead = ({
   
   // Default keywords for the site
   const defaultKeywords = [
+    'ium Labs',
+    'ium labs',
+    'iumlabs',
     'Korea Crypto Marketing Agency',
     'Korea KOL Marketing Agency',
     'Korean Crypto KOL Agency',

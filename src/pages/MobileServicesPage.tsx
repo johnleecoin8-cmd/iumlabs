@@ -49,7 +49,7 @@ const services = [
     link: "/services/compliance",
     video: "/videos/branding-hero.mp4",
     poster: brandingImage,
-    stats: "22+ Projects"
+    stats: "25+ Projects"
   },
   {
     title: "SEO & Ads",
@@ -94,7 +94,7 @@ const services = [
     link: "/services/influencer",
     video: "/videos/influencer-hero.mp4",
     poster: kolImage,
-    stats: "70+ KOLs"
+    stats: "80+ KOLs"
   },
   {
     title: "PR & Media",

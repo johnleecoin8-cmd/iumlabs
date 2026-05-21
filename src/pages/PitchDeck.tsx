@@ -234,7 +234,7 @@ const PitchDeck = () => {
             <h1>Seoul Moves Fast.<br /><span className="hero-accent">We Make You Land.</span></h1>
             <p className="hero-desc">Korea-native operators engineering market entry for the world's top Web3 projects. From narrative to conversion — end-to-end.</p>
             <div className="hero-pills">
-              {["Seoul HQ","Singapore","22+ Launches","$7B+ Client Valuation"].map(p => (
+              {["Seoul HQ","Singapore","25+ Launches","$8B+ Client Valuation"].map(p => (
                 <span key={p} className="hero-pill">{p}</span>
               ))}
             </div>
@@ -288,7 +288,7 @@ const PitchDeck = () => {
           </div>
           <div className="stat-grid dk-reveal dk-d1" style={{ marginTop: "3rem" }}>
             {([["Operator Model","Founded by Binance, KuCoin, and Upbit operators. Same playbooks that scaled exchanges to millions."],
-              ["Direct Access","230+ KOLs. Every one audience-verified, fraud-filtered. No broker markup."],
+              ["Direct Access","250+ KOLs. Every one audience-verified, fraud-filtered. No broker markup."],
               ["End-to-End","9 services, one team. GTM to compliance. No vendor coordination."],
               ["30-Day Launch","Discovery to market presence in 30 days. Performance dashboards from week one."]] as const).map(([t,d])=>(
               <div key={t} className="stat-card" style={{ textAlign: "left" }}>
@@ -308,7 +308,7 @@ const PitchDeck = () => {
               <h2 className="hed">Numbers that <strong className="hed-accent">compound.</strong></h2>
             </div>
             <div className="stat-grid dk-reveal dk-d1">
-              {[["$7B","Combined Client Valuation"],["22","Successful Korea Entries"],["230","Direct KOL Relationships"],["$30M","Revenue Attributed"]].map(([n,l])=>(
+              {[["$8B","Combined Client Valuation"],["25","Successful Korea Entries"],["250","Direct KOL Relationships"],["$35M","Revenue Attributed"]].map(([n,l])=>(
                 <div key={l} className="stat-card">
                   <div className="stat-n">{n}<span className="plus">+</span></div>
                   <div className="stat-l">{l}</div>
@@ -428,7 +428,7 @@ const PitchDeck = () => {
             </div>
             <div className="svc-grid dk-reveal dk-d1">
               {([["01","GTM Strategy","Competitive analysis, Korea-fit narrative, audience segmentation, launch roadmap.",svcGtm],
-                ["02","KOL & Influencer","230+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers.",svcKol],
+                ["02","KOL & Influencer","250+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers.",svcKol],
                 ["03","PR & Media","CoinDesk Korea, Block Media, TokenPost. 87% placement rate.",svcPr],
                 ["04","Community","24/7 native managers. Telegram, Discord, KakaoTalk. 92% retention.",svcCommunity],
                 ["05","Offline Events","KBW side events, VIP dinners, launch parties. 40+ Seoul venue relationships.",svcEvents],

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -41,6 +42,7 @@ const SEOAdsService = () => {
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea SEO & Paid Ads | ium Labs" description="Naver SEO, Google Ads, crypto ad networks for Korean market." path="/services/seo-ads" image={heroImg} keywords={["Korea Naver SEO","Crypto Ads Korea"]} />
       <ServiceSchema name="Korea SEO & Paid Ads" description="Naver SEO, Google Ads, crypto ad networks for Korean market." url="/services/seo-ads" serviceType={["SEO", "Paid Advertising", "Search Engine Marketing"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "SEO & Ads", url: "https://iumlabs.io/services/seo-ads" }]} />
       <Navbar />
 
       {/* HERO */}

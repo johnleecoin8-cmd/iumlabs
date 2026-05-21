@@ -255,8 +255,8 @@ const useGlobalAutoplay = () => {
     const mo = new MutationObserver(observe);
     mo.observe(document.body, { childList: true, subtree: true });
     const events = ["touchstart", "click", "scroll", "mousemove"] as const;
-    const kick = () => { playAll(); events.forEach(e => document.removeEventListener(e, kick)); };
-    events.forEach(e => document.addEventListener(e, kick, { once: true, passive: true }));
+    const kick = () => { playAll(); };
+    events.forEach(e => document.addEventListener(e, kick, { passive: true }));
     return () => { io.disconnect(); mo.disconnect(); events.forEach(e => document.removeEventListener(e, kick)); };
   }, []);
 };
@@ -274,6 +274,16 @@ const AppContent = () => {
   const handleIntroComplete = useCallback(() => {
     sessionStorage.setItem('ium_intro_seen', 'true');
     setShowIntro(false);
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach(v => {
+          if (v.paused) {
+            v.muted = true;
+            v.play().catch(() => {});
+          }
+        });
+      }, 200);
+    });
   }, []);
 
   return (

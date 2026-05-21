@@ -27,7 +27,7 @@ const services = [
   {
     icon: Users,
     title: "KOL & Influencer Marketing",
-    description: "Access our network of 230+ vetted Korean crypto KOLs. Authentic endorsements that drive real community trust and engagement.",
+    description: "Access our network of 250+ vetted Korean crypto KOLs. Authentic endorsements that drive real community trust and engagement.",
     link: "/services/influencer",
   },
   {
@@ -57,10 +57,10 @@ const services = [
 ];
 
 const stats = [
-  { value: "22+", label: "Korea Entries" },
-  { value: "230+", label: "KOL Network" },
-  { value: "$30M+", label: "Revenue Generated" },
-  { value: "70+", label: "Events Hosted" },
+  { value: "25+", label: "Korea Entries" },
+  { value: "250+", label: "KOL Network" },
+  { value: "$35M+", label: "Revenue Generated" },
+  { value: "80+", label: "Events Hosted" },
 ];
 
 const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI"];
@@ -152,7 +152,7 @@ const CryptoMarketingKorea = () => {
             className="mt-6 text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed"
           >
             Full-stack Web3 GTM strategy for blockchain projects entering the Korean market.
-            From KOL networks to community growth — we've launched 22+ projects and driven $7M+ in token sales.
+            From KOL networks to community growth — we've launched 25+ projects and driven $8M+ in token sales.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}

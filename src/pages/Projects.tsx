@@ -8,6 +8,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
 import { ArrowRight, Calendar, ChevronDown, ExternalLink } from "lucide-react";
@@ -702,12 +703,13 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <SEOHead
         title="Korea Web3 & Crypto Marketing Case Studies | ium Labs"
-        description="22+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
+        description="25+ successful Korea Web3 and crypto marketing campaigns. See real GTM results from BNB Chain, KuCoin, Polygon, and more blockchain projects launched in the Korean market."
         path="/projects"
         keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Web3 Case Studies Korea', 'Crypto Marketing Portfolio']}
       />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Projects", url: "https://iumlabs.io/projects" }]} />
       <Navbar />
-      
+
       {/* Hero Section - Homepage Style */}
       <main className="bg-background" id="hero">
         <div className="overflow-hidden">
@@ -756,7 +758,7 @@ const Projects = () => {
 
                 {/* Subtext */}
                 <p className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
-                  Real results from <span className="text-white font-medium">22+ global Web3 projects</span><br className="hidden sm:block" /><span className="sm:hidden"> </span>successfully entering and scaling in the Korean market.
+                  Real results from <span className="text-white font-medium">25+ global Web3 projects</span><br className="hidden sm:block" /><span className="sm:hidden"> </span>successfully entering and scaling in the Korean market.
                 </p>
 
                 {/* CTA Button */}

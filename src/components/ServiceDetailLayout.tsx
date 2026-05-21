@@ -85,8 +85,8 @@ const defaultProcessIcons = [Search, Target, Rocket, TrendingUp];
 
 // Default stats
 const defaultStats: Stat[] = [
-  { value: "230+", label: "KOL Network" },
-  { value: "22+", label: "Korea Entries" },
+  { value: "250+", label: "KOL Network" },
+  { value: "25+", label: "Korea Entries" },
 ];
 
 const ServiceDetailLayout = ({

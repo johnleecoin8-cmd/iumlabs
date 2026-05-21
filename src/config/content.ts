@@ -81,24 +81,24 @@ export const hero = {
 // =====================================================
 export const stats = {
   items: [
-    { 
-      value: 22,
-      label: "Korea Entries", 
+    {
+      value: 25,
+      label: "Korea Entries",
       suffix: "+",
     },
-    { 
-      value: 230,
+    {
+      value: 250,
       label: "KOL Network",
       suffix: "+",
     },
     {
-      value: 30,
+      value: 35,
       label: "Revenue Generated",
       prefix: "$",
       suffix: "M+",
     },
     {
-      value: 70,
+      value: 80,
       label: "Events Hosted",
       suffix: "+",
     },

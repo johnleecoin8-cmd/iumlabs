@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CalendlyButton from "@/components/CalendlyButton";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -76,7 +77,7 @@ const services = [
   { num: "01", title: "GTM Strategy", tagline: "Full-stack Go-To-Market planning for Korean market entry. Competitive landscape, Korea-fit narrative, launch timeline.",
     desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
     caps: ["Competitive Landscape Analysis","Korea-fit Narrative & Positioning","Launch Timeline & Milestone Planning","Market Sizing & Opportunity Mapping","Audience Segmentation","GTM Roadmap & Playbook"], href: "/services/gtm", img: svcGtmImg },
-  { num: "02", title: "KOL & Influencer", tagline: "230+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
+  { num: "02", title: "KOL & Influencer", tagline: "250+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
     desc: "Korea's top crypto KOLs — direct relationships, not broker networks. S-tier thread campaigns, YouTube reviews, Twitter Spaces, AMA hosting. Every placement is audience-verified, content-approved, and performance-tracked.",
     caps: ["S / A / B-Tier KOL Campaigns","YouTube Review Placements","Thread & Long-form Content","Twitter Spaces & AMA Hosting","Audience Verification & Fraud Filtering","Performance Analytics & Reporting"], href: "/services/influencer", img: svcKolImg },
   { num: "03", title: "PR & Media", tagline: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. Press releases, thought leadership, crisis comms.",
@@ -160,6 +161,7 @@ const GTMService = () => {
     <div className="gtm-ed" ref={containerRef}>
       <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Korea-focused Web3 GTM agency. Korean market activation, KOL management, and campaign execution." path="/services/gtm" image={gtmHeroImage} keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
       <ServiceSchema name="Korea Web3 GTM Strategy" description="Korea-focused Web3 GTM agency. Full-stack Go-To-Market planning, Korean market activation, KOL management, and campaign execution." url="/services/gtm" serviceType={["Go-To-Market Strategy", "Market Entry Consulting", "Web3 Marketing"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "GTM Strategy", url: "https://iumlabs.io/services/gtm" }]} />
       <Navbar />
 
       {/* HERO */}
@@ -171,10 +173,10 @@ const GTMService = () => {
           <p className="hero-desc">Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <strong>narrative</strong>, activate <strong>real KOLs</strong>, and run <strong>campaigns that convert</strong>.</p>
         </div>
         <div className="hero-stats">
-          <div className="hero-stat"><div className="hero-stat-big">$7B+</div><div className="hero-stat-sub">Client Valuation</div></div>
-          <div className="hero-stat"><div className="hero-stat-big">230+</div><div className="hero-stat-sub">KOL Network</div></div>
-          <div className="hero-stat"><div className="hero-stat-big">22+</div><div className="hero-stat-sub">Korea Entries</div></div>
-          <div className="hero-stat hidden md:block"><div className="hero-stat-big">70+</div><div className="hero-stat-sub">Events Hosted</div></div>
+          <div className="hero-stat"><div className="hero-stat-big">$8B+</div><div className="hero-stat-sub">Client Valuation</div></div>
+          <div className="hero-stat"><div className="hero-stat-big">250+</div><div className="hero-stat-sub">KOL Network</div></div>
+          <div className="hero-stat"><div className="hero-stat-big">25+</div><div className="hero-stat-sub">Korea Entries</div></div>
+          <div className="hero-stat hidden md:block"><div className="hero-stat-big">80+</div><div className="hero-stat-sub">Events Hosted</div></div>
         </div>
       </section>
 
@@ -276,7 +278,7 @@ const GTMService = () => {
             <div className="pillars">
               <div className="pill"><div className="pill-n">I</div><h4>Built by Binance, KuCoin, Upbit alumni</h4><p>Our team comes from inside Korea's top exchanges and protocols. We didn't study the market — we operated it. That's why our playbooks work from day one.</p></div>
               <div className="pill"><div className="pill-n">II</div><h4>Native to platforms foreigners can't touch</h4><p>Naver Blog ranking, KakaoTalk Open Chat moderation, DC Inside sentiment, Korean CT narratives — these aren't channels you can outsource to a translator.</p></div>
-              <div className="pill"><div className="pill-n">III</div><h4>230+ KOLs, direct — no middlemen</h4><p>Every KOL in our network is audience-verified and fraud-filtered. We negotiate rates, approve content, and track performance in-house. No broker markup.</p></div>
+              <div className="pill"><div className="pill-n">III</div><h4>250+ KOLs, direct — no middlemen</h4><p>Every KOL in our network is audience-verified and fraud-filtered. We negotiate rates, approve content, and track performance in-house. No broker markup.</p></div>
               <div className="pill"><div className="pill-n">IV</div><h4>Korea market infrastructure, end to end</h4><p>From exchange relations and market maker coordination to post-launch volume strategy and investor BD. We cover the full lifecycle of a token entering Korea.</p></div>
             </div>
           </div>

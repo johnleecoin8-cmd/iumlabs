@@ -311,9 +311,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     };
 
     // Listen for any user interaction to trigger play
-    document.addEventListener('touchstart', handleUserInteraction, { once: true, passive: true });
-    document.addEventListener('click', handleUserInteraction, { once: true, passive: true });
-    document.addEventListener('scroll', handleUserInteraction, { once: true, passive: true });
+    document.addEventListener('touchstart', handleUserInteraction, { passive: true });
+    document.addEventListener('click', handleUserInteraction, { passive: true });
+    document.addEventListener('scroll', handleUserInteraction, { passive: true });
 
     // Intersection observer to play when visible
     const observer = new IntersectionObserver(

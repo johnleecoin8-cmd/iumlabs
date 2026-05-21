@@ -18,9 +18,9 @@ const fadeInUp = {
 };
 
 const stats = [
-  { value: "230+", label: "Vetted KOLs" },
+  { value: "250+", label: "Vetted KOLs" },
   { value: "4", label: "Platforms" },
-  { value: "22+", label: "Campaigns" },
+  { value: "25+", label: "Campaigns" },
   { value: "100%", label: "ROI Tracked" },
 ];
 
@@ -126,7 +126,7 @@ const KOLMarketingKorea = () => {
     <>
       <SEOHead
         title="Korean KOL Marketing for Crypto & Web3 | ium Labs"
-        description="Access 230+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. ROI-tracked influencer campaigns for Web3 projects entering Korea."
+        description="Access 250+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. ROI-tracked influencer campaigns for Web3 projects entering Korea."
         path="/kol-marketing-korea"
         keywords={[
           "Korean KOL marketing",
@@ -167,7 +167,7 @@ const KOLMarketingKorea = () => {
               </h1>
 
               <p className="text-sm sm:text-lg md:text-xl text-white/50 max-w-2xl mb-10 font-light tracking-wide leading-relaxed">
-                Access our network of 230+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. Every campaign is ROI-tracked and performance-driven.
+                Access our network of 250+ vetted Korean crypto KOLs across YouTube, Twitter, Telegram, and Naver. Every campaign is ROI-tracked and performance-driven.
               </p>
 
               <CalendlyButton

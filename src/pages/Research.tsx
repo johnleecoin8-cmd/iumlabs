@@ -6,6 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { Link, useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -119,6 +120,7 @@ const Research = () => {
         path="/blog"
         keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Korean Crypto Blog', 'Web3 Market Insights Korea']}
       />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Blog", url: "https://iumlabs.io/blog" }]} />
       <Navbar />
 
       {/* Hero - Compact Editorial Header */}

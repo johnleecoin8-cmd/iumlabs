@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 
 import FooterLinksSection from "@/components/FooterLinksSection";
 import SEOHead from "@/components/SEOHead";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Clock, ExternalLink, Navigation } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -183,12 +184,13 @@ const Contact = () => {
   return <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead
         title="Contact Korea's #1 Web3 & Crypto Marketing Agency | ium Labs"
-        description="Let's build in Korea. Drop us a line and we respond within 24 hours with a full Korea entry plan. 22+ projects launched including BNB, Bybit, and Mantra."
+        description="Let's build in Korea. Drop us a line and we respond within 24 hours with a full Korea entry plan. 25+ projects launched including BNB, Bybit, and Mantra."
         path="/contact"
         keywords={['Korea Web3', 'Korea Crypto', 'Korea Web3 Marketing', 'Korea Crypto Agency', 'Contact Web3 Agency Korea', 'Korea Market Consultation']}
       />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Contact", url: "https://iumlabs.io/contact" }]} />
       <Navbar />
-      
+
       {/* Hero Section - Glassmorphism Style */}
       <main className="p-2 sm:p-3 md:p-4 bg-[#0A0A0A]">
         <section className="relative min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">

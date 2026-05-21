@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -39,8 +40,9 @@ const InfluencerService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="230+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
-      <ServiceSchema name="Korea KOL & Influencer Marketing" description="230+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
+      <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="250+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
+      <ServiceSchema name="Korea KOL & Influencer Marketing" description="250+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "KOL Marketing", url: "https://iumlabs.io/services/influencer" }]} />
       <Navbar />
 
       {/* HERO */}
@@ -48,7 +50,7 @@ const InfluencerService = () => {
         <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
         <div className="hero-center">
           <h1>KOL & <strong>Influencer</strong></h1>
-          <p className="hero-desc">230+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
+          <p className="hero-desc">250+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers — we run the entire operation.</p>
         </div>
         <div className="hero-stats-bar">
           <div className="stat"><div className="stat-val">230+</div><div className="stat-sub">Vetted Korean KOLs</div></div>

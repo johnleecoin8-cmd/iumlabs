@@ -105,7 +105,7 @@ const WhyChooseUsSection = () => {
           <motion.p
             className="text-white/80 leading-relaxed text-[14px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
             variants={descriptionVariants}>
-            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, and run <span className="text-white font-semibold">campaigns that convert</span>. 22+ projects. Zero recycled playbooks.
+            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, and run <span className="text-white font-semibold">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
           </motion.p>
 
           {/* Bottom accent — lines scale out from center */}
@@ -133,11 +133,11 @@ const WhyChooseUsSection = () => {
         <div className="container mx-auto px-6 sm:px-10 md:px-16">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-10 md:gap-14">
             {[
-              { value: "$7B+", label: "Client Valuation", mobileHide: false },
-              { value: "230+", label: "KOL Network", mobileHide: false },
-              { value: "22+", label: "Korea Entries", mobileHide: false },
-              { value: "$30M+", label: "Revenue Generated", mobileHide: false },
-              { value: "70+", label: "Events Hosted", mobileHide: true },
+              { value: "$8B+", label: "Client Valuation", mobileHide: false },
+              { value: "250+", label: "KOL Network", mobileHide: false },
+              { value: "25+", label: "Korea Entries", mobileHide: false },
+              { value: "$35M+", label: "Revenue Generated", mobileHide: false },
+              { value: "80+", label: "Events Hosted", mobileHide: true },
             ].map((stat, i) => (
               <div key={i} className={`text-center ${stat.mobileHide ? 'hidden md:block' : ''}`}>
                 <div className="text-xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">

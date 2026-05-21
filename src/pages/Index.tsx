@@ -37,7 +37,7 @@ import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] md:snap-y md:snap-proximity md:overflow-y-auto md:h-screen scrollbar-hide">
-      <SEOHead title="Korea Crypto Marketing Agency | ium Labs" description="Korea crypto marketing agency for global Web3 projects. Full-stack KOL, community, PR, and GTM strategy across 22+ launches for Korea market entry." path="/" keywords={['Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
+      <SEOHead title="ium Labs — Korea Crypto Marketing Agency | Web3 GTM, KOL, Community" description="Korea's #1 crypto marketing agency for Web3 market entry. End-to-end GTM, KOL campaigns, community growth, and PR — trusted by 25+ global blockchain projects including BNB Chain, KuCoin, and Aptos." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
       
       <Navbar />
       

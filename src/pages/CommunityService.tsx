@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -41,6 +42,7 @@ const CommunityService = () => {
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" image={heroImg} keywords={["Korea Community Management","Web3 Community Korea"]} />
       <ServiceSchema name="Korea Community Management" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." url="/services/community" serviceType={["Community Management", "Social Media Management"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Community", url: "https://iumlabs.io/services/community" }]} />
       <Navbar />
 
       <section className="hero">

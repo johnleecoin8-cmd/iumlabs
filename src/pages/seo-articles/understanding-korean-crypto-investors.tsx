@@ -128,7 +128,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                What follows is drawn from direct experience across 22+ project launches in the Korean market, supplemented by publicly available data from the Korea Financial Intelligence Unit, Korean exchange disclosures, and ongoing community engagement with thousands of Korean retail investors.
+                What follows is drawn from direct experience across 25+ project launches in the Korean market, supplemented by publicly available data from the Korea Financial Intelligence Unit, Korean exchange disclosures, and ongoing community engagement with thousands of Korean retail investors.
               </p>
 
               {/* Demographics */}
@@ -313,7 +313,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
               variants={fadeInUp}
               className="text-white/50 mb-8 max-w-2xl mx-auto"
             >
-              Understanding Korean investors is the first step. Let us build your Korea GTM strategy based on 22+ project launches.
+              Understanding Korean investors is the first step. Let us build your Korea GTM strategy based on 25+ project launches.
             </motion.p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <CalendlyButton size="lg" className="bg-white text-black hover:bg-white/90 text-base px-8 py-6 rounded-full">

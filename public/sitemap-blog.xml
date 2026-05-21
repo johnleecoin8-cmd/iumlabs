@@ -1,137 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-  <!-- Blog Index -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://iumlabs.io/blog</loc>
-    <lastmod>2026-05-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
   </url>
-
-  <!-- Research Articles (Static) -->
-  <url>
-    <loc>https://iumlabs.io/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/korea-memecoin-paradox-4-7b-volume-zero-organic-projects</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Supabase Published Articles -->
-  <url>
-    <loc>https://iumlabs.io/blog/a-forensic-assessment-of-binance-and-okx</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/deconstruction-of-move-vm-layer-1s-sui-vs-aptos</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/megaeth-the-real-time-paradox-structural-arbitrage-in-the-high-frequency-era</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/monetizing-chaos-how-ethgas-turns-l2-volatility-into-institutional-yield</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/strategic-intelligence-report-the-structural-arbitrage-of-information-markets</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/the-identity-pivot-in-sportfi</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/the-machine-economy-structural-arbitrage-in-autonomous-infrastructure</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://iumlabs.io/blog/the-walled-garden-why-upbit-and-bithumb-are-the-only-gateways-left</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-
-  <!-- SEO Guide Articles -->
   <url>
     <loc>https://iumlabs.io/blog/how-to-launch-token-in-korea</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/korean-crypto-kol-marketing-guide</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/naver-seo-for-crypto-projects</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/korea-crypto-community-building</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/web3-event-marketing-korea</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/korea-crypto-pr-media-guide</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/blog/understanding-korean-crypto-investors</loc>
-    <lastmod>2026-05-11</lastmod>
+    <lastmod>2026-05-21</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-memecoin-paradox-4-7b-volume-zero-organic-projects</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-kol-marketing-landscape-2026-guide</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korean-exchange-listing-strategy-upbit-bithumb-2026</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-crypto-regulation-2026-vaupa-travel-rule</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-institutional-crypto-vc-family-office-landscape-2026</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/the-naver-effect-search-dominance-korean-crypto-discovery</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korean-crypto-telegram-anatomy-50k-member-community</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/token-launch-timing-korea-quarterly-cycle</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korea-vs-japan-crypto-market-structural-comparison-2026</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
+  </url>
+  <url>
+    <loc>https://iumlabs.io/blog/korean-premium-decoded-kimchi-premium-mechanics-2026</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
   </url>
 </urlset>

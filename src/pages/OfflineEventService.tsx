@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -39,6 +40,7 @@ const OfflineEventService = () => {
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea Offline Events | ium Labs" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." path="/services/offline-event" image={heroImg} keywords={["Korea Web3 Events","Seoul Crypto Events"]} />
       <ServiceSchema name="Korea Offline Events" description="End-to-end event production in Seoul. KBW side events, VIP dinners, launch parties." url="/services/offline-event" serviceType={["Event Production", "Conference Events", "Networking Events"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Events", url: "https://iumlabs.io/services/offline-event" }]} />
       <Navbar />
 
       {/* HERO */}

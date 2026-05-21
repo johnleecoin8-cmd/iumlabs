@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -41,6 +42,7 @@ const AMAService = () => {
     <div className="svc-detail" ref={containerRef}>
       <SEOHead title="Korea AMA Hosting | ium Labs" description="Structured AMA sessions with native Korean hosts. Pre-event promotion, live moderation, and post-AMA recap content for Web3 projects entering Korea." path="/services/ama" image={heroImg} keywords={["Korea AMA Hosting","Web3 AMA Korea"]} />
       <ServiceSchema name="Korea AMA Hosting" description="Structured AMA sessions with native Korean hosts." url="/services/ama" serviceType={["AMA Hosting", "Live Events", "Community Engagement"]} />
+      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "AMA", url: "https://iumlabs.io/services/ama" }]} />
       <Navbar />
 
       <section className="hero">
