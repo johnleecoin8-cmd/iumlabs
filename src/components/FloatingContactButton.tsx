@@ -22,7 +22,7 @@ const FloatingContactButton = () => {
   }, {
     icon: Send,
     label: "Telegram",
-    href: "https://t.me/iumlabs",
+    href: "https://t.me/hnes2",
     color: "bg-[#0088cc]"
   }];
 
