@@ -195,7 +195,7 @@ const handler = async (req: Request): Promise<Response> => {
                           <p style="margin: 0 0 20px; font-size: 15px; color: #a1a1aa;">
                             Want to skip the wait? Schedule a meeting directly.
                           </p>
-                          <a href="https://calendly.com/iumlabs/30min" 
+                          <a href="https://calendly.com/iumlabs-info/30min" 
                              style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);">
                             Book a Meeting
                           </a>
