@@ -1,7 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
-const NOTIFICATION_RECIPIENT = "info@iumlabs.io";
+const NOTIFICATION_RECIPIENT = "admin@iumlabs.io";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -244,9 +244,9 @@ const handler = async (req: Request): Promise<Response> => {
                               </p>
                             </td>
                             <td align="right" valign="top">
-                              <a href="mailto:info@iumlabs.com" style="display: inline-block; margin-left: 12px; font-size: 12px; color: #3b82f6; text-decoration: none;">Email</a>
+                              <a href="mailto:admin@iumlabs.io" style="display: inline-block; margin-left: 12px; font-size: 12px; color: #3b82f6; text-decoration: none;">Email</a>
                               <span style="color: #27272a; margin: 0 8px;">|</span>
-                              <a href="https://t.me/iumlabs" style="display: inline-block; font-size: 12px; color: #3b82f6; text-decoration: none;">Telegram</a>
+                              <a href="https://t.me/hnes2" style="display: inline-block; font-size: 12px; color: #3b82f6; text-decoration: none;">Telegram</a>
                             </td>
                           </tr>
                         </table>
