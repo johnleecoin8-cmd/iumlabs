@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const NOTIFICATION_RECIPIENT = "info@iumlabs.io";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -15,6 +16,20 @@ interface ContactNotificationRequest {
   message?: string;
 }
 
+const parseResponseBody = async (response: Response) => {
+  const raw = await response.text();
+
+  if (!raw) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return { raw };
+  }
+};
+
 const handler = async (req: Request): Promise<Response> => {
   console.log("Received request to send-contact-notification");
 
@@ -23,6 +38,15 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY secret");
+
+      return new Response(
+        JSON.stringify({ success: false, error: "Email service is not configured" }),
+        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     const body: ContactNotificationRequest = await req.json();
     const name = (body.name ?? "").trim();
     const email = (body.email ?? "").trim();
@@ -55,7 +79,8 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Ium Labs <noreply@iumlabs.io>",
-        to: ["info@iumlabs.io"],
+        to: [NOTIFICATION_RECIPIENT],
+        reply_to: email,
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -239,18 +264,40 @@ const handler = async (req: Request): Promise<Response> => {
     });
 
     const [teamRes, userRes] = await Promise.all([teamNotification, userConfirmation]);
-    
-    const teamData = await teamRes.json();
-    const userData = await userRes.json();
-    
+    const [teamData, userData] = await Promise.all([
+      parseResponseBody(teamRes),
+      parseResponseBody(userRes),
+    ]);
+
     console.log("Team notification response:", teamData);
     console.log("User confirmation response:", userData);
 
-    if (!teamRes.ok || !userRes.ok) {
-      console.error("Email sending failed:", { teamData, userData });
+    if (!teamRes.ok) {
+      console.error("Team notification email failed:", { teamData, userData });
+
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: "Failed to send internal notification email",
+          teamEmail: teamData,
+          confirmationEmail: userData,
+        }),
+        {
+          status: 502,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    if (!userRes.ok) {
+      console.error("User confirmation email failed:", userData);
+    }
+
+    return new Response(JSON.stringify({
+      success: true,
+      notificationSent: true,
+      confirmationSent: userRes.ok,
+    }), {
       status: 200,
       headers: { "Content-Type": "application/json", ...corsHeaders },
     });
