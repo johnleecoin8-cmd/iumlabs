@@ -40,7 +40,7 @@ const GTMContactFormSection = ({
         comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`
       });
       if (error) throw error;
-      supabase.functions.invoke('send-contact-notification', {
+      const { error: notificationError } = await supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -48,7 +48,11 @@ const GTMContactFormSection = ({
           budget: formData.budget,
           message: formData.message
         }
-      }).catch(console.error);
+      });
+
+      if (notificationError) {
+        throw notificationError;
+      }
       
       // Show success animation
       setIsSuccess(true);

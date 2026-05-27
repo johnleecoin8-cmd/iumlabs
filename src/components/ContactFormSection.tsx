@@ -81,7 +81,7 @@ const ContactFormSection = ({
       });
       if (error) throw error;
 
-      supabase.functions.invoke('send-contact-notification', {
+      const { error: notificationError } = await supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -90,7 +90,11 @@ const ContactFormSection = ({
           services: formData.services,
           message: formData.message
         }
-      }).catch(console.error);
+      });
+
+      if (notificationError) {
+        throw notificationError;
+      }
 
       confetti({
         particleCount: 100,

@@ -46,7 +46,7 @@ const CTASection = () => {
         comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`
       });
       if (error) throw error;
-      supabase.functions.invoke('send-contact-notification', {
+      const { error: notificationError } = await supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -54,7 +54,11 @@ const CTASection = () => {
           budget: formData.budget,
           message: formData.message
         }
-      }).catch(console.error);
+      });
+
+      if (notificationError) {
+        throw notificationError;
+      }
       setIsSubmitted(true);
       toast.success("Message sent successfully! We'll get back to you soon.");
       setFormData({
