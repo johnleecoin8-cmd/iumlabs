@@ -146,114 +146,146 @@ const handler = async (req: Request): Promise<Response> => {
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
           </head>
-          <body style="margin: 0; padding: 0; background-color: #0a0a0b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
-            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #0a0a0b; padding: 40px 20px;">
+          <body style="margin:0;padding:0;background-color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;">
+            <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#0a0a0a;">
               <tr>
-                <td align="center">
-                  <table width="600" cellpadding="0" cellspacing="0" style="max-width: 600px; width: 100%;">
-                    
-                    <!-- Header with gradient accent -->
+                <td align="center" style="padding:56px 20px;">
+                  <table width="560" cellpadding="0" cellspacing="0" role="presentation" style="max-width:560px;width:100%;background-color:#0d0d0d;border:1px solid rgba(255,255,255,0.06);">
+
+                    <!-- Header: minimal monogram -->
                     <tr>
-                      <td style="background: linear-gradient(135deg, #0a0a0b 0%, #1a1a2e 100%); border-radius: 24px 24px 0 0; padding: 50px 40px 30px;">
-                        <div style="text-align: center;">
-                          <div style="display: inline-block; background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; background-clip: text;">
-                            <h1 style="margin: 0; font-size: 32px; font-weight: 300; letter-spacing: -0.5px; color: #ffffff;">
-                              Ium<span style="font-weight: 600;">Labs</span>
-                            </h1>
-                          </div>
-                          <p style="margin: 8px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #3b82f6;">
-                            Web3 Marketing Agency
-                          </p>
-                        </div>
+                      <td style="padding:48px 48px 0;">
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#71717a;">
+                              Ium&nbsp;Labs
+                            </td>
+                            <td align="right" style="font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:#3f3f46;">
+                              Seoul · Est. 2021
+                            </td>
+                          </tr>
+                        </table>
+                        <div style="height:1px;background:rgba(255,255,255,0.08);margin:24px 0 0;"></div>
                       </td>
                     </tr>
-                    
-                    <!-- Main content -->
+
+                    <!-- Editorial headline -->
                     <tr>
-                      <td style="background: linear-gradient(180deg, #1a1a2e 0%, #0f0f14 100%); padding: 40px;">
-                        
-                        <!-- Greeting -->
-                        <h2 style="margin: 0 0 24px; font-size: 28px; font-weight: 300; color: #ffffff; line-height: 1.3;">
-                          Thank you, <span style="font-weight: 500;">${name}</span>
-                        </h2>
-                        
-                        <p style="margin: 0 0 32px; font-size: 16px; line-height: 1.7; color: #a1a1aa;">
-                          We have received your message and our team is already reviewing it. You can expect to hear from us within <span style="color: #ffffff; font-weight: 500;">24 hours</span>.
+                      <td style="padding:56px 48px 8px;">
+                        <p style="margin:0 0 28px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#52525b;">
+                          № 001 &nbsp;·&nbsp; Acknowledgement
                         </p>
-                        
-                        <!-- Submission details card -->
-                        <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; margin-bottom: 32px;">
-                          <h3 style="margin: 0 0 16px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #71717a;">
-                            Your Inquiry Details
-                          </h3>
-                          
-                          <table width="100%" cellpadding="0" cellspacing="0">
-                            ${company ? `
-                            <tr>
-                              <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
-                                <span style="font-size: 12px; color: #71717a;">Company</span>
-                                <p style="margin: 4px 0 0; font-size: 15px; color: #ffffff;">${company}</p>
-                              </td>
-                            </tr>
-                            ` : ""}
-                            ${budget ? `
-                            <tr>
-                              <td style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);">
-                                <span style="font-size: 12px; color: #71717a;">Budget Range</span>
-                                <p style="margin: 4px 0 0; font-size: 15px; color: #ffffff;">${budget}</p>
-                              </td>
-                            </tr>
-                            ` : ""}
-                            ${message ? `
-                            <tr>
-                              <td style="padding: 12px 0;">
-                                <span style="font-size: 12px; color: #71717a;">Message</span>
-                                <p style="margin: 4px 0 0; font-size: 15px; color: #d4d4d8; line-height: 1.6;">${message}</p>
-                              </td>
-                            </tr>
-                            ` : ""}
-                          </table>
-                        </div>
-                        
-                        <!-- CTA -->
-                        <div style="text-align: center; margin: 40px 0;">
-                          <p style="margin: 0 0 20px; font-size: 15px; color: #a1a1aa;">
-                            Want to skip the wait? Schedule a meeting directly.
-                          </p>
-                          <a href="https://calendly.com/iumlabs-info/30min" 
-                             style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);">
-                            Book a Meeting
-                          </a>
-                        </div>
-                        
+                        <h1 style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:42px;line-height:1.15;font-weight:400;color:#fafafa;letter-spacing:-0.5px;">
+                          Thank you,<br/>
+                          <em style="font-style:italic;color:#a1a1aa;">${name}.</em>
+                        </h1>
                       </td>
                     </tr>
-                    
+
+                    <!-- Body copy -->
+                    <tr>
+                      <td style="padding:32px 48px 0;">
+                        <p style="margin:0;font-size:15px;line-height:1.75;color:#a1a1aa;">
+                          Your message has reached our desk. A member of our team is reviewing it now and will be in touch within
+                          <span style="color:#fafafa;border-bottom:1px solid rgba(255,255,255,0.25);padding-bottom:1px;">twenty-four hours</span>.
+                        </p>
+                      </td>
+                    </tr>
+
+                    <!-- Inquiry record -->
+                    <tr>
+                      <td style="padding:48px 48px 8px;">
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#52525b;padding-bottom:20px;">
+                              On Record
+                            </td>
+                          </tr>
+                        </table>
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="border-top:1px solid rgba(255,255,255,0.06);">
+                          ${company ? `
+                          <tr>
+                            <td width="120" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#52525b;vertical-align:top;">
+                              Company
+                            </td>
+                            <td style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;color:#fafafa;">
+                              ${company}
+                            </td>
+                          </tr>
+                          ` : ""}
+                          ${budget ? `
+                          <tr>
+                            <td width="120" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#52525b;vertical-align:top;">
+                              Engagement
+                            </td>
+                            <td style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;color:#fafafa;">
+                              ${budget}
+                            </td>
+                          </tr>
+                          ` : ""}
+                          ${message ? `
+                          <tr>
+                            <td width="120" style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#52525b;vertical-align:top;">
+                              Brief
+                            </td>
+                            <td style="padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);font-size:15px;color:#d4d4d8;line-height:1.7;white-space:pre-wrap;">
+                              ${message}
+                            </td>
+                          </tr>
+                          ` : ""}
+                        </table>
+                      </td>
+                    </tr>
+
+                    <!-- CTA: refined link, not gradient button -->
+                    <tr>
+                      <td style="padding:56px 48px 8px;">
+                        <p style="margin:0 0 20px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:18px;line-height:1.5;color:#d4d4d8;">
+                          Or move directly to a conversation.
+                        </p>
+                        <a href="https://iumlabs.io/contact"
+                           style="display:inline-block;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#fafafa;text-decoration:none;border:1px solid rgba(255,255,255,0.4);padding:16px 28px;">
+                          Schedule a Meeting&nbsp;&nbsp;→
+                        </a>
+                      </td>
+                    </tr>
+
+                    <!-- Signature -->
+                    <tr>
+                      <td style="padding:64px 48px 48px;">
+                        <div style="height:1px;background:rgba(255,255,255,0.06);margin-bottom:32px;"></div>
+                        <p style="margin:0 0 4px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:16px;color:#fafafa;">
+                          The Ium Labs team
+                        </p>
+                        <p style="margin:0;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#52525b;">
+                          Bridging Web3 to Korea
+                        </p>
+                      </td>
+                    </tr>
+
                     <!-- Footer -->
                     <tr>
-                      <td style="background: #0a0a0b; border-radius: 0 0 24px 24px; padding: 32px 40px; border-top: 1px solid rgba(255,255,255,0.05);">
-                        <table width="100%" cellpadding="0" cellspacing="0">
+                      <td style="background:#0a0a0a;padding:32px 48px;border-top:1px solid rgba(255,255,255,0.06);">
+                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
-                            <td>
-                              <p style="margin: 0 0 8px; font-size: 13px; color: #52525b;">
-                                Ium Labs
-                              </p>
-                              <p style="margin: 0; font-size: 12px; color: #3f3f46; line-height: 1.6;">
-                                OFFICE 11B, Gangnam-daero 373<br>
-                                Gangnam, Seoul, South Korea
-                              </p>
+                            <td style="font-size:11px;color:#52525b;line-height:1.7;">
+                              Office 11B, Gangnam-daero 373<br/>
+                              Gangnam-gu, Seoul, Republic of Korea
                             </td>
-                            <td align="right" valign="top">
-                              <a href="mailto:admin@iumlabs.io" style="display: inline-block; margin-left: 12px; font-size: 12px; color: #3b82f6; text-decoration: none;">Email</a>
-                              <span style="color: #27272a; margin: 0 8px;">|</span>
-                              <a href="https://t.me/hnes2" style="display: inline-block; font-size: 12px; color: #3b82f6; text-decoration: none;">Telegram</a>
+                            <td align="right" style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;">
+                              <a href="mailto:admin@iumlabs.io" style="color:#a1a1aa;text-decoration:none;">Email</a>
+                              <span style="color:#27272a;margin:0 10px;">·</span>
+                              <a href="https://t.me/hnes2" style="color:#a1a1aa;text-decoration:none;">Telegram</a>
                             </td>
                           </tr>
                         </table>
                       </td>
                     </tr>
-                    
+
                   </table>
+                  <p style="margin:24px 0 0;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#3f3f46;">
+                    © Ium Labs · iumlabs.io
+                  </p>
                 </td>
               </tr>
             </table>
