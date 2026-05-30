@@ -136,7 +136,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Ium Labs <onboarding@resend.dev>",
+        from: "Ium Labs <noreply@updates.iumlabs.io>",
         to: [email],
         subject: "We received your inquiry - Ium Labs",
         html: `
