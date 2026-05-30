@@ -78,7 +78,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Ium Labs <onboarding@resend.dev>",
+        from: "Ium Labs <noreply@updates.iumlabs.io>",
         to: [NOTIFICATION_RECIPIENT],
         reply_to: email,
         subject: `New Contact Form Submission from ${name}`,
