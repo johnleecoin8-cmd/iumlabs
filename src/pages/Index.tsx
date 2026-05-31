@@ -105,8 +105,7 @@ const Index = () => {
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-[9px] sm:text-xs text-white/25 uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-3 sm:mb-4">Seoul · Singapore</p>
               <h2 className="text-2xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-3 sm:mb-4">
-                Ready to land<br />
-                <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">in Korea?</span>
+                Ready to land <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">in Korea?</span>
               </h2>
               <p className="text-[13px] sm:text-base text-white/30 max-w-lg mx-auto mb-8 sm:mb-10 leading-relaxed">
                 From strategy to execution. One call to get started.
