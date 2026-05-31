@@ -6,9 +6,6 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import TrustSignalsSection from "@/components/TrustSignalsSection";
-import TeamSection from "@/components/TeamSection";
-import LeadMagnetSection from "@/components/LeadMagnetSection";
-import FAQSection from "@/components/FAQSection";
 
 // Lazy load heavy components for faster initial page load
 const CasesSection = lazy(() => import("@/components/CasesSection"));
@@ -85,13 +82,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="team">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
-          <TeamSection />
-        </div>
-      </section>
-
       {/* Insights */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
@@ -105,20 +95,6 @@ const Index = () => {
       </section>
       
 
-
-      {/* Lead Magnet */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
-          <LeadMagnetSection />
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="faq">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <FAQSection />
-        </div>
-      </section>
 
       {/* Launch CTA */}
       <section className="sm:px-4 sm:pt-3 snap-start">
