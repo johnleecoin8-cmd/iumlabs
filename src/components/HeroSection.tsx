@@ -212,22 +212,22 @@ const HeroSection = () => {
           </h1>
 
           {/* Subtext */}
-          <h2 className="text-[14px] sm:text-lg md:text-xl text-white/60 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
+          <h2 className="text-[13px] sm:text-lg md:text-xl text-white/50 max-w-5xl mx-auto mb-8 sm:mb-14 font-light tracking-wide leading-[1.7] px-2 sm:px-0">
 Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide.
           </h2>
 
           {/* CTA */}
-          <div className="flex flex-col items-center gap-3">
+          <div className="flex flex-col items-center gap-4">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
             >
-              <Send className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-12 transition-transform duration-300" />
+              <Send className="w-4 h-4 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300" />
               <span>Get Your Free Proposal</span>
             </a>
-            <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-sm text-white/40">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              Free 30-min call • Reply within 24h
+            <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-white/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse" />
+              Free 30-min call · Reply within 24h
             </span>
           </div>
         </div>

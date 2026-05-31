@@ -8,8 +8,8 @@ const Footer = () => {
   return (
     <footer className="bg-[#0A0A0A] text-white" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="px-5 sm:px-6 lg:px-10 py-5 sm:py-6 text-center">
-        <p className="text-xs text-white/20">
-          {currentYear} {brand.name}
+        <p className="text-[11px] text-white/15 font-mono tracking-wide">
+          © {currentYear} {brand.name}
         </p>
       </div>
     </footer>

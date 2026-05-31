@@ -253,8 +253,8 @@ const ContactFormSection = ({
                     exit={{ opacity: 0 }}
                   >
                     {/* Description */}
-                    <div className="mb-4 text-center">
-                      <p className="text-sm sm:text-base text-white/60">Leave your question about Korean/APAC market, and get a proposal.</p>
+                    <div className="mb-5 text-center">
+                      <p className="text-[13px] sm:text-sm text-white/40 font-light leading-relaxed">Leave your question about the Korean/APAC market,<br className="hidden sm:block" /> and get a proposal.</p>
                     </div>
 
                     {/* Step Indicator */}

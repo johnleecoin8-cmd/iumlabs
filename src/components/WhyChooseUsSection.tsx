@@ -103,17 +103,10 @@ const WhyChooseUsSection = () => {
 
           {/* Description — blur reveal */}
           <motion.p
-            className="text-white/80 leading-relaxed text-[14px] sm:text-lg md:text-xl lg:text-2xl max-w-4xl mx-auto mb-6 sm:mb-10 tracking-wide px-2 sm:px-0"
+            className="text-white/55 leading-[1.75] text-[13px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-wide px-3 sm:px-0"
             variants={descriptionVariants}>
-            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, and run <span className="text-white font-semibold">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
+            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <span className="text-white/90 font-medium">narrative</span>, activate <span className="text-white/90 font-medium">real KOLs</span>, and run <span className="text-white/90 font-medium">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
           </motion.p>
-
-          {/* Bottom accent — lines scale out from center */}
-          
-
-
-
-
 
 
 

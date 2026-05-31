@@ -129,12 +129,16 @@ const Navbar = () => {
                   <Link to="/jobs" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Career</Link>
                 </div>
 
-                <div className="flex items-center gap-5">
-                  <CalendlyButton className="inline-flex items-center gap-2.5 px-4 py-2.5 sm:px-6 sm:py-3 bg-white text-black text-sm font-semibold rounded-full hover:bg-white/90 transition-all">
-                    <Calendar className="w-4 h-4" />
-                    Book a Free Consultation
-                  </CalendlyButton>
-                  <span className="hidden sm:block text-xs text-white/30">Mon–Fri 09:00–18:00 KST</span>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
+                    <Send className="w-3.5 h-3.5 text-[#229ED9]" />
+                    Telegram
+                  </a>
+                  <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
+                    <Mail className="w-3.5 h-3.5 text-white/50" />
+                    Email
+                  </a>
+                  <span className="hidden sm:block text-[11px] text-white/25">Mon–Fri 09–18 KST</span>
                 </div>
               </div>
             </div>
@@ -159,7 +163,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
             <img src={logoImage} alt="ium Labs" className="w-7 h-7 sm:w-9 sm:h-9 object-contain rounded-lg" />
-            <span className="text-xs sm:text-[15px] font-bold text-white tracking-tight">ium Labs</span>
+            <span className="text-xs sm:text-[15px] font-semibold text-white tracking-tight">ium Labs</span>
           </Link>
 
           {/* Service Marquee - center (min-width to prevent crush on small screens) */}
