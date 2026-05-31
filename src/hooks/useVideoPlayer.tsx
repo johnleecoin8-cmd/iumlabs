@@ -129,7 +129,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [quality, setQuality] = useState<'low' | 'high' | 'auto'>('auto');
   const [retryCount, setRetryCount] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const playingRef = useRef(false);
+  const readyRef = useRef(false);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -209,22 +209,13 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
-    if (playingRef.current || !video.paused) return;
-    playingRef.current = true;
+    if (!video.paused) return;
     video.muted = true;
     try {
       await video.play();
     } catch {
-      setTimeout(async () => {
-        try {
-          video.muted = true;
-          await video.play();
-        } catch { /* onError handles real failures */ }
-        playingRef.current = false;
-      }, 200);
-      return;
+      // Will retry via interval or user interaction
     }
-    playingRef.current = false;
   }, []);
 
   // Handle network error with retry
@@ -274,7 +265,6 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     timeoutRef.current = setTimeout(() => {
       if (!isVideoReady && videoRef.current) {
-        playingRef.current = false;
         tryPlay(videoRef.current);
       }
     }, loadTimeout);
@@ -293,24 +283,39 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const video = videoRef.current;
     if (!video) return;
 
-    // If video is already cached/loaded (e.g. returning to page), play immediately
+    // Reliable playback detection via timeupdate
+    const handleTimeUpdate = () => {
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setIsVideoReady(true);
+      }
+    };
+    video.addEventListener('timeupdate', handleTimeUpdate, { passive: true });
+
+    // If video is already cached/loaded, play immediately
     if (video.readyState >= 3) {
+      readyRef.current = true;
       setIsVideoReady(true);
       tryPlay(video);
-      return;
+    } else {
+      // Initial play attempt
+      setTimeout(() => tryPlay(video), playDelay);
     }
 
-    // Initial play attempt
-    const timer = setTimeout(() => {
+    // Periodic retry — handles browsers that block initial autoplay
+    const retryInterval = setInterval(() => {
+      if (!video.paused) {
+        clearInterval(retryInterval);
+        return;
+      }
       tryPlay(video);
-    }, playDelay);
+    }, 1500);
 
     // Also try on user interaction (for strict autoplay policies)
     const handleUserInteraction = () => {
       tryPlay(video);
     };
 
-    // Listen for any user interaction to trigger play
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
     document.addEventListener('scroll', handleUserInteraction, { passive: true });
@@ -319,18 +324,16 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            tryPlay(video);
-          }
+          if (entry.isIntersecting) tryPlay(video);
         });
       },
       { threshold: 0.1 }
     );
-
     observer.observe(video);
 
     return () => {
-      clearTimeout(timer);
+      clearInterval(retryInterval);
+      video.removeEventListener('timeupdate', handleTimeUpdate);
       document.removeEventListener('touchstart', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('scroll', handleUserInteraction);
@@ -340,6 +343,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   // Reset state when source changes
   useEffect(() => {
+    readyRef.current = false;
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
@@ -374,8 +378,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (e.currentTarget.paused && !isVideoReady) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
-      // Only mark ready when the video is genuinely playing
-      setIsVideoReady(true);
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setIsVideoReady(true);
+      }
     },
     onLoadedData: () => {
       // no-op: isVideoReady is set by onPlaying instead
