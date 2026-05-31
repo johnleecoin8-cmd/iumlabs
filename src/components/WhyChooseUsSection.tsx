@@ -89,7 +89,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline — each line slides in separately */}
-          <h2 className="font-sans text-[clamp(1.5rem,6vw,5.5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.03em] leading-[1.05] sm:whitespace-nowrap">
+          <h2 className="font-sans text-[clamp(1.5rem,6vw,5.5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.04em] leading-[1.02] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -140,10 +140,10 @@ const WhyChooseUsSection = () => {
               { value: "80+", label: "Events Hosted", mobileHide: true },
             ].map((stat, i) => (
               <div key={i} className={`text-center ${stat.mobileHide ? 'hidden md:block' : ''}`}>
-                <div className="text-xl sm:text-5xl md:text-6xl font-black text-white tracking-tighter leading-none mb-1 sm:mb-2">
+                <div className="text-xl sm:text-4xl md:text-5xl font-semibold text-white tracking-[-0.03em] leading-none mb-1.5 sm:mb-2.5">
                   {stat.value}
                 </div>
-                <div className="text-[10px] sm:text-sm md:text-base text-white/45 font-medium">
+                <div className="text-[9px] sm:text-[11px] md:text-xs text-white/35 font-medium uppercase tracking-[0.15em] font-mono">
                   {stat.label}
                 </div>
               </div>

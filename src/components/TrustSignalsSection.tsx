@@ -51,8 +51,8 @@ const TrustSignalsSection = () => {
               key={stat.label}
               className={`text-center py-6 sm:py-8 ${i < stats.length - 1 ? 'border-r border-white/[0.06]' : ''} ${i < 2 ? 'border-b sm:border-b-0 border-white/[0.06]' : ''}`}
             >
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">{stat.value}</div>
-              <div className="text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.15em] mt-2 font-medium">{stat.label}</div>
+              <div className="text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-[-0.02em]">{stat.value}</div>
+              <div className="text-[9px] sm:text-[11px] text-white/30 uppercase tracking-[0.15em] mt-2 font-medium font-mono">{stat.label}</div>
             </div>
           ))}
         </div>

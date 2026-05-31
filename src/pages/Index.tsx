@@ -76,7 +76,7 @@ const Index = () => {
       <section className="sm:px-4 sm:pt-4 snap-start" id="services">
         <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
-            <h2 className="text-xl sm:text-2xl font-bold text-white">Our Services</h2>
+            <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Our Services</h2>
           </div>
           <ServicesSection />
         </div>
@@ -86,7 +86,7 @@ const Index = () => {
       <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
-            <h2 className="text-xl sm:text-2xl font-bold text-white">Blog</h2>
+            <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Blog</h2>
           </div>
           <Suspense fallback={<SectionLoader />}>
             <InsightsSection />
@@ -104,10 +104,10 @@ const Index = () => {
           <div className="relative px-4 sm:px-6 lg:px-10 py-12 sm:py-24">
             <div className="max-w-3xl mx-auto text-center">
               <p className="text-[9px] sm:text-xs text-white/25 uppercase tracking-[0.25em] sm:tracking-[0.3em] mb-3 sm:mb-4">Seoul · Singapore</p>
-              <h2 className="text-2xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight mb-3 sm:mb-4">
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.03em] mb-3 sm:mb-5">
                 Ready to land <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">in Korea?</span>
               </h2>
-              <p className="text-[13px] sm:text-base text-white/30 max-w-lg mx-auto mb-8 sm:mb-10 leading-relaxed">
+              <p className="text-[13px] sm:text-[15px] text-white/30 max-w-lg mx-auto mb-8 sm:mb-10 leading-relaxed font-light">
                 From strategy to execution. One call to get started.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3">

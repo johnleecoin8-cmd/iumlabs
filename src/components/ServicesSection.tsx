@@ -205,10 +205,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
         {/* Content — bottom aligned */}
         <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 z-10">
-          <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-2 tracking-[-0.02em]">
             {service.title}
           </h3>
-          <p className="text-sm text-white/60 mb-3 leading-relaxed max-w-[90%]">
+          <p className="text-[13px] text-white/45 mb-3 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
           <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 backdrop-blur-sm" style={{ backgroundColor: `${service.accent}15`, border: `1px solid ${service.accent}25` }}>

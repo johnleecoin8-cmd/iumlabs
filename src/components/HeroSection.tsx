@@ -206,13 +206,13 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.02em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
+          <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-semibold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.045em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
             <span className="block">Your Crypto Ecosystem</span>
             <span className="block">Growth Partner</span>
           </h1>
 
           {/* Subtext */}
-          <h2 className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
+          <h2 className="text-[14px] sm:text-lg md:text-xl text-white/60 max-w-5xl mx-auto mb-5 sm:mb-12 font-light tracking-wide leading-[1.6] px-1 sm:px-0">
 Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide.
           </h2>
 
@@ -276,10 +276,10 @@ const StatItem = ({
     decimals: 0
   });
   return <div className="text-center cursor-default select-none">
-      <div className="text-4xl sm:text-6xl md:text-7xl font-black text-white mb-1 sm:mb-2 tracking-tighter leading-none">
+      <div className="text-3xl sm:text-5xl md:text-6xl font-semibold text-white mb-1.5 sm:mb-2.5 tracking-[-0.03em] leading-none">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[11px] sm:text-base md:text-lg text-white/50 font-medium">
+      <div className="text-[9px] sm:text-[11px] md:text-xs text-white/35 font-medium uppercase tracking-[0.15em] font-mono">
         {label}
       </div>
     </div>;
