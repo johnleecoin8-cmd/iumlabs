@@ -5,7 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
-import TrustSignalsSection from "@/components/TrustSignalsSection";
+
 
 // Lazy load heavy components for faster initial page load
 const CasesSection = lazy(() => import("@/components/CasesSection"));
@@ -53,13 +53,6 @@ const Index = () => {
       <section className="sm:px-4 sm:pt-3 snap-start" id="why-choose-us">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
           <WhyChooseUsSection />
-        </div>
-      </section>
-
-      {/* Trust Signals */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
-          <TrustSignalsSection />
         </div>
       </section>
 
