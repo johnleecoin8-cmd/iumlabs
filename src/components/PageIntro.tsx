@@ -5,16 +5,17 @@ interface PageIntroProps {
 }
 
 const MIN_DISPLAY_TIME = 1200;
-const MAX_LOAD_TIME = 6000;
-const IMG_POLL_INTERVAL = 300;
+const MAX_LOAD_TIME = 12000;
+const VIDEO_POLL_INTERVAL = 200;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
   const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
-  const realProgress = useRef(0);
   const displayProgress = useRef(0);
   const rafRef = useRef<number | null>(null);
+  const videoReady = useRef(false);
+  const fontsReady = useRef(false);
 
   const handleComplete = useCallback(() => {
     const elapsed = Date.now() - startTime;
@@ -30,116 +31,83 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   }, [startTime, onComplete]);
 
   useEffect(() => {
-    let totalTasks = 0;
-    let completedTasks = 0;
-    let pollTimer: ReturnType<typeof setInterval> | null = null;
-
-    const updateReal = () => {
-      if (totalTasks === 0) return;
-      realProgress.current = Math.min((completedTasks / totalTasks) * 100, 100);
-    };
-
-    const markDone = () => {
-      completedTasks++;
-      updateReal();
-    };
-
-    // 1. Fonts
-    totalTasks++;
+    // Track fonts
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(markDone);
+      document.fonts.ready.then(() => { fontsReady.current = true; });
     } else {
-      markDone();
+      fontsReady.current = true;
     }
 
-    // 2. Hero video (with error fallback)
-    totalTasks++;
-    const video = document.createElement('video');
-    video.src = '/videos/hero-background.mp4#t=0.001';
-    video.preload = 'auto';
-    video.muted = true;
-    video.playsInline = true;
-    const onVideoReady = () => { markDone(); };
-    video.addEventListener('canplaythrough', onVideoReady, { once: true });
-    video.addEventListener('loadeddata', onVideoReady, { once: true });
-    video.addEventListener('error', onVideoReady, { once: true });
-    try { video.load(); } catch { markDone(); }
-    const videoTimeout = setTimeout(() => {
-      if (completedTasks < totalTasks) markDone();
-    }, 3000);
+    // Poll for the ACTUAL hero video element rendered by HeroSection
+    let videoEl: HTMLVideoElement | null = null;
 
-    // 3. Poll for ALL images on the page (including lazy-loaded ones from Suspense)
-    const trackedImages = new Set<HTMLImageElement>();
-
-    const pollImages = () => {
-      const allImages = document.querySelectorAll('img[src]');
-      allImages.forEach((el) => {
-        const img = el as HTMLImageElement;
-        if (trackedImages.has(img)) return;
-        if (!img.src || img.src.startsWith('data:')) return;
-
-        trackedImages.add(img);
-        totalTasks++;
-
-        if (img.complete && img.naturalWidth > 0) {
-          markDone();
-        } else {
-          img.addEventListener('load', markDone, { once: true });
-          img.addEventListener('error', markDone, { once: true });
-        }
-        updateReal();
-      });
+    const onCanPlayThrough = () => {
+      videoReady.current = true;
     };
 
-    // Start polling after React renders
-    const startPoll = setTimeout(() => {
-      pollImages();
-      pollTimer = setInterval(pollImages, IMG_POLL_INTERVAL);
-    }, 200);
+    const pollForVideo = setInterval(() => {
+      if (videoEl) return;
+      const el = document.querySelector('video[src*="hero-background"], video source[src*="hero-background"]');
+      if (!el) return;
 
-    // Stop polling after a while (all lazy components should be loaded by then)
-    const stopPoll = setTimeout(() => {
-      if (pollTimer) clearInterval(pollTimer);
-      pollImages(); // one final check
-    }, 6000);
+      videoEl = el.tagName === 'SOURCE' ? el.parentElement as HTMLVideoElement : el as HTMLVideoElement;
+      if (!videoEl) return;
 
-    // Max timeout fallback
+      // Already buffered enough
+      if (videoEl.readyState >= 4) {
+        videoReady.current = true;
+        clearInterval(pollForVideo);
+        return;
+      }
+
+      videoEl.addEventListener('canplaythrough', onCanPlayThrough, { once: true });
+      // Also count playing as ready (some browsers skip canplaythrough)
+      videoEl.addEventListener('playing', onCanPlayThrough, { once: true });
+      clearInterval(pollForVideo);
+    }, VIDEO_POLL_INTERVAL);
+
+    // Max timeout — never block forever
     const maxTimer = setTimeout(() => {
-      realProgress.current = 100;
+      videoReady.current = true;
     }, MAX_LOAD_TIME);
 
     return () => {
-      video.removeEventListener('canplaythrough', onVideoReady);
-      video.removeEventListener('loadeddata', onVideoReady);
-      video.pause();
-      video.src = '';
-      clearTimeout(videoTimeout);
-      clearTimeout(startPoll);
-      clearTimeout(stopPoll);
+      clearInterval(pollForVideo);
       clearTimeout(maxTimer);
-      if (pollTimer) clearInterval(pollTimer);
+      if (videoEl) {
+        videoEl.removeEventListener('canplaythrough', onCanPlayThrough);
+        videoEl.removeEventListener('playing', onCanPlayThrough);
+      }
     };
   }, []);
 
-  // Smooth display counter
+  // Smooth progress animation tied to real loading state
   useEffect(() => {
     const animate = () => {
-      const target = realProgress.current;
+      const elapsed = Date.now() - startTime;
       const current = displayProgress.current;
+
+      let target: number;
+
+      if (videoReady.current && fontsReady.current) {
+        target = 100;
+      } else if (videoReady.current || fontsReady.current) {
+        // One major task done — cap at 90, creep slowly
+        target = Math.min(90, 30 + elapsed * 0.012);
+      } else {
+        // Nothing done yet — creep to ~60 based on time
+        target = Math.min(60, elapsed * 0.015);
+      }
 
       if (current < target) {
         const gap = target - current;
-        const speed = gap > 30 ? 3 : gap > 10 ? 1.5 : 0.6;
+        const speed = gap > 30 ? 2.5 : gap > 10 ? 1.2 : 0.5;
         displayProgress.current = Math.min(current + speed, 100);
-        setProgress(Math.floor(displayProgress.current));
-      } else if (target < 100) {
-        const slowdown = current > 85 ? 0.03 : current > 70 ? 0.08 : 0.15;
-        displayProgress.current = Math.min(current + slowdown, 99);
-        setProgress(Math.floor(displayProgress.current));
       }
 
+      setProgress(Math.floor(displayProgress.current));
+
       if (displayProgress.current >= 100) {
-        setProgress(100);
         return;
       }
 
@@ -150,7 +118,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [startTime]);
 
   useEffect(() => {
     if (progress >= 100) {
