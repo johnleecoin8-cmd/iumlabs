@@ -20,6 +20,7 @@ const services = [
     icon: Rocket,
     image: gtmImage,
     accent: "#00C8FF",
+    proof: "18+ projects launched into Korea",
     details: [
       "Competitive landscape & gap analysis",
       "Korea-fit narrative & positioning",
@@ -35,6 +36,7 @@ const services = [
     icon: Mic2,
     image: kolImage,
     accent: "#FACC15",
+    proof: "250+ KOLs · $35M+ revenue driven",
     details: [
       "250+ vetted Korean KOL network",
       "YouTube, Twitter, Telegram, Naver",
@@ -50,6 +52,7 @@ const services = [
     icon: Target,
     image: eventsImage,
     accent: "#FB923C",
+    proof: "80+ events hosted in Seoul",
     details: [
       "Korea Blockchain Week (KBW) side events",
       "Seoul meetups & VIP networking dinners",
@@ -65,6 +68,7 @@ const services = [
     icon: Search,
     image: seoAdsImage,
     accent: "#22C55E",
+    proof: "Top 3 Naver ranking for 12+ keywords",
     details: [
       "Naver SEO & keyword strategy",
       "Google Ads & crypto ad networks",
@@ -80,6 +84,7 @@ const services = [
     icon: Users,
     image: communityImage,
     accent: "#38BDF8",
+    proof: "50K+ community members managed",
     details: [
       "Telegram, Discord, KakaoTalk setup",
       "Native Korean community managers",
@@ -95,6 +100,7 @@ const services = [
     icon: FileSearch,
     image: deepResearchImage,
     accent: "#F43F5E",
+    proof: "15+ published research reports",
     details: [
       "Korean market ecosystem mapping",
       "On-chain behavior & wallet profiling",
@@ -110,6 +116,7 @@ const services = [
     icon: Compass,
     image: "/images/posters/compliance-hero.avif",
     accent: "#A855F7",
+    proof: "10+ VASP compliance cases handled",
     details: [
       "VASP registration & licensing guidance",
       "PIPA & personal data compliance strategy",
@@ -125,6 +132,7 @@ const services = [
     icon: Newspaper,
     image: prImage,
     accent: "#8B5CF6",
+    proof: "200+ articles placed across Korean media",
     details: [
       "CoinDesk Korea, Block Media, TokenPost",
       "Korean press release writing & distribution",
@@ -140,6 +148,7 @@ const services = [
     icon: Mic,
     image: amaImage,
     accent: "#EC4899",
+    proof: "55+ AMA sessions hosted",
     details: [
       "Telegram, Discord, Twitter Spaces AMAs",
       "Native Korean-speaking professional hosts",
@@ -199,9 +208,13 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <h3 className="text-lg sm:text-2xl lg:text-3xl font-bold text-white mb-2 tracking-tight">
             {service.title}
           </h3>
-          <p className="text-sm text-white/60 mb-4 leading-relaxed max-w-[90%]">
+          <p className="text-sm text-white/60 mb-3 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 backdrop-blur-sm" style={{ backgroundColor: `${service.accent}15`, border: `1px solid ${service.accent}25` }}>
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: service.accent }} />
+            <span className="text-[11px] sm:text-xs font-medium tracking-wide" style={{ color: service.accent }}>{service.proof}</span>
+          </div>
 
           {/* Details — always visible on mobile, hover reveal on desktop */}
           <div className="max-h-[300px] sm:max-h-0 sm:group-hover:max-h-[300px] overflow-hidden sm:transition-all sm:duration-500 sm:ease-out">

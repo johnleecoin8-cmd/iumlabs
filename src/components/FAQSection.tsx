@@ -53,29 +53,24 @@ const FAQSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 px-4 bg-card/30">
-      <div className="container mx-auto max-w-4xl">
-        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
-            FAQ
-          </span>
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 uppercase tracking-tight">
-            Frequently Asked <span className="text-gradient">Questions</span>
-          </h2>
-        </div>
+    <div ref={ref} className="py-10 sm:py-14">
+      <div className="px-4 sm:px-6 lg:px-10 max-w-4xl mx-auto">
+        <h2 className={`text-xl sm:text-2xl font-bold text-white mb-8 sm:mb-10 transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          FAQ
+        </h2>
 
-        <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Accordion type="single" collapsible className="space-y-3">
+        <div className={`transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <Accordion type="single" collapsible className="space-y-2">
             {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index} 
+              <AccordionItem
+                key={index}
                 value={`item-${index}`}
-                className="bg-card border border-border/30 rounded-xl px-6 data-[state=open]:border-primary/50 transition-colors"
+                className="border border-white/[0.06] rounded-xl px-5 sm:px-6 data-[state=open]:border-white/[0.12] transition-colors bg-white/[0.02]"
               >
-                <AccordionTrigger className="text-left text-base font-semibold hover:text-primary transition-colors py-5">
+                <AccordionTrigger className="text-left text-sm sm:text-[15px] font-semibold text-white/80 hover:text-white transition-colors py-4 sm:py-5">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5 text-sm leading-relaxed">
+                <AccordionContent className="text-white/40 pb-5 text-sm leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
@@ -83,7 +78,7 @@ const FAQSection = () => {
           </Accordion>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

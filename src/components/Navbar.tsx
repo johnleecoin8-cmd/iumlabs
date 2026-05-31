@@ -27,6 +27,7 @@ const Navbar = () => {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/ium-admin");
 
@@ -162,7 +163,11 @@ const Navbar = () => {
           </Link>
 
           {/* Service Marquee - center (min-width to prevent crush on small screens) */}
-          <div className="flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container min-w-0">
+          <div
+            className="relative flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container min-w-0 group/svc"
+            onMouseEnter={() => setServiceDropdownOpen(true)}
+            onMouseLeave={() => setServiceDropdownOpen(false)}
+          >
             <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="flex items-center gap-5">
@@ -182,6 +187,33 @@ const Navbar = () => {
                 </div>
               ))}
             </div>
+
+            {/* Desktop service dropdown */}
+            <AnimatePresence>
+              {serviceDropdownOpen && (
+                <motion.div
+                  className="hidden md:block absolute top-full left-0 right-0 mt-2 z-50"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2, ease: "easeOut" }}
+                >
+                  <div className="bg-black/80 backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+                    <div className="grid grid-cols-3 gap-1">
+                      {serviceItems.map((item) => (
+                        <Link
+                          key={item.href}
+                          to={item.href}
+                          className="px-3 py-2.5 rounded-lg text-[13px] text-white/60 hover:text-white hover:bg-white/[0.04] transition-all"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5">
