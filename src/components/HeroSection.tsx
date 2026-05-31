@@ -1,10 +1,7 @@
 import { Send } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useCountUp } from "@/hooks/useCountUp";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-import { brand } from "@/config/content";
-import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 import FloatingTags from "@/components/FloatingTags";
 
 // Import client logos
@@ -89,41 +86,8 @@ const clientLogos = [{
   noInvert: true,
   slug: "kite"
 }];
-// Default stats as fallback
-const defaultStats = [{
-  id: "client_valuation",
-  value: 8,
-  label: "Client Valuation",
-  prefix: "$",
-  suffix: "B+"
-}, {
-  id: "kol_network",
-  value: 250,
-  label: "KOL Network",
-  prefix: "",
-  suffix: "+"
-}, {
-  id: "projects_launched",
-  value: 25,
-  label: "Korea Entries",
-  prefix: "",
-  suffix: "+"
-}, {
-  id: "revenue_generated",
-  value: 35,
-  label: "Revenue Generated",
-  prefix: "$",
-  suffix: "M+"
-}, {
-  id: "events_hosted",
-  value: 80,
-  label: "Events Hosted",
-  prefix: "",
-  suffix: "+"
-}];
+
 const HeroSection = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  // Use unified video player hook
   const {
     videoRef,
     isVideoReady,
@@ -131,8 +95,6 @@ const HeroSection = () => {
     shouldDisableVideo,
     videoProps,
     posterProps,
-    quality,
-    networkInfo,
     ShimmerOverlay
   } = useVideoPlayer({
     src: '/videos/hero-background.mp4',
@@ -140,33 +102,6 @@ const HeroSection = () => {
     autoPlay: true,
     preload: 'auto'
   });
-
-  // Fetch dynamic brand stats
-  const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
-  "client_valuation", "kol_network", "projects_launched", "revenue_generated", "events_hosted"]
-  );
-
-  // Merge dynamic stats with fallback defaults
-  const stats = useMemo(() => {
-    return defaultStats.map((defaultStat) => {
-      const dynamicStat = statsMap[defaultStat.id];
-      if (dynamicStat) {
-        return {
-          ...defaultStat,
-          value: dynamicStat.value,
-          prefix: dynamicStat.prefix || defaultStat.prefix,
-          suffix: dynamicStat.suffix || defaultStat.suffix
-        };
-      }
-      return defaultStat;
-    });
-  }, [statsMap]);
-
-  useEffect(() => {
-    // Trigger count-up animation after component mounts
-    const timer = setTimeout(() => setIsVisible(true), 800);
-    return () => clearTimeout(timer);
-  }, []);
 
   const floatingTags = [
     { label: "GTM Strategy", top: "18%", left: "4%" },
@@ -252,36 +187,6 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
     </div>;
 };
 
-// Stat Item Component with Count-Up Animation
-const StatItem = ({
-  value,
-  label,
-  prefix = "",
-  suffix = "",
-  isVisible,
-  delay
 
 
-
-
-
-
-
-}: {value: number;label: string;prefix?: string;suffix?: string;isVisible: boolean;delay: number;}) => {
-  const count = useCountUp({
-    end: Math.round(value),
-    isVisible,
-    delay,
-    duration: 2000,
-    decimals: 0
-  });
-  return <div className="text-center cursor-default select-none">
-      <div className="text-3xl sm:text-5xl md:text-6xl font-semibold text-white mb-1.5 sm:mb-2.5 tracking-[-0.03em] leading-none">
-        {prefix}{count}{suffix}
-      </div>
-      <div className="text-[9px] sm:text-[11px] md:text-xs text-white/35 font-medium uppercase tracking-[0.15em] font-mono">
-        {label}
-      </div>
-    </div>;
-};
 export default HeroSection;

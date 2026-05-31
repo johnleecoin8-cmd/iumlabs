@@ -168,31 +168,33 @@ const Navbar = () => {
 
           {/* Service Marquee - center (min-width to prevent crush on small screens) */}
           <div
-            className="relative flex flex-1 items-center mx-1.5 sm:mx-2.5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container min-w-0 group/svc"
+            className="relative flex-1 mx-1.5 sm:mx-2.5 min-w-0"
             onMouseEnter={() => setServiceDropdownOpen(true)}
             onMouseLeave={() => setServiceDropdownOpen(false)}
           >
-            <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="flex items-center gap-5">
-                  {[
-                    { name: "GTM Strategy", href: "/services/gtm" },
-                    { name: "KOL Marketing", href: "/services/influencer" },
-                    { name: "PR & Media", href: "/services/pr" },
-                    { name: "Community Management", href: "/services/community" },
-                    { name: "Offline Events", href: "/services/offline-event" },
-                    { name: "Deep Research", href: "/services/deep-research" },
-                    { name: "SEO & Paid Ads", href: "/services/seo-ads" },
-                    { name: "AMA Hosting", href: "/services/ama" },
-                    { name: "Compliance", href: "/services/compliance" },
-                  ].map((svc) => (
-                    <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[10px] sm:text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
-                  ))}
-                </div>
-              ))}
+            <div className="flex items-center h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
+              <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="flex items-center gap-5">
+                    {[
+                      { name: "GTM Strategy", href: "/services/gtm" },
+                      { name: "KOL Marketing", href: "/services/influencer" },
+                      { name: "PR & Media", href: "/services/pr" },
+                      { name: "Community Management", href: "/services/community" },
+                      { name: "Offline Events", href: "/services/offline-event" },
+                      { name: "Deep Research", href: "/services/deep-research" },
+                      { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+                      { name: "AMA Hosting", href: "/services/ama" },
+                      { name: "Compliance", href: "/services/compliance" },
+                    ].map((svc) => (
+                      <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[10px] sm:text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Desktop service dropdown */}
+            {/* Desktop service dropdown — outside overflow-hidden container */}
             <AnimatePresence>
               {serviceDropdownOpen && (
                 <motion.div

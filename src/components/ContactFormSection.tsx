@@ -6,7 +6,6 @@ import {
   Send,
   ArrowRight,
   Calendar,
-  MessageCircle,
   Sparkles,
   ChevronRight,
   ChevronLeft,
@@ -33,15 +32,7 @@ const serviceOptions = [
 
 const budgetOptions = ["$5K-10K", "$10K-25K", "$25K-50K", "$50K+"];
 
-interface ContactFormSectionProps {
-  sectionNumber?: string;
-  accentColor?: string;
-}
-
-const ContactFormSection = ({
-  sectionNumber = "08",
-  accentColor = "white"
-}: ContactFormSectionProps) => {
+const ContactFormSection = () => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -150,11 +141,6 @@ const ContactFormSection = ({
       minute: '2-digit',
       hour12: true
     });
-  };
-
-  const scrollToForm = () => {
-    const formElement = document.getElementById('contact-form');
-    formElement?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (

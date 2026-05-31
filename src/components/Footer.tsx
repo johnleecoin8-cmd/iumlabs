@@ -1,6 +1,4 @@
 import { brand } from "@/config/content";
-import { Link } from "react-router-dom";
-import CalendlyButton from "./CalendlyButton";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

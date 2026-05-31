@@ -5,35 +5,18 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import Footer from "@/components/Footer";
+import CalendlyButton from "@/components/CalendlyButton";
+import { Link } from "react-router-dom";
+import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
 
-
-// Lazy load heavy components for faster initial page load
-const CasesSection = lazy(() => import("@/components/CasesSection"));
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 
-const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
-const PartnerCTASection = lazy(() => import("@/components/PartnerCTASection"));
-
-// Loading fallback for lazy components
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
-
-import FooterLinksSection from "@/components/FooterLinksSection";
-import Footer from "@/components/Footer";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import CalendlyButton from "@/components/CalendlyButton";
-import { Link } from "react-router-dom";
-
-import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
-import { ArrowRight } from "lucide-react";
-import { projectsData } from "@/data/projectsData";
-
-import bnbHanokEventImg from "@/assets/campaigns/bnb-hanok-event.jpg";
-import kucoinPartyEventImg from "@/assets/campaigns/kucoin-party-event.jpg";
-import aptosSeoulEventImg from "@/assets/campaigns/aptos-seoul-event.jpg";
-import saharaAiEventImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
 
 const Index = () => {

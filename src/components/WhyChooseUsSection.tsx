@@ -42,22 +42,6 @@ const descriptionVariants = {
   }
 };
 
-const accentLineVariants = {
-  hidden: { scaleX: 0 },
-  visible: {
-    scaleX: 1,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
-  }
-};
-
-const fadeUpVariants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1, y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' }
-  }
-};
-
 const WhyChooseUsSection = () => {
   const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
