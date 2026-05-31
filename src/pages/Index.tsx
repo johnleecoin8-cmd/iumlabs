@@ -68,7 +68,7 @@ const Index = () => {
       {/* Services */}
       <section className="sm:px-4 sm:pt-4 snap-start" id="services">
         <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
+          <div className="px-5 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Our Services</h2>
           </div>
           <ServicesSection />
@@ -78,7 +78,7 @@ const Index = () => {
       {/* Insights */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="insights">
         <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10">
+          <div className="px-5 sm:px-6 lg:px-10 pt-8 sm:pt-10">
             <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Blog</h2>
           </div>
           <Suspense fallback={<SectionLoader />}>

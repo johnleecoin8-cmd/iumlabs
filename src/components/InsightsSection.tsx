@@ -92,14 +92,14 @@ const InsightsSection = () => {
 
   if (articles.length === 0) {
     return (
-      <section className="p-4 sm:p-6 md:p-8">
+      <section className="p-5 sm:p-6 md:p-8">
         <div className="p-8 text-center text-white/30 text-sm">No articles yet.</div>
       </section>
     );
   }
 
   return (
-    <section className="p-4 sm:p-6 md:p-8">
+    <section className="p-5 sm:p-6 md:p-8">
       {/* Header */}
       <div className="flex items-end justify-between mb-5">
         <p className="text-xs sm:text-sm text-white/35">Deep research on the Korean crypto market.</p>

@@ -161,8 +161,8 @@ const ContactFormSection = ({
     <section className="bg-[#0A0A0A]">
       <div className="border-t border-white/15">
         {/* Section Header */}
-        <div className="px-4 sm:px-6 lg:px-10 pt-8 sm:pt-10 pb-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-white">Contact</h2>
+        <div className="px-5 sm:px-6 lg:px-10 pt-8 sm:pt-10 pb-4">
+          <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Contact</h2>
         </div>
 
 
@@ -226,7 +226,7 @@ const ContactFormSection = ({
             </div>
 
             {/* Right Column - Multi-Step Form */}
-            <div className="w-full lg:w-2/3 p-4 sm:p-6 md:p-8 lg:p-12">
+            <div className="w-full lg:w-2/3 p-5 sm:p-6 md:p-8 lg:p-12">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
@@ -548,7 +548,7 @@ const ContactFormSection = ({
         </div>
 
         {/* Mobile Contact Info - Bottom - Optimized */}
-        <div className="lg:hidden border-t border-white/10 p-3 sm:p-4">
+        <div className="lg:hidden border-t border-white/10 p-4 sm:p-5">
           {/* Location & Time - Top row */}
           <div className="flex items-center justify-center gap-1.5 mb-3 text-[11px] text-white/50">
             <MapPin className="w-3 h-3 flex-shrink-0" />
