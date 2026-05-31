@@ -161,7 +161,7 @@ const Navbar = () => {
       {/* ===== NAVBAR — separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
+          <Link to="/" aria-label="ium Labs Home" className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
             <img src={logoImage} alt="ium Labs" className="w-7 h-7 sm:w-9 sm:h-9 object-contain rounded-lg" />
             <span className="text-xs sm:text-[15px] font-semibold text-white tracking-tight">ium Labs</span>
           </Link>
@@ -223,10 +223,10 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5">
-            <button onClick={() => setIsLiveChatOpen(true)} className="hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
+            <button onClick={() => setIsLiveChatOpen(true)} aria-label="Start Live Chat" className="hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
               <Send className="w-4 h-4 text-[#229ED9]" /><span>Start Live Chat</span>
             </button>
-            <CalendlyButton className="hidden sm:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
+            <CalendlyButton aria-label="Book a Meeting" className="hidden sm:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[13px] sm:text-[14px] font-medium text-white/80">
               <Calendar className="w-4 h-4 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
             <button onClick={() => setIsMenuOpen(true)} className="flex items-center gap-2 sm:gap-2.5 h-[40px] sm:h-[52px] px-3 sm:px-5 rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all text-[12px] sm:text-[14px] font-medium text-white/70" aria-label="Open menu">

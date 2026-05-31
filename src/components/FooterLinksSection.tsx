@@ -106,7 +106,7 @@ const FooterLinksSection = () => {
               Email
             </a>
           </div>
-          <span className="text-[11px] text-white/15 leading-relaxed">{brand.address}</span>
+          <span className="text-[11px] text-white/25 leading-relaxed">{brand.address}</span>
         </div>
       </div>
     </section>
