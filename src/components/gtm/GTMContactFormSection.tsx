@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, MapPin, Send, ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
+import { Mail, MapPin, Send, ArrowRight, CheckCircle2, Sparkles, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -25,13 +25,30 @@ const GTMContactFormSection = ({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const fieldErrors: Record<string, string> = {};
+  if (touched.name && !formData.name.trim()) fieldErrors.name = "Name is required";
+  if (touched.email && !formData.email.trim()) fieldErrors.email = "Email is required";
+  else if (touched.email && !emailRegex.test(formData.email)) fieldErrors.email = "Enter a valid email";
+  if (touched.budget && !formData.budget) fieldErrors.budget = "Select a budget range";
+  if (touched.message && !formData.message.trim()) fieldErrors.message = "Tell us about your project";
+
+  const handleBlur = useCallback((field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  }, []);
 
   const filledFields = [formData.name, formData.email, formData.budget, formData.message].filter(Boolean).length;
   const completionPercentage = Math.round(filledFields / 4 * 100);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    setSubmitError(null);
+    setTouched({ name: true, email: true, budget: true, message: true });
+    if (!formData.name || !emailRegex.test(formData.email) || !formData.budget || !formData.message) return;
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from('contact_submissions').insert({
@@ -61,19 +78,13 @@ const GTMContactFormSection = ({
         description: "We'll get back to you within 24 hours."
       });
       
-      // Reset after animation
       setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          website: "",
-          message: "",
-          budget: ""
-        });
+        setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
         setIsSuccess(false);
-      }, 3000);
+        setTouched({});
+      }, 4000);
     } catch (error) {
+      setSubmitError("Something went wrong. Please try again or reach us via Telegram.");
       toast({
         title: "Failed to send",
         description: "Please try again or contact us directly.",
@@ -258,9 +269,11 @@ const GTMContactFormSection = ({
                           placeholder="Your name"
                           value={formData.name}
                           onChange={e => setFormData({ ...formData, name: e.target.value })}
+                          onBlur={() => handleBlur('name')}
                           required
-                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className={`w-full bg-transparent border-b pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:outline-none transition-colors min-h-[44px] ${fieldErrors.name ? 'border-red-500/60' : 'border-primary/40 focus:border-primary'}`}
                         />
+                        <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
                       </motion.div>
                       <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -273,9 +286,11 @@ const GTMContactFormSection = ({
                           placeholder="your@email.com"
                           value={formData.email}
                           onChange={e => setFormData({ ...formData, email: e.target.value })}
+                          onBlur={() => handleBlur('email')}
                           required
-                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className={`w-full bg-transparent border-b pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:outline-none transition-colors min-h-[44px] ${fieldErrors.email ? 'border-red-500/60' : 'border-primary/40 focus:border-primary'}`}
                         />
+                        <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
                       </motion.div>
                     </div>
 
@@ -352,10 +367,25 @@ const GTMContactFormSection = ({
                         placeholder="Tell us about your project..."
                         value={formData.message}
                         onChange={e => setFormData({ ...formData, message: e.target.value })}
+                        onBlur={() => handleBlur('message')}
                         rows={3}
-                        className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors resize-none min-h-[80px]"
+                        className={`w-full bg-transparent border-b pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:outline-none transition-colors resize-none min-h-[80px] ${fieldErrors.message ? 'border-red-500/60' : 'border-primary/40 focus:border-primary'}`}
                       />
+                      <AnimatePresence>{fieldErrors.message && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.message}</motion.p>}</AnimatePresence>
                     </motion.div>
+
+                    {/* Submit Error Banner */}
+                    <AnimatePresence>
+                      {submitError && (
+                        <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-4 py-3 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
+                          <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                          <div>
+                            <p className="text-red-300 text-sm">{submitError}</p>
+                            <button type="button" onClick={() => setSubmitError(null)} className="text-red-400/70 text-xs mt-1 hover:text-red-300 transition-colors">Dismiss</button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {/* Submit Button - Primary themed */}
                     <motion.button

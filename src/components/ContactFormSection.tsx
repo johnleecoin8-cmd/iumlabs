@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mail,
@@ -10,7 +10,8 @@ import {
   Sparkles,
   ChevronRight,
   ChevronLeft,
-  Check
+  Check,
+  AlertCircle
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -53,12 +54,25 @@ const ContactFormSection = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const fieldErrors: Record<string, string> = {};
+  if (touched.name && !formData.name.trim()) fieldErrors.name = "Name is required";
+  if (touched.email && !formData.email.trim()) fieldErrors.email = "Email is required";
+  else if (touched.email && !emailRegex.test(formData.email)) fieldErrors.email = "Enter a valid email";
+
+  const handleBlur = useCallback((field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  }, []);
 
   const totalSteps = 3;
 
   const step1Complete = formData.services.length > 0;
   const step2Complete = !!formData.budget;
-  const step3Complete = !!formData.name && !!formData.email;
+  const step3Complete = !!formData.name && !!formData.email && emailRegex.test(formData.email);
 
   const toggleService = (service: string) => {
     setFormData(prev => ({
@@ -71,7 +85,9 @@ const ContactFormSection = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.email) return;
+    setTouched({ name: true, email: true });
+    setSubmitError(null);
+    if (!formData.name || !emailRegex.test(formData.email)) return;
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from('contact_submissions').insert({
@@ -109,18 +125,13 @@ const ContactFormSection = ({
       });
 
       setTimeout(() => {
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          message: "",
-          budget: "",
-          services: [],
-        });
+        setFormData({ name: "", email: "", company: "", message: "", budget: "", services: [] });
         setCurrentStep(1);
         setIsSuccess(false);
-      }, 3000);
+        setTouched({});
+      }, 4000);
     } catch (error) {
+      setSubmitError("Something went wrong. Please try again or reach us via Telegram.");
       toast({
         title: "Failed to send",
         description: "Please try again or contact us directly.",
@@ -429,9 +440,11 @@ const ContactFormSection = ({
                                   placeholder="Your name"
                                   value={formData.name}
                                   onChange={e => setFormData({ ...formData, name: e.target.value })}
+                                  onBlur={() => handleBlur('name')}
                                   required
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.name ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
+                                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
                               </div>
                               <div>
                                 <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Email *</label>
@@ -440,9 +453,11 @@ const ContactFormSection = ({
                                   placeholder="your@email.com"
                                   value={formData.email}
                                   onChange={e => setFormData({ ...formData, email: e.target.value })}
+                                  onBlur={() => handleBlur('email')}
                                   required
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.email ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
+                                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
                               </div>
                             </div>
 
@@ -474,6 +489,19 @@ const ContactFormSection = ({
                               />
                             </div>
 
+                            {/* Submit Error Banner */}
+                            <AnimatePresence>
+                              {submitError && (
+                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-4 py-3 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
+                                  <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                                  <div>
+                                    <p className="text-red-300 text-sm">{submitError}</p>
+                                    <button type="button" onClick={() => setSubmitError(null)} className="text-red-400/70 text-xs mt-1 hover:text-red-300 transition-colors">Dismiss</button>
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+
                             {/* Action Buttons */}
                             <div className="flex flex-col sm:flex-row gap-3">
                               <button
@@ -493,17 +521,19 @@ const ContactFormSection = ({
                                     : 'bg-white/10 text-white/40 cursor-not-allowed'
                                 }`}
                               >
-                                {isSubmitting ? (
-                                  <>
-                                    <div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                                    Sending...
-                                  </>
-                                ) : (
-                                  <>
-                                    Send Message
-                                    <Send className="w-4 h-4" />
-                                  </>
-                                )}
+                                <AnimatePresence mode="wait">
+                                  {isSubmitting ? (
+                                    <motion.span key="sending" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-flex items-center gap-2">
+                                      <motion.div className="w-4 h-4 border-2 border-black/20 border-t-black rounded-full" animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} />
+                                      Sending...
+                                    </motion.span>
+                                  ) : (
+                                    <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-flex items-center gap-2">
+                                      Send Message
+                                      <Send className="w-4 h-4" />
+                                    </motion.span>
+                                  )}
+                                </AnimatePresence>
                               </button>
                             </div>
                           </motion.div>

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import logo from "@/assets/logo.png";
 import Navbar from "@/components/Navbar";
 import FooterLinksSection from "@/components/FooterLinksSection";
+import SEOHead from "@/components/SEOHead";
 
 import seoulCta from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 
@@ -70,6 +71,12 @@ const PitchDeck = () => {
 
   return (
     <>
+      <SEOHead
+        title="Pitch Deck — ium Labs | Korea Crypto Marketing Agency"
+        description="Explore ium Labs' capabilities: GTM strategy, KOL marketing, PR, community, and events for Web3 projects entering Korea."
+        path="/deck"
+        noindex
+      />
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
         .dk{--bg:#0A0A0A;--off:#111113;--ink:#d4d0c8;--g1:#aaa;--g2:#777;--g3:#555;--g4:rgba(255,255,255,.1);--g5:rgba(255,255,255,.05);--accent:#a78bfa;--serif:'Cormorant Garamond',Georgia,serif;--sans:'DM Sans','Inter',sans-serif;--mono:'IBM Plex Mono',monospace;font-family:var(--sans);background:var(--bg);color:#eae7e0;-webkit-font-smoothing:antialiased}

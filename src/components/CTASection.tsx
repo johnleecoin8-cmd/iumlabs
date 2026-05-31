@@ -1,12 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import { ArrowRight, Mail, MapPin, Send, CheckCircle2, Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight, Mail, MapPin, Send, CheckCircle2, Linkedin, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +21,18 @@ const CTASection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const fieldErrors = useMemo(() => {
+    const errors: Record<string, string> = {};
+    if (touched.name && !formData.name.trim()) errors.name = "Name is required";
+    if (touched.email && !formData.email.trim()) errors.email = "Email is required";
+    else if (touched.email && !emailRegex.test(formData.email)) errors.email = "Enter a valid email";
+    if (touched.budget && !formData.budget) errors.budget = "Select a budget range";
+    if (touched.message && !formData.message.trim()) errors.message = "Tell us about your project";
+    return errors;
+  }, [formData, touched]);
 
   const formProgress = useMemo(() => {
     const fields = [formData.name, formData.email, formData.budget, formData.message];
@@ -36,8 +50,17 @@ const CTASection = () => {
     });
   }, []);
 
+  const handleBlur = useCallback((field: string) => {
+    setTouched(prev => ({ ...prev, [field]: true }));
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError(null);
+    setTouched({ name: true, email: true, budget: true, message: true });
+
+    if (!formData.name || !emailRegex.test(formData.email) || !formData.budget || !formData.message) return;
+
     setIsSubmitting(true);
     try {
       const { error } = await supabase.from("contact_submissions").insert({
@@ -61,16 +84,11 @@ const CTASection = () => {
       }
       setIsSubmitted(true);
       toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        website: "",
-        message: "",
-        budget: ""
-      });
-      setTimeout(() => setIsSubmitted(false), 3000);
+      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
+      setTouched({});
+      setTimeout(() => setIsSubmitted(false), 4000);
     } catch {
+      setSubmitError("Something went wrong. Please try again or reach us via Telegram.");
       toast.error("Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -181,7 +199,16 @@ const CTASection = () => {
           <form onSubmit={handleSubmit} className="max-w-2xl">
             <div className="flex items-center justify-between mb-8">
               <p className="text-muted-foreground text-sm">Contact Form</p>
-              <span className="text-muted-foreground/60 text-xs">{Math.round(formProgress)}% complete</span>
+              <div className="flex items-center gap-2">
+                {formProgress === 100 ? (
+                  <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-emerald-400 text-xs font-medium">Ready</motion.span>
+                ) : (
+                  <span className="text-muted-foreground/60 text-xs">{Math.round(formProgress)}%</span>
+                )}
+              </div>
+            </div>
+            <div className="h-px bg-border mb-8 relative overflow-hidden">
+              <motion.div className="absolute inset-y-0 left-0 bg-foreground" animate={{ width: `${formProgress}%` }} transition={{ duration: 0.4, ease: "easeOut" }} />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -191,10 +218,12 @@ const CTASection = () => {
                   type="text"
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  onBlur={() => handleBlur('name')}
                   required
-                  className="w-full bg-transparent border-b border-border py-3 text-foreground outline-none focus:border-foreground transition-colors placeholder:text-muted-foreground"
+                  className={`w-full bg-transparent border-b py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground ${fieldErrors.name ? 'border-red-500/70' : 'border-border focus:border-foreground'}`}
                   placeholder="Your name"
                 />
+                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[11px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
               </div>
               <div>
                 <label className="block text-muted-foreground text-xs uppercase tracking-wider mb-2">Email *</label>
@@ -202,10 +231,12 @@ const CTASection = () => {
                   type="email"
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
+                  onBlur={() => handleBlur('email')}
                   required
-                  className="w-full bg-transparent border-b border-border py-3 text-foreground outline-none focus:border-foreground transition-colors placeholder:text-muted-foreground"
+                  className={`w-full bg-transparent border-b py-3 text-foreground outline-none transition-colors placeholder:text-muted-foreground ${fieldErrors.email ? 'border-red-500/70' : 'border-border focus:border-foreground'}`}
                   placeholder="your@email.com"
                 />
+                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[11px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
               </div>
             </div>
 
@@ -240,7 +271,7 @@ const CTASection = () => {
                   <button
                     key={option}
                     type="button"
-                    onClick={() => setFormData({ ...formData, budget: option })}
+                    onClick={() => { setFormData({ ...formData, budget: option }); setTouched(prev => ({ ...prev, budget: true })); }}
                     className={`px-5 py-2.5 text-sm rounded-full transition-all duration-300 ${
                       formData.budget === option
                         ? 'bg-foreground text-background shadow-lg shadow-foreground/20'
@@ -251,6 +282,7 @@ const CTASection = () => {
                   </button>
                 ))}
               </div>
+              <AnimatePresence>{fieldErrors.budget && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[11px] mt-2 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.budget}</motion.p>}</AnimatePresence>
             </div>
 
             <div className="mb-8">
@@ -258,36 +290,51 @@ const CTASection = () => {
               <textarea
                 value={formData.message}
                 onChange={e => setFormData({ ...formData, message: e.target.value })}
+                onBlur={() => handleBlur('message')}
                 required
                 rows={4}
-                className="w-full bg-transparent border-b border-border py-3 text-foreground outline-none focus:border-foreground transition-colors resize-none placeholder:text-muted-foreground"
+                className={`w-full bg-transparent border-b py-3 text-foreground outline-none transition-colors resize-none placeholder:text-muted-foreground ${fieldErrors.message ? 'border-red-500/70' : 'border-border focus:border-foreground'}`}
                 placeholder="Tell us about your project and goals..."
               />
+              <AnimatePresence>{fieldErrors.message && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[11px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.message}</motion.p>}</AnimatePresence>
             </div>
+
+            {/* Submit Error Banner */}
+            <AnimatePresence>
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  className="mb-6 px-4 py-3 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3"
+                >
+                  <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
+                  <div>
+                    <p className="text-red-300 text-sm">{submitError}</p>
+                    <button type="button" onClick={() => setSubmitError(null)} className="text-red-400/70 text-xs mt-1 hover:text-red-300 transition-colors">Dismiss</button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Submit */}
             <motion.div className="relative inline-block">
-              {/* Glow effect behind button */}
-              <motion.div 
+              <motion.div
                 className="absolute inset-0 bg-primary/30 rounded-full blur-xl"
                 initial={{ opacity: 0, scale: 0.8 }}
-                animate={formProgress === 100 && !isSubmitted ? { 
+                animate={formProgress === 100 && !isSubmitted ? {
                   opacity: [0.3, 0.6, 0.3],
                   scale: [0.9, 1.1, 0.9]
                 } : { opacity: 0, scale: 0.8 }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
               />
-              
+
               <motion.button
                 type="submit"
                 disabled={isSubmitting || formProgress < 100}
                 className={`group relative inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full overflow-hidden transition-all duration-300 ${
                   isSubmitted
-                    ? 'bg-green-500 text-white shadow-[0_0_30px_rgba(34,197,94,0.4)]'
+                    ? 'bg-emerald-500 text-white shadow-[0_0_30px_rgba(34,197,94,0.4)]'
                     : formProgress === 100
                     ? 'bg-foreground text-background hover:bg-foreground/90 hover:shadow-[0_10px_40px_-10px_rgba(255,255,255,0.4)]'
                     : 'bg-muted text-muted-foreground cursor-not-allowed'
@@ -295,38 +342,32 @@ const CTASection = () => {
                 whileHover={formProgress === 100 && !isSubmitted ? { scale: 1.02, y: -2 } : {}}
                 whileTap={formProgress === 100 && !isSubmitted ? { scale: 0.98 } : {}}
               >
-                {/* Shimmer sweep effect */}
-                {formProgress === 100 && !isSubmitted && (
+                {formProgress === 100 && !isSubmitted && !isSubmitting && (
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                 )}
-                
-                {/* Pulse ring effect */}
-                {formProgress === 100 && !isSubmitted && (
-                  <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100">
-                    <span className="absolute inset-0 rounded-full animate-ping bg-foreground/10" style={{ animationDuration: '1.5s' }} />
-                  </span>
-                )}
-                
-                {isSubmitted ? (
-                  <>
-                    <CheckCircle2 className="w-5 h-5" />
-                    Message Sent!
-                  </>
-                ) : isSubmitting ? (
-                  <>
-                    <motion.div
-                      className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    <span className="relative z-10">SEND MESSAGE</span>
-                    <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
+
+                <AnimatePresence mode="wait">
+                  {isSubmitted ? (
+                    <motion.span key="done" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="relative z-10 inline-flex items-center gap-2">
+                      <CheckCircle2 className="w-5 h-5" />
+                      Message Sent!
+                    </motion.span>
+                  ) : isSubmitting ? (
+                    <motion.span key="sending" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="relative z-10 inline-flex items-center gap-3">
+                      <motion.div
+                        className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full"
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                      />
+                      Sending...
+                    </motion.span>
+                  ) : (
+                    <motion.span key="idle" className="relative z-10 inline-flex items-center gap-2">
+                      SEND MESSAGE
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.button>
             </motion.div>
           </form>
