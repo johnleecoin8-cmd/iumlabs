@@ -159,7 +159,7 @@ const GTMService = () => {
 
   return (
     <div className="gtm-ed" ref={containerRef}>
-      <SEOHead title="Korea Web3 GTM Strategy | ium Labs" description="Korea-focused Web3 GTM agency. Korean market activation, KOL management, and campaign execution." path="/services/gtm" image={gtmHeroImage} keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
+      <SEOHead title="Korea Web3 GTM Strategy & Market Entry | ium Labs" description="Strategic Web3 GTM solutions for the Korean market. Localized market activation, ecosystem growth, and data-driven campaign execution." path="/services/gtm" image={gtmHeroImage} keywords={["Korea Web3 GTM","Go-To-Market Korea"]} />
       <ServiceSchema name="Korea Web3 GTM Strategy" description="Korea-focused Web3 GTM agency. Full-stack Go-To-Market planning, Korean market activation, KOL management, and campaign execution." url="/services/gtm" serviceType={["Go-To-Market Strategy", "Market Entry Consulting", "Web3 Marketing"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "GTM Strategy", url: "https://iumlabs.io/services/gtm" }]} />
       <Navbar />

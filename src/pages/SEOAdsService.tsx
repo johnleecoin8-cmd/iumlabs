@@ -40,7 +40,7 @@ const SEOAdsService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea SEO & Paid Ads | ium Labs" description="Naver SEO, Google Ads, crypto ad networks for Korean market." path="/services/seo-ads" image={heroImg} keywords={["Korea Naver SEO","Crypto Ads Korea"]} />
+      <SEOHead title="Korea Crypto SEO & Targeted Paid Ads | ium Labs" description="Maximize search visibility via Naver SEO, targeted Google Ads, and specialized crypto ad networks tailored for the Korean Web3 market." path="/services/seo-ads" image={heroImg} keywords={["Korea Naver SEO","Crypto Ads Korea"]} />
       <ServiceSchema name="Korea SEO & Paid Ads" description="Naver SEO, Google Ads, crypto ad networks for Korean market." url="/services/seo-ads" serviceType={["SEO", "Paid Advertising", "Search Engine Marketing"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "SEO & Ads", url: "https://iumlabs.io/services/seo-ads" }]} />
       <Navbar />

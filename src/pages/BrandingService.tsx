@@ -40,7 +40,7 @@ const BrandingService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Regulations & Compliance | ium Labs" description="VASP registration, PIPA compliance, regulatory advisory for Korean crypto market." path="/services/compliance" image={heroImg} keywords={["Korea Crypto Compliance","VASP Registration Korea"]} />
+      <SEOHead title="Korea Crypto Regulation & VASP Compliance | ium Labs" description="Navigate the Korean regulatory landscape. Strategic advisory on VASP frameworks, PIPA data compliance, and local crypto guidelines." path="/services/compliance" image={heroImg} keywords={["Korea Crypto Compliance","VASP Registration Korea"]} />
       <ServiceSchema name="Korea Regulations & Compliance" description="VASP registration, PIPA compliance, regulatory advisory for Korean crypto market." url="/services/compliance" serviceType={["Regulatory Compliance", "VASP Registration", "Legal Advisory"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Compliance", url: "https://iumlabs.io/services/compliance" }]} />
       <Navbar />

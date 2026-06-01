@@ -40,7 +40,7 @@ const CommunityService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Community Management | ium Labs" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." path="/services/community" image={heroImg} keywords={["Korea Community Management","Web3 Community Korea"]} />
+      <SEOHead title="Korea Web3 Community Management & Growth | ium Labs" description="24/7 native Korean community management and moderation across Telegram, Discord, and KakaoTalk for sustainable Web3 ecosystem growth." path="/services/community" image={heroImg} keywords={["Korea Community Management","Web3 Community Korea"]} />
       <ServiceSchema name="Korea Community Management" description="24/7 native Korean community management across Telegram, Discord, KakaoTalk." url="/services/community" serviceType={["Community Management", "Social Media Management"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Community", url: "https://iumlabs.io/services/community" }]} />
       <Navbar />

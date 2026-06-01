@@ -40,7 +40,7 @@ const AMAService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea AMA Hosting | ium Labs" description="Structured AMA sessions with native Korean hosts. Pre-event promotion, live moderation, and post-AMA recap content for Web3 projects entering Korea." path="/services/ama" image={heroImg} keywords={["Korea AMA Hosting","Web3 AMA Korea"]} />
+      <SEOHead title="Korea Crypto AMA Hosting & Moderation | ium Labs" description="Structured Web3 AMA sessions with native Korean hosts. Pre-event promotion, professional live moderation, and post-AMA recap content creation." path="/services/ama" image={heroImg} keywords={["Korea AMA Hosting","Web3 AMA Korea"]} />
       <ServiceSchema name="Korea AMA Hosting" description="Structured AMA sessions with native Korean hosts." url="/services/ama" serviceType={["AMA Hosting", "Live Events", "Community Engagement"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "AMA", url: "https://iumlabs.io/services/ama" }]} />
       <Navbar />
