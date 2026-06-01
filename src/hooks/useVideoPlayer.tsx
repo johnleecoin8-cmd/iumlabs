@@ -33,6 +33,10 @@ interface UseVideoPlayerOptions {
   maxRetries?: number;
   /** Load timeout in ms (default: 8000) */
   loadTimeout?: number;
+  /** Lazy load: only attach video source when element enters viewport (default: false) */
+  lazyLoad?: boolean;
+  /** IntersectionObserver rootMargin for lazy load (default: '200px') */
+  lazyRootMargin?: string;
 }
 
 interface UseVideoPlayerReturn {
@@ -50,6 +54,8 @@ interface UseVideoPlayerReturn {
   networkInfo: NetworkInfo | null;
   /** Whether video should be disabled (mobile/reduced-motion) */
   shouldDisableVideo: boolean;
+  /** Whether the video source should be attached (true unless lazyLoad is waiting for viewport) */
+  shouldLoad: boolean;
   /** Whether video is currently loading */
   isLoading: boolean;
   /** Manual play trigger */
@@ -133,6 +139,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     forceFirstFrame = false,
     maxRetries = 3,
     loadTimeout = 8000,
+    lazyLoad = false,
+    lazyRootMargin = '200px',
   } = options;
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -141,10 +149,40 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [networkInfo, setNetworkInfo] = useState<NetworkInfo | null>(null);
   const [quality, setQuality] = useState<'low' | 'high' | 'auto'>('auto');
   const [retryCount, setRetryCount] = useState(0);
+  const [shouldLoad, setShouldLoad] = useState(!lazyLoad);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const readyRef = useRef(false);
+  const loadStartRef = useRef<number | null>(null);
+  const firstByteLoggedRef = useRef(false);
+  const playLoggedRef = useRef(false);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
+
+  // Lazy load: observe video element and only mark for loading when it enters viewport
+  useEffect(() => {
+    if (!lazyLoad || shouldLoad) return;
+    const el = videoRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setShouldLoad(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            console.log('[VideoPlayer] hero in viewport — beginning video load');
+            setShouldLoad(true);
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: lazyRootMargin, threshold: 0.01 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [lazyLoad, shouldLoad, lazyRootMargin]);
+
 
   // Detect network conditions
   useEffect(() => {
@@ -411,10 +449,23 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       opacity: isVideoReady ? 1 : 0,
       transition: 'opacity 300ms ease',
     } as React.CSSProperties,
+    onLoadStart: () => {
+      loadStartRef.current = performance.now();
+      firstByteLoggedRef.current = false;
+      playLoggedRef.current = false;
+      console.log('[VideoPlayer] loadstart', { src, t: 0 });
+    },
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      if (loadStartRef.current != null) {
+        console.log(`[VideoPlayer] loadedmetadata in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      if (loadStartRef.current != null && !firstByteLoggedRef.current) {
+        firstByteLoggedRef.current = true;
+        console.log(`[VideoPlayer] canplay (ready to render) in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (!readyRef.current) {
         readyRef.current = true;
         setIsVideoReady(true);
@@ -422,6 +473,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
+      if (loadStartRef.current != null && !playLoggedRef.current) {
+        playLoggedRef.current = true;
+        console.log(`[VideoPlayer] playback started in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (!readyRef.current) {
         readyRef.current = true;
         setIsVideoReady(true);
@@ -461,15 +516,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   };
 
   const ErrorOverlay: React.FC = () => {
-    if (!hasVideoError) return null;
-    return (
-      <div className="absolute inset-0 z-[5] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2 text-white/30">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span className="text-[11px]">Video unavailable</span>
-        </div>
-      </div>
-    );
+    // Silent fallback: when video errors, the poster image stays visible (handled via posterProps opacity).
+    // No visible error UI — keeps the hero clean.
+    return null;
   };
 
   return {
@@ -480,6 +529,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     optimizedSrc,
     networkInfo,
     shouldDisableVideo: shouldDisableVideo || prefersReducedMotion,
+    shouldLoad,
     isLoading,
     play,
     pause,
