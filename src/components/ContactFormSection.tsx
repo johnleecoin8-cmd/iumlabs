@@ -294,25 +294,26 @@ const ContactFormSection = () => {
                               <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
                                 Services you're interested in *
                               </label>
-                              <div className="flex flex-wrap gap-2">
+                              <div className="flex flex-nowrap gap-1.5 overflow-x-auto -mx-1 px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                                 {serviceOptions.map(service => (
                                   <button
                                     key={service}
                                     type="button"
                                     onClick={() => toggleService(service)}
-                                    className={`px-4 py-2.5 text-[11px] sm:text-xs rounded-full border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
+                                    className={`shrink-0 px-3 py-1.5 text-[11px] rounded-full border transition-all font-medium active:scale-[0.97] whitespace-nowrap ${
                                       formData.services.includes(service)
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
                                     }`}
                                   >
                                     {formData.services.includes(service) && (
-                                      <Check className="w-3 h-3 inline-block mr-1.5 -mt-0.5" />
+                                      <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />
                                     )}
                                     {service}
                                   </button>
                                 ))}
                               </div>
+
                             </div>
 
                             {/* Budget */}
