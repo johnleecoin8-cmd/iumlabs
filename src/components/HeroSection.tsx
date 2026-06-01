@@ -95,7 +95,7 @@ const HeroSection = () => {
     posterProps,
     ShimmerOverlay
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4',
+    src: '/videos/hero-background.mp4?v=rollback1',
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
     preload: 'auto'
@@ -115,7 +115,7 @@ const HeroSection = () => {
           ...videoProps.style,
           WebkitAppearance: 'none'
         }}>
-            <source src="/videos/hero-background.mp4" type="video/mp4" />
+            <source src="/videos/hero-background.mp4?v=rollback1" type="video/mp4" />
           </video>
       }
       </div>
