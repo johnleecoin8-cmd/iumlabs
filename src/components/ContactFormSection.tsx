@@ -420,11 +420,11 @@ const ContactFormSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.25 }}
-                            className="space-y-4"
+                            className="space-y-3"
                           >
-                            <div className="mb-2">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Review your request</h4>
-                              <p className="text-xs sm:text-sm text-white/50">Make sure everything looks right before sending.</p>
+                            <div className="mb-1">
+                              <h4 className="text-base font-semibold text-white mb-0.5">Review your request</h4>
+                              <p className="text-xs text-white/50">Make sure everything looks right before sending.</p>
                             </div>
 
                             {/* Summary Card */}
@@ -437,9 +437,9 @@ const ContactFormSection = () => {
                                 ...(formData.company ? [{ label: "Company", value: formData.company }] : []),
                                 ...(formData.message ? [{ label: "Message", value: formData.message }] : []),
                               ].map(({ label, value }) => (
-                                <div key={label} className="px-4 py-3 flex items-start justify-between gap-4">
+                                <div key={label} className="px-3.5 py-2.5 flex items-start justify-between gap-4">
                                   <div className="min-w-0 flex-1">
-                                    <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">{label}</div>
+                                    <div className="text-[10px] uppercase tracking-wider text-white/40 mb-0.5">{label}</div>
                                     <div className="text-sm text-white whitespace-pre-wrap break-words">{value}</div>
                                   </div>
                                 </div>
@@ -447,7 +447,7 @@ const ContactFormSection = () => {
                               <button
                                 type="button"
                                 onClick={() => setCurrentStep(1)}
-                                className="w-full px-4 py-3 text-xs text-white/60 hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                                className="w-full px-3.5 py-2.5 text-xs text-white/60 hover:text-white transition-colors flex items-center justify-center gap-1.5"
                               >
                                 <Pencil className="w-3.5 h-3.5" />
                                 Edit details
@@ -457,7 +457,7 @@ const ContactFormSection = () => {
                             {/* Submit Error Banner */}
                             <AnimatePresence>
                               {submitError && (
-                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-4 py-3 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
+                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-3.5 py-2.5 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
                                   <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <p className="text-red-300 text-sm">{submitError}</p>
@@ -468,11 +468,11 @@ const ContactFormSection = () => {
                             </AnimatePresence>
 
                             {/* Action Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                            <div className="flex flex-col sm:flex-row gap-2 pt-0.5">
                               <button
                                 type="button"
                                 onClick={() => setCurrentStep(1)}
-                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px] flex items-center justify-center gap-1.5"
+                                className="sm:w-auto px-5 py-3 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[44px] flex items-center justify-center gap-1.5"
                               >
                                 <ChevronLeft className="w-4 h-4" />
                                 Back
@@ -480,7 +480,7 @@ const ContactFormSection = () => {
                               <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] bg-white text-black hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
+                                className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] bg-white text-black hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
                               >
                                 <AnimatePresence mode="wait">
                                   {isSubmitting ? (
