@@ -90,20 +90,22 @@ const Navbar = () => {
                   })}
                 </nav>
 
-                <div className="border-t border-white/[0.05] pt-5 space-y-5">
+                <div className="border-t border-white/[0.05] pt-4 space-y-3">
                   <p className="text-[9px] text-white/20 uppercase tracking-[0.25em] font-medium">Connect</p>
-                  <div className="grid grid-cols-3 gap-2">
-                    <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
-                      <Send className="w-4 h-4 text-[#229ED9]" />
-                      <span className="text-[10px] text-white/40 font-medium">Telegram</span>
+                  <div className="flex items-center gap-3">
+                    <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/60 transition-colors">
+                      <Send className="w-3 h-3" />
+                      <span>Telegram</span>
                     </a>
-                    <a href={`mailto:${brand.email}`} className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
-                      <Mail className="w-4 h-4 text-white/30" />
-                      <span className="text-[10px] text-white/40 font-medium">Email</span>
+                    <span className="text-white/10">·</span>
+                    <a href={`mailto:${brand.email}`} className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/60 transition-colors">
+                      <Mail className="w-3 h-3" />
+                      <span>Email</span>
                     </a>
-                    <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
-                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
-                      <span className="text-[10px] text-white/40 font-medium">LinkedIn</span>
+                    <span className="text-white/10">·</span>
+                    <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-[11px] text-white/35 hover:text-white/60 transition-colors">
+                      <Linkedin className="w-3 h-3" />
+                      <span>LinkedIn</span>
                     </a>
                   </div>
 
