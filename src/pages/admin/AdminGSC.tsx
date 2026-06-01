@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
-import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw, Search, Globe, Send, CheckCircle2, XCircle, Clock, Loader2 } from 'lucide-react';
+import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw, Search, Globe, Send, CheckCircle2, XCircle, Clock, Loader2, Activity, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, LineChart, Line, Legend } from 'recharts';
+
 import { supabase } from '@/integrations/supabase/client';
 
 const MOCK_DAILY = [
@@ -75,7 +76,7 @@ interface InspectionResult {
   error?: string;
 }
 
-type Tab = 'overview' | 'queries' | 'pages' | 'errors' | 'inspection' | 'sitemaps';
+type Tab = 'overview' | 'monitor' | 'queries' | 'pages' | 'errors' | 'inspection' | 'sitemaps';
 
 function VerdictBadge({ value }: { value: string }) {
   const colors: Record<string, string> = {
@@ -117,12 +118,88 @@ export default function AdminGSC() {
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'overview', label: 'Overview' },
+    { id: 'monitor', label: 'Daily Monitor' },
     { id: 'queries', label: 'Top Queries' },
     { id: 'pages', label: 'Top Pages' },
     { id: 'inspection', label: 'URL Inspection' },
     { id: 'sitemaps', label: 'Sitemaps' },
     { id: 'errors', label: 'Crawl Errors' },
   ];
+
+  // Daily monitor state
+  const [monitorLoading, setMonitorLoading] = useState(false);
+  const [monitorError, setMonitorError] = useState<string | null>(null);
+  const [snapshots, setSnapshots] = useState<any[]>([]);
+  const [alertsList, setAlertsList] = useState<any[]>([]);
+  const [runningDaily, setRunningDaily] = useState(false);
+  const [lastRunResult, setLastRunResult] = useState<any>(null);
+
+  async function loadMonitorData() {
+    setMonitorLoading(true);
+    setMonitorError(null);
+    try {
+      const [snapRes, alertRes] = await Promise.all([
+        supabase
+          .from('gsc_inspection_snapshots')
+          .select('*')
+          .order('recorded_at', { ascending: false })
+          .limit(500),
+        supabase
+          .from('gsc_alerts')
+          .select('*')
+          .order('recorded_at', { ascending: false })
+          .limit(200),
+      ]);
+      if (snapRes.error) throw snapRes.error;
+      if (alertRes.error) throw alertRes.error;
+      setSnapshots(snapRes.data || []);
+      setAlertsList(alertRes.data || []);
+    } catch (e: any) {
+      setMonitorError(e.message || 'Failed to load monitor data');
+    } finally {
+      setMonitorLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (activeTab === 'monitor') loadMonitorData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  async function runDailyCheck() {
+    setRunningDaily(true);
+    setLastRunResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('gsc-daily-check', { body: {} });
+      if (error) throw error;
+      setLastRunResult(data);
+      await loadMonitorData();
+    } catch (e: any) {
+      setLastRunResult({ error: e.message });
+    } finally {
+      setRunningDaily(false);
+    }
+  }
+
+  // Aggregate snapshots by date for trend chart
+  const dailyAgg = (() => {
+    const map = new Map<string, { date: string; indexed: number; notIndexed: number; errors: number; total: number }>();
+    for (const s of snapshots) {
+      const d = s.recorded_date;
+      const cur = map.get(d) || { date: d, indexed: 0, notIndexed: 0, errors: 0, total: 0 };
+      cur.total++;
+      if (s.verdict === 'PASS') cur.indexed++;
+      else if (s.verdict === 'FAIL') cur.errors++;
+      else cur.notIndexed++;
+      map.set(d, cur);
+    }
+    return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
+  })();
+
+  const latestDate = dailyAgg.length ? dailyAgg[dailyAgg.length - 1].date : null;
+  const latestSnapshots = snapshots.filter((s) => s.recorded_date === latestDate);
+  const missingUrls = latestSnapshots.filter((s) => s.verdict !== 'PASS');
+
 
   async function runInspection() {
     setInspecting(true);
