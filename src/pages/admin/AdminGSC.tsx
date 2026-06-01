@@ -656,6 +656,148 @@ export default function AdminGSC() {
               </div>
             </div>
           )}
+
+          {activeTab === 'monitor' && (
+            <div className="space-y-6">
+              <div className="bg-[#111] border border-white/10 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-white font-semibold flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-primary" />
+                      Daily GSC Monitor
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1">
+                      Automated daily check (09:00 KST) · stores snapshots · emails alerts to admin@iumlabs.io
+                    </p>
+                  </div>
+                  <Button
+                    onClick={runDailyCheck}
+                    disabled={runningDaily}
+                    size="sm"
+                    className="bg-primary/20 text-primary hover:bg-primary/30 border border-primary/20"
+                  >
+                    {runningDaily ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <RefreshCw className="w-4 h-4 mr-2" />}
+                    {runningDaily ? 'Running...' : 'Run now'}
+                  </Button>
+                </div>
+
+                {lastRunResult && (
+                  <div className={`rounded-lg p-3 mb-4 text-xs ${lastRunResult.error ? 'bg-red-500/5 border border-red-500/20 text-red-400' : 'bg-green-500/5 border border-green-500/20 text-green-400'}`}>
+                    {lastRunResult.error ? `Error: ${lastRunResult.error}` :
+                      `✓ ${lastRunResult.summary?.inspected || 0} inspected · ${lastRunResult.summary?.indexed || 0} indexed · ${lastRunResult.summary?.alerts || 0} alerts · email ${lastRunResult.email?.sent ? 'sent' : 'skipped'}`}
+                  </div>
+                )}
+
+                {monitorError && (
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-3 text-red-400 text-xs mb-4">{monitorError}</div>
+                )}
+
+                {monitorLoading ? (
+                  <div className="text-center py-10 text-white/40"><Loader2 className="w-6 h-6 animate-spin mx-auto" /></div>
+                ) : dailyAgg.length === 0 ? (
+                  <div className="text-center py-12 text-white/30">
+                    <Activity className="w-8 h-8 mx-auto mb-3 opacity-30" />
+                    <p>No snapshots yet. Click "Run now" to generate the first daily report.</p>
+                  </div>
+                ) : (
+                  <>
+                    <ResponsiveContainer width="100%" height={280}>
+                      <LineChart data={dailyAgg}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                        <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.4)' }} />
+                        <YAxis tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.4)' }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }} />
+                        <Line type="monotone" dataKey="indexed" stroke="#22c55e" strokeWidth={2} name="Indexed" dot={false} />
+                        <Line type="monotone" dataKey="notIndexed" stroke="#f59e0b" strokeWidth={2} name="Not indexed" dot={false} />
+                        <Line type="monotone" dataKey="errors" stroke="#ef4444" strokeWidth={2} name="Errors" dot={false} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </>
+                )}
+              </div>
+
+              {/* Missing / problematic URLs latest snapshot */}
+              <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <XCircle className="w-4 h-4 text-amber-400" />
+                    Missing / Not indexed URLs {latestDate ? `(${latestDate})` : ''}
+                  </h3>
+                  <span className="text-xs text-white/40">{missingUrls.length} URLs</span>
+                </div>
+                {missingUrls.length === 0 ? (
+                  <div className="p-8 text-center text-white/30 text-sm">All inspected URLs are indexed. ✓</div>
+                ) : (
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">URL</th>
+                        <th className="text-center px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Verdict</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Indexing State</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Coverage</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Last Crawl</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {missingUrls.map((u) => (
+                        <tr key={u.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                          <td className="px-4 py-3 text-white text-xs font-mono">{u.url.replace('https://iumlabs.io', '')}</td>
+                          <td className="px-4 py-3 text-center"><VerdictBadge value={u.verdict || 'UNKNOWN'} /></td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.indexing_state || '—'}</td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.coverage_state || '—'}</td>
+                          <td className="px-4 py-3 text-white/40 text-xs">{u.last_crawl_time ? new Date(u.last_crawl_time).toLocaleDateString() : '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              {/* Recent alerts */}
+              <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-primary" />
+                    Recent Email Alerts
+                  </h3>
+                  <span className="text-xs text-white/40">{alertsList.length} entries</span>
+                </div>
+                {alertsList.length === 0 ? (
+                  <div className="p-8 text-center text-white/30 text-sm">No alerts logged.</div>
+                ) : (
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Date</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Type</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">URL</th>
+                        <th className="text-center px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Notified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {alertsList.slice(0, 50).map((a) => (
+                        <tr key={a.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                          <td className="px-4 py-3 text-white/60 text-xs">{a.recorded_date}</td>
+                          <td className="px-4 py-3">
+                            <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
+                              a.alert_type === 'error' ? 'bg-red-500/10 text-red-400' :
+                              a.alert_type === 'sitemap_error' ? 'bg-red-500/10 text-red-400' :
+                              'bg-amber-500/10 text-amber-400'
+                            }`}>{a.alert_type}</span>
+                          </td>
+                          <td className="px-4 py-3 text-white text-xs font-mono">{a.url ? a.url.replace('https://iumlabs.io', '') : '—'}</td>
+                          <td className="px-4 py-3 text-center">
+                            {a.notified ? <CheckCircle2 className="w-4 h-4 text-green-400 inline" /> : <span className="text-white/30 text-xs">—</span>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </AdminLayout>
     </ProtectedRoute>
