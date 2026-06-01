@@ -215,6 +215,23 @@ const ContactFormSection = () => {
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
                 </a>
 
+                {/* LinkedIn */}
+                <a
+                  href={brand.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15"
+                >
+                  <div className="flex items-start gap-4">
+                    <Linkedin className="w-5 h-5 text-white/40 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="text-label uppercase tracking-wider text-white/50 block mb-2">LinkedIn</span>
+                      <p className="text-white text-sm">iumlabs</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
+                </a>
+
               </div>
             </div>
 
