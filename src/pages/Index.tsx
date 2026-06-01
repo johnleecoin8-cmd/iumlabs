@@ -7,7 +7,6 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
-import StructuredData from "@/components/StructuredData";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
@@ -23,7 +22,6 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] md:snap-y md:snap-proximity md:overflow-y-auto md:h-screen scrollbar-hide">
       <SEOHead title="ium Labs — Korea Crypto Marketing Agency | Web3 GTM, KOL, Community" description="Korea's #1 crypto marketing agency for Web3 market entry. End-to-end GTM, KOL campaigns, community growth, and PR — trusted by 25+ global blockchain projects including BNB Chain, KuCoin, and Aptos." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
-      <StructuredData />
       
       <Navbar />
       
@@ -55,7 +53,7 @@ const Index = () => {
         <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
           <div className="px-5 sm:px-6 lg:px-10 pt-10 sm:pt-12">
             <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em] mb-1">Our Services</h2>
-            <p className="text-[12px] sm:text-[13px] text-white/25 font-light">End-to-end capabilities for Korea market entry.</p>
+            <p className="text-[12px] sm:text-[13px] text-white/35 font-light">End-to-end capabilities for Korea market entry.</p>
           </div>
           <ServicesSection />
         </div>
