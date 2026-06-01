@@ -145,68 +145,6 @@ export default {
           "75%": { transform: "scale(1.1) translate(1%, -1%)" },
           "100%": { transform: "scale(1) translate(0, 0)" },
         },
-        "light-sweep": {
-          "0%": { opacity: "0", transform: "translateX(-100%) rotate(-45deg)" },
-          "50%": { opacity: "0.4" },
-          "100%": { opacity: "0", transform: "translateX(100%) rotate(-45deg)" },
-        },
-        "aurora": {
-          "0%, 100%": { opacity: "0.2", transform: "translateX(0) scale(1)" },
-          "25%": { opacity: "0.35", transform: "translateX(8%) scale(1.08)" },
-          "50%": { opacity: "0.25", transform: "translateX(-5%) scale(1.05)" },
-          "75%": { opacity: "0.3", transform: "translateX(3%) scale(1.03)" },
-        },
-        "pulse-soft": {
-          "0%, 100%": { opacity: "1" },
-          "50%": { opacity: "0.7" },
-        },
-        // Floating Island animations
-        "floating-subtle": {
-          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
-          "33%": { transform: "translateY(-4px) rotate(0.2deg)" },
-          "66%": { transform: "translateY(3px) rotate(-0.15deg)" },
-        },
-        "neon-pulse": {
-          "0%, 100%": { 
-            boxShadow: "0 0 20px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--primary) / 0.1), inset 0 0 20px hsl(var(--primary) / 0.05)" 
-          },
-          "50%": { 
-            boxShadow: "0 0 30px hsl(var(--primary) / 0.25), 0 0 60px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.08)" 
-          },
-        },
-        "glow-line": {
-          "0%": { transform: "translateY(-100%)", opacity: "0" },
-          "50%": { opacity: "1" },
-          "100%": { transform: "translateY(100%)", opacity: "0" },
-        },
-        "particle-float": {
-          "0%": { transform: "translateY(0) scale(1)", opacity: "1" },
-          "100%": { transform: "translateY(-20px) scale(0)", opacity: "0" },
-        },
-        "ripple-out": {
-          "0%": { transform: "scale(0.5)", opacity: "0.8" },
-          "100%": { transform: "scale(2.5)", opacity: "0" },
-        },
-        "reveal-up": {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
-        },
-        "reveal-fade": {
-          "0%": { opacity: "0", filter: "blur(8px)" },
-          "100%": { opacity: "1", filter: "blur(0)" },
-        },
-        "scroll-indicator": {
-          "0%, 100%": { transform: "translateY(0)", opacity: "1" },
-          "50%": { transform: "translateY(6px)", opacity: "0.5" },
-        },
-        "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 0 0 hsl(var(--primary) / 0.4)" },
-          "50%": { boxShadow: "0 0 20px 4px hsl(var(--primary) / 0.2)" },
-        },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -221,21 +159,6 @@ export default {
         "marquee": "marquee 30s linear infinite",
         "marquee-reverse": "marquee-reverse 30s linear infinite",
         "kenburns": "kenburns 12s ease-in-out infinite",
-        "light-sweep": "light-sweep 4s ease-in-out infinite",
-        "aurora": "aurora 6s ease-in-out infinite",
-        "pulse-soft": "pulse-soft 2s ease-in-out infinite",
-        // Floating Island animations
-        "floating-subtle": "floating-subtle 5s ease-in-out infinite",
-        "neon-pulse": "neon-pulse 3s ease-in-out infinite",
-        "glow-line": "glow-line 3s ease-in-out infinite",
-        "particle-float": "particle-float 0.6s ease-out forwards",
-        "ripple-out": "ripple-out 0.6s ease-out forwards",
-        // New micro-interaction animations
-        "reveal-up": "reveal-up 0.6s ease-out forwards",
-        "reveal-fade": "reveal-fade 0.8s ease-out forwards",
-        "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
