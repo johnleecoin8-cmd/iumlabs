@@ -148,7 +148,7 @@ const FilmstripGallerySection = () => {
           <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-6">
             <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-white/10">
               <span className="text-white/50 text-[10px] sm:text-xs md:text-sm">Events Hosted</span>
-              <span className="text-white font-semibold text-xs sm:text-sm md:text-base">48+</span>
+              <span className="text-white font-semibold text-xs sm:text-sm md:text-base">116+</span>
             </div>
             <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-white/10">
               <span className="text-white/50 text-[10px] sm:text-xs md:text-sm">Media Placements</span>
