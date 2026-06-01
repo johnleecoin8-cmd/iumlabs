@@ -41,8 +41,14 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     // Poll for the ACTUAL hero video element rendered by HeroSection
     let videoEl: HTMLVideoElement | null = null;
 
-    const onCanPlayThrough = () => {
+    const onPlaying = () => {
       videoReady.current = true;
+    };
+
+    const tryPlay = (v: HTMLVideoElement) => {
+      v.muted = true;
+      const p = v.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
     };
 
     const pollForVideo = setInterval(() => {
@@ -53,16 +59,18 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       videoEl = el.tagName === 'SOURCE' ? el.parentElement as HTMLVideoElement : el as HTMLVideoElement;
       if (!videoEl) return;
 
-      // Already buffered enough
-      if (videoEl.readyState >= 4) {
+      // Force play attempt while intro is still on top
+      tryPlay(videoEl);
+
+      // Mark ready only once video is actually playing (frame visible)
+      if (!videoEl.paused && videoEl.currentTime > 0) {
         videoReady.current = true;
         clearInterval(pollForVideo);
         return;
       }
 
-      videoEl.addEventListener('canplaythrough', onCanPlayThrough, { once: true });
-      // Also count playing as ready (some browsers skip canplaythrough)
-      videoEl.addEventListener('playing', onCanPlayThrough, { once: true });
+      videoEl.addEventListener('playing', onPlaying, { once: true });
+      videoEl.addEventListener('timeupdate', onPlaying, { once: true });
       clearInterval(pollForVideo);
     }, VIDEO_POLL_INTERVAL);
 
@@ -75,8 +83,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       clearInterval(pollForVideo);
       clearTimeout(maxTimer);
       if (videoEl) {
-        videoEl.removeEventListener('canplaythrough', onCanPlayThrough);
-        videoEl.removeEventListener('playing', onCanPlayThrough);
+        videoEl.removeEventListener('playing', onPlaying);
+        videoEl.removeEventListener('timeupdate', onPlaying);
       }
     };
   }, []);
