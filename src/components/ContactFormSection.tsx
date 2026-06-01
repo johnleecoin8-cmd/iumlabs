@@ -4,6 +4,7 @@ import {
   Mail,
   MapPin,
   Send,
+  Linkedin,
   ArrowRight,
   Calendar,
   Sparkles,
