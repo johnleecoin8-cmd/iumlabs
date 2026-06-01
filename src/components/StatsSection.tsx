@@ -74,8 +74,8 @@ const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: {
     end: stat.value,
     duration: 2000,
     delay: index * 150,
-    prefix: stat.prefix || '',
-    suffix: stat.suffix || '',
+    prefix: 'prefix' in stat ? (stat.prefix as string) : '',
+    suffix: 'suffix' in stat ? (stat.suffix as string) : '',
     isVisible,
   });
 
