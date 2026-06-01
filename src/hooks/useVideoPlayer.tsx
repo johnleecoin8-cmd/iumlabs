@@ -421,10 +421,23 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       opacity: isVideoReady ? 1 : 0,
       transition: 'opacity 300ms ease',
     } as React.CSSProperties,
+    onLoadStart: () => {
+      loadStartRef.current = performance.now();
+      firstByteLoggedRef.current = false;
+      playLoggedRef.current = false;
+      console.log('[VideoPlayer] loadstart', { src, t: 0 });
+    },
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      if (loadStartRef.current != null) {
+        console.log(`[VideoPlayer] loadedmetadata in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
+      if (loadStartRef.current != null && !firstByteLoggedRef.current) {
+        firstByteLoggedRef.current = true;
+        console.log(`[VideoPlayer] canplay (ready to render) in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (!readyRef.current) {
         readyRef.current = true;
         setIsVideoReady(true);
@@ -432,6 +445,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
+      if (loadStartRef.current != null && !playLoggedRef.current) {
+        playLoggedRef.current = true;
+        console.log(`[VideoPlayer] playback started in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
+      }
       if (!readyRef.current) {
         readyRef.current = true;
         setIsVideoReady(true);
