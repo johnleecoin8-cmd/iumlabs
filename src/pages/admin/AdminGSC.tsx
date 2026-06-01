@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
-import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw, Search, Globe, Send, CheckCircle2, XCircle, Clock, Loader2 } from 'lucide-react';
+import { BarChart3, TrendingUp, Eye, MousePointer, Hash, ExternalLink, AlertCircle, RefreshCw, Search, Globe, Send, CheckCircle2, XCircle, Clock, Loader2, Activity, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, LineChart, Line, Legend } from 'recharts';
+
 import { supabase } from '@/integrations/supabase/client';
 
 const MOCK_DAILY = [
@@ -75,7 +76,7 @@ interface InspectionResult {
   error?: string;
 }
 
-type Tab = 'overview' | 'queries' | 'pages' | 'errors' | 'inspection' | 'sitemaps';
+type Tab = 'overview' | 'monitor' | 'queries' | 'pages' | 'errors' | 'inspection' | 'sitemaps';
 
 function VerdictBadge({ value }: { value: string }) {
   const colors: Record<string, string> = {
@@ -117,12 +118,88 @@ export default function AdminGSC() {
 
   const tabs: { id: Tab; label: string }[] = [
     { id: 'overview', label: 'Overview' },
+    { id: 'monitor', label: 'Daily Monitor' },
     { id: 'queries', label: 'Top Queries' },
     { id: 'pages', label: 'Top Pages' },
     { id: 'inspection', label: 'URL Inspection' },
     { id: 'sitemaps', label: 'Sitemaps' },
     { id: 'errors', label: 'Crawl Errors' },
   ];
+
+  // Daily monitor state
+  const [monitorLoading, setMonitorLoading] = useState(false);
+  const [monitorError, setMonitorError] = useState<string | null>(null);
+  const [snapshots, setSnapshots] = useState<any[]>([]);
+  const [alertsList, setAlertsList] = useState<any[]>([]);
+  const [runningDaily, setRunningDaily] = useState(false);
+  const [lastRunResult, setLastRunResult] = useState<any>(null);
+
+  async function loadMonitorData() {
+    setMonitorLoading(true);
+    setMonitorError(null);
+    try {
+      const [snapRes, alertRes] = await Promise.all([
+        supabase
+          .from('gsc_inspection_snapshots')
+          .select('*')
+          .order('recorded_at', { ascending: false })
+          .limit(500),
+        supabase
+          .from('gsc_alerts')
+          .select('*')
+          .order('recorded_at', { ascending: false })
+          .limit(200),
+      ]);
+      if (snapRes.error) throw snapRes.error;
+      if (alertRes.error) throw alertRes.error;
+      setSnapshots(snapRes.data || []);
+      setAlertsList(alertRes.data || []);
+    } catch (e: any) {
+      setMonitorError(e.message || 'Failed to load monitor data');
+    } finally {
+      setMonitorLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (activeTab === 'monitor') loadMonitorData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  async function runDailyCheck() {
+    setRunningDaily(true);
+    setLastRunResult(null);
+    try {
+      const { data, error } = await supabase.functions.invoke('gsc-daily-check', { body: {} });
+      if (error) throw error;
+      setLastRunResult(data);
+      await loadMonitorData();
+    } catch (e: any) {
+      setLastRunResult({ error: e.message });
+    } finally {
+      setRunningDaily(false);
+    }
+  }
+
+  // Aggregate snapshots by date for trend chart
+  const dailyAgg = (() => {
+    const map = new Map<string, { date: string; indexed: number; notIndexed: number; errors: number; total: number }>();
+    for (const s of snapshots) {
+      const d = s.recorded_date;
+      const cur = map.get(d) || { date: d, indexed: 0, notIndexed: 0, errors: 0, total: 0 };
+      cur.total++;
+      if (s.verdict === 'PASS') cur.indexed++;
+      else if (s.verdict === 'FAIL') cur.errors++;
+      else cur.notIndexed++;
+      map.set(d, cur);
+    }
+    return Array.from(map.values()).sort((a, b) => a.date.localeCompare(b.date));
+  })();
+
+  const latestDate = dailyAgg.length ? dailyAgg[dailyAgg.length - 1].date : null;
+  const latestSnapshots = snapshots.filter((s) => s.recorded_date === latestDate);
+  const missingUrls = latestSnapshots.filter((s) => s.verdict !== 'PASS');
+
 
   async function runInspection() {
     setInspecting(true);
@@ -576,6 +653,148 @@ export default function AdminGSC() {
                 <p className="text-xs text-white/30">
                   Connect the Google Search Console API to see live crawl and indexing errors.
                 </p>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'monitor' && (
+            <div className="space-y-6">
+              <div className="bg-[#111] border border-white/10 rounded-xl p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <div>
+                    <h3 className="text-white font-semibold flex items-center gap-2">
+                      <Activity className="w-4 h-4 text-primary" />
+                      Daily GSC Monitor
+                    </h3>
+                    <p className="text-white/40 text-xs mt-1">
+                      Automated daily check (09:00 KST) · stores snapshots · emails alerts to admin@iumlabs.io
+                    </p>
+                  </div>
+                  <Button
+                    onClick={runDailyCheck}
+                    disabled={runningDaily}
+                    size="sm"
+                    className="bg-primary/20 text-primary hover:bg-primary/30 border border-primary/20"
+                  >
+                    {runningDaily ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : <RefreshCw className="w-4 h-4 mr-2" />}
+                    {runningDaily ? 'Running...' : 'Run now'}
+                  </Button>
+                </div>
+
+                {lastRunResult && (
+                  <div className={`rounded-lg p-3 mb-4 text-xs ${lastRunResult.error ? 'bg-red-500/5 border border-red-500/20 text-red-400' : 'bg-green-500/5 border border-green-500/20 text-green-400'}`}>
+                    {lastRunResult.error ? `Error: ${lastRunResult.error}` :
+                      `✓ ${lastRunResult.summary?.inspected || 0} inspected · ${lastRunResult.summary?.indexed || 0} indexed · ${lastRunResult.summary?.alerts || 0} alerts · email ${lastRunResult.email?.sent ? 'sent' : 'skipped'}`}
+                  </div>
+                )}
+
+                {monitorError && (
+                  <div className="bg-red-500/5 border border-red-500/20 rounded-lg p-3 text-red-400 text-xs mb-4">{monitorError}</div>
+                )}
+
+                {monitorLoading ? (
+                  <div className="text-center py-10 text-white/40"><Loader2 className="w-6 h-6 animate-spin mx-auto" /></div>
+                ) : dailyAgg.length === 0 ? (
+                  <div className="text-center py-12 text-white/30">
+                    <Activity className="w-8 h-8 mx-auto mb-3 opacity-30" />
+                    <p>No snapshots yet. Click "Run now" to generate the first daily report.</p>
+                  </div>
+                ) : (
+                  <>
+                    <ResponsiveContainer width="100%" height={280}>
+                      <LineChart data={dailyAgg}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
+                        <XAxis dataKey="date" tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.4)' }} />
+                        <YAxis tick={{ fontSize: 11, fill: 'rgba(255,255,255,0.4)' }} />
+                        <Tooltip content={<CustomTooltip />} />
+                        <Legend wrapperStyle={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }} />
+                        <Line type="monotone" dataKey="indexed" stroke="#22c55e" strokeWidth={2} name="Indexed" dot={false} />
+                        <Line type="monotone" dataKey="notIndexed" stroke="#f59e0b" strokeWidth={2} name="Not indexed" dot={false} />
+                        <Line type="monotone" dataKey="errors" stroke="#ef4444" strokeWidth={2} name="Errors" dot={false} />
+                      </LineChart>
+                    </ResponsiveContainer>
+                  </>
+                )}
+              </div>
+
+              {/* Missing / problematic URLs latest snapshot */}
+              <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <XCircle className="w-4 h-4 text-amber-400" />
+                    Missing / Not indexed URLs {latestDate ? `(${latestDate})` : ''}
+                  </h3>
+                  <span className="text-xs text-white/40">{missingUrls.length} URLs</span>
+                </div>
+                {missingUrls.length === 0 ? (
+                  <div className="p-8 text-center text-white/30 text-sm">All inspected URLs are indexed. ✓</div>
+                ) : (
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">URL</th>
+                        <th className="text-center px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Verdict</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Indexing State</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Coverage</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Last Crawl</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {missingUrls.map((u) => (
+                        <tr key={u.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                          <td className="px-4 py-3 text-white text-xs font-mono">{u.url.replace('https://iumlabs.io', '')}</td>
+                          <td className="px-4 py-3 text-center"><VerdictBadge value={u.verdict || 'UNKNOWN'} /></td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.indexing_state || '—'}</td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.coverage_state || '—'}</td>
+                          <td className="px-4 py-3 text-white/40 text-xs">{u.last_crawl_time ? new Date(u.last_crawl_time).toLocaleDateString() : '—'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
+              </div>
+
+              {/* Recent alerts */}
+              <div className="bg-[#111] border border-white/10 rounded-xl overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex items-center justify-between">
+                  <h3 className="text-white font-semibold flex items-center gap-2">
+                    <Mail className="w-4 h-4 text-primary" />
+                    Recent Email Alerts
+                  </h3>
+                  <span className="text-xs text-white/40">{alertsList.length} entries</span>
+                </div>
+                {alertsList.length === 0 ? (
+                  <div className="p-8 text-center text-white/30 text-sm">No alerts logged.</div>
+                ) : (
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-white/10">
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Date</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Type</th>
+                        <th className="text-left px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">URL</th>
+                        <th className="text-center px-4 py-3 text-white/40 text-xs font-medium uppercase tracking-wider">Notified</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {alertsList.slice(0, 50).map((a) => (
+                        <tr key={a.id} className="border-b border-white/5 hover:bg-white/[0.02]">
+                          <td className="px-4 py-3 text-white/60 text-xs">{a.recorded_date}</td>
+                          <td className="px-4 py-3">
+                            <span className={`inline-flex px-2 py-0.5 rounded text-xs font-medium ${
+                              a.alert_type === 'error' ? 'bg-red-500/10 text-red-400' :
+                              a.alert_type === 'sitemap_error' ? 'bg-red-500/10 text-red-400' :
+                              'bg-amber-500/10 text-amber-400'
+                            }`}>{a.alert_type}</span>
+                          </td>
+                          <td className="px-4 py-3 text-white text-xs font-mono">{a.url ? a.url.replace('https://iumlabs.io', '') : '—'}</td>
+                          <td className="px-4 py-3 text-center">
+                            {a.notified ? <CheckCircle2 className="w-4 h-4 text-green-400 inline" /> : <span className="text-white/30 text-xs">—</span>}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                )}
               </div>
             </div>
           )}

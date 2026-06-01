@@ -80,6 +80,138 @@ export type Database = {
         }
         Relationships: []
       }
+      gsc_alerts: {
+        Row: {
+          alert_type: string
+          created_at: string
+          details: Json | null
+          id: string
+          notification_channel: string | null
+          notified: boolean | null
+          recorded_at: string
+          recorded_date: string
+          url: string | null
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          notification_channel?: string | null
+          notified?: boolean | null
+          recorded_at?: string
+          recorded_date?: string
+          url?: string | null
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          details?: Json | null
+          id?: string
+          notification_channel?: string | null
+          notified?: boolean | null
+          recorded_at?: string
+          recorded_date?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
+      gsc_inspection_snapshots: {
+        Row: {
+          coverage_state: string | null
+          created_at: string
+          id: string
+          indexing_state: string | null
+          last_crawl_time: string | null
+          mobile_verdict: string | null
+          page_fetch_state: string | null
+          raw: Json | null
+          recorded_at: string
+          recorded_date: string
+          rich_results_count: number | null
+          robots_txt_state: string | null
+          url: string
+          verdict: string | null
+        }
+        Insert: {
+          coverage_state?: string | null
+          created_at?: string
+          id?: string
+          indexing_state?: string | null
+          last_crawl_time?: string | null
+          mobile_verdict?: string | null
+          page_fetch_state?: string | null
+          raw?: Json | null
+          recorded_at?: string
+          recorded_date?: string
+          rich_results_count?: number | null
+          robots_txt_state?: string | null
+          url: string
+          verdict?: string | null
+        }
+        Update: {
+          coverage_state?: string | null
+          created_at?: string
+          id?: string
+          indexing_state?: string | null
+          last_crawl_time?: string | null
+          mobile_verdict?: string | null
+          page_fetch_state?: string | null
+          raw?: Json | null
+          recorded_at?: string
+          recorded_date?: string
+          rich_results_count?: number | null
+          robots_txt_state?: string | null
+          url?: string
+          verdict?: string | null
+        }
+        Relationships: []
+      }
+      gsc_sitemap_snapshots: {
+        Row: {
+          contents: Json | null
+          created_at: string
+          errors: number | null
+          id: string
+          is_pending: boolean | null
+          is_sitemaps_index: boolean | null
+          last_downloaded: string | null
+          last_submitted: string | null
+          recorded_at: string
+          recorded_date: string
+          sitemap_url: string
+          warnings: number | null
+        }
+        Insert: {
+          contents?: Json | null
+          created_at?: string
+          errors?: number | null
+          id?: string
+          is_pending?: boolean | null
+          is_sitemaps_index?: boolean | null
+          last_downloaded?: string | null
+          last_submitted?: string | null
+          recorded_at?: string
+          recorded_date?: string
+          sitemap_url: string
+          warnings?: number | null
+        }
+        Update: {
+          contents?: Json | null
+          created_at?: string
+          errors?: number | null
+          id?: string
+          is_pending?: boolean | null
+          is_sitemaps_index?: boolean | null
+          last_downloaded?: string | null
+          last_submitted?: string | null
+          recorded_at?: string
+          recorded_date?: string
+          sitemap_url?: string
+          warnings?: number | null
+        }
+        Relationships: []
+      }
       hype_projects: {
         Row: {
           change_24h: number | null
