@@ -88,9 +88,9 @@ const clientLogos = [{
 const HeroSection = () => {
   const {
     videoRef,
-    isVideoReady,
     hasVideoError,
     shouldDisableVideo,
+    shouldLoad,
     optimizedSrc,
     videoProps,
     posterProps,
@@ -100,7 +100,9 @@ const HeroSection = () => {
     src: '/videos/hero-background.mp4?v=20260601b',
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
-    preload: 'auto'
+    preload: 'auto',
+    lazyLoad: true,
+    lazyRootMargin: '300px',
   });
 
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
@@ -118,10 +120,11 @@ const HeroSection = () => {
           ...videoProps.style,
           WebkitAppearance: 'none'
         }}>
-            <source src={optimizedSrc} type="video/mp4" />
+            {shouldLoad && <source src={optimizedSrc} type="video/mp4" />}
           </video>
       }
       </div>
+
 
       {/* Overlays */}
       <div className="absolute inset-0 bg-black/40 z-[11]" />
