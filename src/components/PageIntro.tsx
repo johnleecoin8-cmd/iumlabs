@@ -83,8 +83,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       clearInterval(pollForVideo);
       clearTimeout(maxTimer);
       if (videoEl) {
-        videoEl.removeEventListener('canplaythrough', onCanPlayThrough);
-        videoEl.removeEventListener('playing', onCanPlayThrough);
+        videoEl.removeEventListener('playing', onPlaying);
+        videoEl.removeEventListener('timeupdate', onPlaying);
       }
     };
   }, []);
