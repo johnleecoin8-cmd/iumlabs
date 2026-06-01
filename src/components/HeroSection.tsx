@@ -91,11 +91,13 @@ const HeroSection = () => {
     isVideoReady,
     hasVideoError,
     shouldDisableVideo,
+    optimizedSrc,
     videoProps,
     posterProps,
-    ShimmerOverlay
+    ShimmerOverlay,
+    ErrorOverlay,
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4?v=rollback1',
+    src: '/videos/hero-background.mp4',
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
     preload: 'auto'
@@ -106,6 +108,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img {...posterProps} decoding="async" />
         <ShimmerOverlay />
+        <ErrorOverlay />
         {!shouldDisableVideo && !hasVideoError &&
       <video
         ref={videoRef}
@@ -115,7 +118,7 @@ const HeroSection = () => {
           ...videoProps.style,
           WebkitAppearance: 'none'
         }}>
-            <source src="/videos/hero-background.mp4?v=rollback1" type="video/mp4" />
+            <source src={optimizedSrc} type="video/mp4" />
           </video>
       }
       </div>

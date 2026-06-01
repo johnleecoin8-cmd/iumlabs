@@ -1,6 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useMobileOptimization } from './useMobileOptimization';
 
+declare const __BUILD_TIMESTAMP__: string;
+
+const VIDEO_VERSION = typeof __BUILD_TIMESTAMP__ !== 'undefined' ? __BUILD_TIMESTAMP__ : Date.now().toString(36);
+
 interface NetworkInfo {
   effectiveType: '4g' | '3g' | '2g' | 'slow-2g';
   downlink: number;
@@ -54,6 +58,10 @@ interface UseVideoPlayerReturn {
   pause: () => void;
   /** Reset video to beginning */
   reset: () => void;
+  /** Force reload with fresh URL (cache bust) */
+  forceRefresh: () => void;
+  /** Key that changes on forceRefresh to trigger React remount */
+  forceKey: number;
   /** Video event handlers to spread on video element */
   videoProps: {
     autoPlay: boolean;
@@ -85,16 +93,21 @@ interface UseVideoPlayerReturn {
   };
   /** Shimmer overlay component for loading state */
   ShimmerOverlay: React.FC;
+  /** Error overlay component for failed video */
+  ErrorOverlay: React.FC;
 }
 
-/**
- * Get video source with optional first frame parameter
- */
+const appendVersion = (url: string): string => {
+  const sep = url.includes('?') ? '&' : '?';
+  return `${url}${sep}v=${VIDEO_VERSION}`;
+};
+
 const getVideoSource = (src: string, forceFirstFrame: boolean): string => {
-  if (forceFirstFrame && !src.includes('#t=')) {
-    return `${src}#t=0.001`;
+  const versioned = appendVersion(src);
+  if (forceFirstFrame && !versioned.includes('#t=')) {
+    return `${versioned}#t=0.001`;
   }
-  return src;
+  return versioned;
 };
 
 /**
@@ -341,6 +354,33 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     };
   }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, tryPlay]);
 
+  // Cache bust verification via Performance API
+  useEffect(() => {
+    if (!isVideoReady || shouldDisableVideo) return;
+    const check = () => {
+      const entries = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
+      const videoEntry = entries.find(e => e.name.includes('hero-background.mp4'));
+      if (videoEntry) {
+        const fromCache = videoEntry.transferSize === 0 && videoEntry.decodedBodySize > 0;
+        console.log(`[VideoPlayer] cache-bust check: ${fromCache ? 'served from cache' : 'fetched from network'} (transferSize=${videoEntry.transferSize})`);
+      }
+    };
+    setTimeout(check, 500);
+  }, [isVideoReady, shouldDisableVideo]);
+
+  const [forceKey, setForceKey] = useState(0);
+  const forceRefresh = useCallback(() => {
+    readyRef.current = false;
+    setIsVideoReady(false);
+    setHasVideoError(false);
+    setRetryCount(0);
+    setForceKey(k => k + 1);
+    if (videoRef.current) {
+      videoRef.current.src = appendVersion(src) + `&_r=${Date.now()}`;
+      videoRef.current.load();
+    }
+  }, [src]);
+
   // Reset state when source changes
   useEffect(() => {
     readyRef.current = false;
@@ -404,11 +444,29 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     } as React.CSSProperties,
   };
 
-  // Loading state
   const isLoading = !isVideoReady && !hasVideoError && !shouldDisableVideo;
 
-  // Shimmer overlay removed — poster image at 0.1s handles the visual gap
-  const ShimmerOverlay: React.FC = () => null;
+  const ShimmerOverlay: React.FC = () => {
+    if (!isLoading) return null;
+    return (
+      <div className="absolute inset-0 z-[5] flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.03] to-transparent animate-[shimmer_2s_infinite]" style={{ backgroundSize: '200% 100%' }} />
+        <div className="w-8 h-8 border-2 border-white/10 border-t-white/40 rounded-full animate-spin" />
+      </div>
+    );
+  };
+
+  const ErrorOverlay: React.FC = () => {
+    if (!hasVideoError) return null;
+    return (
+      <div className="absolute inset-0 z-[5] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-2 text-white/30">
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span className="text-[11px]">Video unavailable</span>
+        </div>
+      </div>
+    );
+  };
 
   return {
     videoRef,
@@ -422,9 +480,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     play,
     pause,
     reset,
+    forceRefresh,
+    forceKey,
     videoProps,
     posterProps,
     ShimmerOverlay,
+    ErrorOverlay,
   };
 };
 
