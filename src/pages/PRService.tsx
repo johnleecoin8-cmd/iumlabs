@@ -40,7 +40,7 @@ const PRService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea PR & Media | ium Labs" description="Korean press coverage through CoinDesk Korea, Block Media, TokenPost." path="/services/pr" image={heroImg} keywords={["Korea Crypto PR","Korean Media Relations"]} />
+      <SEOHead title="Korea Crypto PR Agency & Web3 Media | ium Labs" description="Strategic crypto PR distribution and media relations in Korea. Localized narrative building and press coverage for global blockchain projects." path="/services/pr" image={heroImg} keywords={["Korea Crypto PR","Korean Media Relations"]} />
       <ServiceSchema name="Korea PR & Media" description="Korean press coverage through CoinDesk Korea, Block Media, TokenPost." url="/services/pr" serviceType={["PR", "Media Relations", "Press Coverage"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "PR & Media", url: "https://iumlabs.io/services/pr" }]} />
       <Navbar />
