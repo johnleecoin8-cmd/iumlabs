@@ -48,7 +48,7 @@ const FooterLinksSection = () => {
         <div className="grid grid-cols-2 gap-x-6 gap-y-6 md:hidden">
           {sections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-[10px] font-medium text-white/25 uppercase tracking-[0.15em] mb-3">
+              <h3 className="text-[10px] font-medium text-white/35 uppercase tracking-[0.15em] mb-3">
                 {section.title}
               </h3>
               <ul className="space-y-2">
@@ -56,7 +56,7 @@ const FooterLinksSection = () => {
                   <li key={link.name}>
                     <Link
                       to={link.href}
-                      className="text-[13px] text-white/40 hover:text-white transition-colors"
+                      className="text-[13px] text-white/50 hover:text-white transition-colors"
                     >
                       {link.name}
                     </Link>
@@ -71,7 +71,7 @@ const FooterLinksSection = () => {
         <div className="hidden md:grid grid-cols-4 gap-8">
           {sections.map((section) => (
             <div key={section.title}>
-              <h3 className="text-xs font-medium text-white/30 uppercase tracking-wider mb-4">
+              <h3 className="text-xs font-medium text-white/40 uppercase tracking-wider mb-4">
                 {section.title}
               </h3>
               <ul className="space-y-2.5">
@@ -92,7 +92,7 @@ const FooterLinksSection = () => {
 
         {/* Contact row */}
         <div className="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-xs text-white/30">
+          <div className="flex flex-wrap items-center gap-5 sm:gap-6 text-xs text-white/40">
             <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="hover:text-white/60 transition-colors">
               Telegram
             </a>
@@ -106,7 +106,7 @@ const FooterLinksSection = () => {
               Email
             </a>
           </div>
-          <span className="text-[11px] text-white/25 leading-relaxed">{brand.address}</span>
+          <span className="text-[11px] text-white/35 leading-relaxed">{brand.address}</span>
         </div>
       </div>
     </section>

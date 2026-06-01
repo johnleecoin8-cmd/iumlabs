@@ -29,7 +29,7 @@ const LeadMagnetSection = () => {
               <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight leading-tight mb-3">
                 Korea Web3 Market<br />Entry Playbook
               </h3>
-              <p className="text-sm text-white/40 leading-relaxed max-w-md">
+              <p className="text-sm text-white/50 leading-relaxed max-w-md">
                 Exchange landscape, regulatory overview, KOL pricing benchmarks, and community platform strategy — everything you need before launching in Korea.
               </p>
             </div>
@@ -51,7 +51,7 @@ const LeadMagnetSection = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="work@company.com"
                     required
-                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-[#a78bfa]/40 transition-colors"
+                    className="w-full px-4 py-3 sm:py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#a78bfa]/40 transition-colors"
                   />
                   <button
                     type="submit"
@@ -60,7 +60,7 @@ const LeadMagnetSection = () => {
                     Download Free Report
                     <ArrowRight className="w-4 h-4" />
                   </button>
-                  <p className="text-[10px] text-white/20 text-center">No spam. Unsubscribe anytime.</p>
+                  <p className="text-[10px] text-white/30 text-center">No spam. Unsubscribe anytime.</p>
                 </form>
               )}
             </div>

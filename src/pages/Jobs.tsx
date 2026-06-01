@@ -402,7 +402,7 @@ const Jobs = () => {
                 <div className="px-4 md:px-10 py-4 sm:py-6 md:py-8 flex items-center justify-between gap-4 sm:gap-6">
                   {/* Left: Number + Title */}
                   <div className="flex items-center gap-4 sm:gap-6 md:gap-10 flex-1 min-w-0">
-                    <span className="text-2xl sm:text-3xl md:text-5xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
+                    <span className="text-2xl sm:text-3xl md:text-5xl font-bold text-white/25 group-hover:text-white/45 transition-colors">
                       0{idx + 1}
                     </span>
                     <div className="flex-1 min-w-0">
@@ -455,7 +455,7 @@ const Jobs = () => {
             <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
                 {process.map((step, idx) => <div key={idx} className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-6 md:p-8 text-center group hover:bg-white/10 transition-colors active:scale-[0.98]">
-                    <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/20 block mb-1 sm:mb-2">
+                    <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/25 block mb-1 sm:mb-2">
                       {step.step}
                     </span>
                     <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1 sm:mb-2">

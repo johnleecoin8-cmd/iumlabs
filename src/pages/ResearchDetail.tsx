@@ -243,7 +243,7 @@ const ResearchDetail = () => {
               {post.date}
             </span>
             {post.content && (
-              <span className="text-white/25 text-xs hidden sm:block">
+              <span className="text-white/40 text-xs hidden sm:block">
                 {Math.round(post.content.split(/\s+/).length / 100) / 10}k words
               </span>
             )}
@@ -302,7 +302,7 @@ const ResearchDetail = () => {
           {/* Tags */}
           {post.tags && post.tags.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 pt-5">
-              <Tag className="w-3.5 h-3.5 text-white/25" />
+              <Tag className="w-3.5 h-3.5 text-white/40" />
               {post.tags.map((tag) => (
                 <Link
                   key={tag}
@@ -482,7 +482,7 @@ const ResearchDetail = () => {
                           <div className="rounded-xl overflow-hidden border border-white/10">
                             <img src={imgSrc} alt={srcCaption} className="w-full h-auto" loading="lazy" />
                           </div>
-                          <figcaption className="mt-3 flex items-center gap-2 text-xs text-white/30 italic">
+                          <figcaption className="mt-3 flex items-center gap-2 text-xs text-white/40 italic">
                             <span className="inline-block w-3 h-3 rounded-full bg-white/10 flex-shrink-0" />
                             <span>Source: {srcCaption}</span>
                           </figcaption>
@@ -520,7 +520,7 @@ const ResearchDetail = () => {
                             <img src={imgSrc} alt={altText} className="w-full h-auto" loading="lazy" />
                           </div>
                           {caption && (
-                            <figcaption className="mt-3 text-center text-xs text-white/30 italic">{caption}</figcaption>
+                            <figcaption className="mt-3 text-center text-xs text-white/40 italic">{caption}</figcaption>
                           )}
                         </figure>
                       );
@@ -690,7 +690,7 @@ const ResearchDetail = () => {
 
         {/* Bottom Share Bar */}
         <div className="mt-16 pt-8 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
-          <p className="text-white/30 text-sm">Found this useful? Share it with your network.</p>
+          <p className="text-white/40 text-sm">Found this useful? Share it with your network.</p>
           <div className="flex items-center gap-2">
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -731,7 +731,7 @@ const ResearchDetail = () => {
                 </div>
               )}
               <div>
-                <p className="text-sm text-white/30 uppercase tracking-wider mb-1">Written by</p>
+                <p className="text-sm text-white/40 uppercase tracking-wider mb-1">Written by</p>
                 <p className="text-lg font-medium text-white">{post.author}</p>
                 <p className="text-sm text-[#b48cde]/80 mb-3">{post.authorRole} at ium Labs</p>
                 <p className="text-sm text-white/50 leading-relaxed">{post.authorBio}</p>
@@ -829,7 +829,7 @@ const ResearchDetail = () => {
                 <p className="text-sm text-white/40 leading-relaxed">
                   {service.desc}
                 </p>
-                <span className="inline-flex items-center gap-1 mt-4 text-sm text-white/30 group-hover:text-primary/80 group-hover:gap-2 transition-all">
+                <span className="inline-flex items-center gap-1 mt-4 text-sm text-white/40 group-hover:text-primary/80 group-hover:gap-2 transition-all">
                   Learn more <ChevronRight className="w-3.5 h-3.5" />
                 </span>
               </Link>

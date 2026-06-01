@@ -70,7 +70,7 @@ const FAQSection = () => {
                 <AccordionTrigger className="text-left text-sm sm:text-[15px] font-semibold text-white/80 hover:text-white transition-colors py-4 sm:py-5">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-white/40 pb-5 text-sm leading-relaxed">
+                <AccordionContent className="text-white/55 pb-5 text-sm leading-relaxed">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

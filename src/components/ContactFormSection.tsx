@@ -239,7 +239,7 @@ const ContactFormSection = () => {
                   >
                     {/* Description */}
                     <div className="mb-5 text-center">
-                      <p className="text-[13px] sm:text-sm text-white/40 font-light leading-relaxed">Leave your question about the Korean/APAC market,<br className="hidden sm:block" /> and get a proposal.</p>
+                      <p className="text-[13px] sm:text-sm text-white/50 font-light leading-relaxed">Leave your question about the Korean/APAC market,<br className="hidden sm:block" /> and get a proposal.</p>
                     </div>
 
                     {/* Step Indicator */}

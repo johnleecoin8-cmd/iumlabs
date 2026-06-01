@@ -128,7 +128,7 @@ const Research = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-12">
             <div className="max-w-2xl">
-              <p className="text-[10px] sm:text-xs text-white/30 uppercase tracking-[0.3em] mb-3 sm:mb-4 font-medium">Research & Insights</p>
+              <p className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.3em] mb-3 sm:mb-4 font-medium">Research & Insights</p>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
                 Web3 Market
                 <span className="block bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Intelligence</span>
@@ -191,15 +191,15 @@ const Research = () => {
             <div className="mt-6 sm:mt-8 flex flex-wrap items-center gap-6 sm:gap-10 py-4 border-t border-white/[0.04]">
               <div>
                 <span className="text-xl sm:text-2xl font-bold text-white">{posts.length}</span>
-                <span className="text-xs text-white/30 ml-2">Articles</span>
+                <span className="text-xs text-white/40 ml-2">Articles</span>
               </div>
               <div>
                 <span className="text-xl sm:text-2xl font-bold text-white">{categories.length - 1}</span>
-                <span className="text-xs text-white/30 ml-2">Categories</span>
+                <span className="text-xs text-white/40 ml-2">Categories</span>
               </div>
               <div>
                 <span className="text-xl sm:text-2xl font-bold text-white">{new Set(posts.flatMap(p => p.tags || [])).size}</span>
-                <span className="text-xs text-white/30 ml-2">Topics</span>
+                <span className="text-xs text-white/40 ml-2">Topics</span>
               </div>
             </div>
           )}
@@ -341,7 +341,7 @@ const Research = () => {
                             {post.category}
                           </span>
                         )}
-                        <span className="text-white/25 text-[10px] sm:text-xs flex items-center gap-1">
+                        <span className="text-white/40 text-[10px] sm:text-xs flex items-center gap-1">
                           <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           {post.readTime}
                         </span>
@@ -351,7 +351,7 @@ const Research = () => {
                         {post.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-white/35 line-clamp-2 mb-4">
+                      <p className="text-xs sm:text-sm text-white/45 line-clamp-2 mb-4">
                         {post.excerpt}
                       </p>
 
@@ -362,7 +362,7 @@ const Research = () => {
                           </div>
                           <span className="text-[10px] sm:text-xs text-white/40">{post.author}</span>
                         </div>
-                        <span className="text-[10px] sm:text-xs text-white/25">{post.date}</span>
+                        <span className="text-[10px] sm:text-xs text-white/40">{post.date}</span>
                       </div>
                     </div>
                   </article>

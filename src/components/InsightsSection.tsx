@@ -102,7 +102,7 @@ const InsightsSection = () => {
     <section className="p-5 sm:p-6 md:p-8">
       {/* Header */}
       <div className="flex items-end justify-between mb-5">
-        <p className="text-xs sm:text-sm text-white/35">Deep research on the Korean crypto market.</p>
+        <p className="text-xs sm:text-sm text-white/45">Deep research on the Korean crypto market.</p>
         <Link to="/blog" className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors flex-shrink-0">
           All articles <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </Link>
@@ -162,7 +162,7 @@ const InsightsSection = () => {
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-[9px] sm:text-[10px] text-white/50 uppercase tracking-wider">{article.category}</span>
                         <span className="text-white/20">·</span>
-                        <span className="text-[9px] sm:text-[10px] text-white/40">{article.date}</span>
+                        <span className="text-[9px] sm:text-[10px] text-white/50">{article.date}</span>
                       </div>
                       <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-white leading-snug line-clamp-2">
                         {article.title}
@@ -187,7 +187,7 @@ const InsightsSection = () => {
 
       {/* Subscribe row */}
       <form onSubmit={handleSubscribe} className="hidden sm:flex mt-5 flex-col sm:flex-row items-center gap-3 justify-center">
-        <p className="text-[11px] text-white/25 hidden sm:block">Join 500+ Web3 founders</p>
+        <p className="text-[11px] text-white/35 hidden sm:block">Join 500+ Web3 founders</p>
         <div className="flex gap-1.5">
           <input
             type="email"
