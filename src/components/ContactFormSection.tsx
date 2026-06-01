@@ -15,7 +15,6 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import type { Options as ConfettiOptions } from "canvas-confetti";
 import CalendlyButton from "./CalendlyButton";
 
 const serviceOptions = [

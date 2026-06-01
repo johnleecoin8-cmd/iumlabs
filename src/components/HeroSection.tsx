@@ -1,8 +1,6 @@
 import { Send } from "lucide-react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-import FloatingTags from "@/components/FloatingTags";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -102,16 +100,6 @@ const HeroSection = () => {
     autoPlay: true,
     preload: 'auto'
   });
-
-  const floatingTags = [
-    { label: "GTM Strategy", top: "18%", left: "4%" },
-    { label: "PR", top: "12%", left: "42%", mobileTop: "10%", mobileLeft: "60%" },
-    { label: "KOL Marketing", top: "22%", right: "6%", mobileTop: "15%", mobileRight: "4%" },
-    { label: "Community", top: "48%", left: "2%", mobileTop: "45%", mobileLeft: "2%" },
-    { label: "Offline Events", top: "44%", right: "3%", mobileTop: "42%", mobileRight: "2%" },
-    { label: "Deep Research", bottom: "32%", left: "8%", mobileBottom: "28%", mobileLeft: "4%" },
-    { label: "AMA Hosting", bottom: "28%", right: "8%", mobileBottom: "25%", mobileRight: "4%" },
-  ];
 
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
