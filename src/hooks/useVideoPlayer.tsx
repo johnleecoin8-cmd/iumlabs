@@ -529,6 +529,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     optimizedSrc,
     networkInfo,
     shouldDisableVideo: shouldDisableVideo || prefersReducedMotion,
+    shouldLoad,
     isLoading,
     play,
     pause,
