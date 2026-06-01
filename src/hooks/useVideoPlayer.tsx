@@ -156,6 +156,32 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
+  // Lazy load: observe video element and only mark for loading when it enters viewport
+  useEffect(() => {
+    if (!lazyLoad || shouldLoad) return;
+    const el = videoRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') {
+      setShouldLoad(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            console.log('[VideoPlayer] hero in viewport — beginning video load');
+            setShouldLoad(true);
+            observer.disconnect();
+            break;
+          }
+        }
+      },
+      { rootMargin: lazyRootMargin, threshold: 0.01 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [lazyLoad, shouldLoad, lazyRootMargin]);
+
+
   // Detect network conditions
   useEffect(() => {
     const updateNetworkInfo = () => {
