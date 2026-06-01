@@ -33,6 +33,10 @@ interface UseVideoPlayerOptions {
   maxRetries?: number;
   /** Load timeout in ms (default: 8000) */
   loadTimeout?: number;
+  /** Lazy load: only attach video source when element enters viewport (default: false) */
+  lazyLoad?: boolean;
+  /** IntersectionObserver rootMargin for lazy load (default: '200px') */
+  lazyRootMargin?: string;
 }
 
 interface UseVideoPlayerReturn {
