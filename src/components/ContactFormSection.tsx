@@ -240,10 +240,34 @@ const ContactFormSection = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    {/* Description */}
-                    <div className="mb-5 text-center">
-                      <p className="text-[13px] sm:text-sm text-white/50 font-light leading-relaxed">Leave your question about the Korean/APAC market,<br className="hidden sm:block" /> and get a proposal.</p>
+                    {/* Hook Header */}
+                    <div className="mb-6 sm:mb-7">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-3">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-[10px] sm:text-[11px] font-medium text-emerald-300 tracking-wide uppercase">Now accepting Q3 partnerships</span>
+                      </div>
+                      <h3 className="text-[22px] sm:text-2xl lg:text-[28px] font-bold text-white tracking-[-0.02em] leading-[1.15] mb-2">
+                        Get a custom Korea GTM<br className="hidden sm:block" /> proposal in <span className="text-emerald-400">24 hours</span>.
+                      </h3>
+                      <p className="text-[13px] sm:text-sm text-white/55 leading-relaxed">
+                        Tell us about your project — we'll send back a tailored strategy from our Seoul team. No sales calls required.
+                      </p>
+
+                      {/* What you get */}
+                      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        {[
+                          { icon: FileText, label: "Tailored proposal" },
+                          { icon: Zap, label: "KOL + GTM playbook" },
+                          { icon: Clock, label: "Reply within 24h KST" },
+                        ].map(({ icon: Icon, label }) => (
+                          <div key={label} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
+                            <Icon className="w-3.5 h-3.5 text-emerald-400/80 flex-shrink-0" />
+                            <span className="text-[11px] sm:text-xs text-white/70 font-medium">{label}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
+
 
                     {/* Step Indicator */}
                     <div className="mb-4 sm:mb-5">
