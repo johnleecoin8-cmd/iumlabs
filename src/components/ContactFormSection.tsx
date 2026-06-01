@@ -10,7 +10,10 @@ import {
   ChevronRight,
   ChevronLeft,
   Check,
-  AlertCircle
+  AlertCircle,
+  Clock,
+  FileText,
+  Zap,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
