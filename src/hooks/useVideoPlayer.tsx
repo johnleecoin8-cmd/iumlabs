@@ -137,6 +137,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     forceFirstFrame = false,
     maxRetries = 3,
     loadTimeout = 8000,
+    lazyLoad = false,
+    lazyRootMargin = '200px',
   } = options;
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -145,8 +147,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [networkInfo, setNetworkInfo] = useState<NetworkInfo | null>(null);
   const [quality, setQuality] = useState<'low' | 'high' | 'auto'>('auto');
   const [retryCount, setRetryCount] = useState(0);
+  const [shouldLoad, setShouldLoad] = useState(!lazyLoad);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const readyRef = useRef(false);
+  const loadStartRef = useRef<number | null>(null);
+  const firstByteLoggedRef = useRef(false);
+  const playLoggedRef = useRef(false);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
