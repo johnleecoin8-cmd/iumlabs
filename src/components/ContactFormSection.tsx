@@ -383,15 +383,15 @@ const ContactFormSection = () => {
 
                             {/* Message */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                Message <span className="text-white/30">(Optional)</span>
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">
+                                Message <span className="text-white/30">(Opt.)</span>
                               </label>
                               <textarea
                                 placeholder="Tell us about your project, goals, and timeline..."
                                 value={formData.message}
                                 onChange={e => setFormData({ ...formData, message: e.target.value })}
-                                rows={4}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[120px]"
+                                rows={3}
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[80px]"
                               />
                             </div>
 
@@ -400,14 +400,14 @@ const ContactFormSection = () => {
                               type="button"
                               onClick={goToReview}
                               disabled={!step1Complete}
-                              className={`w-full flex items-center justify-center gap-2 py-3.5 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[48px] active:scale-[0.98] ${
+                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
                                 step1Complete
                                   ? 'bg-white text-black hover:bg-white/90'
                                   : 'bg-white/10 text-white/40 cursor-not-allowed'
                               }`}
                             >
                               Review your request
-                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                              <ChevronRight className="w-4 h-4" />
                             </button>
                           </motion.div>
                         )}
