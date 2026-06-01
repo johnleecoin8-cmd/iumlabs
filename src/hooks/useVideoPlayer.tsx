@@ -54,6 +54,8 @@ interface UseVideoPlayerReturn {
   networkInfo: NetworkInfo | null;
   /** Whether video should be disabled (mobile/reduced-motion) */
   shouldDisableVideo: boolean;
+  /** Whether the video source should be attached (true unless lazyLoad is waiting for viewport) */
+  shouldLoad: boolean;
   /** Whether video is currently loading */
   isLoading: boolean;
   /** Manual play trigger */
