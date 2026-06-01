@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
 import { Send, Linkedin, Mail, MapPin, ChevronDown, Calendar, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand, navigation } from "@/config/content";
-import LiveChatModal from "./LiveChatModal";
 import CalendlyButton from "./CalendlyButton";
+
+const LiveChatModal = lazy(() => import("./LiveChatModal"));
 import logoImage from "@/assets/ium-logo.png";
 
 const serviceItems = [
@@ -241,7 +242,11 @@ const Navbar = () => {
       </nav>
 
       {isMounted ? createPortal(menuPanel, document.body) : null}
-      <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
+      {isLiveChatOpen && (
+        <Suspense fallback={null}>
+          <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
+        </Suspense>
+      )}
     </>
   );
 };

@@ -15,7 +15,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import confetti from "canvas-confetti";
+import type { Options as ConfettiOptions } from "canvas-confetti";
 import CalendlyButton from "./CalendlyButton";
 
 const serviceOptions = [
@@ -103,11 +103,11 @@ const ContactFormSection = () => {
         throw notificationError;
       }
 
-      confetti({
+      import("canvas-confetti").then(m => m.default({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 }
-      });
+      }));
 
       setIsSuccess(true);
       toast({
