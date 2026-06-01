@@ -40,7 +40,7 @@ const InfluencerService = () => {
 
   return (
     <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea KOL & Influencer Marketing | ium Labs" description="250+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
+      <SEOHead title="Korea Crypto KOL Marketing & Influencer Agency | ium Labs" description="Data-driven Korean crypto KOL and influencer marketing campaigns. Rigorous fraud filtering, ROI tracking, and localized content for Web3 networks." path="/services/influencer" image={heroImg} keywords={["Korea KOL Marketing","Korean Crypto Influencer"]} />
       <ServiceSchema name="Korea KOL & Influencer Marketing" description="250+ vetted Korean KOLs. Managed campaigns with fraud filtering and ROI tracking." url="/services/influencer" serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "KOL Marketing", url: "https://iumlabs.io/services/influencer" }]} />
       <Navbar />
