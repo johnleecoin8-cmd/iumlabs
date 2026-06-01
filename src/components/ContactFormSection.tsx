@@ -4,6 +4,7 @@ import {
   Mail,
   MapPin,
   Send,
+  Linkedin,
   ArrowRight,
   Calendar,
   Sparkles,
@@ -209,6 +210,23 @@ const ContactFormSection = () => {
                     <div>
                       <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Email</span>
                       <p className="text-white text-sm">{brand.email}</p>
+                    </div>
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
+                </a>
+
+                {/* LinkedIn */}
+                <a
+                  href={brand.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15"
+                >
+                  <div className="flex items-start gap-4">
+                    <Linkedin className="w-5 h-5 text-white/40 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <span className="text-label uppercase tracking-wider text-white/50 block mb-2">LinkedIn</span>
+                      <p className="text-white text-sm">iumlabs</p>
                     </div>
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
@@ -520,7 +538,7 @@ const ContactFormSection = () => {
           </div>
 
           {/* Contact buttons - Compact grid */}
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-2 gap-2">
             <a
               href="/book-a-meeting"
               className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
@@ -543,6 +561,15 @@ const ContactFormSection = () => {
             >
               <Mail className="w-3.5 h-3.5 flex-shrink-0" />
               <span className="truncate">Email</span>
+            </a>
+            <a
+              href={brand.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
+            >
+              <Linkedin className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="truncate">LinkedIn</span>
             </a>
           </div>
         </div>
