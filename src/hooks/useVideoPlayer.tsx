@@ -488,15 +488,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   };
 
   const ErrorOverlay: React.FC = () => {
-    if (!hasVideoError) return null;
-    return (
-      <div className="absolute inset-0 z-[5] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-2 text-white/30">
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-          <span className="text-[11px]">Video unavailable</span>
-        </div>
-      </div>
-    );
+    // Silent fallback: when video errors, the poster image stays visible (handled via posterProps opacity).
+    // No visible error UI — keeps the hero clean.
+    return null;
   };
 
   return {
