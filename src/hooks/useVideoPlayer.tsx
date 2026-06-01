@@ -415,7 +415,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onCanPlay: (e: React.SyntheticEvent<HTMLVideoElement>) => {
-      if (e.currentTarget.paused && !isVideoReady) tryPlay(e.currentTarget);
+      if (!readyRef.current) {
+        readyRef.current = true;
+        setIsVideoReady(true);
+      }
+      if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
       if (!readyRef.current) {
