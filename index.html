@@ -124,17 +124,26 @@
   },
   {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
+    "@type": ["ProfessionalService", "LocalBusiness"],
     "@id": "https://iumlabs.io/#service",
     "name": "ium Labs",
     "url": "https://iumlabs.io",
-    "email": "info@iumlabs.io",
+    "telephone": "+82-2-0000-0000",
+    "email": "admin@iumlabs.io",
     "image": "https://iumlabs.io/images/share-og.jpeg",
+    "logo": "https://iumlabs.io/logo.png",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "373 Gangnam-daero, 10F",
-      "addressLocality": "Seocho-gu, Seoul",
+      "addressLocality": "Seocho-gu",
+      "addressRegion": "Seoul",
+      "postalCode": "06621",
       "addressCountry": "KR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 37.4979,
+      "longitude": 127.0276
     },
     "openingHoursSpecification": {
       "@type": "OpeningHoursSpecification",
