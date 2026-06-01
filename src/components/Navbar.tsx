@@ -122,24 +122,48 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Bottom bar */}
-              <div className="border-t border-white/[0.08] px-5 sm:px-8 lg:px-20 py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-white/40">
+              {/* Bottom bar — Mobile */}
+              <div className="border-t border-white/[0.06] md:hidden px-5 py-5 space-y-4">
+                <div className="flex items-center gap-2">
+                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
+                    <Send className="w-3 h-3 text-[#229ED9]" />
+                    Telegram
+                  </a>
+                  <a href={`mailto:${brand.email}`} className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
+                    <Mail className="w-3 h-3 text-white/40" />
+                    Email
+                  </a>
+                  <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
+                    <Linkedin className="w-3 h-3 text-[#0A66C2]" />
+                    LinkedIn
+                  </a>
+                </div>
+                <div className="flex items-center justify-between text-[10px] text-white/20">
+                  <span className="flex items-center gap-1.5">
+                    <MapPin className="w-2.5 h-2.5" />
+                    Gangnam, Seoul
+                  </span>
+                  <span>Mon–Fri 09:00–18:00 KST</span>
+                </div>
+              </div>
+
+              {/* Bottom bar — Desktop */}
+              <div className="border-t border-white/[0.08] hidden md:flex px-8 lg:px-20 py-5 items-center justify-between">
+                <div className="flex items-center gap-6 text-sm text-white/40">
                   <Link to="/projects" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Case Studies</Link>
                   <Link to="/blog" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Blog</Link>
                   <Link to="/jobs" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Career</Link>
                 </div>
-
-                <div className="flex items-center gap-3 sm:gap-4">
-                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
+                <div className="flex items-center gap-4">
+                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
                     <Send className="w-3.5 h-3.5 text-[#229ED9]" />
                     Telegram
                   </a>
-                  <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
+                  <a href={`mailto:${brand.email}`} className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/[0.06] border border-white/[0.1] text-white/70 text-[13px] font-medium rounded-full hover:bg-white/[0.1] hover:text-white transition-all">
                     <Mail className="w-3.5 h-3.5 text-white/50" />
                     Email
                   </a>
-                  <span className="hidden sm:block text-[11px] text-white/25">Mon–Fri 09–18 KST</span>
+                  <span className="text-[11px] text-white/25">Mon–Fri 09–18 KST</span>
                 </div>
               </div>
             </div>
