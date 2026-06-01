@@ -218,7 +218,7 @@ const ContactFormSection = () => {
             </div>
 
             {/* Right Column - 2-Step Form */}
-            <div className="w-full lg:w-2/3 p-5 sm:p-6 md:p-8 lg:p-12">
+            <div className="w-full lg:w-2/3 p-4 sm:p-5 md:p-6 lg:p-8">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
@@ -245,8 +245,8 @@ const ContactFormSection = () => {
                     exit={{ opacity: 0 }}
                   >
                     {/* Header */}
-                    <div className="mb-6 sm:mb-7">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                    <div className="mb-4 sm:mb-5">
+                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1">
                         Let's start a conversation
                       </h3>
                       <p className="text-sm text-white/55 leading-relaxed">
@@ -255,9 +255,9 @@ const ContactFormSection = () => {
                     </div>
 
                     {/* Step Indicator */}
-                    <div className="mb-5 sm:mb-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs sm:text-sm text-white/50">
+                    <div className="mb-3 sm:mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-white/50">
                           Step {currentStep} of {totalSteps}
                         </span>
                         <span className="text-xs text-white/40">
@@ -266,12 +266,12 @@ const ContactFormSection = () => {
                       </div>
 
                       {/* Progress Steps */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 1 ? (currentStep > 1 ? 'bg-emerald-500' : 'bg-white') : 'bg-white/10'}`} />
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 2 ? 'bg-white' : 'bg-white/10'}`} />
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className={`flex-1 h-1 rounded-full transition-all duration-300 ${currentStep >= 1 ? (currentStep > 1 ? 'bg-emerald-500' : 'bg-white') : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1 rounded-full transition-all duration-300 ${currentStep >= 2 ? 'bg-white' : 'bg-white/10'}`} />
                       </div>
 
-                      <div className="flex justify-between text-[10px] sm:text-xs text-white/40">
+                      <div className="flex justify-between text-[10px] text-white/40">
                         <span className={currentStep >= 1 ? 'text-white/70' : ''}>1. Details</span>
                         <span className={currentStep >= 2 ? 'text-white/70' : ''}>2. Review</span>
                       </div>
@@ -287,11 +287,11 @@ const ContactFormSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.25 }}
-                            className="space-y-5 sm:space-y-6"
+                            className="space-y-3 sm:space-y-4"
                           >
                             {/* Services */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-2">
                                 Services you're interested in *
                               </label>
                               <div className="flex flex-nowrap gap-1.5 overflow-x-auto -mx-1 px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -300,14 +300,14 @@ const ContactFormSection = () => {
                                     key={service}
                                     type="button"
                                     onClick={() => toggleService(service)}
-                                    className={`shrink-0 px-3 py-1.5 text-[11px] rounded-full border transition-all font-medium active:scale-[0.97] whitespace-nowrap ${
+                                    className={`shrink-0 px-2.5 py-1 text-[11px] rounded-full border transition-all font-medium active:scale-[0.97] whitespace-nowrap ${
                                       formData.services.includes(service)
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
                                     }`}
                                   >
                                     {formData.services.includes(service) && (
-                                      <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />
+                                      <Check className="w-3 h-3 inline-block mr-0.5 -mt-0.5" />
                                     )}
                                     {service}
                                   </button>
