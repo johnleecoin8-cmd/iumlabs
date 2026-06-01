@@ -318,16 +318,16 @@ const ContactFormSection = () => {
 
                             {/* Budget */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-2">
                                 Estimated budget *
                               </label>
-                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                                 {budgetOptions.map(option => (
                                   <button
                                     key={option}
                                     type="button"
                                     onClick={() => setFormData({ ...formData, budget: option })}
-                                    className={`px-3 py-3 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
+                                    className={`px-2 py-2 text-[11px] rounded-lg border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
                                       formData.budget === option
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
