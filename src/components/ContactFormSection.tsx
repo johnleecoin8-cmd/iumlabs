@@ -340,9 +340,9 @@ const ContactFormSection = () => {
                             </div>
 
                             {/* Name, Email & Company */}
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Name *</label>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">Name *</label>
                                 <input
                                   type="text"
                                   placeholder="Your name"
@@ -350,12 +350,12 @@ const ContactFormSection = () => {
                                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                                   onBlur={() => handleBlur('name')}
                                   required
-                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.name ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[40px] ${fieldErrors.name ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
-                                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
+                                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
                               </div>
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Email *</label>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">Email *</label>
                                 <input
                                   type="email"
                                   placeholder="your@email.com"
@@ -363,20 +363,20 @@ const ContactFormSection = () => {
                                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                                   onBlur={() => handleBlur('email')}
                                   required
-                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.email ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[40px] ${fieldErrors.email ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
-                                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
+                                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
                               </div>
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                  Company <span className="text-white/30">(Optional)</span>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">
+                                  Company <span className="text-white/30">(Opt.)</span>
                                 </label>
                                 <input
                                   type="text"
                                   placeholder="Company name"
                                   value={formData.company}
                                   onChange={e => setFormData({ ...formData, company: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[40px]"
                                 />
                               </div>
                             </div>
