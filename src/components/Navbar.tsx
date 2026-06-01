@@ -39,13 +39,11 @@ const Navbar = () => {
 
   const menuPanel = (
     <>
-      {/* Backdrop — click to close */}
       <div
         className={`fixed inset-0 z-[100] bg-black/40 transition-opacity duration-300 ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`}
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Menu panel — glassmorphism dark */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -55,13 +53,78 @@ const Navbar = () => {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           >
-            <div className="bg-black/60 backdrop-blur-2xl rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-h-screen md:max-h-[85vh] overflow-y-auto overscroll-contain border-b border-white/[0.08]">
-              {/* Main content — 3 columns */}
-              <div className="px-5 sm:px-8 lg:px-20 pt-14 sm:pt-16 pb-8 sm:pb-14">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 lg:gap-16">
+            <div className="bg-[#0A0A0A]/95 backdrop-blur-2xl rounded-b-3xl shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-h-screen md:max-h-[85vh] overflow-y-auto overscroll-contain border-b border-white/[0.06]">
 
-                  {/* Left — Connect */}
-                  <div className="hidden md:block">
+              {/* ====== MOBILE LAYOUT ====== */}
+              <div className="md:hidden px-6 pt-16 pb-6">
+                <nav className="space-y-0.5 mb-8">
+                  {navLinks.map((link, i) => {
+                    if (link.label === "Services") {
+                      return (
+                        <div key={link.to}>
+                          <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between py-2.5 group">
+                            <span className="text-[15px] font-medium text-white tracking-[-0.01em]">{link.label}</span>
+                            <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                              <ChevronDown className="w-4 h-4 text-white/20" />
+                            </motion.div>
+                          </button>
+                          <AnimatePresence>
+                            {servicesOpen && (
+                              <motion.div className="overflow-hidden" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
+                                <div className="pl-4 border-l border-white/[0.06] py-1 mb-1 space-y-0.5">
+                                  {serviceItems.map((item) => (
+                                    <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-[13px] text-white/35 hover:text-white/70 transition-colors py-1.5">{item.name}</Link>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+                    return (
+                      <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-[15px] font-medium text-white tracking-[-0.01em] py-2.5 hover:text-white/50 transition-colors">
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                </nav>
+
+                <div className="border-t border-white/[0.05] pt-5 space-y-5">
+                  <p className="text-[9px] text-white/20 uppercase tracking-[0.25em] font-medium">Connect</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
+                      <Send className="w-4 h-4 text-[#229ED9]" />
+                      <span className="text-[10px] text-white/40 font-medium">Telegram</span>
+                    </a>
+                    <a href={`mailto:${brand.email}`} className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
+                      <Mail className="w-4 h-4 text-white/30" />
+                      <span className="text-[10px] text-white/40 font-medium">Email</span>
+                    </a>
+                    <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1.5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.06] hover:bg-white/[0.08] transition-all">
+                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
+                      <span className="text-[10px] text-white/40 font-medium">LinkedIn</span>
+                    </a>
+                  </div>
+
+                  <div className="pt-2 space-y-2">
+                    <div className="flex items-center gap-2 text-[11px] text-white/20">
+                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <span>Gangnam-daero 373, Seoul, South Korea</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[11px] text-white/20">
+                      <Mail className="w-3 h-3 flex-shrink-0" />
+                      <span>{brand.email}</span>
+                    </div>
+                    <p className="text-[10px] text-white/15 pl-5">Mon–Fri 09:00–18:00 KST</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ====== DESKTOP LAYOUT ====== */}
+              <div className="hidden md:block px-8 lg:px-20 pt-16 pb-14">
+                <div className="grid grid-cols-3 gap-10 lg:gap-16">
+                  <div>
                     <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] mb-5 block font-medium">Connect</span>
                     <div className="space-y-4 mb-8">
                       <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-base">
@@ -79,15 +142,13 @@ const Navbar = () => {
                       <span className="leading-relaxed">{brand.address}</span>
                     </div>
                   </div>
-
-                  {/* Center — Nav links */}
                   <div>
                     <nav className="space-y-1">
                       {navLinks.map((link) => {
                         if (link.label === "Services") {
                           return (
                             <div key={link.to}>
-                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-xl sm:text-3xl lg:text-4xl font-bold text-white hover:text-white/50 transition-colors py-1.5 sm:py-2">
+                              <button onClick={() => setServicesOpen(!servicesOpen)} className="w-full flex items-center justify-between text-3xl lg:text-4xl font-bold text-white hover:text-white/50 transition-colors py-2">
                                 <span>{link.label}</span>
                                 <motion.div animate={{ rotate: servicesOpen ? 180 : 0 }} transition={{ duration: 0.2 }}><ChevronDown className="w-6 h-6 text-white/25" /></motion.div>
                               </button>
@@ -95,7 +156,7 @@ const Navbar = () => {
                                 {servicesOpen && (
                                   <motion.div className="overflow-hidden ml-1 pl-4 border-l-2 border-white/[0.08]" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }}>
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 py-2">
-                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-sm sm:text-base text-white/50 hover:text-white transition-colors py-1">{item.name}</Link>)}
+                                      {serviceItems.map((item) => <Link key={item.href} to={item.href} onClick={() => setIsMenuOpen(false)} className="block text-base text-white/50 hover:text-white transition-colors py-1">{item.name}</Link>)}
                                     </div>
                                   </motion.div>
                                 )}
@@ -103,13 +164,11 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-xl sm:text-3xl lg:text-4xl font-bold text-white hover:text-white/50 transition-colors py-1.5 sm:py-2">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-3xl lg:text-4xl font-bold text-white hover:text-white/50 transition-colors py-2">{link.label}</Link>;
                       })}
                     </nav>
                   </div>
-
-                  {/* Right — Popular Services */}
-                  <div className="hidden md:block">
+                  <div>
                     <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] mb-5 block font-medium">Popular Services</span>
                     <div className="space-y-3">
                       <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">GTM Strategy</Link>
@@ -122,32 +181,7 @@ const Navbar = () => {
                 </div>
               </div>
 
-              {/* Bottom bar — Mobile */}
-              <div className="border-t border-white/[0.06] md:hidden px-5 py-5 space-y-4">
-                <div className="flex items-center gap-2">
-                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
-                    <Send className="w-3 h-3 text-[#229ED9]" />
-                    Telegram
-                  </a>
-                  <a href={`mailto:${brand.email}`} className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
-                    <Mail className="w-3 h-3 text-white/40" />
-                    Email
-                  </a>
-                  <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-white/[0.06] border border-white/[0.08] text-white/60 text-[12px] font-medium rounded-full hover:bg-white/[0.1] transition-all">
-                    <Linkedin className="w-3 h-3 text-[#0A66C2]" />
-                    LinkedIn
-                  </a>
-                </div>
-                <div className="flex items-center justify-between text-[10px] text-white/20">
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="w-2.5 h-2.5" />
-                    Gangnam, Seoul
-                  </span>
-                  <span>Mon–Fri 09:00–18:00 KST</span>
-                </div>
-              </div>
-
-              {/* Bottom bar — Desktop */}
+              {/* Desktop bottom bar */}
               <div className="border-t border-white/[0.08] hidden md:flex px-8 lg:px-20 py-5 items-center justify-between">
                 <div className="flex items-center gap-6 text-sm text-white/40">
                   <Link to="/projects" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Case Studies</Link>
@@ -168,7 +202,6 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Floating close button */}
             <button
               onClick={() => setIsMenuOpen(false)}
               className="absolute bottom-[-50px] right-6 w-10 h-10 rounded-full bg-white/90 backdrop-blur shadow-lg flex items-center justify-center text-black/50 hover:text-black hover:bg-white transition-all"
