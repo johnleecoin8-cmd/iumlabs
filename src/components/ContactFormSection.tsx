@@ -11,14 +11,11 @@ import {
   ChevronLeft,
   Check,
   AlertCircle,
-  Clock,
-  FileText,
-  Zap,
+  Pencil,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import CalendlyButton from "./CalendlyButton";
 
 const serviceOptions = [
   "GTM Strategy",
@@ -61,11 +58,13 @@ const ContactFormSection = () => {
     setTouched(prev => ({ ...prev, [field]: true }));
   }, []);
 
-  const totalSteps = 3;
+  const totalSteps = 2;
 
-  const step1Complete = formData.services.length > 0;
-  const step2Complete = !!formData.budget;
-  const step3Complete = !!formData.name && !!formData.email && emailRegex.test(formData.email);
+  const step1Complete =
+    formData.services.length > 0 &&
+    !!formData.budget &&
+    !!formData.name.trim() &&
+    emailRegex.test(formData.email);
 
   const toggleService = (service: string) => {
     setFormData(prev => ({
@@ -74,6 +73,12 @@ const ContactFormSection = () => {
         ? prev.services.filter(s => s !== service)
         : [...prev.services, service],
     }));
+  };
+
+  const goToReview = () => {
+    setTouched({ name: true, email: true });
+    if (!step1Complete) return;
+    setCurrentStep(2);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -162,20 +167,6 @@ const ContactFormSection = () => {
               <div className="sticky top-24">
                 <span className="text-[10px] uppercase tracking-wider text-white/40 mb-4 block">Contact Info</span>
 
-                {/* Trust block */}
-                <div className="mb-8 pb-8 border-b border-white/15">
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="px-3 py-3 rounded-lg bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/15">
-                      <div className="text-[10px] uppercase tracking-wider text-emerald-300/70 mb-1">Avg. reply</div>
-                      <div className="text-white text-lg font-bold tracking-tight">&lt; 24h</div>
-                    </div>
-                    <div className="px-3 py-3 rounded-lg bg-white/[0.04] border border-white/10">
-                      <div className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Projects</div>
-                      <div className="text-white text-lg font-bold tracking-tight">230+</div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Office */}
                 <div className="mb-8 pb-8 border-b border-white/15">
                   <div className="flex items-start gap-4">
@@ -190,8 +181,6 @@ const ContactFormSection = () => {
                     </div>
                   </div>
                 </div>
-
-
 
                 {/* Telegram */}
                 <a
@@ -228,7 +217,7 @@ const ContactFormSection = () => {
               </div>
             </div>
 
-            {/* Right Column - Multi-Step Form */}
+            {/* Right Column - 2-Step Form */}
             <div className="w-full lg:w-2/3 p-5 sm:p-6 md:p-8 lg:p-12">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
@@ -255,60 +244,42 @@ const ContactFormSection = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                   >
-                    {/* Hook Header */}
+                    {/* Header */}
                     <div className="mb-6 sm:mb-7">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-3">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-[10px] sm:text-[11px] font-medium text-emerald-300 tracking-wide uppercase">Now accepting Q3 partnerships</span>
-                      </div>
-                      <h3 className="text-[22px] sm:text-2xl lg:text-[28px] font-bold text-white tracking-[-0.02em] leading-[1.15] mb-2">
-                        Get a custom Korea GTM<br className="hidden sm:block" /> proposal in <span className="text-emerald-400">24 hours</span>.
+                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                        Let's start a conversation
                       </h3>
-                      <p className="text-[13px] sm:text-sm text-white/55 leading-relaxed">
-                        Tell us about your project — we'll send back a tailored strategy from our Seoul team. No sales calls required.
+                      <p className="text-sm text-white/55 leading-relaxed">
+                        Share your project details — we'll reply within 24 hours KST.
                       </p>
-
-                      {/* What you get */}
-                      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2">
-                        {[
-                          { icon: FileText, label: "Tailored proposal" },
-                          { icon: Zap, label: "KOL + GTM playbook" },
-                          { icon: Clock, label: "Reply within 24h KST" },
-                        ].map(({ icon: Icon, label }) => (
-                          <div key={label} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-                            <Icon className="w-3.5 h-3.5 text-emerald-400/80 flex-shrink-0" />
-                            <span className="text-[11px] sm:text-xs text-white/70 font-medium">{label}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
 
-
                     {/* Step Indicator */}
-                    <div className="mb-4 sm:mb-5">
+                    <div className="mb-5 sm:mb-6">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xs sm:text-sm text-white/50">
                           Step {currentStep} of {totalSteps}
+                        </span>
+                        <span className="text-xs text-white/40">
+                          {currentStep === 1 ? "Project details" : "Review & send"}
                         </span>
                       </div>
 
                       {/* Progress Steps */}
                       <div className="flex items-center gap-2 mb-2">
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step1Complete ? 'bg-emerald-500' : currentStep >= 1 ? 'bg-white/20' : 'bg-white/10'}`} />
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step2Complete ? 'bg-emerald-500' : currentStep >= 2 ? 'bg-white/20' : 'bg-white/10'}`} />
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${step3Complete ? 'bg-emerald-500' : currentStep >= 3 ? 'bg-white/20' : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 1 ? (currentStep > 1 ? 'bg-emerald-500' : 'bg-white') : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 2 ? 'bg-white' : 'bg-white/10'}`} />
                       </div>
 
                       <div className="flex justify-between text-[10px] sm:text-xs text-white/40">
-                        <span className={step1Complete ? 'text-emerald-400' : ''}>Services</span>
-                        <span className={step2Complete ? 'text-emerald-400' : ''}>Budget</span>
-                        <span className={step3Complete ? 'text-emerald-400' : ''}>Contact Info</span>
+                        <span className={currentStep >= 1 ? 'text-white/70' : ''}>1. Details</span>
+                        <span className={currentStep >= 2 ? 'text-white/70' : ''}>2. Review</span>
                       </div>
                     </div>
 
                     <form onSubmit={handleSubmit}>
                       <AnimatePresence mode="wait">
-                        {/* Step 1: Service Selection */}
+                        {/* Step 1: All required inputs */}
                         {currentStep === 1 && (
                           <motion.div
                             key="step1"
@@ -316,145 +287,54 @@ const ContactFormSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.25 }}
-                            className="space-y-4 sm:space-y-5"
+                            className="space-y-5 sm:space-y-6"
                           >
-                            <div className="mb-3">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">What service are you interested in?</h4>
-                              <p className="text-xs sm:text-sm text-white/50">Select all that apply.</p>
-                            </div>
-
-                            <div className="flex flex-wrap gap-2">
-                              {serviceOptions.map(service => (
-                                <button
-                                  key={service}
-                                  type="button"
-                                  onClick={() => toggleService(service)}
-                                  className={`px-4 py-2.5 text-[11px] sm:text-xs rounded-full border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
-                                    formData.services.includes(service)
-                                      ? 'bg-white/20 border-white text-white'
-                                      : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
-                                  }`}
-                                >
-                                  {formData.services.includes(service) && (
-                                    <Check className="w-3 h-3 inline-block mr-1.5 -mt-0.5" />
-                                  )}
-                                  {service}
-                                </button>
-                              ))}
-                            </div>
-
-                            {/* Next Button */}
-                            <button
-                              type="button"
-                              onClick={() => setCurrentStep(2)}
-                              disabled={!step1Complete}
-                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
-                                step1Complete
-                                  ? 'bg-white text-black hover:bg-white/90'
-                                  : 'bg-white/10 text-white/40 cursor-not-allowed'
-                              }`}
-                            >
-                              Next
-                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                            </button>
-                          </motion.div>
-                        )}
-
-                        {/* Step 2: Budget Selection */}
-                        {currentStep === 2 && (
-                          <motion.div
-                            key="step2"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.25 }}
-                            className="space-y-4 sm:space-y-5"
-                          >
-                            <div className="mb-3">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">What's your estimated budget?</h4>
-                              <p className="text-xs sm:text-sm text-white/50">Select your range.</p>
-                            </div>
-
-                            <div className="grid grid-cols-2 gap-2">
-                              {budgetOptions.map(option => (
-                                <button
-                                  key={option}
-                                  type="button"
-                                  onClick={() => setFormData({ ...formData, budget: option })}
-                                  className={`px-3 py-3 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
-                                    formData.budget === option
-                                      ? 'bg-white/20 border-white text-white'
-                                      : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
-                                  }`}
-                                >
-                                  {option}
-                                </button>
-                              ))}
-                            </div>
-
-                            {/* Action Buttons */}
-                            <div className="flex gap-3">
-                              <button
-                                type="button"
-                                onClick={() => setCurrentStep(1)}
-                                className="px-6 py-3 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[44px] flex items-center gap-1.5"
-                              >
-                                <ChevronLeft className="w-4 h-4" />
-                                Back
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => setCurrentStep(3)}
-                                disabled={!step2Complete}
-                                className={`flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
-                                  step2Complete
-                                    ? 'bg-white text-black hover:bg-white/90'
-                                    : 'bg-white/10 text-white/40 cursor-not-allowed'
-                                }`}
-                              >
-                                Next
-                                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
-                              </button>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {/* Step 3: Contact Form */}
-                        {currentStep === 3 && (
-                          <motion.div
-                            key="step3"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -20 }}
-                            transition={{ duration: 0.25 }}
-                            className="space-y-3 sm:space-y-4"
-                          >
-                            <div className="mb-3">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about your project</h4>
-                              <p className="text-xs sm:text-sm text-white/50">How can we reach you?</p>
-                            </div>
-
-                            {/* Summary Card */}
-                            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
-                              <div className="flex items-center justify-between mb-3">
-                                <span className="text-xs text-white/50">Your Selections</span>
-                                <button
-                                  type="button"
-                                  onClick={() => setCurrentStep(1)}
-                                  className="text-xs text-white/50 hover:text-white transition-colors"
-                                >
-                                  Edit
-                                </button>
+                            {/* Services */}
+                            <div>
+                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                                Services you're interested in *
+                              </label>
+                              <div className="flex flex-wrap gap-2">
+                                {serviceOptions.map(service => (
+                                  <button
+                                    key={service}
+                                    type="button"
+                                    onClick={() => toggleService(service)}
+                                    className={`px-4 py-2.5 text-[11px] sm:text-xs rounded-full border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
+                                      formData.services.includes(service)
+                                        ? 'bg-white/20 border-white text-white'
+                                        : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
+                                    }`}
+                                  >
+                                    {formData.services.includes(service) && (
+                                      <Check className="w-3 h-3 inline-block mr-1.5 -mt-0.5" />
+                                    )}
+                                    {service}
+                                  </button>
+                                ))}
                               </div>
-                              <div className="grid grid-cols-2 gap-3 text-sm">
-                                <div>
-                                  <span className="text-white/40 text-xs">Services</span>
-                                  <p className="text-white text-xs leading-relaxed">{formData.services.join(", ")}</p>
-                                </div>
-                                <div>
-                                  <span className="text-white/40 text-xs">Budget</span>
-                                  <p className="text-white">{formData.budget}</p>
-                                </div>
+                            </div>
+
+                            {/* Budget */}
+                            <div>
+                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                                Estimated budget *
+                              </label>
+                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                {budgetOptions.map(option => (
+                                  <button
+                                    key={option}
+                                    type="button"
+                                    onClick={() => setFormData({ ...formData, budget: option })}
+                                    className={`px-3 py-3 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
+                                      formData.budget === option
+                                        ? 'bg-white/20 border-white text-white'
+                                        : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
+                                    }`}
+                                  >
+                                    {option}
+                                  </button>
+                                ))}
                               </div>
                             </div>
 
@@ -516,6 +396,65 @@ const ContactFormSection = () => {
                               />
                             </div>
 
+                            {/* Next Button */}
+                            <button
+                              type="button"
+                              onClick={goToReview}
+                              disabled={!step1Complete}
+                              className={`w-full flex items-center justify-center gap-2 py-3.5 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[48px] active:scale-[0.98] ${
+                                step1Complete
+                                  ? 'bg-white text-black hover:bg-white/90'
+                                  : 'bg-white/10 text-white/40 cursor-not-allowed'
+                              }`}
+                            >
+                              Review your request
+                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                            </button>
+                          </motion.div>
+                        )}
+
+                        {/* Step 2: Review & Confirm */}
+                        {currentStep === 2 && (
+                          <motion.div
+                            key="step2"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.25 }}
+                            className="space-y-4"
+                          >
+                            <div className="mb-2">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Review your request</h4>
+                              <p className="text-xs sm:text-sm text-white/50">Make sure everything looks right before sending.</p>
+                            </div>
+
+                            {/* Summary Card */}
+                            <div className="bg-white/5 border border-white/10 rounded-xl divide-y divide-white/10">
+                              {[
+                                { label: "Services", value: formData.services.join(", ") },
+                                { label: "Budget", value: formData.budget },
+                                { label: "Name", value: formData.name },
+                                { label: "Email", value: formData.email },
+                                ...(formData.company ? [{ label: "Company", value: formData.company }] : []),
+                                ...(formData.message ? [{ label: "Message", value: formData.message }] : []),
+                              ].map(({ label, value }) => (
+                                <div key={label} className="px-4 py-3 flex items-start justify-between gap-4">
+                                  <div className="min-w-0 flex-1">
+                                    <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">{label}</div>
+                                    <div className="text-sm text-white whitespace-pre-wrap break-words">{value}</div>
+                                  </div>
+                                </div>
+                              ))}
+                              <button
+                                type="button"
+                                onClick={() => setCurrentStep(1)}
+                                className="w-full px-4 py-3 text-xs text-white/60 hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                              >
+                                <Pencil className="w-3.5 h-3.5" />
+                                Edit details
+                              </button>
+                            </div>
+
                             {/* Submit Error Banner */}
                             <AnimatePresence>
                               {submitError && (
@@ -530,23 +469,19 @@ const ContactFormSection = () => {
                             </AnimatePresence>
 
                             {/* Action Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-3">
+                            <div className="flex flex-col sm:flex-row gap-3 pt-1">
                               <button
                                 type="button"
-                                onClick={() => setCurrentStep(2)}
-                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px] flex items-center gap-1.5"
+                                onClick={() => setCurrentStep(1)}
+                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px] flex items-center justify-center gap-1.5"
                               >
                                 <ChevronLeft className="w-4 h-4" />
                                 Back
                               </button>
                               <button
                                 type="submit"
-                                disabled={isSubmitting || !step3Complete}
-                                className={`flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] ${
-                                  step3Complete
-                                    ? 'bg-white text-black hover:bg-white/90'
-                                    : 'bg-white/10 text-white/40 cursor-not-allowed'
-                                }`}
+                                disabled={isSubmitting}
+                                className="flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] bg-white text-black hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
                               >
                                 <AnimatePresence mode="wait">
                                   {isSubmitting ? (
@@ -556,7 +491,7 @@ const ContactFormSection = () => {
                                     </motion.span>
                                   ) : (
                                     <motion.span key="idle" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-flex items-center gap-2">
-                                      Send Message
+                                      Confirm & Send
                                       <Send className="w-4 h-4" />
                                     </motion.span>
                                   )}
