@@ -162,6 +162,20 @@ const ContactFormSection = () => {
               <div className="sticky top-24">
                 <span className="text-[10px] uppercase tracking-wider text-white/40 mb-4 block">Contact Info</span>
 
+                {/* Trust block */}
+                <div className="mb-8 pb-8 border-b border-white/15">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="px-3 py-3 rounded-lg bg-gradient-to-br from-emerald-500/10 to-transparent border border-emerald-500/15">
+                      <div className="text-[10px] uppercase tracking-wider text-emerald-300/70 mb-1">Avg. reply</div>
+                      <div className="text-white text-lg font-bold tracking-tight">&lt; 24h</div>
+                    </div>
+                    <div className="px-3 py-3 rounded-lg bg-white/[0.04] border border-white/10">
+                      <div className="text-[10px] uppercase tracking-wider text-white/50 mb-1">Projects</div>
+                      <div className="text-white text-lg font-bold tracking-tight">230+</div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Office */}
                 <div className="mb-8 pb-8 border-b border-white/15">
                   <div className="flex items-start gap-4">
@@ -176,6 +190,7 @@ const ContactFormSection = () => {
                     </div>
                   </div>
                 </div>
+
 
 
                 {/* Telegram */}
