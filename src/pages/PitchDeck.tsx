@@ -315,7 +315,7 @@ const PitchDeck = () => {
               <h2 className="hed">Numbers that <strong className="hed-accent">compound.</strong></h2>
             </div>
             <div className="stat-grid dk-reveal dk-d1">
-              {[["$8B","Combined Client Valuation"],["25","Successful Korea Entries"],["250","Direct KOL Relationships"],["$35M","Revenue Attributed"]].map(([n,l])=>(
+              {[["$8B","Combined Client Valuation"],["25","Successful Korea Entries"],["230","Direct KOL Relationships"],["116","Events Hosted"]].map(([n,l])=>(
                 <div key={l} className="stat-card">
                   <div className="stat-n">{n}<span className="plus">+</span></div>
                   <div className="stat-l">{l}</div>

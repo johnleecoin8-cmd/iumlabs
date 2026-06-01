@@ -87,18 +87,12 @@ export const stats = {
       suffix: "+",
     },
     {
-      value: 250,
+      value: 230,
       label: "KOL Network",
       suffix: "+",
     },
     {
-      value: 35,
-      label: "Revenue Generated",
-      prefix: "$",
-      suffix: "M+",
-    },
-    {
-      value: 80,
+      value: 116,
       label: "Events Hosted",
       suffix: "+",
     },

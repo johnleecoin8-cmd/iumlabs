@@ -18,8 +18,8 @@ const mediaLogos = [
 
 const stats = [
   { value: "25+", label: "Projects Launched" },
-  { value: "250+", label: "KOLs in Network" },
-  { value: "$35M+", label: "Revenue Driven" },
+  { value: "230+", label: "KOLs in Network" },
+  { value: "116+", label: "Events Hosted" },
   { value: "200+", label: "Media Placements" },
 ];
 

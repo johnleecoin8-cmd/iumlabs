@@ -36,9 +36,9 @@ const services = [
     icon: Mic2,
     image: kolImage,
     accent: "#FACC15",
-    proof: "250+ KOLs · $35M+ revenue driven",
+    proof: "230+ KOLs · 116+ events hosted",
     details: [
-      "250+ vetted Korean KOL network",
+      "230+ vetted Korean KOL network",
       "YouTube, Twitter, Telegram, Naver",
       "Campaign management & ROI tracking",
       "Ambassador & long-term partnerships",

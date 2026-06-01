@@ -12,7 +12,7 @@ const stats = [{
   description: "Successfully launched in Korea",
   glowColor: "from-emerald-500/20 to-cyan-500/10"
 }, {
-  value: 250,
+  value: 230,
   suffix: "+",
   prefix: "",
   label: "KOL Network",
@@ -20,20 +20,12 @@ const stats = [{
   description: "Influencers & creators",
   glowColor: "from-primary/20 to-purple-500/10"
 }, {
-  value: 35,
-  suffix: "M+",
-  prefix: "$",
-  label: "Revenue Generated",
-  icon: Building2,
-  description: "Total revenue generated",
-  glowColor: "from-cyan-500/20 to-blue-500/10"
-}, {
-  value: 80,
+  value: 116,
   suffix: "+",
   prefix: "",
-  label: "AMA Hosting",
+  label: "Events Hosted",
   icon: Handshake,
-  description: "AMAs hosted for projects",
+  description: "Events hosted for projects",
   glowColor: "from-purple-500/20 to-pink-500/10"
 }];
 

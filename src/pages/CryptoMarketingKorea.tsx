@@ -58,9 +58,8 @@ const services = [
 
 const stats = [
   { value: "25+", label: "Korea Entries" },
-  { value: "250+", label: "KOL Network" },
-  { value: "$35M+", label: "Revenue Generated" },
-  { value: "80+", label: "Events Hosted" },
+  { value: "230+", label: "KOL Network" },
+  { value: "116+", label: "Events Hosted" },
 ];
 
 const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI"];

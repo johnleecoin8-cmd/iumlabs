@@ -94,7 +94,7 @@ const services = [
     link: "/services/influencer",
     video: "/videos/influencer-hero.mp4",
     poster: kolImage,
-    stats: "80+ KOLs"
+    stats: "230+ KOLs"
   },
   {
     title: "PR & Media",

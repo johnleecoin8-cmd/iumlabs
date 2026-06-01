@@ -111,10 +111,9 @@ const WhyChooseUsSection = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-10 md:gap-14">
             {[
               { value: "$8B+", label: "Client Valuation", mobileHide: false },
-              { value: "250+", label: "KOL Network", mobileHide: false },
+              { value: "230+", label: "KOL Network", mobileHide: false },
               { value: "25+", label: "Korea Entries", mobileHide: false },
-              { value: "$35M+", label: "Revenue Generated", mobileHide: false },
-              { value: "80+", label: "Events Hosted", mobileHide: true },
+              { value: "116+", label: "Events Hosted", mobileHide: true },
             ].map((stat, i) => (
               <div key={i} className={`text-center ${stat.mobileHide ? 'hidden md:block' : ''}`}>
                 <div className="text-xl sm:text-4xl md:text-5xl font-semibold text-white tracking-[-0.03em] leading-none mb-1.5 sm:mb-2.5">
