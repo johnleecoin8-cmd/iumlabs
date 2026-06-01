@@ -339,8 +339,8 @@ const ContactFormSection = () => {
                               </div>
                             </div>
 
-                            {/* Name & Email */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                            {/* Name, Email & Company */}
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                               <div>
                                 <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Name *</label>
                                 <input
@@ -367,20 +367,18 @@ const ContactFormSection = () => {
                                 />
                                 <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
                               </div>
-                            </div>
-
-                            {/* Company (Optional) */}
-                            <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                Company <span className="text-white/30">(Optional)</span>
-                              </label>
-                              <input
-                                type="text"
-                                placeholder="Company name"
-                                value={formData.company}
-                                onChange={e => setFormData({ ...formData, company: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
-                              />
+                              <div>
+                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
+                                  Company <span className="text-white/30">(Optional)</span>
+                                </label>
+                                <input
+                                  type="text"
+                                  placeholder="Company name"
+                                  value={formData.company}
+                                  onChange={e => setFormData({ ...formData, company: e.target.value })}
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                                />
+                              </div>
                             </div>
 
                             {/* Message */}
