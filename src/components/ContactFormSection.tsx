@@ -218,7 +218,7 @@ const ContactFormSection = () => {
             </div>
 
             {/* Right Column - 2-Step Form */}
-            <div className="w-full lg:w-2/3 p-5 sm:p-6 md:p-8 lg:p-12">
+            <div className="w-full lg:w-2/3 p-4 sm:p-5 md:p-6 lg:p-8">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div
@@ -245,8 +245,8 @@ const ContactFormSection = () => {
                     exit={{ opacity: 0 }}
                   >
                     {/* Header */}
-                    <div className="mb-6 sm:mb-7">
-                      <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-2">
+                    <div className="mb-4 sm:mb-5">
+                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1">
                         Let's start a conversation
                       </h3>
                       <p className="text-sm text-white/55 leading-relaxed">
@@ -255,9 +255,9 @@ const ContactFormSection = () => {
                     </div>
 
                     {/* Step Indicator */}
-                    <div className="mb-5 sm:mb-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs sm:text-sm text-white/50">
+                    <div className="mb-3 sm:mb-4">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-xs text-white/50">
                           Step {currentStep} of {totalSteps}
                         </span>
                         <span className="text-xs text-white/40">
@@ -266,12 +266,12 @@ const ContactFormSection = () => {
                       </div>
 
                       {/* Progress Steps */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 1 ? (currentStep > 1 ? 'bg-emerald-500' : 'bg-white') : 'bg-white/10'}`} />
-                        <div className={`flex-1 h-1.5 rounded-full transition-all duration-300 ${currentStep >= 2 ? 'bg-white' : 'bg-white/10'}`} />
+                      <div className="flex items-center gap-2 mb-1.5">
+                        <div className={`flex-1 h-1 rounded-full transition-all duration-300 ${currentStep >= 1 ? (currentStep > 1 ? 'bg-emerald-500' : 'bg-white') : 'bg-white/10'}`} />
+                        <div className={`flex-1 h-1 rounded-full transition-all duration-300 ${currentStep >= 2 ? 'bg-white' : 'bg-white/10'}`} />
                       </div>
 
-                      <div className="flex justify-between text-[10px] sm:text-xs text-white/40">
+                      <div className="flex justify-between text-[10px] text-white/40">
                         <span className={currentStep >= 1 ? 'text-white/70' : ''}>1. Details</span>
                         <span className={currentStep >= 2 ? 'text-white/70' : ''}>2. Review</span>
                       </div>
@@ -287,11 +287,11 @@ const ContactFormSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.25 }}
-                            className="space-y-5 sm:space-y-6"
+                            className="space-y-3 sm:space-y-4"
                           >
                             {/* Services */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-2">
                                 Services you're interested in *
                               </label>
                               <div className="flex flex-nowrap gap-1.5 overflow-x-auto -mx-1 px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -300,14 +300,14 @@ const ContactFormSection = () => {
                                     key={service}
                                     type="button"
                                     onClick={() => toggleService(service)}
-                                    className={`shrink-0 px-3 py-1.5 text-[11px] rounded-full border transition-all font-medium active:scale-[0.97] whitespace-nowrap ${
+                                    className={`shrink-0 px-2.5 py-1 text-[11px] rounded-full border transition-all font-medium active:scale-[0.97] whitespace-nowrap ${
                                       formData.services.includes(service)
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
                                     }`}
                                   >
                                     {formData.services.includes(service) && (
-                                      <Check className="w-3 h-3 inline-block mr-1 -mt-0.5" />
+                                      <Check className="w-3 h-3 inline-block mr-0.5 -mt-0.5" />
                                     )}
                                     {service}
                                   </button>
@@ -318,16 +318,16 @@ const ContactFormSection = () => {
 
                             {/* Budget */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3">
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-2">
                                 Estimated budget *
                               </label>
-                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5">
                                 {budgetOptions.map(option => (
                                   <button
                                     key={option}
                                     type="button"
                                     onClick={() => setFormData({ ...formData, budget: option })}
-                                    className={`px-3 py-3 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
+                                    className={`px-2 py-2 text-[11px] rounded-lg border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
                                       formData.budget === option
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
@@ -340,9 +340,9 @@ const ContactFormSection = () => {
                             </div>
 
                             {/* Name, Email & Company */}
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Name *</label>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">Name *</label>
                                 <input
                                   type="text"
                                   placeholder="Your name"
@@ -350,12 +350,12 @@ const ContactFormSection = () => {
                                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                                   onBlur={() => handleBlur('name')}
                                   required
-                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.name ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[40px] ${fieldErrors.name ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
-                                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
+                                <AnimatePresence>{fieldErrors.name && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.name}</motion.p>}</AnimatePresence>
                               </div>
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Email *</label>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">Email *</label>
                                 <input
                                   type="email"
                                   placeholder="your@email.com"
@@ -363,35 +363,35 @@ const ContactFormSection = () => {
                                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                                   onBlur={() => handleBlur('email')}
                                   required
-                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[44px] ${fieldErrors.email ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
+                                  className={`w-full bg-white/5 border rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:bg-white/10 focus:outline-none transition-all min-h-[40px] ${fieldErrors.email ? 'border-red-500/60 focus:border-red-500/80' : 'border-white/10 focus:border-white/30'}`}
                                 />
-                                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1.5 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
+                                <AnimatePresence>{fieldErrors.email && <motion.p initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="text-red-400 text-[10px] mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{fieldErrors.email}</motion.p>}</AnimatePresence>
                               </div>
                               <div>
-                                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                  Company <span className="text-white/30">(Optional)</span>
+                                <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">
+                                  Company <span className="text-white/30">(Opt.)</span>
                                 </label>
                                 <input
                                   type="text"
                                   placeholder="Company name"
                                   value={formData.company}
                                   onChange={e => setFormData({ ...formData, company: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[40px]"
                                 />
                               </div>
                             </div>
 
                             {/* Message */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
-                                Message <span className="text-white/30">(Optional)</span>
+                              <label className="block text-[10px] uppercase tracking-wider text-white/70 mb-1.5">
+                                Message <span className="text-white/30">(Opt.)</span>
                               </label>
                               <textarea
                                 placeholder="Tell us about your project, goals, and timeline..."
                                 value={formData.message}
                                 onChange={e => setFormData({ ...formData, message: e.target.value })}
-                                rows={4}
-                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[120px]"
+                                rows={3}
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all resize-none min-h-[80px]"
                               />
                             </div>
 
@@ -400,14 +400,14 @@ const ContactFormSection = () => {
                               type="button"
                               onClick={goToReview}
                               disabled={!step1Complete}
-                              className={`w-full flex items-center justify-center gap-2 py-3.5 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[48px] active:scale-[0.98] ${
+                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
                                 step1Complete
                                   ? 'bg-white text-black hover:bg-white/90'
                                   : 'bg-white/10 text-white/40 cursor-not-allowed'
                               }`}
                             >
                               Review your request
-                              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                              <ChevronRight className="w-4 h-4" />
                             </button>
                           </motion.div>
                         )}
@@ -420,11 +420,11 @@ const ContactFormSection = () => {
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.25 }}
-                            className="space-y-4"
+                            className="space-y-3"
                           >
-                            <div className="mb-2">
-                              <h4 className="text-base sm:text-lg font-semibold text-white mb-1">Review your request</h4>
-                              <p className="text-xs sm:text-sm text-white/50">Make sure everything looks right before sending.</p>
+                            <div className="mb-1">
+                              <h4 className="text-base font-semibold text-white mb-0.5">Review your request</h4>
+                              <p className="text-xs text-white/50">Make sure everything looks right before sending.</p>
                             </div>
 
                             {/* Summary Card */}
@@ -437,9 +437,9 @@ const ContactFormSection = () => {
                                 ...(formData.company ? [{ label: "Company", value: formData.company }] : []),
                                 ...(formData.message ? [{ label: "Message", value: formData.message }] : []),
                               ].map(({ label, value }) => (
-                                <div key={label} className="px-4 py-3 flex items-start justify-between gap-4">
+                                <div key={label} className="px-3.5 py-2.5 flex items-start justify-between gap-4">
                                   <div className="min-w-0 flex-1">
-                                    <div className="text-[10px] uppercase tracking-wider text-white/40 mb-1">{label}</div>
+                                    <div className="text-[10px] uppercase tracking-wider text-white/40 mb-0.5">{label}</div>
                                     <div className="text-sm text-white whitespace-pre-wrap break-words">{value}</div>
                                   </div>
                                 </div>
@@ -447,7 +447,7 @@ const ContactFormSection = () => {
                               <button
                                 type="button"
                                 onClick={() => setCurrentStep(1)}
-                                className="w-full px-4 py-3 text-xs text-white/60 hover:text-white transition-colors flex items-center justify-center gap-1.5"
+                                className="w-full px-3.5 py-2.5 text-xs text-white/60 hover:text-white transition-colors flex items-center justify-center gap-1.5"
                               >
                                 <Pencil className="w-3.5 h-3.5" />
                                 Edit details
@@ -457,7 +457,7 @@ const ContactFormSection = () => {
                             {/* Submit Error Banner */}
                             <AnimatePresence>
                               {submitError && (
-                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-4 py-3 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
+                                <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="px-3.5 py-2.5 rounded-lg border border-red-500/30 bg-red-500/10 flex items-start gap-3">
                                   <AlertCircle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
                                   <div>
                                     <p className="text-red-300 text-sm">{submitError}</p>
@@ -468,11 +468,11 @@ const ContactFormSection = () => {
                             </AnimatePresence>
 
                             {/* Action Buttons */}
-                            <div className="flex flex-col sm:flex-row gap-3 pt-1">
+                            <div className="flex flex-col sm:flex-row gap-2 pt-0.5">
                               <button
                                 type="button"
                                 onClick={() => setCurrentStep(1)}
-                                className="sm:w-auto px-6 py-3.5 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[48px] flex items-center justify-center gap-1.5"
+                                className="sm:w-auto px-5 py-3 text-sm font-medium text-white/70 hover:text-white border border-white/20 rounded-lg transition-colors min-h-[44px] flex items-center justify-center gap-1.5"
                               >
                                 <ChevronLeft className="w-4 h-4" />
                                 Back
@@ -480,7 +480,7 @@ const ContactFormSection = () => {
                               <button
                                 type="submit"
                                 disabled={isSubmitting}
-                                className="flex-1 flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] bg-white text-black hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
+                                className="flex-1 flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] bg-white text-black hover:bg-white/90 disabled:opacity-60 disabled:cursor-not-allowed"
                               >
                                 <AnimatePresence mode="wait">
                                   {isSubmitting ? (
