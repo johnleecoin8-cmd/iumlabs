@@ -97,10 +97,10 @@ const Index = () => {
 
               <div className="space-y-0">
                 {[
-                  { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao, DC Inside, Korean CT" },
-                  { name: "Japan", tag: "ACTIVE", desc: "Regulated entry, LINE ecosystem, bitFlyer, Coincheck" },
-                  { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL network, exchange partnerships, community ops" },
-                  { name: "China", tag: "ACTIVE", desc: "Mainland BD, institutional investor network, WeChat CT" },
+                  { name: "South Korea", tag: "HOME", desc: "KOL & Influencer, Naver SEO, Kakao Community, PR & Media, Instagram Viral, Offline Events" },
+                  { name: "Japan", tag: "ACTIVE", desc: "LINE Ecosystem, KOL Network, Regulated Exchange Entry, PR & Media Placement" },
+                  { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL Campaigns, Exchange Partnerships, Community Management, Mandarin PR" },
+                  { name: "China", tag: "ACTIVE", desc: "WeChat & Weibo Marketing, Institutional BD, Mainland KOL Network, Bilibili Content" },
                 ].map(c => (
                   <div key={c.name} className="py-5 border-b border-white/[0.06] last:border-b-0">
                     <div className="flex items-center gap-3 mb-1.5">
