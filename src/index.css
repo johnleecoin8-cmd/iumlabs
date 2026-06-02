@@ -7,6 +7,15 @@
   100% { background-position: -200% 0; }
 }
 
+@keyframes starburst-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-starburst-spin {
+  animation: starburst-spin 4s linear infinite;
+}
+
 /* Calendly z-index fix */
 .calendly-overlay {
   z-index: 99999 !important;

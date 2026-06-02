@@ -4,12 +4,55 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 1200;
+const MIN_DISPLAY_TIME = 1800;
 const MAX_LOAD_TIME = 12000;
 const VIDEO_POLL_INTERVAL = 200;
 
+const Starburst = ({ progress }: { progress: number }) => {
+  const rays = 8;
+  const size = 60;
+  const center = size / 2;
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      className="animate-starburst-spin"
+    >
+      {Array.from({ length: rays }).map((_, i) => {
+        const angle = (i * 360) / rays;
+        const innerR = 4;
+        const outerR = center - 4;
+        const rad = (angle * Math.PI) / 180;
+        const x1 = center + innerR * Math.cos(rad);
+        const y1 = center + innerR * Math.sin(rad);
+        const x2 = center + outerR * Math.cos(rad);
+        const y2 = center + outerR * Math.sin(rad);
+
+        return (
+          <line
+            key={i}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke="white"
+            strokeWidth={i % 2 === 0 ? 1.5 : 1}
+            strokeLinecap="round"
+            style={{
+              opacity: 0.4 + (progress / 100) * 0.6,
+              transition: 'opacity 0.3s ease',
+            }}
+          />
+        );
+      })}
+    </svg>
+  );
+};
+
 const PageIntro = ({ onComplete }: PageIntroProps) => {
-  const [phase, setPhase] = useState<'loading' | 'whiteout' | 'done'>('loading');
+  const [phase, setPhase] = useState<'loading' | 'fadeout' | 'done'>('loading');
   const [progress, setProgress] = useState(0);
   const [startTime] = useState(() => Date.now());
   const displayProgress = useRef(0);
@@ -22,28 +65,24 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     const remaining = Math.max(0, MIN_DISPLAY_TIME - elapsed);
 
     setTimeout(() => {
-      setPhase('whiteout');
+      setPhase('fadeout');
       setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 500);
+      }, 600);
     }, remaining);
   }, [startTime, onComplete]);
 
   useEffect(() => {
-    // Track fonts
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(() => { fontsReady.current = true; });
     } else {
       fontsReady.current = true;
     }
 
-    // Poll for the ACTUAL hero video element rendered by HeroSection
     let videoEl: HTMLVideoElement | null = null;
 
-    const onPlaying = () => {
-      videoReady.current = true;
-    };
+    const onPlaying = () => { videoReady.current = true; };
 
     const tryPlay = (v: HTMLVideoElement) => {
       v.muted = true;
@@ -59,10 +98,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       videoEl = el.tagName === 'SOURCE' ? el.parentElement as HTMLVideoElement : el as HTMLVideoElement;
       if (!videoEl) return;
 
-      // Force play attempt while intro is still on top
       tryPlay(videoEl);
 
-      // Mark ready only once video is actually playing (frame visible)
       if (!videoEl.paused && videoEl.currentTime > 0) {
         videoReady.current = true;
         clearInterval(pollForVideo);
@@ -74,10 +111,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       clearInterval(pollForVideo);
     }, VIDEO_POLL_INTERVAL);
 
-    // Max timeout — never block forever
-    const maxTimer = setTimeout(() => {
-      videoReady.current = true;
-    }, MAX_LOAD_TIME);
+    const maxTimer = setTimeout(() => { videoReady.current = true; }, MAX_LOAD_TIME);
 
     return () => {
       clearInterval(pollForVideo);
@@ -89,7 +123,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     };
   }, []);
 
-  // Smooth progress animation tied to real loading state
   useEffect(() => {
     const animate = () => {
       const elapsed = Date.now() - startTime;
@@ -100,10 +133,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       if (videoReady.current && fontsReady.current) {
         target = 100;
       } else if (videoReady.current || fontsReady.current) {
-        // One major task done — cap at 90, creep slowly
         target = Math.min(90, 30 + elapsed * 0.012);
       } else {
-        // Nothing done yet — creep to ~60 based on time
         target = Math.min(60, elapsed * 0.015);
       }
 
@@ -115,51 +146,34 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
       setProgress(Math.floor(displayProgress.current));
 
-      if (displayProgress.current >= 100) {
-        return;
-      }
+      if (displayProgress.current >= 100) return;
 
       rafRef.current = requestAnimationFrame(animate);
     };
 
     rafRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, [startTime]);
 
   useEffect(() => {
-    if (progress >= 100) {
-      handleComplete();
-    }
+    if (progress >= 100) handleComplete();
   }, [progress, handleComplete]);
 
   if (phase === 'done') return null;
 
   return (
-    <div className="fixed inset-0 z-[10002] flex items-center justify-center bg-background">
-      <div
-        className={`absolute inset-0 bg-white transition-opacity duration-700 ${
-          phase === 'whiteout' ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
-      <div className={`relative z-10 flex flex-col items-center transition-opacity duration-500 ${
-        phase === 'whiteout' ? 'opacity-0' : 'opacity-100'
+    <div
+      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-[#0A0A0A] transition-opacity duration-600 ${
+        phase === 'fadeout' ? 'opacity-0' : 'opacity-100'
+      }`}
+    >
+      <div className={`flex flex-col items-center gap-6 transition-all duration-500 ${
+        phase === 'fadeout' ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
       }`}>
-        <div className="mb-8">
-          <span
-            className="text-6xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-foreground tabular-nums"
-            style={{ fontFeatureSettings: '"tnum"' }}
-          >
-            {String(Math.floor(progress)).padStart(3, '0')}
-          </span>
-        </div>
-        <div className="w-48 sm:w-64 md:w-80 h-[2px] bg-border/30 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-foreground rounded-full transition-all duration-150 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+        <Starburst progress={progress} />
+        <p className="text-[13px] sm:text-sm text-white/60 font-medium tracking-wide">
+          ium Labs
+        </p>
       </div>
     </div>
   );
