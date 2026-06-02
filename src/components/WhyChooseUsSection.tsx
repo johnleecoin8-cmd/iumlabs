@@ -106,20 +106,20 @@ const WhyChooseUsSection = () => {
         </div>
 
       {/* Stats bar */}
-      <div className="relative z-10 py-8 sm:py-12 md:py-14">
-        <div className="container mx-auto px-6 sm:px-10 md:px-16">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-10 md:gap-14">
+      <div className="relative z-10 py-10 sm:py-14 md:py-16">
+        <div className="max-w-5xl mx-auto px-6 sm:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
             {[
-              { value: "$8B+", label: "Client Valuation", mobileHide: false },
-              { value: "230+", label: "KOL Network", mobileHide: false },
-              { value: "25+", label: "Korea Entries", mobileHide: false },
-              { value: "116+", label: "Events Hosted", mobileHide: true },
+              { value: "$8B+", label: "Client Valuation" },
+              { value: "230+", label: "KOL Network" },
+              { value: "25+", label: "Korea Entries" },
+              { value: "116+", label: "Events Hosted" },
             ].map((stat, i) => (
-              <div key={i} className={`text-center ${stat.mobileHide ? 'hidden md:block' : ''}`}>
-                <div className="text-xl sm:text-4xl md:text-5xl font-semibold text-white tracking-[-0.03em] leading-none mb-1.5 sm:mb-2.5">
+              <div key={i} className="text-center">
+                <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-[-0.03em] leading-none mb-2 sm:mb-3">
                   {stat.value}
                 </div>
-                <div className="text-[9px] sm:text-[11px] md:text-xs text-white/35 font-medium uppercase tracking-[0.15em] font-mono">
+                <div className="text-[10px] sm:text-xs md:text-sm text-white/40 font-medium uppercase tracking-[0.2em]">
                   {stat.label}
                 </div>
               </div>
