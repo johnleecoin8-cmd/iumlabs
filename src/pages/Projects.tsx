@@ -32,6 +32,7 @@ import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
+import multipliLogo from "@/assets/logos/multipli.png";
 
 // Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
@@ -46,6 +47,7 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
+import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
 
 // Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
@@ -98,6 +100,7 @@ const fallbackCases = [
   { name: "zkPass", logo: zkpassLogo, bgImage: zkpassBg, slug: "zkpass", result: "The Verifiable Nights", category: "Privacy", description: "Privacy-focused Web3 identity solution launch with Korean developer community." },
   { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
   { name: "Spacecoin", logo: spacecoinLogo, bgImage: spacecoinBg, slug: "spacecoin", result: "200K+ Impressions", category: "Infrastructure", description: "Blockchain-based space infrastructure platform launch with Korean community growth campaign." },
+  { name: "Multipli", logo: multipliLogo, bgImage: multipliBg, slug: "multipli", result: "Korean RWA Yield Launch", category: "RWA", description: "RWA yield infrastructure platform expansion targeting Korean institutional investors." },
 ];
 
 interface Project {
@@ -265,6 +268,7 @@ const logoMap: Record<string, string | null> = {
   "zkpass": zkpassLogo,
   "synfutures": synfuturesLogo,
   "spacecoin": spacecoinLogo,
+  "multipli": multipliLogo,
 };
 
 // Video mapping for projects that have videos

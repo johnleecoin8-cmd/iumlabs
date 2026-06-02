@@ -10,6 +10,7 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
+import multipliLogo from "@/assets/logos/multipli.png";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -35,6 +36,7 @@ import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import lbankFestivalImg from "@/assets/campaigns/lbank-festival.jpg";
 import seoulMetroBillboardImg from "@/assets/campaigns/seoul-metro-billboard-new.jpeg";
 import seoulMetroPosterImg from "@/assets/campaigns/seoul-metro-poster.jpeg";
+import multipliHeroImg from "@/assets/campaigns/multipli-hero.jpg";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -640,6 +642,43 @@ export const projectsData: Record<string, ProjectData> = {
     services: ["Offline Event", "KOL Marketing", "Community"],
     shortServices: ["Events", "KOL", "Community"],
     gallery: [],
+    news: []
+  },
+  "multipli": {
+    name: "Multipli",
+    logo: multipliLogo,
+    bgImage: multipliHeroImg,
+    featureImage: multipliHeroImg,
+    category: "RWA",
+    result: "Korean RWA Yield Launch",
+    glowColor: "#8B5CF6",
+    description: "Multipli is the world's first yield infrastructure for tokenized real-world assets, enabling 90K+ investors to generate returns on Gold, Stocks, and Stablecoins. Backed by Pantera, Binance, and BlackRock, Multipli sought to expand into Korea's institutional investor market.",
+    challenge: "Korea's institutional crypto market demands rigorous regulatory compliance and proven track records. Multipli needed to educate Korean investors on RWA yield infrastructure while competing against established DeFi protocols and local financial products.",
+    whatWeDid: "We positioned Multipli as the institutional-grade RWA yield solution for the Korean market. Through targeted KOL campaigns, educational content on tokenized asset yields, and strategic media placements, we built awareness among Korean institutional and retail investors.",
+    metrics: [
+      { value: "90K+", label: "Global Investors" },
+      { value: "$21.5M", label: "Total Funding" },
+      { value: "Pantera", label: "Lead Investor" },
+      { value: "RWA", label: "Yield Infrastructure" }
+    ],
+    strategy: [
+      "Korean KOL campaign targeting institutional and DeFi audiences",
+      "Educational content series on RWA yield infrastructure",
+      "PR coverage across Korea's top crypto media outlets",
+      "Community building on Korean Telegram and KakaoTalk",
+      "Strategic partnerships with Korean DeFi protocols"
+    ],
+    results: [
+      { metric: "Korean Community Reach", value: "Growing" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "KOL Partnerships", value: "Active" },
+      { metric: "Market Positioning", value: "RWA Yield Leader" }
+    ],
+    services: ["KOL Marketing", "PR & Media Relations", "Community Growth"],
+    shortServices: ["KOLs", "PR", "Community"],
+    gallery: [
+      { src: multipliHeroImg, title: "Korea Launch", description: "Multipli Korea market entry campaign" }
+    ],
     news: []
   }
 };

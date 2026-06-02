@@ -15,6 +15,7 @@ import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
 import triaBg from "@/assets/campaigns/tria-launch.jpg";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerBg from "@/assets/campaigns/openledger-hero-official.jpg";
+import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
 
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -28,6 +29,7 @@ import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 import peaqLogo from "@/assets/logos/peaq.png";
+import multipliLogo from "@/assets/logos/multipli.png";
 
 const projects = [
   { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo },
@@ -42,6 +44,7 @@ const projects = [
   { name: "Tria", slug: "tria", category: "Wallet", result: "450K+", resultLabel: "Impressions", bgImage: triaBg, logo: triaLogo },
   { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo },
   { name: "OpenLedger", slug: "openledger", category: "AI", result: "30M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo },
+  { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo },
 ];
 
 const ProjectCard = ({ project, index }: { project: typeof projects[number]; index: number }) => {
