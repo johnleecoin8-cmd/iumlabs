@@ -162,85 +162,49 @@ interface ProjectCardProps {
   totalCount: number;
 }
 
-const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
-  // 3-column grid border logic
-  const isRightColumn = index % 3 === 2;
-  const rowCount = Math.ceil(totalCount / 3);
-  const currentRow = Math.floor(index / 3);
-  const isLastRow = currentRow === rowCount - 1;
-
-  const { ref, isVisible } = useScrollAnimation({ 
+const ProjectCard = ({ project, index }: ProjectCardProps) => {
+  const { ref, isVisible } = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '30px',
-    triggerOnce: true 
+    triggerOnce: true
   });
 
   return (
-    <div 
+    <div
       ref={ref}
       className={cn(
-        "h-full transition-all duration-500 ease-out will-change-transform",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+        "transition-all duration-600 ease-out will-change-transform",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
-      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
+      style={{ transitionDelay: `${(index % 6) * 80}ms` }}
     >
-      <div
-        className={cn(
-          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
-          !isRightColumn && "lg:border-r border-border",
-          !isLastRow && "border-b border-border"
-        )}
+      <Link
+        to={`/projects/${project.slug}`}
+        onClick={() => window.scrollTo(0, 0)}
+        className="group block"
       >
-        <Link
-          to={`/projects/${project.slug}`}
-          onClick={() => window.scrollTo(0, 0)}
-          className="block active:scale-[0.98] transition-transform duration-150"
-        >
-          {/* Image - Full width on top */}
-          <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
-            <img
-              src={project.bgImage}
-              alt={project.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+        <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden bg-[#1a1a1a]">
+          <img
+            src={project.bgImage}
+            alt={project.name}
+            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
+            <ArrowRight className="w-4 h-4 text-white" />
           </div>
+        </div>
 
-          {/* Content */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{project.category}</span>
-              {project.websiteUrl && (
-                <span
-                  role="link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    window.open(project.websiteUrl, '_blank', 'noopener,noreferrer');
-                  }}
-                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-                  <ExternalLink className="w-2.5 h-2.5" />
-                </span>
-              )}
-            </div>
-            <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
-              {project.name}
-            </h3>
-            <p className="text-foreground/80 font-medium text-[10px] sm:text-xs line-clamp-1">
-              {project.result}
-            </p>
-            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
-              {project.description}
-            </p>
+        <div className="pt-4 pb-2 space-y-2">
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] sm:text-xs text-white/40 uppercase tracking-[0.15em] font-medium">{project.category}</span>
           </div>
-
-          {/* View case link */}
-          <div className="flex items-center gap-1.5 mt-3 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs">
-            <span className="group-hover:underline underline-offset-4">View case</span>
-            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-          </div>
-        </Link>
-      </div>
+          <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight group-hover:text-white/80 transition-colors duration-300">
+            {project.name}
+          </h3>
+          <p className="text-white/50 text-sm font-medium leading-snug">{project.result}</p>
+        </div>
+      </Link>
     </div>
   );
 };
@@ -268,16 +232,17 @@ const CategoryFilter = ({
   onCategoryChange: (category: string) => void;
 }) => {
   return (
-    <div className="flex gap-1.5 sm:gap-2 md:gap-3 overflow-x-auto scrollbar-hide pb-1 -mb-1">
+    <div className="flex gap-2 sm:gap-2.5 overflow-x-auto scrollbar-hide pb-1 -mb-1">
       {filterCategories.map((category) => (
         <button
           key={category}
           onClick={() => onCategoryChange(category)}
-          className={`px-3 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs md:text-sm font-medium rounded-full border transition-all duration-300 active:scale-95 min-h-[32px] sm:min-h-[36px] whitespace-nowrap flex-shrink-0 ${
+          className={cn(
+            "px-4 sm:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-medium rounded-full transition-all duration-300 active:scale-95 whitespace-nowrap flex-shrink-0",
             activeCategory === category
-              ? "bg-foreground text-background border-foreground"
-              : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
-          }`}
+              ? "bg-white text-black"
+              : "bg-white/[0.06] text-white/50 hover:bg-white/[0.1] hover:text-white/80"
+          )}
         >
           {category}
         </button>
@@ -815,34 +780,31 @@ const Projects = () => {
         </div>
       </main>
       
-      {/* Cases Section - 01 */}
-      <section className="scroll-reveal bg-[#121212]" id="cases">
-        <div className="border-t border-border">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
+      {/* Cases Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="cases">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 md:px-12 py-16 md:py-24">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10 md:mb-14">
+            <div>
+              <span className="text-[11px] text-white/30 uppercase tracking-[0.2em] font-medium block mb-3">Portfolio</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">Case Studies</h2>
             </div>
-            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
-              {filteredCases.length} Projects
-            </span>
+            <span className="text-sm text-white/40 font-medium tabular-nums">{filteredCases.length} Projects</span>
           </div>
-          
-          {/* Category Filter - integrated below header */}
-          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-border/50">
+
+          <div className="mb-10 md:mb-14">
             <CategoryFilter
               activeCategory={activeCategory}
               onCategoryChange={setActiveCategory}
             />
           </div>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredCases.map((project, index) => (
-              <ProjectCard 
-                key={project.slug} 
-                project={project} 
-                index={index} 
-                totalCount={filteredCases.length} 
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                index={index}
+                totalCount={filteredCases.length}
               />
             ))}
           </div>
