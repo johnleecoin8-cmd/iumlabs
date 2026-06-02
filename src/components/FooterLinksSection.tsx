@@ -108,6 +108,16 @@ const FooterLinksSection = () => {
           </div>
           <span className="text-[11px] text-white/35 leading-relaxed">{brand.address}</span>
         </div>
+
+        {/* Business info row */}
+        <div className="mt-3 pt-3 border-t border-white/[0.02] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+          <span className="text-[10px] text-white/30">
+            Business Registration No. {brand.registrationNumber}
+          </span>
+          <span className="text-[10px] text-white/30">
+            Services: {brand.businessServices}
+          </span>
+        </div>
       </div>
     </section>
   );

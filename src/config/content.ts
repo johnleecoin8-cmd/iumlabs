@@ -13,6 +13,8 @@ export const brand = {
   description: "Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
   email: "info@iumlabs.io",
   address: "OFFICE 11B, Gangnam-daero 373, Gangnam, Seoul, South Korea",
+  registrationNumber: "302-09-55248",
+  businessServices: "Advertising, Exhibition & Event Management, Professional Scientific & Technical Services",
   telegram: "Telegram",
   telegramLink: "https://t.me/hnes2",
   linkedin: "https://www.linkedin.com/company/iumlabs",
