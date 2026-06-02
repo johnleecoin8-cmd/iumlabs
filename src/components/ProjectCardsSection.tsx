@@ -20,16 +20,16 @@ import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
 
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
-import mantraLogo from "@/assets/logos/mantra.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import bybitLogo from "@/assets/logos/bybit.png";
-import fogoLogo from "@/assets/logos/fogo.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai-wordmark.png";
+import mantraLogo from "@/assets/logos/mantra-wordmark.png";
+import megaethLogo from "@/assets/logos/megaeth-wordmark.png";
+import bybitLogo from "@/assets/logos/bybit-wordmark.png";
+import fogoLogo from "@/assets/logos/fogo-wordmark.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import spacecoinLogo from "@/assets/logos/spacecoin.png";
+import spacecoinLogo from "@/assets/logos/spacecoin-wordmark.png";
 import triaLogo from "@/assets/logos/tria-official.png";
-import zkpassLogo from "@/assets/logos/zkpass.png";
-import peaqLogo from "@/assets/logos/peaq.png";
+import zkpassLogo from "@/assets/logos/zkpass-wordmark.png";
+import peaqLogo from "@/assets/logos/openledger-wordmark.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 
@@ -75,40 +75,36 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06]"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/5" />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-black/95 via-black/40 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-black/95 via-black/50 to-black/15" />
 
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
-
-        <div className="absolute top-3.5 right-3.5">
-          <span className="text-[8px] sm:text-[9px] text-white/30 uppercase tracking-[0.15em] font-medium">
+        <div className="absolute top-4 right-4">
+          <span className="text-[8px] sm:text-[9px] text-white/25 uppercase tracking-[0.15em] font-medium">
             {project.category}
           </span>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-          <div className="flex items-center gap-2.5 mb-2.5">
-            <img
-              src={project.logo}
-              alt=""
-              className="h-4 sm:h-[18px] w-auto brightness-0 invert opacity-50 group-hover:opacity-80 transition-opacity duration-500"
-            />
-            <div className="h-3 w-px bg-white/10" />
-            <h3 className="text-[13px] sm:text-[15px] font-semibold text-white/90 tracking-tight leading-none">
-              {project.name}
-            </h3>
-          </div>
+          <img
+            src={project.logo}
+            alt={project.name}
+            className="h-6 sm:h-8 w-auto max-w-[60%] object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-500 mb-3"
+          />
+
+          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight mb-1.5">
+            {project.name}
+          </h3>
 
           <div className="flex items-baseline gap-1.5">
-            <span className="text-lg sm:text-xl font-black text-white leading-none tracking-tight">
+            <span className="text-base sm:text-lg font-black text-white leading-none tracking-tight">
               {project.result}
             </span>
-            <span className="text-[10px] text-white/30 font-medium">{project.resultLabel}</span>
+            <span className="text-[9px] sm:text-[10px] text-white/35 font-medium">{project.resultLabel}</span>
           </div>
 
-          <div className="overflow-hidden h-0 group-hover:h-6 transition-all duration-500 ease-out">
-            <div className="flex items-center gap-1.5 pt-2.5 text-white/50 translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
-              <span className="text-[10px] font-medium tracking-wider uppercase">View Case</span>
+          <div className="overflow-hidden h-0 group-hover:h-5 transition-all duration-500 ease-out">
+            <div className="flex items-center gap-1.5 pt-2 text-white/50 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+              <span className="text-[9px] font-medium tracking-wider uppercase">View Case</span>
               <ArrowUpRight className="w-3 h-3" />
             </div>
           </div>
