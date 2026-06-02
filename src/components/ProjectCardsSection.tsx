@@ -21,33 +21,33 @@ import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import saharaAiLogo from "@/assets/logos/sahara-ai-wordmark.png";
-import mantraLogo from "@/assets/logos/mantra-wordmark.png";
+import mantraLogo from "@/assets/logos/mantra-new.png";
 import megaethLogo from "@/assets/logos/megaeth-wordmark.png";
 import bybitLogo from "@/assets/logos/bybit-wordmark.png";
-import fogoLogo from "@/assets/logos/fogo-wordmark.png";
-import synfuturesLogo from "@/assets/logos/synfutures.png";
+import fogoLogo from "@/assets/logos/fogo-new.jpg";
+import synfuturesLogo from "@/assets/logos/synfutures-new.png";
 import spacecoinLogo from "@/assets/logos/spacecoin-wordmark.png";
-import triaLogo from "@/assets/logos/tria-official.png";
+import triaLogo from "@/assets/logos/tria-new.jpg";
 import zkpassLogo from "@/assets/logos/zkpass-wordmark.png";
 import peaqLogo from "@/assets/logos/openledger-wordmark.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 
 const projects = [
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo },
-  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$550M+", resultLabel: "TVL", bgImage: kucoinBg, logo: kucoinLogo },
-  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "400+", resultLabel: "Attendees", bgImage: saharaAiBg, logo: saharaAiLogo },
-  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo },
-  { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo },
-  { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", bgImage: bybitBg, logo: bybitLogo },
-  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "250+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo },
-  { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", bgImage: synfuturesBg, logo: synfuturesLogo },
-  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo },
-  { name: "Tria", slug: "tria", category: "Wallet", result: "450K+", resultLabel: "Impressions", bgImage: triaBg, logo: triaLogo },
-  { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo },
-  { name: "OpenLedger", slug: "openledger", category: "AI", result: "30M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo },
-  { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo },
-  { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", bgImage: talusThumb, logo: talusLogo },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: false },
+  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$550M+", resultLabel: "TVL", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "400+", resultLabel: "Attendees", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
+  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
+  { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo, isIcon: false },
+  { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", bgImage: bybitBg, logo: bybitLogo, isIcon: false },
+  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "250+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo, isIcon: true },
+  { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", bgImage: synfuturesBg, logo: synfuturesLogo, isIcon: true },
+  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo, isIcon: false },
+  { name: "Tria", slug: "tria", category: "Wallet", result: "450K+", resultLabel: "Impressions", bgImage: triaBg, logo: triaLogo, isIcon: true },
+  { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo, isIcon: false },
+  { name: "OpenLedger", slug: "openledger", category: "AI", result: "30M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo, isIcon: false },
+  { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo, isIcon: false },
+  { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", bgImage: talusThumb, logo: talusLogo, isIcon: true },
 ];
 
 const ProjectCard = ({ project, index }: { project: typeof projects[number]; index: number }) => {
@@ -88,7 +88,12 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
           <img
             src={project.logo}
             alt={project.name}
-            className="h-6 sm:h-8 w-auto max-w-[60%] object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity duration-500 mb-3"
+            className={cn(
+              "object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500 mb-3",
+              project.isIcon
+                ? "h-7 sm:h-9 w-7 sm:w-9 rounded-lg"
+                : "h-6 sm:h-8 w-auto max-w-[60%] brightness-0 invert"
+            )}
           />
 
           <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight mb-1.5">
