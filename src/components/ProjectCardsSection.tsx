@@ -116,11 +116,11 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
 
 const ProjectCardsSection = () => {
   return (
-    <div className="px-5 sm:px-6 lg:px-10 py-14 sm:py-20">
-      <div className="flex items-end justify-between mb-12 sm:mb-16">
+    <div className="px-5 sm:px-6 lg:px-10 py-10 sm:py-14">
+      <div className="flex items-end justify-between mb-8 sm:mb-10">
         <div>
-          <span className="text-[10px] sm:text-[11px] text-white/25 uppercase tracking-[0.25em] font-medium block mb-3">Portfolio</span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">Case Studies</h2>
+          <span className="text-[9px] sm:text-[10px] text-white/25 uppercase tracking-[0.25em] font-medium block mb-2">Portfolio</span>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Case Studies</h2>
         </div>
         <Link
           to="/projects"
@@ -134,7 +134,7 @@ const ProjectCardsSection = () => {
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
-        {projects.map((project, index) => (
+        {projects.slice(0, 12).map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}
       </div>
