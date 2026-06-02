@@ -8,7 +8,7 @@ const markers: { name: string; coordinates: [number, number]; isHome?: boolean }
   { name: "South Korea", coordinates: [127.0, 37.5], isHome: true },
   { name: "Japan", coordinates: [139.7, 36.2] },
   { name: "Taiwan", coordinates: [121.0, 23.7] },
-  { name: "China", coordinates: [104.0, 35.0] },
+  { name: "China", coordinates: [121.5, 31.2] },
 ];
 
 const seoulCoords: [number, number] = [127.0, 37.5];
@@ -17,7 +17,7 @@ const BLUE = "#3B82F6";
 const EastAsiaMap = () => (
   <ComposableMap
     projection="geoMercator"
-    projectionConfig={{ center: [124, 34], scale: 750 }}
+    projectionConfig={{ center: [127, 34], scale: 900 }}
     width={700}
     height={550}
     style={{ width: "100%", height: "auto" }}
