@@ -6,7 +6,6 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import Footer from "@/components/Footer";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
@@ -115,17 +114,10 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer Links */}
-      <div className="sm:px-4 sm:pt-3">
+      {/* Footer */}
+      <div className="sm:px-4 sm:pt-3 sm:pb-3">
         <div className="sm:rounded-3xl overflow-hidden">
           <FooterLinksSection />
-        </div>
-      </div>
-
-      {/* Footer Brand */}
-      <div className="sm:px-4 sm:py-3">
-        <div className="sm:rounded-3xl overflow-hidden">
-          <Footer />
         </div>
       </div>
     </div>;
