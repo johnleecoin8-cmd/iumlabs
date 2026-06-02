@@ -8,7 +8,6 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
@@ -82,17 +81,15 @@ const Index = () => {
 
       {/* Launch CTA */}
       <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06] relative">
-          <img src={ctaBgImage} alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover opacity-[0.45]" width={1200} height={800} />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/40" />
-          <div className="relative px-5 sm:px-6 lg:px-10 py-16 sm:py-28">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06] relative">
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(140,100,220,0.08)_0%,transparent_70%)]" />
+          <div className="relative px-5 sm:px-6 lg:px-10 py-20 sm:py-32">
             <div className="max-w-3xl mx-auto text-center">
-              <p className="text-[9px] sm:text-[11px] text-white/40 uppercase tracking-[0.3em] mb-4 sm:mb-5 font-mono">Seoul · Singapore</p>
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] tracking-[-0.03em] mb-4 sm:mb-6">
-                Ready to land <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">in Korea?</span>
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-[-0.03em] mb-5 sm:mb-7">
+                Let's Talk <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">Strategy</span>
               </h2>
-              <p className="text-[13px] sm:text-[15px] text-white/45 max-w-md mx-auto mb-10 sm:mb-12 leading-relaxed font-light">
-                From strategy to execution. One call to get started.
+              <p className="text-[13px] sm:text-base text-white/40 max-w-lg mx-auto mb-10 sm:mb-12 leading-relaxed">
+                You explain what you're building. We'll explain how we'd grow it in Korea.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <CalendlyButton className="inline-flex items-center px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-white text-black text-[13px] sm:text-sm font-semibold hover:bg-white/90 hover:-translate-y-0.5 transition-all w-full sm:w-auto justify-center">
