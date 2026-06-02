@@ -12,7 +12,7 @@ import bybitBg from "@/assets/campaigns/bybit-event.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
-import triaBg from "@/assets/campaigns/tria-launch.jpg";
+import triaBg from "@/assets/campaigns/tria-app.png";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerBg from "@/assets/campaigns/openledger-hero-official.jpg";
 import multipliBg from "@/assets/campaigns/multipli-hero.jpg";

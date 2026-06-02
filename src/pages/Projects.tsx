@@ -40,7 +40,7 @@ import bnbBg from "@/assets/campaigns/bnb-event.jpg";
 import kucoinBg from "@/assets/campaigns/kucoin-oldschool.jpg";
 import storyBg from "@/assets/campaigns/story-origin-summit.jpg";
 import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
-import triaBg from "@/assets/campaigns/tria-launch.jpg";
+import triaBg from "@/assets/campaigns/tria-app.png";
 import bybitBg from "@/assets/campaigns/bybit-event.jpg";
 import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
