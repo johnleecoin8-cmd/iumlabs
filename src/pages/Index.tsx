@@ -49,15 +49,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Project Cards */}
-      <section className="sm:px-4 sm:pt-3 snap-start" id="projects">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
-          <Suspense fallback={<SectionLoader />}>
-            <ProjectCardsSection />
-          </Suspense>
-        </div>
-      </section>
-
       {/* Services */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="services">
         <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
@@ -66,6 +57,15 @@ const Index = () => {
             <p className="text-[12px] sm:text-[13px] text-white/45 font-light">End-to-end capabilities for Korea market entry.</p>
           </div>
           <ServicesSection />
+        </div>
+      </section>
+
+      {/* Project Cards */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="projects">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
+          <Suspense fallback={<SectionLoader />}>
+            <ProjectCardsSection />
+          </Suspense>
         </div>
       </section>
 
