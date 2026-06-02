@@ -6,10 +6,10 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
+const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 
@@ -79,25 +79,41 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Launch CTA */}
-      <section className="sm:px-4 sm:pt-3 snap-start">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06] relative">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(140,100,220,0.08)_0%,transparent_70%)]" />
-          <div className="relative px-5 sm:px-6 lg:px-10 py-20 sm:py-32">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-[-0.03em] mb-5 sm:mb-7">
-                Let's Talk <span className="bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent">Strategy</span>
-              </h2>
-              <p className="text-[13px] sm:text-base text-white/40 max-w-lg mx-auto mb-10 sm:mb-12 leading-relaxed">
-                You explain what you're building. We'll explain how we'd grow it in Korea.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                <CalendlyButton className="inline-flex items-center px-7 py-3.5 sm:px-8 sm:py-4 rounded-full bg-white text-black text-[13px] sm:text-sm font-semibold hover:bg-white/90 hover:-translate-y-0.5 transition-all w-full sm:w-auto justify-center">
-                  Book a Meeting
-                </CalendlyButton>
-                <Link to="/contact" className="inline-flex items-center px-7 py-3.5 sm:px-8 sm:py-4 rounded-full border border-white/[0.1] text-white/50 text-[13px] sm:text-sm font-medium hover:border-white/[0.2] hover:text-white/80 transition-all w-full sm:w-auto justify-center">
-                  Send a Message
-                </Link>
+      {/* Coverage */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="coverage">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06]">
+          <div className="px-5 sm:px-6 lg:px-10 py-12 sm:py-20">
+            <span className="text-[10px] sm:text-[11px] text-white/25 uppercase tracking-[0.25em] font-medium block mb-3">Coverage</span>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mb-12 sm:mb-16">
+              Korea-first. <span className="font-bold">Asia-wide.</span>
+            </h2>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+              <div className="w-full max-w-lg lg:max-w-none mx-auto">
+                <Suspense fallback={<div className="aspect-square bg-white/[0.02] rounded-xl animate-pulse" />}>
+                  <EastAsiaMap />
+                </Suspense>
+              </div>
+
+              <div className="space-y-0">
+                {[
+                  { name: "South Korea", tag: "HOME", desc: "Upbit, Bithumb, Naver, Kakao, DC Inside, Korean CT" },
+                  { name: "Japan", tag: "ACTIVE", desc: "Regulated entry, LINE ecosystem, bitFlyer, Coincheck" },
+                  { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL network, exchange partnerships, community ops" },
+                  { name: "China", tag: "ACTIVE", desc: "Mainland BD, institutional investor network, WeChat CT" },
+                ].map(c => (
+                  <div key={c.name} className="py-5 border-b border-white/[0.06] last:border-b-0">
+                    <div className="flex items-center gap-3 mb-1.5">
+                      <span className="text-base sm:text-lg font-semibold text-white">{c.name}</span>
+                      <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
+                        c.tag === "HOME"
+                          ? "bg-blue-600 text-white"
+                          : "bg-white/[0.08] text-white/50"
+                      }`}>{c.tag}</span>
+                    </div>
+                    <p className="text-sm text-white/40">{c.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
