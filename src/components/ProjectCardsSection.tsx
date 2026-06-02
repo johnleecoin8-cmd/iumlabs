@@ -65,7 +65,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className="group relative block w-full aspect-[16/10] rounded-xl overflow-hidden"
+        className="group relative block w-full aspect-[3/4] rounded-xl overflow-hidden"
       >
         <img
           src={project.bgImage}
