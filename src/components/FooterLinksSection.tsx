@@ -61,7 +61,7 @@ const FooterLinksSection = () => {
             <div className="hidden md:block md:col-span-1" />
 
             {navSections.map((section) => (
-              <div key={section.title} className="col-span-1 md:col-span-2">
+              <div key={section.title} className="hidden md:block col-span-1 md:col-span-2">
                 <h3 className="text-[10px] sm:text-[11px] font-medium text-white/25 uppercase tracking-[0.15em] mb-4 sm:mb-5">
                   {section.title}
                 </h3>
