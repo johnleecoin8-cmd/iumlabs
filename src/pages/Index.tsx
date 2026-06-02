@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import ctaBgImage from "@/assets/campaigns/event-fisheye.jpg";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
+const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
@@ -44,6 +45,15 @@ const Index = () => {
         <div className="sm:rounded-3xl overflow-hidden">
           <Suspense fallback={<SectionLoader />}>
             <SelectedWorkShowcase />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Project Cards */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="projects">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
+          <Suspense fallback={<SectionLoader />}>
+            <ProjectCardsSection />
           </Suspense>
         </div>
       </section>
