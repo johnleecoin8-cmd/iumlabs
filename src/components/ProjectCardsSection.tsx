@@ -127,7 +127,7 @@ const ProjectCardsSection = () => {
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
         {projects.map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}
