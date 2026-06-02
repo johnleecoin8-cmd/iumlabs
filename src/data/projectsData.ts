@@ -11,6 +11,8 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 import multipliLogo from "@/assets/logos/multipli.png";
+import talusLogo from "@/assets/logos/talus.png";
+import talusHeroImg from "@/assets/campaigns/talus-hero.jpg";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -678,6 +680,42 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["KOLs", "PR", "Community"],
     gallery: [
       { src: multipliHeroImg, title: "Korea Launch", description: "Multipli Korea market entry campaign" }
+    ],
+    news: []
+  },
+  "talus": {
+    name: "Talus",
+    logo: talusLogo,
+    bgImage: talusHeroImg,
+    featureImage: talusHeroImg,
+    category: "AI",
+    result: "Korean AI Agent Launch",
+    glowColor: "#00E5A0",
+    description: "Talus is a decentralized automation protocol that provides the building blocks for developing, deploying, and managing autonomous AI Agents and multi-agent systems. Unlike competitors operating from centralized servers, Talus leverages blockchain for verifiability and resiliency.",
+    challenge: "The Korean AI x blockchain market was rapidly growing but dominated by data-focused projects. Talus needed to differentiate their AI agent automation approach and build awareness among Korean developers and crypto communities.",
+    whatWeDid: "We positioned Talus as the decentralized AI agent infrastructure leader for the Korean market. Through targeted KOL campaigns, developer-focused educational content, and strategic PR placements across Korean crypto media, we built strong community awareness.",
+    metrics: [
+      { value: "AI Agents", label: "Core Product" },
+      { value: "On+Off", label: "Chain Automation" },
+      { value: "Growing", label: "Korean Community" },
+      { value: "Tier-1", label: "Media Coverage" }
+    ],
+    strategy: [
+      "Korean KOL campaign targeting AI and DeFi audiences",
+      "Developer community outreach and education",
+      "PR coverage across Korean crypto media outlets",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Korean Community", value: "Growing" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "KOL Partnerships", value: "Active" },
+      { metric: "Market Positioning", value: "AI Agent Leader" }
+    ],
+    services: ["KOL Marketing", "PR & Media Relations", "Community Growth"],
+    shortServices: ["KOLs", "PR", "Community"],
+    gallery: [
+      { src: talusHeroImg, title: "Korea Launch", description: "Talus Korea market entry campaign" }
     ],
     news: []
   }
