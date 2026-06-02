@@ -18,7 +18,7 @@ import openledgerBg from "@/assets/campaigns/openledger-hero-official.jpg";
 import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
 import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
 
-import bnbLogo from "@/assets/logos/bnb.svg";
+import bnbLogo from "@/assets/logos/bnb-new.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import saharaAiLogo from "@/assets/logos/sahara-ai-wordmark.png";
 import mantraLogo from "@/assets/logos/mantra-new.png";
@@ -34,7 +34,7 @@ import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 
 const projects = [
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: false },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
   { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$550M+", resultLabel: "TVL", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
   { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "400+", resultLabel: "Attendees", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
   { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
