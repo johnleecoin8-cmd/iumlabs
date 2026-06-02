@@ -49,7 +49,7 @@ import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
 import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
-import talusBg from "@/assets/campaigns/talus-hero.jpg";
+import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
 
 // Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
@@ -103,7 +103,7 @@ const fallbackCases = [
   { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
   { name: "Spacecoin", logo: spacecoinLogo, bgImage: spacecoinBg, slug: "spacecoin", result: "200K+ Impressions", category: "Infrastructure", description: "Blockchain-based space infrastructure platform launch with Korean community growth campaign." },
   { name: "Multipli", logo: multipliLogo, bgImage: multipliBg, slug: "multipli", result: "Korean RWA Yield Launch", category: "RWA", description: "RWA yield infrastructure platform expansion targeting Korean institutional investors." },
-  { name: "Talus", logo: talusLogo, bgImage: talusBg, slug: "talus", result: "Korean AI Agent Launch", category: "AI", description: "Decentralized AI agent automation protocol Korea market entry with KOL and PR campaigns." },
+  { name: "Talus", logo: talusLogo, bgImage: talusThumb, slug: "talus", result: "Korean AI Agent Launch", category: "AI", description: "Decentralized AI agent automation protocol Korea market entry with KOL and PR campaigns." },
 ];
 
 interface Project {
