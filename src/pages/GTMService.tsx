@@ -6,6 +6,7 @@ import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
+import ServiceNav from "@/components/ServiceNav";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { brand } from "@/config/content";
@@ -369,6 +370,7 @@ const GTMService = () => {
 
       {/* FOOTER */}
       <div style={{ background: '#0A0A0A' }}>
+        <ServiceNav />
         <ContactFormSection />
         <FooterLinksSection />
         <Footer />

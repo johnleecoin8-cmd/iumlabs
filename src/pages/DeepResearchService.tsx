@@ -5,6 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ContactFormSection from "@/components/ContactFormSection";
+import ServiceNav from "@/components/ServiceNav";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import gsap from "gsap";
@@ -126,6 +127,7 @@ const DeepResearchService = () => {
       </div></section>
 
       <section className="svc-footer">
+        <ServiceNav />
         <ContactFormSection />
         <FooterLinksSection />
         <Footer />
