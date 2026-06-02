@@ -58,54 +58,58 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       ref={ref}
       className={cn(
         "transition-all duration-700 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       )}
-      style={{ transitionDelay: `${(index % 6) * 100}ms` }}
+      style={{ transitionDelay: `${(index % 4) * 80}ms` }}
     >
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className="group relative block w-full aspect-[3/4] rounded-2xl overflow-hidden ring-1 ring-white/[0.06] hover:ring-white/[0.12] transition-all duration-500"
+        className="group relative block w-full aspect-[16/10] rounded-xl overflow-hidden"
       >
         <img
           src={project.bgImage}
           alt={project.name}
-          loading={index < 6 ? "eager" : "lazy"}
+          loading={index < 8 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06]"
         />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-        <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/5" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-black/95 via-black/40 to-black/10" />
 
-        <div className="absolute top-5 left-5 right-5 flex items-start justify-between">
-          <img
-            src={project.logo}
-            alt=""
-            className="h-5 sm:h-6 w-auto brightness-0 invert opacity-60 group-hover:opacity-90 transition-opacity duration-500"
-          />
-          <span className="text-[9px] text-white/35 uppercase tracking-[0.2em] font-medium group-hover:text-white/55 transition-colors duration-500">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+
+        <div className="absolute top-3.5 right-3.5">
+          <span className="text-[8px] sm:text-[9px] text-white/30 uppercase tracking-[0.15em] font-medium">
             {project.category}
           </span>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
-          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight mb-3 leading-tight">
-            {project.name}
-          </h3>
-
-          <div className="flex items-baseline gap-2 mb-4">
-            <span className="text-2xl sm:text-3xl font-black bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent leading-none">
-              {project.result}
-            </span>
-            <span className="text-[11px] sm:text-xs text-white/35 font-medium tracking-wide">{project.resultLabel}</span>
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
+          <div className="flex items-center gap-2.5 mb-2.5">
+            <img
+              src={project.logo}
+              alt=""
+              className="h-4 sm:h-[18px] w-auto brightness-0 invert opacity-50 group-hover:opacity-80 transition-opacity duration-500"
+            />
+            <div className="h-3 w-px bg-white/10" />
+            <h3 className="text-[13px] sm:text-[15px] font-semibold text-white/90 tracking-tight leading-none">
+              {project.name}
+            </h3>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="w-10 h-[1px] bg-gradient-to-r from-white/25 to-transparent" />
-            <div className="flex items-center gap-2 text-white/0 group-hover:text-white/60 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-              <span className="text-[11px] font-medium tracking-wide">View Case</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+          <div className="flex items-baseline gap-1.5">
+            <span className="text-lg sm:text-xl font-black text-white leading-none tracking-tight">
+              {project.result}
+            </span>
+            <span className="text-[10px] text-white/30 font-medium">{project.resultLabel}</span>
+          </div>
+
+          <div className="overflow-hidden h-0 group-hover:h-6 transition-all duration-500 ease-out">
+            <div className="flex items-center gap-1.5 pt-2.5 text-white/50 translate-y-3 group-hover:translate-y-0 transition-transform duration-500">
+              <span className="text-[10px] font-medium tracking-wider uppercase">View Case</span>
+              <ArrowUpRight className="w-3 h-3" />
             </div>
           </div>
         </div>
@@ -117,36 +121,21 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
 const ProjectCardsSection = () => {
   return (
     <div className="px-5 sm:px-6 lg:px-10 py-10 sm:py-14">
-      <div className="flex items-end justify-between mb-8 sm:mb-10">
-        <div>
-          <span className="text-[9px] sm:text-[10px] text-white/25 uppercase tracking-[0.25em] font-medium block mb-2">Portfolio</span>
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">Case Studies</h2>
-        </div>
+      <div className="flex items-center justify-between mb-7 sm:mb-9">
+        <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Case Studies</h2>
         <Link
           to="/projects"
-          className="hidden sm:inline-flex items-center gap-2.5 text-[13px] text-white/35 hover:text-white transition-colors font-medium group"
+          className="inline-flex items-center gap-2 text-xs text-white/30 hover:text-white/70 transition-colors font-medium group"
         >
           <span>View All</span>
-          <div className="w-7 h-7 rounded-full border border-white/15 group-hover:border-white/40 group-hover:bg-white/[0.05] flex items-center justify-center transition-all duration-300">
-            <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </div>
+          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
         </Link>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
         {projects.slice(0, 12).map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}
-      </div>
-
-      <div className="sm:hidden mt-10 text-center">
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors font-medium"
-        >
-          View All Projects
-          <ArrowUpRight className="w-4 h-4" />
-        </Link>
       </div>
     </div>
   );
