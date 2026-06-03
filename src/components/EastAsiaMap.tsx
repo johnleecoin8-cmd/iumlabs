@@ -17,7 +17,7 @@ const BLUE = "#3B82F6";
 const EastAsiaMap = () => (
   <ComposableMap
     projection="geoMercator"
-    projectionConfig={{ center: [130, 32], scale: 1600 }}
+    projectionConfig={{ center: [130, 30], scale: 1300 }}
     width={700}
     height={520}
     style={{ width: "100%", height: "auto" }}
