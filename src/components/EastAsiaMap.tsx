@@ -17,9 +17,9 @@ const BLUE = "#3B82F6";
 const EastAsiaMap = () => (
   <ComposableMap
     projection="geoMercator"
-    projectionConfig={{ center: [128, 31], scale: 1400 }}
+    projectionConfig={{ center: [130, 32], scale: 1600 }}
     width={700}
-    height={500}
+    height={520}
     style={{ width: "100%", height: "auto" }}
   >
     <Geographies geography={GEO_URL}>
@@ -60,12 +60,12 @@ const EastAsiaMap = () => (
     {markers.map((m) => (
       <Marker key={m.name} coordinates={m.coordinates}>
         {m.isHome && (
-          <circle r={16} fill={BLUE} opacity={0.1}>
-            <animate attributeName="r" values="16;26;16" dur="3s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.12;0.03;0.12" dur="3s" repeatCount="indefinite" />
+          <circle r={20} fill={BLUE} opacity={0.12}>
+            <animate attributeName="r" values="20;32;20" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.15;0.04;0.15" dur="3s" repeatCount="indefinite" />
           </circle>
         )}
-        <circle r={m.isHome ? 6 : 4} fill={BLUE} opacity={m.isHome ? 1 : 0.7} />
+        <circle r={m.isHome ? 8 : 6} fill={BLUE} opacity={m.isHome ? 1 : 0.8} />
         <text
           textAnchor="middle"
           y={m.isHome ? -20 : -12}
