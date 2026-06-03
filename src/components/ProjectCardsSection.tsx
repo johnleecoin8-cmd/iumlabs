@@ -65,14 +65,14 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className="group relative block w-full aspect-[3/4] rounded-xl overflow-hidden"
+        className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden"
       >
         <img
           src={project.bgImage}
           alt={project.name}
           loading={index < 8 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06]"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06]"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5" />

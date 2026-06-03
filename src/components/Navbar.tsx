@@ -232,7 +232,13 @@ const Navbar = () => {
             onMouseEnter={() => setServiceDropdownOpen(true)}
             onMouseLeave={() => setServiceDropdownOpen(false)}
           >
-            <div className="flex items-center h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container">
+            <div
+              className="flex items-center h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container px-3 sm:px-4"
+              style={{
+                maskImage: 'linear-gradient(to right, transparent 0, black 18px, black calc(100% - 18px), transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0, black 18px, black calc(100% - 18px), transparent 100%)',
+              }}
+            >
               <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
                 {[...Array(4)].map((_, i) => (
                   <div key={i} className="flex items-center gap-5">
