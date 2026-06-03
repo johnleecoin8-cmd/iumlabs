@@ -78,12 +78,12 @@ const clientLogos = [{
 }, {
   name: "MegaETH",
   logo: megaethLogo,
-  noInvert: false,
+  noInvert: true,
   slug: "megaeth"
 }, {
   name: "zkPass",
   logo: zkpassLogo,
-  noInvert: false,
+  noInvert: true,
   slug: "zkpass"
 }, {
   name: "OpenLedger",
