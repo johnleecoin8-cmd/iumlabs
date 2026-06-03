@@ -138,8 +138,8 @@ const HeroSection = () => {
           ...videoProps.style,
           WebkitAppearance: 'none'
         }}>
-            {shouldLoad && <source src={optimizedSrc} type="video/mp4" />}
           </video>
+
       }
       </div>
 
