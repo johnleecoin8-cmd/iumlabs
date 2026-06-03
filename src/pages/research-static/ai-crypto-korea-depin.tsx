@@ -235,7 +235,7 @@ const AiCryptoKoreaDepin = () => {
   const seoDescription = `${title} - ${category} article by ium Labs.`;
 
   const breadcrumbItems = useMemo(() => [
-    { name: "Home", url: "https://iumlabs.io" },
+    { name: "HQ", url: "https://iumlabs.io" },
     { name: "Blog", url: "https://iumlabs.io/blog" },
     { name: title, url: `https://iumlabs.io/blog/${slug}` }
   ], []);

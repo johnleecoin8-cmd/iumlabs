@@ -39,7 +39,7 @@ const NotFound = () => {
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all">
               <Home className="w-4 h-4" />
-              <span>Back to Home</span>
+              <span>Back to HQ</span>
             </Link>
             <button
               onClick={() => window.history.back()}

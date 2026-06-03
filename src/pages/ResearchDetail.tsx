@@ -148,7 +148,7 @@ const ResearchDetail = () => {
 
   // Dynamic breadcrumb items - must be before any conditional returns
   const breadcrumbItems = useMemo(() => [
-    { name: "Home", url: "https://iumlabs.io" },
+    { name: "HQ", url: "https://iumlabs.io" },
     { name: "Blog", url: "https://iumlabs.io/blog" },
     { name: post?.title || '', url: `https://iumlabs.io/blog/${slug}` }
   ], [post?.title, slug]);
