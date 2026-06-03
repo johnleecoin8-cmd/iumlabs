@@ -40,7 +40,7 @@ const HowToLaunchTokenInKorea = () => {
       />
 
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "HQ", url: "https://iumlabs.io/" },
         { name: "Blog", url: "https://iumlabs.io/blog" },
         { name: "How to Launch a Token in Korea", url: "https://iumlabs.io/blog/how-to-launch-token-in-korea" },
       ]} />
