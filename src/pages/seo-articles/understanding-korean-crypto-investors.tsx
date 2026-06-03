@@ -43,7 +43,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
       />
 
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "HQ", url: "https://iumlabs.io/" },
         { name: "Blog", url: "https://iumlabs.io/blog" },
         { name: "Understanding Korean Crypto Investors", url: "https://iumlabs.io/blog/understanding-korean-crypto-investors" },
       ]} />
