@@ -8,15 +8,17 @@ import kucoinLogo from "@/assets/logos/kucoin-mono.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-// Story Protocol removed per client visibility restrictions
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import aptosLogo from "@/assets/logos/aptos-round.png";
-import kiteLogo from "@/assets/logos/kite.png";
+import megaethLogo from "@/assets/logos/megaeth-wordmark.png";
+import zkpassLogo from "@/assets/logos/zkpass-wordmark.png";
+import openledgerLogo from "@/assets/logos/openledger-wordmark.png";
+import multipliLogo from "@/assets/logos/multipli.png";
+import talusLogo from "@/assets/logos/talus.png";
 
 const clientLogos = [{
   name: "BNB",
@@ -74,16 +76,32 @@ const clientLogos = [{
   noInvert: true,
   slug: "synfutures"
 }, {
-  name: "Aptos",
-  logo: aptosLogo,
-  noInvert: true,
-  slug: "aptos"
+  name: "MegaETH",
+  logo: megaethLogo,
+  noInvert: false,
+  slug: "megaeth"
 }, {
-  name: "Kite",
-  logo: kiteLogo,
+  name: "zkPass",
+  logo: zkpassLogo,
+  noInvert: false,
+  slug: "zkpass"
+}, {
+  name: "OpenLedger",
+  logo: openledgerLogo,
+  noInvert: false,
+  slug: "openledger"
+}, {
+  name: "Multipli",
+  logo: multipliLogo,
   noInvert: true,
-  slug: "kite"
+  slug: "multipli"
+}, {
+  name: "Talus",
+  logo: talusLogo,
+  noInvert: true,
+  slug: "talus"
 }];
+
 
 const HeroSection = () => {
   const {
