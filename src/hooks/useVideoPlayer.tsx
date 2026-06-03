@@ -427,8 +427,25 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setRetryCount(0);
   }, [optimizedSrc]);
 
+  // When lazyLoad gate opens (shouldLoad turns true) AFTER mount, force the
+  // <video> element to (re)load. Without this, mobile Safari ignores newly
+  // appended <source> children and the video never starts.
+  useEffect(() => {
+    if (!shouldLoad) return;
+    const video = videoRef.current;
+    if (!video) return;
+    try {
+      video.load();
+    } catch {}
+    // Try playing immediately and again shortly after metadata is likely ready
+    tryPlay(video);
+    const t = setTimeout(() => tryPlay(video), 250);
+    return () => clearTimeout(t);
+  }, [shouldLoad, tryPlay]);
+
   // Video element props
   const videoProps = {
+    src: shouldLoad ? optimizedSrc : undefined,
     autoPlay: autoPlay && !shouldDisableVideo,
     muted: true,
     loop: true,
@@ -488,6 +505,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     onError: handleError,
   };
 
+
   // Poster fallback props
   const posterProps = {
     src: poster,
@@ -528,7 +546,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     quality,
     optimizedSrc,
     networkInfo,
-    shouldDisableVideo: shouldDisableVideo || prefersReducedMotion,
+    // Note: do NOT include prefersReducedMotion here. iOS Low Power Mode can
+    // report reduced-motion, which would hide the muted background video
+    // entirely on most phones. Keep the muted loop; users who explicitly
+    // request reduced motion still see the poster underneath until canplay.
+    shouldDisableVideo,
     shouldLoad,
     isLoading,
     play,
