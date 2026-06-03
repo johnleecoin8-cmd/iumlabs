@@ -92,7 +92,7 @@ export default function AdminLogin() {
             Your account does not have admin privileges. Contact an administrator to request access.
           </p>
           <Button variant="outline" onClick={() => navigate('/')}>
-            Back to Home
+            Back to HQ
           </Button>
         </div>
       </div>

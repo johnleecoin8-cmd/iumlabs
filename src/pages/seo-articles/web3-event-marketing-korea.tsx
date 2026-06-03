@@ -40,7 +40,7 @@ const Web3EventMarketingKorea = () => {
       />
 
       <BreadcrumbSchema items={[
-        { name: "Home", url: "https://iumlabs.io/" },
+        { name: "HQ", url: "https://iumlabs.io/" },
         { name: "Blog", url: "https://iumlabs.io/blog" },
         { name: "Web3 Event Marketing in Korea", url: "https://iumlabs.io/blog/web3-event-marketing-korea" },
       ]} />
