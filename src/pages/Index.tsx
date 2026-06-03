@@ -82,7 +82,7 @@ const Index = () => {
       {/* Coverage */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="coverage">
         <div className="sm:rounded-3xl overflow-hidden bg-[#0A0A0A] border border-white/[0.06]">
-          <div className="px-5 sm:px-6 lg:px-10 py-12 sm:py-20">
+          <div className="px-5 sm:px-6 lg:px-10 pt-12 pb-0 sm:py-20">
             <span className="text-[10px] sm:text-[11px] text-white/25 uppercase tracking-[0.25em] font-medium block mb-3">Coverage</span>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mb-12 sm:mb-16">
               Korea-first. <span className="font-bold">Asia-wide.</span>
@@ -104,14 +104,14 @@ const Index = () => {
                 ].map(c => (
                   <div key={c.name} className="py-5 border-b border-white/[0.06] last:border-b-0">
                     <div className="flex items-center gap-3 mb-1.5">
-                      <span className="text-base sm:text-lg font-semibold text-white">{c.name}</span>
+                      <span className="text-sm sm:text-lg font-semibold text-white">{c.name}</span>
                       <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
                         c.tag === "HOME"
                           ? "bg-blue-600 text-white"
                           : "bg-white/[0.08] text-white/50"
                       }`}>{c.tag}</span>
                     </div>
-                    <p className="text-sm text-white/40">{c.desc}</p>
+                    <p className="text-xs sm:text-sm text-white/40">{c.desc}</p>
                   </div>
                 ))}
               </div>
