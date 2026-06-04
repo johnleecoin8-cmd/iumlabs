@@ -119,8 +119,7 @@ const HeroSection = () => {
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
     preload: 'auto',
-    lazyLoad: true,
-    lazyRootMargin: '300px',
+    lazyLoad: false,
   });
 
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
