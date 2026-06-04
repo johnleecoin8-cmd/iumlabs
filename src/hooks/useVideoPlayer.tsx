@@ -155,6 +155,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const loadStartRef = useRef<number | null>(null);
   const firstByteLoggedRef = useRef(false);
   const playLoggedRef = useRef(false);
+  const firstIntersectionHandledRef = useRef(false);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -264,6 +265,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     video.muted = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
+    video.setAttribute('autoplay', '');
+    video.defaultMuted = true;
     try {
       const p = video.play();
       if (p && typeof p.then === 'function') {
@@ -277,6 +280,19 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       });
     }
   }, []);
+
+  const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
+    const attempts = [immediateDelay, 80, 220, 500, 1200];
+    const timers = attempts.map((delay) => window.setTimeout(() => {
+      if (video.isConnected && video.paused) {
+        tryPlay(video);
+      }
+    }, delay));
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+    };
+  }, [tryPlay]);
 
   // Handle network error with retry
   const handleError = useCallback(() => {
@@ -338,10 +354,17 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   // Auto-play on mount if enabled - with visibility detection
   useEffect(() => {
-    if (!autoPlay || shouldDisableVideo || hasVideoError) return;
+    if (!autoPlay || shouldDisableVideo || hasVideoError || !shouldLoad) return;
 
     const video = videoRef.current;
     if (!video) return;
+    firstIntersectionHandledRef.current = false;
+    let clearPlaybackBurst = () => {};
+
+    const playNow = (delay = 0) => {
+      clearPlaybackBurst();
+      clearPlaybackBurst = triggerPlaybackBurst(video, delay);
+    };
 
     // Reliable playback detection via timeupdate
     const handleTimeUpdate = () => {
@@ -356,10 +379,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     if (video.readyState >= 3) {
       readyRef.current = true;
       setIsVideoReady(true);
-      tryPlay(video);
+      playNow();
     } else {
       // Initial play attempt
-      setTimeout(() => tryPlay(video), playDelay);
+      playNow(playDelay);
     }
 
     // Periodic retry — handles browsers that block initial autoplay
@@ -376,30 +399,59 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       tryPlay(video);
     };
 
+    const handleVisibilityResume = () => {
+      if (document.visibilityState === 'visible') {
+        playNow();
+      }
+    };
+
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
     document.addEventListener('scroll', handleUserInteraction, { passive: true });
+    window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
+    window.addEventListener('focus', handleVisibilityResume, { passive: true });
+    document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
 
-    // Intersection observer to play when visible
+    // First viewport intersection should aggressively trigger playback,
+    // especially on mobile Chrome where initial autoplay can be deferred.
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) tryPlay(video);
+          if (!entry.isIntersecting) return;
+
+          if (!firstIntersectionHandledRef.current) {
+            firstIntersectionHandledRef.current = true;
+            playNow();
+          } else if (video.paused) {
+            tryPlay(video);
+          }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.01, rootMargin: '25% 0px 25% 0px' }
     );
     observer.observe(video);
 
+    const rect = video.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const initiallyVisible = rect.bottom > 0 && rect.top < viewportHeight;
+    if (initiallyVisible) {
+      firstIntersectionHandledRef.current = true;
+      playNow();
+    }
+
     return () => {
       clearInterval(retryInterval);
+      clearPlaybackBurst();
       video.removeEventListener('timeupdate', handleTimeUpdate);
       document.removeEventListener('touchstart', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('scroll', handleUserInteraction);
+      window.removeEventListener('pageshow', handleVisibilityResume);
+      window.removeEventListener('focus', handleVisibilityResume);
+      document.removeEventListener('visibilitychange', handleVisibilityResume);
       observer.disconnect();
     };
-  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, tryPlay]);
+  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, tryPlay, triggerPlaybackBurst]);
 
   // Cache bust verification via Performance API
   useEffect(() => {
