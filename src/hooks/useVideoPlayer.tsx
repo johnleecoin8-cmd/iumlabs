@@ -262,10 +262,19 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
     video.muted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
     try {
-      await video.play();
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        await p;
+      }
     } catch {
-      // Will retry via interval or user interaction
+      // Retry once on next frame — iOS Safari sometimes rejects the first call
+      requestAnimationFrame(() => {
+        video.muted = true;
+        video.play().catch(() => {});
+      });
     }
   }, []);
 
