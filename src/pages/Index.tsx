@@ -20,7 +20,7 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
 
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] md:snap-y md:snap-proximity md:overflow-y-auto md:h-screen scrollbar-hide">
-      <SEOHead title="HQ | ium Labs" description="Strategic Korea crypto ecosystem growth partner for Web3 market entry. Delivering data-backed GTM, KOL, and PR solutions for global blockchain networks." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
+      <SEOHead title="Korea Crypto Marketing Agency & Web3 GTM | ium Labs" description="Strategic Korea crypto ecosystem growth partner for Web3 market entry. Delivering data-backed GTM, KOL, and PR solutions for global blockchain networks." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
       
       <Navbar />
       
