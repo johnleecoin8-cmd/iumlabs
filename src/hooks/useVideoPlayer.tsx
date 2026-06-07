@@ -155,7 +155,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const loadStartRef = useRef<number | null>(null);
   const firstByteLoggedRef = useRef(false);
   const playLoggedRef = useRef(false);
-  const firstIntersectionHandledRef = useRef(false);
+  const frameReadyRef = useRef(false);
+  const frameCallbackIdRef = useRef<number | null>(null);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -260,6 +261,49 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return getVideoSource(baseSrc, forceFirstFrame);
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
+  const markVideoReady = useCallback(() => {
+    if (readyRef.current) return;
+    readyRef.current = true;
+    frameReadyRef.current = true;
+    setIsVideoReady(true);
+  }, []);
+
+  const scheduleFrameReady = useCallback((video: HTMLVideoElement) => {
+    if (frameReadyRef.current) return;
+
+    const requestVideoFrame = (video as HTMLVideoElement & {
+      requestVideoFrameCallback?: (callback: () => void) => number;
+      cancelVideoFrameCallback?: (handle: number) => void;
+    }).requestVideoFrameCallback;
+
+    if (typeof requestVideoFrame === 'function') {
+      frameCallbackIdRef.current = requestVideoFrame.call(video, () => {
+        frameCallbackIdRef.current = null;
+        markVideoReady();
+      });
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      if (!video.isConnected) return;
+      markVideoReady();
+    });
+  }, [markVideoReady]);
+
+  const clearFrameReadyCallback = useCallback((video?: HTMLVideoElement | null) => {
+    if (!video || frameCallbackIdRef.current == null) return;
+
+    const cancelVideoFrame = (video as HTMLVideoElement & {
+      cancelVideoFrameCallback?: (handle: number) => void;
+    }).cancelVideoFrameCallback;
+
+    if (typeof cancelVideoFrame === 'function') {
+      cancelVideoFrame.call(video, frameCallbackIdRef.current);
+    }
+
+    frameCallbackIdRef.current = null;
+  }, []);
+
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
     video.muted = true;
@@ -352,13 +396,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     };
   }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout, tryPlay]);
 
-  // Auto-play on mount if enabled - with visibility detection
+  // Auto-play on mount with a single deterministic playback path.
   useEffect(() => {
     if (!autoPlay || shouldDisableVideo || hasVideoError || !shouldLoad) return;
 
     const video = videoRef.current;
     if (!video) return;
-    firstIntersectionHandledRef.current = false;
     let clearPlaybackBurst = () => {};
 
     const playNow = (delay = 0) => {
@@ -368,17 +411,20 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     // Reliable playback detection via timeupdate
     const handleTimeUpdate = () => {
-      if (!readyRef.current) {
-        readyRef.current = true;
-        setIsVideoReady(true);
+      if (video.currentTime > 0) {
+        scheduleFrameReady(video);
       }
     };
+
+    const handlePlaying = () => {
+      scheduleFrameReady(video);
+    };
+
     video.addEventListener('timeupdate', handleTimeUpdate, { passive: true });
+    video.addEventListener('playing', handlePlaying, { passive: true });
 
     // If video is already cached/loaded, play immediately
     if (video.readyState >= 3) {
-      readyRef.current = true;
-      setIsVideoReady(true);
       playNow();
     } else {
       // Initial play attempt
@@ -407,51 +453,23 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
-    document.addEventListener('scroll', handleUserInteraction, { passive: true });
     window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
     window.addEventListener('focus', handleVisibilityResume, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
 
-    // First viewport intersection should aggressively trigger playback,
-    // especially on mobile Chrome where initial autoplay can be deferred.
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          if (!firstIntersectionHandledRef.current) {
-            firstIntersectionHandledRef.current = true;
-            playNow();
-          } else if (video.paused) {
-            tryPlay(video);
-          }
-        });
-      },
-      { threshold: 0.01, rootMargin: '25% 0px 25% 0px' }
-    );
-    observer.observe(video);
-
-    const rect = video.getBoundingClientRect();
-    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-    const initiallyVisible = rect.bottom > 0 && rect.top < viewportHeight;
-    if (initiallyVisible) {
-      firstIntersectionHandledRef.current = true;
-      playNow();
-    }
-
     return () => {
       clearInterval(retryInterval);
       clearPlaybackBurst();
+      clearFrameReadyCallback(video);
       video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('playing', handlePlaying);
       document.removeEventListener('touchstart', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
-      document.removeEventListener('scroll', handleUserInteraction);
       window.removeEventListener('pageshow', handleVisibilityResume);
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
-      observer.disconnect();
     };
-  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, tryPlay, triggerPlaybackBurst]);
+  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, tryPlay, triggerPlaybackBurst, scheduleFrameReady, clearFrameReadyCallback]);
 
   // Cache bust verification via Performance API
   useEffect(() => {
@@ -483,6 +501,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   // Reset state when source changes
   useEffect(() => {
     readyRef.current = false;
+    frameReadyRef.current = false;
+    frameCallbackIdRef.current = null;
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
@@ -526,6 +546,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     style: {
       opacity: isVideoReady ? 1 : 0,
       transition: 'opacity 300ms ease',
+      transform: 'translateZ(0)',
+      backfaceVisibility: 'hidden',
+      willChange: 'opacity',
     } as React.CSSProperties,
     onLoadStart: () => {
       loadStartRef.current = performance.now();
@@ -544,10 +567,6 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         firstByteLoggedRef.current = true;
         console.log(`[VideoPlayer] canplay (ready to render) in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
       }
-      if (!readyRef.current) {
-        readyRef.current = true;
-        setIsVideoReady(true);
-      }
       if (e.currentTarget.paused) tryPlay(e.currentTarget);
     },
     onPlaying: () => {
@@ -555,13 +574,14 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         playLoggedRef.current = true;
         console.log(`[VideoPlayer] playback started in ${(performance.now() - loadStartRef.current).toFixed(0)}ms`);
       }
-      if (!readyRef.current) {
-        readyRef.current = true;
-        setIsVideoReady(true);
+      if (videoRef.current) {
+        scheduleFrameReady(videoRef.current);
       }
     },
     onLoadedData: () => {
-      // no-op: isVideoReady is set by onPlaying instead
+      if (videoRef.current && videoRef.current.currentTime > 0) {
+        scheduleFrameReady(videoRef.current);
+      }
     },
     onError: handleError,
   };
