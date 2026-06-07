@@ -595,7 +595,6 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     height: 1080,
     className: 'absolute inset-0 w-full h-full object-cover z-0',
     loading: 'eager' as const,
-    fetchPriority: 'high' as const,
     style: {
       opacity: shouldDisableVideo || hasVideoError || !isVideoReady ? 1 : 0,
       transition: 'opacity 400ms ease',
