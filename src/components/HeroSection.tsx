@@ -152,10 +152,10 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <h1 className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-semibold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.045em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap">
+          <p className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-semibold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.045em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
             <span className="block">Your Crypto Ecosystem</span>
             <span className="block">Growth Partner</span>
-          </h1>
+          </p>
 
           {/* Subtext */}
           <h2 className="text-[13px] sm:text-lg md:text-xl text-white/50 max-w-5xl mx-auto mb-8 sm:mb-14 font-light tracking-wide leading-[1.7] px-2 sm:px-0">
