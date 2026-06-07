@@ -23,6 +23,9 @@ const Index = () => {
       <SEOHead title="Korea Crypto Marketing Agency & Web3 GTM | ium Labs" description="Strategic Korea crypto ecosystem growth partner for Web3 market entry. Delivering data-backed GTM, KOL, and PR solutions for global blockchain networks." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
       
       <Navbar />
+
+      {/* SEO H1 — visually hidden, matches document title for semantic alignment */}
+      <h1 className="sr-only">Korea Crypto Marketing Agency &amp; Web3 GTM | ium Labs</h1>
       
       {/* Hero - Full Bleed */}
       <main id="hero" className="sm:px-4 sm:pt-3 snap-start">
