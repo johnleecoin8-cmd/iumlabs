@@ -314,6 +314,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
+    if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
+    const now = performance.now();
+    if (now - lastPlayAttemptRef.current < 250) return; // throttle bursts
+    lastPlayAttemptRef.current = now;
+    playAttemptsRef.current += 1;
+    setDebugTick((t) => t + 1);
     video.muted = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
@@ -325,11 +331,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         await p;
       }
     } catch {
-      // Retry once on next frame — iOS Safari sometimes rejects the first call
-      requestAnimationFrame(() => {
-        video.muted = true;
-        video.play().catch(() => {});
-      });
+      // Silent — bounded retry handled by the interval/burst caller.
     }
   }, []);
 
