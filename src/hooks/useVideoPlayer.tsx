@@ -101,7 +101,12 @@ interface UseVideoPlayerReturn {
   ShimmerOverlay: React.FC;
   /** Error overlay component for failed video */
   ErrorOverlay: React.FC;
+  /** Mobile debug banner showing readyState / frame / poster transition */
+  DebugBanner: React.FC;
 }
+
+const MAX_PLAY_ATTEMPTS = 8;
+const PLAY_COOLDOWN_MS = 1800;
 
 const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
