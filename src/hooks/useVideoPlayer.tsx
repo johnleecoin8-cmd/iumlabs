@@ -509,6 +509,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
+    playAttemptsRef.current = 0;
+    lastPlayAttemptRef.current = 0;
     setForceKey(k => k + 1);
     if (videoRef.current) {
       videoRef.current.src = appendVersion(src) + `&_r=${Date.now()}`;
