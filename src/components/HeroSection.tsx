@@ -114,6 +114,7 @@ const HeroSection = () => {
     posterProps,
     ShimmerOverlay,
     ErrorOverlay,
+    DebugBanner,
   } = useVideoPlayer({
     src: '/videos/hero-background.mp4?v=20260601b',
     poster: '/images/posters/hero-background-poster.jpg',
