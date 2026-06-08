@@ -101,7 +101,12 @@ interface UseVideoPlayerReturn {
   ShimmerOverlay: React.FC;
   /** Error overlay component for failed video */
   ErrorOverlay: React.FC;
+  /** Mobile debug banner showing readyState / frame / poster transition */
+  DebugBanner: React.FC;
 }
+
+const MAX_PLAY_ATTEMPTS = 8;
+const PLAY_COOLDOWN_MS = 1800;
 
 const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
@@ -157,6 +162,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const playLoggedRef = useRef(false);
   const frameReadyRef = useRef(false);
   const frameCallbackIdRef = useRef<number | null>(null);
+  const playAttemptsRef = useRef(0);
+  const lastPlayAttemptRef = useRef(0);
+  const [debugTick, setDebugTick] = useState(0);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -262,10 +270,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
   const markVideoReady = useCallback(() => {
-    if (readyRef.current) return;
+    if (readyRef.current) return; // single, irreversible poster→video transition
     readyRef.current = true;
     frameReadyRef.current = true;
     setIsVideoReady(true);
+    setDebugTick((t) => t + 1);
   }, []);
 
   const scheduleFrameReady = useCallback((video: HTMLVideoElement) => {
@@ -306,6 +315,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
+    if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
+    const now = performance.now();
+    if (now - lastPlayAttemptRef.current < 250) return; // throttle bursts
+    lastPlayAttemptRef.current = now;
+    playAttemptsRef.current += 1;
+    setDebugTick((t) => t + 1);
     video.muted = true;
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
@@ -317,11 +332,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         await p;
       }
     } catch {
-      // Retry once on next frame — iOS Safari sometimes rejects the first call
-      requestAnimationFrame(() => {
-        video.muted = true;
-        video.play().catch(() => {});
-      });
+      // Silent — bounded retry handled by the interval/burst caller.
     }
   }, []);
 
@@ -431,14 +442,21 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       playNow(playDelay);
     }
 
-    // Periodic retry — handles browsers that block initial autoplay
+    // Bounded periodic retry — handles browsers that block initial autoplay.
+    // Stops on success OR when MAX_PLAY_ATTEMPTS is reached (poster stays).
     const retryInterval = setInterval(() => {
       if (!video.paused) {
         clearInterval(retryInterval);
         return;
       }
+      if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
+        clearInterval(retryInterval);
+        console.warn('[VideoPlayer] play attempts exhausted — keeping poster');
+        setDebugTick((t) => t + 1);
+        return;
+      }
       tryPlay(video);
-    }, 1500);
+    }, PLAY_COOLDOWN_MS);
 
     // Also try on user interaction (for strict autoplay policies)
     const handleUserInteraction = () => {
@@ -491,6 +509,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
+    playAttemptsRef.current = 0;
+    lastPlayAttemptRef.current = 0;
     setForceKey(k => k + 1);
     if (videoRef.current) {
       videoRef.current.src = appendVersion(src) + `&_r=${Date.now()}`;
@@ -549,6 +569,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       transform: 'translateZ(0)',
       backfaceVisibility: 'hidden',
       willChange: 'opacity',
+      pointerEvents: 'none', // never clickable — no play button, no interaction
     } as React.CSSProperties,
     onLoadStart: () => {
       loadStartRef.current = performance.now();
@@ -615,8 +636,42 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const ErrorOverlay: React.FC = () => {
     // Silent fallback: when video errors, the poster image stays visible (handled via posterProps opacity).
-    // No visible error UI — keeps the hero clean.
     return null;
+  };
+
+  // Mobile debug banner — only renders on mobile when ?vdebug=1 is in the URL
+  // or localStorage.videoDebug === '1'. Shows readyState / frame / attempts /
+  // poster state so we can diagnose mobile playback issues live on-device.
+  const DebugBanner: React.FC = () => {
+    const [, force] = useState(0);
+    useEffect(() => {
+      const id = setInterval(() => force((n) => n + 1), 500);
+      return () => clearInterval(id);
+    }, []);
+    const enabled = (() => {
+      if (typeof window === 'undefined') return false;
+      try {
+        if (new URLSearchParams(window.location.search).get('vdebug') === '1') return true;
+        if (window.localStorage?.getItem('videoDebug') === '1') return true;
+      } catch {}
+      return false;
+    })();
+    if (!enabled || !isMobile) return null;
+    const v = videoRef.current;
+    const rs = v?.readyState ?? -1;
+    const rsLabels = ['NOTHING', 'METADATA', 'CURRENT', 'FUTURE', 'ENOUGH'];
+    return (
+      <div
+        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/80 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none"
+        aria-hidden
+      >
+        <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''}</div>
+        <div>frame: {frameReadyRef.current ? '✓' : '…'} · ready: {isVideoReady ? '✓' : '…'}</div>
+        <div>poster: {(!isVideoReady || hasVideoError || shouldDisableVideo) ? 'shown' : 'hidden'}</div>
+        <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} {v?.paused ? '(paused)' : '(playing)'}</div>
+        <div>err: {hasVideoError ? 'yes' : 'no'} · tick: {debugTick}</div>
+      </div>
+    );
   };
 
   return {
@@ -642,6 +697,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     posterProps,
     ShimmerOverlay,
     ErrorOverlay,
+    DebugBanner,
   };
 };
 
