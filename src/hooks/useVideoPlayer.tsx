@@ -569,6 +569,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       transform: 'translateZ(0)',
       backfaceVisibility: 'hidden',
       willChange: 'opacity',
+      pointerEvents: 'none', // never clickable — no play button, no interaction
     } as React.CSSProperties,
     onLoadStart: () => {
       loadStartRef.current = performance.now();
