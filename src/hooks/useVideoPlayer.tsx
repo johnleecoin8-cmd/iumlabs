@@ -270,10 +270,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [src, quality, qualityVariants, forceFirstFrame])();
 
   const markVideoReady = useCallback(() => {
-    if (readyRef.current) return;
+    if (readyRef.current) return; // single, irreversible poster→video transition
     readyRef.current = true;
     frameReadyRef.current = true;
     setIsVideoReady(true);
+    setDebugTick((t) => t + 1);
   }, []);
 
   const scheduleFrameReady = useCallback((video: HTMLVideoElement) => {
