@@ -442,14 +442,21 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       playNow(playDelay);
     }
 
-    // Periodic retry — handles browsers that block initial autoplay
+    // Bounded periodic retry — handles browsers that block initial autoplay.
+    // Stops on success OR when MAX_PLAY_ATTEMPTS is reached (poster stays).
     const retryInterval = setInterval(() => {
       if (!video.paused) {
         clearInterval(retryInterval);
         return;
       }
+      if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
+        clearInterval(retryInterval);
+        console.warn('[VideoPlayer] play attempts exhausted — keeping poster');
+        setDebugTick((t) => t + 1);
+        return;
+      }
       tryPlay(video);
-    }, 1500);
+    }, PLAY_COOLDOWN_MS);
 
     // Also try on user interaction (for strict autoplay policies)
     const handleUserInteraction = () => {
