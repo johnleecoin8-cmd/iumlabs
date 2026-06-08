@@ -162,6 +162,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const playLoggedRef = useRef(false);
   const frameReadyRef = useRef(false);
   const frameCallbackIdRef = useRef<number | null>(null);
+  const playAttemptsRef = useRef(0);
+  const lastPlayAttemptRef = useRef(0);
+  const [debugTick, setDebugTick] = useState(0);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
