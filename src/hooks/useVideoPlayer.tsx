@@ -697,6 +697,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     posterProps,
     ShimmerOverlay,
     ErrorOverlay,
+    DebugBanner,
   };
 };
 
