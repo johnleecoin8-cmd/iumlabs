@@ -636,8 +636,42 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const ErrorOverlay: React.FC = () => {
     // Silent fallback: when video errors, the poster image stays visible (handled via posterProps opacity).
-    // No visible error UI — keeps the hero clean.
     return null;
+  };
+
+  // Mobile debug banner — only renders on mobile when ?vdebug=1 is in the URL
+  // or localStorage.videoDebug === '1'. Shows readyState / frame / attempts /
+  // poster state so we can diagnose mobile playback issues live on-device.
+  const DebugBanner: React.FC = () => {
+    const [, force] = useState(0);
+    useEffect(() => {
+      const id = setInterval(() => force((n) => n + 1), 500);
+      return () => clearInterval(id);
+    }, []);
+    const enabled = (() => {
+      if (typeof window === 'undefined') return false;
+      try {
+        if (new URLSearchParams(window.location.search).get('vdebug') === '1') return true;
+        if (window.localStorage?.getItem('videoDebug') === '1') return true;
+      } catch {}
+      return false;
+    })();
+    if (!enabled || !isMobile) return null;
+    const v = videoRef.current;
+    const rs = v?.readyState ?? -1;
+    const rsLabels = ['NOTHING', 'METADATA', 'CURRENT', 'FUTURE', 'ENOUGH'];
+    return (
+      <div
+        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/80 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none"
+        aria-hidden
+      >
+        <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''}</div>
+        <div>frame: {frameReadyRef.current ? '✓' : '…'} · ready: {isVideoReady ? '✓' : '…'}</div>
+        <div>poster: {(!isVideoReady || hasVideoError || shouldDisableVideo) ? 'shown' : 'hidden'}</div>
+        <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} {v?.paused ? '(paused)' : '(playing)'}</div>
+        <div>err: {hasVideoError ? 'yes' : 'no'} · tick: {debugTick}</div>
+      </div>
+    );
   };
 
   return {
