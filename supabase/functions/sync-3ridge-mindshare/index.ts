@@ -179,7 +179,8 @@ async function scrapePeriod(
       url,
       formats: ["markdown"],
       onlyMainContent: true,
-      waitFor: 5000,
+      waitFor: 8000,
+      timeout: 90000,
     }),
   });
 
