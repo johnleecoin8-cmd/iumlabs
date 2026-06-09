@@ -397,12 +397,13 @@ Deno.serve(async (req) => {
     
     const projectsWithVariance: ProjectWithVariance[] = aggregatedProjects.map(project => {
       const baseScore = project.weightedMindshare * 100;
-      
-      // Apply significant variance so output differs meaningfully from source
-      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, 'mindshare', 0.30);
-      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, 'change', 0.35);
-      const adjustedScore = applyVariance(baseScore, project.ticker, 'score', 0.25);
-      
+
+      // Apply ±10% daily variance — values shift each day but stay close to source
+      const dayStamp = new Date().toISOString().slice(0, 10);
+      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, `mindshare_${dayStamp}`, 0.10);
+      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, `change_${dayStamp}`, 0.10);
+      const adjustedScore = applyVariance(baseScore, project.ticker, `score_${dayStamp}`, 0.10);
+
       return {
         ...project,
         adjustedMindshare,
