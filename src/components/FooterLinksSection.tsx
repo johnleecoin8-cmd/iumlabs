@@ -51,7 +51,7 @@ const FooterLinksSection = () => {
                 Korea's leading Web3 growth partner. From strategy to execution, we engineer your market entry.
               </p>
               <div className="flex items-center gap-5">
-                <a href={brand.twitter} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">X</a>
+                
                 <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">LinkedIn</a>
                 <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">Telegram</a>
                 <a href={`mailto:${brand.email}`} className="text-white/30 hover:text-white transition-colors text-sm font-medium">Email</a>
