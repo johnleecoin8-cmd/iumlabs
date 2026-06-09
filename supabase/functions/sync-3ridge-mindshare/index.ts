@@ -296,10 +296,20 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Require API key auth — expensive Firecrawl operation
+  // Auth: accept either x-api-key (CRAWLER_API_KEY) or Authorization Bearer
+  // matching the project anon/service-role key (used by pg_cron net.http_post).
   const apiKey = req.headers.get('x-api-key');
-  const expectedKey = Deno.env.get('CRAWLER_API_KEY');
-  if (!expectedKey || apiKey !== expectedKey) {
+  const authHeader = req.headers.get('authorization') || '';
+  const bearer = authHeader.toLowerCase().startsWith('bearer ')
+    ? authHeader.slice(7).trim()
+    : '';
+  const expectedCrawler = Deno.env.get('CRAWLER_API_KEY') || '';
+  const anonKey = Deno.env.get('SUPABASE_ANON_KEY') || Deno.env.get('SUPABASE_PUBLISHABLE_KEY') || '';
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  const isAuthorized =
+    (expectedCrawler && apiKey === expectedCrawler) ||
+    (bearer && (bearer === expectedCrawler || bearer === anonKey || bearer === serviceKey));
+  if (!isAuthorized) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized' }),
       { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
