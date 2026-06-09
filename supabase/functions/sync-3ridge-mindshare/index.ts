@@ -63,8 +63,8 @@ function applyVariance(value: number, ticker: string, field: string, range: numb
 
 function applySparklineVariance(sparkline: number[], ticker: string): number[] {
   return sparkline.map((value, index) => {
-    const seed = tickerToSeed(ticker, `sparkline_${index}`);
-    const variance = (seededRandom(seed) - 0.5) * 2 * 0.15;
+    const seed = tickerToSeed(ticker, `sparkline_${index}_${new Date().toISOString().slice(0,10)}`);
+    const variance = (seededRandom(seed) - 0.5) * 2 * 0.10;
     return Math.max(0, Math.round(value * (1 + variance)));
   });
 }
@@ -296,10 +296,20 @@ Deno.serve(async (req) => {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // Require API key auth — expensive Firecrawl operation
+  // Auth: accept either x-api-key (CRAWLER_API_KEY) or Authorization Bearer
+  // matching the project anon/service-role key (used by pg_cron net.http_post).
   const apiKey = req.headers.get('x-api-key');
-  const expectedKey = Deno.env.get('CRAWLER_API_KEY');
-  if (!expectedKey || apiKey !== expectedKey) {
+  const authHeader = req.headers.get('authorization') || '';
+  const bearer = authHeader.toLowerCase().startsWith('bearer ')
+    ? authHeader.slice(7).trim()
+    : '';
+  const expectedCrawler = Deno.env.get('CRAWLER_API_KEY') || '';
+  const anonKey = Deno.env.get('SUPABASE_ANON_KEY') || Deno.env.get('SUPABASE_PUBLISHABLE_KEY') || '';
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+  const isAuthorized =
+    (expectedCrawler && apiKey === expectedCrawler) ||
+    (bearer && (bearer === expectedCrawler || bearer === anonKey || bearer === serviceKey));
+  if (!isAuthorized) {
     return new Response(
       JSON.stringify({ error: 'Unauthorized' }),
       { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
@@ -387,12 +397,13 @@ Deno.serve(async (req) => {
     
     const projectsWithVariance: ProjectWithVariance[] = aggregatedProjects.map(project => {
       const baseScore = project.weightedMindshare * 100;
-      
-      // Apply significant variance so output differs meaningfully from source
-      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, 'mindshare', 0.30);
-      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, 'change', 0.35);
-      const adjustedScore = applyVariance(baseScore, project.ticker, 'score', 0.25);
-      
+
+      // Apply ±10% daily variance — values shift each day but stay close to source
+      const dayStamp = new Date().toISOString().slice(0, 10);
+      const adjustedMindshare = applyVariance(project.weightedMindshare, project.ticker, `mindshare_${dayStamp}`, 0.10);
+      const adjustedMindshareChange = applyVariance(project.weightedChange, project.ticker, `change_${dayStamp}`, 0.10);
+      const adjustedScore = applyVariance(baseScore, project.ticker, `score_${dayStamp}`, 0.10);
+
       return {
         ...project,
         adjustedMindshare,
