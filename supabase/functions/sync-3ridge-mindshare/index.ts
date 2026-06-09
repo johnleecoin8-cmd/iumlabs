@@ -63,8 +63,8 @@ function applyVariance(value: number, ticker: string, field: string, range: numb
 
 function applySparklineVariance(sparkline: number[], ticker: string): number[] {
   return sparkline.map((value, index) => {
-    const seed = tickerToSeed(ticker, `sparkline_${index}`);
-    const variance = (seededRandom(seed) - 0.5) * 2 * 0.15;
+    const seed = tickerToSeed(ticker, `sparkline_${index}_${new Date().toISOString().slice(0,10)}`);
+    const variance = (seededRandom(seed) - 0.5) * 2 * 0.10;
     return Math.max(0, Math.round(value * (1 + variance)));
   });
 }
