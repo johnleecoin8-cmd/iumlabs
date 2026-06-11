@@ -170,7 +170,7 @@ const GTMService = () => {
         <img src={gtmHeroImage} alt="" className="hero-bg" width={1200} height={800} />
         <div className="hero-overlay" />
         <div className="hero-center">
-          <h1>Korea GTM,<br /><span className="hero-accent">Engineered to Land.</span></h1>
+          <h1>Korea Web3 GTM Strategy &amp; Market Entry</h1>
           <p className="hero-desc">Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <strong>narrative</strong>, activate <strong>real KOLs</strong>, and run <strong>campaigns that convert</strong>.</p>
         </div>
         <div className="hero-stats">
