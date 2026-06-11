@@ -1,4 +1,5 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { STATS } from "@/data/stats";
 
 import logoCoindesk from "@/assets/logos/coindesk.png";
 import logoBlockmedia from "@/assets/logos/blockmedia-new.png";
@@ -17,9 +18,9 @@ const mediaLogos = [
 ];
 
 const stats = [
-  { value: "25+", label: "Projects Launched" },
-  { value: "230+", label: "KOLs in Network" },
-  { value: "116+", label: "Events Hosted" },
+  { value: STATS.koreaEntries.display, label: "Projects Launched" },
+  { value: STATS.kolNetwork.display, label: "KOLs in Network" },
+  { value: STATS.eventsHosted.display, label: "Events Hosted" },
   { value: "200+", label: "Media Placements" },
 ];
 

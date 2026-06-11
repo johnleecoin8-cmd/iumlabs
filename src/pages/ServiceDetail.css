@@ -4,7 +4,7 @@
   --black:#eae7e0;--ink:#d4d0c8;--char:#b8b4ac;
   --g1:#bbb;--g2:#888;--g3:#666;--g4:rgba(255,255,255,.12);--g5:rgba(255,255,255,.06);
   --blue:#4A7CFF;--blue-soft:rgba(74,124,255,.06);--blue-mid:rgba(74,124,255,.15);
-  --serif:'Cormorant Garamond',Georgia,serif;
+  --serif:'DM Sans','Inter',-apple-system,sans-serif; /* unified with site type system — was Cormorant Garamond */
   --sans:'DM Sans','Inter',sans-serif;
   --mono:'IBM Plex Mono',monospace;
   --kr:'Noto Sans KR',sans-serif;

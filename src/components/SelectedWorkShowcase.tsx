@@ -254,6 +254,10 @@ const DesktopShowcase = () => {
         );
       })}
 
+      {/* Readability scrims — keep list (left) and mission (right) legible over bright footage */}
+      <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-r from-black/90 via-black/35 to-transparent" />
+      <div className="hidden lg:block absolute inset-0 z-[5] pointer-events-none bg-gradient-to-l from-black/70 via-transparent to-transparent" />
+
       <div className="relative z-10 h-full flex flex-col lg:flex-row">
         <div
           className="w-full lg:w-2/5 h-full flex flex-col justify-center px-5 py-6 lg:px-12 lg:py-0 lg:px-16"
@@ -283,13 +287,13 @@ const DesktopShowcase = () => {
                   onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
+                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/35'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
+                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/55 group-hover:text-white/80'}`}>
                       {project.name}
                     </span>
-                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 text-left ${activeIndex === i ? 'text-white/50' : 'text-white/15'}`}>
+                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 text-left ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>
                       {project.category}
                     </span>
                     <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />

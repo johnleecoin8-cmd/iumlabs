@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
+import { STATS } from "@/data/stats";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
@@ -119,10 +120,10 @@ interface Project {
 }
 
 const stats = [
-  { value: 22, label: "Korea Entries", suffix: "+" },
-  { value: 130, label: "Avg. Impression", suffix: "K" },
-  { value: 7, label: "Client Valuation", prefix: "$", suffix: "B+" },
-  { value: 2, label: "Avg. Community Users", suffix: "K+" },
+  { value: STATS.koreaEntries.value, label: STATS.koreaEntries.label, suffix: STATS.koreaEntries.suffix },
+  { value: STATS.avgImpression.value, label: STATS.avgImpression.label, suffix: STATS.avgImpression.suffix },
+  { value: STATS.clientValuation.value, label: STATS.clientValuation.label, prefix: STATS.clientValuation.prefix, suffix: STATS.clientValuation.suffix },
+  { value: STATS.avgCommunityUsers.value, label: STATS.avgCommunityUsers.label, suffix: STATS.avgCommunityUsers.suffix },
 ];
 
 
@@ -193,9 +194,9 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
           <img
             src={project.bgImage}
             alt={project.name}
-            className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            className="w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 saturate-[0.8] brightness-[0.88] group-hover:saturate-100 group-hover:brightness-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent group-hover:opacity-100 transition-opacity duration-500" />
           <div className="absolute bottom-4 right-4 w-9 h-9 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
             <ArrowRight className="w-4 h-4 text-white" />
           </div>

@@ -72,7 +72,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
           alt={project.name}
           loading={index < 8 ? "eager" : "lazy"}
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06]"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06] saturate-[0.8] brightness-[0.88] group-hover:saturate-100 group-hover:brightness-100"
         />
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5" />

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
+import { STATS } from '@/data/stats';
 
 // Import media logos
 import coindeskLogo from "@/assets/logos/coindesk.png";
@@ -110,10 +111,10 @@ const WhyChooseUsSection = () => {
         <div className="max-w-5xl mx-auto px-6 sm:px-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12">
             {[
-              { value: "$8B+", label: "Client Valuation" },
-              { value: "230+", label: "KOL Network" },
-              { value: "25+", label: "Korea Entries" },
-              { value: "116+", label: "Events Hosted" },
+              { value: STATS.clientValuation.display, label: STATS.clientValuation.label },
+              { value: STATS.kolNetwork.display, label: STATS.kolNetwork.label },
+              { value: STATS.koreaEntries.display, label: STATS.koreaEntries.label },
+              { value: STATS.eventsHosted.display, label: STATS.eventsHosted.label },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-[-0.03em] leading-none mb-2 sm:mb-3">

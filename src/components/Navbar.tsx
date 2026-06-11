@@ -235,8 +235,8 @@ const Navbar = () => {
             <div
               className="flex items-center h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container px-3 sm:px-4"
               style={{
-                maskImage: 'linear-gradient(to right, transparent 0, black 18px, black calc(100% - 18px), transparent 100%)',
-                WebkitMaskImage: 'linear-gradient(to right, transparent 0, black 18px, black calc(100% - 18px), transparent 100%)',
+                maskImage: 'linear-gradient(to right, transparent 0, black 56px, black calc(100% - 56px), transparent 100%)',
+                WebkitMaskImage: 'linear-gradient(to right, transparent 0, black 56px, black calc(100% - 56px), transparent 100%)',
               }}
             >
               <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>

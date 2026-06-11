@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
+import { STATS } from "@/data/stats";
 
 // Client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -85,8 +86,8 @@ const defaultProcessIcons = [Search, Target, Rocket, TrendingUp];
 
 // Default stats
 const defaultStats: Stat[] = [
-  { value: "230+", label: "KOL Network" },
-  { value: "25+", label: "Korea Entries" },
+  { value: STATS.kolNetwork.display, label: STATS.kolNetwork.label },
+  { value: STATS.koreaEntries.display, label: STATS.koreaEntries.label },
 ];
 
 const ServiceDetailLayout = ({

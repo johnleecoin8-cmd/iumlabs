@@ -7,6 +7,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import SEOHead from "@/components/SEOHead";
 import CalendlyButton from "@/components/CalendlyButton";
+import { STATS } from "@/data/stats";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -57,9 +58,9 @@ const services = [
 ];
 
 const stats = [
-  { value: "25+", label: "Korea Entries" },
-  { value: "230+", label: "KOL Network" },
-  { value: "116+", label: "Events Hosted" },
+  { value: STATS.koreaEntries.display, label: STATS.koreaEntries.label },
+  { value: STATS.kolNetwork.display, label: STATS.kolNetwork.label },
+  { value: STATS.eventsHosted.display, label: STATS.eventsHosted.label },
 ];
 
 const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "Sahara AI"];
