@@ -121,6 +121,7 @@ const HeroSection = () => {
     autoPlay: true,
     preload: 'auto',
     lazyLoad: false,
+    lazyRootMargin: '100px',
   });
 
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
