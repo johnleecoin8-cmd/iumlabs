@@ -99,18 +99,6 @@ const MobileShowcase = () => {
                   decoding="async"
                   className="absolute inset-0 w-full h-full object-cover"
                 />
-                {project.video && (
-                  <video
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload={i <= 1 ? "auto" : "none"}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  >
-                    <source src={project.video} type="video/mp4" />
-                  </video>
-                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
 
                 <div className="absolute bottom-0 left-0 right-0 p-4">
