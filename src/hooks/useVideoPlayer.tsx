@@ -33,7 +33,7 @@ interface UseVideoPlayerOptions {
   maxRetries?: number;
   /** Load timeout in ms (default: 8000) */
   loadTimeout?: number;
-  /** Lazy load: only attach video source when element enters viewport (default: false) */
+  /** Lazy load: only attach video source when element enters viewport (default: true) */
   lazyLoad?: boolean;
   /** IntersectionObserver rootMargin for lazy load (default: '200px') */
   lazyRootMargin?: string;
@@ -144,7 +144,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     forceFirstFrame = false,
     maxRetries = 3,
     loadTimeout = 8000,
-    lazyLoad = false,
+    lazyLoad = true,
     lazyRootMargin = '200px',
   } = options;
 
@@ -408,6 +408,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout, tryPlay]);
 
   // Auto-play on mount with a single deterministic playback path.
+  // On mobile, lazy loading prevents below-the-fold background videos from
+  // competing with the hero video during initial page load.
   useEffect(() => {
     if (!autoPlay || shouldDisableVideo || hasVideoError || !shouldLoad) return;
 

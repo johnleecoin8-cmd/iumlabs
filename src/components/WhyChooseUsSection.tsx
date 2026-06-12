@@ -44,16 +44,21 @@ const descriptionVariants = {
 };
 
 const WhyChooseUsSection = () => {
-  const { videoRef, isVideoReady, optimizedSrc, videoProps } = useVideoPlayer({
+  const { videoRef, isVideoReady, optimizedSrc, videoProps, posterProps, ShimmerOverlay } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
     poster: '/images/posters/about-background-poster.jpg',
-    forceFirstFrame: true
+    forceFirstFrame: true,
+    lazyLoad: true,
+    preload: 'metadata',
+    loadTimeout: 12000,
   });
 
   return (
     <section className="relative overflow-hidden">
       {/* Fullscreen Video Background */}
       <div className="absolute inset-0 z-0">
+        <img {...posterProps} decoding="async" />
+        <ShimmerOverlay />
         <video
           ref={videoRef}
           src={optimizedSrc}
