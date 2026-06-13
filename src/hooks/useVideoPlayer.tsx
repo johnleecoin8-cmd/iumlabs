@@ -107,6 +107,10 @@ interface UseVideoPlayerReturn {
 
 const MAX_PLAY_ATTEMPTS = 8;
 const PLAY_COOLDOWN_MS = 1800;
+const PLAY_RETRY_THROTTLE_MS = 250;
+const MOBILE_STALL_WINDOW_MS = 2600;
+const MOBILE_RELOAD_COOLDOWN_MS = 2200;
+const MAX_HARD_RELOADS = 2;
 
 const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
@@ -164,6 +168,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const frameCallbackIdRef = useRef<number | null>(null);
   const playAttemptsRef = useRef(0);
   const lastPlayAttemptRef = useRef(0);
+  const lastProgressAtRef = useRef(0);
+  const lastCurrentTimeRef = useRef(0);
+  const lastHardReloadAtRef = useRef(0);
+  const hardReloadCountRef = useRef(0);
+  const loadGateOpenedAtRef = useRef(0);
   const [debugTick, setDebugTick] = useState(0);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
@@ -313,11 +322,38 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     frameCallbackIdRef.current = null;
   }, []);
 
+  const hardReload = useCallback((video: HTMLVideoElement, reason: string) => {
+    const now = performance.now();
+    if (hardReloadCountRef.current >= MAX_HARD_RELOADS) return;
+    if (now - lastHardReloadAtRef.current < MOBILE_RELOAD_COOLDOWN_MS) return;
+
+    hardReloadCountRef.current += 1;
+    lastHardReloadAtRef.current = now;
+    readyRef.current = false;
+    frameReadyRef.current = false;
+    setIsVideoReady(false);
+    setDebugTick((t) => t + 1);
+    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS} — ${reason}`);
+
+    try {
+      video.pause();
+      video.load();
+    } catch {
+      return;
+    }
+
+    window.setTimeout(() => {
+      if (video.isConnected) {
+        tryPlay(video);
+      }
+    }, 80);
+  }, [tryPlay]);
+
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
     if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
     const now = performance.now();
-    if (now - lastPlayAttemptRef.current < 250) return; // throttle bursts
+    if (now - lastPlayAttemptRef.current < PLAY_RETRY_THROTTLE_MS) return; // throttle bursts
     lastPlayAttemptRef.current = now;
     playAttemptsRef.current += 1;
     setDebugTick((t) => t + 1);
@@ -331,6 +367,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (p && typeof p.then === 'function') {
         await p;
       }
+      lastProgressAtRef.current = performance.now();
     } catch {
       // Silent — bounded retry handled by the interval/burst caller.
     }
