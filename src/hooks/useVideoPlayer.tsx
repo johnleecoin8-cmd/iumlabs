@@ -453,6 +453,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const video = videoRef.current;
     if (!video) return;
     let clearPlaybackBurst = () => {};
+    loadGateOpenedAtRef.current = performance.now();
+    lastProgressAtRef.current = performance.now();
+    lastCurrentTimeRef.current = video.currentTime;
 
     const playNow = (delay = 0) => {
       clearPlaybackBurst();
@@ -461,12 +464,18 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     // Reliable playback detection via timeupdate
     const handleTimeUpdate = () => {
+      if (video.currentTime > lastCurrentTimeRef.current + 0.01) {
+        lastCurrentTimeRef.current = video.currentTime;
+        lastProgressAtRef.current = performance.now();
+      }
       if (video.currentTime > 0) {
         scheduleFrameReady(video);
       }
     };
 
     const handlePlaying = () => {
+      lastProgressAtRef.current = performance.now();
+      lastCurrentTimeRef.current = video.currentTime;
       scheduleFrameReady(video);
     };
 
@@ -497,6 +506,35 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       tryPlay(video);
     }, PLAY_COOLDOWN_MS);
 
+    const stallMonitor = window.setInterval(() => {
+      if (!video.isConnected || document.visibilityState !== 'visible') return;
+
+      const now = performance.now();
+      const madeProgress = video.currentTime > lastCurrentTimeRef.current + 0.01;
+      if (madeProgress) {
+        lastCurrentTimeRef.current = video.currentTime;
+        lastProgressAtRef.current = now;
+      }
+
+      if (!readyRef.current && video.readyState >= 2 && video.currentTime > 0) {
+        scheduleFrameReady(video);
+      }
+
+      if (!isMobile) return;
+
+      const stalledFor = now - lastProgressAtRef.current;
+      const exceededInitialWindow = now - loadGateOpenedAtRef.current > MOBILE_STALL_WINDOW_MS;
+
+      if (video.paused && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
+        tryPlay(video);
+        return;
+      }
+
+      if (exceededInitialWindow && stalledFor > MOBILE_STALL_WINDOW_MS) {
+        hardReload(video, video.paused ? 'paused on mobile after load window' : 'currentTime stalled on mobile');
+      }
+    }, 1200);
+
     // Also try on user interaction (for strict autoplay policies)
     const handleUserInteraction = () => {
       tryPlay(video);
@@ -516,6 +554,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     return () => {
       clearInterval(retryInterval);
+      window.clearInterval(stallMonitor);
       clearPlaybackBurst();
       clearFrameReadyCallback(video);
       video.removeEventListener('timeupdate', handleTimeUpdate);
@@ -526,7 +565,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
     };
-  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, tryPlay, triggerPlaybackBurst, scheduleFrameReady, clearFrameReadyCallback]);
+  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, isMobile, tryPlay, hardReload, triggerPlaybackBurst, scheduleFrameReady, clearFrameReadyCallback]);
 
   // Cache bust verification via Performance API
   useEffect(() => {
@@ -562,6 +601,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     readyRef.current = false;
     frameReadyRef.current = false;
     frameCallbackIdRef.current = null;
+    lastProgressAtRef.current = 0;
+    lastCurrentTimeRef.current = 0;
+    lastHardReloadAtRef.current = 0;
+    hardReloadCountRef.current = 0;
+    loadGateOpenedAtRef.current = 0;
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
@@ -574,6 +618,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     if (!shouldLoad) return;
     const video = videoRef.current;
     if (!video) return;
+    loadGateOpenedAtRef.current = performance.now();
+    lastProgressAtRef.current = performance.now();
+    lastCurrentTimeRef.current = video.currentTime;
     try {
       video.load();
     } catch {}
