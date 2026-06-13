@@ -59,7 +59,7 @@ const MobileDeferredSection = ({ children, minHeight = "60vh" }: { children: Rea
 
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] md:snap-y md:snap-proximity md:overflow-y-auto md:h-screen scrollbar-hide">
-      <SEOHead title="Korea Crypto Marketing Agency & Web3 GTM | ium Labs" description="Strategic Korea crypto ecosystem growth partner for Web3 market entry. Delivering data-backed GTM, KOL, and PR solutions for global blockchain networks." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'Web3 ecosystem partner Korea', 'crypto GTM Seoul', 'Korea market entry crypto', 'Korean KOL marketing', 'influencer campaigns Korea', 'blockchain agency Seoul', 'crypto PR Korea']} />
+      <SEOHead title="Korea Crypto Marketing Agency & Web3 GTM | ium Labs" description="Korea's Web3 & crypto marketing agency. Full-stack Go-To-Market (GTM): KOL/influencer, PR, community, and digital marketing for global blockchain projects entering the Korean market." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'crypto marketing agency', 'Web3 marketing agency', 'blockchain marketing agency', 'crypto GTM agency', 'Web3 go-to-market agency', 'crypto digital marketing agency', 'Web3 digital marketing', 'Korean KOL marketing', 'crypto influencer marketing Korea', 'crypto PR Korea', 'DePIN marketing agency', 'RWA marketing agency', 'AI crypto marketing', 'Korea market entry crypto', 'Web3 GTM Seoul']} />
       
       <Navbar />
 
