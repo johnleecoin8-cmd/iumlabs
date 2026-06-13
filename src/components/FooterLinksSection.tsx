@@ -11,6 +11,7 @@ const navSections = [
       { name: "PR & Media", href: "/services/pr" },
       { name: "Offline Events", href: "/services/offline-event" },
       { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+      { name: "Liquidity & Market Making", href: "/services/liquidity" },
     ],
   },
   {

@@ -35,6 +35,7 @@ const STATIC_ROUTES = [
   { path: '/services/ama', priority: '0.65', changefreq: 'weekly' },
   { path: '/services/seo-ads', priority: '0.65', changefreq: 'weekly' },
   { path: '/services/offline-event', priority: '0.65', changefreq: 'weekly' },
+  { path: '/services/liquidity', priority: '0.8', changefreq: 'weekly' },
 
   // SEO landing pages
   { path: '/crypto-marketing-korea', priority: '0.9', changefreq: 'weekly' },

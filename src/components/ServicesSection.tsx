@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, Target, FileSearch, Droplets } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
@@ -10,6 +10,7 @@ import prImage from "@/assets/services/pr-coindesk.jpg";
 import seoAdsImage from "@/assets/services/seo-naver.jpg";
 import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
+import liquidityImage from "@/assets/platforms/comp-exchange.jpg";
 
 const services = [
   {
@@ -154,6 +155,22 @@ const services = [
       "Native Korean-speaking professional hosts",
       "Pre-event promotion & question curation",
       "Post-AMA recap content & analytics",
+    ],
+  },
+  {
+    number: "10",
+    title: "Liquidity & Market Making",
+    description: "Exchange-grade order-book depth from listing day.",
+    link: "/services/liquidity",
+    icon: Droplets,
+    image: liquidityImage,
+    accent: "#00E0B8",
+    proof: "Upbit & Bithumb liquidity coordination",
+    details: [
+      "Liquidity strategy & order-book sizing",
+      "Vetted market-maker desk matching",
+      "Listing-day depth & spread management",
+      "Compliant — never wash trading",
     ],
   },
 ];
