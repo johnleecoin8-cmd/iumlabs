@@ -11,6 +11,7 @@ const services = [
   { slug: "ama", title: "AMA Hosting" },
   { slug: "deep-research", title: "Deep Research" },
   { slug: "compliance", title: "Compliance" },
+  { slug: "liquidity", title: "Liquidity & Market Making" },
 ];
 
 const ServiceNav = () => {

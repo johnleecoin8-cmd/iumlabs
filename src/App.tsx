@@ -26,6 +26,7 @@ const DeepResearchService = React.lazy(() => import("./pages/DeepResearchService
 const InfluencerService = React.lazy(() => import("./pages/InfluencerService"));
 const PRService = React.lazy(() => import("./pages/PRService"));
 const AMAService = React.lazy(() => import("./pages/AMAService"));
+const LiquidityService = React.lazy(() => import("./pages/LiquidityService"));
 const Terms = React.lazy(() => import("./pages/Terms"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
 const Transparency = React.lazy(() => import("./pages/Transparency"));
@@ -183,6 +184,7 @@ const AppRoutes = () => {
         <Route path="/services/influencer" element={<InfluencerService />} />
         <Route path="/services/pr" element={<PRService />} />
         <Route path="/services/ama" element={<AMAService />} />
+        <Route path="/services/liquidity" element={<LiquidityService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
