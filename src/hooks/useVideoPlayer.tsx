@@ -105,12 +105,12 @@ interface UseVideoPlayerReturn {
   DebugBanner: React.FC;
 }
 
-const MAX_PLAY_ATTEMPTS = 8;
-const PLAY_COOLDOWN_MS = 1800;
-const PLAY_RETRY_THROTTLE_MS = 250;
-const MOBILE_STALL_WINDOW_MS = 2600;
-const MOBILE_RELOAD_COOLDOWN_MS = 2200;
-const MAX_HARD_RELOADS = 2;
+const MAX_PLAY_ATTEMPTS = 10;
+const PLAY_COOLDOWN_MS = 1200;
+const PLAY_RETRY_THROTTLE_MS = 120;
+const MOBILE_STALL_WINDOW_MS = 1800;
+const MOBILE_RELOAD_COOLDOWN_MS = 1600;
+const MAX_HARD_RELOADS = 4;
 
 const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
@@ -173,6 +173,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const lastHardReloadAtRef = useRef(0);
   const hardReloadCountRef = useRef(0);
   const loadGateOpenedAtRef = useRef(0);
+  const playPromiseRef = useRef<Promise<void> | null>(null);
   const [debugTick, setDebugTick] = useState(0);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
@@ -324,6 +325,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   const tryPlay = useCallback(async (video: HTMLVideoElement) => {
     if (!video.paused) return;
+    if (playPromiseRef.current) return;
     if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
     const now = performance.now();
     if (now - lastPlayAttemptRef.current < PLAY_RETRY_THROTTLE_MS) return; // throttle bursts
@@ -334,15 +336,20 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('autoplay', '');
+    video.removeAttribute('controls');
+    video.controls = false;
     video.defaultMuted = true;
     try {
-      const p = video.play();
+      const p = Promise.resolve(video.play());
+      playPromiseRef.current = p;
       if (p && typeof p.then === 'function') {
         await p;
       }
       lastProgressAtRef.current = performance.now();
     } catch {
       // Silent — bounded retry handled by the interval/burst caller.
+    } finally {
+      playPromiseRef.current = null;
     }
   }, []);
 
@@ -359,10 +366,14 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setDebugTick((t) => t + 1);
     console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS} — ${reason}`);
 
-    try {
-      video.pause();
-      video.load();
-    } catch {
+     try {
+       video.pause();
+       const currentSrc = video.currentSrc || video.src || optimizedSrc;
+       if (currentSrc) {
+         video.src = currentSrc.includes('_mr=') ? currentSrc.replace(/([?&])_mr=[^&#]*/g, '$1_mr=' + Date.now()) : `${currentSrc}${currentSrc.includes('?') ? '&' : '?'}_mr=${Date.now()}`;
+       }
+       video.load();
+     } catch {
       return;
     }
 
@@ -371,7 +382,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         tryPlay(video);
       }
     }, 80);
-  }, [tryPlay]);
+  }, [optimizedSrc, tryPlay]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
@@ -506,7 +517,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       tryPlay(video);
     }, PLAY_COOLDOWN_MS);
 
-    const stallMonitor = window.setInterval(() => {
+     const stallMonitor = window.setInterval(() => {
       if (!video.isConnected || document.visibilityState !== 'visible') return;
 
       const now = performance.now();
@@ -525,12 +536,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       const stalledFor = now - lastProgressAtRef.current;
       const exceededInitialWindow = now - loadGateOpenedAtRef.current > MOBILE_STALL_WINDOW_MS;
 
-      if (video.paused && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
+       if ((video.paused || video.readyState < 3) && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
         tryPlay(video);
         return;
       }
 
-      if (exceededInitialWindow && stalledFor > MOBILE_STALL_WINDOW_MS) {
+       if (exceededInitialWindow && (stalledFor > MOBILE_STALL_WINDOW_MS || (video.currentTime <= 0.01 && video.readyState >= 2))) {
         hardReload(video, video.paused ? 'paused on mobile after load window' : 'currentTime stalled on mobile');
       }
     }, 1200);
