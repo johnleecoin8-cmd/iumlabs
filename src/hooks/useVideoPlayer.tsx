@@ -322,6 +322,30 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     frameCallbackIdRef.current = null;
   }, []);
 
+  const tryPlay = useCallback(async (video: HTMLVideoElement) => {
+    if (!video.paused) return;
+    if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
+    const now = performance.now();
+    if (now - lastPlayAttemptRef.current < PLAY_RETRY_THROTTLE_MS) return; // throttle bursts
+    lastPlayAttemptRef.current = now;
+    playAttemptsRef.current += 1;
+    setDebugTick((t) => t + 1);
+    video.muted = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('autoplay', '');
+    video.defaultMuted = true;
+    try {
+      const p = video.play();
+      if (p && typeof p.then === 'function') {
+        await p;
+      }
+      lastProgressAtRef.current = performance.now();
+    } catch {
+      // Silent — bounded retry handled by the interval/burst caller.
+    }
+  }, []);
+
   const hardReload = useCallback((video: HTMLVideoElement, reason: string) => {
     const now = performance.now();
     if (hardReloadCountRef.current >= MAX_HARD_RELOADS) return;
@@ -348,30 +372,6 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       }
     }, 80);
   }, [tryPlay]);
-
-  const tryPlay = useCallback(async (video: HTMLVideoElement) => {
-    if (!video.paused) return;
-    if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
-    const now = performance.now();
-    if (now - lastPlayAttemptRef.current < PLAY_RETRY_THROTTLE_MS) return; // throttle bursts
-    lastPlayAttemptRef.current = now;
-    playAttemptsRef.current += 1;
-    setDebugTick((t) => t + 1);
-    video.muted = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('playsinline', '');
-    video.setAttribute('autoplay', '');
-    video.defaultMuted = true;
-    try {
-      const p = video.play();
-      if (p && typeof p.then === 'function') {
-        await p;
-      }
-      lastProgressAtRef.current = performance.now();
-    } catch {
-      // Silent — bounded retry handled by the interval/burst caller.
-    }
-  }, []);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];

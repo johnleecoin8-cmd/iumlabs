@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useVideoPlayer } from '@/hooks/useVideoPlayer';
 import { STATS } from '@/data/stats';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Import media logos
 import coindeskLogo from "@/assets/logos/coindesk.png";
@@ -44,12 +45,14 @@ const descriptionVariants = {
 };
 
 const WhyChooseUsSection = () => {
+  const isMobile = useIsMobile();
   const { videoRef, isVideoReady, optimizedSrc, videoProps, posterProps, ShimmerOverlay } = useVideoPlayer({
     src: '/videos/about-background.mp4?v=3',
     poster: '/images/posters/about-background-poster.jpg',
     forceFirstFrame: true,
     lazyLoad: true,
-    preload: 'metadata',
+    lazyRootMargin: isMobile ? '0px' : '200px',
+    preload: isMobile ? 'none' : 'metadata',
     loadTimeout: 12000,
   });
 
