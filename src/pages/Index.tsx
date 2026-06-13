@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
@@ -7,6 +7,7 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { Link } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
@@ -16,6 +17,44 @@ const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
+
+const MobileDeferredSection = ({ children, minHeight = "60vh" }: { children: ReactNode; minHeight?: string }) => {
+  const isMobile = useIsMobile();
+  const [shouldRender, setShouldRender] = useState(!isMobile);
+  const mountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setShouldRender(true);
+      return;
+    }
+
+    const el = mountRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setShouldRender(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldRender(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "220px 0px", threshold: 0.01 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  return (
+    <div ref={mountRef} style={isMobile && !shouldRender ? { minHeight } : undefined}>
+      {shouldRender ? children : null}
+    </div>
+  );
+};
 
 
 const Index = () => {
@@ -36,18 +75,22 @@ const Index = () => {
 
       {/* About */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="why-choose-us">
-        <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
-          <WhyChooseUsSection />
-        </div>
+        <MobileDeferredSection minHeight="90vh">
+          <div className="sm:rounded-3xl overflow-hidden bg-[#111] border border-white/[0.06]">
+            <WhyChooseUsSection />
+          </div>
+        </MobileDeferredSection>
       </section>
 
       {/* Selected Work */}
       <section className="sm:px-4 sm:pt-3 snap-start" id="selected-work">
-        <div className="sm:rounded-3xl overflow-hidden">
-          <Suspense fallback={<SectionLoader />}>
-            <SelectedWorkShowcase />
-          </Suspense>
-        </div>
+        <MobileDeferredSection minHeight="70vh">
+          <div className="sm:rounded-3xl overflow-hidden">
+            <Suspense fallback={<SectionLoader />}>
+              <SelectedWorkShowcase />
+            </Suspense>
+          </div>
+        </MobileDeferredSection>
       </section>
 
       {/* Services */}

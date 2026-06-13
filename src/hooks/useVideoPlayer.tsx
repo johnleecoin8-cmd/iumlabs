@@ -107,6 +107,10 @@ interface UseVideoPlayerReturn {
 
 const MAX_PLAY_ATTEMPTS = 8;
 const PLAY_COOLDOWN_MS = 1800;
+const PLAY_RETRY_THROTTLE_MS = 250;
+const MOBILE_STALL_WINDOW_MS = 2600;
+const MOBILE_RELOAD_COOLDOWN_MS = 2200;
+const MAX_HARD_RELOADS = 2;
 
 const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
@@ -164,6 +168,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const frameCallbackIdRef = useRef<number | null>(null);
   const playAttemptsRef = useRef(0);
   const lastPlayAttemptRef = useRef(0);
+  const lastProgressAtRef = useRef(0);
+  const lastCurrentTimeRef = useRef(0);
+  const lastHardReloadAtRef = useRef(0);
+  const hardReloadCountRef = useRef(0);
+  const loadGateOpenedAtRef = useRef(0);
   const [debugTick, setDebugTick] = useState(0);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
@@ -317,7 +326,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     if (!video.paused) return;
     if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) return;
     const now = performance.now();
-    if (now - lastPlayAttemptRef.current < 250) return; // throttle bursts
+    if (now - lastPlayAttemptRef.current < PLAY_RETRY_THROTTLE_MS) return; // throttle bursts
     lastPlayAttemptRef.current = now;
     playAttemptsRef.current += 1;
     setDebugTick((t) => t + 1);
@@ -331,10 +340,38 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (p && typeof p.then === 'function') {
         await p;
       }
+      lastProgressAtRef.current = performance.now();
     } catch {
       // Silent — bounded retry handled by the interval/burst caller.
     }
   }, []);
+
+  const hardReload = useCallback((video: HTMLVideoElement, reason: string) => {
+    const now = performance.now();
+    if (hardReloadCountRef.current >= MAX_HARD_RELOADS) return;
+    if (now - lastHardReloadAtRef.current < MOBILE_RELOAD_COOLDOWN_MS) return;
+
+    hardReloadCountRef.current += 1;
+    lastHardReloadAtRef.current = now;
+    readyRef.current = false;
+    frameReadyRef.current = false;
+    setIsVideoReady(false);
+    setDebugTick((t) => t + 1);
+    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS} — ${reason}`);
+
+    try {
+      video.pause();
+      video.load();
+    } catch {
+      return;
+    }
+
+    window.setTimeout(() => {
+      if (video.isConnected) {
+        tryPlay(video);
+      }
+    }, 80);
+  }, [tryPlay]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
@@ -416,6 +453,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const video = videoRef.current;
     if (!video) return;
     let clearPlaybackBurst = () => {};
+    loadGateOpenedAtRef.current = performance.now();
+    lastProgressAtRef.current = performance.now();
+    lastCurrentTimeRef.current = video.currentTime;
 
     const playNow = (delay = 0) => {
       clearPlaybackBurst();
@@ -424,12 +464,18 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     // Reliable playback detection via timeupdate
     const handleTimeUpdate = () => {
+      if (video.currentTime > lastCurrentTimeRef.current + 0.01) {
+        lastCurrentTimeRef.current = video.currentTime;
+        lastProgressAtRef.current = performance.now();
+      }
       if (video.currentTime > 0) {
         scheduleFrameReady(video);
       }
     };
 
     const handlePlaying = () => {
+      lastProgressAtRef.current = performance.now();
+      lastCurrentTimeRef.current = video.currentTime;
       scheduleFrameReady(video);
     };
 
@@ -460,6 +506,35 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       tryPlay(video);
     }, PLAY_COOLDOWN_MS);
 
+    const stallMonitor = window.setInterval(() => {
+      if (!video.isConnected || document.visibilityState !== 'visible') return;
+
+      const now = performance.now();
+      const madeProgress = video.currentTime > lastCurrentTimeRef.current + 0.01;
+      if (madeProgress) {
+        lastCurrentTimeRef.current = video.currentTime;
+        lastProgressAtRef.current = now;
+      }
+
+      if (!readyRef.current && video.readyState >= 2 && video.currentTime > 0) {
+        scheduleFrameReady(video);
+      }
+
+      if (!isMobile) return;
+
+      const stalledFor = now - lastProgressAtRef.current;
+      const exceededInitialWindow = now - loadGateOpenedAtRef.current > MOBILE_STALL_WINDOW_MS;
+
+      if (video.paused && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
+        tryPlay(video);
+        return;
+      }
+
+      if (exceededInitialWindow && stalledFor > MOBILE_STALL_WINDOW_MS) {
+        hardReload(video, video.paused ? 'paused on mobile after load window' : 'currentTime stalled on mobile');
+      }
+    }, 1200);
+
     // Also try on user interaction (for strict autoplay policies)
     const handleUserInteraction = () => {
       tryPlay(video);
@@ -472,24 +547,29 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     };
 
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
+    document.addEventListener('touchmove', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
+    window.addEventListener('scroll', handleUserInteraction, { passive: true });
     window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
     window.addEventListener('focus', handleVisibilityResume, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
 
     return () => {
       clearInterval(retryInterval);
+      window.clearInterval(stallMonitor);
       clearPlaybackBurst();
       clearFrameReadyCallback(video);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('playing', handlePlaying);
       document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('touchmove', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
+      window.removeEventListener('scroll', handleUserInteraction);
       window.removeEventListener('pageshow', handleVisibilityResume);
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
     };
-  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, tryPlay, triggerPlaybackBurst, scheduleFrameReady, clearFrameReadyCallback]);
+  }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, shouldLoad, isMobile, tryPlay, hardReload, triggerPlaybackBurst, scheduleFrameReady, clearFrameReadyCallback]);
 
   // Cache bust verification via Performance API
   useEffect(() => {
@@ -525,6 +605,11 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     readyRef.current = false;
     frameReadyRef.current = false;
     frameCallbackIdRef.current = null;
+    lastProgressAtRef.current = 0;
+    lastCurrentTimeRef.current = 0;
+    lastHardReloadAtRef.current = 0;
+    hardReloadCountRef.current = 0;
+    loadGateOpenedAtRef.current = 0;
     setIsVideoReady(false);
     setHasVideoError(false);
     setRetryCount(0);
@@ -537,6 +622,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     if (!shouldLoad) return;
     const video = videoRef.current;
     if (!video) return;
+    loadGateOpenedAtRef.current = performance.now();
+    lastProgressAtRef.current = performance.now();
+    lastCurrentTimeRef.current = video.currentTime;
     try {
       video.load();
     } catch {}
