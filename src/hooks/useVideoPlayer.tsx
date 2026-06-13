@@ -547,7 +547,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     };
 
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
+    document.addEventListener('touchmove', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
+    window.addEventListener('scroll', handleUserInteraction, { passive: true });
     window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
     window.addEventListener('focus', handleVisibilityResume, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
@@ -560,7 +562,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('playing', handlePlaying);
       document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('touchmove', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
+      window.removeEventListener('scroll', handleUserInteraction);
       window.removeEventListener('pageshow', handleVisibilityResume);
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
