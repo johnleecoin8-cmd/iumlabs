@@ -24,6 +24,19 @@ const navSections = [
     ],
   },
   {
+    title: "Korea Guides",
+    links: [
+      { name: "Crypto Marketing Korea", href: "/crypto-marketing-korea" },
+      { name: "KOL Marketing Korea", href: "/kol-marketing-korea" },
+      { name: "Korea Web3 Guide", href: "/korea-web3-guide" },
+      { name: "Korea Community Management", href: "/korea-community-management" },
+      { name: "Korea PR & Media", href: "/korea-pr-media" },
+      { name: "Korea Event Marketing", href: "/korea-event-marketing" },
+      { name: "Korea Naver SEO", href: "/korea-seo-naver" },
+      { name: "Korea Exchange Listing", href: "/korea-exchange-listing" },
+    ],
+  },
+  {
     title: "Legal",
     links: [
       { name: "Terms", href: "/terms" },
@@ -43,7 +56,7 @@ const FooterLinksSection = () => {
         <div className="py-12 sm:py-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6">
 
-            <div className="col-span-2 md:col-span-5">
+            <div className="col-span-2 md:col-span-4">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] mb-5">
                 {brand.name}
               </h2>
@@ -51,14 +64,12 @@ const FooterLinksSection = () => {
                 Korea's leading Web3 growth partner. From strategy to execution, we engineer your market entry.
               </p>
               <div className="flex items-center gap-5">
-                
+
                 <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">LinkedIn</a>
                 <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">Telegram</a>
                 <a href={`mailto:${brand.email}`} className="text-white/30 hover:text-white transition-colors text-sm font-medium">Email</a>
               </div>
             </div>
-
-            <div className="hidden md:block md:col-span-1" />
 
             {navSections.map((section) => (
               <div key={section.title} className="hidden md:block col-span-1 md:col-span-2">
