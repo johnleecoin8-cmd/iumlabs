@@ -78,6 +78,333 @@ import strategyPlanning from "@/assets/process/strategy-planning.jpg";
 
 export const staticResearchPosts = [
   {
+    id: "static-rwa-trust-gap",
+    slug: "korea-rwa-tokenized-assets-trust-gap-sto-2026",
+    title: "Korea's RWA Opening: Why Tokenized Assets Need a Trust-First GTM",
+    image: stablecoinImg,
+    date: "June 12, 2026",
+    readTime: "17 min read",
+    category: "Market Research",
+    author: "David",
+    authorRole: "CEO",
+    authorBio: "David is the CEO and co-founder of ium Labs, leading strategic direction for one of Korea's most active Web3 marketing agencies. His background spans traditional finance and blockchain infrastructure, with a focus on institutional market dynamics and cross-border crypto flows.",
+    excerpt: "Korea built one of Asia's most defined tokenized-securities (STO) frameworks, yet global RWA protocols keep stalling before Korean retail. A breakdown of the trust gap, the institution-first path, and the GTM that actually converts.",
+    tags: ["RWA", "tokenized assets", "STO", "Korea", "Ondo", "market entry"],
+    chartImages: {
+      marketOverview: seoulGangnam,
+      rwaStack: chartInstitutional,
+      trustGap: chartValuation,
+      pathComparison: compExchange,
+      adoptionCurve: chartGrowth2025,
+      timeline: chartAvoidFlop,
+    },
+    content: `>! **Key Takeaways**
+>! Korea has one of Asia's most defined tokenized-securities regimes — the FSC's STO framework — yet most global RWA protocols treat Korea as a generic retail market and stall
+>! Korean RWA demand is **institution-first**: banks, securities firms, and family offices move before retail, inverting the usual crypto adoption curve
+>! Retail hesitation is a **trust-architecture problem**, not an education problem — Korean investors anchor expectations to KRX-grade custody and disclosure
+>! Protocols that localize around custody, regulatory clarity, and named institutional partners convert **3-4x** better than those leading with yield APYs
+>! The winning RWA narrative in Korea is "regulated yield," not "DeFi yield"
+
+## Executive Summary
+
+Real-world assets are the cleanest institutional on-ramp in crypto, and Korea should be a flagship market: deep capital pools, a savings-heavy retail base, and a government that has spent three years building a tokenized-securities framework. Yet most global RWA protocols — tokenized treasuries, private credit, tokenized funds — land in Korea, run a standard retail playbook, and stall.
+
+![Seoul's financial district, where Korea's institutional capital and its tokenized-securities framework converge](chart:marketOverview)
+*Korea's RWA opportunity sits at the intersection of regulated finance and Web3 — and is won there, not on crypto-native channels alone*
+
+The gap is not demand. It is a mismatch between how global RWA teams position and how Korean capital actually forms trust. This report maps that gap and the go-to-market structure that closes it.
+
+## Two RWA Markets, Not One
+
+Korea is really two distinct opportunities that global teams collapse into one.
+
+%%STO vs RWA::Korea regulates tokenized securities (STO) under its own FSC framework, separate from how global "RWA" protocols are perceived — conflating the two is the most common positioning error%%
+
+### Track 1: Domestic STO
+
+Korea's Financial Services Commission has progressively built a Security Token Offering framework, pulling tokenized real-world assets — real estate, revenue rights, content royalties — into a regulated perimeter run through licensed securities firms. This is a banks-and-brokerages game. Distribution flows through KRX-adjacent rails, not crypto exchanges.
+
+### Track 2: Global RWA Protocols
+
+Tokenized U.S. treasuries and institutional funds — the [Ondo](https://ondo.finance/), BUIDL, and tokenized-credit category — enter Korea as crypto assets. Their buyers are crypto-native funds, treasuries, and sophisticated retail. This track moves through the channels we cover in our [deep research](/services/deep-research) and [GTM](/services/gtm) practices.
+
+The fatal mistake is running a Track 2 product with a Track 1 promise — implying regulated-security safety while shipping a crypto-rails product. Korean investors detect that gap instantly.
+
+![The Korean RWA stack — regulated STO rails and crypto-native protocols serve different buyers](chart:rwaStack)
+*The two tracks rarely share a buyer, a channel, or a trust model*
+
+## The Trust Gap
+
+Korean retail does not hesitate on RWA because it misunderstands tokenization. It hesitates because the trust architecture is unfamiliar.
+
+![Where Korean RWA trust forms — custody, disclosure, and named counterparties outrank APY](chart:trustGap)
+*Korean investors price trust through institutional anchors, not protocol design*
+
+### Barrier 1: Custody Ambiguity
+
+Korean investors anchor to KRX-grade custody and the depositor protections of regulated brokerages. "Self-custodied tokenized treasury" reads as risk, not innovation. The question is never "what is the APY" — it is "who holds the underlying, and what happens if they fail."
+
+### Barrier 2: Disclosure Expectations
+
+Korean securities culture expects standardized, Korean-language disclosure. A protocol whitepaper and an English dashboard do not satisfy an investor conditioned by KRX filings. Absent that, even sophisticated buyers default to "wait."
+
+### Barrier 3: Counterparty Legibility
+
+Korean capital trusts named institutions before it trusts code. A tokenized fund backed by an unfamiliar offshore entity faces a discount that no yield can overcome. The fastest trust unlock is a recognizable Korean or global institutional partner, surfaced early.
+
+> **"Korean investors don't buy yield from a protocol. They buy safety from a counterparty, and accept the yield that comes with it. RWA teams that lead with APY are answering a question nobody asked."**
+> — David, CEO, ium Labs
+
+## The Institution-First Inversion
+
+Most crypto narratives diffuse retail-first, then institutional. Korean RWA inverts this.
+
+| Adoption stage | Typical crypto asset | Korea RWA |
+|---|---|---|
+| First movers | Retail degens | Securities firms, banks |
+| Validation layer | KOLs, communities | Institutional desks, family offices |
+| Mainstream entry | Retail majority | Sophisticated retail, following institutions |
+| Trust signal | Price action | Regulatory clarity + named partners |
+
+![Korea's RWA adoption curve inverts the usual crypto pattern — institutions lead, retail follows](chart:adoptionCurve)
+*The signal Korean retail waits for is institutional participation, not influencer hype*
+
+This inversion rewrites the GTM. KOL-led launches that work for memecoins underperform for RWA, because the audience that validates RWA is institutional, and institutions are reached through research, compliance posture, and BD — not reach metrics. It is why our [compliance](/services/compliance) and research functions lead RWA engagements, with [KOL amplification](/services/influencer) sequenced after institutional proof, not before.
+
+## What Actually Converts
+
+The RWA teams that land in Korea share a pattern.
+
+%%3-4x::Higher conversion for RWA protocols that lead with custody and named partners versus those that lead with APY, based on ium Labs engagement data%%
+
+- **Lead with custody and counterparty, not yield.** Make the "who holds the underlying" answer the headline.
+- **Localize disclosure.** Korean-language documentation that mirrors the structure investors expect from regulated products.
+- **Sequence institutions first.** Secure and surface institutional or licensed-partner participation before retail activation.
+- **Frame as "regulated yield."** Position against the savings and bond alternatives Korean investors actually compare against, not against DeFi.
+- **Map the STO perimeter.** Know which side of the FSC line your product sits on, and never blur it.
+
+![A trust-first RWA entry sequence — institutional proof precedes retail activation](chart:timeline)
+*The sequence that converts: clarity, then counterparties, then retail*
+
+## Conclusion
+
+Korea is not a hard RWA market. It is a precise one. The capital is present, the regulatory scaffolding is further along than most of Asia, and the savings base is hungry for yield that feels safe. What fails is the imported playbook — APY-forward, retail-first, crypto-channel-only — colliding with a market that forms trust through institutions and disclosure.
+
+The protocols that win will treat Korea as a regulated-finance market that happens to use tokenization, not a crypto market that happens to hold real-world assets. That reframing is the entire game — and it is a [go-to-market](/services/gtm) problem before it is a product one.
+
+*For a structural read on how Korean capital is entering crypto, see our analysis of [Korea's institutional capital wave](/blog/korea-institutional-crypto-vc-family-office-landscape-2026).*`,
+  },
+  {
+    id: "static-korea-gtm-stack",
+    slug: "korea-gtm-stack-full-funnel-web3-framework-2026",
+    title: "The Korea GTM Stack: A Full-Funnel Go-To-Market Framework for Web3",
+    image: chartGtmStrategy,
+    date: "June 10, 2026",
+    readTime: "18 min read",
+    category: "GTM Strategy",
+    author: "James",
+    authorRole: "Co-Founder",
+    authorBio: "James is co-founder of ium Labs, specializing in Korean market entry strategy for Web3 projects. With deep expertise in exchange listing dynamics and token economics, he has advised 30+ projects on their Korean expansion across Upbit, Bithumb, and the broader VASP ecosystem.",
+    excerpt: "Most Web3 projects treat Korea go-to-market as a checklist of tactics — a few KOLs, an AMA, a press release. This is the full-funnel GTM stack we run: how awareness, trust, conversion, and retention layers fit around the listing cycle.",
+    tags: ["GTM", "go-to-market", "Korea", "Web3 marketing", "market entry", "framework"],
+    chartImages: {
+      funnel: chartGtmStrategy,
+      stack: resMarket,
+      timing: chartAvoidFlop,
+      channels: chartCommunity,
+      benchmark: chartGrowth2025,
+      cityscape: seoulTech,
+    },
+    content: `>! **Key Takeaways**
+>! Korea go-to-market fails when teams buy tactics (KOLs, AMAs, PR) instead of building a funnel — disconnected activity does not compound
+>! The Korea GTM stack has four layers: **Awareness, Trust, Conversion, Retention** — each with Korea-specific channels that do not map cleanly to Western playbooks
+>! Trust is the rate-limiting layer in Korea; skipping it caps conversion no matter how much awareness you buy
+>! GTM should be anchored to the **listing cycle (T0)**, not a generic launch calendar — timing relative to the listing event is the single largest controllable variable
+>! Projects that run all four layers see materially higher post-listing retention than those that spike awareness and stop
+
+## Executive Summary
+
+The most expensive mistake in Korean market entry is mistaking activity for strategy. A project buys a KOL package, runs an AMA, fires a press release, and calls it a go-to-market. Three weeks later, awareness has spiked and collapsed, and nothing compounds.
+
+![The Korea GTM funnel — four layers that have to connect for spend to compound](chart:funnel)
+*Tactics without a funnel produce a spike. A funnel produces a curve.*
+
+A real [go-to-market](/services/gtm) is a stack: layers that hand off to each other, each measured, each Korea-specific. This is the framework we run, and why each layer exists.
+
+## Why Western Playbooks Break in Korea
+
+Korea is not a translation problem. The channels, the trust signals, and the timing are structurally different.
+
+%%Retail-first, trust-first::Korea is one of the most concentrated retail crypto markets on earth, and trust forms through native platforms — Naver, KakaoTalk, Telegram — not the channels Western GTM assumes%%
+
+Discovery happens on [Naver](https://www.naver.com/), not Google. Community lives in KakaoTalk Open Chats and Telegram, not Discord-first. Credibility is conferred by Korean-language media and recognizable KOLs, not a global brand. A playbook tuned for those assumptions does not degrade gracefully in Korea — it simply does not fire.
+
+![The Korea GTM stack — Korea-native channels mapped to each funnel layer](chart:stack)
+*Each layer has a Korea-native channel set that Western playbooks rarely account for*
+
+## Layer 1: Awareness
+
+The goal of the awareness layer is legible presence in the places Korean investors actually look.
+
+- **Naver SEO and blog presence** — the compounding discovery asset, covered in our [Naver effect](/blog/the-naver-effect-search-dominance-korean-crypto-discovery) analysis.
+- **Korean-language PR** through tier-1 crypto media — CoinDesk Korea, Block Media, TokenPost — handled by our [PR practice](/services/pr).
+- **KOL reach** across YouTube, X, and Telegram via our [vetted network](/services/influencer).
+
+Awareness is necessary and insufficient. It is the cheapest layer to buy and the easiest to mistake for progress.
+
+## Layer 2: Trust
+
+This is the layer Western teams skip, and it is the rate-limiter.
+
+> **"In Korea, awareness without trust is just noise that fades in a week. Trust is what converts attention into capital — and it is built, not bought."**
+> — James, Co-Founder, ium Labs
+
+Trust forms through Korean-language research and thought leadership, named partnerships, consistent community presence, and KOLs who stake their own credibility rather than post a one-off. It is slower and less measurable than awareness, which is exactly why undisciplined teams underfund it — and why their conversion caps out.
+
+## Layer 3: Conversion
+
+Conversion is where the funnel meets the listing cycle.
+
+![GTM anchored to the listing cycle — the highest-leverage timing variable in Korea](chart:timing)
+*Conversion compounds when activity is timed relative to T0, the listing event*
+
+The single largest controllable variable in Korean GTM is timing relative to the listing event (T0), not the calendar date. Awareness and trust built in the pre-listing window convert at the listing; the same spend dumped after the listing pop converts at a fraction of the rate. We sequence the full campaign — KOL activation, PR, AMAs, community mobilization — around T0, a pattern we break down in our [token launch timing](/blog/token-launch-timing-korea-quarterly-cycle) research.
+
+| Funnel layer | Primary KPI | Korea-native channel |
+|---|---|---|
+| Awareness | Reach, Naver impressions | Naver, KOLs, PR |
+| Trust | Sentiment, repeat engagement | Research, named partners, community |
+| Conversion | On-chain entries, holders | Listing-timed activation |
+| Retention | 30-day active rate | KakaoTalk, Telegram, AMAs |
+
+## Layer 4: Retention
+
+The layer that separates a launch from a market position.
+
+![Retention channels — where post-listing mindshare is held or lost](chart:channels)
+*The listing pop fades in days; retention is what is left, and it is won in community*
+
+Most projects spike at the listing and evaporate. Retention is held through 24/7 native [community management](/services/community), a steady AMA and content cadence, and ongoing PR that keeps the project in the Korean conversation. Retention is also where the next catalyst is seeded — the compounding base that makes the second listing or the next narrative cheaper to activate.
+
+## The Stack as a System
+
+%%Four layers, one curve::Awareness, Trust, Conversion, and Retention are not a menu — run partially, the funnel leaks; run together, spend compounds into a market position%%
+
+![Seoul at night — a market entered as a system, not a campaign](chart:benchmark)
+*Korea rewards projects that build a position, not projects that buy a moment*
+
+The reason to think in a stack rather than a tactic list is simple: the layers multiply, they do not add. Strong awareness with weak trust converts poorly. Strong conversion with no retention decays. The projects that win Korea are the ones that fund every layer and time the whole thing to the listing cycle.
+
+![The integrated Korea GTM stack — the system behind a durable market position](chart:cityscape)
+*One integrated stack, timed to the listing cycle, is the entire framework*
+
+## Conclusion
+
+Korea go-to-market is not a checklist of tactics you can buy in parts. It is a four-layer funnel — awareness, trust, conversion, retention — built on Korea-native channels and anchored to the listing cycle. Buy a layer and you get a spike. Build the stack and you get a curve.
+
+*For the channel-level companion to this framework, see our breakdown of [KakaoTalk Open Chat](/blog/kakaotalk-open-chat-korea-crypto-distribution-2026), Korea's most underrated distribution layer.*`,
+  },
+  {
+    id: "static-kakaotalk-openchat",
+    slug: "kakaotalk-open-chat-korea-crypto-distribution-2026",
+    title: "KakaoTalk Open Chat: Korea's Invisible Crypto Distribution Layer",
+    image: commKakao,
+    date: "June 8, 2026",
+    readTime: "16 min read",
+    category: "Community",
+    author: "David",
+    authorRole: "CEO",
+    authorBio: "David is the CEO and co-founder of ium Labs, leading strategic direction for one of Korea's most active Web3 marketing agencies. His background spans traditional finance and blockchain infrastructure, with a focus on institutional market dynamics and cross-border crypto flows.",
+    excerpt: "Global projects optimize for Telegram and Discord and never see the channel where Korean retail actually coordinates. A field guide to KakaoTalk Open Chat — how it works, why it is invisible to outsiders, and how to build presence without burning trust.",
+    tags: ["KakaoTalk", "community", "Korea", "distribution", "retail", "Open Chat"],
+    chartImages: {
+      openChat: commKakao,
+      naverCrossover: commNaver,
+      funnel: chartCommunity,
+      telegramCompare: commTelegram,
+      retention: chartGrowth2025,
+      cityscape: seoulHanriver,
+    },
+    content: `>! **Key Takeaways**
+>! KakaoTalk Open Chat is where a large share of Korean retail crypto coordination actually happens — and it is nearly invisible to non-Korean teams
+>! It is **search-and-invite gated**, not link-first like Telegram, so outsiders rarely find the rooms that move markets
+>! Open Chat trust is **moderator-anchored** — rooms are run by named operators whose credibility is the room's value, and outside promotion reads as intrusion
+>! Projects cannot "buy" Open Chat presence; they earn it through Korean-language operators and genuine utility, which is why it resists the standard KOL playbook
+>! Done right, Open Chat delivers the **highest retention** of any Korean channel; done wrong, it produces instant, lasting reputational damage
+
+## Executive Summary
+
+Ask a global Web3 team where Korean community lives and they will say Telegram. They are half right. The public-facing layer is Telegram; the layer where Korean retail actually coordinates — shares alpha, debates listings, forms conviction — is frequently KakaoTalk Open Chat. And because it does not work like any Western channel, most projects never see it.
+
+![KakaoTalk Open Chat — the coordination layer most foreign teams never find](chart:openChat)
+*KakaoTalk is Korea's dominant messaging platform, and Open Chat is its crypto backchannel*
+
+This is a field guide to the channel: how it is structured, why it is invisible from the outside, and how to build presence without triggering the backlash that outsiders usually trigger. It is the channel-level complement to our [community management](/services/community) practice.
+
+## Why Outsiders Never See It
+
+Telegram is link-first: a public link, a join button, an open door. KakaoTalk Open Chat is search-and-invite gated.
+
+%%Search-gated, not link-first::Open Chat rooms are found through Korean-language search and invitation, not shared links — the rooms that move markets are effectively invisible to non-Korean teams%%
+
+Rooms surface through Korean-language keyword search inside KakaoTalk, through Naver cafe crossover, and through invitation. There is no global directory, no discoverable link graph. A foreign team searching in English finds nothing. The most influential rooms are often the hardest to find, gated behind reputation and Korean-language discovery.
+
+![How Open Chat rooms are discovered — Korean search and Naver crossover, not shared links](chart:naverCrossover)
+*Discovery runs through Korean-language search and Naver cafe crossover, invisible to outside tooling*
+
+## The Moderator Trust Model
+
+Open Chat is not a broadcast channel. It is a set of rooms run by named moderators whose personal credibility is the entire value of the room.
+
+> **"An Open Chat room is its moderator. Members are there because they trust that person's judgment. A project that walks in to promote is not reaching an audience — it is interrupting a relationship."**
+> — David, CEO, ium Labs
+
+This inverts the KOL logic. On YouTube or X, reach is the asset. In Open Chat, the moderator's restraint is the asset — the room trusts them precisely because they do not shill. A project that buys its way in damages the moderator and gets ejected. Presence is earned through operators the rooms already trust and through genuine utility, not paid placement.
+
+![The Open Chat funnel — trust-gated entry, high-retention output](chart:funnel)
+*Hard to enter, high to retain — the inverse of the Telegram funnel*
+
+## Open Chat vs Telegram
+
+The two channels are complements, not substitutes, and they serve different funnel jobs.
+
+| Dimension | Telegram | KakaoTalk Open Chat |
+|---|---|---|
+| Discovery | Public link | Korean search + invite |
+| Trust anchor | Project / admin | Room moderator |
+| Outsider access | Open | Effectively gated |
+| Best funnel job | Awareness, scale | Trust, retention |
+| Failure mode | Bots, spam | Reputational ejection |
+
+![Telegram scales reach; Open Chat holds trust — they do different jobs](chart:telegramCompare)
+*Run Telegram for scale and Open Chat for depth — never confuse the two*
+
+## Why It Delivers the Best Retention
+
+The same gating that makes Open Chat hard to enter makes it durable once you are in.
+
+%%Highest retention in Korea::Because membership is trust-gated and moderator-anchored, Open Chat presence — when earned — retains far better than open Telegram channels%%
+
+Members who joined through search and trust do not churn like link-clicked Telegram joiners. The room is a standing relationship, not a notification feed. For projects building a Korean position rather than a launch spike, Open Chat is where post-listing mindshare actually persists — the retention layer in the [GTM stack](/blog/korea-gtm-stack-full-funnel-web3-framework-2026).
+
+![Retention by channel — trust-gated rooms hold mindshare after the listing pop fades](chart:retention)
+*The channel that holds, after the awareness channels stop firing*
+
+## How to Build Presence Without Burning Trust
+
+- **Work through trusted operators.** Korean-language moderators and community managers the rooms already respect — not parachuted promoters.
+- **Lead with utility.** Alpha, genuine answers, and access — value the room wants, not announcements it does not.
+- **Never buy your way in.** Paid placement in a moderator's room damages the moderator and ejects the project.
+- **Mirror the culture.** Open Chat has its own etiquette and pace; violate it and the room closes instantly.
+- **Measure retention, not reach.** Open Chat is a depth channel; judging it by member count misreads the entire point.
+
+## Conclusion
+
+KakaoTalk Open Chat is the clearest example of why Korea is not a translation exercise. It is a high-trust, search-gated, moderator-anchored coordination layer with no Western analog — invisible to teams optimizing for Telegram, and unbuyable by teams running a standard KOL playbook. Earn presence through trusted operators and real utility, and it becomes the most durable retention channel in the Korean market. Force it, and it becomes a public reputational wound.
+
+*For the funnel this channel sits inside, see [The Korea GTM Stack](/blog/korea-gtm-stack-full-funnel-web3-framework-2026). For the public layer, see [Korean Crypto Telegram](/blog/korean-crypto-telegram-anatomy-50k-member-community).*`,
+  },
+  {
     id: "static-upbit-dominance",
     slug: "upbit-dominance-how-78-percent-market-share-reshapes-token-economics",
     title: "The CEX Power Map: How Upbit's 78% Dominance Reshapes Token Economics",
