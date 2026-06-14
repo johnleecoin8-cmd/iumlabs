@@ -302,14 +302,52 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   );
 };
 
+const SectionHeader = ({ eyebrow, title, sub }: { eyebrow: string; title: string; sub: string }) => (
+  <div className="mb-5 sm:mb-7">
+    <div className="flex items-center gap-3">
+      <span className="font-mono text-[10px] sm:text-xs font-bold tracking-[0.3em] text-[#C084FC]/70">
+        {eyebrow}
+      </span>
+      <div className="h-px flex-1 bg-gradient-to-r from-white/15 to-transparent" />
+    </div>
+    <h3 className="mt-3 text-xl sm:text-2xl lg:text-3xl font-semibold text-white tracking-[-0.02em]">
+      {title}
+    </h3>
+    <p className="mt-1.5 text-[13px] sm:text-sm text-white/45 leading-relaxed max-w-2xl">
+      {sub}
+    </p>
+  </div>
+);
+
 const ServicesSection = () => {
+  const newServices = services.slice(0, 4);
+  const coreServices = services.slice(4);
   return (
     <section className="py-6 sm:py-10 md:py-14">
-      <div className="px-4 sm:px-4 lg:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          {services.map((service, index) => (
-            <ServiceCard key={service.number} service={service} index={index} />
-          ))}
+      <div className="px-4 sm:px-4 lg:px-6 space-y-10 sm:space-y-14">
+        <div>
+          <SectionHeader
+            eyebrow="NEW · THE FULL LAUNCH STACK"
+            title="Listing · Liquidity · Tokenomics · Capital"
+            sub="The layer that turns marketing into a launch — and the one no other Korea agency offers."
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {newServices.map((service, index) => (
+              <ServiceCard key={service.number} service={service} index={index} />
+            ))}
+          </div>
+        </div>
+        <div>
+          <SectionHeader
+            eyebrow="PROVEN · GROWTH SERVICES"
+            title="Battle-tested across 18+ Korea launches"
+            sub="230+ KOLs · 50K+ community members · 200+ media placements · Top-3 Naver rankings."
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {coreServices.map((service, index) => (
+              <ServiceCard key={service.number} service={service} index={index} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
