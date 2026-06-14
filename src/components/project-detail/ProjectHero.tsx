@@ -78,7 +78,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
           className="font-display mt-5 max-w-5xl text-[2.75rem] leading-[1.04] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.25rem] font-light"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
         >
           {project.name}
         </motion.h1>

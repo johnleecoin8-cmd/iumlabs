@@ -1188,3 +1188,17 @@ video {
   }
 }
 
+/* Lightweight page transition — subtle rise on route change.
+   translateY-only (no opacity) so content is never hidden even if the
+   animation is interrupted. */
+@keyframes page-in {
+  from { transform: translateY(10px); }
+  to { transform: translateY(0); }
+}
+.animate-page-in {
+  animation: page-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-page-in { animation: none; }
+}
+

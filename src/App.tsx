@@ -10,7 +10,6 @@ import RouteProgressBar from "@/components/RouteProgressBar";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import logo from "@/assets/logo.png";
 
 // Lazy-loaded page components
 const Projects = React.lazy(() => import("./pages/Projects"));
@@ -87,88 +86,10 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Logo center pulse page transition
+// Lightweight page transition — quick fade/rise on route change (keyed remount in AppRoutes)
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
-  const location = useLocation();
-  const [displayChildren, setDisplayChildren] = useState(children);
-  const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
-  const isFirstMount = useRef(true);
-  const prevPathname = useRef(location.pathname);
-
-  useEffect(() => {
-    // Skip animation on first mount
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-      return;
-    }
-
-    // Only animate if pathname actually changed
-    if (prevPathname.current === location.pathname) {
-      return;
-    }
-    prevPathname.current = location.pathname;
-
-    // Start transition sequence
-    setPhase('fadeOut');
-
-    const fadeOutTimer = setTimeout(() => {
-      setPhase('logo');
-    }, 200);
-
-    const logoTimer = setTimeout(() => {
-      setDisplayChildren(children);
-      setPhase('fadeIn');
-    }, 600);
-
-    const fadeInTimer = setTimeout(() => {
-      setPhase('idle');
-    }, 850);
-
-    return () => {
-      clearTimeout(fadeOutTimer);
-      clearTimeout(logoTimer);
-      clearTimeout(fadeInTimer);
-    };
-  }, [location.pathname, children]);
-
-  // Update children immediately when not transitioning
-  useEffect(() => {
-    if (phase === 'idle' && children !== displayChildren) {
-      setDisplayChildren(children);
-    }
-  }, [children, displayChildren, phase]);
-
   return (
-    <>
-      {/* Logo overlay */}
-      {(phase === 'logo' || phase === 'fadeOut') && (
-        <div 
-          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
-          style={{ willChange: 'opacity' }}
-        >
-          <img 
-            src={logo} 
-            alt="ium Labs" 
-            className={`w-16 h-16 object-contain rounded-xl ${
-              phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
-            }`}
-            style={{ willChange: 'opacity, transform' }}
-          />
-        </div>
-      )}
-
-      {/* Page content */}
-      <div 
-        className={`transition-opacity duration-200 ease-out ${
-          phase === 'fadeOut' || phase === 'logo' 
-            ? 'opacity-0' 
-            : 'opacity-100'
-        }`}
-        style={{ willChange: 'opacity' }}
-      >
-        {displayChildren}
-      </div>
-    </>
+    <div className="animate-page-in">{children}</div>
   );
 };
 

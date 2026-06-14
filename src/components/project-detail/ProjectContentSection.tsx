@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import ProjectStrategy from "./ProjectStrategy";
 import ProjectResults from "./ProjectResults";
@@ -40,6 +41,64 @@ const SectionLabel = ({ index, label }: { index: string; label: string }) => (
   </div>
 );
 
+// Staggered reveal for grids (meta cells, gallery)
+const staggerContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08 } },
+};
+const staggerItem = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+};
+
+// Gallery image with a subtle scroll-linked parallax drift.
+const GalleryItem = ({
+  item,
+  idx,
+  projectName,
+}: {
+  item: { src: string; title?: string; description?: string };
+  idx: number;
+  projectName: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
+  return (
+    <motion.figure className="group" variants={staggerItem}>
+      <div ref={ref} className="overflow-hidden rounded-xl bg-[#111]">
+        <div className="relative aspect-[16/10]">
+          <motion.div className="absolute inset-[-12%] will-change-transform" style={{ y }}>
+            <img
+              src={resolveAssetSrc(item.src)}
+              alt={item.title || `${projectName} work ${idx + 1}`}
+              loading="lazy"
+              onError={(e) => {
+                const fig = e.currentTarget.closest("figure") as HTMLElement | null;
+                if (fig) fig.style.display = "none";
+              }}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+          </motion.div>
+        </div>
+      </div>
+      {(item.title || item.description) && (
+        <figcaption className="mt-4">
+          {item.title && (
+            <span className="block text-sm font-medium text-white">{item.title}</span>
+          )}
+          {item.description && (
+            <span className="mt-1 block text-sm leading-relaxed text-white/50">
+              {item.description}
+            </span>
+          )}
+        </figcaption>
+      )}
+    </motion.figure>
+  );
+};
+
 const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
 
@@ -74,17 +133,20 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         {/* ===== META GRID ===== */}
         <motion.section
           className="grid grid-cols-2 gap-x-6 gap-y-10 py-16 md:grid-cols-4 md:py-24"
-          {...fadeUp}
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-60px" }}
         >
           {meta.map((m) => (
-            <div key={m.label} className="border-t border-white/10 pt-5">
+            <motion.div key={m.label} className="border-t border-white/10 pt-5" variants={staggerItem}>
               <span className="mb-2 block text-xs uppercase tracking-[0.2em] text-white/40">
                 {m.label}
               </span>
               <span className="block text-base font-medium leading-snug text-white md:text-lg">
                 {m.value}
               </span>
-            </div>
+            </motion.div>
           ))}
         </motion.section>
 
@@ -125,36 +187,17 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
           <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
             <SectionLabel index={galleryNum} label="Selected Work" />
-            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+            <motion.div
+              className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-40px" }}
+            >
               {gallery.map((item, idx) => (
-                <figure key={idx} className="group">
-                  <div className="overflow-hidden rounded-xl bg-[#111]">
-                    <img
-                      src={resolveAssetSrc(item.src)}
-                      alt={item.title || `${project.name} work ${idx + 1}`}
-                      loading="lazy"
-                      onError={(e) => {
-                        const fig = (e.currentTarget.closest("figure") as HTMLElement | null);
-                        if (fig) fig.style.display = "none";
-                      }}
-                      className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                  {(item.title || item.description) && (
-                    <figcaption className="mt-4">
-                      {item.title && (
-                        <span className="block text-sm font-medium text-white">{item.title}</span>
-                      )}
-                      {item.description && (
-                        <span className="mt-1 block text-sm leading-relaxed text-white/50">
-                          {item.description}
-                        </span>
-                      )}
-                    </figcaption>
-                  )}
-                </figure>
+                <GalleryItem key={idx} item={item} idx={idx} projectName={project.name} />
               ))}
-            </div>
+            </motion.div>
           </motion.section>
         </div>
       )}
