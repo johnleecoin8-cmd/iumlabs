@@ -82,11 +82,12 @@ const promises = {
 };
 
 const faqs = [
-  { q: "Can you guarantee a listing on Upbit or Bithumb?", a: "No — and anyone who does is a red flag. Each exchange decides independently through its own review committee. What we guarantee is that you arrive as the strongest, best-prepared, fully-compliant applicant, with the right documentation and the right introductions. The decision is the exchange's." },
-  { q: "Do you pay exchanges or use listing brokers?", a: "Never. Unlicensed listing brokerage and paid listing guarantees are illegal in Korea and have led to prosecutions. We work strictly as a compliance and GTM advisor: readiness, packaging, legal-opinion coordination, and transparent relationship facilitation." },
-  { q: "Do we need a Korean entity or foundation to list?", a: "Not as a formal requirement — most foreign projects list via an offshore foundation, which is normal. A Korean entity, audited statements, and a credible board are trust-and-readiness signals that strengthen your case. We advise you precisely, without overstating requirements." },
-  { q: "What changed with the 2024–2025 rules?", a: "DAXA's Best-Practices framework (in force from July 2024) and its 2025 overhaul raised the bar against post-listing pumps, meme-coins, and zombie coins, and added a quarterly maintenance review. Staying listed is now an ongoing compliance job — which is why we build your disclosure cadence from day one." },
-  { q: "KRW market or BTC market first?", a: "It depends. The KRW market holds the deep retail liquidity everyone wants but is the hardest gate; a BTC-pair listing can build a Korean trading history first, though each market is reviewed separately. We sequence it as part of your overall strategy." },
+  { q: "How long does a Korean listing actually take?", a: "There's no published SLA. Realistically it's weeks to months from a serious application to a decision, and most inquiries are filtered out in pre-screening before in-depth review even begins. Anyone promising a fixed listing date is a red flag — the timeline belongs to the exchange. We optimize how ready you are when the window opens." },
+  { q: "What actually gets a project rejected?", a: "Most often: no clean Korean securities legal opinion, concentrated or opaque token distribution, thin disclosure, weak AML documentation, or no identifiable, accountable issuer. The 2024–2025 rules also screen hard for meme / zombie-coin profiles and post-listing pump risk. Our diagnosis surfaces every one of these before a committee ever sees you." },
+  { q: "How do you charge — and do you take a success fee on the listing?", a: "Retainer plus milestones for the advisory work. We never take a success fee tied to a listing outcome — that structure is exactly what Korea's bribery and fraud cases have targeted, and it would put both of us at risk. You pay for expert preparation and representation, not for a decision we don't control." },
+  { q: "We already have legal counsel and a market maker. Do you replace them?", a: "No — we coordinate them. We add the Korea-specific layer: the domestic securities opinion via partner firms, the localized dossier, exchange relationships, and a liquidity plan sized for KRW pairs. If you have global counsel or an MM desk we work alongside them; if you don't, we bring vetted partners." },
+  { q: "What if the readiness review says we're not ready?", a: "Then we tell you plainly, and give you the exact sequence to fix it. Burning a first impression with a review committee is far more expensive than waiting a quarter to apply correctly. The scorecard exists so you apply when you can win — not when you're merely hopeful." },
+  { q: "Which exchange should we target first?", a: "It depends on your profile. The KRW market (Upbit, Bithumb) holds the deep retail liquidity everyone wants but is the hardest gate; a BTC-pair listing can build a Korean trading history first. Each market is reviewed separately, so we sequence entries deliberately as part of your strategy." },
 ];
 
 const Reveal = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => {
@@ -283,22 +284,30 @@ const ListingService = () => {
 
       {/* ===== FAQ ===== */}
       <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-t border-white/[0.06]">
-        <Reveal>
-          <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">FAQ</span>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-10">Straight answers.</h2>
-        </Reveal>
-        <div className="max-w-3xl divide-y divide-white/[0.08] border-y border-white/[0.08]">
-          {faqs.map((f, i) => (
-            <div key={f.q}>
-              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded={openFaq === i}>
-                <span className="text-base sm:text-lg font-medium text-white/90">{f.q}</span>
-                <ChevronDown className={`w-5 h-5 flex-shrink-0 text-white/40 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
-              </button>
-              <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-96 pb-5" : "max-h-0"}`}>
-                <p className="text-white/55 leading-relaxed pr-8">{f.a}</p>
-              </div>
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-10 lg:gap-16">
+          <Reveal>
+            <div className="lg:sticky lg:top-28">
+              <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">FAQ</span>
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-4">The questions founders actually ask.</h2>
+              <p className="text-white/50 leading-relaxed mb-6">Straight answers on timing, cost, and what really moves a review committee — no sales spin.</p>
+              <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: ACCENT }}>
+                Still unsure? Talk to us <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
-          ))}
+          </Reveal>
+          <div className="divide-y divide-white/[0.08] border-y border-white/[0.08]">
+            {faqs.map((f, i) => (
+              <div key={f.q}>
+                <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between gap-4 py-5 text-left group" aria-expanded={openFaq === i}>
+                  <span className={`text-base sm:text-lg font-medium transition-colors ${openFaq === i ? "text-white" : "text-white/80 group-hover:text-white"}`}>{f.q}</span>
+                  <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300" style={{ color: openFaq === i ? ACCENT : "rgba(255,255,255,0.4)", transform: openFaq === i ? "rotate(180deg)" : "none" }} />
+                </button>
+                <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-[600px] pb-6" : "max-h-0"}`}>
+                  <p className="text-white/55 leading-relaxed pr-6">{f.a}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
