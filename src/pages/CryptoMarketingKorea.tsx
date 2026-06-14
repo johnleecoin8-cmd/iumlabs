@@ -101,13 +101,10 @@ const SectionHeader = ({ number, title, badge }: { number: string; title: string
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.4 }}
-    className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10"
+    className="flex items-baseline gap-4 md:gap-6"
   >
-    <div className="flex items-baseline gap-6 md:gap-10">
-      <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{number}</span>
-      <h2 className="text-lg md:text-xl font-medium text-white">{title}</h2>
-    </div>
-    <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">{badge}</span>
+    <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">{number}</span>
+    <span className="text-[10px] md:text-xs uppercase tracking-[0.25em] text-white/40">{badge}</span>
   </motion.div>
 );
 
@@ -133,13 +130,12 @@ const CryptoMarketingKorea = () => {
 
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-tight tracking-tight"
           >
             Korea's #1 Crypto{" "}
             <br className="hidden md:block" />
@@ -174,7 +170,7 @@ const CryptoMarketingKorea = () => {
           >
             {stats.map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white">{stat.value}</div>
+                <div className="text-3xl md:text-4xl font-light text-white tracking-tight">{stat.value}</div>
                 <div className="text-sm text-white/40 mt-1">{stat.label}</div>
               </div>
             ))}
@@ -184,18 +180,18 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 01 — Why Korea */}
       <section className="border-t border-white/10">
-        <SectionHeader number="01" title="Why Korea" badge="Market Opportunity" />
-        <div className="max-w-4xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-6 py-20 md:py-28">
+          <SectionHeader number="01" title="Why Korea" badge="Market Opportunity" />
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-4xl font-bold text-white mb-10 leading-tight"
+            className="text-3xl md:text-5xl font-light text-white mt-8 mb-12 leading-tight tracking-tight"
           >
             Why Korea Is the #1 Market for Your Web3 Project
           </motion.h2>
-          <div className="space-y-6">
+          <div className="space-y-0">
             {[
               {
                 title: "16M+ Active Crypto Users",
@@ -225,11 +221,11 @@ const CryptoMarketingKorea = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeIn}
-                className="flex gap-4"
+                className="flex gap-4 border-t border-white/10 py-7"
               >
                 <CheckCircle className="w-5 h-5 text-white/30 mt-1 flex-shrink-0" />
                 <div>
-                  <h3 className="text-white font-semibold text-lg mb-1">{item.title}</h3>
+                  <h3 className="text-white font-medium text-lg mb-2">{item.title}</h3>
                   <p className="text-white/50 leading-relaxed">{item.text}</p>
                 </div>
               </motion.div>
@@ -240,18 +236,18 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 02 — Services */}
       <section className="border-t border-white/10">
-        <SectionHeader number="02" title="Services" badge="What We Do" />
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+          <SectionHeader number="02" title="Services" badge="What We Do" />
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-4xl font-bold text-white mb-12 leading-tight"
+            className="text-3xl md:text-5xl font-light text-white mt-8 mb-14 leading-tight tracking-tight"
           >
             What We Do: Full-Stack Crypto Marketing
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-0">
             {services.map((service, i) => {
               const Icon = service.icon;
               return (
@@ -265,10 +261,10 @@ const CryptoMarketingKorea = () => {
                 >
                   <Link
                     to={service.link}
-                    className="block h-full p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
+                    className="block h-full border-t border-white/10 py-8 group"
                   >
-                    <Icon className="w-8 h-8 text-white/40 mb-4 group-hover:text-white/60 transition-colors" />
-                    <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
+                    <Icon className="w-8 h-8 text-white/40 mb-5 group-hover:text-white/60 transition-colors" />
+                    <h3 className="text-white font-medium text-lg mb-2">{service.title}</h3>
                     <p className="text-white/45 text-sm leading-relaxed mb-4">{service.description}</p>
                     <span className="inline-flex items-center text-sm text-white/50 group-hover:text-white/80 transition-colors">
                       Learn more <ArrowRight className="w-4 h-4 ml-1" />
@@ -283,14 +279,16 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 03 — Trust */}
       <section className="border-t border-white/10">
-        <SectionHeader number="03" title="Clients" badge="Trust" />
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24 text-center">
+        <div className="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
+          <div className="flex justify-center">
+            <SectionHeader number="03" title="Clients" badge="Trust" />
+          </div>
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-4xl font-bold text-white mb-6 leading-tight"
+            className="text-3xl md:text-5xl font-light text-white mt-8 mb-6 leading-tight tracking-tight"
           >
             Trusted by Leading Web3 Projects
           </motion.h2>
@@ -330,18 +328,18 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 04 — Process */}
       <section className="border-t border-white/10">
-        <SectionHeader number="04" title="Process" badge="How We Work" />
-        <div className="max-w-5xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
+          <SectionHeader number="04" title="Process" badge="How We Work" />
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-4xl font-bold text-white mb-12 leading-tight"
+            className="text-3xl md:text-5xl font-light text-white mt-8 mb-14 leading-tight tracking-tight"
           >
             How We Work
           </motion.h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-0">
             {steps.map((step, i) => (
               <motion.div
                 key={step.number}
@@ -350,10 +348,10 @@ const CryptoMarketingKorea = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeIn}
-                className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]"
+                className="border-t border-white/10 py-8"
               >
                 <span className="text-xs text-white/30 font-mono tracking-widest">{step.number}</span>
-                <h3 className="text-white font-semibold text-xl mt-3 mb-3">{step.title}</h3>
+                <h3 className="text-white font-medium text-xl mt-4 mb-3">{step.title}</h3>
                 <p className="text-white/45 text-sm leading-relaxed">{step.description}</p>
               </motion.div>
             ))}
@@ -363,18 +361,18 @@ const CryptoMarketingKorea = () => {
 
       {/* Section 05 — FAQ */}
       <section className="border-t border-white/10">
-        <SectionHeader number="05" title="FAQ" badge="Common Questions" />
-        <div className="max-w-3xl mx-auto px-6 py-16 md:py-24">
+        <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
+          <SectionHeader number="05" title="FAQ" badge="Common Questions" />
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-2xl md:text-4xl font-bold text-white mb-12 leading-tight"
+            className="text-3xl md:text-5xl font-light text-white mt-8 mb-14 leading-tight tracking-tight"
           >
             Frequently Asked Questions
           </motion.h2>
-          <div className="space-y-8">
+          <div className="space-y-0">
             {faqs.map((faq, i) => (
               <motion.div
                 key={i}
@@ -383,9 +381,9 @@ const CryptoMarketingKorea = () => {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeIn}
-                className="pb-8 border-b border-white/10 last:border-0"
+                className="border-t border-white/10 py-7"
               >
-                <h3 className="text-white font-semibold text-lg mb-3">{faq.q}</h3>
+                <h3 className="text-white font-medium text-lg mb-3">{faq.q}</h3>
                 <p className="text-white/50 leading-relaxed">{faq.a}</p>
               </motion.div>
             ))}

@@ -205,7 +205,7 @@ const Contact = () => {
 
           <div className="flex-1 flex items-center justify-center relative z-10 px-5 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
-              <h1 className="font-sans text-[clamp(1.75rem,7vw,6rem)] font-bold leading-[0.95] tracking-[-0.04em] mb-3 sm:mb-8 mt-10 sm:mt-0 text-white sm:whitespace-nowrap">
+              <h1 className="font-sans text-[clamp(1.75rem,7vw,6rem)] font-light leading-[0.95] tracking-[-0.04em] mb-3 sm:mb-8 mt-10 sm:mt-0 text-white sm:whitespace-nowrap">
                 Let's Build in Korea
               </h1>
 
@@ -214,7 +214,7 @@ const Contact = () => {
               </p>
 
               <div className="mb-6 sm:mb-10">
-                <CalendlyButton className="group relative inline-flex items-center gap-2.5 px-6 py-3 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5">
+                <CalendlyButton className="group relative inline-flex items-center gap-2.5 px-6 py-3 sm:px-8 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:-translate-y-0.5">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>
@@ -235,25 +235,29 @@ const Contact = () => {
       </main>
 
       {/* Office + Form */}
-      <section id="contact-form" className="bg-[#0A0A0A] py-6 md:py-12">
-        <div className="px-2 sm:px-3">
-          <div className="rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/[0.08] overflow-hidden">
-            <div className="flex flex-col lg:flex-row">
+      <section id="contact-form" className="bg-[#0A0A0A] border-t border-white/10 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 sm:px-6 md:px-8">
+          <div className="flex items-center gap-3 mb-12 md:mb-16">
+            <span className="font-mono text-xs text-white/40">01</span>
+            <span className="text-xs uppercase tracking-[0.25em] text-white/40">Get in Touch</span>
+          </div>
+          <div className="overflow-hidden">
+            <div className="flex flex-col lg:flex-row lg:gap-16">
 
               {/* Left — Office Photo + Map + Info */}
               <div className="lg:w-1/2 flex flex-col">
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-0">
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-px rounded-2xl overflow-hidden">
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={officeImage} alt="Ium Labs Office" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3">
-                      <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white uppercase tracking-wider">
+                      <span className="text-[9px] sm:text-[10px] font-medium text-white/80 uppercase tracking-[0.25em]">
                         Office
                       </span>
                     </div>
                   </div>
 
-                  <a href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul" target="_blank" rel="noopener noreferrer" className="relative group aspect-[4/3] overflow-hidden border-l sm:border-l lg:border-l-0 lg:border-t xl:border-t-0 xl:border-l border-white/[0.08]">
+                  <a href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul" target="_blank" rel="noopener noreferrer" className="relative group aspect-[4/3] overflow-hidden">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5!2d127.0265!3d37.4965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a6f8b5555%3A0x5555555555555555!2s373%20Gangnam-daero%2C%20Seocho-gu%2C%20Seoul!5e0!3m2!1sen!2skr!4v1704067200000!5m2!1sen!2skr" className="absolute inset-0 w-full h-full pointer-events-none grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" style={{
                       border: 0,
                       filter: 'invert(0.9) hue-rotate(180deg)'
@@ -266,17 +270,17 @@ const Contact = () => {
                       </span>
                     </div>
                     <div className="absolute bottom-2 left-2 sm:bottom-3 sm:left-3">
-                      <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 text-[9px] sm:text-[10px] font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white uppercase tracking-wider">
+                      <span className="text-[9px] sm:text-[10px] font-medium text-white/80 uppercase tracking-[0.25em]">
                         Map
                       </span>
                     </div>
                   </a>
                 </div>
 
-                <div className="px-4 py-4 sm:p-6 border-t border-white/[0.08]">
+                <div className="py-6 sm:py-8 mt-2 border-t border-white/10">
                   <div className="flex items-start gap-3 sm:gap-4">
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-white font-semibold text-[15px] sm:text-lg mb-1">Ium Labs</h3>
+                      <h3 className="text-white font-medium text-[15px] sm:text-lg mb-1">Ium Labs</h3>
                       <p className="text-white/40 text-[12px] sm:text-sm leading-relaxed">373 Gangnam-daero, 10F, Seocho District, Seoul</p>
                     </div>
                     <a href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul" target="_blank" rel="noopener noreferrer" className="flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/[0.05] border border-white/[0.1] rounded-lg text-white/60 text-[11px] sm:text-sm font-medium hover:bg-white/[0.1] transition-all">
@@ -293,9 +297,9 @@ const Contact = () => {
               </div>
 
               {/* Right — Form */}
-              <div className="lg:w-1/2 px-4 py-5 sm:p-8 md:p-10 border-t lg:border-t-0 lg:border-l border-white/[0.08]">
-                <div className="mb-5 sm:mb-8">
-                  <h2 className="font-sans text-xl sm:text-3xl font-bold text-white mb-1.5 sm:mb-2">
+              <div className="lg:w-1/2 pt-8 mt-2 border-t border-white/10 lg:pt-0 lg:mt-0 lg:border-t-0">
+                <div className="mb-6 sm:mb-10">
+                  <h2 className="font-sans text-2xl sm:text-3xl font-light tracking-tight text-white mb-2 sm:mb-3">
                     Ready to Enter Korea?
                   </h2>
                   <p className="text-[12px] sm:text-sm text-white/40">
@@ -343,7 +347,7 @@ const Contact = () => {
                   </div>
 
                   <div className="pt-1 sm:pt-2 flex justify-center">
-                    <button type="submit" disabled={isSubmitting} className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 sm:py-4 bg-white text-black font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50">
+                    <button type="submit" disabled={isSubmitting} className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 sm:py-4 bg-white text-black font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50">
                       <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                       <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

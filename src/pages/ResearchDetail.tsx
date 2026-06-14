@@ -231,7 +231,7 @@ const ResearchDetail = () => {
           
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
-            <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
               {post.category}
             </span>
             <span className="text-white/40 text-sm flex items-center gap-1">
@@ -248,9 +248,9 @@ const ResearchDetail = () => {
               </span>
             )}
           </div>
-          
+
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight mb-8">
             {post.title}
           </h1>
           
@@ -379,7 +379,7 @@ const ResearchDetail = () => {
                   const body = calloutLines.slice(1);
                   const isKeyTakeaways = title.toLowerCase().includes('key takeaway') || title.toLowerCase().includes('tl;dr');
                   rendered.push(
-                    <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-gradient-to-br from-[#b48cde]/[0.08] via-[#0f0f0f] to-transparent border-[#b48cde]/20' : 'bg-white/[0.02] border-white/10'}`}>
+                    <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-[#b48cde]/[0.04] border-[#b48cde]/20' : 'bg-white/[0.02] border-white/10'}`}>
                       {title.startsWith('**') ? (
                         <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-[#d8b4fe]' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
                       ) : (
@@ -408,8 +408,8 @@ const ResearchDetail = () => {
                     const stat = inner.slice(0, sepIdx);
                     const label = inner.slice(sepIdx + 2);
                     rendered.push(
-                      <div key={key} className="my-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 p-6 sm:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                        <span className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#b48cde] to-[#c084fc] bg-clip-text text-transparent whitespace-nowrap">{stat}</span>
+                      <div key={key} className="my-10 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 py-6 border-t border-b border-white/10">
+                        <span className="text-4xl sm:text-5xl font-light tracking-tight text-white whitespace-nowrap">{stat}</span>
                         <span className="text-white/50 text-sm sm:text-[15px] leading-relaxed">{label}</span>
                       </div>
                     );
@@ -562,14 +562,14 @@ const ResearchDetail = () => {
                 if (line.startsWith('## ') && !line.startsWith('### ')) {
                   const text = line.replace('## ', '');
                   rendered.push(
-                    <h2 key={key} id={slugify(text)} className="text-2xl md:text-3xl font-semibold text-white mt-16 mb-6 scroll-mt-24">{text}</h2>
+                    <h2 key={key} id={slugify(text)} className="text-2xl md:text-3xl font-light tracking-tight text-white mt-16 mb-6 scroll-mt-24">{text}</h2>
                   );
                   i++; continue;
                 }
                 if (line.startsWith('### ')) {
                   const text = line.replace('### ', '');
                   rendered.push(
-                    <h3 key={key} id={slugify(text)} className="text-xl md:text-2xl font-medium text-white mt-10 mb-4 scroll-mt-24">{text}</h3>
+                    <h3 key={key} id={slugify(text)} className="text-xl md:text-2xl font-normal tracking-tight text-white mt-10 mb-4 scroll-mt-24">{text}</h3>
                   );
                   i++; continue;
                 }
@@ -719,19 +719,19 @@ const ResearchDetail = () => {
           </div>
         </div>
 
-        {/* Author Bio Card */}
+        {/* Author Bio */}
         {post.authorBio && (
-          <div className="mt-12 p-6 sm:p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08]">
+          <div className="mt-12 pt-10 border-t border-white/10">
             <div className="flex items-start gap-5">
               {post.authorImage ? (
                 <img src={post.authorImage} alt={post.author} className="w-16 h-16 rounded-full object-cover ring-2 ring-white/10 flex-shrink-0" />
               ) : (
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#b48cde]/20 to-[#6d28d9]/20 flex items-center justify-center text-xl font-medium text-[#b48cde] flex-shrink-0 ring-2 ring-[#b48cde]/10">
+                <div className="w-16 h-16 rounded-full bg-white/[0.06] flex items-center justify-center text-xl font-medium text-white/80 flex-shrink-0 ring-1 ring-white/10">
                   {post.author.split(' ').map(n => n[0]).join('')}
                 </div>
               )}
               <div>
-                <p className="text-sm text-white/40 uppercase tracking-wider mb-1">Written by</p>
+                <p className="text-[11px] text-white/40 uppercase tracking-[0.25em] mb-2">Written by</p>
                 <p className="text-lg font-medium text-white">{post.author}</p>
                 <p className="text-sm text-[#b48cde]/80 mb-3">{post.authorRole} at ium Labs</p>
                 <p className="text-sm text-white/50 leading-relaxed">{post.authorBio}</p>
@@ -747,41 +747,41 @@ const ResearchDetail = () => {
         <section className="bg-[#0A0A0A] py-20 border-t border-white/10">
           <div className="container mx-auto max-w-7xl px-4">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-2xl md:text-3xl font-light text-white">
+              <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white">
                 More Articles
               </h2>
-              <Link 
-                to="/blog" 
+              <Link
+                to="/blog"
                 className="text-primary flex items-center gap-2 hover:gap-3 transition-all"
               >
                 View All <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
                 <div key={relatedPost.id}>
-                  <Link 
+                  <Link
                     to={`/blog/${relatedPost.slug}`}
                     className="group block"
                   >
-                    <motion.div 
+                    <motion.div
                       whileHover={{ y: -8 }}
                       transition={{ duration: 0.3 }}
-                      className="rounded-2xl border border-white/10 hover:border-white/30 overflow-hidden bg-white/[0.02] transition-all duration-300"
+                      className="block"
                     >
-                      <div className="aspect-[16/10] overflow-hidden">
-                        <motion.img 
+                      <div className="aspect-[16/10] overflow-hidden rounded-xl">
+                        <motion.img
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.5 }}
-                          src={relatedPost.image} 
+                          src={relatedPost.image}
                           alt={relatedPost.title}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="p-5">
+                      <div className="pt-5">
                         <div className="flex items-center gap-3 mb-3">
-                          <span className="px-2 py-1 bg-white/5 text-white/60 rounded text-xs">
+                          <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
                             {relatedPost.category}
                           </span>
                           <span className="text-white/40 text-xs">
@@ -803,15 +803,15 @@ const ResearchDetail = () => {
 
 
       {/* Related Services */}
-      <section className="bg-[#111] py-20 border-t border-white/10">
+      <section className="bg-[#0A0A0A] py-20 border-t border-white/10">
         <div className="container mx-auto max-w-7xl px-4">
-          <h2 className="text-2xl md:text-3xl font-light text-white mb-4">
+          <h2 className="text-2xl md:text-3xl font-light tracking-tight text-white mb-4">
             Explore Our Services
           </h2>
           <p className="text-white/50 mb-10 max-w-2xl">
             Discover how ium Labs helps Web3 projects succeed in the Korean market with tailored marketing strategies.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 border border-white/10">
             {[
               { to: "/services/gtm", label: "GTM Strategy", desc: "Go-to-market strategy for Korea's Web3 ecosystem" },
               { to: "/services/influencer", label: "KOL Marketing", desc: "Influencer partnerships that drive real engagement" },
@@ -821,7 +821,7 @@ const ResearchDetail = () => {
               <Link
                 key={service.to}
                 to={service.to}
-                className="group block p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/25 hover:bg-white/[0.06] transition-all duration-300"
+                className="group block p-6 bg-[#0A0A0A] hover:bg-white/[0.03] transition-colors duration-300"
               >
                 <h3 className="text-lg font-medium text-white mb-2 group-hover:text-primary transition-colors">
                   {service.label}

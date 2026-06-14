@@ -338,7 +338,7 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
-                <h1 className="font-sans text-[clamp(2.25rem,8vw,7.5rem)] font-bold text-white leading-[0.95] tracking-[-0.03em] mb-4 sm:mb-6">
+                <h1 className="font-sans text-[clamp(2.25rem,8vw,7.5rem)] font-light text-white leading-[0.95] tracking-[-0.03em] mb-4 sm:mb-6">
                   We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
@@ -351,7 +351,7 @@ const Jobs = () => {
               </AnimatedSection>
 
               <AnimatedSection delay={300}>
-                <a href="#positions" className="inline-flex items-center gap-2.5 bg-white text-black px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-semibold text-[13px] sm:text-sm hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97] min-h-[44px] sm:min-h-[48px]">
+                <a href="#positions" className="inline-flex items-center gap-2.5 bg-white text-black px-6 py-3.5 sm:px-8 sm:py-4 rounded-full font-medium text-[13px] sm:text-sm hover:bg-white/90 transition-all active:scale-[0.97] min-h-[44px] sm:min-h-[48px]">
                   Explore Opportunities
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
@@ -388,10 +388,10 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Find Your Role</h2>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
+                <h2 className="text-base sm:text-lg md:text-xl font-light text-white tracking-tight">Find Your Role</h2>
               </div>
-              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">We're Actively Hiring</span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.25em] hidden sm:block">We're Actively Hiring</span>
             </div>
           </AnimatedSection>
 
@@ -402,11 +402,11 @@ const Jobs = () => {
                 <div className="px-4 md:px-10 py-4 sm:py-6 md:py-8 flex items-center justify-between gap-4 sm:gap-6">
                   {/* Left: Number + Title */}
                   <div className="flex items-center gap-4 sm:gap-6 md:gap-10 flex-1 min-w-0">
-                    <span className="text-2xl sm:text-3xl md:text-5xl font-bold text-white/25 group-hover:text-white/45 transition-colors">
+                    <span className="text-2xl sm:text-3xl md:text-5xl font-light text-white/25 group-hover:text-white/45 transition-colors">
                       0{idx + 1}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-lg sm:text-2xl md:text-4xl font-bold text-white group-hover:text-white/90 transition-colors truncate">
+                      <h3 className="text-lg sm:text-2xl md:text-4xl font-light text-white group-hover:text-white/90 transition-colors truncate tracking-tight">
                         {pos.title}
                       </h3>
                       <p className="text-white/40 text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1 hidden sm:block truncate">
@@ -444,27 +444,27 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Process</h2>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">03</span>
+                <h2 className="text-base sm:text-lg md:text-xl font-light text-white tracking-tight">Process</h2>
               </div>
-              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">How It Works</span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.25em] hidden sm:block">How It Works</span>
             </div>
           </AnimatedSection>
           
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
-                {process.map((step, idx) => <div key={idx} className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-6 md:p-8 text-center group hover:bg-white/10 transition-colors active:scale-[0.98]">
-                    <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/25 block mb-1 sm:mb-2">
+                {process.map((step, idx) => <div key={idx} className="relative p-3 sm:p-6 md:p-8 text-center group">
+                    <span className="text-3xl sm:text-4xl md:text-5xl font-light text-white/20 block mb-1 sm:mb-2 group-hover:text-white/35 transition-colors">
                       {step.step}
                     </span>
-                    <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1 sm:mb-2">
+                    <h4 className="text-xs sm:text-sm md:text-base font-light text-white mb-1 sm:mb-2 tracking-tight">
                       {step.title}
                     </h4>
-                    <p className="text-white/50 text-[10px] sm:text-xs md:text-sm">
+                    <p className="text-white/40 text-[10px] sm:text-xs md:text-sm">
                       {step.description}
                     </p>
-                    
+
                     {/* Connector Line */}
                     {idx < process.length - 1 && <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-white/10" />}
                   </div>)}
@@ -480,10 +480,10 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">We Want You</h2>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">04</span>
+                <h2 className="text-base sm:text-lg md:text-xl font-light text-white tracking-tight">We Want You</h2>
               </div>
-              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">Tell Us Your Story</span>
+              <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.25em] hidden sm:block">Tell Us Your Story</span>
             </div>
           </AnimatedSection>
 
@@ -493,7 +493,7 @@ const Jobs = () => {
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
               <div className="max-w-4xl mx-auto">
-                <p className="text-center text-white/60 text-base sm:text-lg md:text-xl mb-3 sm:mb-4 font-medium">
+                <p className="text-center text-white/70 text-xl sm:text-2xl md:text-3xl mb-3 sm:mb-4 font-light tracking-tight">
                   Ready to make an impact?
                 </p>
                 <p className="text-center text-white/40 text-xs sm:text-sm md:text-base mb-6 sm:mb-10 leading-relaxed">
@@ -537,7 +537,7 @@ const Jobs = () => {
                   </div>
 
                   {/* Submit Button */}
-                  <Button type="submit" disabled={isSubmitting} className="w-full py-6 h-auto text-lg bg-white text-black hover:bg-white/90 rounded-full font-semibold mt-6">
+                  <Button type="submit" disabled={isSubmitting} className="w-full py-6 h-auto text-lg bg-white text-black hover:bg-white/90 rounded-full font-medium mt-6">
                     {isSubmitting ? "Submitting..." : "Submit Application"}
                   </Button>
                 </form>
@@ -559,7 +559,7 @@ const Jobs = () => {
 
       {/* Position Detail Dialog */}
       <Dialog open={!!selectedPosition} onOpenChange={open => !open && setSelectedPosition(null)}>
-        <DialogContent className="bg-gradient-to-b from-surface-odd to-surface-base border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
+        <DialogContent className="bg-surface-odd border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
           {selectedPosition && <motion.div initial={{
           opacity: 0,
           y: 20
@@ -584,7 +584,7 @@ const Jobs = () => {
                     <selectedPosition.icon className="w-7 h-7 text-white/80" />
                   </motion.div>
                   <div>
-                    <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
+                    <DialogTitle className="text-2xl md:text-3xl font-light text-white tracking-tight">
                       {selectedPosition.title}
                     </DialogTitle>
                     <p className="text-white/50 text-sm mt-2 leading-relaxed">{selectedPosition.description}</p>
@@ -592,7 +592,7 @@ const Jobs = () => {
                 </div>
 
                 {/* Salary & Work Type Pills */}
-                <motion.div className="flex flex-wrap gap-3 mt-4" initial={{
+                <motion.div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-5" initial={{
               opacity: 0,
               x: -20
             }} animate={{
@@ -601,13 +601,13 @@ const Jobs = () => {
             }} transition={{
               delay: 0.15
             }}>
-                  <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
-                    <DollarSign className="w-4 h-4" />
-                    <span className="text-sm font-medium">{selectedPosition.salary}</span>
+                  <div className="flex items-center gap-2 text-white/60">
+                    <DollarSign className="w-4 h-4 text-white/40" />
+                    <span className="text-sm">{selectedPosition.salary}</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm font-medium">{selectedPosition.workType}</span>
+                  <div className="flex items-center gap-2 text-white/60">
+                    <MapPin className="w-4 h-4 text-white/40" />
+                    <span className="text-sm">{selectedPosition.workType}</span>
                   </div>
                 </motion.div>
 
@@ -623,11 +623,9 @@ const Jobs = () => {
               y: 0
             }} transition={{
               delay: 0.25
-            }} className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                      <Briefcase className="w-4 h-4 text-white/70" />
-                    </div>
+            }} className="border-t border-white/10 pt-6">
+                  <h4 className="text-lg font-light text-white tracking-tight mb-4 flex items-center gap-3">
+                    <Briefcase className="w-5 h-5 text-white/50" />
                     Job Description
                   </h4>
                   <ul className="space-y-3">
@@ -655,11 +653,9 @@ const Jobs = () => {
               y: 0
             }} transition={{
               delay: 0.35
-            }} className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                      <GraduationCap className="w-4 h-4 text-white/70" />
-                    </div>
+            }} className="border-t border-white/10 pt-6">
+                  <h4 className="text-lg font-light text-white tracking-tight mb-4 flex items-center gap-3">
+                    <GraduationCap className="w-5 h-5 text-white/50" />
                     Qualifications
                   </h4>
                   <ul className="space-y-3">
@@ -682,7 +678,7 @@ const Jobs = () => {
                 <motion.a href="#apply" onClick={() => {
               setSelectedPosition(null);
               handleInputChange("position", selectedPosition.title === "Open Position" ? "Other" : selectedPosition.title);
-            }} className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.02] active:scale-[0.98] mt-2" initial={{
+            }} className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-medium text-lg hover:bg-white/90 transition-all hover:scale-[1.02] active:scale-[0.98] mt-2" initial={{
               opacity: 0,
               y: 10
             }} animate={{

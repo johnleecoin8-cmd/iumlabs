@@ -9,122 +9,119 @@ interface ProjectContentSectionProps {
   gallery?: Array<{ src: string; title?: string; description?: string }>;
 }
 
+const fadeUp = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.6, ease: "easeOut" },
+};
+
+const SectionLabel = ({ index, label }: { index: string; label: string }) => (
+  <div className="flex items-baseline gap-4">
+    <span className="font-mono text-xs text-white/30">{index}</span>
+    <span className="text-xs uppercase tracking-[0.25em] text-white/40">{label}</span>
+  </div>
+);
+
 const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
+  const meta = [
+    { label: "Client", value: project.client_name || project.name },
+    { label: "Category", value: project.category },
+    { label: "Timeline", value: project.duration || "2025" },
+    {
+      label: "Services",
+      value: (project.services && project.services.length > 0
+        ? project.services
+        : project.shortServices || []
+      ).join(", "),
+    },
+  ].filter((m) => m.value);
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* ===== SECTION 1: PROJECT INFO ===== */}
-      <section className="py-12 md:py-20">
-        <div className="px-4 md:px-8 lg:px-12">
-          {/* Section Header */}
-          <motion.div 
-            className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-10 md:mb-14"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-baseline gap-4 md:gap-6">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Overview</h2>
+      <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
+        {/* ===== META GRID ===== */}
+        <motion.section
+          className="grid grid-cols-2 gap-x-6 gap-y-10 py-16 md:grid-cols-4 md:py-24"
+          {...fadeUp}
+        >
+          {meta.map((m) => (
+            <div key={m.label} className="border-t border-white/10 pt-5">
+              <span className="mb-2 block text-xs uppercase tracking-[0.2em] text-white/40">
+                {m.label}
+              </span>
+              <span className="block text-base font-medium leading-snug text-white md:text-lg">
+                {m.value}
+              </span>
             </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block px-3 py-1 border border-white/10 rounded-full">
-              Project Info
-            </span>
-          </motion.div>
-          
-          {/* Project Info - 2 Column Layout */}
-          <motion.div 
-            className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Left: Meta Info Panel */}
-            <div className="bg-[#111111] rounded-xl border border-white/[0.06] overflow-hidden">
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Client</span>
-                <span className="text-base md:text-lg font-semibold text-white block">{project.client_name || project.name}</span>
-              </div>
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Category</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor || '#00CED1' }} />
-                  <span className="text-base md:text-lg font-semibold text-white">{project.category}</span>
-                </div>
-              </div>
-              <div className="p-4 md:p-5 border-b border-white/[0.06]">
-                <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Year</span>
-                <span className="text-base md:text-lg font-semibold text-white block">2025</span>
-              </div>
-              {project.result && (
-                <div className="p-4 md:p-5">
-                  <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest block mb-1">Key Result</span>
-                  <span className="text-base md:text-lg font-bold block" style={{ color: project.glowColor || '#00CED1' }}>
-                    {project.result}
-                  </span>
-                </div>
-              )}
-            </div>
-            
-            {/* Right: About & Challenge */}
-            <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06] flex-1">
-                <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">About the Project</h3>
-                <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.description}</p>
-              </div>
-              {project.challenge && (
-                <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                  <h3 className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest mb-3 md:mb-4 font-medium">The Challenge</h3>
-                  <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.challenge}</p>
-                </div>
-              )}
-            </div>
-          </motion.div>
-          
-          {/* Scope of Work & What We Did */}
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {project.services && project.services.length > 0 && (
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
-                <ul className="space-y-2">
-                  {project.services.map((service, idx) => (
-                    <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            {(project.whatWeDid || project.challenge) && (
-              <div className="bg-[#111111] rounded-xl p-5 md:p-6 border border-white/[0.06]">
-                <h3 className="text-xs md:text-sm text-white/40 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
-                <p className="text-sm md:text-base text-white leading-relaxed">{project.whatWeDid || project.challenge}</p>
-              </div>
-            )}
-          </motion.div>
-        </div>
-      </section>
+          ))}
+        </motion.section>
 
-      {/* ===== SECTION 2: RESULTS ===== */}
+        {/* ===== THE CHALLENGE ===== */}
+        {project.challenge && (
+          <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
+            <SectionLabel index="01" label="The Challenge" />
+            <p className="mt-8 max-w-4xl text-2xl font-light leading-snug text-white/90 md:text-3xl lg:text-[2.5rem] lg:leading-[1.2]">
+              {project.challenge}
+            </p>
+          </motion.section>
+        )}
+      </div>
+
+      {/* ===== OUR STRATEGY ===== */}
+      {project.strategy && project.strategy.length > 0 && (
+        <ProjectStrategy
+          strategy={project.strategy}
+          glowColor={project.glowColor}
+          intro={project.whatWeDid}
+        />
+      )}
+
+      {/* ===== THE RESULTS ===== */}
       {displayMetrics && displayMetrics.length > 0 && (
         <ProjectResults
           metrics={displayMetrics}
           glowColor={project.glowColor}
+          headline={project.result}
           timeline={project.duration}
         />
       )}
 
-      {/* ===== SECTION 3: APPROACH ===== */}
-      {project.strategy && project.strategy.length > 0 && (
-        <ProjectStrategy strategy={project.strategy} glowColor={project.glowColor} />
+      {/* ===== GALLERY ===== */}
+      {gallery && gallery.length > 0 && (
+        <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
+          <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
+            <SectionLabel index="04" label="Selected Work" />
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {gallery.map((item, idx) => (
+                <figure key={idx} className="group">
+                  <div className="overflow-hidden rounded-xl bg-[#111]">
+                    <img
+                      src={item.src}
+                      alt={item.title || `${project.name} work ${idx + 1}`}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  {(item.title || item.description) && (
+                    <figcaption className="mt-4">
+                      {item.title && (
+                        <span className="block text-sm font-medium text-white">{item.title}</span>
+                      )}
+                      {item.description && (
+                        <span className="mt-1 block text-sm leading-relaxed text-white/50">
+                          {item.description}
+                        </span>
+                      )}
+                    </figcaption>
+                  )}
+                </figure>
+              ))}
+            </div>
+          </motion.section>
+        </div>
       )}
-
 
       <div className="h-8 md:h-10" />
     </div>

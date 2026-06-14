@@ -78,16 +78,15 @@ const KoreaWeb3Guide = () => {
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 px-6 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 via-transparent to-transparent pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div
             initial="hidden"
             animate="visible"
             variants={fadeUp}
             custom={0}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-sm text-white/60 mb-8"
+            className="inline-flex items-center gap-3 mb-8 text-xs uppercase tracking-[0.25em] text-white/40"
           >
-            <BookOpen className="w-4 h-4" />
+            <BookOpen className="w-3.5 h-3.5" />
             <span>2026 Edition — Updated Quarterly</span>
           </motion.div>
           <motion.h1
@@ -95,7 +94,7 @@ const KoreaWeb3Guide = () => {
             animate="visible"
             variants={fadeUp}
             custom={1}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1] mb-6"
+            className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6"
           >
             The Complete Guide to Entering Korea's Crypto Market
           </motion.h1>
@@ -125,7 +124,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 01 — Market Overview */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -133,8 +132,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">01</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">01</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">Market Overview</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-8">
               Korea Crypto Market Overview: Why It Matters
             </h2>
           </motion.div>
@@ -171,7 +173,7 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
             custom={2}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12"
+            className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/10 mt-12 border-t border-b border-white/10"
           >
             {[
               { stat: "16M+", label: "Active crypto users" },
@@ -179,8 +181,8 @@ const KoreaWeb3Guide = () => {
               { stat: "30%", label: "Population penetration" },
               { stat: "2024", label: "VAUPA enacted" },
             ].map((item, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-white/[0.03] border border-white/5 text-center">
-                <div className="text-2xl md:text-3xl font-bold text-white mb-1">{item.stat}</div>
+              <div key={i} className="bg-[#0A0A0A] py-8 px-6 text-center">
+                <div className="text-3xl md:text-4xl font-light text-white mb-2">{item.stat}</div>
                 <div className="text-sm text-white/40">{item.label}</div>
               </div>
             ))}
@@ -189,7 +191,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 02 — Regulatory Landscape */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -197,8 +199,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">02</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">02</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">Regulatory Landscape</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-8">
               Korean Crypto Regulations You Need to Know
             </h2>
           </motion.div>
@@ -234,7 +239,7 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
             custom={2}
-            className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4"
+            className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12"
           >
             {[
               { icon: Shield, title: "VAUPA Compliance", desc: "User asset segregation, anti-manipulation rules, VASP registration" },
@@ -242,11 +247,11 @@ const KoreaWeb3Guide = () => {
               { icon: TrendingUp, title: "Tax Framework", desc: "250M KRW threshold for gains reporting, evolving regulations" },
               { icon: Globe, title: "Marketing Rules", desc: "No guaranteed returns, mandatory disclaimers, compliant promotions" },
             ].map((item, i) => (
-              <div key={i} className="flex gap-4 p-6 rounded-2xl bg-white/[0.03] border border-white/5">
-                <item.icon className="w-6 h-6 text-purple-400 flex-shrink-0 mt-1" />
+              <div key={i} className="flex gap-4 py-7 border-t border-white/10">
+                <item.icon className="w-5 h-5 text-white/40 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-                  <p className="text-sm text-white/40">{item.desc}</p>
+                  <h3 className="text-white mb-1">{item.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -255,7 +260,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 03 — GTM Checklist */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -263,8 +268,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">03</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">03</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">GTM Checklist</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-4">
               Korea Market Entry Checklist
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
@@ -272,7 +280,7 @@ const KoreaWeb3Guide = () => {
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="border-t border-white/10">
             {checklist.map((item, i) => (
               <motion.div
                 key={i}
@@ -281,13 +289,13 @@ const KoreaWeb3Guide = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 custom={i * 0.5}
-                className="flex gap-5 p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors"
+                className="flex gap-6 py-7 border-b border-white/10"
               >
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center">
-                  <span className="text-sm font-mono text-purple-400">{i + 1}</span>
-                </div>
+                <span className="flex-shrink-0 text-sm font-mono text-white/30 mt-0.5 w-6">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <div>
-                  <h3 className="font-semibold text-white mb-1">{item.title}</h3>
+                  <h3 className="text-white mb-1">{item.title}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{item.description}</p>
                 </div>
               </motion.div>
@@ -297,7 +305,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 04 — Key Platforms */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -305,8 +313,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">04</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">04</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">Key Platforms</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-4">
               Essential Platforms for Korean Crypto Marketing
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
@@ -314,7 +325,7 @@ const KoreaWeb3Guide = () => {
             </p>
           </motion.div>
 
-          <div className="space-y-4">
+          <div className="border-t border-white/10">
             {platforms.map((platform, i) => (
               <motion.div
                 key={i}
@@ -323,13 +334,11 @@ const KoreaWeb3Guide = () => {
                 viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
                 custom={i * 0.5}
-                className="flex gap-5 p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/10 transition-colors"
+                className="flex gap-5 py-7 border-b border-white/10"
               >
-                <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                  <platform.icon className="w-5 h-5 text-white/60" />
-                </div>
+                <platform.icon className="w-5 h-5 text-white/40 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">{platform.name}</h3>
+                  <h3 className="text-lg font-light text-white mb-1">{platform.name}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{platform.description}</p>
                 </div>
               </motion.div>
@@ -339,7 +348,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 05 — Exchange Landscape */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -347,8 +356,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">05</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-8">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">05</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">Exchange Landscape</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-8">
               Korean Exchange Listing: Upbit, Bithumb & Beyond
             </h2>
           </motion.div>
@@ -385,17 +397,17 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
             custom={2}
-            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4"
+            className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border-t border-b border-white/10"
           >
             {[
               { name: "Upbit", share: "70%+", note: "Largest volume, highest impact listings", tier: "Tier 1" },
               { name: "Bithumb", share: "~15%", note: "Strong retail base, accessible process", tier: "Tier 1" },
               { name: "Coinone / GOPAX", share: "~10%", note: "Niche communities, stepping stone", tier: "Tier 2" },
             ].map((ex, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-white/[0.03] border border-white/5 text-center">
-                <span className="text-xs font-mono text-purple-400 uppercase tracking-widest">{ex.tier}</span>
-                <h3 className="text-xl font-bold text-white mt-2 mb-1">{ex.name}</h3>
-                <div className="text-2xl font-bold text-white/80 mb-2">{ex.share}</div>
+              <div key={i} className="bg-[#0A0A0A] py-8 px-6 text-center">
+                <span className="text-xs font-mono text-white/40 uppercase tracking-[0.25em]">{ex.tier}</span>
+                <h3 className="text-xl font-light text-white mt-3 mb-1">{ex.name}</h3>
+                <div className="text-3xl font-light text-white/80 mb-2">{ex.share}</div>
                 <p className="text-sm text-white/40">{ex.note}</p>
               </div>
             ))}
@@ -404,7 +416,7 @@ const KoreaWeb3Guide = () => {
       </section>
 
       {/* Section 06 — How ium Labs Helps */}
-      <section className="py-20 md:py-32 px-6 border-t border-white/5">
+      <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial="hidden"
@@ -412,8 +424,11 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
           >
-            <span className="text-sm font-mono text-white/30 mb-4 block">06</span>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/40">06</span>
+              <span className="text-xs uppercase tracking-[0.25em] text-white/40">How We Help</span>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-light tracking-tight mb-4">
               How ium Labs Helps You Enter Korea
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
@@ -427,7 +442,7 @@ const KoreaWeb3Guide = () => {
             viewport={{ once: true, margin: "-100px" }}
             variants={fadeUp}
             custom={1}
-            className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8"
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-12 mb-8 border-t border-white/10"
           >
             {[
               { title: "GTM Strategy", desc: "Full go-to-market planning tailored to Korea's unique crypto landscape.", link: "/services/gtm" },
@@ -438,13 +453,13 @@ const KoreaWeb3Guide = () => {
               <Link
                 key={i}
                 to={service.link}
-                className="group flex flex-col justify-between p-6 rounded-2xl bg-white/[0.03] border border-white/5 hover:border-white/15 transition-all"
+                className="group flex flex-col justify-between py-7 border-b border-white/10 transition-colors"
               >
                 <div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{service.title}</h3>
+                  <h3 className="text-lg font-light text-white mb-2 group-hover:text-white/70 transition-colors">{service.title}</h3>
                   <p className="text-sm text-white/40 leading-relaxed">{service.desc}</p>
                 </div>
-                <div className="flex items-center gap-1 text-sm text-purple-400 mt-4 group-hover:gap-2 transition-all">
+                <div className="flex items-center gap-1 text-sm text-white/50 mt-4 group-hover:gap-2 group-hover:text-white transition-all">
                   Learn more <ArrowRight className="w-4 h-4" />
                 </div>
               </Link>

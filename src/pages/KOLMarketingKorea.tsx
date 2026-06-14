@@ -144,10 +144,6 @@ const KOLMarketingKorea = () => {
 
         {/* ===== HERO ===== */}
         <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/[0.015] rounded-full blur-3xl pointer-events-none" />
-
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 relative z-10">
             <motion.div
               initial="hidden"
@@ -155,12 +151,14 @@ const KOLMarketingKorea = () => {
               variants={fadeInUp}
               className="max-w-4xl"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-white/50 text-xs tracking-widest uppercase mb-8">
-                <Star className="w-3 h-3" />
-                Korean KOL Marketing
+              <div className="flex items-center gap-4 mb-8">
+                <span className="text-white/40 text-sm font-mono">00</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  Korean KOL Marketing
+                </span>
               </div>
 
-              <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-6">
+              <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-light leading-[1.05] tracking-[-0.03em] mb-6">
                 Korean KOL Marketing
                 <br />
                 <span className="text-white/40">for Crypto & Web3</span>
@@ -185,11 +183,11 @@ const KOLMarketingKorea = () => {
               animate="visible"
               variants={fadeInUp}
               custom={3}
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-10 border-t border-white/[0.06]"
+              className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-10 border-t border-white/10"
             >
               {stats.map((stat) => (
                 <div key={stat.label}>
-                  <div className="text-3xl md:text-4xl font-bold tracking-tight">{stat.value}</div>
+                  <div className="text-3xl md:text-4xl font-light tracking-tight">{stat.value}</div>
                   <div className="text-white/40 text-sm mt-1">{stat.label}</div>
                 </div>
               ))}
@@ -198,7 +196,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 01 — Why KOL Marketing in Korea ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
               initial="hidden"
@@ -206,11 +204,13 @@ const KOLMarketingKorea = () => {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-white/20 text-sm font-mono">01</span>
-                <div className="h-px w-12 bg-white/10" />
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-white/40 text-sm font-mono">01</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  Why Korea
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-16">
                 Why KOL Marketing Is
                 <br />
                 <span className="text-white/40">Essential in Korea</span>
@@ -251,7 +251,7 @@ const KOLMarketingKorea = () => {
                 >
                   <CheckCircle className="w-5 h-5 text-white/30 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-normal mb-2">{item.title}</h3>
                     <p className="text-white/50 leading-relaxed">{item.text}</p>
                   </div>
                 </motion.div>
@@ -261,7 +261,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 02 — Platform Coverage ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
               initial="hidden"
@@ -269,18 +269,20 @@ const KOLMarketingKorea = () => {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-white/20 text-sm font-mono">02</span>
-                <div className="h-px w-12 bg-white/10" />
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-white/40 text-sm font-mono">02</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  Platform Coverage
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-16">
                 Our KOL Network Covers
                 <br />
                 <span className="text-white/40">Every Platform</span>
               </h2>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-12">
               {platforms.map((platform, i) => (
                 <motion.div
                   key={platform.title}
@@ -289,12 +291,9 @@ const KOLMarketingKorea = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   variants={fadeInUp}
                   custom={i}
-                  className="group border border-white/[0.06] rounded-2xl p-6 hover:border-white/10 transition-colors bg-white/[0.02]"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center mb-5">
-                    <platform.icon className="w-5 h-5 text-white/60" />
-                  </div>
-                  <h3 className="text-lg font-semibold mb-3">{platform.title}</h3>
+                  <platform.icon className="w-6 h-6 text-white/50 mb-5" />
+                  <h3 className="text-lg font-normal mb-3">{platform.title}</h3>
                   <p className="text-white/45 text-sm leading-relaxed">{platform.description}</p>
                 </motion.div>
               ))}
@@ -303,7 +302,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 03 — How It Works ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
               initial="hidden"
@@ -311,11 +310,13 @@ const KOLMarketingKorea = () => {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-white/20 text-sm font-mono">03</span>
-                <div className="h-px w-12 bg-white/10" />
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-white/40 text-sm font-mono">03</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  How It Works
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-16">
                 How Our KOL
                 <br />
                 <span className="text-white/40">Campaigns Work</span>
@@ -331,13 +332,13 @@ const KOLMarketingKorea = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   variants={fadeInUp}
                   custom={i}
-                  className="flex gap-6 md:gap-10 py-8 border-b border-white/[0.06] last:border-b-0"
+                  className="flex gap-6 md:gap-10 py-8 border-t border-white/10 last:pb-0"
                 >
-                  <span className="text-3xl md:text-4xl font-bold text-white/10 font-mono flex-shrink-0 w-12">
+                  <span className="text-3xl md:text-4xl font-light text-white/20 font-mono flex-shrink-0 w-12">
                     {step.number}
                   </span>
                   <div>
-                    <h3 className="text-xl md:text-2xl font-semibold mb-3">{step.title}</h3>
+                    <h3 className="text-xl md:text-2xl font-normal mb-3">{step.title}</h3>
                     <p className="text-white/45 leading-relaxed max-w-2xl">{step.description}</p>
                   </div>
                 </motion.div>
@@ -347,7 +348,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 04 — What Sets Us Apart ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
               initial="hidden"
@@ -355,18 +356,20 @@ const KOLMarketingKorea = () => {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-white/20 text-sm font-mono">04</span>
-                <div className="h-px w-12 bg-white/10" />
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-white/40 text-sm font-mono">04</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  What Sets Us Apart
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-16">
                 Why Choose ium Labs
                 <br />
                 <span className="text-white/40">for KOL Marketing</span>
               </h2>
             </motion.div>
 
-            <div className="grid sm:grid-cols-2 gap-8">
+            <div className="grid sm:grid-cols-2 gap-x-16 gap-y-12">
               {differentiators.map((item, i) => (
                 <motion.div
                   key={item.title}
@@ -377,11 +380,9 @@ const KOLMarketingKorea = () => {
                   custom={i}
                   className="flex gap-5"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/[0.05] flex items-center justify-center flex-shrink-0">
-                    <item.icon className="w-5 h-5 text-white/50" />
-                  </div>
+                  <item.icon className="w-6 h-6 text-white/50 flex-shrink-0 mt-1" />
                   <div>
-                    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-normal mb-2">{item.title}</h3>
                     <p className="text-white/45 leading-relaxed">{item.description}</p>
                   </div>
                 </motion.div>
@@ -391,7 +392,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 05 — FAQ ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
               initial="hidden"
@@ -399,11 +400,13 @@ const KOLMarketingKorea = () => {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeInUp}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <span className="text-white/20 text-sm font-mono">05</span>
-                <div className="h-px w-12 bg-white/10" />
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-white/40 text-sm font-mono">05</span>
+                <span className="text-xs tracking-[0.25em] uppercase text-white/40">
+                  FAQ
+                </span>
               </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-16">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight mb-16">
                 Frequently Asked
                 <br />
                 <span className="text-white/40">Questions</span>
@@ -419,9 +422,9 @@ const KOLMarketingKorea = () => {
                   viewport={{ once: true, margin: "-50px" }}
                   variants={fadeInUp}
                   custom={i}
-                  className="group border-b border-white/[0.06] last:border-b-0"
+                  className="group border-t border-white/10 last:border-b last:border-white/10"
                 >
-                  <summary className="flex items-center justify-between py-6 cursor-pointer list-none text-lg font-medium hover:text-white/80 transition-colors">
+                  <summary className="flex items-center justify-between py-6 cursor-pointer list-none text-lg font-normal hover:text-white/80 transition-colors">
                     {faq.question}
                     <ArrowRight className="w-4 h-4 text-white/30 group-open:rotate-90 transition-transform flex-shrink-0 ml-4" />
                   </summary>
@@ -435,7 +438,7 @@ const KOLMarketingKorea = () => {
         </section>
 
         {/* ===== SECTION 06 — Contact ===== */}
-        <section className="border-t border-white/[0.06]">
+        <section className="border-t border-white/10">
           <ContactFormSection />
         </section>
 

@@ -5,61 +5,64 @@ import { useCountUp } from "@/hooks/useCountUp";
 interface ProjectResultsProps {
   metrics: ProjectMetric[];
   glowColor: string;
+  headline?: string;
   timeline?: string;
   duration?: string;
 }
 
-const ResultCard = ({ metric, index, glowColor }: { metric: ProjectMetric; index: number; glowColor: string }) => {
+const ResultStat = ({ metric, index }: { metric: ProjectMetric; index: number }) => {
   const numericMatch = metric.value.match(/^([^\d]*)([\d,.]+)(.*)$/);
   const prefix = numericMatch ? numericMatch[1] : "";
   const numericValue = numericMatch ? parseFloat(numericMatch[2].replace(/,/g, "")) : 0;
   const suffix = numericMatch ? numericMatch[3] : metric.value;
-  const displayValue = useCountUp({ end: numericValue, duration: 2200, prefix, suffix, isVisible: true });
+  const displayValue = useCountUp({ end: numericValue, duration: 2000, prefix, suffix, isVisible: true });
 
   return (
     <motion.div
-      className="relative p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm overflow-hidden group"
-      initial={{ opacity: 0, y: 24 }}
+      className="border-t border-white/10 pt-6"
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
     >
-      <div className="absolute top-0 left-0 h-[2px] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(90deg, transparent, ${glowColor}, transparent)` }} />
-      <span className="block text-2xl md:text-3xl lg:text-4xl font-light text-white tracking-tight leading-none">
+      <span className="block text-4xl font-light leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
         {numericMatch ? displayValue : metric.value}
       </span>
-      <span className="block text-[10px] md:text-xs text-white/50 mt-2 tracking-wide">{metric.label}</span>
+      <span className="mt-3 block text-sm leading-relaxed text-white/50">{metric.label}</span>
     </motion.div>
   );
 };
 
-const ProjectResults = ({ metrics, glowColor, timeline, duration }: ProjectResultsProps) => {
+const ProjectResults = ({ metrics, headline }: ProjectResultsProps) => {
   if (!metrics || metrics.length === 0) return null;
 
   return (
-    <section className="py-14 md:py-20 bg-[#0A0A0A]">
-      <div className="px-4 md:px-8 lg:px-12">
+    <section className="bg-[#0A0A0A]">
+      <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
         <motion.div
-          className="flex items-baseline justify-between border-b border-white/10 pb-4 mb-10 md:mb-14"
-          initial={{ opacity: 0, y: 20 }}
+          className="border-t border-white/10 py-16 md:py-24"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <div className="flex items-baseline gap-4 md:gap-6">
-            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">02</span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Results</h2>
+          <div className="flex items-baseline gap-4">
+            <span className="font-mono text-xs text-white/30">03</span>
+            <span className="text-xs uppercase tracking-[0.25em] text-white/40">The Results</span>
           </div>
-          <div className="flex items-center gap-4">
-            {duration && <span className="text-[10px] md:text-xs text-white/40 tracking-wider">{duration}</span>}
-            {timeline && <span className="text-[10px] md:text-xs text-white/40 tracking-wider px-3 py-1 border border-white/10 rounded-full">{timeline}</span>}
+
+          {headline && (
+            <p className="mt-8 max-w-4xl text-2xl font-light leading-snug text-white md:text-3xl lg:text-[2.5rem] lg:leading-[1.2]">
+              {headline}
+            </p>
+          )}
+
+          <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
+            {metrics.map((metric, idx) => (
+              <ResultStat key={idx} metric={metric} index={idx} />
+            ))}
           </div>
         </motion.div>
-
-        <div className={`grid gap-3 md:gap-4 ${metrics.length <= 4 ? "grid-cols-2 md:grid-cols-4" : "grid-cols-2 md:grid-cols-3"}`}>
-          {metrics.map((metric, idx) => (
-            <ResultCard key={idx} metric={metric} index={idx} glowColor={glowColor} />
-          ))}
-        </div>
       </div>
     </section>
   );
