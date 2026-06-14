@@ -2,10 +2,10 @@ import { Users, MessageCircle, Activity, Shield } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
-import heroImg from "@/assets/services/community-management.jpg";
-import featStaffImg from "@/assets/platforms/comm-telegram.jpg";
+import heroImg from "@/assets/services/community-hero.webp";
+import featStaffImg from "@/assets/services/community-moderation.webp";
 import featKoreanImg from "@/assets/platforms/comm-kakao.jpg";
-import featEngageImg from "@/assets/platforms/comm-engage.jpg";
+import featEngageImg from "@/assets/services/community-events.jpg";
 import featSentimentImg from "@/assets/platforms/comm-sentiment.jpg";
 import playbookImg from "@/assets/platforms/comm-discord.jpg";
 
