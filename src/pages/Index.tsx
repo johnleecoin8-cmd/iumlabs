@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
+import IumModelSection from "@/components/IumModelSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -101,6 +102,17 @@ const Index = () => {
             <p className="text-[12px] sm:text-[13px] text-white/45 font-light">End-to-end capabilities for Korea market entry.</p>
           </div>
           <ServicesSection />
+        </div>
+      </section>
+
+      {/* The ium Model — engagement, platforms, catalysts */}
+      <section className="sm:px-4 sm:pt-3 snap-start" id="model">
+        <div className="sm:rounded-3xl overflow-hidden bg-[#0D0D0D] border border-white/[0.06]">
+          <div className="px-5 sm:px-6 lg:px-10 pt-10 sm:pt-12">
+            <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em] mb-1">The ium Model</h2>
+            <p className="text-[12px] sm:text-[13px] text-white/45 font-light">Beyond an agency — how a Korea launch partner is built.</p>
+          </div>
+          <IumModelSection />
         </div>
       </section>
 
