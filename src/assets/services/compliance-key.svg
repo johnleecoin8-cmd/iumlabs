@@ -1,0 +1,13 @@
+<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="service key visual">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="64%">
+      <stop offset="0%" stop-color="#1E1233"/><stop offset="54%" stop-color="#0C0B12"/><stop offset="100%" stop-color="#0A0A0C"/>
+    </radialGradient>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="256" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <circle cx="400" cy="400" r="150" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <g filter="url(#g)"><path d="M 400 248 L 512 308 L 512 428 Q 512 520 400 560 Q 288 520 288 428 L 288 308 Z" fill="none" stroke="#A855F7" stroke-width="10" stroke-opacity="0.8"/><path d="M 400 308.8 L 467.2 344.8 L 467.2 416.8 Q 467.2 472 400 496 Q 332.8 472 332.8 416.8 L 332.8 344.8 Z" fill="#A855F7" fill-opacity="0.12"/><path d="M 358 398 L 388 430 L 448 360" fill="none" stroke="#A855F7" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.95"/></g>
+  <circle cx="400" cy="400" r="6" fill="#A855F7" filter="url(#g)"/>
+</svg>

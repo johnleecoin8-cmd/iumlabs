@@ -2,7 +2,7 @@ import { ShieldCheck, FileCheck, Lock, ClipboardCheck } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
-import heroImg from "@/assets/services/compliance-hero.avif";
+import heroImg from "@/assets/services/compliance-key.svg";
 import featVaspImg from "@/assets/platforms/comp-vasp.jpg";
 import featProtectionImg from "@/assets/platforms/comp-aml.jpg";
 import featPipaImg from "@/assets/platforms/comp-pipa.jpg";

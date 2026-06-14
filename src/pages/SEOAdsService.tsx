@@ -2,7 +2,7 @@ import { Search, Target, BarChart3, FlaskConical } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
-import heroImg from "@/assets/services/seo-naver.jpg";
+import heroImg from "@/assets/services/seo-key.svg";
 import featNaverImg from "@/assets/platforms/seo-naver.jpg";
 import featPaidImg from "@/assets/platforms/seo-google.jpg";
 import featTrackImg from "@/assets/platforms/seo-analytics.jpg";

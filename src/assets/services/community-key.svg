@@ -1,0 +1,13 @@
+<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="service key visual">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="64%">
+      <stop offset="0%" stop-color="#102634"/><stop offset="54%" stop-color="#0C0B12"/><stop offset="100%" stop-color="#0A0A0C"/>
+    </radialGradient>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="256" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <circle cx="400" cy="400" r="150" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <g filter="url(#g)"><line x1="400" y1="400" x2="550.0" y2="400.0" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><line x1="400" y1="400" x2="475.0" y2="529.9" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><line x1="400" y1="400" x2="325.0" y2="529.9" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><line x1="400" y1="400" x2="250.0" y2="400.0" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><line x1="400" y1="400" x2="325.0" y2="270.1" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><line x1="400" y1="400" x2="475.0" y2="270.1" stroke="#38BDF8" stroke-width="1.5" stroke-opacity="0.3"/><circle cx="550.0" cy="400.0" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="475.0" cy="529.9" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="325.0" cy="529.9" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="250.0" cy="400.0" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="325.0" cy="270.1" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="475.0" cy="270.1" r="11" fill="#38BDF8" fill-opacity="0.7"/><circle cx="630.7" cy="466.2" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="558.3" cy="580.4" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="435.7" cy="637.3" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="301.7" cy="618.9" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="198.9" cy="531.0" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="160.0" cy="401.5" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="197.3" cy="271.5" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="298.9" cy="182.3" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="432.6" cy="162.2" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="556.0" cy="217.6" r="9" fill="#38BDF8" fill-opacity="0.4"/><circle cx="629.8" cy="330.9" r="9" fill="#38BDF8" fill-opacity="0.4"/></g>
+  <circle cx="400" cy="400" r="6" fill="#38BDF8" filter="url(#g)"/>
+</svg>

@@ -2,7 +2,7 @@ import { Map, Activity, BarChart3, FileSearch } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
-import heroImg from "@/assets/services/deep-research-blog.jpg";
+import heroImg from "@/assets/services/research-key.svg";
 import featMappingImg from "@/assets/platforms/res-market.jpg";
 import featOnchainImg from "@/assets/platforms/res-onchain.jpg";
 import featCompetitorImg from "@/assets/platforms/res-competitor.jpg";

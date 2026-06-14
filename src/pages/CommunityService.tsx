@@ -2,7 +2,7 @@ import { Users, MessageCircle, Activity, Shield } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
-import heroImg from "@/assets/services/community-management.jpg";
+import heroImg from "@/assets/services/community-key.svg";
 import featStaffImg from "@/assets/platforms/comm-telegram.jpg";
 import featKoreanImg from "@/assets/platforms/comm-kakao.jpg";
 import featEngageImg from "@/assets/platforms/comm-engage.jpg";

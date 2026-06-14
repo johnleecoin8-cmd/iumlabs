@@ -2,7 +2,7 @@ import { Handshake, ArrowLeftRight, Vault, Building2 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos. */
-import heroImg from "@/assets/platforms/res-thesis.jpg";
+import heroImg from "@/assets/services/capital-key.svg";
 import f1 from "@/assets/platforms/pr-interview.jpg";
 import f2 from "@/assets/platforms/comp-vasp.jpg";
 import f3 from "@/assets/platforms/comp-legal.jpg";
