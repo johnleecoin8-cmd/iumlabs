@@ -43,12 +43,12 @@ const InfluencerService = () => (
       eyebrow: "KOL TIERS",
       heading: "The right tier for",
       headingAccent: "the right objective.",
-      sub: "We match the tier to the goal: market-moving authority, sector credibility, broad reach, or grassroots seeding. Most campaigns blend several.",
+      sub: "We map each tier to a job: anchor the narrative, validate the thesis, amplify reach, or seed the grassroots. Most launches blend all four.",
       cards: [
-        { title: "S-Tier", body: "30K+ followers, top Korean CT. Market-moving opinion leaders. A single thread can shift retail sentiment overnight. Narrative authority, high signal-to-noise, premium pricing for maximum impact." },
-        { title: "A-Tier", body: "10K+ followers, niche authority. Deep expertise in DeFi, DePIN, and AI x Crypto. Highly engaged audiences that trust their analysis. Sector credibility with strong comment quality." },
-        { title: "B-Tier", body: "5K to 10K followers, volume and reach. Emerging voices with authentic, growing audiences. Cost-efficient reach for broadening awareness through thread relay campaigns." },
-        { title: "C-Tier", body: "1K to 5K followers, micro and seeding. Grassroots seeding with high authenticity and low cost. Used to flood timelines with organic-feeling exposure during launch windows." },
+        { title: "S-Tier · Sentiment Anchors", body: "30K+ followers, but reach isn't the point: these are the few accounts Korean CT actually reacts to. When one covers a token, the quote-tweets and Telegram forwards follow within the hour. Used sparingly, at the moments that set a narrative: listing day, a major partnership, the first impression that sticks." },
+        { title: "A-Tier · Sector Authorities", body: "10K+ followers, deep in one thesis: DeFi, DePIN, RWA, or AI x crypto. Smaller rooms, far higher conviction. Their coverage reads as diligence, not promotion, and the comment sections do real work for your credibility." },
+        { title: "B-Tier · Reach Amplifiers", body: "5K to 10K followers, fast-rising and genuinely engaged. The cost-efficient layer that carries a narrative across timelines after the anchors set it, turning one thread into sustained, multi-day coverage." },
+        { title: "C-Tier · Grassroots Layer", body: "1K to 5K followers, authentic micro-accounts seeded during launch windows. Real people posting in their own voice, the ground-up momentum that makes a narrative feel lived-in rather than announced." },
       ],
     }}
     process={{
