@@ -2,16 +2,18 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const services = [
+  { slug: "listing", title: "CEX Listing Advisory" },
+  { slug: "liquidity", title: "Market Making & Liquidity" },
+  { slug: "tokenomics", title: "Tokenomics & Listing Strategy" },
+  { slug: "capital", title: "Capital & OTC Introduction" },
   { slug: "gtm", title: "GTM Strategy" },
   { slug: "influencer", title: "KOL & Influencer" },
   { slug: "community", title: "Community" },
   { slug: "pr", title: "PR & Media" },
-  { slug: "offline-event", title: "Offline Events" },
   { slug: "seo-ads", title: "SEO & Paid Ads" },
   { slug: "ama", title: "AMA Hosting" },
   { slug: "deep-research", title: "Deep Research" },
   { slug: "compliance", title: "Compliance" },
-  { slug: "liquidity", title: "Liquidity & Market Making" },
 ];
 
 const ServiceNav = () => {
