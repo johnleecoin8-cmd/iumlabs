@@ -6,7 +6,7 @@ import heroImg from "@/assets/services/tokenomics-allocation.svg";
 import f1 from "@/assets/platforms/res-onchain.jpg";
 import f2 from "@/assets/platforms/res-market.jpg";
 import f3 from "@/assets/platforms/seo-report.jpg";
-import f4 from "@/assets/platforms/res-thesis.jpg";
+import f4 from "@/assets/services/tokenomics-value-accrual.png";
 import delivImg from "@/assets/platforms/res-competitor.jpg";
 
 const ACCENT = "#818CF8";

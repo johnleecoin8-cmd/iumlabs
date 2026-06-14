@@ -6,7 +6,7 @@ import heroImg from "@/assets/platforms/res-market.jpg";
 import f1 from "@/assets/platforms/res-market.jpg";
 import f2 from "@/assets/platforms/comp-landscape.jpg";
 import f3 from "@/assets/platforms/res-onchain.jpg";
-import f4 from "@/assets/platforms/seo-analytics.jpg";
+import f4 from "@/assets/services/liquidity-compliance.png";
 import delivImg from "@/assets/platforms/pr-analytics.jpg";
 
 const ACCENT = "#00E0B8";
