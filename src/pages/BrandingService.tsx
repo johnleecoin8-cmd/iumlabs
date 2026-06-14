@@ -1,124 +1,78 @@
-import { useEffect, useRef, useState, useCallback } from "react";
-import Navbar from "@/components/Navbar";
-import SEOHead from "@/components/SEOHead";
-import ServiceSchema from "@/components/ServiceSchema";
-import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import ContactFormSection from "@/components/ContactFormSection";
-import ServiceNav from "@/components/ServiceNav";
-import FooterLinksSection from "@/components/FooterLinksSection";
-import Footer from "@/components/Footer";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/services/compliance-hero.avif";
-import capImg1 from "@/assets/platforms/comp-vasp.jpg";
-import capImg2 from "@/assets/platforms/comp-pipa.jpg";
-import capImg3 from "@/assets/platforms/comp-aml.jpg";
-import capImg4 from "@/assets/platforms/comp-exchange.jpg";
-import capImg5 from "@/assets/platforms/comp-landscape.jpg";
-import capImg6 from "@/assets/platforms/comp-legal.jpg";
-import "./ServiceDetail.css";
-gsap.registerPlugin(ScrollTrigger);
+import { ShieldCheck, FileCheck, Lock, ClipboardCheck } from "lucide-react";
+import ServiceTemplate from "@/components/ServiceTemplate";
 
-const BrandingService = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [openCap, setOpenCap] = useState<number | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const toggleCap = useCallback((i: number) => setOpenCap(p => p === i ? null : i), []);
-  const toggleFaq = useCallback((i: number) => setOpenFaq(p => p === i ? null : i), []);
+/* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
+import heroImg from "@/assets/services/compliance-key.svg";
+import featVaspImg from "@/assets/platforms/comp-vasp.jpg";
+import featProtectionImg from "@/assets/platforms/comp-aml.jpg";
+import featPipaImg from "@/assets/platforms/comp-pipa.jpg";
+import featDisclosureImg from "@/assets/platforms/comp-exchange.jpg";
+import auditImg from "@/assets/platforms/comp-landscape.jpg";
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .2 });
-      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 50, duration: 1.2, delay: .3, ease: "power3.out" });
-      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .7 });
-      gsap.from(".svc-detail .hero-stats-bar .stat", { opacity: 0, y: 20, duration: .8, delay: .9, stagger: .1 });
-      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
-        gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
-      });
-    }, containerRef);
-    return () => { ctx.revert(); };
-  }, []);
+const ACCENT = "#A855F7";
 
-  return (
-    <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korea Crypto Regulation & VASP Compliance | ium Labs" description="Navigate the Korean regulatory landscape. Strategic advisory on VASP frameworks, PIPA data compliance, and local crypto guidelines." path="/services/compliance" image={heroImg} keywords={["Korea Crypto Compliance","VASP Registration Korea"]} />
-      <ServiceSchema name="Korea Regulations & Compliance" description="VASP registration, PIPA compliance, regulatory advisory for Korean crypto market." url="/services/compliance" serviceType={["Regulatory Compliance", "VASP Registration", "Legal Advisory"]} />
-      <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "Compliance", url: "https://iumlabs.io/services/compliance" }]} />
-      <Navbar />
+const BrandingService = () => (
+  <ServiceTemplate
+    accent={ACCENT}
+    breadcrumb="Regulations & Compliance"
+    seo={{
+      title: "Korea Crypto Regulation & VASP Compliance Advisory | ium Labs",
+      description: "Navigate Korea's crypto regulation with confidence. Advisory on VASP registration, the Virtual Asset User Protection Act, PIPA data compliance, AML, and listing disclosure, coordinated with licensed local counsel.",
+      path: "/services/compliance",
+      keywords: ["Korea crypto compliance", "VASP registration Korea", "Virtual Asset User Protection Act", "PIPA crypto", "Korea AML crypto", "travel rule Korea", "crypto regulatory advisory Korea"],
+    }}
+    schema={{ name: "Korea Regulations & Compliance Advisory", description: "Advisory on VASP registration, the Virtual Asset User Protection Act, PIPA data compliance, AML, and listing disclosure for the Korean crypto market, coordinated with licensed local counsel.", serviceType: ["Regulatory Compliance Advisory", "VASP Registration", "Data Protection Compliance", "AML Advisory"] }}
+    hero={{
+      eyebrow: "REGULATIONS & COMPLIANCE",
+      titleLead: <>Navigate Korea's crypto<br />regulation</>,
+      titleAccent: "with confidence.",
+      lede: "Korea's framework is strict, layered, and fast-changing: VASP registration, the Virtual Asset User Protection Act, PIPA, AML, and the travel rule. We map what applies to you, prepare the documentation, and coordinate with licensed local counsel so you meet the rules instead of stumbling into them.",
+      image: heroImg,
+      primaryCta: { label: "Request a compliance review", href: "/contact" },
+    }}
+    stats={[{ v: "10+", l: "VASP Cases" }, { v: "100%", l: "Compliance-First" }, { v: "VAUPA", l: "+ PIPA Ready" }, { v: "KR", l: "Counsel Network" }]}
+    reality={{
+      heading: "Korea's crypto rules are complex",
+      headingAccent: "and fast-changing.",
+      body: [
+        "The Virtual Asset User Protection Act, PIPA personal-data requirements, AML and travel-rule obligations, and exchange-specific listing disclosure stack into a regulatory maze that most global projects cannot navigate alone.",
+        "DeFi, NFT, and token projects each face different requirements. What worked for an L1 will not work for a DeFi protocol, and the rules move quarterly: what was compliant six months ago may not be today. We keep your project mapped to the current framework, not last year's.",
+      ],
+    }}
+    process={{
+      heading: "From assessment to",
+      headingAccent: "ongoing compliance.",
+      steps: [
+        { t: "WEEK 1, 2", title: "Assessment", body: "Map your project against the current Korean regulatory framework. Identify which obligations apply and where the compliance gaps are." },
+        { t: "WEEK 2, 4", title: "Strategy", body: "Build a compliance roadmap: documentation plan, sequencing, timeline, and the points where licensed counsel must be engaged." },
+        { t: "WEEK 4, 8", title: "Implementation", body: "Prepare documentation, support filings, and coordinate with licensed local counsel and the relevant authorities." },
+        { t: "ONGOING", title: "Monitoring", body: "Track regulatory change, run periodic compliance reviews, and advise as the rules evolve so updates are proactive, not reactive." },
+      ],
+    }}
+    features={[
+      { icon: ShieldCheck, eyebrow: "01 · Register", title: "VASP Registration & Licensing", body: "We support Korean Virtual Asset Service Provider registration end to end: scoping what applies to your model, preparing the documentation set, and coordinating filings and follow-up with the relevant authorities through licensed local counsel.", points: ["Scope and applicability assessment", "Documentation preparation and review", "Filing support with authorities", "Coordination with licensed counsel"], image: featVaspImg },
+      { icon: FileCheck, eyebrow: "02 · Protect", title: "User-Protection Act Compliance", body: "The Virtual Asset User Protection Act sets obligations around user-asset segregation, reserves, disclosure, and unfair-trading controls. We map your duties under the Act and help build the internal procedures and records that demonstrate them.", points: ["User-asset segregation and reserves review", "Disclosure obligation mapping", "Unfair-trading and abuse controls", "Internal procedure and record design"], image: featProtectionImg },
+      { icon: Lock, eyebrow: "03 · Secure", title: "PIPA & Data Compliance", body: "Handling Korean users means handling Korean personal data under PIPA. We assess your data flows, consent and cross-border transfer practices, and AML and travel-rule data obligations, then help close the gaps with documented controls.", points: ["Personal-data flow and consent review", "Cross-border transfer practices", "AML and travel-rule data obligations", "Documented controls and policies"], image: featPipaImg },
+      { icon: ClipboardCheck, eyebrow: "04 · Disclose", title: "Listing & Disclosure Compliance", body: "Korean exchanges and DAXA self-regulation set a high bar for listing and ongoing disclosure. We help prepare the diligence and disclosure documentation exchanges expect and keep your reporting current to stay clear of caution-list risk.", points: ["Listing diligence documentation", "DAXA best-practice alignment", "Ongoing disclosure and reporting cadence", "Caution-list and delisting risk review"], image: featDisclosureImg },
+    ]}
+    promise={{
+      heading: "We advise and coordinate.",
+      headingMuted: "Licensed counsel decides the law.",
+      do: ["Map the obligations that actually apply to your project and stage", "Prepare and review the documentation each framework requires", "Coordinate filings and formal opinions with licensed local counsel", "Track regulatory change and keep your compliance current"],
+      dont: ["Offer legal advice in place of licensed counsel", "Promise regulatory outcomes we can't control", "Cut corners on AML or disclosure", "Help you evade rules; we help you meet them"],
+    }}
+    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Compliance Readiness Audit&trade;</>, body: "Every engagement starts with a graded audit: which Korean obligations apply to your project, where you currently stand against each, what is blocking compliance, and the exact sequence to close the gaps, with the points where licensed counsel must be engaged clearly flagged.", cta: "Request your audit", image: auditImg }}
+    faq={{
+      heading: "The questions founders actually ask.",
+      sub: "Straight answers on VASP registration, timing, legal opinions, and how Korea's framework applies to your project type.",
+      items: [
+        { q: "How long does VASP registration take?", a: "Assessment takes one to two weeks. Registration support typically runs four to eight weeks depending on your project's complexity and current compliance state. Timelines also depend on the authorities and on the licensed counsel coordinating the filing." },
+        { q: "Do you provide legal opinions?", a: "We do not give legal advice ourselves. Through our partnerships with licensed local counsel, formal legal opinions and regulatory submissions can be prepared and issued. Our role is the strategic advisory and documentation around that work, coordinated with the lawyers who own the legal conclusions." },
+        { q: "Is compliance different for DeFi vs token projects?", a: "Yes, significantly. DeFi protocols, token issuers, NFT projects, and infrastructure providers each face different obligations. We map the specific regulatory framework that applies to your project type rather than applying a generic checklist." },
+        { q: "How often do Korean regulations change?", a: "Quarterly updates are common, and the Virtual Asset User Protection Act has reshaped obligations recently. We provide ongoing monitoring and flag you when a change affects your compliance status, so updates are proactive rather than reactive surprises." },
+      ],
+    }}
+  />
+);
 
-      <section className="hero">
-        <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
-        <div className="hero-center">
-          <h1>Regulations & <strong>Compliance</strong></h1>
-          <p className="hero-desc">In partnership with Law Office Asset and Freeman Law. VASP registration, PIPA compliance, regulatory landscape analysis, and exchange compliance documentation. Navigate Korea's regulations with confidence.</p>
-        </div>
-        <div className="hero-stats-bar">
-          <div className="stat"><div className="stat-val">19+</div><div className="stat-sub">Projects Advised</div></div>
-          <div className="stat"><div className="stat-val">100%</div><div className="stat-sub">Compliance Rate</div></div>
-          <div className="stat"><div className="stat-val">5</div><div className="stat-sub">Regulatory Frameworks</div></div>
-          <div className="stat"><div className="stat-val">24h</div><div className="stat-sub">Response Time</div></div>
-        </div>
-      </section>
-
-      <section className="problem"><div className="wrap">
-        <div className="lbl">The Problem</div>
-        <div className="problem-grid">
-          <div className="problem-left"><h2>Korean crypto regulations are <strong>complex and fast-changing.</strong></h2></div>
-          <div className="problem-right">
-            <p>The Virtual Asset User Protection Act, PIPA personal data requirements, and exchange-specific listing compliance create a regulatory maze that most global projects can't navigate alone.</p>
-            <p>DeFi, NFT, and token projects each face different requirements. What worked for an L1 won't work for a DeFi protocol. And the regulations change quarterly — what was compliant 6 months ago might not be today.</p>
-          </div>
-        </div>
-      </div></section>
-
-      <section className="capabilities"><div className="wrap">
-        <div className="lbl">What We Do</div>
-        {[
-          { icon: "◎", img: capImg1, title: "VASP Registration", desc: "Full support for Korean Virtual Asset Service Provider registration. Documentation preparation, application submission, and follow-up with regulatory authorities." },
-          { icon: "◈", img: capImg3, title: "Exchange Listing Compliance", desc: "Upbit, Bithumb, Coinone listing requirements. Due diligence preparation, compliance documentation, and regulatory review to meet exchange standards." },
-          { icon: "◆", img: capImg4, title: "AML/KYC Advisory", desc: "Anti-money laundering and Know Your Customer framework design. Transaction monitoring procedures, suspicious activity reporting, and compliance training." },
-          { icon: "◐", img: capImg6, title: "Legal Partnership Access", desc: "Direct access to Law Office Asset and Freeman Law for formal legal opinions, regulatory submissions, and litigation support when needed." },
-        ].map((cap, i) => (
-          <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} width={600} height={400} /></div></div></div>
-          </div>
-        ))}
-      </div></section>
-
-      <section className="svc-process"><div className="wrap">
-        <div className="lbl">How It Works</div>
-        <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(1.8rem,3vw,2.5rem)", letterSpacing: "-.02em" }}>From assessment to <strong>full compliance.</strong></h2>
-        <div className="proc-grid">
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 1–2</div><div className="proc-title">Assessment</div><div className="proc-text">Map your project against Korean regulatory framework. Identify compliance gaps and requirements.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 2–4</div><div className="proc-title">Strategy</div><div className="proc-text">Develop compliance roadmap. Documentation plan, timeline, and resource requirements.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Week 4–8</div><div className="proc-title">Implementation</div><div className="proc-text">Prepare documentation, submit applications, coordinate with legal partners and regulators.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Ongoing</div><div className="proc-title">Monitoring</div><div className="proc-text">Regulatory change tracking, quarterly compliance reviews, ongoing advisory as regulations evolve.</div></div>
-        </div>
-      </div></section>
-
-      <section className="faq"><div className="wrap">
-        <div className="lbl">FAQ</div>
-        {[
-          { q: "How long does VASP registration take?", a: "Assessment takes 1-2 weeks. Full registration support typically runs 4-8 weeks depending on your project's complexity and current compliance state." },
-          { q: "Do you provide legal opinions?", a: "Through our partnerships with Law Office Asset and Freeman Law, we can provide formal legal opinions and regulatory submissions. Our advisory covers both strategic guidance and formal legal work." },
-          { q: "Is compliance different for DeFi vs token projects?", a: "Yes, significantly. DeFi protocols face different requirements than token issuers, NFT projects, or infrastructure providers. We map the specific regulatory framework that applies to your project type." },
-          { q: "How often do Korean regulations change?", a: "Quarterly updates are common. We provide ongoing monitoring and alert you when regulatory changes affect your compliance status. Proactive updates, not reactive surprises." },
-        ].map((faq, i) => (
-          <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
-            <div className="faq-a"><p>{faq.a}</p></div>
-          </div>
-        ))}
-      </div></section>
-
-      <section className="svc-footer">
-        <ServiceNav />
-        <ContactFormSection />
-        <FooterLinksSection />
-        <Footer />
-      </section>
-    </div>
-  );
-};
 export default BrandingService;

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="service key visual">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="64%">
+      <stop offset="0%" stop-color="#2A1022"/><stop offset="54%" stop-color="#0C0B12"/><stop offset="100%" stop-color="#0A0A0C"/>
+    </radialGradient>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <circle cx="400" cy="400" r="256" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <circle cx="400" cy="400" r="150" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <g filter="url(#g)"><rect x="203.0" y="380.0" width="14" height="40" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="234.7" y="358.0" width="14" height="84" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="266.3" y="325.0" width="14" height="150" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="298.0" y="352.0" width="14" height="96" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="329.7" y="300.0" width="14" height="200" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="361.3" y="338.0" width="14" height="124" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="393.0" y="290.0" width="14" height="220" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="424.7" y="334.0" width="14" height="132" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="456.3" y="306.0" width="14" height="188" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="488.0" y="354.0" width="14" height="92" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="519.7" y="325.0" width="14" height="150" rx="7" fill="#EC4899" fill-opacity="0.40"/><rect x="551.3" y="367.0" width="14" height="66" rx="7" fill="#EC4899" fill-opacity="0.72"/><rect x="583.0" y="380.0" width="14" height="40" rx="7" fill="#EC4899" fill-opacity="0.40"/></g>
+  <circle cx="400" cy="400" r="6" fill="#EC4899" filter="url(#g)"/>
+</svg>

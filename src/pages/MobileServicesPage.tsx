@@ -1,14 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { 
-  Rocket, 
-  Palette, 
-  Search, 
-  Calendar, 
-  Users, 
-  FileSearch, 
-  Star, 
+  Rocket,
+  Palette,
+  Search,
+  Users,
+  FileSearch,
+  Star,
   Newspaper,
+  Landmark,
+  Droplets,
+  Coins,
+  Handshake,
+  Mic,
   ArrowUpRight,
   ChevronDown
 } from "lucide-react";
@@ -31,61 +35,53 @@ import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-management.jpg";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-coindesk.jpg";
+import listingImg from "@/assets/platforms/comp-exchange.jpg";
+import liquidityImg from "@/assets/platforms/res-market.jpg";
+import tokenomicsImg from "@/assets/services/tokenomics-allocation.svg";
+import capitalImg from "@/assets/platforms/res-thesis.jpg";
+import amaImg from "@/assets/services/ama-spaces.jpg";
 
 const services = [
   {
     title: "GTM Strategy",
     description: "Full-stack market entry",
     icon: Rocket,
-    link: "/services",
+    link: "/services/gtm",
     video: "/videos/gtm-hero.mp4",
     poster: gtmImage,
-    stats: "50+ Projects"
+    stats: "18+ Projects"
   },
   {
-    title: "Compliance",
-    description: "Regulations & advisory",
-    icon: Palette,
-    link: "/services/compliance",
-    video: "/videos/branding-hero.mp4",
-    poster: brandingImage,
-    stats: "25+ Projects"
+    title: "CEX Listing Advisory",
+    description: "Upbit · Bithumb · Coinone · Korbit",
+    icon: Landmark,
+    link: "/services/listing",
+    poster: listingImg,
+    stats: "4 KRW Exchanges"
   },
   {
-    title: "SEO & Ads",
-    description: "Search & paid traffic",
-    icon: Search,
-    link: "/services/seo-ads",
-    video: "/videos/seo-hero.mp4",
-    poster: seoAdsImage,
-    stats: "1M+ Reach"
+    title: "Market Making & Liquidity",
+    description: "Exchange-grade depth",
+    icon: Droplets,
+    link: "/services/liquidity",
+    poster: liquidityImg,
+    stats: "Vetted MM desks"
   },
   {
-    title: "Offline Event",
-    description: "Conferences & meetups",
-    icon: Calendar,
-    link: "/services/offline-event",
-    video: "/videos/offline-event-hero.mp4",
-    poster: eventsImage,
-    stats: "30+ Events"
+    title: "Tokenomics",
+    description: "Supply, unlocks & FDV",
+    icon: Coins,
+    link: "/services/tokenomics",
+    poster: tokenomicsImg,
+    stats: "Korea-fit design"
   },
   {
-    title: "Community",
-    description: "Discord & Telegram",
-    icon: Users,
-    link: "/services/community",
-    video: "/videos/community-hero.mp4",
-    poster: communityImage,
-    stats: "500K+ Members"
-  },
-  {
-    title: "Deep Research",
-    description: "Market intelligence",
-    icon: FileSearch,
-    link: "/services/deep-research",
-    video: "/videos/deep-research-hero.mp4",
-    poster: gtmImage,
-    stats: "100+ Reports"
+    title: "Capital & OTC",
+    description: "VC · OTC · custody",
+    icon: Handshake,
+    link: "/services/capital",
+    poster: capitalImg,
+    stats: "Korean network"
   },
   {
     title: "KOL Network",
@@ -97,6 +93,15 @@ const services = [
     stats: "230+ KOLs"
   },
   {
+    title: "Community",
+    description: "Discord & Telegram",
+    icon: Users,
+    link: "/services/community",
+    video: "/videos/community-hero.mp4",
+    poster: communityImage,
+    stats: "50K+ Members"
+  },
+  {
     title: "PR & Media",
     description: "Press & coverage",
     icon: Newspaper,
@@ -104,14 +109,49 @@ const services = [
     video: "/videos/pr-hero.mp4",
     poster: prImage,
     stats: "200+ Articles"
+  },
+  {
+    title: "SEO & Ads",
+    description: "Search & paid traffic",
+    icon: Search,
+    link: "/services/seo-ads",
+    video: "/videos/seo-hero.mp4",
+    poster: seoAdsImage,
+    stats: "Top-3 Naver"
+  },
+  {
+    title: "AMA Hosting",
+    description: "Telegram · Spaces · Discord",
+    icon: Mic,
+    link: "/services/ama",
+    poster: amaImg,
+    stats: "55+ Sessions"
+  },
+  {
+    title: "Deep Research",
+    description: "Market intelligence",
+    icon: FileSearch,
+    link: "/services/deep-research",
+    video: "/videos/deep-research-hero.mp4",
+    poster: gtmImage,
+    stats: "15+ Reports"
+  },
+  {
+    title: "Compliance",
+    description: "Regulations & advisory",
+    icon: Palette,
+    link: "/services/compliance",
+    video: "/videos/branding-hero.mp4",
+    poster: brandingImage,
+    stats: "10+ VASP cases"
   }
 ];
 
 // Stats data
 const statsData = [
-  { value: 8, label: "Services", suffix: "" },
+  { value: 12, label: "Services", suffix: "" },
   { value: 18, label: "Projects", prefix: "+", suffix: "" },
-  { value: 170, label: "KOLs", suffix: "+" },
+  { value: 230, label: "KOLs", suffix: "+" },
 ];
 
 // Stats Section Component with count-up animation

@@ -10,15 +10,18 @@ const LiveChatModal = lazy(() => import("./LiveChatModal"));
 import logoImage from "@/assets/ium-logo.png";
 
 const serviceItems = [
-  { name: "Web3 GTM Strategy", href: "/services/gtm" },
-  { name: "Regulations & Compliance", href: "/services/compliance" },
-  { name: "SEO & Paid Ads", href: "/services/seo-ads" },
-  { name: "Influencer & KOL", href: "/services/influencer" },
-  { name: "PR & Media Coverage", href: "/services/pr" },
-  { name: "Deep Research & Analytics", href: "/services/deep-research" },
+  { name: "GTM Strategy", href: "/services/gtm" },
+  { name: "CEX Listing Advisory", href: "/services/listing" },
+  { name: "Market Making & Liquidity", href: "/services/liquidity" },
+  { name: "Tokenomics", href: "/services/tokenomics" },
+  { name: "Capital & OTC Introduction", href: "/services/capital" },
+  { name: "Influencer / KOL Marketing", href: "/services/influencer" },
   { name: "Community Management", href: "/services/community" },
-  { name: "Offline Events Korea", href: "/services/offline-event" },
+  { name: "PR & Media", href: "/services/pr" },
+  { name: "SEO / Paid Ads", href: "/services/seo-ads" },
   { name: "AMA Hosting", href: "/services/ama" },
+  { name: "Deep Research", href: "/services/deep-research" },
+  { name: "Regulations & Compliance", href: "/services/compliance" },
 ];
 
 const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
@@ -174,10 +177,10 @@ const Navbar = () => {
                     <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] mb-5 block font-medium">Popular Services</span>
                     <div className="space-y-3">
                       <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">GTM Strategy</Link>
-                      <Link to="/services/influencer" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">KOL & Influencer Marketing</Link>
-                      <Link to="/services/community" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Community Management</Link>
-                      <Link to="/services/pr" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">PR & Media Coverage</Link>
-                      <Link to="/services/ama" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">AMA Hosting</Link>
+                      <Link to="/services/listing" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">CEX Listing Advisory</Link>
+                      <Link to="/services/liquidity" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Market Making & Liquidity</Link>
+                      <Link to="/services/tokenomics" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Tokenomics</Link>
+                      <Link to="/services/capital" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Capital & OTC Introduction</Link>
                     </div>
                   </div>
                 </div>
@@ -244,13 +247,16 @@ const Navbar = () => {
                   <div key={i} className="flex items-center gap-5">
                     {[
                       { name: "GTM Strategy", href: "/services/gtm" },
+                      { name: "CEX Listing", href: "/services/listing" },
+                      { name: "Market Making", href: "/services/liquidity" },
+                      { name: "Tokenomics", href: "/services/tokenomics" },
+                      { name: "Capital & OTC", href: "/services/capital" },
                       { name: "KOL Marketing", href: "/services/influencer" },
-                      { name: "PR & Media", href: "/services/pr" },
                       { name: "Community Management", href: "/services/community" },
-                      { name: "Offline Events", href: "/services/offline-event" },
-                      { name: "Deep Research", href: "/services/deep-research" },
+                      { name: "PR & Media", href: "/services/pr" },
                       { name: "SEO & Paid Ads", href: "/services/seo-ads" },
                       { name: "AMA Hosting", href: "/services/ama" },
+                      { name: "Deep Research", href: "/services/deep-research" },
                       { name: "Compliance", href: "/services/compliance" },
                     ].map((svc) => (
                       <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[10px] sm:text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
