@@ -1,4 +1,4 @@
-import { Search, Target, BarChart3, FlaskConical } from "lucide-react";
+import { Search, Target, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
@@ -6,7 +6,6 @@ import heroImg from "@/assets/services/seo-naver.jpg";
 import featNaverImg from "@/assets/platforms/seo-naver.jpg";
 import featPaidImg from "@/assets/platforms/seo-google.jpg";
 import featTrackImg from "@/assets/platforms/seo-analytics.jpg";
-import featTestImg from "@/assets/platforms/seo-testing.jpg";
 import deliverableImg from "@/assets/platforms/seo-report.jpg";
 
 const ACCENT = "#22C55E";
@@ -54,7 +53,6 @@ const SEOAdsService = () => (
       { icon: Search, eyebrow: "01 · Naver SEO", title: "Naver SEO & Keyword Strategy", body: "Naver's algorithm is completely different from Google, with different ranking factors, content formats, and link structures. We build the blog content strategy, keyword research, and Naver-specific optimization that earns first-page placement in the search engine 70% of Korea actually uses.", points: ["Naver Blog content strategy & production", "Keyword research for Korean intent", "Smart Block & SERP optimization", "Native Korean copy by in-house writers"], image: featNaverImg },
       { icon: Target, eyebrow: "02 · Paid Media", title: "Crypto Paid Media", body: "Most agencies can't even get approved to advertise crypto. We handle Google's crypto advertiser certification end-to-end, then run search, display, and YouTube alongside X Ads and crypto-native networks that accept the campaigns everyone else rejects.", points: ["Google crypto advertiser certification", "Search, display & YouTube campaigns", "X Ads for Korean crypto Twitter", "Coinzilla, Brave & crypto ad networks"], image: featPaidImg },
       { icon: BarChart3, eyebrow: "03 · Tracking", title: "Performance Tracking & ROI", body: "Every dollar is tracked from impression to click to conversion. Weekly reporting with full attribution, campaign-level and channel-level ROAS, and actionable recommendations so budget always flows to what works.", points: ["Weekly reporting with full attribution", "Campaign & channel-level ROAS", "Impression-to-conversion tracking", "Actionable optimization recommendations"], image: featTrackImg },
-      { icon: FlaskConical, eyebrow: "04 · Optimize", title: "A/B & Conversion Optimization", body: "Growth is a loop, not a launch. We A/B test creatives, landing pages, and audiences continuously, pausing underperformers and scaling winners to drive cost-per-engagement down and conversion rates up across every channel.", points: ["Creative & landing page A/B tests", "Audience and targeting experiments", "Cost-per-engagement optimization", "Pause losers, scale winners weekly"], image: featTestImg },
     ]}
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Search & Paid Growth Plan&trade;</>, body: "Every engagement starts with a graded plan: where you rank on Naver and Google today, which channels accept your campaigns, the keywords and budget that will move the needle, and the exact sequence to execute it.", cta: "Request your growth plan", image: deliverableImg }}
     faq={{
