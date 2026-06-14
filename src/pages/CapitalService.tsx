@@ -1,4 +1,4 @@
-import { Handshake, ArrowLeftRight, Vault, Building2 } from "lucide-react";
+import { Handshake, ArrowLeftRight, Vault } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos. */
@@ -6,7 +6,6 @@ import heroImg from "@/assets/platforms/res-thesis.jpg";
 import f1 from "@/assets/platforms/pr-interview.jpg";
 import f2 from "@/assets/platforms/comp-vasp.jpg";
 import f3 from "@/assets/platforms/comp-legal.jpg";
-import f4 from "@/assets/platforms/pr-analytics.jpg";
 import delivImg from "@/assets/platforms/res-market.jpg";
 
 const ACCENT = "#FBBF24";
@@ -54,7 +53,6 @@ const CapitalService = () => (
       { icon: Handshake, eyebrow: "01 · Introduce", title: "Korean VC & Strategic Introductions", body: "Warm intros to Korea's crypto-native funds and strategic corporate arms for token and equity rounds, the players who actually write checks and open ecosystems, not a cold list.", points: ["Crypto-native VC introductions", "Strategic / corporate-arm intros", "Token & equity round fit", "Curated, warm, never a cold blast"], image: f1 },
       { icon: ArrowLeftRight, eyebrow: "02 · Execute", title: "Licensed OTC Desk Connections", body: "Connections to VASP-registered OTC desks for compliant execution. Domestic desks broker crypto-to-crypto today and are positioned for crypto-to-cash as regulation opens. We never touch unlicensed OTC.", points: ["VASP-registered desks only", "Crypto-to-crypto execution today", "Positioned for crypto-to-cash", "Compliance-first routing"], image: f2 },
       { icon: Vault, eyebrow: "03 · Custody", title: "Institutional Custody Onboarding", body: "Onboarding to institutional-grade Korean custodians (bank-backed and independent), the plumbing every institutional allocation and treasury needs before it can move.", points: ["Bank-backed & independent custodians", "Institutional onboarding support", "Treasury-ready setup", "Security & compliance review"], image: f3 },
-      { icon: Building2, eyebrow: "04 · Structure", title: "Offshore Entity & Fund-Ready Structuring", body: "Advisory on the entity, custody, and compliance setup that makes you investable, so when you sit in front of a fund, the structure is already right.", points: ["Offshore entity structuring advisory", "Cap-table & SAFT readiness", "Compliance & custody scaffolding", "Investor-ready data room"], image: f4 },
     ]}
     promise={{
       heading: "We connect and structure.",
