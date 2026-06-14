@@ -30,7 +30,7 @@ const LiquidityService = () => (
       image: heroImg,
       primaryCta: { label: "Get a liquidity plan", href: "/contact" },
     }}
-    stats={[{ v: "T0", l: "Listing-Day Ready" }, { v: "CEX+DEX", l: "Venues Covered" }, { v: "Vetted", l: "MM Desk Partners" }, { v: "24/7", l: "Depth Monitoring" }]}
+    stats={[{ v: "Day 1", l: "Listing-Day Depth" }, { v: "CEX+DEX", l: "Venues Covered" }, { v: "Vetted", l: "MM Desk Partners" }, { v: "24/7", l: "Depth Monitoring" }]}
     strip={{ label: "Venue coverage", items: ["Upbit", "Bithumb", "Global CEX", "On-chain DEX"] }}
     reality={{
       heading: "A great listing into a thin book",

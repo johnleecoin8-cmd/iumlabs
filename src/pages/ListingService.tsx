@@ -42,7 +42,7 @@ const ListingService = () => (
       image: heroImg,
       primaryCta: { label: "Get a listing-readiness review", href: "/contact" },
     }}
-    stats={[{ v: "CEX·DEX", l: "& Hybrid Venues" }, { v: "Global", l: "+ Native Korea Depth" }, { v: "T0", l: "Your Biggest Catalyst" }, { v: "100%", l: "Compliance-First" }]}
+    stats={[{ v: "CEX·DEX", l: "& Hybrid Venues" }, { v: "Global", l: "+ Native Korea Depth" }, { v: "#1", l: "Growth Catalyst" }, { v: "100%", l: "Compliance-First" }]}
     strip={{ label: "Listing coverage", items: ["Binance", "Coinbase", "OKX", "Bybit", "Upbit", "Uniswap"] }}
     reality={{
       heading: "The best exchanges reject most applicants",

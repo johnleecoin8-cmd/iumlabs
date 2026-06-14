@@ -47,12 +47,6 @@ const Reveal = ({ children, className = "", delay = 0 }: { children: ReactNode; 
   );
 };
 
-const TimelineLine = ({ accent }: { accent: string }) => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2, rootMargin: "0px", triggerOnce: true });
-  return (
-    <div ref={ref} className="hidden lg:block absolute top-[42px] left-6 right-6 h-px origin-left transition-transform duration-[1200ms] ease-out" style={{ background: `linear-gradient(to right, ${accent}00, ${accent}55 20%, ${accent}55 80%, ${accent}00)`, transform: isVisible ? "scaleX(1)" : "scaleX(0)" }} />
-  );
-};
 
 const ServiceTemplate = (p: ServiceTemplateProps) => {
   const A = p.accent;
@@ -154,16 +148,16 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.process.eyebrow ?? "HOW IT WORKS"}</span>
           <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-12">{p.process.heading} {p.process.headingAccent && <span style={{ color: A }}>{p.process.headingAccent}</span>}</h2>
         </Reveal>
-        <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <TimelineLine accent={A} />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {p.process.steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <div className="relative h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] p-6 backdrop-blur-sm hover:border-white/[0.14] transition-colors">
-                <div className="hidden lg:block absolute -top-[6px] left-6 w-3 h-3 rounded-full ring-4 ring-[#0D0D0D]" style={{ backgroundColor: A }} />
-                <div className="font-mono text-sm font-bold mb-3 lg:mt-2" style={{ color: A }}>{s.t}</div>
+              <div className="h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] border-t-2 p-6 hover:bg-white/[0.05] transition-colors" style={{ borderTopColor: `${A}66` }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="font-mono text-sm font-bold" style={{ color: A }}>{s.t}</span>
+                  <span className="font-display font-bold text-2xl leading-none text-white/[0.14]">0{i + 1}</span>
+                </div>
                 <div className="font-display text-lg font-semibold mb-2">{s.title}</div>
                 <p className="text-[13px] text-white/50 leading-relaxed">{s.body}</p>
-                <div className="absolute top-6 right-6 text-white/[0.08] font-display font-bold text-3xl">0{i + 1}</div>
               </div>
             </Reveal>
           ))}
