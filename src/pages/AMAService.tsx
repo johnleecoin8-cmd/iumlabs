@@ -2,7 +2,7 @@ import { Mic, Megaphone, MessageCircle, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
-import heroImg from "@/assets/services/ama-key.svg";
+import heroImg from "@/assets/services/ama-spaces.jpg";
 import featHostsImg from "@/assets/platforms/ama-telegram.jpg";
 import featPromoImg from "@/assets/platforms/ama-discord.jpg";
 import featModerationImg from "@/assets/platforms/ama-moderation.jpg";

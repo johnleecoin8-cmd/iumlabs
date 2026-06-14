@@ -1,7 +1,7 @@
 import { Search, Mic2, BarChart3, Users } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/kol-key.svg";
+import heroImg from "@/assets/services/kol-avatars.webp";
 import ytImg from "@/assets/platforms/kol-youtube.jpg";
 import ctImg from "@/assets/platforms/kol-twitter.jpg";
 import perfImg from "@/assets/platforms/kol-performance.jpg";

@@ -2,7 +2,7 @@ import { Gauge, Handshake, Activity, ShieldCheck } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos. */
-import heroImg from "@/assets/services/liquidity-key.svg";
+import heroImg from "@/assets/platforms/res-market.jpg";
 import f1 from "@/assets/platforms/res-market.jpg";
 import f2 from "@/assets/platforms/comp-landscape.jpg";
 import f3 from "@/assets/platforms/res-onchain.jpg";
