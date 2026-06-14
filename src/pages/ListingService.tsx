@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { ClipboardCheck, FileText, Network, ShieldCheck, ArrowRight, Check, ChevronDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -7,121 +9,305 @@ import ContactFormSection from "@/components/ContactFormSection";
 import ServiceNav from "@/components/ServiceNav";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+
+/* =========================================================================
+   PLACEHOLDER IMAGES — temporary. Swap each for the provided photos.
+   (Drop new files in src/assets/ and update these 6 imports only.)
+   ========================================================================= */
 import heroImg from "@/assets/platforms/comp-exchange.jpg";
-import diagImg from "@/assets/platforms/comp-landscape.jpg";
-import packImg from "@/assets/platforms/comp-legal.jpg";
-import legalImg from "@/assets/platforms/comp-vasp.jpg";
-import amlImg from "@/assets/platforms/comp-aml.jpg";
-import maintImg from "@/assets/platforms/seo-analytics.jpg";
-import relImg from "@/assets/platforms/pr-interview.jpg";
-import "./ServiceDetail.css";
-gsap.registerPlugin(ScrollTrigger);
+import featDiagnosisImg from "@/assets/platforms/comp-landscape.jpg";
+import featDossierImg from "@/assets/platforms/comp-legal.jpg";
+import featRelationsImg from "@/assets/platforms/pr-interview.jpg";
+import featMaintenanceImg from "@/assets/platforms/seo-analytics.jpg";
+import scorecardImg from "@/assets/platforms/res-thesis.jpg";
+
+const ACCENT = "#22D3EE";
+
+const steps = [
+  { t: "T–8W", title: "Readiness Diagnosis", body: "Audit your project against the DAXA Best-Practices axes and each exchange's known criteria. Deliver a prioritized gap report." },
+  { t: "T–6W", title: "Dossier & Legal Opinion", body: "Package and Korean-localize the application; coordinate the independent securities legal opinion through partner counsel." },
+  { t: "T–2W", title: "Submission & Relations", body: "Manage submission, timing, and the market narrative with exchange listing and research teams." },
+  { t: "T0 →", title: "Maintenance & Disclosure", body: "Stand up the ongoing IR and disclosure cadence needed to survive quarterly maintenance review." },
+];
+
+const features = [
+  {
+    icon: ClipboardCheck,
+    eyebrow: "01 · Diagnose",
+    title: "Listing-Readiness Diagnosis",
+    body: "Before you ever apply, we audit your project against the DAXA 거래지원 모범사례 axes and each exchange's real bar — then hand you a prioritized gap report so nothing surprises the review committee.",
+    points: ["Securities-status & legal-opinion exposure", "Tokenomics, unlock & distribution red flags", "Disclosure, audit & AML documentation gaps", "Meme / zombie-coin risk screening"],
+    image: featDiagnosisImg,
+  },
+  {
+    icon: FileText,
+    eyebrow: "02 · Package",
+    title: "Application Packaging & Legal Opinion",
+    body: "We assemble and Korean-localize the full dossier exchanges expect, and coordinate the domestic securities legal opinion Upbit and Coinone require — through independent partner firms, never authored to order.",
+    points: ["Whitepaper, cap table & legal structure", "Technical & security audit packaging", "가상자산 설명서 (mandatory disclosure)", "KR securities opinion (Kim & Chang, Yoon & Yang, Hwawoo)"],
+    image: featDossierImg,
+  },
+  {
+    icon: Network,
+    eyebrow: "03 · Place",
+    title: "Exchange Relations & Market Sequencing",
+    body: "Warm, transparent introductions to exchange listing and research teams — plus the strategy of which market to enter and when, sequenced around the windows that actually move Korean volume.",
+    points: ["Listing & research-team introductions", "KRW vs BTC market sequencing", "Listing-window & catalyst timing (KBW)", "Back-and-forth and narrative management"],
+    image: featRelationsImg,
+  },
+  {
+    icon: ShieldCheck,
+    eyebrow: "04 · Sustain",
+    title: "Maintenance-Review Compliance",
+    body: "Since 2024, listing is no longer once-and-done. We build the disclosure and IR cadence that keeps you clear of caution-item (유의종목) designation and delisting at every quarterly review.",
+    points: ["Quarterly maintenance-review readiness", "Ongoing disclosure & IR cadence", "Milestone & roadmap tracking", "Early-warning risk monitoring"],
+    image: featMaintenanceImg,
+  },
+];
+
+const promises = {
+  do: [
+    "Make you the strongest, best-prepared, fully-compliant applicant",
+    "Coordinate an independent Korean securities legal opinion",
+    "Open warm, transparent introductions to the right teams",
+    "Keep you listed through quarterly maintenance review",
+  ],
+  dont: [
+    "Guarantee or \"buy\" a listing — the exchange decides, independently",
+    "Pay exchanges or use unlicensed listing brokers (illegal in Korea)",
+    "Touch wash trading, fake volume, or post-listing pump schemes",
+    "Pressure or author the securities legal opinion's conclusion",
+  ],
+};
+
+const faqs = [
+  { q: "Can you guarantee a listing on Upbit or Bithumb?", a: "No — and anyone who does is a red flag. Each exchange decides independently through its own review committee. What we guarantee is that you arrive as the strongest, best-prepared, fully-compliant applicant, with the right documentation and the right introductions. The decision is the exchange's." },
+  { q: "Do you pay exchanges or use listing brokers?", a: "Never. Unlicensed listing brokerage and paid listing guarantees are illegal in Korea and have led to prosecutions. We work strictly as a compliance and GTM advisor: readiness, packaging, legal-opinion coordination, and transparent relationship facilitation." },
+  { q: "Do we need a Korean entity or foundation to list?", a: "Not as a formal requirement — most foreign projects list via an offshore foundation, which is normal. A Korean entity, audited statements, and a credible board are trust-and-readiness signals that strengthen your case. We advise you precisely, without overstating requirements." },
+  { q: "What changed with the 2024–2025 rules?", a: "DAXA's Best-Practices framework (in force from July 2024) and its 2025 overhaul raised the bar against post-listing pumps, meme-coins, and zombie coins, and added a quarterly maintenance review. Staying listed is now an ongoing compliance job — which is why we build your disclosure cadence from day one." },
+  { q: "KRW market or BTC market first?", a: "It depends. The KRW market holds the deep retail liquidity everyone wants but is the hardest gate; a BTC-pair listing can build a Korean trading history first, though each market is reviewed separately. We sequence it as part of your overall strategy." },
+];
+
+const Reveal = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1, rootMargin: "80px", triggerOnce: true });
+  return (
+    <div ref={ref} className={`${className} transition-all ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDuration: "700ms", transitionDelay: `${delay}ms` }}>
+      {children}
+    </div>
+  );
+};
 
 const ListingService = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [openCap, setOpenCap] = useState<number | null>(null);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const toggleCap = useCallback((i: number) => setOpenCap(p => p === i ? null : i), []);
-  const toggleFaq = useCallback((i: number) => setOpenFaq(p => p === i ? null : i), []);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".svc-detail .hero-label", { opacity: 0, y: 20, duration: .8, delay: .2 });
-      gsap.from(".svc-detail .hero h1", { opacity: 0, y: 50, duration: 1.2, delay: .3, ease: "power3.out" });
-      gsap.from(".svc-detail .hero-desc", { opacity: 0, y: 30, duration: 1, delay: .7 });
-      gsap.from(".svc-detail .hero-stats-bar .stat", { opacity: 0, y: 20, duration: .8, delay: .9, stagger: .1 });
-      gsap.utils.toArray<HTMLElement>(".svc-detail .lbl,.svc-detail .stat,.svc-detail .problem-left,.svc-detail .problem-right,.svc-detail .cap-block,.svc-detail .proc-step,.svc-detail .tier-card,.svc-detail .plat,.svc-detail .case-split,.svc-detail .faq-item,.svc-detail .invite h2,.svc-detail .invite-kr,.svc-detail .highlight-box").forEach(el => {
-        gsap.from(el, { y: 40, opacity: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 90%" }});
-      });
-    }, containerRef);
-    return () => { ctx.revert(); };
-  }, []);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   return (
-    <div className="svc-detail" ref={containerRef}>
-      <SEOHead title="Korean CEX Listing Advisory — Upbit, Bithumb, Coinone, Korbit | ium Labs" description="Listing-readiness diagnosis, application packaging, and exchange relations for Korea's KRW-market exchanges. DAXA-aligned, compliance-first — we make you the strongest applicant. The exchange makes the decision." path="/services/listing" image={heroImg} keywords={["Korean exchange listing","Upbit listing","Bithumb listing","CEX listing advisory Korea","DAXA listing","KRW market listing","Coinone Korbit listing"]} />
+    <div className="bg-[#0A0A0A] min-h-screen text-white">
+      <SEOHead title="Korean CEX Listing Advisory — Upbit, Bithumb, Coinone, Korbit | ium Labs" description="Listing-readiness diagnosis, application packaging, securities legal-opinion coordination, and exchange relations for Korea's KRW-market exchanges. DAXA-aligned, compliance-first — we make you the strongest applicant. The exchange makes the decision." path="/services/listing" image={heroImg} keywords={["Korean exchange listing", "Upbit listing", "Bithumb listing", "CEX listing advisory Korea", "DAXA listing", "KRW market listing", "Coinone Korbit listing"]} />
       <ServiceSchema name="Korean CEX Listing Advisory" description="Listing-readiness diagnosis, application packaging, securities legal-opinion coordination, and exchange relationship facilitation for Upbit, Bithumb, Coinone, and Korbit." url="/services/listing" serviceType={["Exchange Listing Advisory", "CEX Listing Korea", "Listing Readiness", "Regulatory Compliance"]} />
       <BreadcrumbSchema items={[{ name: "ium Labs", url: "https://iumlabs.io/" }, { name: "Services", url: "https://iumlabs.io/services/gtm" }, { name: "CEX Listing Advisory", url: "https://iumlabs.io/services/listing" }]} />
       <Navbar />
 
-      <section className="hero">
-        <img src={heroImg} alt="" className="hero-bg" width={1200} height={800} /><div className="hero-overlay" />
-        <div className="hero-center">
-          <h1>CEX Listing <strong>Advisory</strong></h1>
-          <p className="hero-desc">The KRW market is the prize and the hardest gate in crypto. We make your project the strongest, best-prepared, fully-compliant applicant for Upbit, Bithumb, Coinone, and Korbit — and put you in front of the right people. The exchange makes the decision; we make sure you deserve a yes.</p>
-        </div>
-        <div className="hero-stats-bar">
-          <div className="stat"><div className="stat-val">4</div><div className="stat-sub">KRW Exchanges Covered</div></div>
-          <div className="stat"><div className="stat-val">DAXA</div><div className="stat-sub">Best-Practices Aligned</div></div>
-          <div className="stat"><div className="stat-val">100%</div><div className="stat-sub">Compliance-First</div></div>
-          <div className="stat"><div className="stat-val">25+</div><div className="stat-sub">Korea Market Entries</div></div>
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[88vh] flex items-center overflow-hidden">
+        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/60" />
+        <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 80% 0%, ${ACCENT}14, transparent 55%)` }} />
+        <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
+          <div className="max-w-4xl">
+            <span className="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-[0.35em] mb-5" style={{ color: ACCENT }}>CEX LISTING ADVISORY</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] leading-[1.02] mb-6">
+              Get listed on Korea's<br />exchanges. <span style={{ color: ACCENT }}>And stay listed.</span>
+            </h1>
+            <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl mb-8">
+              The KRW market is the deepest retail liquidity in crypto — and the hardest gate. We make your project the strongest, fully-compliant applicant for Upbit, Bithumb, Coinone, and Korbit, and put you in front of the right people. The exchange decides; we make sure you deserve a yes.
+            </p>
+            <div className="flex flex-wrap items-center gap-3 mb-12">
+              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[#0A0A0A] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: ACCENT }}>
+                Get a listing-readiness review <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href="#process" className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-white/80 bg-white/[0.06] border border-white/[0.12] hover:bg-white/[0.1] transition-colors">
+                See how it works
+              </a>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.08] rounded-2xl overflow-hidden max-w-3xl border border-white/[0.08]">
+              {[["4", "KRW Exchanges"], ["DAXA", "Best-Practices Aligned"], ["25+", "Korea Market Entries"], ["100%", "Compliance-First"]].map(([v, l]) => (
+                <div key={l} className="bg-[#0A0A0A] px-4 py-5">
+                  <div className="text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: ACCENT }}>{v}</div>
+                  <div className="text-[11px] sm:text-xs text-white/45 mt-1">{l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="problem"><div className="wrap">
-        <div className="lbl">The Reality</div>
-        <div className="problem-grid">
-          <div className="problem-left"><h2>Listing demand vastly exceeds slots — and the rules just got <strong>much harder.</strong></h2></div>
-          <div className="problem-right">
-            <p>Each exchange decides its own listings through an independent review committee — not DAXA, and not any advisor. Since the 2024 Best-Practices framework and its 2025 overhaul, the bar has risen sharply: tougher review criteria targeting post-listing pumps, meme-coin floods, and "zombie coins," plus a quarterly maintenance review that means a listing is no longer permanent.</p>
-            <p>The grey market of unlicensed "listing brokers" is illegal and prosecuted. The legitimate path is to be undeniably ready — a clean securities legal opinion, airtight tokenomics and disclosure, and a credible Korean representative managing the process. That is exactly what we build.</p>
-          </div>
+      {/* ===== EXCHANGE STRIP ===== */}
+      <div className="border-y border-white/[0.06] bg-[#0D0D0D]">
+        <div className="px-5 sm:px-8 lg:px-20 py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
+          <span className="text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">Listing coverage</span>
+          {["Upbit", "Bithumb", "Coinone", "Korbit"].map((e) => (
+            <span key={e} className="text-lg sm:text-xl font-semibold text-white/70">{e}</span>
+          ))}
         </div>
-      </div></section>
+      </div>
 
-      <section className="capabilities"><div className="wrap">
-        <div className="lbl">What We Do</div>
-        {[
-          { icon: "◎", title: "Listing-Readiness Diagnosis", desc: "We audit your project against the DAXA Best-Practices axes and each exchange's known criteria — securities exposure, tokenomics and unlock red flags, disclosure gaps, audit and AML documentation — and deliver a prioritized gap report before you ever apply.", img: diagImg },
-          { icon: "◉", title: "Application Packaging & Localization", desc: "We assemble and Korean-localize the full dossier exchanges expect: whitepaper, cap table and legal structure, technical and security audits, tokenomics, and the mandatory virtual-asset disclosure document (가상자산 설명서).", img: packImg },
-          { icon: "◈", title: "Securities Legal-Opinion Coordination", desc: "Upbit and Coinone require a domestic Korean legal opinion on securities status before review. We coordinate it through independent partner law firms — Kim & Chang, Yoon & Yang, Hwawoo — without ever authoring or pressuring the conclusion.", img: legalImg },
-          { icon: "◆", title: "Compliance & AML Preparation", desc: "We prepare your project for the AML, disclosure, and user-protection scrutiny that each exchange's dedicated team applies, coordinated with our in-house compliance practice and the Virtual Asset User Protection Act.", img: amlImg },
-          { icon: "◇", title: "Maintenance-Review Survival", desc: "Listing is no longer once-and-done. We stand up the ongoing IR and disclosure cadence needed to survive the quarterly maintenance review and avoid caution-item (유의종목) designation and delisting.", img: maintImg },
-          { icon: "◐", title: "Exchange Relationship Facilitation", desc: "Warm, transparent introductions to exchange listing and research teams, and management of the back-and-forth, timing, and Korean-market narrative. We sell competent representation and access — never a decision.", img: relImg },
-        ].map((cap, i) => (
-          <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
-            <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}><div className="cap-icon">{cap.icon}</div><div className="cap-title">{cap.title}</div><div className="cap-toggle">+</div></div>
-            <div className="cap-body"><div className="cap-inner"><div /><div className="cap-desc">{cap.desc}</div><div className="cap-img"><img src={cap.img} alt={cap.title} width={600} height={400} /></div></div></div>
+      {/* ===== REALITY ===== */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-28">
+        <Reveal>
+          <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">THE REALITY</span>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mt-6 items-start">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
+              Listing demand vastly exceeds supply — and the rules just got <span style={{ color: ACCENT }}>much harder.</span>
+            </h2>
+            <div className="space-y-4 text-white/55 leading-relaxed">
+              <p>Each exchange decides its own listings through an independent review committee — not DAXA, and not any advisor. Since the 2024 Best-Practices framework and its 2025 overhaul, the bar has risen sharply: tougher criteria against post-listing pumps, meme-coin floods, and "zombie coins," plus a quarterly maintenance review that means a listing is no longer permanent.</p>
+              <p>The grey market of unlicensed "listing brokers" is illegal and prosecuted. The legitimate path is to be undeniably ready — a clean securities legal opinion, airtight tokenomics and disclosure, and a credible Korean representative managing the process. That is exactly what we build.</p>
+            </div>
           </div>
-        ))}
-      </div></section>
-
-      <section className="svc-process"><div className="wrap">
-        <div className="lbl">How It Works</div>
-        <h2 style={{ fontFamily: "var(--serif)", fontWeight: 300, fontSize: "clamp(1.8rem,3vw,2.5rem)", letterSpacing: "-.02em" }}>From candidate to <strong>credible applicant.</strong></h2>
-        <div className="proc-grid">
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase I</div><div className="proc-title">Readiness Diagnosis</div><div className="proc-text">Audit against DAXA Best-Practices and per-exchange criteria. Deliver a prioritized gap report.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase II</div><div className="proc-title">Dossier & Legal Opinion</div><div className="proc-text">Package and localize the application; coordinate the independent Korean securities legal opinion.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase III</div><div className="proc-title">Submission & Relations</div><div className="proc-text">Manage submission, timing, and the narrative with exchange listing and research teams.</div></div>
-          <div className="proc-step"><div className="proc-dot" /><div className="proc-ph">Phase IV</div><div className="proc-title">Maintenance & Disclosure</div><div className="proc-text">Stand up the ongoing IR and disclosure cadence to survive quarterly maintenance review.</div></div>
-        </div>
-      </div></section>
-
-      <section className="faq"><div className="wrap">
-        <div className="lbl">FAQ</div>
-        {[
-          { q: "Can you guarantee a listing on Upbit or Bithumb?", a: "No — and anyone who does is a red flag. Each exchange decides independently through its own review committee. What we guarantee is that you arrive as the strongest, best-prepared, fully-compliant applicant, with the right documentation and the right introductions. The decision is the exchange's." },
-          { q: "Do you pay exchanges or use listing brokers?", a: "Never. Unlicensed listing brokerage and paid listing guarantees are illegal in Korea and have led to prosecutions. We work strictly as a compliance and GTM advisor: readiness, packaging, legal-opinion coordination, and transparent relationship facilitation." },
-          { q: "Do we need a Korean entity or foundation to list?", a: "Not as a formal requirement — most foreign projects list via an offshore foundation, which is normal. A Korean entity, audited statements, and a credible board are trust-and-readiness signals that strengthen your case, and they matter more on the capital and treasury side. We advise you precisely, without overstating requirements." },
-          { q: "What changed with the 2024–2025 rules?", a: "DAXA's Best-Practices framework (in force from July 2024) and its 2025 overhaul raised the bar: tougher criteria against post-listing pumps, meme-coins, and zombie coins, plus a quarterly maintenance review. Staying listed is now an ongoing compliance job — which is why we build your disclosure and IR cadence from day one." },
-          { q: "KRW market or BTC market first?", a: "It depends on the project. The KRW market holds the deep retail liquidity everyone wants but is the hardest gate; a BTC-pair listing can build a Korean trading history first, though each market is reviewed separately and one does not guarantee the other. We sequence it as part of your overall strategy." },
-        ].map((faq, i) => (
-          <div key={i} className={`faq-item${openFaq === i ? " open" : ""}`}>
-            <div className="faq-q" role="button" tabIndex={0} onClick={() => toggleFaq(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleFaq(i); } }} aria-expanded={openFaq === i}><h4>{faq.q}</h4><span className="fq-t">+</span></div>
-            <div className="faq-a"><p>{faq.a}</p></div>
-          </div>
-        ))}
-      </div></section>
-
-      <section className="svc-footer">
-        <ServiceNav />
-        <ContactFormSection />
-        <FooterLinksSection />
-        <Footer />
+        </Reveal>
       </section>
+
+      {/* ===== PROCESS TIMELINE ===== */}
+      <section id="process" className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-y border-white/[0.06]">
+        <Reveal>
+          <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">HOW IT WORKS</span>
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-12">From candidate to <span style={{ color: ACCENT }}>credible applicant.</span></h2>
+        </Reveal>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {steps.map((s, i) => (
+            <Reveal key={s.title} delay={i * 80}>
+              <div className="relative h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] p-6">
+                <div className="font-mono text-sm font-bold mb-3" style={{ color: ACCENT }}>{s.t}</div>
+                <div className="text-lg font-semibold mb-2">{s.title}</div>
+                <p className="text-[13px] text-white/50 leading-relaxed">{s.body}</p>
+                <div className="absolute top-6 right-6 text-white/15 font-mono text-xs">0{i + 1}</div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== FEATURES — alternating media ===== */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-28 space-y-20 sm:space-y-28">
+        {features.map((f, i) => {
+          const Icon = f.icon;
+          const flip = i % 2 === 1;
+          return (
+            <Reveal key={f.title}>
+              <div className={`grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
+                <div className="relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3]">
+                  <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 to-transparent" />
+                  {/* placeholder badge — remove once real photo is in */}
+                  <span className="absolute top-4 left-4 text-[10px] uppercase tracking-wider text-white/40 bg-black/40 backdrop-blur px-2 py-1 rounded">placeholder</span>
+                </div>
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-11 h-11 rounded-full flex items-center justify-center border" style={{ backgroundColor: `${ACCENT}14`, borderColor: `${ACCENT}33` }}>
+                      <Icon className="w-5 h-5" style={{ color: ACCENT }} />
+                    </div>
+                    <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/35">{f.eyebrow}</span>
+                  </div>
+                  <h3 className="text-2xl sm:text-3xl font-semibold tracking-[-0.02em] mb-4">{f.title}</h3>
+                  <p className="text-white/55 leading-relaxed mb-6">{f.body}</p>
+                  <ul className="space-y-2.5">
+                    {f.points.map((p) => (
+                      <li key={p} className="flex items-start gap-3 text-[14px] text-white/65">
+                        <Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: ACCENT }} />
+                        <span>{p}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </Reveal>
+          );
+        })}
+      </section>
+
+      {/* ===== PROMISE / HONESTY ===== */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-y border-white/[0.06]">
+        <Reveal>
+          <div className="max-w-3xl mb-12">
+            <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">OUR PROMISE</span>
+            <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4">
+              We make you the best applicant. <span className="text-white/40">The exchange makes the decision.</span>
+            </h2>
+          </div>
+        </Reveal>
+        <div className="grid md:grid-cols-2 gap-4">
+          <Reveal>
+            <div className="h-full rounded-3xl border p-7 sm:p-8" style={{ borderColor: `${ACCENT}33`, background: `${ACCENT}0A` }}>
+              <div className="text-sm font-bold uppercase tracking-wider mb-5" style={{ color: ACCENT }}>What we do</div>
+              <ul className="space-y-3">
+                {promises.do.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-[15px] text-white/75"><Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: ACCENT }} /><span>{p}</span></li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="h-full rounded-3xl border border-white/[0.08] bg-white/[0.02] p-7 sm:p-8">
+              <div className="text-sm font-bold uppercase tracking-wider mb-5 text-white/40">What we never do</div>
+              <ul className="space-y-3">
+                {promises.dont.map((p) => (
+                  <li key={p} className="flex items-start gap-3 text-[15px] text-white/55"><span className="mt-1.5 w-3 h-px bg-white/30 flex-shrink-0" /><span>{p}</span></li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== DELIVERABLE ===== */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-28">
+        <Reveal>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+            <div>
+              <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">THE DELIVERABLE</span>
+              <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-5">Your Listing Readiness Scorecard.</h2>
+              <p className="text-white/55 leading-relaxed mb-6">Every engagement starts with a graded scorecard: where you stand against each exchange's criteria, what's blocking a yes, and the exact sequence to fix it — before a single application goes out.</p>
+              <Link to="/contact" className="inline-flex items-center gap-2 font-semibold" style={{ color: ACCENT }}>
+                Request your scorecard <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[16/10]">
+              <img src={scorecardImg} alt="Listing readiness scorecard" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent" />
+              <span className="absolute top-4 left-4 text-[10px] uppercase tracking-wider text-white/40 bg-black/40 backdrop-blur px-2 py-1 rounded">placeholder</span>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== FAQ ===== */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-t border-white/[0.06]">
+        <Reveal>
+          <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">FAQ</span>
+          <h2 className="text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-10">Straight answers.</h2>
+        </Reveal>
+        <div className="max-w-3xl divide-y divide-white/[0.08] border-y border-white/[0.08]">
+          {faqs.map((f, i) => (
+            <div key={f.q}>
+              <button onClick={() => setOpenFaq(openFaq === i ? null : i)} className="w-full flex items-center justify-between gap-4 py-5 text-left" aria-expanded={openFaq === i}>
+                <span className="text-base sm:text-lg font-medium text-white/90">{f.q}</span>
+                <ChevronDown className={`w-5 h-5 flex-shrink-0 text-white/40 transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
+              </button>
+              <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-96 pb-5" : "max-h-0"}`}>
+                <p className="text-white/55 leading-relaxed pr-8">{f.a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <ServiceNav />
+      <ContactFormSection />
+      <FooterLinksSection />
+      <Footer />
     </div>
   );
 };
+
 export default ListingService;
