@@ -259,7 +259,7 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
       className={`transition-all ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
       style={{
         transitionDuration: '600ms',
-        transitionDelay: `${(index % 3) * 80}ms`,
+        transitionDelay: `${(index % 4) * 80}ms`,
       }}
     >
       <Link
@@ -367,7 +367,7 @@ const ServicesSection = () => {
         {pillars.map((pillar) => (
           <div key={pillar.tag}>
             <PillarHeader pillar={pillar} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {pillar.services.map((service, index) => (
                 <ServiceCard key={service.number} service={service} index={index} />
               ))}
