@@ -28,63 +28,73 @@ const ListingService = () => (
     motif={<CandleMotif />}
     breadcrumb="CEX Listing Advisory"
     seo={{
-      title: "Korean CEX Listing Advisory, Upbit, Bithumb, Coinone, Korbit | ium Labs",
-      description: "Listing-readiness diagnosis, application packaging, securities legal-opinion coordination, and exchange relations for Korea's KRW-market exchanges. DAXA-aligned, compliance-first, we make you the strongest applicant. The exchange makes the decision.",
+      title: "Crypto Exchange Listing Advisory, CEX, DEX & Hybrid | ium Labs",
+      description: "We get crypto projects listed on the world's top exchanges, centralized, decentralized, and hybrid. Listing-readiness diagnosis, application packaging, legal-opinion coordination, and exchange relations, with native depth in Korea.",
       path: "/services/listing",
-      keywords: ["Korean exchange listing", "Upbit listing", "Bithumb listing", "CEX listing advisory Korea", "DAXA listing", "KRW market listing", "Coinone Korbit listing"],
+      keywords: ["crypto exchange listing", "CEX listing agency", "DEX listing", "token listing services", "Binance listing", "Upbit listing", "exchange listing advisory"],
     }}
-    schema={{ name: "Korean CEX Listing Advisory", description: "Listing-readiness diagnosis, application packaging, securities legal-opinion coordination, and exchange relationship facilitation for Upbit, Bithumb, Coinone, and Korbit.", serviceType: ["Exchange Listing Advisory", "CEX Listing Korea", "Listing Readiness", "Regulatory Compliance"] }}
+    schema={{ name: "Crypto Exchange Listing Advisory", description: "Listing-readiness diagnosis, application packaging, legal-opinion coordination, and exchange relations for the world's top centralized, decentralized, and hybrid exchanges, with deep Korea expertise.", serviceType: ["Exchange Listing Advisory", "CEX Listing", "DEX Listing", "Token Listing Services"] }}
     hero={{
-      eyebrow: "CEX LISTING ADVISORY",
-      titleLead: <>Get listed on Korea's<br />exchanges.</>,
-      titleAccent: "And stay listed.",
-      lede: "The KRW market is the deepest retail liquidity in crypto, and the hardest gate. We make your project the strongest, fully-compliant applicant for Upbit, Bithumb, Coinone, and Korbit, and put you in front of the right people. The exchange decides; we make sure you deserve a yes.",
+      eyebrow: "EXCHANGE LISTING ADVISORY",
+      titleLead: <>Get listed on the<br />world's</>,
+      titleAccent: "top exchanges.",
+      lede: "A listing is the single biggest catalyst in a token's life. We prepare your project for the world's top centralized and decentralized exchanges, from Binance and Coinbase to Upbit and Uniswap, with the readiness, packaging, and relationships that turn an application into a yes. Deepest in Korea, fluent everywhere.",
       image: heroImg,
       primaryCta: { label: "Get a listing-readiness review", href: "/contact" },
     }}
-    stats={[{ v: "4", l: "KRW Exchanges" }, { v: "DAXA", l: "Best-Practices Aligned" }, { v: "25+", l: "Korea Market Entries" }, { v: "100%", l: "Compliance-First" }]}
-    strip={{ label: "Listing coverage", items: ["Upbit", "Bithumb", "Coinone", "Korbit"] }}
+    stats={[{ v: "CEX·DEX", l: "& Hybrid Venues" }, { v: "Global", l: "+ Native Korea Depth" }, { v: "T0", l: "Your Biggest Catalyst" }, { v: "100%", l: "Compliance-First" }]}
+    strip={{ label: "Listing coverage", items: ["Binance", "Coinbase", "OKX", "Bybit", "Upbit", "Uniswap"] }}
     reality={{
-      heading: "Listing demand vastly exceeds supply, and the rules just got",
-      headingAccent: "much harder.",
+      heading: "The best exchanges reject most applicants",
+      headingAccent: "by design.",
       body: [
-        "Each exchange decides its own listings through an independent review committee, not DAXA, and not any advisor. Since the 2024 Best-Practices framework and its 2025 overhaul, the bar has risen sharply: tougher criteria against post-listing pumps, meme-coin floods, and \"zombie coins,\" plus a quarterly maintenance review that means a listing is no longer permanent.",
-        "The grey market of unlicensed \"listing brokers\" is illegal and prosecuted. The legitimate path is to be undeniably ready, a clean securities legal opinion, airtight tokenomics and disclosure, and a credible Korean representative managing the process. That is exactly what we build.",
+        "A listing is the single biggest catalyst in a token's life. It is also the hardest door to open: top centralized exchanges list a small fraction of who applies, and each one judges you on fundamentals, distribution, security, and legal standing before a single pair goes live.",
+        "Getting in, and staying in, is a job. We make your project the strongest, fully-compliant applicant for the venues that matter, sequence which exchange to target and when, and manage the relationships and disclosures that keep you listed. Native depth in Korea's KRW market, reach across global CEX, DEX, and hybrid venues.",
+      ],
+    }}
+    types={{
+      eyebrow: "WHAT WE COVER",
+      heading: "Every venue that moves",
+      headingAccent: "your token.",
+      sub: "Centralized, decentralized, or hybrid, we map the right mix and sequence for your stage, liquidity, and audience, instead of chasing logos.",
+      cards: [
+        { title: "Centralized Exchanges (CEX)", body: "Binance, Coinbase, OKX, Bybit, Upbit, Bithumb. The deepest liquidity, the widest retail reach, and the strongest credibility, behind the most rigorous review and the highest bar. Where most of your volume and trust will come from." },
+        { title: "Decentralized Exchanges (DEX)", body: "Uniswap, PancakeSwap, and on-chain pools. Permissionless, fast to launch, fully self-custodied, ideal for early price discovery and community access. We design the pool, depth, and incentives so a DEX listing builds momentum instead of bleeding it." },
+        { title: "Hybrid & Emerging Venues", body: "Order-book DEXs and hybrid platforms that pair CEX-grade liquidity with on-chain transparency. We help you decide when a hybrid venue is the right complement, and how to sequence it alongside your CEX and DEX strategy." },
       ],
     }}
     process={{
       heading: "From candidate to",
-      headingAccent: "credible applicant.",
+      headingAccent: "listed, and staying there.",
       steps: [
-        { t: "8 WEEKS OUT", title: "Readiness Diagnosis", body: "Audit your project against the DAXA Best-Practices axes and each exchange's known criteria. Deliver a prioritized gap report." },
-        { t: "6 WEEKS OUT", title: "Dossier & Legal Opinion", body: "Package and Korean-localize the application; coordinate the independent securities legal opinion through partner counsel." },
-        { t: "2 WEEKS OUT", title: "Submission & Relations", body: "Manage submission, timing, and the market narrative with exchange listing and research teams." },
-        { t: "LISTING DAY", title: "Maintenance & Disclosure", body: "Stand up the ongoing IR and disclosure cadence needed to survive quarterly maintenance review." },
+        { t: "8 WEEKS OUT", title: "Readiness Diagnosis", body: "Audit your project against each target exchange's real bar, fundamentals, distribution, security, and legal standing. Deliver a prioritized gap report." },
+        { t: "6 WEEKS OUT", title: "Dossier & Legal Opinion", body: "Assemble and localize the application each venue expects; coordinate the securities or legal opinions specific jurisdictions require." },
+        { t: "2 WEEKS OUT", title: "Submission & Relations", body: "Manage submission, timing, and the narrative with listing and research teams, and sequence CEX, DEX, and hybrid venues." },
+        { t: "LISTING DAY", title: "Liquidity & Maintenance", body: "Coordinate listing-day depth, then stand up the disclosure and review cadence that keeps you listed." },
       ],
     }}
     features={[
-      { icon: ClipboardCheck, eyebrow: "01 · Diagnose", title: "Listing-Readiness Diagnosis", body: "Before you ever apply, we audit your project against the DAXA 거래지원 모범사례 axes and each exchange's real bar, then hand you a prioritized gap report so nothing surprises the review committee.", points: ["Securities-status & legal-opinion exposure", "Tokenomics, unlock & distribution red flags", "Disclosure, audit & AML documentation gaps", "Meme / zombie-coin risk screening"], image: featDiagnosisImg },
-      { icon: FileText, eyebrow: "02 · Package", title: "Application Packaging & Legal Opinion", body: "We assemble and Korean-localize the full dossier exchanges expect, and coordinate the domestic securities legal opinion Upbit and Coinone require, through independent partner firms, never authored to order.", points: ["Whitepaper, cap table & legal structure", "Technical & security audit packaging", "가상자산 설명서 (mandatory disclosure)", "KR securities opinion (Kim & Chang, Yoon & Yang, Hwawoo)"], image: featDossierImg },
-      { icon: Network, eyebrow: "03 · Place", title: "Exchange Relations & Market Sequencing", body: "Warm, transparent introductions to exchange listing and research teams, plus the strategy of which market to enter and when, sequenced around the windows that actually move Korean volume.", points: ["Listing & research-team introductions", "KRW vs BTC market sequencing", "Listing-window & catalyst timing (KBW)", "Back-and-forth and narrative management"], image: featRelationsImg },
-      { icon: ShieldCheck, eyebrow: "04 · Sustain", title: "Maintenance-Review Compliance", body: "Since 2024, listing is no longer once-and-done. We build the disclosure and IR cadence that keeps you clear of caution-item (유의종목) designation and delisting at every quarterly review.", points: ["Quarterly maintenance-review readiness", "Ongoing disclosure & IR cadence", "Milestone & roadmap tracking", "Early-warning risk monitoring"], image: featMaintenanceImg },
+      { icon: ClipboardCheck, eyebrow: "01 · Diagnose", title: "Listing-Readiness Diagnosis", body: "Before you apply anywhere, we audit your project against the real bar at each target venue, from a Tier-1 CEX's fundamentals review to Korea's DAXA best-practices, and hand you a prioritized gap report so nothing surprises a listing committee.", points: ["Per-exchange criteria & gap report", "Securities / legal-status exposure", "Tokenomics, unlock & distribution flags", "Security audit & documentation review"], image: featDiagnosisImg },
+      { icon: FileText, eyebrow: "02 · Package", title: "Application Packaging & Legal Opinion", body: "We assemble and localize the full dossier top exchanges expect, and coordinate the securities or legal opinions specific markets require, including the domestic opinion Korea's KRW exchanges demand, through independent counsel.", points: ["Whitepaper, cap table & legal structure", "Technical & security audit packaging", "Jurisdiction-specific legal opinions", "Korean securities opinion (KR counsel)"], image: featDossierImg },
+      { icon: Network, eyebrow: "03 · Place", title: "Exchange Relations & Venue Sequencing", body: "Warm, transparent introductions to listing and research teams across global and Korean venues, plus the strategy of which exchange to target first and how CEX, DEX, and hybrid listings should be sequenced.", points: ["Listing & research-team introductions", "CEX, DEX & hybrid sequencing", "Market & timing strategy", "Narrative and process management"], image: featRelationsImg },
+      { icon: ShieldCheck, eyebrow: "04 · Sustain", title: "Liquidity & Maintenance", body: "A listing is the start, not the finish. We coordinate listing-day liquidity and the ongoing disclosure and review cadence that keeps you in good standing, and clear of caution-list or delisting risk.", points: ["Listing-day liquidity coordination", "Ongoing disclosure & IR cadence", "Maintenance-review readiness", "Multi-venue standing management"], image: featMaintenanceImg },
     ]}
     promise={{
       heading: "We make you the best applicant.",
       headingMuted: "The exchange makes the decision.",
-      do: ["Make you the strongest, best-prepared, fully-compliant applicant", "Coordinate an independent Korean securities legal opinion", "Open warm, transparent introductions to the right teams", "Keep you listed through quarterly maintenance review"],
-      dont: ["Guarantee or \"buy\" a listing, the exchange decides, independently", "Pay exchanges or use unlicensed listing brokers (illegal in Korea)", "Touch wash trading, fake volume, or post-listing pump schemes", "Pressure or author the securities legal opinion's conclusion"],
+      do: ["Make you the strongest, fully-compliant applicant at every target venue", "Coordinate the legal and securities opinions each market requires", "Open warm, transparent introductions to listing teams", "Coordinate liquidity and keep you listed after day one"],
+      dont: ["Guarantee or buy a listing. Every exchange decides independently", "Pay exchanges or use unlicensed listing brokers", "Touch wash trading, fake volume, or post-listing pump schemes", "Pressure or author a legal opinion's conclusion"],
     }}
-    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Listing Readiness Scorecard&trade;</>, body: "Every engagement starts with a graded scorecard: where you stand against each exchange's criteria, what's blocking a yes, and the exact sequence to fix it, before a single application goes out.", cta: "Request your scorecard", image: scorecardImg }}
+    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Listing Readiness Scorecard&trade;</>, body: "Every engagement starts with a graded scorecard: where you stand against each target exchange's criteria, what is blocking a yes, and the exact sequence to fix it, before a single application goes out.", cta: "Request your scorecard", image: scorecardImg }}
     faq={{
       heading: "The questions founders actually ask.",
-      sub: "Straight answers on timing, cost, and what really moves a review committee, no sales spin.",
+      sub: "Straight answers on venues, timing, cost, and what really moves a listing committee.",
       items: [
-        { q: "How long does a Korean listing actually take?", a: "There's no published SLA. Realistically it's weeks to months from a serious application to a decision, and most inquiries are filtered out in pre-screening before in-depth review even begins. Anyone promising a fixed listing date is a red flag, the timeline belongs to the exchange. We optimize how ready you are when the window opens." },
-        { q: "What actually gets a project rejected?", a: "Most often: no clean Korean securities legal opinion, concentrated or opaque token distribution, thin disclosure, weak AML documentation, or no identifiable, accountable issuer. The 2024-2025 rules also screen hard for meme / zombie-coin profiles and post-listing pump risk. Our diagnosis surfaces every one of these before a committee ever sees you." },
-        { q: "How do you charge, and do you take a success fee on the listing?", a: "Retainer plus milestones for the advisory work. We never take a success fee tied to a listing outcome, that structure is exactly what Korea's bribery and fraud cases have targeted, and it would put both of us at risk. You pay for expert preparation and representation, not for a decision we don't control." },
-        { q: "We already have legal counsel and a market maker. Do you replace them?", a: "No, we coordinate them. We add the Korea-specific layer: the domestic securities opinion via partner firms, the localized dossier, exchange relationships, and a liquidity plan sized for KRW pairs. If you have global counsel or an MM desk we work alongside them; if you don't, we bring vetted partners." },
-        { q: "What if the readiness review says we're not ready?", a: "Then we tell you plainly, and give you the exact sequence to fix it. Burning a first impression with a review committee is far more expensive than waiting a quarter to apply correctly. The scorecard exists so you apply when you can win, not when you're merely hopeful." },
-        { q: "Which exchange should we target first?", a: "It depends on your profile. The KRW market (Upbit, Bithumb) holds the deep retail liquidity everyone wants but is the hardest gate; a BTC-pair listing can build a Korean trading history first. Each market is reviewed separately, so we sequence entries deliberately as part of your strategy." },
+        { q: "Which exchanges can you help us list on?", a: "Top centralized venues (Binance, Coinbase, OKX, Bybit and others), Korea's KRW exchanges (Upbit, Bithumb, Coinone, Korbit), and decentralized and hybrid venues. We help you choose the right mix and sequence for your stage, not just chase logos." },
+        { q: "Can you guarantee a listing?", a: "No, and anyone who does is a red flag. Every exchange decides independently through its own review. What we guarantee is that you arrive as the strongest, fully-compliant, best-prepared applicant, with the right documentation and the right introductions." },
+        { q: "How do you charge, and do you take a success fee on the listing?", a: "Retainer plus milestones for the advisory work. We never take a success fee tied to a listing outcome, a structure that invites bribery and fraud exposure and that exchanges blacklist. You pay for preparation and representation, not a decision we don't control." },
+        { q: "CEX or DEX first?", a: "It depends on your stage, liquidity, and audience. A DEX listing can build early price discovery and community access fast; a Tier-1 CEX brings depth and credibility behind a much higher bar. We sequence them deliberately rather than rushing every venue at once." },
+        { q: "What makes your Korea coverage different?", a: "Korea is the deepest retail market in crypto and the hardest gate, governed by DAXA self-regulation and a domestic securities-opinion requirement most agencies can't navigate. Native Korea depth is our edge, and we pair it with global reach so one partner covers your whole listing map." },
       ],
     }}
   />

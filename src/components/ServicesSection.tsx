@@ -38,10 +38,10 @@ const services = [
     image: listingImage,
     accent: "#22D3EE",
     details: [
-      "Readiness diagnosis vs DAXA best-practices",
+      "Readiness diagnosis vs each exchange's bar",
       "Application packaging & legal-opinion coordination",
-      "KRW vs BTC sequencing & listing-window timing",
-      "Quarterly maintenance-review compliance",
+      "CEX, DEX & hybrid venue sequencing",
+      "Post-listing liquidity & maintenance",
     ],
   },
   {

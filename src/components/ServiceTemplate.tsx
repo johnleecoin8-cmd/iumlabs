@@ -28,6 +28,7 @@ export type ServiceTemplateProps = {
   stats: SvcStat[];
   strip?: { label: string; items: string[] };
   reality: { eyebrow?: string; heading: ReactNode; headingAccent?: string; body: string[] };
+  types?: { eyebrow?: string; heading: ReactNode; headingAccent?: string; sub?: string; cards: { title: string; body: string }[] };
   process: { eyebrow?: string; heading: ReactNode; headingAccent?: string; steps: SvcStep[] };
   features: SvcFeature[];
   pullQuote?: { lead: string; accent: string };
@@ -125,6 +126,27 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           </div>
         </Reveal>
       </section>
+
+      {/* TYPES */}
+      {p.types && (
+        <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 border-b border-white/[0.06]">
+          <Reveal>
+            <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.types.eyebrow ?? "WHAT WE COVER"}</span>
+            <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-3">{p.types.heading} {p.types.headingAccent && <span style={{ color: A }}>{p.types.headingAccent}</span>}</h2>
+            {p.types.sub && <p className="text-white/50 leading-relaxed max-w-2xl">{p.types.sub}</p>}
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-4 mt-10">
+            {p.types.cards.map((c, i) => (
+              <Reveal key={c.title} delay={i * 80}>
+                <div className="h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] p-7 hover:border-white/[0.14] transition-colors">
+                  <div className="font-display text-lg font-semibold mb-3" style={{ color: A }}>{c.title}</div>
+                  <p className="text-[14px] text-white/55 leading-relaxed">{c.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* PROCESS */}
       <section id="process" className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-y border-white/[0.06]">
