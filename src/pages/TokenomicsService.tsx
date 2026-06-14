@@ -9,7 +9,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroImg from "@/assets/platforms/res-competitor.jpg";
+import heroImg from "@/assets/services/tokenomics-allocation.svg";
 import distImg from "@/assets/platforms/res-onchain.jpg";
 import floatImg from "@/assets/platforms/res-market.jpg";
 import unlockImg from "@/assets/platforms/seo-report.jpg";
