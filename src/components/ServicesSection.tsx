@@ -258,13 +258,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-2 tracking-[-0.02em]">
             {service.title}
           </h3>
-          <p className="text-[13px] text-white/55 mb-3 leading-relaxed max-w-[90%]">
+          <p className="text-[13px] text-white/55 mb-4 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
-          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 backdrop-blur-sm" style={{ backgroundColor: `${service.accent}15`, border: `1px solid ${service.accent}25` }}>
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: service.accent }} />
-            <span className="text-[11px] sm:text-xs font-medium tracking-wide" style={{ color: service.accent }}>{service.proof}</span>
-          </div>
 
           {/* Details — always visible on mobile, hover reveal on desktop */}
           <div className="max-h-[300px] sm:max-h-0 sm:group-hover:max-h-[300px] overflow-hidden sm:transition-all sm:duration-500 sm:ease-out">
