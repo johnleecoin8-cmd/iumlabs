@@ -6,8 +6,8 @@ import heroImg from "@/assets/platforms/comp-exchange.jpg";
 import featDiagnosisImg from "@/assets/platforms/comp-landscape.jpg";
 import featDossierImg from "@/assets/platforms/comp-vasp.jpg";
 import featRelationsImg from "@/assets/platforms/pr-interview.jpg";
-import featMaintenanceImg from "@/assets/platforms/seo-analytics.jpg";
-import scorecardImg from "@/assets/platforms/res-thesis.jpg";
+import featMaintenanceImg from "@/assets/services/listing-liqmaint.webp";
+import scorecardImg from "@/assets/services/listing-scorecard.webp";
 
 const ACCENT = "#22D3EE";
 
