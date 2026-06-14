@@ -97,9 +97,6 @@ const Index = () => {
       <section id="services" className="border-t border-white/[0.07]">
         <div className="mx-auto max-w-7xl px-6 md:px-10 pt-20 md:pt-28">
           <Eyebrow index="01" label="Services" />
-          <h2 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
-            End-to-end capabilities <span className="text-white/40">for Korea market entry.</span>
-          </h2>
         </div>
         <ServicesSection />
       </section>
