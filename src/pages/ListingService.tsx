@@ -131,7 +131,6 @@ const ListingService = () => {
 
   return (
     <div className="relative bg-[#0A0A0A] min-h-screen text-white overflow-x-hidden">
-      <style>{`@keyframes lstKen{0%{transform:scale(1.06)}100%{transform:scale(1.16)}}.lst-ken{animation:lstKen 26s ease-in-out infinite alternate;transform-origin:60% 40%}`}</style>
       {/* film grain */}
       <div className="pointer-events-none fixed inset-0 z-[2] opacity-[0.04] mix-blend-overlay" style={{ backgroundImage: `url("${GRAIN}")` }} />
 
@@ -142,17 +141,17 @@ const ListingService = () => {
 
       {/* ===== HERO ===== */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        <img src={heroImg} alt="" className="lst-ken absolute inset-0 w-full h-full object-cover" />
+        <img src={heroImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/55" />
         <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 82% 8%, ${ACCENT}1f, transparent 52%)` }} />
         <CandleMotif className="absolute right-6 sm:right-16 bottom-10 w-28 sm:w-44 h-auto opacity-50" />
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
           <div className="max-w-4xl">
             <span className="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-[0.35em] mb-5" style={{ color: ACCENT, ...heroStep(0) }}>CEX LISTING ADVISORY</span>
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.03em] leading-[1.02] mb-6" style={heroStep(1)}>
+            <h1 className="font-display text-5xl sm:text-7xl lg:text-8xl xl:text-[8.5rem] font-bold tracking-[-0.04em] leading-[0.92] mb-7" style={heroStep(1)}>
               Get listed on Korea's<br />exchanges. <span style={{ color: ACCENT }}>And stay listed.</span>
             </h1>
-            <p className="text-base sm:text-lg text-white/60 leading-relaxed max-w-2xl mb-8" style={heroStep(2)}>
+            <p className="font-serif text-lg sm:text-2xl text-white/70 leading-snug max-w-2xl mb-9" style={heroStep(2)}>
               The KRW market is the deepest retail liquidity in crypto — and the hardest gate. We make your project the strongest, fully-compliant applicant for Upbit, Bithumb, Coinone, and Korbit, and put you in front of the right people. The exchange decides; we make sure you deserve a yes.
             </p>
             <div className="flex flex-wrap items-center gap-3 mb-12" style={heroStep(3)}>
@@ -186,8 +185,7 @@ const ListingService = () => {
       </div>
 
       {/* ===== REALITY ===== */}
-      <section className="relative px-5 sm:px-8 lg:px-20 py-20 sm:py-28 overflow-hidden">
-        <div className="pointer-events-none absolute -left-40 top-10 w-[500px] h-[500px] rounded-full blur-[120px] opacity-20" style={{ background: ACCENT }} />
+      <section className="relative px-5 sm:px-8 lg:px-20 py-20 sm:py-28">
         <Reveal>
           <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">THE REALITY</span>
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mt-6 items-start">
@@ -232,7 +230,6 @@ const ListingService = () => {
           return (
             <Reveal key={f.title}>
               <div className={`relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
-                <span className="pointer-events-none absolute -top-16 -z-0 font-display font-bold text-[10rem] leading-none text-white/[0.025] select-none hidden sm:block" style={flip ? { right: "-1rem" } : { left: "-1rem" }}>{f.eyebrow.slice(0, 2)}</span>
                 <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3]">
                   <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
@@ -242,11 +239,14 @@ const ListingService = () => {
                   <span className="absolute top-4 right-4 text-[10px] uppercase tracking-wider text-white/40 bg-black/40 backdrop-blur px-2 py-1 rounded">placeholder</span>
                 </div>
                 <div className="relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-11 h-11 rounded-full flex items-center justify-center border" style={{ backgroundColor: `${ACCENT}14`, borderColor: `${ACCENT}33` }}>
-                      <Icon className="w-5 h-5" style={{ color: ACCENT }} />
+                  <div className="flex items-baseline gap-4 mb-5">
+                    <span className="font-display text-5xl sm:text-6xl font-bold leading-none" style={{ color: ACCENT }}>{f.eyebrow.slice(0, 2)}</span>
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-full flex items-center justify-center border" style={{ backgroundColor: `${ACCENT}14`, borderColor: `${ACCENT}33` }}>
+                        <Icon className="w-4 h-4" style={{ color: ACCENT }} />
+                      </div>
+                      <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/35">{f.eyebrow.split("· ")[1] ?? f.eyebrow}</span>
                     </div>
-                    <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/35">{f.eyebrow}</span>
                   </div>
                   <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-[-0.02em] mb-4">{f.title}</h3>
                   <p className="text-white/55 leading-relaxed mb-6">{f.body}</p>
@@ -313,13 +313,12 @@ const ListingService = () => {
       </section>
 
       {/* ===== DELIVERABLE ===== */}
-      <section className="relative px-5 sm:px-8 lg:px-20 py-20 sm:py-28 bg-[#0D0D0D] border-y border-white/[0.06] overflow-hidden">
-        <div className="pointer-events-none absolute right-0 bottom-0 w-[500px] h-[500px] rounded-full blur-[130px] opacity-[0.14]" style={{ background: ACCENT }} />
+      <section className="relative px-5 sm:px-8 lg:px-20 py-20 sm:py-28 bg-[#0D0D0D] border-y border-white/[0.06]">
         <Reveal>
           <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             <div>
               <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">THE DELIVERABLE</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-5">Your Listing Readiness Scorecard.</h2>
+              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-5">Listing Readiness Scorecard&trade;</h2>
               <p className="text-white/55 leading-relaxed mb-6">Every engagement starts with a graded scorecard: where you stand against each exchange's criteria, what's blocking a yes, and the exact sequence to fix it — before a single application goes out.</p>
               <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: ACCENT }}>
                 Request your scorecard <ArrowRight className="w-4 h-4" />
