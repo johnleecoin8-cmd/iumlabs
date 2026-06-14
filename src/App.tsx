@@ -7,6 +7,7 @@ import React, { useEffect, useState, useRef, useCallback, Suspense } from "react
 import { HelmetProvider } from "react-helmet-async";
 import PageIntro from "@/components/PageIntro";
 import RouteProgressBar from "@/components/RouteProgressBar";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import logo from "@/assets/logo.png";
@@ -76,7 +77,11 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (window.__lenis) {
+      window.__lenis.scrollTo(0, { immediate: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
   }, [pathname]);
 
   return null;
@@ -271,6 +276,7 @@ const useGlobalAutoplay = () => {
 
 const AppContent = () => {
   useGlobalAutoplay();
+  useSmoothScroll();
   const location = useLocation();
   const [showIntro, setShowIntro] = useState(() => {
     // Only show intro on first visit in session and on home page

@@ -1,6 +1,7 @@
 import { ArrowLeft, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useRef } from "react";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
 interface ProjectHeroProps {
@@ -21,6 +22,11 @@ interface ProjectHeroProps {
 const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const services = project.services || [];
   const hasVideo = !!project.bgVideo;
+
+  // Scroll-linked parallax for the hero media — restores the "스르륵" drift feel.
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: mediaRef, offset: ["start end", "end start"] });
+  const mediaY = useTransform(scrollYProgress, [0, 1], ["-9%", "9%"]);
 
   const videoPoster = hasVideo
     ? `/images/posters/${project.bgVideo!.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '-poster.jpg')}`
@@ -118,42 +124,48 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
         {/* Divider */}
         <div className="mt-12 border-t border-white/10" />
 
-        {/* Contained media */}
+        {/* Contained media — smooth reveal + scroll parallax */}
         <motion.div
-          className="relative mt-12 overflow-hidden rounded-2xl bg-[#111]"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
+          ref={mediaRef}
+          className="relative mt-12 overflow-hidden rounded-2xl bg-[#111] ring-1 ring-white/[0.06]"
+          initial={{ opacity: 0, y: 32, scale: 1.04 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-12%" }}
+          transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="aspect-[16/10] md:aspect-[16/9]">
-            {hasVideo ? (
-              <>
-                <img
-                  {...posterProps}
-                  className="absolute inset-0 h-full w-full object-cover"
-                />
-                <ShimmerOverlay />
-                {!shouldDisableVideo && !hasVideoError && (
-                  <video
-                    ref={videoRef}
-                    {...videoProps}
+          <div className="relative aspect-[16/10] md:aspect-[16/9]">
+            <motion.div className="absolute inset-[-15%] will-change-transform" style={{ y: mediaY }}>
+              {hasVideo ? (
+                <>
+                  <img
+                    {...posterProps}
                     className="absolute inset-0 h-full w-full object-cover"
-                  >
-                    <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
-                  </video>
-                )}
-              </>
-            ) : (
-              <img
-                src={project.bgImage || "/images/hero-poster.jpg"}
-                alt={project.name}
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="eager"
-                width={1920}
-                height={1080}
-              />
-            )}
+                  />
+                  <ShimmerOverlay />
+                  {!shouldDisableVideo && !hasVideoError && (
+                    <video
+                      ref={videoRef}
+                      {...videoProps}
+                      className="absolute inset-0 h-full w-full object-cover"
+                    >
+                      <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
+                    </video>
+                  )}
+                </>
+              ) : (
+                <img
+                  src={project.bgImage || "/images/hero-poster.jpg"}
+                  alt={project.name}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="eager"
+                  width={1920}
+                  height={1080}
+                />
+              )}
+            </motion.div>
           </div>
+          {/* Soft bottom vignette for depth */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/30 to-transparent" />
         </motion.div>
       </div>
     </header>
