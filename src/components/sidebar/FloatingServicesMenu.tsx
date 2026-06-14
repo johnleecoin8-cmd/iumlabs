@@ -7,14 +7,18 @@ import { cn } from "@/lib/utils";
 
 // Flat services list
 const serviceItems = [
-  { name: "GTM Strategy", href: "/services" },
-  { name: "Regulations & Compliance", href: "/services/compliance" },
-  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
+  { name: "GTM Strategy", href: "/services/gtm" },
+  { name: "CEX Listing Advisory", href: "/services/listing" },
+  { name: "Market Making & Liquidity", href: "/services/liquidity" },
+  { name: "Tokenomics", href: "/services/tokenomics" },
+  { name: "Capital & OTC Introduction", href: "/services/capital" },
   { name: "Influencer/KOL", href: "/services/influencer" },
-  { name: "PR/Media", href: "/services/pr" },
-  { name: "Deep Research", href: "/services/deep-research" },
   { name: "Community Management", href: "/services/community" },
-  { name: "Offline Event", href: "/services/offline-event" },
+  { name: "PR/Media", href: "/services/pr" },
+  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
+  { name: "AMA Hosting", href: "/services/ama" },
+  { name: "Deep Research", href: "/services/deep-research" },
+  { name: "Regulations & Compliance", href: "/services/compliance" },
 ];
 
 const allServiceItems = serviceItems;
