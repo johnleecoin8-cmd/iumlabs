@@ -183,7 +183,6 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${A}1a, transparent 55%)` }} />
                   <div className="absolute top-4 left-4 w-7 h-7 border-t-2 border-l-2 rounded-tl-lg" style={{ borderColor: `${A}aa` }} />
                   <div className="absolute bottom-4 right-4 w-7 h-7 border-b-2 border-r-2 rounded-br-lg" style={{ borderColor: `${A}aa` }} />
-                  <span className="absolute top-4 right-4 text-[10px] uppercase tracking-wider text-white/40 bg-black/40 backdrop-blur px-2 py-1 rounded">placeholder</span>
                 </div>
                 <div className="relative">
                   <div className="flex items-baseline gap-4 mb-5">
@@ -261,7 +260,6 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
               <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[16/10]">
                 <img src={p.deliverable.image} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 to-transparent" />
-                <span className="absolute top-4 left-4 text-[10px] uppercase tracking-wider text-white/40 bg-black/40 backdrop-blur px-2 py-1 rounded">placeholder</span>
               </div>
             </div>
           </Reveal>
