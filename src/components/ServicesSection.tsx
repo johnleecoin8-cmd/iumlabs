@@ -16,13 +16,27 @@ import capitalImage from "@/assets/platforms/res-thesis.jpg";
 const services = [
   {
     number: "01",
+    title: "GTM Strategy",
+    description: "Full-stack Go-To-Market planning for Korean market entry.",
+    link: "/services/gtm",
+    icon: Rocket,
+    image: gtmImage,
+    accent: "#00C8FF",
+    details: [
+      "Competitive landscape & gap analysis",
+      "Korea-fit narrative & positioning",
+      "Launch timeline & milestone planning",
+      "Exchange listing strategy (Upbit, Bithumb)",
+    ],
+  },
+  {
+    number: "02",
     title: "CEX Listing Advisory",
     description: "From listing-readiness diagnosis to application packaging and exchange relations.",
     link: "/services/listing",
     icon: Landmark,
     image: listingImage,
     accent: "#22D3EE",
-    proof: "Upbit · Bithumb · Coinone · Korbit",
     details: [
       "Readiness diagnosis vs DAXA best-practices",
       "Application packaging & legal-opinion coordination",
@@ -31,14 +45,13 @@ const services = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     title: "Market Making & Liquidity",
     description: "Exchange-grade order-book depth from listing day.",
     link: "/services/liquidity",
     icon: Droplets,
     image: liquidityImage,
     accent: "#00E0B8",
-    proof: "Vetted MM desks · never wash trading",
     details: [
       "Liquidity strategy & order-book sizing",
       "Vetted market-maker desk matching",
@@ -47,14 +60,13 @@ const services = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     title: "Tokenomics",
     description: "Token supply, distribution, and unlocks engineered for the Korean market.",
     link: "/services/tokenomics",
     icon: Coins,
     image: tokenomicsImage,
     accent: "#818CF8",
-    proof: "Korea-fit supply & unlock design",
     details: [
       "Supply, emission & allocation design",
       "Vesting & unlock scheduling",
@@ -63,35 +75,18 @@ const services = [
     ],
   },
   {
-    number: "04",
+    number: "05",
     title: "Capital & OTC Introduction",
     description: "Warm access to Korea's crypto VCs, OTC desks, and institutional custody.",
     link: "/services/capital",
     icon: Handshake,
     image: capitalImage,
     accent: "#FBBF24",
-    proof: "Korean VC · OTC · custody network",
     details: [
       "Korean VC & strategic intros (token / equity)",
       "Licensed OTC desk connections",
       "Institutional custody onboarding",
       "Offshore entity & fund-ready structuring",
-    ],
-  },
-  {
-    number: "05",
-    title: "GTM Strategy",
-    description: "Full-stack Go-To-Market planning for Korean market entry.",
-    link: "/services/gtm",
-    icon: Rocket,
-    image: gtmImage,
-    accent: "#00C8FF",
-    proof: "18+ projects launched into Korea",
-    details: [
-      "Competitive landscape & gap analysis",
-      "Korea-fit narrative & positioning",
-      "Launch timeline & milestone planning",
-      "Exchange listing strategy (Upbit, Bithumb)",
     ],
   },
   {
@@ -102,7 +97,6 @@ const services = [
     icon: Mic2,
     image: kolImage,
     accent: "#FACC15",
-    proof: "230+ KOLs · 116+ events hosted",
     details: [
       "230+ vetted Korean KOL network",
       "YouTube, Twitter, Telegram, Naver",
@@ -118,7 +112,6 @@ const services = [
     icon: Users,
     image: communityImage,
     accent: "#38BDF8",
-    proof: "50K+ members · 80+ Seoul events",
     details: [
       "Telegram, Discord, KakaoTalk setup",
       "Native Korean community managers",
@@ -134,7 +127,6 @@ const services = [
     icon: Newspaper,
     image: prImage,
     accent: "#8B5CF6",
-    proof: "200+ articles placed across Korean media",
     details: [
       "CoinDesk Korea, Block Media, TokenPost",
       "Korean press release writing & distribution",
@@ -150,7 +142,6 @@ const services = [
     icon: Search,
     image: seoAdsImage,
     accent: "#22C55E",
-    proof: "Top 3 Naver ranking for 12+ keywords",
     details: [
       "Naver SEO & keyword strategy",
       "Google Ads & crypto ad networks",
@@ -166,7 +157,6 @@ const services = [
     icon: Mic,
     image: amaImage,
     accent: "#EC4899",
-    proof: "55+ AMA sessions hosted",
     details: [
       "Telegram, Discord, Twitter Spaces AMAs",
       "Native Korean-speaking professional hosts",
@@ -182,7 +172,6 @@ const services = [
     icon: FileSearch,
     image: deepResearchImage,
     accent: "#F43F5E",
-    proof: "15+ published research reports",
     details: [
       "Korean market ecosystem mapping",
       "On-chain behavior & wallet profiling",
@@ -198,7 +187,6 @@ const services = [
     icon: Compass,
     image: "/images/posters/compliance-hero.avif",
     accent: "#A855F7",
-    proof: "10+ VASP compliance cases handled",
     details: [
       "VASP registration & licensing guidance",
       "PIPA & personal data compliance strategy",
@@ -218,7 +206,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       className={`transition-all ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
       style={{
         transitionDuration: '600ms',
-        transitionDelay: `${(index % 4) * 80}ms`,
+        transitionDelay: `${(index % 3) * 80}ms`,
       }}
     >
       <Link
@@ -302,7 +290,7 @@ const ServicesSection = () => {
   return (
     <section className="py-6 sm:py-10 md:py-14">
       <div className="px-4 sm:px-4 lg:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {services.map((service, index) => (
             <ServiceCard key={service.number} service={service} index={index} />
           ))}
