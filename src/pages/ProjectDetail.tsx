@@ -7,6 +7,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
+import { caseStudyOverrides } from "@/data/caseStudyOverrides";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectContentSection from "@/components/project-detail/ProjectContentSection";
 import NextProject from "@/components/project-detail/NextProject";
@@ -83,7 +84,7 @@ const ProjectDetail = () => {
   
   const websiteUrl = dbProject?.website_url || '';
   
-  const project: (ProjectData & { client_name?: string; duration?: string; featureImage?: string; bgVideo?: string }) | null = dbProject ? {
+  const baseProject: (ProjectData & { client_name?: string; duration?: string; featureImage?: string; bgVideo?: string }) | null = dbProject ? {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
     bgImage: heroBackgroundImage,
@@ -108,6 +109,16 @@ const ProjectDetail = () => {
       : fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
   } : (fallbackProject ? { ...fallbackProject, client_name: fallbackProject.name, featureImage: fallbackProject.featureImage, bgVideo: fallbackProject.bgVideo } : null);
+
+  // Apply curated, campaign-appropriate Results overrides (code-controlled, no DB writes).
+  const override = slug ? caseStudyOverrides[slug] : undefined;
+  const project = baseProject
+    ? {
+        ...baseProject,
+        ...(override?.result !== undefined ? { result: override.result } : {}),
+        ...(override?.metrics !== undefined ? { metrics: override.metrics } : {}),
+      }
+    : null;
 
   // SEO meta computed from project data
   const seoTitle = project ? `${project.name} Case Study | ium Labs` : "Case Study | ium Labs";
