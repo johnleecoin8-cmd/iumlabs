@@ -3,6 +3,23 @@ import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import ProjectStrategy from "./ProjectStrategy";
 import ProjectResults from "./ProjectResults";
 
+// Resolve DB-stored asset paths (e.g. "/src/assets/campaigns/x.jpg") to real bundled URLs.
+const assetModules = {
+  ...import.meta.glob("../../assets/campaigns/*", { eager: true, query: "?url", import: "default" }),
+  ...import.meta.glob("../../assets/projects/*", { eager: true, query: "?url", import: "default" }),
+} as Record<string, string>;
+const assetByName: Record<string, string> = {};
+for (const [path, url] of Object.entries(assetModules)) {
+  const name = path.split("/").pop();
+  if (name) assetByName[name] = url;
+}
+const resolveAssetSrc = (src?: string) => {
+  if (!src) return src;
+  if (/^https?:\/\//.test(src) || src.startsWith("data:")) return src;
+  const name = src.split("/").pop();
+  return (name && assetByName[name]) || src;
+};
+
 interface ProjectContentSectionProps {
   project: ProjectData & { client_name?: string; duration?: string; featureImage?: string };
   metrics?: ProjectMetric[];
@@ -25,6 +42,19 @@ const SectionLabel = ({ index, label }: { index: string; label: string }) => (
 
 const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
+
+  // Sequential section numbering — only count sections that actually render.
+  const hasChallenge = !!project.challenge;
+  const hasStrategy = !!(project.strategy && project.strategy.length > 0);
+  const hasResults = !!((displayMetrics && displayMetrics.length > 0) || project.result);
+  const hasGallery = !!(gallery && gallery.length > 0);
+  let step = 0;
+  const num = (present: boolean) => (present ? String(++step).padStart(2, "0") : "");
+  const challengeNum = num(hasChallenge);
+  const strategyNum = num(hasStrategy);
+  const resultsNum = num(hasResults);
+  const galleryNum = num(hasGallery);
+
   const meta = [
     { label: "Client", value: project.client_name || project.name },
     { label: "Category", value: project.category },
@@ -61,7 +91,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         {/* ===== THE CHALLENGE ===== */}
         {project.challenge && (
           <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
-            <SectionLabel index="01" label="The Challenge" />
+            <SectionLabel index={challengeNum} label="The Challenge" />
             <p className="mt-8 max-w-4xl text-2xl font-light leading-snug text-white/90 md:text-3xl lg:text-[2.5rem] lg:leading-[1.2]">
               {project.challenge}
             </p>
@@ -70,37 +100,43 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       </div>
 
       {/* ===== OUR STRATEGY ===== */}
-      {project.strategy && project.strategy.length > 0 && (
+      {hasStrategy && (
         <ProjectStrategy
           strategy={project.strategy}
           glowColor={project.glowColor}
           intro={project.whatWeDid}
+          index={strategyNum}
         />
       )}
 
       {/* ===== THE RESULTS ===== */}
-      {displayMetrics && displayMetrics.length > 0 && (
+      {hasResults && (
         <ProjectResults
           metrics={displayMetrics}
           glowColor={project.glowColor}
           headline={project.result}
           timeline={project.duration}
+          index={resultsNum}
         />
       )}
 
       {/* ===== GALLERY ===== */}
-      {gallery && gallery.length > 0 && (
+      {hasGallery && (
         <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
           <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
-            <SectionLabel index="04" label="Selected Work" />
+            <SectionLabel index={galleryNum} label="Selected Work" />
             <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
               {gallery.map((item, idx) => (
                 <figure key={idx} className="group">
                   <div className="overflow-hidden rounded-xl bg-[#111]">
                     <img
-                      src={item.src}
+                      src={resolveAssetSrc(item.src)}
                       alt={item.title || `${project.name} work ${idx + 1}`}
                       loading="lazy"
+                      onError={(e) => {
+                        const fig = (e.currentTarget.closest("figure") as HTMLElement | null);
+                        if (fig) fig.style.display = "none";
+                      }}
                       className="aspect-[16/10] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                     />
                   </div>

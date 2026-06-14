@@ -8,6 +8,7 @@ interface ProjectResultsProps {
   headline?: string;
   timeline?: string;
   duration?: string;
+  index?: string;
 }
 
 const ResultStat = ({ metric, index }: { metric: ProjectMetric; index: number }) => {
@@ -33,8 +34,9 @@ const ResultStat = ({ metric, index }: { metric: ProjectMetric; index: number })
   );
 };
 
-const ProjectResults = ({ metrics, headline }: ProjectResultsProps) => {
-  if (!metrics || metrics.length === 0) return null;
+const ProjectResults = ({ metrics, headline, index = "03" }: ProjectResultsProps) => {
+  const hasMetrics = !!(metrics && metrics.length > 0);
+  if (!hasMetrics && !headline) return null;
 
   return (
     <section className="bg-[#0A0A0A]">
@@ -47,7 +49,7 @@ const ProjectResults = ({ metrics, headline }: ProjectResultsProps) => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="flex items-baseline gap-4">
-            <span className="font-mono text-xs text-white/30">03</span>
+            <span className="font-mono text-xs text-white/30">{index}</span>
             <span className="text-xs uppercase tracking-[0.25em] text-white/40">The Results</span>
           </div>
 
@@ -57,11 +59,13 @@ const ProjectResults = ({ metrics, headline }: ProjectResultsProps) => {
             </p>
           )}
 
-          <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
-            {metrics.map((metric, idx) => (
-              <ResultStat key={idx} metric={metric} index={idx} />
-            ))}
-          </div>
+          {hasMetrics && (
+            <div className="mt-14 grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
+              {metrics.map((metric, idx) => (
+                <ResultStat key={idx} metric={metric} index={idx} />
+              ))}
+            </div>
+          )}
         </motion.div>
       </div>
     </section>

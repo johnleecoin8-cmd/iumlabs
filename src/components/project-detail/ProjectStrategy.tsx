@@ -4,9 +4,10 @@ interface ProjectStrategyProps {
   strategy: string[];
   glowColor: string;
   intro?: string;
+  index?: string;
 }
 
-const ProjectStrategy = ({ strategy, intro }: ProjectStrategyProps) => {
+const ProjectStrategy = ({ strategy, intro, index = "02" }: ProjectStrategyProps) => {
   if (!strategy || strategy.length === 0) return null;
 
   return (
@@ -20,7 +21,7 @@ const ProjectStrategy = ({ strategy, intro }: ProjectStrategyProps) => {
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="flex items-baseline gap-4">
-            <span className="font-mono text-xs text-white/30">02</span>
+            <span className="font-mono text-xs text-white/30">{index}</span>
             <span className="text-xs uppercase tracking-[0.25em] text-white/40">Our Strategy</span>
           </div>
 
