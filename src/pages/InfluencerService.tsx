@@ -3,10 +3,10 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/services/kol-avatars.webp";
 import ytImg from "@/assets/platforms/kol-youtube.jpg";
-import ctImg from "@/assets/platforms/kol-twitter.jpg";
-import perfImg from "@/assets/platforms/kol-performance.jpg";
-import naverImg from "@/assets/platforms/kol-naver.jpg";
-import fraudImg from "@/assets/platforms/kol-fraud.jpg";
+import ctImg from "@/assets/services/kol-campaign.webp";
+import perfImg from "@/assets/services/kol-performance.png";
+import naverImg from "@/assets/services/kol-multiplatform.png";
+import fraudImg from "@/assets/services/kol-roster.webp";
 
 const ACCENT = "#FACC15";
 

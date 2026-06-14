@@ -2,10 +2,10 @@ import { Handshake, ArrowLeftRight, Vault } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos. */
-import heroImg from "@/assets/platforms/res-thesis.jpg";
-import f1 from "@/assets/platforms/pr-interview.jpg";
-import f2 from "@/assets/platforms/comp-vasp.jpg";
-import f3 from "@/assets/platforms/comp-legal.jpg";
+import heroImg from "@/assets/services/capital-hero.webp";
+import f1 from "@/assets/services/capital-vc.png";
+import f2 from "@/assets/services/capital-otc.png";
+import f3 from "@/assets/services/capital-custody.webp";
 import delivImg from "@/assets/platforms/res-market.jpg";
 
 const ACCENT = "#FBBF24";
