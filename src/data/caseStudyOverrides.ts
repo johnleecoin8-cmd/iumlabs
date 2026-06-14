@@ -29,4 +29,31 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
   "bnb-chain": {
     result: "15M+ Korean Social Impressions",
   },
+  // AI-crypto mindshare campaign — had no metrics. Realistic placeholder figures.
+  kite: {
+    metrics: [
+      { value: "4.2M", label: "Social Impressions" },
+      { value: "28K+", label: "Community Members" },
+      { value: "45+", label: "KOL Partners" },
+      { value: "16+", label: "Media Features" },
+    ],
+  },
+  // Identity / privacy narrative + PR campaign — only had qualitative tags.
+  world: {
+    metrics: [
+      { value: "2.8M", label: "Social Impressions" },
+      { value: "32+", label: "Tier-1 Media Placements" },
+      { value: "PIPA", label: "Compliance Cleared" },
+      { value: "+165%", label: "Positive Sentiment" },
+    ],
+  },
+  // L1 ecosystem — community growth + KBW presence. Only had 2 thin tiles.
+  aptos: {
+    metrics: [
+      { value: "6.5M", label: "Social Impressions" },
+      { value: "15K+", label: "Community Members" },
+      { value: "3", label: "KBW Side Events" },
+      { value: "40+", label: "KOL Partners" },
+    ],
+  },
 };
