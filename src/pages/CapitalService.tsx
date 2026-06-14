@@ -1,7 +1,7 @@
 import { Handshake, ArrowLeftRight, Vault, Building2 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES — swap for provided photos. */
+/* PLACEHOLDER IMAGES, swap for provided photos. */
 import heroImg from "@/assets/platforms/res-thesis.jpg";
 import f1 from "@/assets/platforms/pr-interview.jpg";
 import f2 from "@/assets/platforms/comp-vasp.jpg";
@@ -16,8 +16,8 @@ const CapitalService = () => (
     accent={ACCENT}
     breadcrumb="Capital & OTC Introduction"
     seo={{
-      title: "Capital & OTC Introduction — Korean Crypto VCs, OTC & Custody | ium Labs",
-      description: "Warm introductions to Korea's crypto capital network: VCs and strategic investors, licensed OTC desks, and institutional custody — plus fund-ready structuring. Introductions and structuring, not capital deployment.",
+      title: "Capital & OTC Introduction, Korean Crypto VCs, OTC & Custody | ium Labs",
+      description: "Warm introductions to Korea's crypto capital network: VCs and strategic investors, licensed OTC desks, and institutional custody, plus fund-ready structuring. Introductions and structuring, not capital deployment.",
       path: "/services/capital",
       keywords: ["Korean crypto VC", "crypto OTC Korea", "crypto capital Korea", "institutional custody Korea", "Web3 fundraising Korea", "crypto OTC desk"],
     }}
@@ -26,7 +26,7 @@ const CapitalService = () => (
       eyebrow: "CAPITAL & OTC INTRODUCTION",
       titleLead: <>Open Korea's</>,
       titleAccent: "capital network.",
-      lede: "Korea's capital is relationship-gated and largely invisible from the outside. We open the door — warm introductions to crypto VCs and strategic investors, licensed OTC desks, and institutional custody, plus the structuring to make you fund-ready. We connect and structure; we never deploy capital or promise a check.",
+      lede: "Korea's capital is relationship-gated and largely invisible from the outside. We open the door, warm introductions to crypto VCs and strategic investors, licensed OTC desks, and institutional custody, plus the structuring to make you fund-ready. We connect and structure; we never deploy capital or promise a check.",
       image: heroImg,
       primaryCta: { label: "Request an introduction", href: "/contact" },
     }}
@@ -36,7 +36,7 @@ const CapitalService = () => (
       heading: "Korea's real capital is",
       headingAccent: "relationship-gated.",
       body: [
-        "The deployable on-shore fiat pool is still constrained — corporate exchange trading is only partially open, and unlicensed OTC is a prosecuted crime. The capital that actually moves runs through crypto-native VCs, strategic corporate arms, licensed desks, and cross-border flows you can't cold-email your way into.",
+        "The deployable on-shore fiat pool is still constrained, corporate exchange trading is only partially open, and unlicensed OTC is a prosecuted crime. The capital that actually moves runs through crypto-native VCs, strategic corporate arms, licensed desks, and cross-border flows you can't cold-email your way into.",
         "We give you the warm introductions and the structuring to be taken seriously: the right desks, the right funds, set up the right way. As Phase-2 regulation opens corporate participation, the relationships you build now become the capital you deploy later.",
       ],
     }}
@@ -51,12 +51,11 @@ const CapitalService = () => (
       ],
     }}
     features={[
-      { icon: Handshake, eyebrow: "01 · Introduce", title: "Korean VC & Strategic Introductions", body: "Warm intros to Korea's crypto-native funds and strategic corporate arms for token and equity rounds — the players who actually write checks and open ecosystems, not a cold list.", points: ["Crypto-native VC introductions", "Strategic / corporate-arm intros", "Token & equity round fit", "Curated, warm — never a cold blast"], image: f1 },
+      { icon: Handshake, eyebrow: "01 · Introduce", title: "Korean VC & Strategic Introductions", body: "Warm intros to Korea's crypto-native funds and strategic corporate arms for token and equity rounds, the players who actually write checks and open ecosystems, not a cold list.", points: ["Crypto-native VC introductions", "Strategic / corporate-arm intros", "Token & equity round fit", "Curated, warm, never a cold blast"], image: f1 },
       { icon: ArrowLeftRight, eyebrow: "02 · Execute", title: "Licensed OTC Desk Connections", body: "Connections to VASP-registered OTC desks for compliant execution. Domestic desks broker crypto-to-crypto today and are positioned for crypto-to-cash as regulation opens. We never touch unlicensed OTC.", points: ["VASP-registered desks only", "Crypto-to-crypto execution today", "Positioned for crypto-to-cash", "Compliance-first routing"], image: f2 },
-      { icon: Vault, eyebrow: "03 · Custody", title: "Institutional Custody Onboarding", body: "Onboarding to institutional-grade Korean custodians (bank-backed and independent) — the plumbing every institutional allocation and treasury needs before it can move.", points: ["Bank-backed & independent custodians", "Institutional onboarding support", "Treasury-ready setup", "Security & compliance review"], image: f3 },
-      { icon: Building2, eyebrow: "04 · Structure", title: "Offshore Entity & Fund-Ready Structuring", body: "Advisory on the entity, custody, and compliance setup that makes you investable — so when you sit in front of a fund, the structure is already right.", points: ["Offshore entity structuring advisory", "Cap-table & SAFT readiness", "Compliance & custody scaffolding", "Investor-ready data room"], image: f4 },
+      { icon: Vault, eyebrow: "03 · Custody", title: "Institutional Custody Onboarding", body: "Onboarding to institutional-grade Korean custodians (bank-backed and independent), the plumbing every institutional allocation and treasury needs before it can move.", points: ["Bank-backed & independent custodians", "Institutional onboarding support", "Treasury-ready setup", "Security & compliance review"], image: f3 },
+      { icon: Building2, eyebrow: "04 · Structure", title: "Offshore Entity & Fund-Ready Structuring", body: "Advisory on the entity, custody, and compliance setup that makes you investable, so when you sit in front of a fund, the structure is already right.", points: ["Offshore entity structuring advisory", "Cap-table & SAFT readiness", "Compliance & custody scaffolding", "Investor-ready data room"], image: f4 },
     ]}
-    pullQuote={{ lead: "In Korea, capital moves on trust you can't cold-email.", accent: "We make the introduction." }}
     promise={{
       heading: "We connect and structure.",
       headingMuted: "We never deploy capital.",
@@ -66,12 +65,12 @@ const CapitalService = () => (
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Capital Readiness Map&trade;</>, body: "A clear picture of who to talk to and how to be ready: the right funds, desks, and custodians for your stage, plus the structuring gaps to close before the first introduction goes out.", cta: "Request your readiness map", image: delivImg }}
     faq={{
       heading: "The questions founders actually ask.",
-      sub: "Straight answers on what's brokerable in Korea today — and what isn't.",
+      sub: "Straight answers on what's brokerable in Korea today, and what isn't.",
       items: [
-        { q: "Do you invest or guarantee fundraising?", a: "No. We are not a fund and we do not deploy capital. We provide warm introductions and fund-ready structuring, on an introduction basis — clearly separated from any investment outcome. We open doors; the capital decision is the investor's." },
+        { q: "Do you invest or guarantee fundraising?", a: "No. We are not a fund and we do not deploy capital. We provide warm introductions and fund-ready structuring, on an introduction basis, clearly separated from any investment outcome. We open doors; the capital decision is the investor's." },
         { q: "Can you help a Korean corporate buy crypto?", a: "Not in a way the law doesn't yet permit. Corporate on-exchange trading is only partially open in Korea, and we never facilitate unlicensed OTC, which is a criminal offense. We work strictly through licensed desks and compliant structures." },
         { q: "What kind of OTC can you actually arrange?", a: "Introductions to VASP-registered, licensed desks. Today domestic desks broker crypto-to-crypto; crypto-to-cash for corporates depends on regulation that is still opening. We position you for both, compliantly." },
-        { q: "Why build these relationships now if corporate capital isn't fully open?", a: "Because the relationships and compliance scaffolding take time, and the firms that have them will be first to deploy when Phase-2 regulation and the Digital Asset Basic Act open the taps — plausibly within 2026, though timing is uncertain. Early positioning is the entire play." },
+        { q: "Why build these relationships now if corporate capital isn't fully open?", a: "Because the relationships and compliance scaffolding take time, and the firms that have them will be first to deploy when Phase-2 regulation and the Digital Asset Basic Act open the taps, plausibly within 2026, though timing is uncertain. Early positioning is the entire play." },
       ],
     }}
   />
