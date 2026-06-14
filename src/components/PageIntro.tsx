@@ -4,8 +4,8 @@ interface PageIntroProps {
   onComplete: () => void;
 }
 
-const MIN_DISPLAY_TIME = 1400;
-const MAX_LOAD_TIME = 12000;
+const MIN_DISPLAY_TIME = 600;
+const MAX_LOAD_TIME = 1200;
 const VIDEO_POLL_INTERVAL = 200;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
