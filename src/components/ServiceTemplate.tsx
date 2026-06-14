@@ -160,10 +160,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           {p.process.steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
               <div className="h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] border-t-2 p-6 hover:bg-white/[0.05] transition-colors" style={{ borderTopColor: `${A}66` }}>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="font-mono text-sm font-bold" style={{ color: A }}>{s.t}</span>
-                  <span className="font-display font-bold text-2xl leading-none text-white/[0.14]">0{i + 1}</span>
-                </div>
+                <div className="font-display font-bold text-2xl leading-none mb-4" style={{ color: A }}>0{i + 1}</div>
                 <div className="font-display text-lg font-semibold mb-2">{s.title}</div>
                 <p className="text-[13px] text-white/50 leading-relaxed">{s.body}</p>
               </div>
