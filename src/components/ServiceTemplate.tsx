@@ -96,12 +96,20 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         </div>
       </section>
 
-      {/* STRIP */}
+      {/* STRIP — scrolling marquee */}
       {p.strip && (
         <div className="relative border-y border-white/[0.06] bg-[#0D0D0D]">
-          <div className="px-5 sm:px-8 lg:px-20 py-6 flex flex-wrap items-center gap-x-8 gap-y-3">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium">{p.strip.label}</span>
-            {p.strip.items.map((e) => (<span key={e} className="font-display text-lg sm:text-xl font-semibold text-white/70 hover:text-white transition-colors">{e}</span>))}
+          <div className="px-5 sm:px-8 lg:px-20 py-5 flex items-center gap-6">
+            <span className="text-[11px] uppercase tracking-[0.25em] text-white/30 font-medium whitespace-nowrap flex-shrink-0 hidden sm:block">{p.strip.label}</span>
+            <div className="marquee-container relative flex-1 overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, #000 48px, #000 calc(100% - 48px), transparent)" }}>
+              <div className="logo-marquee-slow">
+                {[0, 1].map((dup) => (
+                  <div key={dup} className="flex items-center gap-9 pr-9" aria-hidden={dup === 1}>
+                    {p.strip!.items.map((e) => (<span key={e} className="font-display text-base sm:text-lg font-semibold text-white/45 hover:text-white transition-colors whitespace-nowrap">{e}</span>))}
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       )}
