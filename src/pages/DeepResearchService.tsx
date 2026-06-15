@@ -1,12 +1,11 @@
-import { Map, Activity, BarChart3, FileSearch } from "lucide-react";
+import { Map, Activity, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
 import heroImg from "@/assets/services/deep-research-blog.jpg";
-import featMappingImg from "@/assets/platforms/res-market.jpg";
-import featOnchainImg from "@/assets/platforms/res-onchain.jpg";
+import featMappingImg from "@/assets/services/dr-market-mapping.png";
+import featOnchainImg from "@/assets/services/dr-onchain.png";
 import featCompetitorImg from "@/assets/platforms/res-competitor.jpg";
-import featThesisImg from "@/assets/platforms/res-thesis.jpg";
 import reportImg from "@/assets/platforms/res-trend.jpg";
 
 const ACCENT = "#F43F5E";
@@ -64,7 +63,6 @@ const DeepResearchService = () => (
       { icon: Map, eyebrow: "01 · Map", title: "Korean Market Mapping", body: "Before you enter, we map the entire Korean ecosystem against your category, exchanges, KOLs, media outlets, communities, and the regulations that shape them, so you see the full landscape rather than a regional summary.", points: ["Exchange, KOL & media landscape", "Community and retail attention flows", "Regulatory and DAXA context", "TAM sizing & entry feasibility"], image: featMappingImg },
       { icon: Activity, eyebrow: "02 · Trace", title: "On-Chain & Wallet Profiling", body: "We combine Dune, Nansen, and Arkham data with Korea-specific signals, then have analysts who operate in the market daily read the wallets, flows, and protocol usage patterns that a generic dashboard will never surface.", points: ["Wallet profiling & cohort analysis", "Flow tracking across CEX and DeFi", "Protocol usage patterns in Korea", "Upbit premium & KRW flow signals"], image: featOnchainImg },
       { icon: BarChart3, eyebrow: "03 · Benchmark", title: "Competitor Share-of-Voice", body: "Deep-dive into how competing protocols are positioned in Korea. K-Mindshare tracking across Korean CT, Telegram, and Naver measures real-time share-of-voice, mapped against KOL relationships, community size, and narrative strengths.", points: ["K-Mindshare share-of-voice tracking", "Competitor KOL & community mapping", "Exchange presence benchmarking", "Narrative and positioning gaps"], image: featCompetitorImg },
-      { icon: FileSearch, eyebrow: "04 · Validate", title: "Investment Thesis & Due Diligence", body: "Investor-grade market entry analysis. Due diligence packages, Korean market TAM sizing, regulatory landscape, and go-to-market feasibility, structured for the stakeholders who sign off on a Korea strategy.", points: ["Market entry thesis & TAM sizing", "Due diligence packages", "Regulatory landscape assessment", "Go-to-market feasibility"], image: featThesisImg },
     ]}
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Korea Market Intelligence Report&trade;</>, body: "Every engagement produces a bilingual, investor-grade report: the on-chain data, the competitive landscape, and the on-the-ground intelligence that answer your question, structured for both your Korean stakeholders and your international investors.", cta: "Commission your report", image: reportImg }}
     faq={{
