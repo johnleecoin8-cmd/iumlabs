@@ -1,11 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { appendVersion } from '@/hooks/useVideoPlayer';
 
 interface PageIntroProps {
   onComplete: () => void;
 }
 
 const MIN_DISPLAY_TIME = 600;
-const MAX_LOAD_TIME = 1200;
+const MAX_LOAD_TIME = 3500; // hard cap: reveal after 3.5s even if videos still buffering
 const VIDEO_POLL_INTERVAL = 200;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
@@ -37,40 +38,56 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       fontsReady.current = true;
     }
 
-    let videoEl: HTMLVideoElement | null = null;
-    const onPlaying = () => { videoReady.current = true; };
-    const tryPlay = (v: HTMLVideoElement) => {
-      v.muted = true;
-      const p = v.play();
-      if (p && typeof p.catch === 'function') p.catch(() => {});
-    };
+    // The intro should not lift until the page's top videos are actually loaded.
+    // The Why-Choose / Selected-Work clips are lazy, so at intro time only the hero
+    // has begun loading — we proactively prefetch the rest into HTTP cache here.
+    // Gate the reveal on the two full-bleed loops (hero + Why-Choose) finishing,
+    // and warm the Selected-Work gallery clips in the background so they're cached
+    // by the time the user scrolls down. MAX_LOAD_TIME is the hard ceiling either way.
+    // Match the exact versioned URLs the <video> elements request, so the prefetch
+    // warms the same cache entry (no double download).
+    const GATED = [
+      appendVersion('/videos/hero-background.mp4?v=20260601b'),
+      appendVersion('/videos/about-background.mp4?v=3'),
+    ];
+    const WARM = [
+      '/videos/projects/bnb-hero.mp4', '/videos/projects/aptos-hero.mp4',
+      '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
+      '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
+    ];
 
-    const pollForVideo = setInterval(() => {
-      if (videoEl) return;
-      const el = document.querySelector('video[src*="hero-background"], video source[src*="hero-background"]');
-      if (!el) return;
-      videoEl = el.tagName === 'SOURCE' ? el.parentElement as HTMLVideoElement : el as HTMLVideoElement;
-      if (!videoEl) return;
-      tryPlay(videoEl);
-      if (!videoEl.paused && videoEl.currentTime > 0) {
-        videoReady.current = true;
-        clearInterval(pollForVideo);
-        return;
-      }
-      videoEl.addEventListener('playing', onPlaying, { once: true });
-      videoEl.addEventListener('timeupdate', onPlaying, { once: true });
-      clearInterval(pollForVideo);
+    WARM.forEach((u) => {
+      fetch(u, { cache: 'force-cache' }).catch(() => {});
+    });
+
+    let remaining = GATED.length;
+    const markIfDone = () => {
+      remaining -= 1;
+      if (remaining <= 0) videoReady.current = true;
+    };
+    GATED.forEach((u) => {
+      fetch(u, { cache: 'force-cache' })
+        .then((r) => r.blob())
+        .catch(() => {})
+        .finally(markIfDone);
+    });
+
+    // Nudge any mounted <video> into muted autoplay so the hero paints promptly.
+    const nudge = setInterval(() => {
+      document.querySelectorAll('video').forEach((v) => {
+        v.muted = true;
+        const p = v.play();
+        if (p && typeof p.catch === 'function') p.catch(() => {});
+      });
     }, VIDEO_POLL_INTERVAL);
 
-    const maxTimer = setTimeout(() => { videoReady.current = true; }, MAX_LOAD_TIME);
+    const maxTimer = setTimeout(() => {
+      videoReady.current = true;
+    }, MAX_LOAD_TIME);
 
     return () => {
-      clearInterval(pollForVideo);
+      clearInterval(nudge);
       clearTimeout(maxTimer);
-      if (videoEl) {
-        videoEl.removeEventListener('playing', onPlaying);
-        videoEl.removeEventListener('timeupdate', onPlaying);
-      }
     };
   }, []);
 

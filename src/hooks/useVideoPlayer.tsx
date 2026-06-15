@@ -112,7 +112,9 @@ const MOBILE_STALL_WINDOW_MS = 1800;
 const MOBILE_RELOAD_COOLDOWN_MS = 1600;
 const MAX_HARD_RELOADS = 4;
 
-const appendVersion = (url: string): string => {
+// Exported so the intro loader can prefetch the exact same versioned URLs the
+// <video> elements request (shared module-singleton VIDEO_VERSION = exact cache match).
+export const appendVersion = (url: string): string => {
   const sep = url.includes('?') ? '&' : '?';
   return `${url}${sep}v=${VIDEO_VERSION}`;
 };
