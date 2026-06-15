@@ -2,7 +2,7 @@ import { Coins, PieChart, Lock, Zap } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos. */
-import heroImg from "@/assets/services/tokenomics-allocation.svg";
+import heroImg from "@/assets/services/tokenomics-hero.png";
 import f1 from "@/assets/services/tok-distribution.webp";
 import f2 from "@/assets/services/tok-float.png";
 import f3 from "@/assets/services/tok-vesting.webp";
