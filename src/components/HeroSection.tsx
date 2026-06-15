@@ -155,7 +155,7 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <p className="font-sans text-[clamp(2rem,8vw,6.875rem)] font-semibold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.045em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
+          <p className="font-display text-[clamp(2rem,7.2vw,6rem)] font-bold leading-[0.95] sm:leading-[0.9] tracking-[-0.03em] sm:tracking-[-0.04em] mb-4 sm:mb-8 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
             <span className="block">Your Crypto Ecosystem</span>
             <span className="block">Growth Partner</span>
           </p>
@@ -180,6 +180,20 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Proof metrics — hard numbers at the fold */}
+      <div className="relative z-[14] mx-auto mb-5 sm:mb-7 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-2.5 px-6 sm:gap-x-14">
+        {[
+          { v: "25+", l: "Web3 projects launched" },
+          { v: "$8B+", l: "in client valuation" },
+          { v: "130K+", l: "avg. impressions / launch" },
+        ].map((s) => (
+          <div key={s.v} className="flex items-baseline gap-2">
+            <span className="font-display text-xl sm:text-2xl font-bold text-[hsl(var(--brand))]">{s.v}</span>
+            <span className="text-[11px] sm:text-xs text-white/45">{s.l}</span>
+          </div>
+        ))}
       </div>
 
       {/* Client Logo Marquee */}

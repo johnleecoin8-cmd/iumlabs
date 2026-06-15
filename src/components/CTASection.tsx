@@ -119,7 +119,7 @@ const CTASection = () => {
           <div
             className="p-6 md:p-8 lg:p-10 lg:sticky lg:top-0 flex flex-col pt-8 md:pt-12"
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Get in Touch
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-8">

@@ -54,9 +54,9 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Lunar Strategy colors
+        // Brand accent (kept the `lunar` key name for compatibility; value is now emerald)
         lunar: {
-          blue: "hsl(217 91% 60%)",
+          blue: "hsl(158 64% 52%)",
           dark: "hsl(0 0% 4%)",
           light: "hsl(0 0% 96%)",
         },

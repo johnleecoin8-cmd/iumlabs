@@ -71,9 +71,12 @@ video {
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    /* Clean Blue Primary */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Brand accent — single source of truth (swap this one line to recolor the site) */
+    --brand: 158 64% 52%;
+
+    /* Emerald Primary */
+    --primary: var(--brand);
+    --primary-foreground: 0 0% 8%;
     
     /* Clean Gray Secondary */
     --secondary: 0 0% 15%;
@@ -82,16 +85,16 @@ video {
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 60%;
     
-    /* Blue Accent */
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    /* Emerald Accent */
+    --accent: var(--brand);
+    --accent-foreground: 0 0% 8%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 217 91% 60%;
+    --ring: var(--brand);
     
     --radius: 0.5rem;
 
@@ -109,7 +112,7 @@ video {
     --surface-even: 0 0% 10%;     /* #1A1A1A - dark gray sections */
 
     /* Lunar Strategy Blue */
-    --lunar-blue: 217 91% 60%;
+    --lunar-blue: var(--brand);
     
     /* Premium Text Hierarchy - 3-tier opacity system */
     --text-primary: 0 0% 100%;
@@ -127,8 +130,8 @@ video {
     --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: var(--brand);
+    --primary-foreground: 0 0% 8%;
     
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
@@ -136,15 +139,15 @@ video {
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: var(--brand);
+    --accent-foreground: 0 0% 8%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
     --border: 0 0% 18%;
     --input: 0 0% 18%;
-    --ring: 217 91% 60%;
+    --ring: var(--brand);
   }
 }
 
@@ -515,7 +518,7 @@ video {
 
 /* Gradient Text - Clean Blue */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 75%));
+  background: linear-gradient(135deg, hsl(var(--brand)), hsl(217 91% 75%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

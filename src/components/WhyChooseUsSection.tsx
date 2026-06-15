@@ -82,7 +82,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline, each line slides in separately */}
-          <h2 className="font-sans text-[clamp(1.5rem,6vw,5.5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.04em] leading-[1.02] sm:whitespace-nowrap">
+          <h2 className="font-display text-[clamp(1.5rem,5.5vw,5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.04em] leading-[1.02] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
