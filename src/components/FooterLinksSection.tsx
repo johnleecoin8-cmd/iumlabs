@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import { brand } from "@/config/content";
 
-const navSections = [
+const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
   {
     title: "Services",
+    wide: true,
     links: [
       { name: "GTM Strategy", href: "/services/gtm" },
       { name: "CEX Listing Advisory", href: "/services/listing" },
@@ -64,25 +65,38 @@ const FooterLinksSection = () => {
               </div>
             </div>
 
-            {navSections.map((section) => (
-              <div key={section.title} className="hidden md:block col-span-1 md:col-span-2">
-                <h3 className="text-[10px] sm:text-[11px] font-medium text-white/25 uppercase tracking-[0.15em] mb-4 sm:mb-5">
-                  {section.title}
-                </h3>
-                <ul className="space-y-2.5 sm:space-y-3">
-                  {section.links.map((link) => (
-                    <li key={link.name}>
-                      <Link
-                        to={link.href}
-                        className="text-[13px] sm:text-sm text-white/45 hover:text-white transition-colors duration-300"
-                      >
-                        {link.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            {navSections.map((section) => {
+              const mid = Math.ceil(section.links.length / 2);
+              const columns = section.wide
+                ? [section.links.slice(0, mid), section.links.slice(mid)]
+                : [section.links];
+              return (
+                <div
+                  key={section.title}
+                  className={`hidden md:block col-span-1 ${section.wide ? "md:col-span-4" : "md:col-span-2"}`}
+                >
+                  <h3 className="text-[10px] sm:text-[11px] font-medium text-white/25 uppercase tracking-[0.15em] mb-4 sm:mb-5">
+                    {section.title}
+                  </h3>
+                  <div className={section.wide ? "grid grid-cols-2 gap-x-6" : ""}>
+                    {columns.map((col, ci) => (
+                      <ul key={ci} className="space-y-2.5 sm:space-y-3">
+                        {col.map((link) => (
+                          <li key={link.name}>
+                            <Link
+                              to={link.href}
+                              className="text-[13px] sm:text-sm text-white/45 hover:text-white transition-colors duration-300"
+                            >
+                              {link.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
