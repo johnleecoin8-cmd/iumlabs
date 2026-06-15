@@ -151,7 +151,7 @@ const JobsHeroVideo = () => {
     src: '/videos/jobs-hero.mp4',
     poster: '/images/posters/jobs-hero.jpg',
     autoPlay: true,
-    preload: 'auto'
+    preload: "none"
   });
   return <>
       {/* Fallback poster - always visible until video is ready */}

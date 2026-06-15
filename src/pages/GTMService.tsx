@@ -206,7 +206,7 @@ const GTMService = () => {
         <div className="wrap manifesto-grid">
           <p>Korea is the world's third-largest crypto market by trading volume, but it's also the <strong>hardest to crack</strong>. Unique platforms, aggressive retail sentiment, and cultural nuance that no translated deck can capture. ium Labs exists because we've <strong>lived it</strong> — as exchange operators, as BD leads, as builders inside the Korean crypto ecosystem.</p>
           <div className="manifesto-video">
-            <video autoPlay muted loop playsInline preload="auto">
+            <video autoPlay muted loop playsInline preload="none">
               <source src="/videos/manifesto.mp4" type="video/mp4" />
             </video>
           </div>

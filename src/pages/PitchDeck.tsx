@@ -231,7 +231,7 @@ const PitchDeck = () => {
         {/* 01 — HERO */}
         <section className="hero">
           <img src="/images/posters/hero-background-poster.jpg" alt="" className="hero-poster" />
-          <video autoPlay muted loop playsInline preload="auto">
+          <video autoPlay muted loop playsInline preload="none">
             <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
           <div className="hero-ov1" />
@@ -359,7 +359,7 @@ const PitchDeck = () => {
           </div>
           <div className="cs-vid-grid dk-reveal dk-d1">
             <div className="cs-vid-card">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/sahara-hero.jpg">
+              <video autoPlay muted loop playsInline preload="none" poster="/images/posters/sahara-hero.jpg">
                 <source src="/videos/projects/sahara-hero.mp4" type="video/mp4" />
               </video>
               <div className="cs-vid-ov" />
@@ -375,7 +375,7 @@ const PitchDeck = () => {
               </div>
             </div>
             <div className="cs-vid-card">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/story-hero.jpg">
+              <video autoPlay muted loop playsInline preload="none" poster="/images/posters/story-hero.jpg">
                 <source src="/videos/projects/story-hero.mp4" type="video/mp4" />
               </video>
               <div className="cs-vid-ov" />
@@ -391,7 +391,7 @@ const PitchDeck = () => {
               </div>
             </div>
             <div className="cs-vid-card">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/bnb-hero.jpg">
+              <video autoPlay muted loop playsInline preload="none" poster="/images/posters/bnb-hero.jpg">
                 <source src="/videos/projects/bnb-hero.mp4" type="video/mp4" />
               </video>
               <div className="cs-vid-ov" />
@@ -407,7 +407,7 @@ const PitchDeck = () => {
               </div>
             </div>
             <div className="cs-vid-card">
-              <video autoPlay muted loop playsInline preload="auto" poster="/images/posters/mantra-hero.jpg">
+              <video autoPlay muted loop playsInline preload="none" poster="/images/posters/mantra-hero.jpg">
                 <source src="/videos/projects/mantra-hero.mp4" type="video/mp4" />
               </video>
               <div className="cs-vid-ov" />
