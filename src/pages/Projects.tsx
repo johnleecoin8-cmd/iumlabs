@@ -17,6 +17,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import { STATS } from "@/data/stats";
+import { caseStudyOverrides } from "@/data/caseStudyOverrides";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
@@ -95,8 +96,8 @@ const resolveGallerySrcToAsset = (src?: string | null) => {
 
 // Hardcoded fallback data
 const fallbackCases = [
-  { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "2M+ Impressions with VIP Network", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
-  { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "50K+ New Korean Users", category: "Exchange", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
+  { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "50+ Institutional VIPs at a Seoul Network Party", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
+  { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "$150M+ Trading Volume via KOL & Paid Ads", category: "Exchange", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
   { name: "Sahara AI", logo: saharaAiLogo, bgImage: saharaAiBg, slug: "sahara-ai", result: "Korean AI x Web3 Launch", category: "AI", description: "AI blockchain platform launch with Korean developer community and enterprise partnerships." },
   { name: "Mantra", logo: mantraLogo, bgImage: mantraBg, slug: "mantra", result: "Korean RWA Expansion", category: "RWA", description: "Real World Assets platform expansion targeting Korean institutional investors." },
   // { name: "Story Protocol", logo: storyLogo, bgImage: storyBg, slug: "story-protocol", result: "5K+ Korean Creators", category: "IP Protocol", description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists." }, // Hidden
@@ -649,7 +650,7 @@ const Projects = () => {
           name: p.name,
           slug: p.slug,
           description: p.description || "",
-          result: p.result || "",
+          result: caseStudyOverrides[p.slug]?.result ?? p.result ?? "",
           category: p.category || "",
           // Prefer bundled assets for known campaign files; otherwise use gallery src; never use video URLs as <img> src.
           bgImage: galleryAsset || backgroundImageFromDb || firstGallerySrc || fallback?.bgImage || "",
