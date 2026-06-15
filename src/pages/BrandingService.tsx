@@ -1,11 +1,10 @@
-import { ShieldCheck, FileCheck, Scale } from "lucide-react";
+import { ShieldCheck, Scale } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
-import featVaspImg from "@/assets/services/comp-vasp-license.webp";
-import featProtectionImg from "@/assets/platforms/comp-aml.jpg";
-import featDisclosureImg from "@/assets/platforms/comp-exchange.jpg";
-import auditImg from "@/assets/platforms/comp-landscape.jpg";
+import featVaspImg from "@/assets/services/comp-vasp-travelrule.webp";
+import featDisclosureImg from "@/assets/services/comp-legal.png";
+import auditImg from "@/assets/services/comp-audit.png";
 
 /* Hero uses the homepage "main" compliance photo (public asset). */
 const heroImg = "/images/posters/compliance-hero.avif";
@@ -52,8 +51,7 @@ const BrandingService = () => (
     }}
     features={[
       { icon: ShieldCheck, eyebrow: "01 · Register", title: "VASP Registration & Licensing", body: "Korea's gateway is VASP registration with the KoFIU under the Specific Financial Information Act: ISMS certification, a real-name verified bank account, and a working AML program before you can operate. We map the full path and coordinate the mandatory travel-rule layer through Korea's two networks, VerifyVASP (Lambda256) and CODE (the Bithumb, Coinone, Korbit joint venture), so your filing is built the way regulators and partner exchanges expect.", points: ["KoFIU registration roadmap (Specific Financial Information Act)", "ISMS certification & real-name account guidance", "Travel-rule onboarding via VerifyVASP or CODE", "Coordinated with licensed Korean counsel"], image: featVaspImg },
-      { icon: FileCheck, eyebrow: "02 · Protect", title: "User-Protection Act Compliance", body: "The Virtual Asset User Protection Act sets obligations around user-asset segregation, reserves, disclosure, and unfair-trading controls. We map your duties under the Act and help build the internal procedures and records that demonstrate them.", points: ["User-asset segregation and reserves review", "Disclosure obligation mapping", "Unfair-trading and abuse controls", "Internal procedure and record design"], image: featProtectionImg },
-      { icon: Scale, eyebrow: "03 · Advise", title: "Korean Legal Advisory & Opinions", body: "Korea's crypto rules ultimately turn on local law, and only a licensed Korean attorney can issue an opinion that exchanges and regulators will accept. We engage and coordinate vetted Korean law firms to secure the legal interpretations and formal opinions your project needs, from token and securities classification to the domestic legal opinion KRW exchanges require before they will list.", points: ["Engagement of licensed Korean law firms", "Token & securities legal-classification opinions", "Domestic legal opinion for KRW-exchange listing", "Ongoing regulatory interpretation as rules evolve"], image: featDisclosureImg },
+      { icon: Scale, eyebrow: "02 · Advise", title: "Korean Legal Advisory & Opinions", body: "Korea's crypto rules ultimately turn on local law, and only a licensed Korean attorney can issue an opinion that exchanges and regulators will accept. We engage and coordinate vetted Korean law firms to secure the legal interpretations and formal opinions your project needs, from token and securities classification to the domestic legal opinion KRW exchanges require before they will list.", points: ["Engagement of licensed Korean law firms", "Token & securities legal-classification opinions", "Domestic legal opinion for KRW-exchange listing", "Ongoing regulatory interpretation as rules evolve"], image: featDisclosureImg },
     ]}
     promise={{
       heading: "We advise and coordinate.",
