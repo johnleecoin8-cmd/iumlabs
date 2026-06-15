@@ -659,13 +659,13 @@ const Projects = () => {
       })
     : fallbackCases.map(f => ({ ...f, logo: f.logo }));
 
-  // Code-defined projects merged on top of the DB list (e.g. Arcium — not in DB).
+  // Code-defined projects merged on top of the DB list (e.g. Arcium, not in DB).
   const extraCases = [
     {
       name: "Stable",
       slug: "stable",
       description:
-        "A stablecoin-native payment rail for global money movement — instant, low-cost settlement and seamless on/off-ramps.",
+        "A stablecoin-native payment rail for global money movement, instant, low-cost settlement and seamless on/off-ramps.",
       result: "Korean Stablecoin Rail Entry",
       category: "Stablecoin / Payments",
       bgImage: stableBg,
@@ -676,7 +676,7 @@ const Projects = () => {
       name: "Arcium",
       slug: "arcium",
       description:
-        "The encrypted supercomputer for Solana — confidential MPC compute powering sealed-bid auctions and private DeFi.",
+        "The encrypted supercomputer for Solana, confidential MPC compute powering sealed-bid auctions and private DeFi.",
       result: "Korean Privacy-Tech Mindshare",
       category: "Privacy / MPC",
       bgImage: arciumBg,
@@ -687,7 +687,7 @@ const Projects = () => {
       name: "GoPlus",
       slug: "goplus",
       description:
-        "The decentralized security layer for Web3 — open security data and tooling that protect every on-chain transaction.",
+        "The decentralized security layer for Web3, open security data and tooling that protect every on-chain transaction.",
       result: "Korean Web3 Security Adoption",
       category: "Security / Infra",
       bgImage: goplusBg,

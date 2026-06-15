@@ -1,7 +1,6 @@
 import { Map, Activity, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
 import heroImg from "@/assets/services/deep-research-blog.jpg";
 import featMappingImg from "@/assets/services/dr-market-mapping.png";
 import featOnchainImg from "@/assets/services/dr-onchain.png";

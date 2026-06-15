@@ -497,7 +497,7 @@ const Jobs = () => {
                   Ready to make an impact?
                 </p>
                 <p className="text-center text-white/40 text-xs sm:text-sm md:text-base mb-6 sm:mb-10 leading-relaxed">
-                  We're excited to hear from you. Tell us your story—we're listening.
+                  We're excited to hear from you. Tell us your story, we're listening.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">

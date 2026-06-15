@@ -1,7 +1,6 @@
 import { Search, Target, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
 import heroImg from "@/assets/services/seo-naver.jpg";
 import featNaverImg from "@/assets/platforms/seo-naver.jpg";
 import featPaidImg from "@/assets/services/cex-paid-ads.webp";

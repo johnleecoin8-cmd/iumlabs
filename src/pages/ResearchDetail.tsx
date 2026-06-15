@@ -368,7 +368,7 @@ const ResearchDetail = () => {
                 const line = lines[i];
                 const key = i;
 
-                // Callout blocks: >! prefix — collect consecutive lines
+                // Callout blocks: >! prefix, collect consecutive lines
                 if (line.startsWith('>! ')) {
                   const calloutLines: string[] = [];
                   while (i < lines.length && lines[i].startsWith('>! ')) {
@@ -438,7 +438,7 @@ const ResearchDetail = () => {
                   i++; continue;
                 }
 
-                // Tweet/X embed screenshot: {{tweet:IMAGE_URL::@handle — tweet text}}
+                // Tweet/X embed screenshot: {{tweet:IMAGE_URL::@handle, tweet text}}
                 if (line.startsWith('{{tweet:') && line.endsWith('}}')) {
                   const inner = line.slice(8, -2);
                   const sepIdx = inner.indexOf('::');
@@ -548,7 +548,7 @@ const ResearchDetail = () => {
                         if (ql.startsWith('**') && ql.includes('**')) {
                           return <p key={j} className="text-white/80 font-medium mb-1">{ql.replace(/\*\*/g, '')}</p>;
                         }
-                        if (ql.startsWith('— ') || ql.startsWith('- ') && isCitation) {
+                        if (ql.startsWith(', ') || ql.startsWith('- ') && isCitation) {
                           return <p key={j} className="text-white/40 text-sm mt-2">{ql}</p>;
                         }
                         return <p key={j} className="text-white/60 italic leading-relaxed">{renderInline(ql)}</p>;

@@ -1,7 +1,6 @@
 import { ClipboardCheck, FileText, Network, ShieldCheck } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
 import heroImg from "@/assets/platforms/comp-exchange.jpg";
 import featDiagnosisImg from "@/assets/platforms/comp-landscape.jpg";
 import featDossierImg from "@/assets/platforms/comp-vasp.jpg";

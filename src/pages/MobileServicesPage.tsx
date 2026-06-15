@@ -492,7 +492,7 @@ const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="All Services | ium Labs — Korea Web3 Marketing Agency"
+        title="All Services | ium Labs, Korea Web3 Marketing Agency"
         description="Full-stack Web3 marketing services for Korea market entry. GTM strategy, KOL marketing, PR, community management, events, SEO, and more."
         path="/services/all"
         canonicalPath="/"

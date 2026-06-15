@@ -1,7 +1,6 @@
 import { Newspaper, Send, Megaphone, ShieldAlert } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
 import heroImg from "@/assets/services/pr-hero.webp";
 import featNarrativeImg from "@/assets/platforms/pr-newsroom.jpg";
 import featDistributionImg from "@/assets/services/pr-distribution.webp";

@@ -195,7 +195,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 01 — Why KOL Marketing in Korea ===== */}
+        {/* ===== SECTION 01, Why KOL Marketing in Korea ===== */}
         <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
@@ -260,7 +260,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 02 — Platform Coverage ===== */}
+        {/* ===== SECTION 02, Platform Coverage ===== */}
         <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
@@ -301,7 +301,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 03 — How It Works ===== */}
+        {/* ===== SECTION 03, How It Works ===== */}
         <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
@@ -347,7 +347,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 04 — What Sets Us Apart ===== */}
+        {/* ===== SECTION 04, What Sets Us Apart ===== */}
         <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
@@ -391,7 +391,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 05 — FAQ ===== */}
+        {/* ===== SECTION 05, FAQ ===== */}
         <section className="border-t border-white/10">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-20 md:py-32">
             <motion.div
@@ -437,7 +437,7 @@ const KOLMarketingKorea = () => {
           </div>
         </section>
 
-        {/* ===== SECTION 06 — Contact ===== */}
+        {/* ===== SECTION 06, Contact ===== */}
         <section className="border-t border-white/10">
           <ContactFormSection />
         </section>

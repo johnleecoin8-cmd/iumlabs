@@ -66,7 +66,7 @@ const OfflineEventService = () => {
           <div className="problem-left"><h2>Running events in Seoul requires <strong>local expertise.</strong></h2></div>
           <div className="problem-right">
             <p>You can't run a Web3 event in Seoul from a Notion doc. Venue contracts are in Korean. Catering companies need introductions. KOLs RSVP through KakaoTalk. AV teams expect Korean-language briefs. And the best venues book out months in advance.</p>
-            <p>Without a local team, you end up overpaying for a mediocre venue, underwhelming turnout, and zero content to show for it. Korea's event scene rewards relationships and local knowledge — not Eventbrite links and cold emails.</p>
+            <p>Without a local team, you end up overpaying for a mediocre venue, underwhelming turnout, and zero content to show for it. Korea's event scene rewards relationships and local knowledge, not Eventbrite links and cold emails.</p>
           </div>
         </div>
       </div></section>
@@ -75,10 +75,10 @@ const OfflineEventService = () => {
       <section className="capabilities"><div className="wrap">
         <div className="lbl">What We Do</div>
         {[
-          { icon: "◎", title: "KBW Side Events", desc: "Korea Blockchain Week is the biggest moment of the year. We produce side events that become the talk of the conference — from venue selection to guest list curation to day-of execution.", img: kbwImg },
+          { icon: "◎", title: "KBW Side Events", desc: "Korea Blockchain Week is the biggest moment of the year. We produce side events that become the talk of the conference, from venue selection to guest list curation to day-of execution.", img: kbwImg },
           { icon: "◉", title: "VIP Dinners", desc: "Intimate 20-40 person dinners with curated guest lists. Korean exchange executives, fund managers, top KOLs. We handle the venue, menu, seating arrangement, and conversation flow.", img: vipImg },
           { icon: "◈", title: "Launch Parties", desc: "Mainnet launches, token listings, partnership announcements. We produce celebration events that generate buzz, attract media coverage, and create shareable content.", img: launchImg },
-          { icon: "◆", title: "Venue Sourcing", desc: "40+ venue relationships across Seoul — rooftop bars, private dining rooms, conference halls, gallery spaces. We match the venue to your brand, budget, and audience size.", img: meetupImg },
+          { icon: "◆", title: "Venue Sourcing", desc: "40+ venue relationships across Seoul, rooftop bars, private dining rooms, conference halls, gallery spaces. We match the venue to your brand, budget, and audience size.", img: meetupImg },
         ].map((cap, i) => (
           <div key={i} className={`cap-block${openCap === i ? " open" : ""}`}>
             <div className="cap-head" role="button" tabIndex={0} onClick={() => toggleCap(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCap(i); } }} aria-expanded={openCap === i}>
