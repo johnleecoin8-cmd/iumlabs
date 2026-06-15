@@ -34,7 +34,7 @@ const AMAService = () => (
     reality={{
       heading: "Most AMAs are",
       headingAccent: "wasted opportunities.",
-      body: ["Generic questions, passive audiences, zero follow-up. The host stumbles through translations, the audience drops off after five minutes, and nothing gets produced afterward.", "Korean AMAs are especially tricky. The audience expects a native speaker who understands crypto deeply, and awkward translations kill engagement. The post-AMA window, when interest peaks, is wasted without recap content."],
+      body: ["Most AMAs are wasted: generic questions, a passive room, and zero follow-up. The host stumbles through translations, the audience drops after five minutes, and nothing gets produced afterward.", "Korean AMAs are their own game. The room expects a native host who understands crypto deeply, and awkward translation kills engagement instantly. The post-AMA window, when interest peaks, is the most wasted asset in Korean crypto marketing without recap content."],
     }}
     process={{
       heading: "From planning to",
