@@ -35,10 +35,7 @@ const PRService = () => (
     reality={{
       heading: "Global PR does not work",
       headingAccent: "in Korean media.",
-      body: [
-        "Korean crypto journalists do not read English press releases. They have their own editorial calendars, beat structures, and trust networks, and a translated release sent to a generic media list gets you zero coverage.",
-        "The journalists who matter respond to relationships, not cold pitches. We pitch stories, not press releases, through reporters we already know at the outlets that move the Korean crypto narrative.",
-      ],
+      body: ["Korean crypto journalists don't read English press releases. They have their own editorial calendars, beats, and trust networks, and a translated release to a generic media list gets you zero coverage.", "The journalists who matter respond to relationships, not cold pitches. We pitch stories through reporters we already know at the outlets that move the Korean crypto narrative."],
     }}
     process={{
       heading: "From story to",

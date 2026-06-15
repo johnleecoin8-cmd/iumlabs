@@ -34,10 +34,7 @@ const TokenomicsService = () => (
     reality={{
       heading: "The same token can moon or bleed, it's the",
       headingAccent: "float and the unlock.",
-      body: [
-        "Korean retail is unusually sensitive to circulating float and unlock schedules. A thin float spikes and then craters on the first cliff; a concentrated or opaque distribution is both a day-one price risk and, under the 2024-2025 rules, a delisting trigger. Get the supply structure wrong and even a flawless campaign bleeds out.",
-        "And a token still has to be worth holding. Without real utility, value accrual, and a defensible FDV, the bid disappears once the launch noise fades. We design the whole economic structure, supply, unlocks, utility, and valuation, so the token holds up long after listing day.",
-      ],
+      body: ["Korean retail is unusually sensitive to float and unlock schedules. A thin float spikes then craters on the first cliff, and an opaque distribution is both a day-one price risk and, under the new rules, a delisting trigger.", "And a token still has to be worth holding. Without real utility, value accrual, and a defensible FDV, the bid disappears once launch noise fades. We design the whole structure, supply, unlocks, utility, and valuation, to hold up long after listing."],
     }}
     process={{
       heading: "Supply, unlocks, and value, ",

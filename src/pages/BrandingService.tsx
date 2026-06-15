@@ -34,10 +34,7 @@ const BrandingService = () => (
     reality={{
       heading: "Korea's crypto rules are complex",
       headingAccent: "and fast-changing.",
-      body: [
-        "The Virtual Asset User Protection Act, PIPA personal-data requirements, AML and travel-rule obligations, and exchange-specific listing disclosure stack into a regulatory maze that most global projects cannot navigate alone.",
-        "DeFi, NFT, and token projects each face different requirements. What worked for an L1 will not work for a DeFi protocol, and the rules move quarterly: what was compliant six months ago may not be today. We keep your project mapped to the current framework, not last year's.",
-      ],
+      body: ["The Virtual Asset User Protection Act, PIPA, AML and travel-rule obligations, and exchange-specific listing disclosure stack into a regulatory maze most global projects can't navigate alone.", "DeFi, NFT, and token projects each face different requirements, and the rules move quarterly, what was compliant six months ago may not be today. We keep your project mapped to the current framework, not last year's."],
     }}
     process={{
       heading: "From assessment to",

@@ -34,10 +34,7 @@ const InfluencerService = () => (
       eyebrow: "THE PROBLEM",
       heading: "Korean KOL marketing is",
       headingAccent: "broken by default.",
-      body: [
-        "Most agencies hand you a KOL list and disappear. The list is full of inflated follower counts, recycled audiences, and influencers who post once and forget your project exists.",
-        "Korea makes this worse. The KOL landscape is fragmented across YouTube, X, Telegram, and Naver Blog, each with its own culture, audience behavior, and pricing norms. A KOL who is S-tier on Korean CT might have zero presence on Naver.",
-      ],
+      body: ["Most agencies hand you a KOL list and disappear, a list full of inflated follower counts, recycled audiences, and influencers who post once and forget your project exists.", "Korea makes it worse. The KOL landscape is fragmented across YouTube, X, Telegram, and Naver Blog, each with its own culture and pricing. A KOL who's S-tier on Korean CT can have zero presence on Naver."],
     }}
     types={{
       eyebrow: "KOL TIERS",

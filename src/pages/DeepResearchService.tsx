@@ -33,10 +33,7 @@ const DeepResearchService = () => (
     reality={{
       heading: "Global research firms don't understand",
       headingAccent: "Korean crypto.",
-      body: [
-        "The Upbit premium, DC Inside sentiment, Naver search trends, KakaoTalk group dynamics, these signals are invisible to anyone not operating inside the ecosystem daily. Global research firms give you generic Asia-Pacific reports that lump Korea in with Japan and Southeast Asia.",
-        "Korea is the third largest crypto market in the world. It deserves dedicated intelligence, not a footnote in a regional deck. Our research combines on-chain data with on-the-ground intelligence you cannot get from a dashboard.",
-      ],
+      body: ["The Upbit premium, DC Inside sentiment, Naver search trends, KakaoTalk group dynamics, these signals are invisible to anyone not inside the ecosystem daily. Global firms give you generic Asia-Pacific reports that lump Korea in with Japan.", "Korea is the third-largest crypto market in the world. It deserves dedicated intelligence, not a footnote in a regional deck, on-chain data paired with on-the-ground signal you can't get from a dashboard."],
     }}
     types={{
       eyebrow: "WHAT WE COVER",

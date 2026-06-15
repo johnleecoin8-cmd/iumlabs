@@ -47,10 +47,7 @@ const ListingService = () => (
     reality={{
       heading: "The best exchanges reject most applicants",
       headingAccent: "by design.",
-      body: [
-        "A listing is the single biggest catalyst in a token's life. It is also the hardest door to open: top centralized exchanges list a small fraction of who applies, and each one judges you on fundamentals, distribution, security, and legal standing before a single pair goes live.",
-        "Getting in, and staying in, is a job. We make your project the strongest, fully-compliant applicant for the venues that matter, sequence which exchange to target and when, and manage the relationships and disclosures that keep you listed. Native depth in Korea's KRW market, reach across global CEX, DEX, and hybrid venues.",
-      ],
+      body: ["A listing is the biggest catalyst in a token's life, and the hardest door to open. Top exchanges list a small fraction of applicants, judging fundamentals, distribution, security, and legal standing before a pair goes live.", "Getting in, and staying in, is a job. We make you the strongest, fully-compliant applicant, sequence which venue to target and when, and manage the disclosures that keep you listed, deepest in Korea, across global CEX, DEX, and hybrid venues."],
     }}
     types={{
       eyebrow: "WHAT WE COVER",
