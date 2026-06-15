@@ -246,6 +246,25 @@ const GTMService = () => {
         </div>
       </section>
 
+      {/* HORIZONTAL WORK */}
+      <section className="work-sec" id="work">
+        <div className="work-pin" ref={workPinRef}>
+          <div className="work-intro">
+            <div className="lbl">Selected Work</div>
+            <h2>Campaigns that <strong>moved Korea.</strong></h2>
+          </div>
+          {workCards.map(card => (
+            <Link key={card.slug} to={`/projects/${card.slug}`} className="work-card" onClick={() => window.scrollTo(0,0)}>
+              <div className="wc-img"><img src={card.img} alt={card.title} loading="lazy" width={600} height={400} /></div>
+              <div className="wc-cat">{card.cat}</div>
+              <div className="wc-metric">{card.metric}</div>
+              <h4>{card.title}</h4>
+              <p>{card.desc}</p>
+              <div className="wc-tags">{card.tags.map(t => <span key={t} className="wc-tag">{t}</span>)}</div>
+            </Link>
+          ))}
+        </div>
+      </section>
 
 
       {/* APPROACH */}

@@ -8,6 +8,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { useIsMobile } from "@/hooks/use-mobile";
 
+const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
@@ -83,6 +84,14 @@ const Index = () => {
         </MobileDeferredSection>
       </section>
 
+      {/* Selected Work */}
+      <section id="selected-work" className="border-t border-white/[0.07]">
+        <MobileDeferredSection minHeight="70vh">
+          <Suspense fallback={<SectionLoader />}>
+            <SelectedWorkShowcase />
+          </Suspense>
+        </MobileDeferredSection>
+      </section>
 
       {/* Services */}
       <section id="services" className="border-t border-white/[0.07]">

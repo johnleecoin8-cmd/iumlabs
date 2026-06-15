@@ -182,25 +182,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         />
       )}
 
-      {/* ===== GALLERY ===== */}
-      {hasGallery && (
-        <div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16">
-          <motion.section className="border-t border-white/10 py-16 md:py-24" {...fadeUp}>
-            <SectionLabel index={galleryNum} label="Selected Work" />
-            <motion.div
-              className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, margin: "-40px" }}
-            >
-              {gallery.map((item, idx) => (
-                <GalleryItem key={idx} item={item} idx={idx} projectName={project.name} />
-              ))}
-            </motion.div>
-          </motion.section>
-        </div>
-      )}
+      {/* Gallery / Selected Work section removed per request */}
 
       <div className="h-8 md:h-10" />
     </div>
