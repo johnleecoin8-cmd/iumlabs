@@ -33,7 +33,7 @@ const SEOAdsService = () => (
     reality={{
       heading: "Korea doesn't Google.",
       headingAccent: "Korea Navers.",
-      body: ["70% of Korean search runs through Naver, and its algorithm rewards completely different content than Google. Naver Blog posts and Smart Blocks dominate the SERP, so if you optimize for Google only, you're invisible to Korean users.", "Add crypto ad bans, and it compounds. Google requires special crypto advertiser certification, and most networks reject crypto outright. You need someone who knows which networks accept crypto, how to get certified, and how to structure campaigns that convert Koreans."],
+      body: ["70% of Korean search runs through Naver, and its algorithm rewards completely different content than Google. Naver Blog posts and Smart Blocks dominate the SERP, so optimize for Google alone and you're invisible to Korean users, project or exchange.", "Add crypto ad bans, and it compounds. Google requires special crypto-advertiser certification and most networks reject crypto outright. You need someone who knows which networks accept it, how to get certified, and how to turn spend into signups and deposits."],
     }}
     process={{
       heading: "From audit to",
