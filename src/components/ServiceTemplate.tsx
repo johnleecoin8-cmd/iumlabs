@@ -122,7 +122,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
               {p.reality.heading} {p.reality.headingAccent && <span style={{ color: A }}>{p.reality.headingAccent}</span>}
             </h2>
-            <div className="space-y-4 font-serif text-lg text-white/60 leading-relaxed">
+            <div className="space-y-5 font-sans text-[15px] sm:text-base text-white/80 leading-relaxed">
               {p.reality.body.map((para, i) => (<p key={i}>{para}</p>))}
             </div>
           </div>

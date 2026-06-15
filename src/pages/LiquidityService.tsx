@@ -35,10 +35,7 @@ const LiquidityService = () => (
     reality={{
       heading: "A great listing into a thin book",
       headingAccent: "is a failed listing.",
-      body: [
-        "Korean exchanges and retail punish shallow liquidity. Wide spreads and a thin order book break price discovery on day one, exactly when attention and volatility peak. Most teams over-invest in the launch campaign and under-invest in the depth behind it.",
-        "Liquidity is not an afterthought to GTM, it is part of it. We size the depth your listing actually needs, broker the right desks, and keep it honest: genuine order-book depth and tight spreads, structured to respect exchange rules and Korean market-manipulation enforcement. Never wash trading.",
-      ],
+      body: ["Korean exchanges and retail punish shallow liquidity. Wide spreads and a thin book break price discovery on day one, exactly when attention peaks. Most teams over-invest in the campaign and under-invest in the depth behind it.", "Liquidity isn't an afterthought to GTM, it's part of it. We size the depth your listing needs and broker the right desks, honest order-book depth and tight spreads, structured to respect exchange rules and Korean enforcement. Never wash trading."],
     }}
     process={{
       heading: "From thin float to",

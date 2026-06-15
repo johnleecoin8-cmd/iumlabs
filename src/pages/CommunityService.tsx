@@ -35,10 +35,7 @@ const CommunityService = () => (
     reality={{
       heading: "Korean communities don't run on",
       headingAccent: "global rules.",
-      body: [
-        "KakaoTalk Open Chat replaces Telegram for many Korean users. Naver Cafe is where long-form discussion happens. DC Inside is where sentiment shifts. Each platform has its own culture, moderation norms, and engagement patterns.",
-        "A community manager who doesn't speak Korean natively, doesn't understand 24-hour crypto culture, and doesn't know the difference between KakaoTalk and Telegram culture will lose your members in weeks.",
-      ],
+      body: ["KakaoTalk Open Chat replaces Telegram for many Korean users, Naver Cafe is where long-form discussion happens, and DC Inside is where sentiment shifts. Each platform has its own culture and norms.", "A manager who isn't natively Korean, doesn't get 24-hour crypto culture, and doesn't know KakaoTalk from Telegram will lose your members in weeks."],
     }}
     process={{
       heading: "From setup to",
