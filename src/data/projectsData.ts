@@ -113,16 +113,15 @@ export const projectsData: Record<string, ProjectData> = {
     bgVideo: "/videos/projects/bnb-hero.mp4",
     featureImage: bnbBg,
     category: "Infrastructure",
-    result: "2M+ Impressions with VIP Network",
+    result: "50+ Institutional VIPs at a Seoul Network Party",
     glowColor: "#F3BA2F",
     description: "BNB Chain is the world's largest smart contract platform by daily active users, powering thousands of dApps across DeFi, GameFi, and NFTs. As the blockchain arm of Binance, BNB Chain sought to dramatically expand their footprint in Korea, one of the world's most active crypto trading markets, targeting both retail traders and institutional partners.",
     challenge: "Despite being one of the largest blockchain ecosystems globally, BNB Chain faced an uphill battle in Korea. Local exchanges dominated user attention, and Korean traders remained skeptical of foreign platforms. BNB Chain needed to overcome brand unfamiliarity, build trust with a notoriously discerning audience, and navigate Korea's unique regulatory landscape, all while competing against well-established local players with deep community roots.",
     whatWeDid: "We deployed a full-spectrum GTM strategy combining high-impact KOL campaigns, exclusive Seoul networking events, and comprehensive PR coverage across Korea's top crypto media outlets. Our team established strategic partnerships with local DeFi protocols, created Korean-language documentation and support infrastructure, and built an ambassador network of 150+ VIP community leaders who became the voice of BNB Chain in Korea.",
     metrics: [
-      { value: "2M+", label: "Total Impressions" },
-      { value: "150+", label: "VIP Ambassador Network" },
-      { value: "2K+", label: "Community Members" },
-      { value: "1", label: "Seoul Networking Event" }
+      { value: "50+", label: "Institutional VIPs" },
+      { value: "1.5M", label: "Social Impressions" },
+      { value: "VIP", label: "Seoul Network Party" }
     ],
     strategy: [
       "Partnered with top Korean crypto influencers for educational content",
@@ -151,16 +150,15 @@ export const projectsData: Record<string, ProjectData> = {
     bgVideo: "/videos/projects/kucoin-hero.mp4",
     featureImage: kucoinBg,
     category: "Exchange",
-    result: "$550M+ TVL & +600% SEO Growth",
+    result: "$150M+ Trading Volume via KOL & Paid Ads",
     glowColor: "#23AF91",
     description: "KuCoin is a global top-5 cryptocurrency exchange known for its extensive altcoin listings and innovative trading products. With over 30 million users worldwide, KuCoin aimed to capture a significant share of Korea's highly active trading market by positioning themselves as the premium alternative to local exchanges.",
     challenge: "Korean traders are notoriously loyal to domestic exchanges like Upbit and Bithumb, which dominate over 90% of local trading volume. KuCoin faced the dual challenge of building trust with users skeptical of foreign platforms while demonstrating their unique value proposition, superior altcoin access and competitive trading fees.",
     whatWeDid: "We orchestrated premium offline experiences that positioned KuCoin as a sophisticated, trader-first platform. From exclusive trading seminars with professional analysts to VIP networking dinners with Korean crypto leaders, we created touchpoints that built genuine trust. Our creator partnership program onboarded 100+ Korean influencers who authentically showcased KuCoin's advantages to their audiences.",
     metrics: [
-      { value: "$550M+", label: "TVL Achieved" },
-      { value: "+600%", label: "SEO Keyword Growth" },
-      { value: "300K+", label: "Campaign Impressions" },
-      { value: "1", label: "Premium Offline Event" }
+      { value: "$150M+", label: "Trading Volume" },
+      { value: "100+", label: "Korean KOL Partners" },
+      { value: "Paid + KOL", label: "Acquisition Engine" }
     ],
     strategy: [
       "Created localized trading guides and tutorials",

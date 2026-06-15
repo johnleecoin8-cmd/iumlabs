@@ -34,8 +34,8 @@ import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 
 const projects = [
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "15M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
-  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "50K+", resultLabel: "Korean Users", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "50+", resultLabel: "VIP & Institutions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
+  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$150M+", resultLabel: "Trading Volume", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
   { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "30K+", resultLabel: "Community", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
   { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
   { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo, isIcon: false },

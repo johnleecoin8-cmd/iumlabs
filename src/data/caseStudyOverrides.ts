@@ -25,9 +25,23 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "2,000%", label: "TVL Growth" },
     ],
   },
-  // Infra / KOL / community campaign, was awareness-driven, not a trading-volume play.
+  // BNB Chain: institutional VIP network party in Seoul (not a mass-reach play).
   "bnb-chain": {
-    result: "15M+ Korean Social Impressions",
+    result: "50+ Institutional VIPs at a Seoul Network Party",
+    metrics: [
+      { value: "50+", label: "Institutional VIPs" },
+      { value: "1.5M", label: "Social Impressions" },
+      { value: "VIP", label: "Seoul Network Party" },
+    ],
+  },
+  // KuCoin (CEX): paid-ads + KOL user-acquisition play, measured in trading volume.
+  kucoin: {
+    result: "$150M+ Trading Volume via KOL & Paid Ads",
+    metrics: [
+      { value: "$150M+", label: "Trading Volume" },
+      { value: "100+", label: "Korean KOL Partners" },
+      { value: "Paid + KOL", label: "Acquisition Engine" },
+    ],
   },
   // AI-crypto mindshare campaign, had no metrics. Realistic placeholder figures.
   kite: {
