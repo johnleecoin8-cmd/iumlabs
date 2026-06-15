@@ -77,7 +77,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.035em] leading-[0.98] mb-7" style={heroStep(1)}>
               {p.hero.titleLead} <span style={{ color: A }}>{p.hero.titleAccent}</span>
             </h1>
-            <p className="font-serif text-lg sm:text-2xl text-white/70 leading-snug max-w-2xl mb-9" style={heroStep(2)}>{p.hero.lede}</p>
+            <p className="font-sans font-light text-lg sm:text-xl text-white/75 leading-relaxed max-w-2xl mb-9" style={heroStep(2)}>{p.hero.lede}</p>
             <div className="flex flex-wrap items-center gap-3 mb-12" style={heroStep(3)}>
               <Link to={primaryCta.href} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[#0A0A0A] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: A, boxShadow: `0 10px 40px -10px ${A}80` }}>
                 {primaryCta.label} <ArrowRight className="w-4 h-4" />

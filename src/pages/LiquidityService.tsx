@@ -26,7 +26,7 @@ const LiquidityService = () => (
       eyebrow: "MARKET MAKING & LIQUIDITY",
       titleLead: <>Launch into depth,</>,
       titleAccent: "not a vacuum.",
-      lede: "A great listing into a thin order book is a failed listing. We architect your Korea liquidity strategy and coordinate vetted market-making desks for Upbit, Bithumb, and global venues, so your token opens into real depth and a tight spread, never fake volume.",
+      lede: "A great listing into a thin order book is a failed listing. We architect your liquidity and broker vetted market-making desks so you open into real depth and a tight spread, never fake volume.",
       image: heroImg,
       primaryCta: { label: "Get a liquidity plan", href: "/contact" },
     }}

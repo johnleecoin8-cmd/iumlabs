@@ -25,7 +25,7 @@ const DeepResearchService = () => (
       eyebrow: "KOREA MARKET INTELLIGENCE",
       titleLead: <>Deep</>,
       titleAccent: "Research.",
-      lede: "On-chain analytics, competitor analysis, and market ecosystem mapping for the world's third largest crypto market. Reports in Korean and English, distributed through our media network. Intelligence you cannot get from a dashboard.",
+      lede: "On-chain analytics, competitor analysis, and market mapping for the world's third-largest crypto market, in Korean and English. Intelligence you cannot get from a dashboard.",
       image: heroImg,
       primaryCta: { label: "Commission a research report", href: "/contact" },
     }}

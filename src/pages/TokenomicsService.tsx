@@ -26,7 +26,7 @@ const TokenomicsService = () => (
       eyebrow: "TOKENOMICS",
       titleLead: <>Token economics,</>,
       titleAccent: "built for Korea.",
-      lede: "Korean retail trades the float and the unlock, not the whitepaper. We engineer your token's supply, distribution, vesting, utility, and valuation for how this market actually behaves, and build it disclosure-ready so it stands up to exchange review.",
+      lede: "Korean retail trades the float and the unlock, not the whitepaper. We engineer your supply, vesting, and valuation for how this market actually behaves, built disclosure-ready for exchange review.",
       image: heroImg,
       primaryCta: { label: "Get a tokenomics review", href: "/contact" },
     }}

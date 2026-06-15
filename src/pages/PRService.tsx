@@ -26,7 +26,7 @@ const PRService = () => (
       eyebrow: "PR & MEDIA",
       titleLead: <>Stories Korean journalists<br />actually want</>,
       titleAccent: "to publish.",
-      lede: "CoinDesk Korea, Block Media, TokenPost, and mainstream outlets. We build the narrative, write it natively in Korean, and place it through direct journalist relationships, not spray-and-pray pitching.",
+      lede: "CoinDesk Korea, Block Media, TokenPost, and mainstream outlets. We build the narrative, write it natively in Korean, and place it through direct journalist relationships.",
       image: heroImg,
       primaryCta: { label: "Plan your coverage", href: "/contact" },
     }}

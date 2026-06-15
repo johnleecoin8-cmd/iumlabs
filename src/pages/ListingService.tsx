@@ -38,7 +38,7 @@ const ListingService = () => (
       eyebrow: "EXCHANGE LISTING ADVISORY",
       titleLead: <>Get listed on the<br />world's</>,
       titleAccent: "top exchanges.",
-      lede: "A listing is the single biggest catalyst in a token's life. We prepare your project for the world's top centralized and decentralized exchanges, from Binance and Coinbase to Upbit and Uniswap, with the readiness, packaging, and relationships that turn an application into a yes. Deepest in Korea, fluent everywhere.",
+      lede: "A listing is the biggest catalyst in a token's life, and the hardest door to open. We make you the strongest, fully-compliant applicant for the world's top exchanges, deepest in Korea.",
       image: heroImg,
       primaryCta: { label: "Get a listing-readiness review", href: "/contact" },
     }}

@@ -25,7 +25,7 @@ const SEOAdsService = () => (
       eyebrow: "SEO & PAID ADS",
       titleLead: <>Be found where<br />Korea</>,
       titleAccent: "searches.",
-      lede: "Naver SEO, Google Ads, X Ads, and specialized crypto ad networks. We know which platforms ban crypto and how to get certified for the ones that don't, then we structure campaigns that actually convert Korean audiences.",
+      lede: "Naver SEO, Google Ads, X Ads, and crypto ad networks. We know which platforms ban crypto and how to get certified, then structure campaigns that actually convert Korean audiences.",
       image: heroImg,
       primaryCta: { label: "Get a search & ads audit", href: "/contact" },
     }}
