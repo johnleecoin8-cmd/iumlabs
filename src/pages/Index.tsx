@@ -12,6 +12,7 @@ const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcas
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -121,10 +122,19 @@ const Index = () => {
         </Suspense>
       </section>
 
+      {/* Testimonials */}
+      <section id="testimonials" className="border-t border-white/[0.07]">
+        <MobileDeferredSection minHeight="60vh">
+          <Suspense fallback={<SectionLoader />}>
+            <TestimonialsSection />
+          </Suspense>
+        </MobileDeferredSection>
+      </section>
+
       {/* Coverage */}
       <section id="coverage" className="border-t border-white/[0.07]">
         <div className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28">
-          <Eyebrow index="03" label="Coverage" />
+          <Eyebrow index="04" label="Coverage" />
           <h2 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mb-12 sm:mb-16">
             Korea-first. <span className="font-semibold">Asia-wide.</span>
           </h2>

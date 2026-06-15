@@ -1,160 +1,155 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+type Testimonial = {
+  name: string;
+  role: string;
+  initials: string;
+  text: string;
+  time: string;
+};
 
-const testimonials = [{
-  name: "Alex Chen",
-  role: "CEO",
-  company: "MetaVerse Korea",
-  content: "ium Labs helped us raise $12M and build a community of 50K+ members in just 3 months. Their understanding of the Korean market is unmatched.",
-  rating: 5
-}, {
-  name: "Sarah Kim",
-  role: "Founder",
-  company: "KimchiSwap",
-  content: "The team's DeFi expertise and KOL network helped us achieve $100M TVL within the first month of launch. Highly recommend!",
-  rating: 5
-}, {
-  name: "Michael Park",
-  role: "CMO",
-  company: "Seoul DAO",
-  content: "Professional, responsive, and results-driven. They know exactly how to position Web3 projects for the Korean audience.",
-  rating: 5
-}, {
-  name: "Jennifer Lee",
-  role: "Head of Marketing",
-  company: "ChainLink Korea",
-  content: "Their network of Korean crypto influencers is incredible. We saw 300% increase in Korean community engagement within weeks.",
-  rating: 5
-}, {
-  name: "David Hong",
-  role: "CEO",
-  company: "NFT Seoul",
-  content: "From zero to hero in the Korean NFT space. ium Labs made our launch a massive success with their comprehensive approach.",
-  rating: 5
-}];
+// Placeholder testimonials — realistic, Korea-GTM specific, attributed to ium's
+// case-study clients. Swap the `text`/`name` for real client quotes before launch.
+const testimonials: Testimonial[] = [
+  {
+    name: "Daniel R.",
+    role: "Growth Lead, peaq",
+    initials: "DR",
+    text: "ium had us KBW-ready in three weeks — 6 AMAs, a real Korean community, zero bots. They don't hand you a list, they embed and run it.",
+    time: "16:42",
+  },
+  {
+    name: "Mina S.",
+    role: "Head of Marketing, Mantra",
+    initials: "MS",
+    text: "Upbit and Bithumb felt out of reach until ium. Listing groundwork plus a Korean KOL rollout in one motion. We finally cracked Korea.",
+    time: "14:18",
+  },
+  {
+    name: "Kevin L.",
+    role: "CMO, KuCoin",
+    initials: "KL",
+    text: "50K+ Korean users in a single campaign cycle. They know every KOL, every Kakao group, every Naver play.",
+    time: "19:05",
+  },
+  {
+    name: "Sofia T.",
+    role: "Founder, Tria",
+    initials: "ST",
+    text: "30K Korean wallets in six months. They ran our UA like it was their own runway. gg.",
+    time: "11:50",
+  },
+  {
+    name: "Marco B.",
+    role: "Growth, BNB Chain",
+    initials: "MB",
+    text: "15M+ Korean impressions and a community we still talk to daily. ium operates, it doesn't just advise.",
+    time: "13:27",
+  },
+  {
+    name: "Hana K.",
+    role: "Partnerships, Sahara AI",
+    initials: "HK",
+    text: "The AMAs they ran during KBW were packed. 30K+ organic, Korea-native community — no bots, no filler.",
+    time: "17:33",
+  },
+  {
+    name: "Tom A.",
+    role: "VP Marketing, Bybit",
+    initials: "TA",
+    text: "Seoul Metro takeover plus a creator push, executed flawlessly. People in Korea still bring it up.",
+    time: "15:12",
+  },
+  {
+    name: "Leo M.",
+    role: "CMO, Ondo Finance",
+    initials: "LM",
+    text: "RWA is a hard sell anywhere. ium made it land with Korean institutions and retail at the same time.",
+    time: "20:41",
+  },
+  {
+    name: "Priya N.",
+    role: "Head of Growth, MegaETH",
+    initials: "PN",
+    text: "Pre-TGE Korea positioning that actually moved mindshare. Sharp team, zero fluff.",
+    time: "12:09",
+  },
+  {
+    name: "Diego F.",
+    role: "Founder, FOGO",
+    initials: "DF",
+    text: "From no Korea presence to a real launch moment. They embed like cofounders, not vendors.",
+    time: "18:55",
+  },
+  {
+    name: "Anya V.",
+    role: "Growth Lead, Story Protocol",
+    initials: "AV",
+    text: "Our IP × Web3 story, localized perfectly for Korea — and tier-1 PR hits to back it. chapeau.",
+    time: "10:27",
+  },
+  {
+    name: "Sam W.",
+    role: "CMO, Polygon",
+    initials: "SW",
+    text: "Hackathons, KOLs, community — one team, one motion. Korea entry without adding headcount.",
+    time: "21:33",
+  },
+];
+
+const Card = ({ t }: { t: Testimonial }) => (
+  <figure className="mr-5 w-[300px] shrink-0 rounded-2xl border border-white/[0.07] bg-white/[0.03] p-5 transition-colors duration-300 hover:border-white/[0.14] hover:bg-white/[0.05]">
+    <figcaption className="mb-3">
+      <p className="text-sm font-semibold text-[hsl(var(--brand))]">{t.name}</p>
+      <p className="text-xs text-white/40">{t.role}</p>
+    </figcaption>
+    <blockquote className="text-sm leading-relaxed text-white/80">{t.text}</blockquote>
+    <div className="mt-4 flex items-center justify-between">
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/[0.06] text-[10px] font-semibold text-white/55">
+        {t.initials}
+      </span>
+      <span className="font-mono text-[10px] text-white/25">{t.time}</span>
+    </div>
+  </figure>
+);
+
+const Row = ({ items, reverse = false }: { items: Testimonial[]; reverse?: boolean }) => (
+  <div
+    className="group flex overflow-hidden"
+    style={{
+      maskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+      WebkitMaskImage: "linear-gradient(to right, transparent, black 5%, black 95%, transparent)",
+    }}
+  >
+    <div
+      className={`flex shrink-0 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover:[animation-play-state:paused]`}
+      style={{ animationDuration: "75s" }}
+    >
+      {[...items, ...items].map((t, i) => (
+        <Card key={i} t={t} />
+      ))}
+    </div>
+  </div>
+);
 
 const TestimonialsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  const nextSlide = useCallback(() => {
-    setCurrentIndex(prev => (prev + 1) % testimonials.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentIndex(prev => (prev - 1 + testimonials.length) % testimonials.length);
-  }, []);
-
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, nextSlide]);
-
-  const getVisibleTestimonials = () => {
-    const visible = [];
-    for (let i = 0; i < 3; i++) {
-      const index = (currentIndex + i) % testimonials.length;
-      visible.push({
-        ...testimonials[index],
-        originalIndex: index
-      });
-    }
-    return visible;
-  };
+  const mid = Math.ceil(testimonials.length / 2);
+  const row1 = testimonials.slice(0, mid);
+  const row2 = testimonials.slice(mid);
 
   return (
-    <div ref={ref} className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-        {/* Option B Header */}
-        <div className="relative mb-12 md:mb-16">
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
-            07
-          </span>
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-gray-400">Client</span>{" "}
-              <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
-                Testimonials
-              </span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 mt-4 rounded-full" />
-          </div>
+    <div className="py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-6 md:px-10">
+        <div className="flex items-baseline gap-4">
+          <span className="font-mono text-xs text-white/30">03</span>
+          <span className="text-xs uppercase tracking-[0.25em] text-white/40">Testimonials</span>
         </div>
+        <h2 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
+          What our <span className="text-white/40">partners say.</span>
+        </h2>
+      </div>
 
-        {/* Carousel Container */}
-        <div 
-          className="relative"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-        >
-          {/* Testimonial Cards - Unified Style */}
-          <div className="grid md:grid-cols-3 gap-4">
-            {getVisibleTestimonials().map((testimonial, index) => (
-              <div
-                key={`${testimonial.originalIndex}-${currentIndex}`}
-                className={`group p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <Quote className="w-8 h-8 text-primary/30 mb-4" />
-                
-                <p className="text-gray-700 text-sm leading-relaxed mb-6">
-                  "{testimonial.content}"
-                </p>
-                
-                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="text-primary font-bold text-sm">
-                      {testimonial.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <p className="text-gray-900 font-semibold text-sm">{testimonial.name}</p>
-                    <p className="text-gray-500 text-xs">{testimonial.role} at {testimonial.company}</p>
-                  </div>
-                  <div className="ml-auto flex gap-0.5">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-yellow-400 fill-yellow-400" />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation - Unified Style */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <button 
-              onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            </button>
-            
-            <div className="flex gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    index === currentIndex ? 'bg-primary w-6' : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
-            </div>
-            
-            <button 
-              onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
-            </button>
-          </div>
-        </div>
+      <div className="mt-12 space-y-5 md:mt-16">
+        <Row items={row1} />
+        <Row items={row2} reverse />
       </div>
     </div>
   );
