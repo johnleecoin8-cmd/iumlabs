@@ -13,7 +13,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Send } from "lucide-react";
+import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Send, Megaphone } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -118,6 +118,14 @@ const positions = [{
   workType: "Hybrid (Seoul Office + Remote)",
   jobDescription: ["Design and execute end-to-end Go-To-Market (GTM) strategies for global Web3 projects targeting the Korean market, from initial market analysis to full launch", "Build, nurture, and scale Korean crypto communities across Discord, Telegram, KakaoTalk open chats, and Twitter/X with engagement-focused content strategies", "Identify, negotiate, and manage relationships with Korean KOLs (Key Opinion Leaders), ensuring authentic partnerships and measurable campaign ROI", "Plan and execute high-impact offline events including meetups, conferences, hackathons, and exclusive networking dinners in Seoul", "Develop and maintain strategic partnerships with Korean exchanges (Upbit, Bithumb, Coinone) for listing support and co-marketing initiatives", "Coordinate PR campaigns with Korean crypto media outlets (Block Media, Coindesk Korea, Bloomingbit) to maximize project visibility", "Create localized marketing content including blog posts, social media assets, and video scripts tailored to Korean audience preferences", "Track and report on key growth metrics (community size, engagement rates, sentiment analysis) with data-driven optimization recommendations"],
   qualifications: ["3+ years experience in Web3 marketing, community management, or growth roles", "Native Korean speaker with professional-level English communication skills", "Proven track record of building and scaling crypto communities (10K+ members)", "Established network within the Korean crypto ecosystem (exchanges, media, KOLs)", "Experience with marketing analytics tools and community management platforms", "Strong project management skills with ability to handle multiple campaigns simultaneously"]
+}, {
+  icon: Megaphone,
+  title: "Marketing Manager",
+  description: "Own brand, content, and integrated campaigns for global Web3 projects launching in Korea. Turn complex narratives into stories the Korean market actually engages with.",
+  salary: "KRW 45M - 75M / Year",
+  workType: "Hybrid (Seoul Office + Remote)",
+  jobDescription: ["Own the end-to-end marketing calendar and integrated campaigns across paid, owned, and earned channels for global Web3 clients entering Korea", "Define brand and creative direction — messaging, narrative, and localized creative assets that resonate with Korean crypto audiences", "Plan and run performance marketing (Twitter/X Ads, Google, Naver, programmatic) against clear CAC/ROAS targets with weekly optimization", "Manage the content production pipeline: blog posts, X/Threads, newsletters, video scripts, and AMA/Spaces narratives in Korean and English", "Lead PR and media relations with Korean crypto outlets (Block Media, TokenPost, Coindesk Korea, Bloomingbit) — press releases through feature placements", "Build the marketing analytics stack, attribute pipeline and mindshare to campaigns, and deliver clear performance reports to clients", "Direct KOL and influencer creative briefs alongside the Growth team so messaging stays consistent across every channel", "Drive event and launch marketing (KBW, Token2049 side events, exchange listing campaigns) from creative concept to on-site execution"],
+  qualifications: ["3+ years in marketing, brand, or campaign management — ideally in crypto/Web3, fintech, or a high-growth startup", "Native Korean speaker with professional English; strong copywriting and storytelling in both languages", "Hands-on experience running paid social and performance campaigns with measurable ROI", "Familiarity with the Korean crypto media and KOL landscape", "Sharp creative eye with the ability to direct designers and video editors", "Data-driven, highly organized, and comfortable owning multiple client campaigns at once"]
 }];
 const process = [{
   step: "01",
