@@ -53,6 +53,8 @@ import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
 import arciumBg from "@/assets/projects/arcium-bg.webp";
 import stableBg from "@/assets/projects/stable-bg.webp";
+import goplusBg from "@/assets/projects/goplus-bg.webp";
+import bouncebitBg from "@/assets/projects/bouncebit-bg.webp";
 
 // Types
 export interface ProjectMetric {
@@ -794,6 +796,82 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["GTM", "KOLs", "PR"],
     gallery: [
       { src: stableBg, title: "Stable — Global Payment Rail", description: "The stablecoin payment rail for the world" }
+    ],
+    news: []
+  },
+  "goplus": {
+    name: "GoPlus",
+    logo: goplusBg,
+    bgImage: goplusBg,
+    featureImage: goplusBg,
+    category: "Security / Infra",
+    duration: "2025",
+    result: "Korean Web3 Security Adoption",
+    glowColor: "#3BE37E",
+    description: "GoPlus is the decentralized security layer for Web3 — open security data and tooling (token security, malicious-address, dApp and NFT checks) that protect every on-chain transaction across wallets, exchanges, and apps.",
+    challenge: "Security is invisible until something breaks, making it a hard sell to Korean retail. GoPlus needed to make on-chain protection tangible and earn trust with both Korean developers integrating its API and everyday users.",
+    whatWeDid: "We built GoPlus's Korean narrative around real user protection, drove developer adoption of its security API, and ran education and KOL campaigns showing live scam and rug detection — positioning GoPlus as the default security layer for Korean Web3.",
+    metrics: [
+      { value: "5.4M", label: "Social Impressions" },
+      { value: "30+", label: "KOL Partners" },
+      { value: "20+", label: "Media Features" },
+      { value: "14K+", label: "Community Members" }
+    ],
+    strategy: [
+      "Korean-native narrative for on-chain security and user protection",
+      "Developer adoption push for the GoPlus security API",
+      "KOL demos of live scam and malicious-token detection",
+      "Tier-1 Korean crypto media placements",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Social Impressions", value: "5.4M" },
+      { metric: "KOL Partnerships", value: "30+" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "Community", value: "14K+ Members" }
+    ],
+    services: ["KOL & Influencer", "PR & Media", "Deep Research"],
+    shortServices: ["KOLs", "PR", "Research"],
+    gallery: [
+      { src: goplusBg, title: "GoPlus — Security Layer", description: "Decentralized security layer for Web3" }
+    ],
+    news: []
+  },
+  "bouncebit": {
+    name: "BounceBit",
+    logo: bouncebitBg,
+    bgImage: bouncebitBg,
+    featureImage: bouncebitBg,
+    category: "CeDeFi / BTC",
+    duration: "2025",
+    result: "Korean BTC Yield Mindshare",
+    glowColor: "#F5B73D",
+    description: "BounceBit is a BTC restaking CeDeFi chain that unlocks institutional-grade yield on Bitcoin — combining regulated custody (Ceffu) with on-chain DeFi so users earn secure, transparent yield on their BTC.",
+    challenge: "Korean investors are yield-hungry but wary after past CeFi blowups. BounceBit needed to show how its CeDeFi model (custody plus on-chain) is different and safe, while standing out in a crowded BTC-yield narrative.",
+    whatWeDid: "We translated BounceBit's CeDeFi model into a trust-first Korean narrative, activated DeFi and trading KOLs, and secured tier-1 media coverage — positioning BounceBit as the institutional BTC-yield gateway for the Korean market.",
+    metrics: [
+      { value: "6.8M", label: "Social Impressions" },
+      { value: "32+", label: "KOL Partners" },
+      { value: "20+", label: "Media Features" },
+      { value: "16K+", label: "Community Members" }
+    ],
+    strategy: [
+      "Trust-first Korean narrative for CeDeFi BTC yield",
+      "DeFi and trading KOL activation across X and YouTube",
+      "Tier-1 Korean crypto and finance media placements",
+      "Education on the custody (Ceffu) plus on-chain yield model",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Social Impressions", value: "6.8M" },
+      { metric: "KOL Partnerships", value: "32+" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "Community", value: "16K+ Members" }
+    ],
+    services: ["GTM Strategy", "KOL & Influencer", "PR & Media"],
+    shortServices: ["GTM", "KOLs", "PR"],
+    gallery: [
+      { src: bouncebitBg, title: "BounceBit — CeDeFi", description: "Institutional BTC yield with BounceBit CeDeFi" }
     ],
     news: []
   }

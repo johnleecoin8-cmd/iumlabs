@@ -45,6 +45,8 @@ import triaBg from "@/assets/campaigns/tria-app.png";
 import bybitBg from "@/assets/campaigns/bybit-event.jpg";
 import arciumBg from "@/assets/projects/arcium-bg.webp";
 import stableBg from "@/assets/projects/stable-bg.webp";
+import goplusBg from "@/assets/projects/goplus-bg.webp";
+import bouncebitBg from "@/assets/projects/bouncebit-bg.webp";
 import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
@@ -678,6 +680,28 @@ const Projects = () => {
       result: "Korean Privacy-Tech Mindshare",
       category: "Privacy / MPC",
       bgImage: arciumBg,
+      websiteUrl: "",
+      logo: null as string | null,
+    },
+    {
+      name: "GoPlus",
+      slug: "goplus",
+      description:
+        "The decentralized security layer for Web3 — open security data and tooling that protect every on-chain transaction.",
+      result: "Korean Web3 Security Adoption",
+      category: "Security / Infra",
+      bgImage: goplusBg,
+      websiteUrl: "",
+      logo: null as string | null,
+    },
+    {
+      name: "BounceBit",
+      slug: "bouncebit",
+      description:
+        "A BTC restaking CeDeFi chain unlocking institutional-grade Bitcoin yield via regulated custody and on-chain DeFi.",
+      result: "Korean BTC Yield Mindshare",
+      category: "CeDeFi / BTC",
+      bgImage: bouncebitBg,
       websiteUrl: "",
       logo: null as string | null,
     },
