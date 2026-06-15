@@ -2,9 +2,9 @@ import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileS
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
-import communityImage from "@/assets/services/community-management.jpg";
+import communityImage from "@/assets/services/community-hero.webp";
 import kolImage from "@/assets/services/kol-avatars.webp";
-import prImage from "@/assets/services/pr-coindesk.jpg";
+import prImage from "@/assets/services/pr-hero.webp";
 import seoAdsImage from "@/assets/services/seo-naver.jpg";
 import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
