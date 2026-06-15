@@ -30,19 +30,6 @@ const navSections = [
     ],
   },
   {
-    title: "Korea Guides",
-    links: [
-      { name: "Crypto Marketing Korea", href: "/crypto-marketing-korea" },
-      { name: "KOL Marketing Korea", href: "/kol-marketing-korea" },
-      { name: "Korea Web3 Guide", href: "/korea-web3-guide" },
-      { name: "Korea Community Management", href: "/korea-community-management" },
-      { name: "Korea PR & Media", href: "/korea-pr-media" },
-      { name: "Korea Event Marketing", href: "/korea-event-marketing" },
-      { name: "Korea Naver SEO", href: "/korea-seo-naver" },
-      { name: "Korea Exchange Listing", href: "/korea-exchange-listing" },
-    ],
-  },
-  {
     title: "Legal",
     links: [
       { name: "Terms", href: "/terms" },
