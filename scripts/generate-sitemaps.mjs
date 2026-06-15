@@ -70,12 +70,17 @@ const SEO_ARTICLES = [
   'understanding-korean-crypto-investors',
 ];
 
-// Published project slugs (from projectsData)
-const PROJECT_SLUGS = [
-  'aptos', 'bnb-chain', 'bybit', 'fogo', 'kite', 'kucoin', 'mantra',
-  'openledger', 'polygon', 'sahara-ai', 'spacecoin', 'synfutures', 'tria',
-  'world', 'megaeth', 'story-protocol', 'ondo',
-];
+// Project slugs — auto-extracted from projectsData.ts so the sitemap stays current
+// as new case studies are added, plus DB-only projects not present in projectsData.
+function extractProjectSlugs() {
+  const file = readFileSync(resolve(ROOT, 'src/data/projectsData.ts'), 'utf-8');
+  const body = file.split('export const projectsData')[1] || file;
+  // Top-level keys of the projectsData object are the slugs: `  "slug": {`
+  const fromData = [...body.matchAll(/^\s{2}["']([a-z0-9-]+)["']:\s*\{/gm)].map(m => m[1]);
+  const DB_ONLY = ['peaq']; // DB-driven projects not present in projectsData
+  return [...new Set([...fromData, ...DB_ONLY])].sort();
+}
+const PROJECT_SLUGS = extractProjectSlugs();
 
 function urlEntry(path, priority, changefreq, lastmod = TODAY) {
   return `  <url>
@@ -186,7 +191,11 @@ console.log(`  ✓ sitemap.xml: ${mainCount} URLs`);
 console.log(`  ✓ sitemap-blog.xml: ${blogCount} URLs`);
 console.log(`  ✓ lastmod: ${TODAY}`);
 
-console.log('\n📡 Pinging search engines...');
-await pingSearchEngines();
+if (process.env.SKIP_SITEMAP_PING === '1') {
+  console.log('\n📡 Skipping search-engine ping (SKIP_SITEMAP_PING=1).');
+} else {
+  console.log('\n📡 Pinging search engines...');
+  await pingSearchEngines();
+}
 
-console.log('\n✅ Sitemaps generated and search engines notified.');
+console.log('\n✅ Sitemaps generated.');
