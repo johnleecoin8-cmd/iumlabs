@@ -34,18 +34,18 @@ import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 
 const projects = [
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "2M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
-  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$550M+", resultLabel: "TVL", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
-  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "400+", resultLabel: "Attendees", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "15M+", resultLabel: "Impressions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
+  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "50K+", resultLabel: "Korean Users", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "30K+", resultLabel: "Community", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
   { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
   { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo, isIcon: false },
   { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", bgImage: bybitBg, logo: bybitLogo, isIcon: false },
-  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "250+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo, isIcon: true },
+  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "500+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo, isIcon: true },
   { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", bgImage: synfuturesBg, logo: synfuturesLogo, isIcon: true },
   { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo, isIcon: false },
-  { name: "Tria", slug: "tria", category: "Wallet", result: "450K+", resultLabel: "Impressions", bgImage: triaBg, logo: triaLogo, isIcon: true },
+  { name: "Tria", slug: "tria", category: "Wallet", result: "30K+", resultLabel: "Korean Wallets", bgImage: triaBg, logo: triaLogo, isIcon: true },
   { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo, isIcon: false },
-  { name: "OpenLedger", slug: "openledger", category: "AI", result: "30M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo, isIcon: false },
+  { name: "OpenLedger", slug: "openledger", category: "AI", result: "2M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo, isIcon: false },
   { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo, isIcon: false },
   { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", bgImage: talusThumb, logo: talusLogo, isIcon: true },
 ];

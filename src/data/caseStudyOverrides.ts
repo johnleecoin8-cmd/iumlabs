@@ -56,4 +56,14 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "40+", label: "KOL Partners" },
     ],
   },
+  // Wallet UA campaign — DB metric had an inconsistent "5K Impressions" vs the
+  // 30K-wallets headline. Align to the body: wallets + sensible impressions.
+  tria: {
+    metrics: [
+      { value: "30K+", label: "Korean Wallets" },
+      { value: "450K+", label: "Total Impressions" },
+      { value: "+200%", label: "Community Growth" },
+      { value: "6 Months", label: "Campaign Duration" },
+    ],
+  },
 };
