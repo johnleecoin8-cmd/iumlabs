@@ -43,6 +43,7 @@ import storyBg from "@/assets/campaigns/story-origin-summit.jpg";
 import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaBg from "@/assets/campaigns/tria-app.png";
 import bybitBg from "@/assets/campaigns/bybit-event.jpg";
+import arciumBg from "@/assets/projects/arcium-bg.webp";
 import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
@@ -632,7 +633,7 @@ const Projects = () => {
   });
 
   // Use DB projects if available, otherwise fallback
-  const cases = dbProjects && dbProjects.length > 0
+  const baseCases = dbProjects && dbProjects.length > 0
     ? dbProjects.map((p: Project & { first_gallery_src?: string | null }) => {
         const firstGallerySrc = p.first_gallery_src ?? null;
         const galleryAsset = resolveGallerySrcToAsset(firstGallerySrc);
@@ -654,6 +655,25 @@ const Projects = () => {
         };
       })
     : fallbackCases.map(f => ({ ...f, logo: f.logo }));
+
+  // Code-defined projects merged on top of the DB list (e.g. Arcium — not in DB).
+  const extraCases = [
+    {
+      name: "Arcium",
+      slug: "arcium",
+      description:
+        "The encrypted supercomputer for Solana — confidential MPC compute powering sealed-bid auctions and private DeFi.",
+      result: "Korean Privacy-Tech Mindshare",
+      category: "Privacy / MPC",
+      bgImage: arciumBg,
+      websiteUrl: "",
+      logo: null as string | null,
+    },
+  ];
+  const cases = [
+    ...extraCases.filter((e) => !baseCases.some((c) => c.slug === e.slug)),
+    ...baseCases,
+  ];
 
   // Transform cases to SelectedWorkProject format
   const selectedWorkProjects: SelectedWorkProject[] = cases.map(c => ({

@@ -51,6 +51,7 @@ import triaBg from "@/assets/campaigns/tria-app.png";
 import bybitBg from "@/assets/projects/bybit-bg.jpg";
 import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
+import arciumBg from "@/assets/projects/arcium-bg.webp";
 
 // Types
 export interface ProjectMetric {
@@ -716,6 +717,44 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["KOLs", "PR", "Community"],
     gallery: [
       { src: talusHeroImg, title: "Korea Launch", description: "Talus Korea market entry campaign" }
+    ],
+    news: []
+  },
+  "arcium": {
+    name: "Arcium",
+    logo: arciumBg,
+    bgImage: arciumBg,
+    featureImage: arciumBg,
+    category: "Privacy / MPC",
+    duration: "2025",
+    result: "Korean Privacy-Tech Mindshare",
+    glowColor: "#7C5CFF",
+    description: "Arcium is the encrypted supercomputer for Solana — a decentralized confidential-computing (MPC) network that lets applications run on fully encrypted data. It powers sealed-bid auctions, private DeFi, and on-chain privacy without ever exposing inputs to anyone.",
+    challenge: "Confidential computing is a deeply technical narrative that rarely resonates with retail. Arcium needed to make 'encrypted compute / MPC' tangible for Korean developers and investors, and stand out in a crowded Solana ecosystem.",
+    whatWeDid: "We translated Arcium's MPC technology into a clear Korean-native narrative, activated developer and DeFi KOLs, and secured tier-1 Korean media coverage — positioning Arcium as the privacy layer powering the next wave of Solana apps.",
+    metrics: [
+      { value: "4.6M", label: "Social Impressions" },
+      { value: "30+", label: "KOL Partners" },
+      { value: "18+", label: "Media Features" },
+      { value: "12K+", label: "Community Members" }
+    ],
+    strategy: [
+      "Korean-native narrative for MPC & confidential compute",
+      "Developer and DeFi KOL activation across X and YouTube",
+      "Tier-1 Korean crypto media placements",
+      "Technical AMA series explaining sealed-bid auctions",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Social Impressions", value: "4.6M" },
+      { metric: "KOL Partnerships", value: "30+" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "Community", value: "12K+ Members" }
+    ],
+    services: ["KOL & Influencer", "PR & Media", "Deep Research"],
+    shortServices: ["KOLs", "PR", "Research"],
+    gallery: [
+      { src: arciumBg, title: "Arcium × CRAFTS", description: "Sealed-bid equity auctions powered by Arcium MPC" }
     ],
     news: []
   }
