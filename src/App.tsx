@@ -86,7 +86,7 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Lightweight page transition — quick fade/rise on route change (keyed remount in AppRoutes)
+// Lightweight page transition, quick fade/rise on route change (keyed remount in AppRoutes)
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="animate-page-in">{children}</div>

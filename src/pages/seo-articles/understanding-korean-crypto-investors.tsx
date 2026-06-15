@@ -110,7 +110,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
 
         {/* Hero Image */}
         <section className="container mx-auto max-w-4xl px-4">
-          <img src={heroImg} alt="Seoul Gangnam district at night — Korea's crypto capital" className="aspect-[16/9] w-full object-cover rounded-2xl mb-12" />
+          <img src={heroImg} alt="Seoul Gangnam district at night, Korea's crypto capital" className="aspect-[16/9] w-full object-cover rounded-2xl mb-12" />
         </section>
 
         {/* Content */}
@@ -120,11 +120,11 @@ const UnderstandingKoreanCryptoInvestors = () => {
 
               {/* Introduction */}
               <p className="text-white/70 mb-4 leading-relaxed text-lg">
-                South Korea has approximately 14 million crypto investors in a population of 52 million — over 1 in 4 adults. Korean exchanges process daily trading volumes that routinely exceed Korea's KOSDAQ stock market. This is not a niche market; crypto is mainstream in Korea. For any project looking to build a Korean user base, understanding how Korean investors think, research, and make decisions is foundational to success.
+                South Korea has approximately 14 million crypto investors in a population of 52 million, over 1 in 4 adults. Korean exchanges process daily trading volumes that routinely exceed Korea's KOSDAQ stock market. This is not a niche market; crypto is mainstream in Korea. For any project looking to build a Korean user base, understanding how Korean investors think, research, and make decisions is foundational to success.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                The Korean market operates with its own logic, its own information channels, and its own trust hierarchy. Projects that assume Korean investors behave like their Western counterparts will misjudge everything from messaging to timing to platform selection. This article breaks down the behavioral patterns, preferences, and cultural nuances that define Korea's crypto investor base — the insights you need before crafting a <Link to="/services/gtm" className="text-primary hover:underline">Korea go-to-market strategy</Link>.
+                The Korean market operates with its own logic, its own information channels, and its own trust hierarchy. Projects that assume Korean investors behave like their Western counterparts will misjudge everything from messaging to timing to platform selection. This article breaks down the behavioral patterns, preferences, and cultural nuances that define Korea's crypto investor base, the insights you need before crafting a <Link to="/services/gtm" className="text-primary hover:underline">Korea go-to-market strategy</Link>.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
@@ -141,11 +141,11 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Gender distribution in Korean crypto is roughly 60/40 male to female — significantly more balanced than Western markets, where male dominance often exceeds 75%. Korean women, particularly in the 20-35 age range, are highly active crypto traders. This has implications for marketing: messaging that only resonates with male audiences leaves significant market share on the table. Income-wise, Korean crypto investors tend to be middle to upper-middle class, with many treating crypto as their primary investment vehicle over stocks or bonds. For a generation locked out of the housing market, crypto represents the most accessible path to wealth building.
+                Gender distribution in Korean crypto is roughly 60/40 male to female, significantly more balanced than Western markets, where male dominance often exceeds 75%. Korean women, particularly in the 20-35 age range, are highly active crypto traders. This has implications for marketing: messaging that only resonates with male audiences leaves significant market share on the table. Income-wise, Korean crypto investors tend to be middle to upper-middle class, with many treating crypto as their primary investment vehicle over stocks or bonds. For a generation locked out of the housing market, crypto represents the most accessible path to wealth building.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Education levels among Korean crypto investors are notably high, reflecting Korea's overall educational attainment. Most have at least a bachelor's degree, and many hold professional or graduate qualifications. This creates an investor base that is research-oriented, detail-focused, and skeptical of vague promises. Korea also has one of the highest smartphone penetration rates globally at over 97%, and mobile trading dominates — over 85% of Korean crypto transactions happen on mobile devices. Any project targeting Korean users must ensure a flawless mobile experience.
+                Education levels among Korean crypto investors are notably high, reflecting Korea's overall educational attainment. Most have at least a bachelor's degree, and many hold professional or graduate qualifications. This creates an investor base that is research-oriented, detail-focused, and skeptical of vague promises. Korea also has one of the highest smartphone penetration rates globally at over 97%, and mobile trading dominates, over 85% of Korean crypto transactions happen on mobile devices. Any project targeting Korean users must ensure a flawless mobile experience.
               </p>
 
               {/* Kimchi Premium */}
@@ -174,15 +174,15 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </h2>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Korean crypto investors are not impulsive buyers. Despite the stereotype of aggressive retail speculation, the typical Korean investor follows a structured research process before committing capital to a new project. Understanding this research funnel is critical for projects designing their Korean marketing approach. The process typically begins with discovery — a Korean investor encounters a project through a YouTube KOL video, a Naver search result, or a mention in a Telegram alpha group they trust.
+                Korean crypto investors are not impulsive buyers. Despite the stereotype of aggressive retail speculation, the typical Korean investor follows a structured research process before committing capital to a new project. Understanding this research funnel is critical for projects designing their Korean marketing approach. The process typically begins with discovery, a Korean investor encounters a project through a YouTube KOL video, a Naver search result, or a mention in a Telegram alpha group they trust.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                After initial discovery, the investor moves to deep-dive research. This involves searching Naver Cafe (Korea's Reddit equivalent for crypto) for community discussions about the project, reading Korean-language analysis posts, and checking Telegram group sentiment. They look for warning signs: are experienced community members skeptical? Are there concerns about tokenomics or team credibility? This phase is where most projects either gain or lose Korean investor interest. If there is no Korean-language content available — no translated documentation, no Naver Blog posts, no Korean community discussion — the research process hits a dead end and the investor moves on.
+                After initial discovery, the investor moves to deep-dive research. This involves searching Naver Cafe (Korea's Reddit equivalent for crypto) for community discussions about the project, reading Korean-language analysis posts, and checking Telegram group sentiment. They look for warning signs: are experienced community members skeptical? Are there concerns about tokenomics or team credibility? This phase is where most projects either gain or lose Korean investor interest. If there is no Korean-language content available, no translated documentation, no Naver Blog posts, no Korean community discussion, the research process hits a dead end and the investor moves on.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                The final phase involves tokenomics verification and community sentiment confirmation. Korean investors will review vesting schedules, unlock timelines, and circulating supply metrics with unusual rigor. They will check Korean Telegram groups one more time before buying to ensure sentiment has not shifted during their research period. The entire research cycle typically takes 3-7 days for a new project — longer than what is observed in Western markets, where FOMO-driven purchases happen within hours of discovery. This means projects need to ensure their Korean-language presence is not just present but substantive enough to survive sustained scrutiny over multiple days. A <Link to="/services/deep-research" className="text-primary hover:underline">deep research package</Link> can help projects understand exactly what Korean investors find when they search.
+                The final phase involves tokenomics verification and community sentiment confirmation. Korean investors will review vesting schedules, unlock timelines, and circulating supply metrics with unusual rigor. They will check Korean Telegram groups one more time before buying to ensure sentiment has not shifted during their research period. The entire research cycle typically takes 3-7 days for a new project, longer than what is observed in Western markets, where FOMO-driven purchases happen within hours of discovery. This means projects need to ensure their Korean-language presence is not just present but substantive enough to survive sustained scrutiny over multiple days. A <Link to="/services/deep-research" className="text-primary hover:underline">deep research package</Link> can help projects understand exactly what Korean investors find when they search.
               </p>
 
               {/* What They Prioritize */}
@@ -208,15 +208,15 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </h2>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Korean crypto investors have a distinct trust hierarchy for information sources that projects must understand to allocate marketing budgets effectively. At the top sits the Upbit listing announcement — nothing confers legitimacy faster in the Korean market. Below that, major Korean crypto media coverage from outlets like CoinDesk Korea, Block Media, and Decenter carries significant weight because these publications are perceived as having editorial standards. A respected YouTube KOL review comes next; Korean investors follow specific KOLs for years and develop strong parasocial trust relationships.
+                Korean crypto investors have a distinct trust hierarchy for information sources that projects must understand to allocate marketing budgets effectively. At the top sits the Upbit listing announcement, nothing confers legitimacy faster in the Korean market. Below that, major Korean crypto media coverage from outlets like CoinDesk Korea, Block Media, and Decenter carries significant weight because these publications are perceived as having editorial standards. A respected YouTube KOL review comes next; Korean investors follow specific KOLs for years and develop strong parasocial trust relationships.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                The middle tier includes Telegram alpha group endorsements (particularly from groups with proven track records of early calls), followed by Naver Blog posts from established crypto writers. At the bottom of the Korean trust hierarchy sits Twitter/X content — while Korean investors do use Twitter for global market intelligence, it carries less weight for specific project evaluation than Korean-native information sources. This hierarchy has a critical implication: Korean investors give disproportionate weight to information delivered in Korean. English-only projects automatically start with a trust deficit because the absence of Korean content signals a lack of market commitment.
+                The middle tier includes Telegram alpha group endorsements (particularly from groups with proven track records of early calls), followed by Naver Blog posts from established crypto writers. At the bottom of the Korean trust hierarchy sits Twitter/X content, while Korean investors do use Twitter for global market intelligence, it carries less weight for specific project evaluation than Korean-native information sources. This hierarchy has a critical implication: Korean investors give disproportionate weight to information delivered in Korean. English-only projects automatically start with a trust deficit because the absence of Korean content signals a lack of market commitment.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                For projects, this means that a comprehensive Korean <Link to="/services/influencer" className="text-primary hover:underline">KOL and media strategy</Link> is not optional — it is the primary mechanism through which Korean investors will evaluate your project. Investing in quality Korean-language content across the full trust hierarchy (media coverage + KOL reviews + Naver Blog + Telegram presence) creates multiple touchpoints during the investor research process described above, dramatically increasing conversion from awareness to investment.
+                For projects, this means that a comprehensive Korean <Link to="/services/influencer" className="text-primary hover:underline">KOL and media strategy</Link> is not optional, it is the primary mechanism through which Korean investors will evaluate your project. Investing in quality Korean-language content across the full trust hierarchy (media coverage + KOL reviews + Naver Blog + Telegram presence) creates multiple touchpoints during the investor research process described above, dramatically increasing conversion from awareness to investment.
               </p>
 
               {/* Mindshare Image */}
@@ -232,7 +232,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Korean investors tend to concentrate positions rather than diversify widely. A typical Korean retail investor might hold 3-5 positions at any given time, compared to 10-15 for a diversified Western portfolio. When conviction is high in a particular project, Korean buying is aggressive and concentrated — investors will allocate 30-50% of their portfolio to a single position. When sentiment shifts, selling is equally aggressive. This creates sharp volume spikes that can look like coordinated manipulation to outside observers but actually reflect genuine retail sentiment shifts propagating rapidly through Korean information networks.
+                Korean investors tend to concentrate positions rather than diversify widely. A typical Korean retail investor might hold 3-5 positions at any given time, compared to 10-15 for a diversified Western portfolio. When conviction is high in a particular project, Korean buying is aggressive and concentrated, investors will allocate 30-50% of their portfolio to a single position. When sentiment shifts, selling is equally aggressive. This creates sharp volume spikes that can look like coordinated manipulation to outside observers but actually reflect genuine retail sentiment shifts propagating rapidly through Korean information networks.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
@@ -262,7 +262,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </h2>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Honorific language in communications matters more than most international projects realize. Korean has multiple speech levels, and using the wrong register in official communications — too casual in formal announcements, too stiff in community banter — immediately signals a non-native operation or lack of cultural understanding. Your Korean <Link to="/services/community" className="text-primary hover:underline">community managers</Link> need to fluidly navigate these registers: formal and respectful in official announcements, warm and relatable in community discussions, appropriately witty in meme-driven Telegram banter. This is not something that can be achieved with translation alone; it requires native Korean speakers who understand crypto culture.
+                Honorific language in communications matters more than most international projects realize. Korean has multiple speech levels, and using the wrong register in official communications, too casual in formal announcements, too stiff in community banter, immediately signals a non-native operation or lack of cultural understanding. Your Korean <Link to="/services/community" className="text-primary hover:underline">community managers</Link> need to fluidly navigate these registers: formal and respectful in official announcements, warm and relatable in community discussions, appropriately witty in meme-driven Telegram banter. This is not something that can be achieved with translation alone; it requires native Korean speakers who understand crypto culture.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
@@ -270,7 +270,7 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Seasonal patterns affect Korean crypto activity in predictable ways. Trading volume and community engagement drop noticeably during Seollal (Lunar New Year, late January/February) and Chuseok (September/October) as Korean investors focus on family. Volume surges during year-end as investors engage in tax-loss harvesting and portfolio rebalancing. Korean investors also value exclusivity — "Korea-first" announcements, exclusive Korean AMAs with the founding team, or events at Korean crypto conferences like Korea Blockchain Week create enormous goodwill. Even small gestures that signal "we prioritize the Korean market" carry disproportionate weight in building community loyalty.
+                Seasonal patterns affect Korean crypto activity in predictable ways. Trading volume and community engagement drop noticeably during Seollal (Lunar New Year, late January/February) and Chuseok (September/October) as Korean investors focus on family. Volume surges during year-end as investors engage in tax-loss harvesting and portfolio rebalancing. Korean investors also value exclusivity, "Korea-first" announcements, exclusive Korean AMAs with the founding team, or events at Korean crypto conferences like Korea Blockchain Week create enormous goodwill. Even small gestures that signal "we prioritize the Korean market" carry disproportionate weight in building community loyalty.
               </p>
 
               {/* Positioning */}
@@ -283,11 +283,11 @@ const UnderstandingKoreanCryptoInvestors = () => {
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                The optimal Korean market entry combines multiple simultaneous workstreams: Korean PR/media coverage to establish legitimacy, <Link to="/services/influencer" className="text-primary hover:underline">KOL campaigns</Link> across YouTube and Telegram for awareness, <Link to="/services/community" className="text-primary hover:underline">community building</Link> on Korean platforms for engagement and retention, and Naver SEO content for ongoing organic discovery. These layers compound over time — each Korean investor who researches your project encounters multiple positive signals across their entire research funnel, dramatically increasing conversion probability.
+                The optimal Korean market entry combines multiple simultaneous workstreams: Korean PR/media coverage to establish legitimacy, <Link to="/services/influencer" className="text-primary hover:underline">KOL campaigns</Link> across YouTube and Telegram for awareness, <Link to="/services/community" className="text-primary hover:underline">community building</Link> on Korean platforms for engagement and retention, and Naver SEO content for ongoing organic discovery. These layers compound over time, each Korean investor who researches your project encounters multiple positive signals across their entire research funnel, dramatically increasing conversion probability.
               </p>
 
               <p className="text-white/70 mb-4 leading-relaxed">
-                Timing matters. The 8-12 weeks before a Korean exchange listing is the critical window for pre-listing awareness building. Projects that arrive at listing day with an established Korean presence see 3-5x better post-listing retention compared to those that list cold. Post-listing, sustained monthly engagement (community events, KOL refreshes, media updates) maintains holder interest and attracts new Korean investors through the ongoing research pipeline. The Korean market rewards consistency and commitment — the projects that keep investing in the market after the listing excitement fades are the ones that build durable Korean user bases.
+                Timing matters. The 8-12 weeks before a Korean exchange listing is the critical window for pre-listing awareness building. Projects that arrive at listing day with an established Korean presence see 3-5x better post-listing retention compared to those that list cold. Post-listing, sustained monthly engagement (community events, KOL refreshes, media updates) maintains holder interest and attracts new Korean investors through the ongoing research pipeline. The Korean market rewards consistency and commitment, the projects that keep investing in the market after the listing excitement fades are the ones that build durable Korean user bases.
               </p>
 
             </div>

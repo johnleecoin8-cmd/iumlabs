@@ -183,7 +183,7 @@ const LeadershipSection = () => {
           className="mt-14 md:mt-16 text-center"
         >
           <p className="text-lg md:text-xl text-white/40 italic">
-            "One Team, One Mission — To make your project the next dominant player in Korea."
+            "One Team, One Mission, To make your project the next dominant player in Korea."
           </p>
         </motion.div>
       </div>

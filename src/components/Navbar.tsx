@@ -221,7 +221,7 @@ const Navbar = () => {
 
   return (
     <>
-      {/* ===== NAVBAR — separate floating pills ===== */}
+      {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
           <Link to="/" aria-label="ium Labs HQ" className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 transition-all">
@@ -266,7 +266,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Desktop service dropdown — outside overflow-hidden container */}
+            {/* Desktop service dropdown, outside overflow-hidden container */}
             <AnimatePresence>
               {serviceDropdownOpen && (
                 <motion.div

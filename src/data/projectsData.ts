@@ -115,8 +115,8 @@ export const projectsData: Record<string, ProjectData> = {
     category: "Infrastructure",
     result: "2M+ Impressions with VIP Network",
     glowColor: "#F3BA2F",
-    description: "BNB Chain is the world's largest smart contract platform by daily active users, powering thousands of dApps across DeFi, GameFi, and NFTs. As the blockchain arm of Binance, BNB Chain sought to dramatically expand their footprint in Korea—one of the world's most active crypto trading markets—targeting both retail traders and institutional partners.",
-    challenge: "Despite being one of the largest blockchain ecosystems globally, BNB Chain faced an uphill battle in Korea. Local exchanges dominated user attention, and Korean traders remained skeptical of foreign platforms. BNB Chain needed to overcome brand unfamiliarity, build trust with a notoriously discerning audience, and navigate Korea's unique regulatory landscape—all while competing against well-established local players with deep community roots.",
+    description: "BNB Chain is the world's largest smart contract platform by daily active users, powering thousands of dApps across DeFi, GameFi, and NFTs. As the blockchain arm of Binance, BNB Chain sought to dramatically expand their footprint in Korea, one of the world's most active crypto trading markets, targeting both retail traders and institutional partners.",
+    challenge: "Despite being one of the largest blockchain ecosystems globally, BNB Chain faced an uphill battle in Korea. Local exchanges dominated user attention, and Korean traders remained skeptical of foreign platforms. BNB Chain needed to overcome brand unfamiliarity, build trust with a notoriously discerning audience, and navigate Korea's unique regulatory landscape, all while competing against well-established local players with deep community roots.",
     whatWeDid: "We deployed a full-spectrum GTM strategy combining high-impact KOL campaigns, exclusive Seoul networking events, and comprehensive PR coverage across Korea's top crypto media outlets. Our team established strategic partnerships with local DeFi protocols, created Korean-language documentation and support infrastructure, and built an ambassador network of 150+ VIP community leaders who became the voice of BNB Chain in Korea.",
     metrics: [
       { value: "2M+", label: "Total Impressions" },
@@ -154,7 +154,7 @@ export const projectsData: Record<string, ProjectData> = {
     result: "$550M+ TVL & +600% SEO Growth",
     glowColor: "#23AF91",
     description: "KuCoin is a global top-5 cryptocurrency exchange known for its extensive altcoin listings and innovative trading products. With over 30 million users worldwide, KuCoin aimed to capture a significant share of Korea's highly active trading market by positioning themselves as the premium alternative to local exchanges.",
-    challenge: "Korean traders are notoriously loyal to domestic exchanges like Upbit and Bithumb, which dominate over 90% of local trading volume. KuCoin faced the dual challenge of building trust with users skeptical of foreign platforms while demonstrating their unique value proposition—superior altcoin access and competitive trading fees.",
+    challenge: "Korean traders are notoriously loyal to domestic exchanges like Upbit and Bithumb, which dominate over 90% of local trading volume. KuCoin faced the dual challenge of building trust with users skeptical of foreign platforms while demonstrating their unique value proposition, superior altcoin access and competitive trading fees.",
     whatWeDid: "We orchestrated premium offline experiences that positioned KuCoin as a sophisticated, trader-first platform. From exclusive trading seminars with professional analysts to VIP networking dinners with Korean crypto leaders, we created touchpoints that built genuine trust. Our creator partnership program onboarded 100+ Korean influencers who authentically showcased KuCoin's advantages to their audiences.",
     metrics: [
       { value: "$550M+", label: "TVL Achieved" },
@@ -190,7 +190,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "Layer 2",
     result: "200+ Developers at L2 Hackathon",
     glowColor: "#8247E5",
-    description: "Polygon is the leading Ethereum scaling solution, processing millions of transactions daily at a fraction of mainnet costs. As the backbone of major DeFi protocols and NFT marketplaces, Polygon sought to unlock the Korean market—home to some of the world's most active DeFi users—by driving developer adoption and TVL growth.",
+    description: "Polygon is the leading Ethereum scaling solution, processing millions of transactions daily at a fraction of mainnet costs. As the backbone of major DeFi protocols and NFT marketplaces, Polygon sought to unlock the Korean market, home to some of the world's most active DeFi users, by driving developer adoption and TVL growth.",
     challenge: "While Polygon dominated the L2 landscape globally, Korean users remained tethered to Layer 1 chains and local solutions. The concept of Layer 2 scaling was poorly understood, and developers needed convincing that building on Polygon could access Korea's lucrative user base.",
     whatWeDid: "We launched Korea's most ambitious L2 education initiative, hosting developer hackathons, workshops, and meetups that demystified scaling solutions. Our team connected Polygon with leading Korean DeFi protocols for integrations, administered a Korean-specific grants program that attracted 80+ applications, and facilitated direct sessions with the Polygon core team.",
     metrics: [
@@ -227,7 +227,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "RWA",
     result: "50+ Institutional Leads via RWA Seminars",
     glowColor: "#3B82F6",
-    description: "Ondo Finance is the pioneer of tokenized real-world assets, bringing U.S. Treasuries and institutional-grade yield products on-chain. Backed by top-tier VCs and with billions in TVL, Ondo sought to introduce RWA tokenization to Korea's sophisticated investor base—a market hungry for stable, yield-generating crypto products.",
+    description: "Ondo Finance is the pioneer of tokenized real-world assets, bringing U.S. Treasuries and institutional-grade yield products on-chain. Backed by top-tier VCs and with billions in TVL, Ondo sought to introduce RWA tokenization to Korea's sophisticated investor base, a market hungry for stable, yield-generating crypto products.",
     challenge: "Real World Asset tokenization was virtually unknown in Korea. Unlike volatile crypto assets, RWA required educating investors on regulatory frameworks, custody solutions, and the mechanics of tokenized securities. Building trust with a market that had been burned by crypto scandals demanded a carefully crafted institutional approach.",
     whatWeDid: "We positioned Ondo as Korea's gateway to institutional-grade DeFi yields. Through comprehensive educational content, seminars featuring traditional finance professionals, and targeted outreach to Korean institutional investors, we built a community of 100K+ members who understood and trusted the RWA thesis.",
     metrics: [
@@ -265,8 +265,8 @@ export const projectsData: Record<string, ProjectData> = {
     category: "IP Protocol",
     result: "500+ Creators at IP Workshop",
     glowColor: "#FF6B9D",
-    description: "Story Protocol is the world's first IP infrastructure layer, enabling creators to register, license, and monetize their intellectual property on-chain. Backed by a16z and top VCs, Story Protocol sought to tap into Korea's world-renowned creator economy—home to K-pop, webtoons, and digital content that dominates global culture.",
-    challenge: "Korean creators—from webtoon artists to indie musicians—had never heard of IP tokenization. Most were unfamiliar with blockchain entirely, and convincing them to adopt a fundamentally new way of managing their creative rights required a delicate balance of education, trust-building, and demonstrating tangible value without the crypto jargon.",
+    description: "Story Protocol is the world's first IP infrastructure layer, enabling creators to register, license, and monetize their intellectual property on-chain. Backed by a16z and top VCs, Story Protocol sought to tap into Korea's world-renowned creator economy, home to K-pop, webtoons, and digital content that dominates global culture.",
+    challenge: "Korean creators, from webtoon artists to indie musicians, had never heard of IP tokenization. Most were unfamiliar with blockchain entirely, and convincing them to adopt a fundamentally new way of managing their creative rights required a delicate balance of education, trust-building, and demonstrating tangible value without the crypto jargon.",
     whatWeDid: "We became the bridge between Story Protocol's technology and Korea's creator community. Through intimate workshop sessions, we introduced webtoon artists, musicians, and digital creators to IP tokenization in their language. Our creator ambassador program built authentic advocates who demonstrated the platform's value to their peers.",
     metrics: [
       { value: "500+", label: "Workshop Participants" },
@@ -302,8 +302,8 @@ export const projectsData: Record<string, ProjectData> = {
     category: "Layer 2",
     result: "2M+ Impressions Pre-Mainnet",
     glowColor: "#4169E1",
-    description: "MegaETH is building the first real-time blockchain—an L2 capable of processing 100,000+ TPS with millisecond latency. Backed by Dragonfly and Figment, MegaETH represents the next evolution of Ethereum scaling. They came to Korea to build an early community of believers before their highly anticipated mainnet launch.",
-    challenge: "As a pre-mainnet project, MegaETH had no live product to showcase. In a market saturated with Layer 2 announcements, they needed to differentiate their technological breakthrough and build genuine community excitement—not just hype—that would sustain through to launch.",
+    description: "MegaETH is building the first real-time blockchain, an L2 capable of processing 100,000+ TPS with millisecond latency. Backed by Dragonfly and Figment, MegaETH represents the next evolution of Ethereum scaling. They came to Korea to build an early community of believers before their highly anticipated mainnet launch.",
+    challenge: "As a pre-mainnet project, MegaETH had no live product to showcase. In a market saturated with Layer 2 announcements, they needed to differentiate their technological breakthrough and build genuine community excitement, not just hype, that would sustain through to launch.",
     whatWeDid: "We architected a pre-launch campaign that turned MegaETH into Korea's most anticipated L2. Through exclusive technical deep-dives, early testnet access programs, and strategic AMAs with Korean crypto media, we built a community of genuine believers.",
     metrics: [
       { value: "$3M+", label: "ICO Contribution" },
@@ -340,7 +340,7 @@ export const projectsData: Record<string, ProjectData> = {
     result: "450K+ Impressions in 6 Months",
     glowColor: "#FF7F50",
     description: "Tria is reinventing the Web3 wallet experience with social login, gasless transactions, and a UX that finally makes crypto accessible to everyone. Their mission: eliminate the friction that keeps mainstream users away from Web3. Korea, with its tech-savvy population and mobile-first culture, was the perfect market to prove their thesis.",
-    challenge: "Korea's wallet market is brutally competitive—dominated by established players and local solutions integrated with Korean apps. Tria needed to convince users that a new wallet, from an unknown brand, was worth the switch.",
+    challenge: "Korea's wallet market is brutally competitive, dominated by established players and local solutions integrated with Korean apps. Tria needed to convince users that a new wallet, from an unknown brand, was worth the switch.",
     whatWeDid: "We positioned Tria as the wallet for Korea's next generation of Web3 users. Through strategic influencer partnerships showcasing the seamless UX, referral campaigns with compelling incentives, and integrations with popular Korean dApps, we drove sustained engagement over 6 months.",
     metrics: [
       { value: "450K+", label: "Total Impressions" },
@@ -377,7 +377,7 @@ export const projectsData: Record<string, ProjectData> = {
     category: "Exchange",
     result: "#2 Exchange Traffic with VIP Program",
     glowColor: "#F7931A",
-    description: "Bybit is the world's second-largest crypto derivatives exchange, known for its advanced trading tools and professional-grade platform. With ambitions to capture the Korean market—one of the most active trading regions globally—Bybit sought to position themselves as the premium alternative for Korea's demanding trader community.",
+    description: "Bybit is the world's second-largest crypto derivatives exchange, known for its advanced trading tools and professional-grade platform. With ambitions to capture the Korean market, one of the most active trading regions globally, Bybit sought to position themselves as the premium alternative for Korea's demanding trader community.",
     challenge: "Korea's exchange market is a fortress dominated by local giants. Bybit faced regulatory scrutiny, user skepticism toward foreign platforms, and the need to localize everything from customer support to trading pairs.",
     whatWeDid: "We executed a comprehensive market entry strategy that transformed Bybit's Korean presence. High-profile offline events in Seoul attracted thousands of traders, while our VIP program created an exclusive community of high-volume Korean users.",
     metrics: [
@@ -492,7 +492,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#6366F1",
     description: "SynFutures is the leading decentralized derivatives exchange, pioneering permissionless perpetual futures trading with innovative AMM mechanisms. As DeFi derivatives gained mainstream traction, SynFutures sought to establish dominant brand presence in Korea.",
     challenge: "Korean traders were heavily invested in centralized derivatives platforms, with DeFi perpetuals perceived as complex and risky. SynFutures needed to break through the noise with a brand awareness campaign.",
-    whatWeDid: "We executed a high-impact OOH campaign that put SynFutures front and center in Gangnam—Korea's financial and crypto heartland. Premium billboard placements generated 5M+ impressions, while coordinated digital campaigns amplified the visibility.",
+    whatWeDid: "We executed a high-impact OOH campaign that put SynFutures front and center in Gangnam, Korea's financial and crypto heartland. Premium billboard placements generated 5M+ impressions, while coordinated digital campaigns amplified the visibility.",
     metrics: [
       { value: "5M+", label: "Billboard Impressions" },
       { value: "+300%", label: "Brand Awareness Lift" },
@@ -732,9 +732,9 @@ export const projectsData: Record<string, ProjectData> = {
     duration: "2025",
     result: "Korean Privacy-Tech Mindshare",
     glowColor: "#7C5CFF",
-    description: "Arcium is the encrypted supercomputer for Solana — a decentralized confidential-computing (MPC) network that lets applications run on fully encrypted data. It powers sealed-bid auctions, private DeFi, and on-chain privacy without ever exposing inputs to anyone.",
+    description: "Arcium is the encrypted supercomputer for Solana, a decentralized confidential-computing (MPC) network that lets applications run on fully encrypted data. It powers sealed-bid auctions, private DeFi, and on-chain privacy without ever exposing inputs to anyone.",
     challenge: "Confidential computing is a deeply technical narrative that rarely resonates with retail. Arcium needed to make 'encrypted compute / MPC' tangible for Korean developers and investors, and stand out in a crowded Solana ecosystem.",
-    whatWeDid: "We translated Arcium's MPC technology into a clear Korean-native narrative, activated developer and DeFi KOLs, and secured tier-1 Korean media coverage — positioning Arcium as the privacy layer powering the next wave of Solana apps.",
+    whatWeDid: "We translated Arcium's MPC technology into a clear Korean-native narrative, activated developer and DeFi KOLs, and secured tier-1 Korean media coverage, positioning Arcium as the privacy layer powering the next wave of Solana apps.",
     metrics: [
       { value: "4.6M", label: "Social Impressions" },
       { value: "30+", label: "KOL Partners" },
@@ -770,9 +770,9 @@ export const projectsData: Record<string, ProjectData> = {
     duration: "2025",
     result: "Korean Stablecoin Rail Entry",
     glowColor: "#5BE584",
-    description: "Stable is a stablecoin-native payment rail built for global money movement — instant, low-cost settlement with seamless on/off-ramps that make stablecoins usable for real-world payments everywhere.",
+    description: "Stable is a stablecoin-native payment rail built for global money movement, instant, low-cost settlement with seamless on/off-ramps that make stablecoins usable for real-world payments everywhere.",
     challenge: "Korea's payments market is tightly regulated and dominated by domestic rails. Stable needed to build trust, educate the market on stablecoin settlement, and position itself ahead of Korea's evolving stablecoin regulation.",
-    whatWeDid: "We built Stable's Korean narrative around real-world stablecoin payments, activated fintech and crypto KOLs, and secured tier-1 media coverage — positioning Stable as the global stablecoin payment rail entering the Korean market.",
+    whatWeDid: "We built Stable's Korean narrative around real-world stablecoin payments, activated fintech and crypto KOLs, and secured tier-1 media coverage, positioning Stable as the global stablecoin payment rail entering the Korean market.",
     metrics: [
       { value: "8.2M", label: "Social Impressions" },
       { value: "35+", label: "KOL Partners" },
@@ -795,7 +795,7 @@ export const projectsData: Record<string, ProjectData> = {
     services: ["GTM Strategy", "KOL & Influencer", "PR & Media"],
     shortServices: ["GTM", "KOLs", "PR"],
     gallery: [
-      { src: stableBg, title: "Stable — Global Payment Rail", description: "The stablecoin payment rail for the world" }
+      { src: stableBg, title: "Stable, Global Payment Rail", description: "The stablecoin payment rail for the world" }
     ],
     news: []
   },
@@ -808,9 +808,9 @@ export const projectsData: Record<string, ProjectData> = {
     duration: "2025",
     result: "Korean Web3 Security Adoption",
     glowColor: "#3BE37E",
-    description: "GoPlus is the decentralized security layer for Web3 — open security data and tooling (token security, malicious-address, dApp and NFT checks) that protect every on-chain transaction across wallets, exchanges, and apps.",
+    description: "GoPlus is the decentralized security layer for Web3, open security data and tooling (token security, malicious-address, dApp and NFT checks) that protect every on-chain transaction across wallets, exchanges, and apps.",
     challenge: "Security is invisible until something breaks, making it a hard sell to Korean retail. GoPlus needed to make on-chain protection tangible and earn trust with both Korean developers integrating its API and everyday users.",
-    whatWeDid: "We built GoPlus's Korean narrative around real user protection, drove developer adoption of its security API, and ran education and KOL campaigns showing live scam and rug detection — positioning GoPlus as the default security layer for Korean Web3.",
+    whatWeDid: "We built GoPlus's Korean narrative around real user protection, drove developer adoption of its security API, and ran education and KOL campaigns showing live scam and rug detection, positioning GoPlus as the default security layer for Korean Web3.",
     metrics: [
       { value: "5.4M", label: "Social Impressions" },
       { value: "30+", label: "KOL Partners" },
@@ -833,7 +833,7 @@ export const projectsData: Record<string, ProjectData> = {
     services: ["KOL & Influencer", "PR & Media", "Deep Research"],
     shortServices: ["KOLs", "PR", "Research"],
     gallery: [
-      { src: goplusBg, title: "GoPlus — Security Layer", description: "Decentralized security layer for Web3" }
+      { src: goplusBg, title: "GoPlus, Security Layer", description: "Decentralized security layer for Web3" }
     ],
     news: []
   },
@@ -846,9 +846,9 @@ export const projectsData: Record<string, ProjectData> = {
     duration: "2025",
     result: "Korean BTC Yield Mindshare",
     glowColor: "#F5B73D",
-    description: "BounceBit is a BTC restaking CeDeFi chain that unlocks institutional-grade yield on Bitcoin — combining regulated custody (Ceffu) with on-chain DeFi so users earn secure, transparent yield on their BTC.",
+    description: "BounceBit is a BTC restaking CeDeFi chain that unlocks institutional-grade yield on Bitcoin, combining regulated custody (Ceffu) with on-chain DeFi so users earn secure, transparent yield on their BTC.",
     challenge: "Korean investors are yield-hungry but wary after past CeFi blowups. BounceBit needed to show how its CeDeFi model (custody plus on-chain) is different and safe, while standing out in a crowded BTC-yield narrative.",
-    whatWeDid: "We translated BounceBit's CeDeFi model into a trust-first Korean narrative, activated DeFi and trading KOLs, and secured tier-1 media coverage — positioning BounceBit as the institutional BTC-yield gateway for the Korean market.",
+    whatWeDid: "We translated BounceBit's CeDeFi model into a trust-first Korean narrative, activated DeFi and trading KOLs, and secured tier-1 media coverage, positioning BounceBit as the institutional BTC-yield gateway for the Korean market.",
     metrics: [
       { value: "6.8M", label: "Social Impressions" },
       { value: "32+", label: "KOL Partners" },
@@ -871,7 +871,7 @@ export const projectsData: Record<string, ProjectData> = {
     services: ["GTM Strategy", "KOL & Influencer", "PR & Media"],
     shortServices: ["GTM", "KOLs", "PR"],
     gallery: [
-      { src: bouncebitBg, title: "BounceBit — CeDeFi", description: "Institutional BTC yield with BounceBit CeDeFi" }
+      { src: bouncebitBg, title: "BounceBit, CeDeFi", description: "Institutional BTC yield with BounceBit CeDeFi" }
     ],
     news: []
   }

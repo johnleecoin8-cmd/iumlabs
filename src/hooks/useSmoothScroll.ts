@@ -15,7 +15,7 @@ declare global {
 
 /**
  * Global buttery smooth scrolling (Lenis) integrated with GSAP ScrollTrigger so
- * pinned/scrubbed sections (e.g. the GTM page) stay in sync. Desktop only — touch
+ * pinned/scrubbed sections (e.g. the GTM page) stay in sync. Desktop only, touch
  * keeps native scrolling (smoothTouch off). Disabled under prefers-reduced-motion.
  * Exposes the instance on window.__lenis for route-change scroll resets.
  */

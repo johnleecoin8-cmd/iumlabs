@@ -76,7 +76,7 @@ const EastAsiaMap = () => (
         />
       ))}
 
-    {/* Flowing dashed arcs — energy moving out of Seoul */}
+    {/* Flowing dashed arcs, energy moving out of Seoul */}
     {markers
       .filter((m) => !m.isHome)
       .map((m) => (

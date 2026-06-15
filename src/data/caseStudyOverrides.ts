@@ -17,7 +17,7 @@ export interface CaseStudyOverride {
 }
 
 export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
-  // DePIN campaign (AMA / KBW / PR / brand positioning) — had no metrics in DB.
+  // DePIN campaign (AMA / KBW / PR / brand positioning), had no metrics in DB.
   peaq: {
     metrics: [
       { value: "6", label: "AMAs & KBW Sessions" },
@@ -25,11 +25,11 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "2,000%", label: "TVL Growth" },
     ],
   },
-  // Infra / KOL / community campaign — was awareness-driven, not a trading-volume play.
+  // Infra / KOL / community campaign, was awareness-driven, not a trading-volume play.
   "bnb-chain": {
     result: "15M+ Korean Social Impressions",
   },
-  // AI-crypto mindshare campaign — had no metrics. Realistic placeholder figures.
+  // AI-crypto mindshare campaign, had no metrics. Realistic placeholder figures.
   kite: {
     metrics: [
       { value: "4.2M", label: "Social Impressions" },
@@ -38,7 +38,7 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "16+", label: "Media Features" },
     ],
   },
-  // Identity / privacy narrative + PR campaign — only had qualitative tags.
+  // Identity / privacy narrative + PR campaign, only had qualitative tags.
   world: {
     metrics: [
       { value: "2.8M", label: "Social Impressions" },
@@ -47,7 +47,7 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "+165%", label: "Positive Sentiment" },
     ],
   },
-  // L1 ecosystem — community growth + KBW presence. Only had 2 thin tiles.
+  // L1 ecosystem, community growth + KBW presence. Only had 2 thin tiles.
   aptos: {
     metrics: [
       { value: "6.5M", label: "Social Impressions" },
@@ -56,7 +56,7 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "40+", label: "KOL Partners" },
     ],
   },
-  // Wallet UA campaign — DB metric had an inconsistent "5K Impressions" vs the
+  // Wallet UA campaign, DB metric had an inconsistent "5K Impressions" vs the
   // 30K-wallets headline. Align to the body: wallets + sensible impressions.
   tria: {
     metrics: [

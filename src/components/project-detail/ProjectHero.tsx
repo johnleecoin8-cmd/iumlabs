@@ -23,7 +23,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const services = project.services || [];
   const hasVideo = !!project.bgVideo;
 
-  // Scroll-linked parallax for the hero media — restores the "스르륵" drift feel.
+  // Scroll-linked parallax for the hero media, restores the "스르륵" drift feel.
   const mediaRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: mediaRef, offset: ["start end", "end start"] });
   const mediaY = useTransform(scrollYProgress, [0, 1], ["-9%", "9%"]);
@@ -124,7 +124,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
         {/* Divider */}
         <div className="mt-12 border-t border-white/10" />
 
-        {/* Contained media — smooth reveal + scroll parallax */}
+        {/* Contained media, smooth reveal + scroll parallax */}
         <motion.div
           ref={mediaRef}
           className="relative mt-12 overflow-hidden rounded-2xl bg-[#111] ring-1 ring-white/[0.06]"

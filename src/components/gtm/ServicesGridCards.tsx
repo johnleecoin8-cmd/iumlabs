@@ -206,7 +206,7 @@ const ServicesGridCards = () => {
             Full-Stack <span className="bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">GTM Services</span>
           </h3>
           <p className="text-white/50 mt-4 max-w-xl mx-auto">
-            From research to scale — everything you need for a successful Korea launch.
+            From research to scale, everything you need for a successful Korea launch.
           </p>
         </motion.div>
 

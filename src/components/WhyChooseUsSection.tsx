@@ -71,7 +71,7 @@ const WhyChooseUsSection = () => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      {/* Content — centered vertically, stats pushed to bottom */}
+      {/* Content, centered vertically, stats pushed to bottom */}
       <div className="relative z-10 flex flex-col min-h-[100vh]">
         <div className="flex-1 flex items-center">
         <motion.div
@@ -81,7 +81,7 @@ const WhyChooseUsSection = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}>
 
-          {/* Headline — each line slides in separately */}
+          {/* Headline, each line slides in separately */}
           <h2 className="font-sans text-[clamp(1.5rem,6vw,5.5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.04em] leading-[1.02] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
@@ -94,11 +94,11 @@ const WhyChooseUsSection = () => {
             </motion.span>
           </h2>
 
-          {/* Description — blur reveal */}
+          {/* Description, blur reveal */}
           <motion.p
             className="text-white/55 leading-[1.75] text-[13px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-wide px-3 sm:px-0"
             variants={descriptionVariants}>
-            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck — we rebuild your <span className="text-white/90 font-medium">narrative</span>, activate <span className="text-white/90 font-medium">real KOLs</span>, and run <span className="text-white/90 font-medium">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
+            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck, we rebuild your <span className="text-white/90 font-medium">narrative</span>, activate <span className="text-white/90 font-medium">real KOLs</span>, and run <span className="text-white/90 font-medium">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
           </motion.p>
 
 

@@ -167,7 +167,7 @@ const ProjectSpotlight = ({ project, rank }: ProjectSpotlightProps) => {
                 </span>
               </div>
               <p className="text-2xl font-bold text-white tabular-nums">
-                {project.telegram_mentions_24h?.toLocaleString() || '—'}
+                {project.telegram_mentions_24h?.toLocaleString() || ', '}
               </p>
             </div>
 
@@ -179,7 +179,7 @@ const ProjectSpotlight = ({ project, rank }: ProjectSpotlightProps) => {
                 </span>
               </div>
               <p className="text-2xl font-bold text-white tabular-nums">
-                {project.twitter_mentions?.toLocaleString() || '—'}
+                {project.twitter_mentions?.toLocaleString() || ', '}
               </p>
             </div>
           </motion.div>

@@ -40,7 +40,7 @@ const services = [
   {
     icon: Megaphone,
     title: "PR & Media Relations",
-    description: "Coverage in top Korean crypto outlets — TokenPost, Blockmedia, CoinDesk Korea, and more. Earned media that builds lasting credibility.",
+    description: "Coverage in top Korean crypto outlets, TokenPost, Blockmedia, CoinDesk Korea, and more. Earned media that builds lasting credibility.",
     link: "/services/pr",
   },
   {
@@ -52,7 +52,7 @@ const services = [
   {
     icon: Globe,
     title: "Regulations & Compliance",
-    description: "Navigate Korea's crypto regulations — VASP registration, PIPA compliance, and exchange listing requirements.",
+    description: "Navigate Korea's crypto regulations, VASP registration, PIPA compliance, and exchange listing requirements.",
     link: "/services/compliance",
   },
 ];
@@ -67,9 +67,9 @@ const clients = ["BNB Chain", "Bybit", "KuCoin", "Polygon", "Mantra", "Aptos", "
 
 const steps = [
   { number: "01", title: "Discovery", description: "We audit your project, tokenomics, and current Korean presence. We identify gaps, opportunities, and competitive positioning." },
-  { number: "02", title: "Strategy", description: "A custom GTM playbook covering KOL selection, community channels, PR targets, event calendar, and content roadmap — all localized for Korea." },
+  { number: "02", title: "Strategy", description: "A custom GTM playbook covering KOL selection, community channels, PR targets, event calendar, and content roadmap, all localized for Korea." },
   { number: "03", title: "Execution", description: "Our on-the-ground team in Seoul activates every channel simultaneously. KOL campaigns, community seeding, PR blitzes, and exchange coordination." },
-  { number: "04", title: "Optimization", description: "Weekly performance reports, sentiment analysis, and strategy pivots. We double down on what works and cut what doesn't — fast." },
+  { number: "04", title: "Optimization", description: "Weekly performance reports, sentiment analysis, and strategy pivots. We double down on what works and cut what doesn't, fast." },
 ];
 
 const faqs = [
@@ -83,7 +83,7 @@ const faqs = [
   },
   {
     q: "Do you work with early-stage projects?",
-    a: "Yes. We work with projects from pre-launch through post-TGE. For early-stage teams, we focus on narrative development, community seeding, and KOL relationship building — all of which create the foundation for a successful Korean market entry when you're ready to scale.",
+    a: "Yes. We work with projects from pre-launch through post-TGE. For early-stage teams, we focus on narrative development, community seeding, and KOL relationship building, all of which create the foundation for a successful Korean market entry when you're ready to scale.",
   },
   {
     q: "What platforms do Korean crypto users use?",
@@ -91,7 +91,7 @@ const faqs = [
   },
   {
     q: "Do you handle exchange listings?",
-    a: "We don't guarantee listings — no ethical agency can. But we provide end-to-end listing support: preparing applications, connecting you with exchange BD teams, coordinating market-making partners, and running the pre- and post-listing marketing campaigns that exchanges want to see.",
+    a: "We don't guarantee listings, no ethical agency can. But we provide end-to-end listing support: preparing applications, connecting you with exchange BD teams, coordinating market-making partners, and running the pre- and post-listing marketing campaigns that exchanges want to see.",
   },
 ];
 
@@ -148,7 +148,7 @@ const CryptoMarketingKorea = () => {
             className="mt-6 text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed"
           >
             Full-stack Web3 GTM strategy for blockchain projects entering the Korean market.
-            From KOL networks to community growth — we've launched 25+ projects and driven $8M+ in token sales.
+            From KOL networks to community growth, we've launched 25+ projects and driven $8M+ in token sales.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -178,7 +178,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 01 — Why Korea */}
+      {/* Section 01, Why Korea */}
       <section className="border-t border-white/10">
         <div className="max-w-4xl mx-auto px-6 py-20 md:py-28">
           <SectionHeader number="01" title="Why Korea" badge="Market Opportunity" />
@@ -195,11 +195,11 @@ const CryptoMarketingKorea = () => {
             {[
               {
                 title: "16M+ Active Crypto Users",
-                text: "South Korea has over 16 million registered crypto exchange accounts — roughly 30% of the entire population. No other country comes close to this level of retail penetration. For any token or protocol looking to maximize holder count and trading volume, Korea is non-negotiable.",
+                text: "South Korea has over 16 million registered crypto exchange accounts, roughly 30% of the entire population. No other country comes close to this level of retail penetration. For any token or protocol looking to maximize holder count and trading volume, Korea is non-negotiable.",
               },
               {
                 title: "The Kimchi Premium Is Real",
-                text: "Korean retail investors are known for aggressive trading behavior, often pushing token prices 5–15% higher on Korean exchanges than global averages. This \"Kimchi Premium\" isn't just a meme — it reflects genuine demand and high engagement from a market that moves fast and trades with conviction.",
+                text: "Korean retail investors are known for aggressive trading behavior, often pushing token prices 5–15% higher on Korean exchanges than global averages. This \"Kimchi Premium\" isn't just a meme, it reflects genuine demand and high engagement from a market that moves fast and trades with conviction.",
               },
               {
                 title: "Massive Exchange Volume",
@@ -207,11 +207,11 @@ const CryptoMarketingKorea = () => {
               },
               {
                 title: "Trust-First Culture",
-                text: "Korean investors don't ape into random projects. They rely on trusted KOLs, community managers, and local media coverage to evaluate legitimacy. Projects that skip localization — hiring native Korean speakers, building KakaoTalk communities, and getting coverage in TokenPost or Blockmedia — are effectively invisible in this market.",
+                text: "Korean investors don't ape into random projects. They rely on trusted KOLs, community managers, and local media coverage to evaluate legitimacy. Projects that skip localization, hiring native Korean speakers, building KakaoTalk communities, and getting coverage in TokenPost or Blockmedia, are effectively invisible in this market.",
               },
               {
                 title: "Regulatory Clarity Is Improving",
-                text: "Korea's Virtual Asset User Protection Act (VAUPA), enacted in July 2024, created a clear legal framework for crypto assets. While regulation is strict, it's also predictable — and projects that play by the rules gain a significant trust advantage. Korea is not a gray zone; it's a regulated, high-integrity market.",
+                text: "Korea's Virtual Asset User Protection Act (VAUPA), enacted in July 2024, created a clear legal framework for crypto assets. While regulation is strict, it's also predictable, and projects that play by the rules gain a significant trust advantage. Korea is not a gray zone; it's a regulated, high-integrity market.",
               },
             ].map((item, i) => (
               <motion.div
@@ -234,7 +234,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 02 — Services */}
+      {/* Section 02, Services */}
       <section className="border-t border-white/10">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
           <SectionHeader number="02" title="Services" badge="What We Do" />
@@ -277,7 +277,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 03 — Trust */}
+      {/* Section 03, Trust */}
       <section className="border-t border-white/10">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-28 text-center">
           <div className="flex justify-center">
@@ -326,7 +326,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 04 — Process */}
+      {/* Section 04, Process */}
       <section className="border-t border-white/10">
         <div className="max-w-5xl mx-auto px-6 py-20 md:py-28">
           <SectionHeader number="04" title="Process" badge="How We Work" />
@@ -359,7 +359,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 05 — FAQ */}
+      {/* Section 05, FAQ */}
       <section className="border-t border-white/10">
         <div className="max-w-3xl mx-auto px-6 py-20 md:py-28">
           <SectionHeader number="05" title="FAQ" badge="Common Questions" />
@@ -391,7 +391,7 @@ const CryptoMarketingKorea = () => {
         </div>
       </section>
 
-      {/* Section 06 — Contact */}
+      {/* Section 06, Contact */}
       <section className="border-t border-white/10">
         <ContactFormSection />
       </section>

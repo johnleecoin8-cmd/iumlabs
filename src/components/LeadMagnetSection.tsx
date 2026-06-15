@@ -30,7 +30,7 @@ const LeadMagnetSection = () => {
                 Korea Web3 Market<br />Entry Playbook
               </h3>
               <p className="text-sm text-white/50 leading-relaxed max-w-md">
-                Exchange landscape, regulatory overview, KOL pricing benchmarks, and community platform strategy — everything you need before launching in Korea.
+                Exchange landscape, regulatory overview, KOL pricing benchmarks, and community platform strategy, everything you need before launching in Korea.
               </p>
             </div>
 
