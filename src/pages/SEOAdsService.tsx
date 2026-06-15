@@ -5,8 +5,8 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 import heroImg from "@/assets/services/seo-naver.jpg";
 import featNaverImg from "@/assets/platforms/seo-naver.jpg";
 import featPaidImg from "@/assets/services/cex-paid-ads.webp";
-import featTrackImg from "@/assets/platforms/seo-analytics.jpg";
-import deliverableImg from "@/assets/platforms/seo-report.jpg";
+import featTrackImg from "@/assets/services/seo-performance.png";
+import deliverableImg from "@/assets/services/seo-growth-plan.webp";
 
 const ACCENT = "#22C55E";
 
