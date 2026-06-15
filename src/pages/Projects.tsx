@@ -44,6 +44,7 @@ import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaBg from "@/assets/campaigns/tria-app.png";
 import bybitBg from "@/assets/campaigns/bybit-event.jpg";
 import arciumBg from "@/assets/projects/arcium-bg.webp";
+import stableBg from "@/assets/projects/stable-bg.webp";
 import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
@@ -658,6 +659,17 @@ const Projects = () => {
 
   // Code-defined projects merged on top of the DB list (e.g. Arcium — not in DB).
   const extraCases = [
+    {
+      name: "Stable",
+      slug: "stable",
+      description:
+        "A stablecoin-native payment rail for global money movement — instant, low-cost settlement and seamless on/off-ramps.",
+      result: "Korean Stablecoin Rail Entry",
+      category: "Stablecoin / Payments",
+      bgImage: stableBg,
+      websiteUrl: "",
+      logo: null as string | null,
+    },
     {
       name: "Arcium",
       slug: "arcium",

@@ -52,6 +52,7 @@ import bybitBg from "@/assets/projects/bybit-bg.jpg";
 import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
 import arciumBg from "@/assets/projects/arcium-bg.webp";
+import stableBg from "@/assets/projects/stable-bg.webp";
 
 // Types
 export interface ProjectMetric {
@@ -755,6 +756,44 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["KOLs", "PR", "Research"],
     gallery: [
       { src: arciumBg, title: "Arcium × CRAFTS", description: "Sealed-bid equity auctions powered by Arcium MPC" }
+    ],
+    news: []
+  },
+  "stable": {
+    name: "Stable",
+    logo: stableBg,
+    bgImage: stableBg,
+    featureImage: stableBg,
+    category: "Stablecoin / Payments",
+    duration: "2025",
+    result: "Korean Stablecoin Rail Entry",
+    glowColor: "#5BE584",
+    description: "Stable is a stablecoin-native payment rail built for global money movement — instant, low-cost settlement with seamless on/off-ramps that make stablecoins usable for real-world payments everywhere.",
+    challenge: "Korea's payments market is tightly regulated and dominated by domestic rails. Stable needed to build trust, educate the market on stablecoin settlement, and position itself ahead of Korea's evolving stablecoin regulation.",
+    whatWeDid: "We built Stable's Korean narrative around real-world stablecoin payments, activated fintech and crypto KOLs, and secured tier-1 media coverage — positioning Stable as the global stablecoin payment rail entering the Korean market.",
+    metrics: [
+      { value: "8.2M", label: "Social Impressions" },
+      { value: "35+", label: "KOL Partners" },
+      { value: "22+", label: "Media Features" },
+      { value: "18K+", label: "Community Members" }
+    ],
+    strategy: [
+      "Korean-native narrative for stablecoin payments & settlement",
+      "Fintech and crypto KOL activation across X and YouTube",
+      "Tier-1 Korean crypto & business media placements",
+      "Regulatory-aware positioning ahead of KRW stablecoin rules",
+      "Community building on Telegram and KakaoTalk"
+    ],
+    results: [
+      { metric: "Social Impressions", value: "8.2M" },
+      { metric: "KOL Partnerships", value: "35+" },
+      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
+      { metric: "Community", value: "18K+ Members" }
+    ],
+    services: ["GTM Strategy", "KOL & Influencer", "PR & Media"],
+    shortServices: ["GTM", "KOLs", "PR"],
+    gallery: [
+      { src: stableBg, title: "Stable — Global Payment Rail", description: "The stablecoin payment rail for the world" }
     ],
     news: []
   }
