@@ -33,7 +33,7 @@ const TokenomicsService = () => (
     reality={{
       heading: "The same token can moon or bleed, it's the",
       headingAccent: "float and the unlock.",
-      body: ["Korean retail is unusually sensitive to float and unlock schedules. A thin float spikes then craters on the first cliff, and an opaque distribution is both a day-one price risk and, under the new rules, a delisting trigger.", "And a token still has to be worth holding. Without real utility, value accrual, and a defensible FDV, the bid disappears once launch noise fades. We design the whole structure, supply, unlocks, utility, and valuation, to hold up long after listing."],
+      body: ["Korean retail trades the float and the unlock, not the whitepaper. A thin float spikes then craters on the first cliff, and an opaque or over-concentrated distribution is both a day-one dump risk and, under the listing-maintenance criteria DAXA now enforces, a path to a caution-list tag or delisting.", "And the token still has to be worth holding. Without real utility, value accrual, and an FDV the market can defend, the bid evaporates once launch noise fades. We design the whole structure, supply, float, unlocks, utility, and valuation, disclosure-ready and built to hold long after listing day."],
     }}
     process={{
       heading: "Supply, unlocks, and value, ",

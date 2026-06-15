@@ -33,7 +33,7 @@ const CapitalService = () => (
     reality={{
       heading: "Korea's real capital is",
       headingAccent: "relationship-gated.",
-      body: ["The deployable on-shore fiat pool is still constrained, corporate exchange trading only partially open, and unlicensed OTC a prosecuted crime. The capital that actually moves runs through crypto-native VCs, strategic arms, and licensed desks you can't cold-email your way into.", "We give you the warm introductions and structuring to be taken seriously: the right desks and funds, set up the right way. As Phase-2 regulation opens corporate participation, the relationships you build now become the capital you deploy later."],
+      body: ["The deployable on-shore won pool is still constrained, corporate exchange accounts only partially open, and unlicensed OTC a prosecuted crime. The capital that actually moves runs through crypto-native VCs, strategic corporate arms, and licensed desks you can't cold-email your way into.", "We give you the warm introductions and the structuring to be taken seriously: the right desks and funds, set up the right way. As Phase-2 regulation and the Digital Asset Basic Act open corporate participation, the relationships you build now become the capital you deploy later."],
     }}
     process={{
       heading: "Be fund-ready,",
