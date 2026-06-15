@@ -1,7 +1,6 @@
 import { Gauge, Handshake, Activity, ShieldCheck } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos. */
 import heroImg from "@/assets/services/liquidity-sizing.webp";
 import f1 from "@/assets/services/liquidity-sizing.webp";
 import f2 from "@/assets/services/liquidity-algorithm.webp";

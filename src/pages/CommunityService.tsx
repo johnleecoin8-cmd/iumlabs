@@ -1,7 +1,6 @@
 import { Users, MessageCircle, Activity, Shield } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these imports only). */
 import heroImg from "@/assets/services/community-hero.webp";
 import featStaffImg from "@/assets/services/community-moderation.webp";
 import featKoreanImg from "@/assets/platforms/comm-kakao.jpg";

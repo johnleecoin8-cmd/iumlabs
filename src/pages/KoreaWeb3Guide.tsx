@@ -25,7 +25,7 @@ const platforms = [
   },
   {
     name: "KakaoTalk",
-    description: "Korea's #1 messaging app with 47M+ users. Open chat groups for crypto are thriving — essential for reaching mainstream Korean investors beyond the crypto-native crowd.",
+    description: "Korea's #1 messaging app with 47M+ users. Open chat groups for crypto are thriving, essential for reaching mainstream Korean investors beyond the crypto-native crowd.",
     icon: MapPin,
   },
   {
@@ -87,7 +87,7 @@ const KoreaWeb3Guide = () => {
             className="inline-flex items-center gap-3 mb-8 text-xs uppercase tracking-[0.25em] text-white/40"
           >
             <BookOpen className="w-3.5 h-3.5" />
-            <span>2026 Edition — Updated Quarterly</span>
+            <span>2026 Edition, Updated Quarterly</span>
           </motion.div>
           <motion.h1
             initial="hidden"
@@ -105,7 +105,7 @@ const KoreaWeb3Guide = () => {
             custom={2}
             className="text-lg md:text-xl text-white/50 max-w-3xl mx-auto leading-relaxed mb-10"
           >
-            Everything you need to know about launching your Web3 project in Korea — from regulations and exchange listings to KOL marketing and community building. Based on 25+ successful project launches.
+            Everything you need to know about launching your Web3 project in Korea, from regulations and exchange listings to KOL marketing and community building. Based on 25+ successful project launches.
           </motion.p>
           <motion.div
             initial="hidden"
@@ -123,7 +123,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 01 — Market Overview */}
+      {/* Section 01, Market Overview */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -150,19 +150,19 @@ const KoreaWeb3Guide = () => {
             className="space-y-6 text-white/60 text-lg leading-relaxed"
           >
             <p>
-              South Korea is one of the most active crypto markets in the world — and it's not even close. With <strong className="text-white">16 million+ active crypto users</strong>, roughly 30% of the entire population trades digital assets. No other developed nation comes close to that penetration rate.
+              South Korea is one of the most active crypto markets in the world, and it's not even close. With <strong className="text-white">16 million+ active crypto users</strong>, roughly 30% of the entire population trades digital assets. No other developed nation comes close to that penetration rate.
             </p>
             <p>
-              At the center of this ecosystem is <strong className="text-white">Upbit</strong>, which processes <strong className="text-white">$4B+ in daily trading volume</strong>, making it one of the world's largest crypto exchanges by volume. The exchange's influence is so significant that a new token listing on Upbit routinely triggers massive price movements — a phenomenon the market has come to expect.
+              At the center of this ecosystem is <strong className="text-white">Upbit</strong>, which processes <strong className="text-white">$4B+ in daily trading volume</strong>, making it one of the world's largest crypto exchanges by volume. The exchange's influence is so significant that a new token listing on Upbit routinely triggers massive price movements, a phenomenon the market has come to expect.
             </p>
             <p>
-              You've probably heard of the <strong className="text-white">"Kimchi Premium"</strong> — the price gap where cryptocurrencies trade at higher prices on Korean exchanges compared to global markets. This premium, which can range from 2-10% during bull markets, is a direct reflection of the intense demand and liquidity in the Korean market. For projects, it signals an opportunity: Korean investors are willing to pay more, and they trade aggressively.
+              You've probably heard of the <strong className="text-white">"Kimchi Premium"</strong>, the price gap where cryptocurrencies trade at higher prices on Korean exchanges compared to global markets. This premium, which can range from 2-10% during bull markets, is a direct reflection of the intense demand and liquidity in the Korean market. For projects, it signals an opportunity: Korean investors are willing to pay more, and they trade aggressively.
             </p>
             <p>
               Regulatory clarity has also improved dramatically. The <strong className="text-white">Virtual Asset User Protection Act (VAUPA)</strong>, enacted in 2024, provides clear guardrails for exchanges and projects operating in Korea. While compliance requirements are strict, the regulatory framework actually benefits serious projects by weeding out scams and building investor trust.
             </p>
             <p>
-              But here's what most projects get wrong: Korea is a <strong className="text-white">trust-first market</strong>. You can't airdrop your way to a Korean community. Investors expect localized content — not Google-translated blog posts, but genuine Korean-native messaging. They want to see Korean KOLs they trust vouching for your project. And they want active, well-moderated Korean communities where they can ask questions in their own language.
+              But here's what most projects get wrong: Korea is a <strong className="text-white">trust-first market</strong>. You can't airdrop your way to a Korean community. Investors expect localized content, not Google-translated blog posts, but genuine Korean-native messaging. They want to see Korean KOLs they trust vouching for your project. And they want active, well-moderated Korean communities where they can ask questions in their own language.
             </p>
           </motion.div>
 
@@ -190,7 +190,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 02 — Regulatory Landscape */}
+      {/* Section 02, Regulatory Landscape */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -217,13 +217,13 @@ const KoreaWeb3Guide = () => {
             className="space-y-6 text-white/60 text-lg leading-relaxed"
           >
             <p>
-              Korea's regulatory landscape has matured significantly. The <strong className="text-white">Virtual Asset User Protection Act (VAUPA)</strong>, enacted in July 2024, was a watershed moment. It establishes clear rules for virtual asset service providers (VASPs), mandates user asset segregation, and introduces penalties for market manipulation and unfair trading practices. For legitimate projects, this is good news — it means the market is getting cleaner.
+              Korea's regulatory landscape has matured significantly. The <strong className="text-white">Virtual Asset User Protection Act (VAUPA)</strong>, enacted in July 2024, was a watershed moment. It establishes clear rules for virtual asset service providers (VASPs), mandates user asset segregation, and introduces penalties for market manipulation and unfair trading practices. For legitimate projects, this is good news, it means the market is getting cleaner.
             </p>
             <p>
               The <strong className="text-white">Financial Services Commission (FSC)</strong> is the primary regulatory body overseeing crypto in Korea. The FSC works alongside the Financial Intelligence Unit (FIU) to enforce compliance. All exchanges operating in Korea must register with the FIU and meet stringent operational requirements, including real-name verification partnerships with Korean banks.
             </p>
             <p>
-              <strong className="text-white">KYC/AML requirements</strong> are among the strictest globally. Korean exchanges require real-name bank accounts linked to individual users, making anonymous trading virtually impossible. For projects, this means Korean users are verified, high-quality participants — not bots or Sybil attackers. Your Korean community metrics are likely your most reliable.
+              <strong className="text-white">KYC/AML requirements</strong> are among the strictest globally. Korean exchanges require real-name bank accounts linked to individual users, making anonymous trading virtually impossible. For projects, this means Korean users are verified, high-quality participants, not bots or Sybil attackers. Your Korean community metrics are likely your most reliable.
             </p>
             <p>
               On the tax side, Korea currently applies a <strong className="text-white">250 million KRW threshold</strong> (approximately $185,000 USD) for crypto gains reporting. Gains above this threshold are subject to taxation. The tax framework continues to evolve, and staying updated is critical for projects advising their Korean community.
@@ -259,7 +259,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 03 — GTM Checklist */}
+      {/* Section 03, GTM Checklist */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -276,7 +276,7 @@ const KoreaWeb3Guide = () => {
               Korea Market Entry Checklist
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
-              A step-by-step framework based on 25+ successful Korea launches. Skip any of these steps at your own risk — the Korean market punishes half-measures.
+              A step-by-step framework based on 25+ successful Korea launches. Skip any of these steps at your own risk, the Korean market punishes half-measures.
             </p>
           </motion.div>
 
@@ -304,7 +304,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 04 — Key Platforms */}
+      {/* Section 04, Key Platforms */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -321,7 +321,7 @@ const KoreaWeb3Guide = () => {
               Essential Platforms for Korean Crypto Marketing
             </h2>
             <p className="text-lg text-white/50 mb-12 max-w-2xl">
-              The Korean digital ecosystem is fundamentally different from the West. These are the platforms that matter — and how to use them.
+              The Korean digital ecosystem is fundamentally different from the West. These are the platforms that matter, and how to use them.
             </p>
           </motion.div>
 
@@ -347,7 +347,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 05 — Exchange Landscape */}
+      {/* Section 05, Exchange Landscape */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -374,7 +374,7 @@ const KoreaWeb3Guide = () => {
             className="space-y-6 text-white/60 text-lg leading-relaxed"
           >
             <p>
-              Exchange listings are the single most impactful event for any crypto project entering Korea. <strong className="text-white">Upbit dominates with 70%+ market share</strong> of Korean crypto trading volume. A Upbit listing is widely considered one of the most valuable catalysts in crypto — tokens have historically seen 50-300% price increases on listing day alone.
+              Exchange listings are the single most impactful event for any crypto project entering Korea. <strong className="text-white">Upbit dominates with 70%+ market share</strong> of Korean crypto trading volume. A Upbit listing is widely considered one of the most valuable catalysts in crypto, tokens have historically seen 50-300% price increases on listing day alone.
             </p>
             <p>
               <strong className="text-white">Bithumb</strong> is Korea's second-largest exchange with a strong retail investor base. While it doesn't command the same volume as Upbit, a Bithumb listing still provides significant Korean market exposure and is often more accessible for mid-cap projects. Many projects pursue a Bithumb listing as a stepping stone to Upbit.
@@ -415,7 +415,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 06 — How ium Labs Helps */}
+      {/* Section 06, How ium Labs Helps */}
       <section className="py-20 md:py-28 px-6 border-t border-white/10">
         <div className="max-w-4xl mx-auto">
           <motion.div
@@ -485,7 +485,7 @@ const KoreaWeb3Guide = () => {
         </div>
       </section>
 
-      {/* Section 07 — Contact */}
+      {/* Section 07, Contact */}
       <ContactFormSection />
 
       {/* Footer */}

@@ -1,7 +1,6 @@
 import { Handshake, ArrowLeftRight, Vault } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos. */
 import heroImg from "@/assets/services/capital-hero.webp";
 import f1 from "@/assets/services/capital-vc.png";
 import f2 from "@/assets/services/capital-otc.png";

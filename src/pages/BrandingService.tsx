@@ -1,7 +1,6 @@
 import { ShieldCheck, Scale } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-/* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
 import featVaspImg from "@/assets/services/comp-vasp-travelrule.webp";
 import featDisclosureImg from "@/assets/services/comp-legal.png";
 import auditImg from "@/assets/services/comp-audit.png";

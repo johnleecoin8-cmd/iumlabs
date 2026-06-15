@@ -244,7 +244,7 @@ const Contact = () => {
           <div className="overflow-hidden">
             <div className="flex flex-col lg:flex-row lg:gap-16">
 
-              {/* Left — Office Photo + Map + Info */}
+              {/* Left, Office Photo + Map + Info */}
               <div className="lg:w-1/2 flex flex-col">
                 <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-px rounded-2xl overflow-hidden">
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -296,14 +296,14 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Right — Form */}
+              {/* Right, Form */}
               <div className="lg:w-1/2 pt-8 mt-2 border-t border-white/10 lg:pt-0 lg:mt-0 lg:border-t-0">
                 <div className="mb-6 sm:mb-10">
                   <h2 className="font-sans text-2xl sm:text-3xl font-light tracking-tight text-white mb-2 sm:mb-3">
                     Ready to Enter Korea?
                   </h2>
                   <p className="text-[12px] sm:text-sm text-white/40">
-                    Share your project details — we respond within 24 hours.
+                    Share your project details, we respond within 24 hours.
                   </p>
                 </div>
 
