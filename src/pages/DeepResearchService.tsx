@@ -6,7 +6,7 @@ import heroImg from "@/assets/services/deep-research-blog.jpg";
 import featMappingImg from "@/assets/services/dr-market-mapping.png";
 import featOnchainImg from "@/assets/services/dr-onchain.png";
 import featCompetitorImg from "@/assets/platforms/res-competitor.jpg";
-import reportImg from "@/assets/platforms/res-trend.jpg";
+import reportImg from "@/assets/services/dr-report.png";
 
 const ACCENT = "#F43F5E";
 
