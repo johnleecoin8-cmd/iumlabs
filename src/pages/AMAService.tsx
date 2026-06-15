@@ -7,7 +7,7 @@ import featHostsImg from "@/assets/platforms/ama-telegram.jpg";
 import featPromoImg from "@/assets/platforms/ama-discord.jpg";
 import featModerationImg from "@/assets/platforms/ama-moderation.jpg";
 import featRecapImg from "@/assets/platforms/ama-content.jpg";
-import runOfShowImg from "@/assets/platforms/ama-youtube.jpg";
+import runOfShowImg from "@/assets/services/ama-runofshow.webp";
 
 const ACCENT = "#EC4899";
 
