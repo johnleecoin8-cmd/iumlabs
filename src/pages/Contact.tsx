@@ -205,7 +205,7 @@ const Contact = () => {
 
           <div className="flex-1 flex items-center justify-center relative z-10 px-5 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
-              <h1 className="font-sans text-[clamp(1.75rem,7vw,6rem)] font-light leading-[0.95] tracking-[-0.04em] mb-3 sm:mb-8 mt-10 sm:mt-0 text-white sm:whitespace-nowrap">
+              <h1 className="font-sans text-[clamp(1.6rem,6vw,4.25rem)] font-light leading-[0.95] tracking-[-0.04em] mb-3 sm:mb-8 mt-10 sm:mt-0 text-white sm:whitespace-nowrap">
                 Let's Build in Korea
               </h1>
 

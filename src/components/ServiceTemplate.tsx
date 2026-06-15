@@ -74,7 +74,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
           <div className="max-w-4xl">
             <span className="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-[0.35em] mb-5" style={{ color: A, ...heroStep(0) }}>{p.hero.eyebrow}</span>
-            <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-bold tracking-[-0.035em] leading-[0.98] mb-7" style={heroStep(1)}>
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] leading-[0.98] mb-7" style={heroStep(1)}>
               {p.hero.titleLead} <span style={{ color: A }}>{p.hero.titleAccent}</span>
             </h1>
             <p className="font-sans font-light text-lg sm:text-xl text-white/75 leading-relaxed max-w-2xl mb-9" style={heroStep(2)}>{p.hero.lede}</p>

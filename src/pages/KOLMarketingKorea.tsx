@@ -158,7 +158,7 @@ const KOLMarketingKorea = () => {
                 </span>
               </div>
 
-              <h1 className="font-sans text-[1.75rem] sm:text-[3.5rem] md:text-[clamp(4.5rem,8vw,7.5rem)] font-light leading-[1.05] tracking-[-0.03em] mb-6">
+              <h1 className="font-sans text-[1.6rem] sm:text-[3rem] md:text-[clamp(3.5rem,6.5vw,5.5rem)] font-light leading-[1.05] tracking-[-0.03em] mb-6">
                 Korean KOL Marketing
                 <br />
                 <span className="text-white/40">for Crypto & Web3</span>

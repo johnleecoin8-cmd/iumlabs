@@ -94,7 +94,7 @@ const KoreaWeb3Guide = () => {
             animate="visible"
             variants={fadeUp}
             custom={1}
-            className="text-4xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[1.1] mb-6"
+            className="text-3xl md:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] mb-6"
           >
             The Complete Guide to Entering Korea's Crypto Market
           </motion.h1>
