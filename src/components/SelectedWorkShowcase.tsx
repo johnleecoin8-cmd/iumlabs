@@ -62,6 +62,23 @@ const BUFFER_RANGE = 2;
 const MobileShowcase = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "100px" });
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+
+  // Play each card's video only while it's in view (mobile data + battery friendly)
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const v = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        });
+      },
+      { threshold: 0.6 }
+    );
+    Object.values(videoRefs.current).forEach((v) => v && io.observe(v));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <section ref={ref} className="relative bg-black py-10">
@@ -92,13 +109,27 @@ const MobileShowcase = () => {
                 to={`/projects/${project.slug}`}
                 className="group relative block w-full h-full rounded-xl overflow-hidden"
               >
-                <img
-                  src={project.media}
-                  alt={project.name}
-                  loading={i <= 2 ? "eager" : "lazy"}
-                  decoding="async"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                {project.video ? (
+                  <video
+                    ref={(el) => { videoRefs.current[i] = el; }}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    poster={project.media}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  >
+                    <source src={`${project.video}#t=0.001`} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img
+                    src={project.media}
+                    alt={project.name}
+                    loading={i <= 2 ? "eager" : "lazy"}
+                    decoding="async"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10" />
 
                 <div className="absolute bottom-0 left-0 right-0 p-4">
