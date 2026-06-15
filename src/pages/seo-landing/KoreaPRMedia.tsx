@@ -53,7 +53,7 @@ const KoreaPRMedia = () => {
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
         <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
-          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight">
+          <motion.h1 initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="text-4xl md:text-6xl lg:text-7xl font-light text-white leading-[1.05] tracking-tight">
             Korea Crypto PR{" "}<br className="hidden md:block" />& Media Relations
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.5 }} className="mt-6 text-lg md:text-xl text-white/60 max-w-3xl mx-auto leading-relaxed">
@@ -72,9 +72,9 @@ const KoreaPRMedia = () => {
             {sections.map((s, i) => {
               const Icon = s.icon;
               return (
-                <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="p-6 rounded-2xl border border-white/10 bg-white/[0.02]">
+                <motion.div key={s.title} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn} className="border-t border-white/10 pt-6">
                   <Icon className="w-8 h-8 text-white/40 mb-4" />
-                  <h2 className="text-white font-semibold text-lg mb-2">{s.title}</h2>
+                  <h2 className="text-white font-medium text-lg mb-2">{s.title}</h2>
                   <p className="text-white/50 text-sm leading-relaxed">{s.text}</p>
                 </motion.div>
               );
@@ -86,7 +86,7 @@ const KoreaPRMedia = () => {
       {/* CTA */}
       <section className="border-t border-white/10">
         <div className="max-w-3xl mx-auto px-6 py-16 md:py-24 text-center">
-          <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-2xl md:text-4xl font-bold text-white mb-6">
+          <motion.h2 initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="text-3xl md:text-5xl font-light text-white mb-6 tracking-tight">
             Get Your Project Covered in Korean Media
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1, duration: 0.5 }} className="text-white/50 mb-8 max-w-2xl mx-auto">
