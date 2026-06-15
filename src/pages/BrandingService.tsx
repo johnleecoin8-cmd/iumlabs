@@ -2,7 +2,7 @@ import { ShieldCheck, FileCheck, Scale } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 /* PLACEHOLDER IMAGES, swap for provided photos (update these 6 imports only). */
-import featVaspImg from "@/assets/platforms/comp-vasp.jpg";
+import featVaspImg from "@/assets/services/comp-vasp-license.webp";
 import featProtectionImg from "@/assets/platforms/comp-aml.jpg";
 import featDisclosureImg from "@/assets/platforms/comp-exchange.jpg";
 import auditImg from "@/assets/platforms/comp-landscape.jpg";
