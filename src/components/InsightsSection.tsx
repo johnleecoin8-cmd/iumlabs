@@ -149,7 +149,7 @@ const InsightsSection = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Content — visible when active */}
+                {/* Content, visible when active */}
                 <AnimatePresence>
                   {isActive && (
                     <motion.div
@@ -175,7 +175,7 @@ const InsightsSection = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Collapsed state — no overlay, just dark tint */}
+                {/* Collapsed state, no overlay, just dark tint */}
                 {!isActive && (
                   <div className="absolute inset-0 bg-black/30" />
                 )}

@@ -268,7 +268,7 @@ const ContactFormSection = () => {
                         Let's start a conversation
                       </h3>
                       <p className="text-sm text-white/55 leading-relaxed">
-                        Share your project details — we'll reply within 24 hours KST.
+                        Share your project details, we'll reply within 24 hours KST.
                       </p>
                     </div>
 

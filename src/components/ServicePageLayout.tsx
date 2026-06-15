@@ -99,7 +99,7 @@ const ServicePageLayout = ({
           </div>
         </div>
 
-        {/* Description + CTA + Stats — tight */}
+        {/* Description + CTA + Stats, tight */}
         <div className="px-4 sm:px-6 lg:px-10 pt-5 pb-6 sm:pb-8">
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
             <p className="text-sm text-white/45 leading-relaxed max-w-2xl">{serviceDescription}</p>
@@ -137,7 +137,7 @@ const ServicePageLayout = ({
                 <ul className="space-y-1">
                   {d.items.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-[13px] text-white/40 leading-relaxed">
-                      <span className="text-white/15">—</span>{item}
+                      <span className="text-white/15">, </span>{item}
                     </li>
                   ))}
                 </ul>
@@ -148,11 +148,11 @@ const ServicePageLayout = ({
       )}
 
 
-      {/* ===== Process + FAQ — 2-column split ===== */}
+      {/* ===== Process + FAQ, 2-column split ===== */}
       {(processSteps && processSteps.length > 0 || faqItems && faqItems.length > 0) && (
         <section className="px-4 sm:px-6 lg:px-10 pb-8 sm:pb-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-            {/* Left — Process */}
+            {/* Left, Process */}
             {processSteps && processSteps.length > 0 && (
               <div>
                 <h2 className="text-base sm:text-lg font-bold text-white mb-5">How we work</h2>
@@ -170,7 +170,7 @@ const ServicePageLayout = ({
               </div>
             )}
 
-            {/* Right — FAQ */}
+            {/* Right, FAQ */}
             {faqItems && faqItems.length > 0 && (
               <div>
                 <h2 className="text-base sm:text-lg font-bold text-white mb-5">FAQ</h2>
@@ -203,7 +203,7 @@ const ServicePageLayout = ({
         </div>
       </section>
 
-      {/* ===== More services — grid ===== */}
+      {/* ===== More services, grid ===== */}
       <section className="px-4 sm:px-6 lg:px-10 pb-8 border-t border-white/[0.04] pt-6">
         <span className="text-[10px] text-white/25 uppercase tracking-[0.2em] mb-4 block font-medium">Other Services</span>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">

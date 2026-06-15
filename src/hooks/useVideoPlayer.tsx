@@ -190,7 +190,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            console.log('[VideoPlayer] hero in viewport — beginning video load');
+            console.log('[VideoPlayer] hero in viewport, beginning video load');
             setShouldLoad(true);
             observer.disconnect();
             break;
@@ -347,7 +347,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       }
       lastProgressAtRef.current = performance.now();
     } catch {
-      // Silent — bounded retry handled by the interval/burst caller.
+      // Silent, bounded retry handled by the interval/burst caller.
     } finally {
       playPromiseRef.current = null;
     }
@@ -364,7 +364,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     frameReadyRef.current = false;
     setIsVideoReady(false);
     setDebugTick((t) => t + 1);
-    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS} — ${reason}`);
+    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
 
      try {
        video.pause();
@@ -501,7 +501,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       playNow(playDelay);
     }
 
-    // Bounded periodic retry — handles browsers that block initial autoplay.
+    // Bounded periodic retry, handles browsers that block initial autoplay.
     // Stops on success OR when MAX_PLAY_ATTEMPTS is reached (poster stays).
     const retryInterval = setInterval(() => {
       if (!video.paused) {
@@ -510,7 +510,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       }
       if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
         clearInterval(retryInterval);
-        console.warn('[VideoPlayer] play attempts exhausted — keeping poster');
+        console.warn('[VideoPlayer] play attempts exhausted, keeping poster');
         setDebugTick((t) => t + 1);
         return;
       }
@@ -670,7 +670,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       transform: 'translateZ(0)',
       backfaceVisibility: 'hidden',
       willChange: 'opacity',
-      pointerEvents: 'none', // never clickable — no play button, no interaction
+      pointerEvents: 'none', // never clickable, no play button, no interaction
     } as React.CSSProperties,
     onLoadStart: () => {
       loadStartRef.current = performance.now();
@@ -740,7 +740,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return null;
   };
 
-  // Mobile debug banner — only renders on mobile when ?vdebug=1 is in the URL
+  // Mobile debug banner, only renders on mobile when ?vdebug=1 is in the URL
   // or localStorage.videoDebug === '1'. Shows readyState / frame / attempts /
   // poster state so we can diagnose mobile playback issues live on-device.
   const DebugBanner: React.FC = () => {

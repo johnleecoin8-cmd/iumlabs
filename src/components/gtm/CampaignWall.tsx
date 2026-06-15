@@ -253,7 +253,7 @@ const CampaignWall = () => {
               Real <span className="bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">Campaigns</span>
             </h3>
             <p className="text-white/50 mt-4 max-w-xl mx-auto">
-              From subway billboards to exclusive summits — see our work across Korea.
+              From subway billboards to exclusive summits, see our work across Korea.
             </p>
           </motion.div>
 

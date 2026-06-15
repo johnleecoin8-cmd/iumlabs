@@ -56,7 +56,7 @@ const services = [
       "Liquidity strategy & order-book sizing",
       "Vetted market-maker desk matching",
       "Listing-day depth & spread management",
-      "Retainer model — compliant, aligned incentives",
+      "Retainer model, compliant, aligned incentives",
     ],
   },
   {
@@ -241,7 +241,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           </div>
         </div>
 
-        {/* Content — bottom aligned */}
+        {/* Content, bottom aligned */}
         <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 z-10">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-2 tracking-[-0.02em]">
             {service.title}
@@ -250,7 +250,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             {service.description}
           </p>
 
-          {/* Details — always visible on mobile, hover reveal on desktop */}
+          {/* Details, always visible on mobile, hover reveal on desktop */}
           <div className="max-h-[300px] sm:max-h-0 sm:group-hover:max-h-[300px] overflow-hidden sm:transition-all sm:duration-500 sm:ease-out">
             <ul className="space-y-1.5 mb-4 sm:mb-5 pt-2 sm:pt-3 border-t border-white/10">
               {service.details.map((detail, i) => (

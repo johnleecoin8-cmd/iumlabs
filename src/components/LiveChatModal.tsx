@@ -65,7 +65,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
               <div className="px-4 sm:px-8 lg:px-16 py-6 sm:py-10">
                 <div className="flex flex-col lg:flex-row gap-10 lg:gap-16">
 
-                  {/* Left — message */}
+                  {/* Left, message */}
                   <motion.div
                     className="flex-1"
                     initial={{ opacity: 0, y: 20 }}
@@ -99,7 +99,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                     >
                       <div>
                         <p className="text-[10px] text-black/30 uppercase tracking-widest mb-1">open hours</p>
-                        <p className="text-black text-base font-medium">Mon–Fri 09:00 — 18:00 KST</p>
+                        <p className="text-black text-base font-medium">Mon–Fri 09:00, 18:00 KST</p>
                       </div>
                       <a
                         href={brand.telegramLink}
@@ -112,7 +112,7 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
                     </motion.div>
                   </motion.div>
 
-                  {/* Right — team photos (staggered) */}
+                  {/* Right, team photos (staggered) */}
                   <div className="flex gap-2 sm:gap-3 justify-center lg:justify-end">
                     {teamMembers.map((member, i) => (
                       <motion.a

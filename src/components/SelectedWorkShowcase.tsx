@@ -273,7 +273,7 @@ const DesktopShowcase = () => {
         );
       })}
 
-      {/* Readability scrims — keep list (left) and mission (right) legible over bright footage */}
+      {/* Readability scrims, keep list (left) and mission (right) legible over bright footage */}
       <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-r from-black/90 via-black/35 to-transparent" />
       <div className="hidden lg:block absolute inset-0 z-[5] pointer-events-none bg-gradient-to-l from-black/70 via-transparent to-transparent" />
 
@@ -333,7 +333,7 @@ const DesktopShowcase = () => {
           </div>
         </div>
 
-        {/* Right panel — clean text only */}
+        {/* Right panel, clean text only */}
         <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[50%] z-10 flex-col justify-center p-10 xl:p-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

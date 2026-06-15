@@ -72,7 +72,7 @@ const PitchDeck = () => {
   return (
     <>
       <SEOHead
-        title="Pitch Deck — ium Labs | Korea Crypto Marketing Agency"
+        title="Pitch Deck, ium Labs | Korea Crypto Marketing Agency"
         description="Explore ium Labs' capabilities: GTM strategy, KOL marketing, PR, community, and events for Web3 projects entering Korea."
         path="/deck"
         noindex
@@ -171,7 +171,7 @@ const PitchDeck = () => {
         .dk .svc-t{font-weight:600;font-size:1.05rem;margin-bottom:.4rem}
         .dk .svc-d{font-size:.78rem;color:rgba(255,255,255,.55);line-height:1.55;font-weight:300}
 
-        /* TEAM — larger photos, rounded rect */
+        /* TEAM, larger photos, rounded rect */
         .dk .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:3rem;border-radius:12px;overflow:hidden}
         .dk .tm{background:var(--off);text-align:center;padding:2.5rem 1.5rem}
         .dk .tm img{width:120px;height:120px;border-radius:16px;object-fit:cover;margin:0 auto 1.2rem;filter:grayscale(1);border:2px solid var(--g4);transition:filter .4s}
@@ -179,7 +179,7 @@ const PitchDeck = () => {
         .dk .tm h4{font-weight:600;font-size:.95rem;margin-bottom:.25rem}
         .dk .tm span{font-family:var(--mono);font-size:.6rem;color:var(--g2);letter-spacing:.1em;text-transform:uppercase}
 
-        /* GEO — full-width cards, no globe */
+        /* GEO, full-width cards, no globe */
         .dk .geo-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:3rem;border-radius:12px;overflow:hidden}
         .dk .geo-card{background:var(--off);padding:2.5rem 2rem}
         .dk .geo-card h4{font-weight:600;font-size:1.2rem;margin-bottom:.6rem}
@@ -228,7 +228,7 @@ const PitchDeck = () => {
       <Navbar />
       <div className="dk">
 
-        {/* 01 — HERO */}
+        {/* 01, HERO */}
         <section className="hero">
           <img src="/images/posters/hero-background-poster.jpg" alt="" className="hero-poster" />
           <video autoPlay muted loop playsInline preload="none">
@@ -239,7 +239,7 @@ const PitchDeck = () => {
           <div className="hero-c">
             <img src={logo} alt="ium Labs" style={{ width: 52, height: 52, borderRadius: 14, margin: "0 auto 1.5rem" }} />
             <h1>Seoul Moves Fast.<br /><span className="hero-accent">We Make You Land.</span></h1>
-            <p className="hero-desc">Korea-native operators engineering market entry for the world's top Web3 projects. From narrative to conversion — end-to-end.</p>
+            <p className="hero-desc">Korea-native operators engineering market entry for the world's top Web3 projects. From narrative to conversion, end-to-end.</p>
             <div className="hero-pills">
               {["Seoul HQ","Singapore","25+ Launches","$8B+ Client Valuation"].map(p => (
                 <span key={p} className="hero-pill">{p}</span>
@@ -262,7 +262,7 @@ const PitchDeck = () => {
           <div className="stmt-sub">This is why we exist</div>
         </section>
 
-        {/* 02 — PROBLEM */}
+        {/* 02, PROBLEM */}
         <section className="sec wrap">
           <div className="dk-reveal">
             <div className="lbl">The Problem</div>
@@ -270,11 +270,11 @@ const PitchDeck = () => {
             <p className="sub">Korea is not a "translate and launch" market. It has its own platforms, gatekeepers, cultural codes, and regulatory walls.</p>
           </div>
           <div className="prob-grid dk-reveal dk-d1">
-            {([["01","Platform Lock-Out","Korean users live on Naver, KakaoTalk, DC Inside — not Google, Telegram, or Discord. Western playbooks have zero reach."],
+            {([["01","Platform Lock-Out","Korean users live on Naver, KakaoTalk, DC Inside, not Google, Telegram, or Discord. Western playbooks have zero reach."],
               ["02","Exchange Gatekeeping","Upbit controls 78% of volume. Without relationships and compliance infrastructure, listing is impossible."],
               ["03","Cultural Mistranslation","Korean investors evaluate through institutional trust, not decentralization narratives. Western messaging doesn't convert."],
               ["04","KOL Fraud","60%+ of Korean crypto 'influencers' use fabricated engagement. Without direct relationships, you pay for bots."],
-              ["05","Regulatory Complexity","VASP registration, Travel Rule, PIPA, crypto tax — the legal surface area is vast and enforcement is real."],
+              ["05","Regulatory Complexity","VASP registration, Travel Rule, PIPA, crypto tax, the legal surface area is vast and enforcement is real."],
               ["06","Community Fragmentation","KakaoTalk (closed) not Telegram (open). Building across fragmented platforms requires native operators."]] as const).map(([i,t,d])=>(
               <div key={t} className="prob">
                 <div className="prob-idx">{i}</div>
@@ -286,7 +286,7 @@ const PitchDeck = () => {
           <div className="sn">02 / 08</div>
         </section>
 
-        {/* 03 — SOLUTION */}
+        {/* 03, SOLUTION */}
         <section className="sec wrap">
           <div className="dk-reveal">
             <div className="lbl">The Solution</div>
@@ -307,7 +307,7 @@ const PitchDeck = () => {
           <div className="sn">03 / 08</div>
         </section>
 
-        {/* 04 — TRACTION */}
+        {/* 04, TRACTION */}
         <section className="sec sec-alt">
           <div className="wrap">
             <div className="dk-reveal">
@@ -350,7 +350,7 @@ const PitchDeck = () => {
           <div className="stmt-sub">22 projects launched in Korea</div>
         </section>
 
-        {/* 05 — CASE STUDIES */}
+        {/* 05, CASE STUDIES */}
         <section className="sec wrap">
           <div className="dk-reveal">
             <div className="lbl">Case Studies</div>
@@ -426,7 +426,7 @@ const PitchDeck = () => {
           <div className="sn">05 / 08</div>
         </section>
 
-        {/* 06 — SERVICES */}
+        {/* 06, SERVICES */}
         <section className="sec sec-alt">
           <div className="wrap">
             <div className="dk-reveal">
@@ -435,7 +435,7 @@ const PitchDeck = () => {
             </div>
             <div className="svc-grid dk-reveal dk-d1">
               {([["01","GTM Strategy","Competitive analysis, Korea-fit narrative, audience segmentation, launch roadmap.",svcGtm],
-                ["02","KOL & Influencer","250+ vetted KOLs. YouTube, X, Telegram, Naver. Direct — no brokers.",svcKol],
+                ["02","KOL & Influencer","250+ vetted KOLs. YouTube, X, Telegram, Naver. Direct, no brokers.",svcKol],
                 ["03","PR & Media","CoinDesk Korea, Block Media, TokenPost. 87% placement rate.",svcPr],
                 ["04","Community","24/7 native managers. Telegram, Discord, KakaoTalk. 92% retention.",svcCommunity],
                 ["05","Offline Events","KBW side events, VIP dinners, launch parties. 40+ Seoul venue relationships.",svcEvents],
@@ -458,12 +458,12 @@ const PitchDeck = () => {
           <div className="wrap"><div className="sn">06 / 08</div></div>
         </section>
 
-        {/* 07 — TEAM */}
+        {/* 07, TEAM */}
         <section className="sec wrap">
           <div className="dk-reveal">
             <div className="lbl">Team</div>
             <h2 className="hed">Built by operators, <strong className="hed-accent">not consultants.</strong></h2>
-            <p className="sub">Every member has lived inside the Korean crypto ecosystem — operating exchanges, managing communities, running campaigns firsthand.</p>
+            <p className="sub">Every member has lived inside the Korean crypto ecosystem, operating exchanges, managing communities, running campaigns firsthand.</p>
           </div>
           <div className="team-grid dk-reveal dk-d1">
             {([
@@ -530,7 +530,7 @@ const PitchDeck = () => {
           </div>
         </section>
 
-        {/* 08 — CTA */}
+        {/* 08, CTA */}
         <section className="cta-sec">
           <div className="cta-bg">
             <img src={seoulCta} alt="" />
@@ -556,7 +556,7 @@ const PitchDeck = () => {
               ))}
             </div>
             <div style={{ width: 40, height: 1, background: "var(--accent)", opacity: .4, margin: "3rem auto 1rem" }} />
-            <div style={{ fontFamily: "var(--mono)", fontSize: ".6rem", color: "var(--g3)", letterSpacing: ".1em" }}>Confidential — ium Labs Q2 2026</div>
+            <div style={{ fontFamily: "var(--mono)", fontSize: ".6rem", color: "var(--g3)", letterSpacing: ".1em" }}>Confidential, ium Labs Q2 2026</div>
           </div>
           <div className="wrap"><div className="sn">08 / 08</div></div>
         </section>

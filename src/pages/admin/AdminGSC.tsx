@@ -494,14 +494,14 @@ export default function AdminGSC() {
                               )}
                             </td>
                             <td className="px-3 py-2 text-center">
-                              <span className="text-white/60 text-xs">{r.indexingState || '—'}</span>
+                              <span className="text-white/60 text-xs">{r.indexingState || ', '}</span>
                             </td>
                             <td className="px-3 py-2 text-center">
-                              <span className="text-white/60 text-xs">{r.crawledAs || '—'}</span>
+                              <span className="text-white/60 text-xs">{r.crawledAs || ', '}</span>
                             </td>
                             <td className="px-3 py-2 text-center">
                               <span className="text-white/40 text-xs">
-                                {r.lastCrawlTime ? new Date(r.lastCrawlTime).toLocaleDateString() : '—'}
+                                {r.lastCrawlTime ? new Date(r.lastCrawlTime).toLocaleDateString() : ', '}
                               </span>
                             </td>
                             <td className="px-3 py-2 text-center">
@@ -510,7 +510,7 @@ export default function AdminGSC() {
                                   <CheckCircle2 className="w-3 h-3" /> {r.richResults}
                                 </span>
                               ) : (
-                                <span className="text-white/30 text-xs">—</span>
+                                <span className="text-white/30 text-xs">, </span>
                               )}
                             </td>
                             <td className="px-3 py-2 text-center">
@@ -744,9 +744,9 @@ export default function AdminGSC() {
                         <tr key={u.id} className="border-b border-white/5 hover:bg-white/[0.02]">
                           <td className="px-4 py-3 text-white text-xs font-mono">{u.url.replace('https://iumlabs.io', '')}</td>
                           <td className="px-4 py-3 text-center"><VerdictBadge value={u.verdict || 'UNKNOWN'} /></td>
-                          <td className="px-4 py-3 text-white/60 text-xs">{u.indexing_state || '—'}</td>
-                          <td className="px-4 py-3 text-white/60 text-xs">{u.coverage_state || '—'}</td>
-                          <td className="px-4 py-3 text-white/40 text-xs">{u.last_crawl_time ? new Date(u.last_crawl_time).toLocaleDateString() : '—'}</td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.indexing_state || ', '}</td>
+                          <td className="px-4 py-3 text-white/60 text-xs">{u.coverage_state || ', '}</td>
+                          <td className="px-4 py-3 text-white/40 text-xs">{u.last_crawl_time ? new Date(u.last_crawl_time).toLocaleDateString() : ', '}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -786,9 +786,9 @@ export default function AdminGSC() {
                               'bg-amber-500/10 text-amber-400'
                             }`}>{a.alert_type}</span>
                           </td>
-                          <td className="px-4 py-3 text-white text-xs font-mono">{a.url ? a.url.replace('https://iumlabs.io', '') : '—'}</td>
+                          <td className="px-4 py-3 text-white text-xs font-mono">{a.url ? a.url.replace('https://iumlabs.io', '') : ', '}</td>
                           <td className="px-4 py-3 text-center">
-                            {a.notified ? <CheckCircle2 className="w-4 h-4 text-green-400 inline" /> : <span className="text-white/30 text-xs">—</span>}
+                            {a.notified ? <CheckCircle2 className="w-4 h-4 text-green-400 inline" /> : <span className="text-white/30 text-xs">, </span>}
                           </td>
                         </tr>
                       ))}

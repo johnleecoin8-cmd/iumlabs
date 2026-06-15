@@ -69,7 +69,7 @@ const Index = () => {
 
       <Navbar />
 
-      {/* SEO H1 — visually hidden, matches document title for semantic alignment */}
+      {/* SEO H1, visually hidden, matches document title for semantic alignment */}
       <h1 className="sr-only">Korea Crypto Marketing Agency &amp; Web3 GTM | ium Labs</h1>
 
       {/* Hero - Full Bleed */}

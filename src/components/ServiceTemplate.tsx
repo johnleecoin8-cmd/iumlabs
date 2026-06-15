@@ -96,7 +96,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         </div>
       </section>
 
-      {/* STRIP — scrolling marquee */}
+      {/* STRIP, scrolling marquee */}
       {p.strip && (
         <div className="relative border-y border-white/[0.06] bg-[#0D0D0D]">
           <div className="px-5 sm:px-8 lg:px-20 py-5 flex items-center gap-6">

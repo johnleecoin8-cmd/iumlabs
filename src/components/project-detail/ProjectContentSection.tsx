@@ -102,7 +102,7 @@ const GalleryItem = ({
 const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
 
-  // Sequential section numbering — only count sections that actually render.
+  // Sequential section numbering, only count sections that actually render.
   const hasChallenge = !!project.challenge;
   const hasStrategy = !!(project.strategy && project.strategy.length > 0);
   const hasResults = !!((displayMetrics && displayMetrics.length > 0) || project.result);
