@@ -397,7 +397,7 @@ const ServiceCard = ({
             webkit-playsinline="true"
             x5-playsinline="true"
             x5-video-player-type="h5"
-            preload="auto"
+            preload="none"
             poster={service.poster}
             disablePictureInPicture
             controls={false}
