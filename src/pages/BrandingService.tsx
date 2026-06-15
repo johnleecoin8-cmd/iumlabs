@@ -26,7 +26,7 @@ const BrandingService = () => (
       eyebrow: "REGULATIONS & COMPLIANCE",
       titleLead: <>Navigate Korea's crypto<br />regulation</>,
       titleAccent: "with confidence.",
-      lede: "Korea's framework is strict, layered, and fast-changing: VASP registration, the Virtual Asset User Protection Act, PIPA, AML, and the travel rule. We map what applies to you, prepare the documentation, and coordinate with licensed local counsel so you meet the rules instead of stumbling into them.",
+      lede: "Korea's framework is strict and fast-changing: VASP registration, the User Protection Act, AML, and the travel rule. We map what applies and coordinate licensed Korean counsel so you meet the rules, not stumble into them.",
       image: heroImg,
       primaryCta: { label: "Request a compliance review", href: "/contact" },
     }}

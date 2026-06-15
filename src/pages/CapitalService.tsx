@@ -25,7 +25,7 @@ const CapitalService = () => (
       eyebrow: "CAPITAL & OTC INTRODUCTION",
       titleLead: <>Open Korea's</>,
       titleAccent: "capital network.",
-      lede: "Korea's capital is relationship-gated and largely invisible from the outside. We open the door, warm introductions to crypto VCs and strategic investors, licensed OTC desks, and institutional custody, plus the structuring to make you fund-ready. We connect and structure; we never deploy capital or promise a check.",
+      lede: "Korea's real capital is relationship-gated and invisible from the outside. We open the door, warm introductions to crypto VCs, licensed OTC desks, and custody, plus the structuring to make you fund-ready.",
       image: heroImg,
       primaryCta: { label: "Request an introduction", href: "/contact" },
     }}

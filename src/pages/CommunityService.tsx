@@ -26,7 +26,7 @@ const CommunityService = () => (
       eyebrow: "COMMUNITY MANAGEMENT",
       titleLead: <>Community that<br />retains,</>,
       titleAccent: "not just grows.",
-      lede: "24/7 native Korean community managers across Telegram, Discord, and KakaoTalk. We don't just moderate, we design community culture that retains and grows.",
+      lede: "24/7 native Korean community managers across Telegram, Discord, and KakaoTalk. We don't just moderate, we design the community culture that retains members and grows.",
       image: heroImg,
       primaryCta: { label: "Book a community review", href: "/contact" },
     }}

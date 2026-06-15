@@ -26,7 +26,7 @@ const AMAService = () => (
       eyebrow: "AMA HOSTING",
       titleLead: <>AMAs that move<br />communities,</>,
       titleAccent: "not just timelines.",
-      lede: "Structured AMA sessions with native Korean-speaking hosts. Pre-event promotion, live moderation, post-AMA recap content and analytics. Every session is built to convert attention into a community that stays.",
+      lede: "Structured AMA sessions with native Korean hosts, from pre-event promotion to live moderation to recap content. Built to convert attention into a community that stays.",
       image: heroImg,
       primaryCta: { label: "Plan your next AMA", href: "/contact" },
     }}

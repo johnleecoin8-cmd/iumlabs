@@ -25,7 +25,7 @@ const InfluencerService = () => (
       eyebrow: "KOL & INFLUENCER MARKETING",
       titleLead: <>We don't hand you a list.<br />We run the</>,
       titleAccent: "entire campaign.",
-      lede: "230+ vetted Korean KOLs across YouTube, X, Telegram, and Naver. Managed campaigns with fraud filtering and ROI tracking. We don't just connect you with influencers, we run the entire operation.",
+      lede: "230+ vetted Korean KOLs across YouTube, X, Telegram, and Naver. We don't just hand you a list, we run the entire campaign, with fraud filtering and ROI tracking on every placement.",
       image: heroImg,
       primaryCta: { label: "Plan a KOL campaign", href: "/contact" },
     }}
