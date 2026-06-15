@@ -10,7 +10,7 @@ import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
 import listingImage from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImage from "@/assets/platforms/res-market.jpg";
-import tokenomicsImage from "@/assets/services/tokenomics-allocation.svg";
+import tokenomicsImage from "@/assets/services/tokenomics-hero.png";
 import capitalImage from "@/assets/platforms/res-thesis.jpg";
 
 const services = [
