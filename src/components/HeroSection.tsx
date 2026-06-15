@@ -182,20 +182,6 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
         </div>
       </div>
 
-      {/* Proof metrics — hard numbers at the fold */}
-      <div className="relative z-[14] mx-auto mb-5 sm:mb-7 flex max-w-3xl flex-wrap items-center justify-center gap-x-8 gap-y-2.5 px-6 sm:gap-x-14">
-        {[
-          { v: "25+", l: "Web3 projects launched" },
-          { v: "$8B+", l: "in client valuation" },
-          { v: "130K+", l: "avg. impressions / launch" },
-        ].map((s) => (
-          <div key={s.v} className="flex items-baseline gap-2">
-            <span className="font-display text-xl sm:text-2xl font-bold text-[hsl(var(--brand))]">{s.v}</span>
-            <span className="text-[11px] sm:text-xs text-white/45">{s.l}</span>
-          </div>
-        ))}
-      </div>
-
       {/* Client Logo Marquee */}
       <div
         className="relative z-[14] py-3 sm:py-6 overflow-hidden px-4 sm:px-8"
