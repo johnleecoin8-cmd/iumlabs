@@ -14,7 +14,8 @@ import {
   Handshake,
   Mic,
   ArrowUpRight,
-  ChevronDown
+  ChevronDown,
+  Calendar
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useRef, useEffect, useCallback } from "react";
