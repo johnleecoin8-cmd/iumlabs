@@ -1198,8 +1198,12 @@ video {
   from { transform: translateY(10px); }
   to { transform: translateY(0); }
 }
+/* `backwards` (not `both`): the entrance must NOT leave a persistent transform.
+   A lingering transform on this page wrapper makes it the containing block for
+   position:fixed descendants, which breaks GSAP ScrollTrigger pins (e.g. the GTM
+   horizontal "Selected Work" section rendered as a black screen). */
 .animate-page-in {
-  animation: page-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: page-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) backwards;
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-page-in { animation: none; }
