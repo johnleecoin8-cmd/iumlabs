@@ -37,6 +37,8 @@ import openledgerHero from "@/assets/campaigns/openledger-hero.jpg";
 import openledgerHeroNew from "@/assets/campaigns/openledger-hero-new.jpg";
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
 import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.jpg";
+import multipliLogo from "@/assets/logos/multipli.png";
+import multipliHeroImg from "@/assets/campaigns/multipli-hero.jpg";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets
 const campaignAssetByFile: Record<string, string> = {
@@ -278,7 +280,21 @@ const CasesSection = ({
     }
   });
   const cases = projects || [];
-  const displayCases = cases.slice(0, maxItems);
+  // Inject Multipli (not yet in DB). Skipped automatically once a DB row with this slug exists.
+  const multipliCard = {
+    name: "Multipli",
+    slug: "multipli",
+    category: "RWA",
+    result: "Korea Launch for Trillions in Tokenized Asset Yield",
+    description: "Multipli is the world's first yield infrastructure for tokenized real-world assets, enabling 90K+ investors to earn on Gold, Stocks, and Stablecoins.",
+    logo: multipliLogo,
+    bgImage: multipliHeroImg,
+    websiteUrl: "https://multipli.fi",
+  };
+  const withMultipli = cases.some((c) => c.slug === "multipli")
+    ? cases
+    : [...cases.slice(0, 5), multipliCard, ...cases.slice(5)];
+  const displayCases = withMultipli.slice(0, maxItems);
   return <section className="bg-background">
       {/* Top Info Bar */}
       

@@ -663,6 +663,17 @@ const Projects = () => {
   // Code-defined projects merged on top of the DB list (e.g. Arcium, not in DB).
   const extraCases = [
     {
+      name: "Multipli",
+      slug: "multipli",
+      description:
+        "The world's first yield infrastructure for tokenized real-world assets, 90K+ investors earning on Gold, Stocks, and Stablecoins.",
+      result: "Korea Launch for Trillions in Tokenized Asset Yield",
+      category: "RWA",
+      bgImage: multipliBg,
+      websiteUrl: "https://multipli.fi",
+      logo: multipliLogo,
+    },
+    {
       name: "Stable",
       slug: "stable",
       description:
