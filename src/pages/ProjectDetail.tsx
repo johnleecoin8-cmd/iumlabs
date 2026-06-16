@@ -10,6 +10,7 @@ import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import { caseStudyOverrides } from "@/data/caseStudyOverrides";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectContentSection from "@/components/project-detail/ProjectContentSection";
+import MantraCaseStudy from "@/components/project-detail/MantraCaseStudy";
 import NextProject from "@/components/project-detail/NextProject";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import CaseStudySchema from "@/components/CaseStudySchema";
@@ -162,8 +163,12 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <ProjectHero project={project} websiteUrl={websiteUrl} />
 
-      {/* Unified Content Section */}
-      <ProjectContentSection project={project} metrics={project.metrics} gallery={project.gallery} />
+      {/* Unified Content Section (MANTRA uses the long-form case-study format as an example) */}
+      {slug === "mantra" ? (
+        <MantraCaseStudy project={project} />
+      ) : (
+        <ProjectContentSection project={project} metrics={project.metrics} gallery={project.gallery} />
+      )}
 
       {/* Next Project */}
       {nextProjectData && (
