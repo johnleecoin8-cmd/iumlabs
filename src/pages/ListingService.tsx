@@ -64,6 +64,7 @@ const ListingService = () => (
       { name: "LBank", logo: "https://www.google.com/s2/favicons?sz=64&domain=lbank.com" },
       { name: "HitBTC", logo: "https://www.google.com/s2/favicons?sz=64&domain=hitbtc.com" },
       { name: "WazirX", logo: "https://www.google.com/s2/favicons?sz=64&domain=wazirx.com" },
+      { name: "CoinW", logo: "https://www.google.com/s2/favicons?sz=64&domain=coinw.com" },
       { name: "Uniswap", logo: "https://www.google.com/s2/favicons?sz=64&domain=uniswap.org" },
     ] }}
     reality={{
