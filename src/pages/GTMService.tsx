@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gtmHeroImage from "@/assets/services/gtm-hero.avif";
+import gtmHeroImage from "@/assets/services/gtm-hero.jpg";
 import bnbImg from "@/assets/campaigns/bnb-hanok-event.jpg";
 import kucoinImg from "@/assets/campaigns/kucoin-party-event.jpg";
 import mantraImg from "@/assets/campaigns/mantra-party.jpg";
@@ -187,7 +187,7 @@ const GTMService = () => {
 
       {/* HERO */}
       <section className="hero-ed">
-        <img src={gtmHeroImage} alt="" className="hero-bg" width={1200} height={800} />
+        <img src={gtmHeroImage} alt="" className="hero-bg" width={1200} height={800} fetchPriority="high" decoding="async" />
         <div className="hero-overlay" />
         <div className="hero-center">
           <h1>Korea Web3 GTM Strategy &amp; Market Entry</h1>
