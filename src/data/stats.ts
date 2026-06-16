@@ -5,6 +5,6 @@ export const STATS = {
   kolNetwork: { value: 230, prefix: "", suffix: "+", display: "230+", label: "KOL Network" },
   koreaEntries: { value: 25, prefix: "", suffix: "+", display: "25+", label: "Korea Entries" },
   eventsHosted: { value: 116, prefix: "", suffix: "+", display: "116+", label: "Events Hosted" },
-  avgImpression: { value: 130, prefix: "", suffix: "K", display: "130K", label: "Avg. Impression" },
+  avgImpression: { value: 1.2, prefix: "", suffix: "M", display: "1.2M", label: "Avg. Impression" },
   avgCommunityUsers: { value: 2, prefix: "", suffix: "K+", display: "2K+", label: "Avg. Community Users" },
 } as const;
