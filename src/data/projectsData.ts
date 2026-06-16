@@ -39,8 +39,6 @@ import lbankFestivalImg from "@/assets/campaigns/lbank-festival.jpg";
 import seoulMetroBillboardImg from "@/assets/campaigns/seoul-metro-billboard-new.jpeg";
 import seoulMetroPosterImg from "@/assets/campaigns/seoul-metro-poster.jpeg";
 import multipliHeroImg from "@/assets/campaigns/multipli-hero.jpg";
-import coinwLogo from "@/assets/logos/coinw.png";
-import coinwHeroImg from "@/assets/campaigns/coinw-hero.webp";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -684,43 +682,6 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["KOLs", "PR", "Community"],
     gallery: [
       { src: multipliHeroImg, title: "Korea Launch", description: "Multipli Korea market entry campaign" }
-    ],
-    news: []
-  },
-  "coinw": {
-    name: "CoinW",
-    logo: coinwLogo,
-    bgImage: coinwHeroImg,
-    featureImage: coinwHeroImg,
-    category: "Exchange",
-    result: "Korean Market Expansion",
-    glowColor: "#22C55E",
-    description: "CoinW is a global cryptocurrency exchange founded in 2017, serving over 10 million users across 200+ countries with deep altcoin liquidity and a trader-first product suite. CoinW sought to strengthen its brand presence and trading community in Korea's high-volume retail market.",
-    challenge: "Korea's exchange market is trust-driven and dominated by domestic platforms under strict regulatory oversight. CoinW needed to build credibility and an engaged community to win Korean traders against entrenched local competitors.",
-    whatWeDid: "We positioned CoinW as a trader-first global exchange for the Korean market. Through high-impact KOL campaigns, trading-focused community activations, and strategic media placements across Korea's leading crypto outlets, we built brand awareness and trust among Korean retail traders.",
-    metrics: [
-      { value: "10M+", label: "Global Users" },
-      { value: "2017", label: "Founded" },
-      { value: "200+", label: "Countries" },
-      { value: "Altcoin", label: "Deep Liquidity" }
-    ],
-    strategy: [
-      "Korean KOL campaign targeting active traders and crypto communities",
-      "Trading-focused community activations on Telegram and KakaoTalk",
-      "PR coverage across Korea's top crypto media outlets",
-      "Localized content and campaign creative for Korean audiences",
-      "Listing and event-driven engagement to drive trading volume"
-    ],
-    results: [
-      { metric: "Korean Community Reach", value: "Growing" },
-      { metric: "Media Coverage", value: "Tier-1 Korean Media" },
-      { metric: "KOL Partnerships", value: "Active" },
-      { metric: "Market Positioning", value: "Trader-First Exchange" }
-    ],
-    services: ["KOL Marketing", "Community Growth", "PR & Media Relations"],
-    shortServices: ["KOLs", "Community", "PR"],
-    gallery: [
-      { src: coinwHeroImg, title: "Korea Campaign", description: "CoinW Korea market expansion campaign" }
     ],
     news: []
   },
