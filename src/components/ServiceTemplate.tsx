@@ -26,7 +26,7 @@ export type ServiceTemplateProps = {
   breadcrumb: string;
   hero: { eyebrow: string; titleLead: ReactNode; titleAccent: string; lede: string; image: string; primaryCta?: { label: string; href: string } };
   stats: SvcStat[];
-  strip?: { label: string; items: string[] };
+  strip?: { label: string; items: Array<string | { name: string; logo: string }> };
   reality: { eyebrow?: string; heading: ReactNode; headingAccent?: string; body: string[] };
   types?: { eyebrow?: string; heading: ReactNode; headingAccent?: string; sub?: string; cards: { title: string; body: string }[] };
   process: { eyebrow?: string; heading: ReactNode; headingAccent?: string; steps: SvcStep[] };
@@ -105,7 +105,16 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
               <div className="logo-marquee-slow">
                 {[0, 1].map((dup) => (
                   <div key={dup} className="flex items-center gap-9 pr-9" aria-hidden={dup === 1}>
-                    {p.strip!.items.map((e) => (<span key={e} className="font-display text-base sm:text-lg font-semibold text-white/45 hover:text-white transition-colors whitespace-nowrap">{e}</span>))}
+                    {p.strip!.items.map((e) => {
+                      const nm = typeof e === "string" ? e : e.name;
+                      const lg = typeof e === "string" ? null : e.logo;
+                      return (
+                        <span key={nm} className="font-display text-base sm:text-lg font-semibold text-white/45 hover:text-white transition-colors whitespace-nowrap inline-flex items-center gap-2">
+                          {lg && <img src={lg} alt="" width={20} height={20} loading="lazy" className="h-5 w-5 rounded-[4px] object-contain bg-white/5" onError={(ev) => { ev.currentTarget.style.display = "none"; }} />}
+                          {nm}
+                        </span>
+                      );
+                    })}
                   </div>
                 ))}
               </div>

@@ -42,7 +42,30 @@ const ListingService = () => (
       primaryCta: { label: "Get a listing-readiness review", href: "/contact" },
     }}
     stats={[{ v: "CEX·DEX", l: "& Hybrid Venues" }, { v: "Global", l: "+ Native Korea Depth" }, { v: "#1", l: "Growth Catalyst" }, { v: "100%", l: "Compliance-First" }]}
-    strip={{ label: "Listing coverage", items: ["Binance", "Coinbase", "OKX", "Bybit", "KuCoin", "Upbit", "Bithumb", "Coinone", "Korbit", "Gate", "Huobi", "BitMart", "Bitrue", "DigiFinex", "LAToken", "ProBit Global", "AscendEX", "CoinTiger", "LBank", "HitBTC", "WazirX", "Uniswap"] }}
+    strip={{ label: "Listing coverage", items: [
+      { name: "Binance", logo: "https://www.google.com/s2/favicons?sz=64&domain=binance.com" },
+      { name: "Coinbase", logo: "https://www.google.com/s2/favicons?sz=64&domain=coinbase.com" },
+      { name: "OKX", logo: "https://www.google.com/s2/favicons?sz=64&domain=okx.com" },
+      { name: "Bybit", logo: "https://www.google.com/s2/favicons?sz=64&domain=bybit.com" },
+      { name: "KuCoin", logo: "https://www.google.com/s2/favicons?sz=64&domain=kucoin.com" },
+      { name: "Upbit", logo: "https://www.google.com/s2/favicons?sz=64&domain=upbit.com" },
+      { name: "Bithumb", logo: "https://www.google.com/s2/favicons?sz=64&domain=bithumb.com" },
+      { name: "Coinone", logo: "https://www.google.com/s2/favicons?sz=64&domain=coinone.co.kr" },
+      { name: "Korbit", logo: "https://www.google.com/s2/favicons?sz=64&domain=korbit.co.kr" },
+      { name: "Gate", logo: "https://www.google.com/s2/favicons?sz=64&domain=gate.io" },
+      { name: "Huobi", logo: "https://www.google.com/s2/favicons?sz=64&domain=htx.com" },
+      { name: "BitMart", logo: "https://www.google.com/s2/favicons?sz=64&domain=bitmart.com" },
+      { name: "Bitrue", logo: "https://www.google.com/s2/favicons?sz=64&domain=bitrue.com" },
+      { name: "DigiFinex", logo: "https://www.google.com/s2/favicons?sz=64&domain=digifinex.com" },
+      { name: "LAToken", logo: "https://www.google.com/s2/favicons?sz=64&domain=latoken.com" },
+      { name: "ProBit Global", logo: "https://www.google.com/s2/favicons?sz=64&domain=probit.com" },
+      { name: "AscendEX", logo: "https://www.google.com/s2/favicons?sz=64&domain=ascendex.com" },
+      { name: "CoinTiger", logo: "https://www.google.com/s2/favicons?sz=64&domain=cointiger.com" },
+      { name: "LBank", logo: "https://www.google.com/s2/favicons?sz=64&domain=lbank.com" },
+      { name: "HitBTC", logo: "https://www.google.com/s2/favicons?sz=64&domain=hitbtc.com" },
+      { name: "WazirX", logo: "https://www.google.com/s2/favicons?sz=64&domain=wazirx.com" },
+      { name: "Uniswap", logo: "https://www.google.com/s2/favicons?sz=64&domain=uniswap.org" },
+    ] }}
     reality={{
       heading: "The best exchanges reject most applicants",
       headingAccent: "by design.",
