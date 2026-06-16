@@ -121,17 +121,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
 
 const ProjectCardsSection = () => {
   return (
-    <div className="px-5 sm:px-6 lg:px-10 py-10 sm:py-14">
-      <div className="flex items-center justify-between mb-7 sm:mb-9">
-        <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Case Studies</h2>
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-2 text-xs text-white/30 hover:text-white/70 transition-colors font-medium group"
-        >
-          <span>View All</span>
-          <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-        </Link>
-      </div>
+    <div className="px-5 sm:px-6 lg:px-10 pb-12 sm:pb-16">
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
         {projects.slice(0, 12).map((project, index) => (
