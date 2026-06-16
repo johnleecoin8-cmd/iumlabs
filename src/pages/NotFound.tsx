@@ -4,11 +4,21 @@ import { ArrowLeft, Home } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 
+// Track paths we've already logged so repeated external hits (e.g. a browser
+// extension probing a path) don't spam the console with duplicate errors.
+const loggedNotFoundPaths = new Set<string>();
+
 const NotFound = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.error("404 Error: User attempted to access non-existent route:", location.pathname);
+    // A bad inbound URL is a navigation event, not an application error.
+    // Log each unseen path once, at warn level, to keep real broken links visible
+    // without flooding the console when something hits the same dead path repeatedly.
+    if (!loggedNotFoundPaths.has(location.pathname)) {
+      loggedNotFoundPaths.add(location.pathname);
+      console.warn("404: no route for", location.pathname);
+    }
   }, [location.pathname]);
 
   return (
