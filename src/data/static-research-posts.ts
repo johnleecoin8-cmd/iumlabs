@@ -78,6 +78,340 @@ import strategyPlanning from "@/assets/process/strategy-planning.jpg";
 
 export const staticResearchPosts = [
   {
+    id: "static-won-stablecoin-basic-act",
+    slug: "korea-won-stablecoin-digital-asset-basic-act-2026",
+    title: "Korea's Won-Stablecoin Endgame: What the Digital Asset Basic Act Changes",
+    image: regulatoryImg,
+    date: "June 16, 2026",
+    readTime: "16 min read",
+    category: "Regulation",
+    author: "David",
+    authorRole: "CEO",
+    authorBio: "David is the CEO and co-founder of ium Labs, leading strategic direction for one of Korea's most active Web3 marketing agencies. His background spans traditional finance and blockchain infrastructure, with a focus on institutional market dynamics and cross-border crypto flows.",
+    excerpt: "Korea's Digital Asset Basic Act will decide who can issue a won stablecoin, on what reserves, and through which entity. A breakdown of the Bank of Korea vs FSC fight, the 100%-reserve and local-entity rules, and what it means for every project, exchange, and stablecoin eyeing Korea.",
+    tags: ["won stablecoin", "Digital Asset Basic Act", "Korea regulation", "KRW stablecoin", "FSC", "Bank of Korea", "stablecoin"],
+    chartImages: {
+      marketOverview: seoulGangnam,
+      framework: regulatoryImg,
+      reserves: chartInstitutional,
+      foreignEntity: compVasp,
+      comparison: compLandscape,
+      timeline: chartAvoidFlop,
+    },
+    content: `>! **Key Takeaways**
+>! The Digital Asset Basic Act is the framework that will license won-denominated stablecoins, and its stablecoin provisions are the most contested part, the reason the bill slipped into 2026
+>! The Bank of Korea pushed for bank-led issuance (banks holding a controlling stake); the Financial Services Commission favored a broader licensing regime, and that unresolved tension shaped the final draft
+>! Issuers must **fully back** stablecoins with reserves held at banks or approved institutions, KRX-grade safety, not algorithmic experiments
+>! Foreign issuers must establish a **Korean branch or subsidiary**, one of the most restrictive stances in Asia
+>! For most projects the opportunity is not issuing a won stablecoin, it is positioning around the rails it creates: settlement, on/off-ramps, and RWA distribution
+
+## Executive Summary
+
+For three years Korea has been the largest crypto market without a stablecoin of its own. Trading is won-denominated, but the settlement asset is almost always a dollar stablecoin or a bank transfer. The Digital Asset Basic Act is the bill that finally addresses this, and its most fought-over chapter is the one that decides who gets to issue a won-pegged stablecoin, on what reserves, and through what kind of entity.
+
+![Seoul's financial district, where Korea's monetary authority and its crypto market are about to be formally connected](chart:marketOverview)
+*A won stablecoin would wire Korea's retail crypto market directly into its banking system, which is exactly why the rules are contested*
+
+This report breaks down the regulatory fight behind the bill, the rules that look settled, and the strategic implications for projects, exchanges, and stablecoin issuers who will live with the outcome.
+
+## Why a Won Stablecoin Matters
+
+Korea is one of the most concentrated retail crypto markets on earth, yet its on-chain settlement layer is foreign. A regulated won stablecoin changes the plumbing.
+
+%%The missing rail::Korea trades in won but settles in dollars or bank wires, a compliant KRW stablecoin would close the loop and pull on-chain activity onto domestic rails%%
+
+A won stablecoin is not just a new token. It is a programmable settlement asset for exchanges, a cleaner on/off-ramp for foreign projects, and the natural unit of account for the [tokenized real-world assets](/blog/korea-rwa-tokenized-assets-trust-gap-sto-2026) Korea is also trying to regulate. Whoever controls issuance controls a strategic piece of the market's infrastructure, which is why the fight has been less about crypto and more about monetary authority.
+
+## The Bank of Korea vs FSC Fight
+
+The delay that pushed the framework into 2026 was not bureaucratic drift. It was a genuine institutional dispute.
+
+![The regulatory framework, two agencies with different theories of who should hold the issuance privilege](chart:framework)
+*The bill's stablecoin chapter sat between a central bank protecting monetary control and a markets regulator protecting competition*
+
+The Bank of Korea argued that stablecoin issuance is close enough to money creation that it should sit with banks, with the central bank in the supervisory loop. The Financial Services Commission leaned toward a licensing regime that could admit qualified non-bank issuers under strict capital and reserve rules. The unresolved version of that argument is what shaped the draft, and it is why the final issuer universe is narrower than crypto-native teams hoped.
+
+> **"The won stablecoin debate was never really about crypto. It was about whether a private issuer can stand next to the Bank of Korea on the won. That framing tells you everything about how conservative the final rules will be."**
+>, David, CEO, ium Labs
+
+## The Reserve and Issuance Model
+
+Whatever the final issuer list, two principles look durable.
+
+![The reserve model, full backing held at regulated institutions, KRX-grade safety over yield](chart:reserves)
+*Korea's instinct is depositor-grade protection, the reserve rules reflect a savings culture, not a DeFi one*
+
+First, **full reserve backing**. Issuers must hold reserves equal to the stablecoin in circulation, parked at banks or approved institutions, in the spirit of the depositor protections Korean savers expect. Algorithmic or fractionally-backed designs are effectively excluded. Second, **bank-anchored issuance**. Even if non-bank issuers are admitted, expect bank involvement in custody of reserves and in the issuance structure itself.
+
+| Dimension | Bank-led model (BoK lean) | Open-license model (FSC lean) |
+|---|---|---|
+| Who can issue | Banks / bank-controlled entities | Licensed issuers meeting capital rules |
+| Reserve rule | 100% at the issuing bank | 100% at banks / approved custodians |
+| Monetary oversight | Central bank in the loop | Markets regulator primary |
+| Practical effect | Few, highly trusted issuers | More issuers, heavier compliance |
+
+The market should plan for the conservative end of this range. In Korea, when a central bank and a markets regulator disagree about monetary risk, the cautious reading usually wins.
+
+## The Foreign-Issuer Local-Entity Rule
+
+This is the provision foreign teams underestimate.
+
+![The local-entity requirement, foreign issuers must stand up a Korean branch or subsidiary to participate](chart:foreignEntity)
+*Korea's framework expects a domestic legal presence, a compliance reality before it is a marketing one*
+
+The draft requires foreign stablecoin issuers to establish a Korean branch or subsidiary to operate domestically, one of the most restrictive positions in Asia. A foreign issuer cannot simply passport a dollar or won-linked stablecoin into Korea and expect distribution. There must be a local entity, local compliance, and a relationship with the Korean banking system. For most foreign projects, that converts "issue a won stablecoin" from a product decision into a multi-quarter regulatory and [compliance](/services/compliance) project.
+
+## What It Means for Projects
+
+Most teams reading this will not issue a won stablecoin. The strategic question is how to position around the rails it creates.
+
+%%Position around the rail, not on it::For all but a handful of issuers, the won stablecoin is infrastructure to build on, settlement, ramps, RWA distribution, not a token to mint%%
+
+- **Exchanges** gain a domestic settlement asset and a cleaner won on/off-ramp, the natural plumbing behind the trading volume that defines them.
+- **RWA and payment projects** get a compliant unit of account, the won stablecoin is the settlement layer Korea's [tokenized-securities push](/blog/korea-rwa-tokenized-assets-trust-gap-sto-2026) has been missing.
+- **Foreign issuers** face a local-entity and reserve bar that makes Korea a deliberate, [capital](/services/capital)-backed entry, not an opportunistic one.
+
+| Stakeholder | The opportunity | The bar to clear |
+|---|---|---|
+| Exchanges | Domestic settlement + ramp | Banking + reserve integration |
+| RWA / payments | Compliant unit of account | Alignment with the STO perimeter |
+| Foreign issuers | A regulated KRW asset | Korean entity, 100% reserves |
+| Marketing / GTM teams | A new narrative to own | Translating compliance into trust |
+
+## The GTM Implications
+
+A regulated won stablecoin reshapes how projects should talk to the Korean market.
+
+![The path forward, regulatory clarity becomes a trust narrative, sequenced before retail activation](chart:timeline)
+*In Korea, compliance is not a footnote to the campaign, it is the headline that earns the right to run one*
+
+The winning narrative will be "regulated and bank-backed," not "DeFi-native." Projects that can credibly associate with the new framework, compliant ramps, reserve transparency, named banking relationships, will convert Korean trust faster than projects leading with yield or decentralization. That reframing, compliance as the headline rather than the disclaimer, is a [go-to-market](/services/gtm) decision before it is a legal one.
+
+## Conclusion
+
+The Digital Asset Basic Act will not turn Korea into a stablecoin free-for-all. It will create a narrow, bank-anchored, fully-reserved, locally-domiciled issuance regime, and a deep, strategically important settlement rail underneath it. The handful of issuers who clear the bar will own critical infrastructure. Everyone else wins by building on the rail and telling a Korean-market story in the language the new framework rewards: safety, reserves, and named institutions.
+
+*For how Korea's exchange structure shapes the market this rail will settle, see [The CEX Power Map](/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics). For the institutional capital arriving alongside it, read [Korea Lifts Its 9-Year Corporate Crypto Ban](/blog/korea-corporate-crypto-ban-lifted-institutional-playbook-2026).*`,
+    isFeatured: true,
+  },
+  {
+    id: "static-corporate-crypto-2026",
+    slug: "korea-corporate-crypto-ban-lifted-institutional-playbook-2026",
+    title: "Korea Lifts Its 9-Year Corporate Crypto Ban: The 2026 Institutional Playbook",
+    image: chartInstitutional,
+    date: "June 14, 2026",
+    readTime: "15 min read",
+    category: "Market Research",
+    author: "James",
+    authorRole: "Co-Founder",
+    authorBio: "James is co-founder of ium Labs, specializing in Korean market entry strategy for Web3 projects. With deep expertise in exchange listing dynamics and token economics, he has advised 30+ projects on their Korean expansion across Upbit, Bithumb, and the broader VASP ecosystem.",
+    excerpt: "After nine years, Korea is letting corporations and institutions trade crypto, with a phased rollout, a portfolio cap, a top-tier coin universe, and a spot Bitcoin ETF on a fast track. As retail volume cools, this is the capital that defines the next cycle. Here is the institutional market-entry playbook.",
+    tags: ["corporate crypto", "institutional", "Korea", "Bitcoin ETF", "FSC", "market entry", "OTC"],
+    chartImages: {
+      institutionalWave: chartInstitutional,
+      phasedAccess: compExchange,
+      etf: chartGrowth2025,
+      retailRetreat: chartBear,
+      opportunity: seoulGangnam,
+      sequence: chartAvoidFlop,
+    },
+    content: `>! **Key Takeaways**
+>! Korea ended its nine-year ban on corporate and institutional crypto trading, entry is now official FSC policy, rolled out in phases
+>! Early access is **deliberately narrow**: a portfolio cap and a top-tier coin universe, institutions accumulate the majors before anything else
+>! A **spot Bitcoin ETF** is on a fast track, the structural on-ramp that turns policy into sustained institutional flow
+>! Retail volume cooled, average daily turnover fell to roughly **5.4 trillion won**, down about 15% half-on-half, the marginal buyer is shifting from retail to institutions
+>! Projects outside the top tier will not ride the institutional bid directly, the play is OTC relationships, compliance posture, and listing groundwork now, before the window widens
+
+## Executive Summary
+
+For nine years, Korean corporations were effectively barred from holding crypto. Retail carried the entire market, and it carried it loudly. In 2026 that era ends: the Financial Services Commission has moved institutional participation from gray-zone to official policy, and a spot Bitcoin ETF is on a fast track behind it. This is the single largest structural shift in Korean crypto since real-name banking.
+
+![Korea's institutional wave, regulated capital entering a market retail built](chart:institutionalWave)
+*The buyer base is changing, and with it, what a Korean market-entry strategy has to optimize for*
+
+The opening is real, but it is narrow and phased. This report maps what is actually permitted, what the ETF track changes, and how a project that is not a top-tier asset should position for the capital that is arriving.
+
+## The End of a Nine-Year Ban
+
+The ban was a relic of the 2017 ICO panic, when Korea slammed the door on corporate and institutional crypto accounts. The door is now reopening under conditions the regulator controls tightly.
+
+%%From gray-zone to policy::Institutional crypto participation in Korea is no longer tolerated at the edges, it is official, supervised FSC policy, which is what makes it investable%%
+
+The significance is less about day-one volume and more about legitimacy. Once corporate participation is policy rather than risk, the entire compliance, custody, and listing apparatus reorients to serve it, and that reorientation is where durable opportunity sits.
+
+## The Rules: Phased, Capped, Top-Tier
+
+This is not an open floodgate. Early institutional access is constrained on purpose.
+
+![Phased access, a portfolio cap and a top-tier universe keep the first wave conservative](chart:phasedAccess)
+*The regulator is letting institutions in through a narrow door, the universe widens later, not now*
+
+Expect a meaningful **portfolio cap** limiting how much of an institution's book can sit in crypto, and a **restricted universe** concentrated in top-tier assets, the majors and the most liquid large-caps. The intent is to let regulated capital accumulate Bitcoin, Ether, and a short list of blue-chips first, while the regulator watches the plumbing hold.
+
+| Dimension | First wave (2026) | Likely later phases |
+|---|---|---|
+| Eligible entities | Approved institutions, phased | Broader corporates |
+| Asset universe | Top-tier / majors | Wider large-cap set |
+| Position cap | Conservative portfolio cap | Loosened with track record |
+| Primary venue | Regulated exchanges + OTC | ETF + structured products |
+
+## The ETF Fast Track
+
+The spot Bitcoin ETF is the part that turns a policy change into sustained flow.
+
+![The ETF track, the regulated wrapper that lets conservative Korean capital allocate without touching a wallet](chart:etf)
+*An ETF converts "institutions may trade crypto" into "institutions will allocate to crypto," at scale*
+
+A spot ETF lets pensions, asset managers, and conservative corporates gain exposure through a familiar, regulated wrapper, no custody questions, no VASP onboarding, no wallet. In a market as intermediated and risk-conscious as Korea's, the ETF is likely to move more institutional capital than direct exchange access in the first year.
+
+> **"The corporate ban lifting is the headline, but the ETF is the mechanism. Korean institutions don't want to self-custody Bitcoin. They want a ticker. Give them a regulated wrapper and the allocation follows."**
+>, James, Co-Founder, ium Labs
+
+## The Retail-to-Institutional Handoff
+
+The timing is not a coincidence. Institutions are arriving as retail cools.
+
+![The handoff, retail turnover cooling as institutional access opens](chart:retailRetreat)
+*The marginal Korean buyer is changing, and projects tuned only for retail hype will feel it*
+
+Average daily turnover on Korean exchanges fell to roughly 5.4 trillion won, down about 15% half-on-half, as the retail frenzy that defined prior cycles normalized. A market that was almost purely retail is rebalancing toward institutional flow. For projects, that means the playbook that won the last cycle, pure retail hype, KOL-led pumps, is necessary but no longer sufficient.
+
+%%~5.4T won::Average daily Korean exchange turnover as retail cooled, down roughly 15% half-on-half, the gap institutions are stepping into%%
+
+## What It Means If You're Not Top-Tier
+
+Here is the uncomfortable truth for most projects: the first institutional wave will not buy your token. It will buy Bitcoin, Ether, and a short list of majors through an ETF and regulated desks. So what do you do?
+
+You build the relationships and the compliance posture now, while the window is narrow, so you are positioned when it widens.
+
+- **Open OTC and desk relationships early.** The institutional flow runs through licensed desks and [capital](/services/capital) intermediaries, and those relationships take quarters to build, not days.
+- **Get your compliance posture institutional-grade.** Disclosure, custody readiness, and a clean regulatory story are now table stakes for the capital that matters, the core of our [compliance](/services/compliance) practice.
+- **Do the listing groundwork.** When your asset class is eventually admitted to the institutional universe, the projects with existing Korean exchange traction and a credible track record move first, the dynamic we map in [The CEX Power Map](/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics).
+
+## The Capital Playbook
+
+![The sequence, position for institutional capital before it arrives, not after](chart:sequence)
+*The projects that win the institutional cycle are the ones building credibility while everyone else waits for permission*
+
+The sequence is: compliance and custody readiness first, OTC and capital relationships second, Korean market presence and listing traction third. Run in that order, a project that is not yet in the institutional universe is still building the exact credibility that gets it admitted when the universe expands. Run it backwards, chasing institutional capital before the groundwork exists, and you spend the cycle pitching rooms you have not earned.
+
+## Conclusion
+
+Korea reopening to corporate and institutional crypto is the most important structural change in the market in years, but it is a phased, capped, top-tier-first opening with an ETF as its primary engine. The first wave rewards Bitcoin and the majors. The durable opportunity for everyone else is to use this window to build institutional-grade compliance, OTC relationships, and Korean market traction now, so the project is positioned the moment the institutional door widens past the majors.
+
+*For the capital relationships behind this shift, see our [Capital & OTC Introduction](/services/capital) practice. For the regulated settlement rail arriving alongside it, read [Korea's Won-Stablecoin Endgame](/blog/korea-won-stablecoin-digital-asset-basic-act-2026).*`,
+    isFeatured: false,
+  },
+  {
+    id: "static-cex-ua-funnel",
+    slug: "korea-cex-user-acquisition-funnel-kol-naver-paid-ads",
+    title: "The CEX User-Acquisition Funnel in Korea: Install, Sign-up, First Deposit",
+    image: kolImg,
+    date: "June 13, 2026",
+    readTime: "14 min read",
+    category: "GTM Strategy",
+    author: "Tobi",
+    authorRole: "Senior Analyst",
+    authorBio: "Tobi is a senior analyst at ium Labs, focused on market structure analysis and narrative dynamics in Korean crypto. His work tracks retail investor behavior, memecoin flows, and community engagement patterns across Korean platforms.",
+    excerpt: "For an exchange, one metric matters: trading volume. This is the Korean user-acquisition funnel that produces it, how Naver SEO, KOLs, and paid ads compound from first impression to first deposit, and why most exchanges measure the wrong thing.",
+    tags: ["CEX marketing", "user acquisition", "KOL", "Naver SEO", "paid ads", "Korea", "trading volume", "exchange"],
+    chartImages: {
+      funnel: chartGtmStrategy,
+      discovery: seoNaver,
+      kol: kolYoutube,
+      paid: prAnalytics,
+      conversion: chartGrowth2025,
+      volume: exchangeImg,
+    },
+    content: `>! **Key Takeaways**
+>! For an exchange, the only metric that compounds is **trading volume**, installs and sign-ups are mile-markers, not the destination
+>! Korean exchange user acquisition runs on three channels that hand off to each other: **Naver SEO** for discovery, **KOLs** for trust, **paid ads** for conversion
+>! The real funnel is install, sign-up, KYC, **first deposit**, first trade, repeat volume, and most campaigns quietly die at the deposit step
+>! As retail turnover cools, deposit-optimized acquisition beats vanity reach, the cost of a wasted impression just went up
+>! Korea-native targeting, by region, demographic, and intent, plus Naver dominance, is what separates spend that converts from spend that burns
+
+## Executive Summary
+
+Every exchange marketing deck is full of impressions, followers, and app installs. Almost none of it matters. For a centralized exchange, there is exactly one number that compounds into a business: trading volume. Everything upstream, awareness, installs, sign-ups, is a mile-marker on the way to a funded account that trades, and trades again.
+
+![The Korea exchange UA funnel, every stage exists to produce the next deposit, not the next impression](chart:funnel)
+*Reach is the input. Trading volume is the output. The funnel is the machine in between, and in Korea it has Korea-specific parts*
+
+This is the user-acquisition funnel we run for exchanges entering Korea, the three channels that drive it, and the single step where most campaigns silently fail.
+
+## Volume Is the Only Number
+
+An exchange does not get paid for installs. It gets paid for fees on volume. That reframes the entire campaign.
+
+%%One metric, not ten::For a CEX, trading volume is the only KPI that pays the bills, every other number is a leading indicator at best and a vanity metric at worst%%
+
+Optimize for installs and you get installs that never fund. Optimize for sign-ups and you get KYC-incomplete ghosts. The discipline is to measure backward from volume: cost per funded account, cost per first trade, and the repeat-trade rate that turns a one-time deposit into a book of business. This is the lens behind the [paid acquisition](/services/seo-ads) and [KOL](/services/influencer) work we run for exchanges, and it is why the KuCoin campaign we measured in [trading volume, not impressions](/projects/kucoin) cleared nine figures.
+
+## The Three-Channel Stack
+
+Korean exchange UA runs on three channels that do different jobs and hand off in sequence.
+
+![Discovery starts on Naver, not Google, the compounding top of the Korean funnel](chart:discovery)
+*Roughly 70% of Korean search runs through Naver, an exchange invisible on Naver is invisible at the top of the funnel*
+
+**Naver SEO is discovery.** Around 70% of Korean search happens on Naver, with its own ranking logic, blog ecosystem, and Smart Blocks. An exchange that ranks on Naver for its brand and for high-intent trading terms owns a compounding, near-zero-marginal-cost top of funnel. Optimize only for Google and you are invisible to the audience you are paying to acquire.
+
+![KOLs are the trust layer, the step that turns a curious Korean trader into a funded one](chart:kol)
+*Korean traders fund accounts on the word of KOLs they follow, reach without trust does not convert to deposits*
+
+**KOLs are trust.** Korean retail funds accounts on the recommendation of YouTube, X, and Telegram voices they already follow. The job is not reach, it is a credible KOL walking an audience from "interesting exchange" to "I signed up and deposited," with the referral and tracking attached so you can measure it.
+
+**Paid ads are conversion.** Most ad networks reject crypto outright. The exchanges that win run a certified, full-funnel paid engine across the networks that do accept it, optimized not to impressions but to the deposit.
+
+| Channel | Funnel job | Primary KPI |
+|---|---|---|
+| Naver SEO | Discovery (compounding) | High-intent organic sign-ups |
+| KOL Marketing | Trust (conversion driver) | Funded accounts per placement |
+| Paid Ads | Conversion (scalable) | Cost per first deposit |
+
+## The Funnel: Install to Deposit
+
+The funnel an exchange actually has to manage is longer than most campaigns admit.
+
+![Conversion compounds when every stage is measured to the deposit, not the click](chart:conversion)
+*Each step leaks. The exchanges that win are the ones that instrument and defend the deposit step*
+
+The stages are: impression, click, install, sign-up, KYC completion, **first deposit**, first trade, repeat trade. Western playbooks celebrate the install. In Korea, the install is the easy part, the deposit is where it breaks.
+
+## Where Campaigns Die
+
+%%The deposit gap::Most exchange campaigns generate installs and sign-ups, then lose the user at KYC and first deposit, the step that actually creates volume%%
+
+The deposit step fails for Korea-specific reasons: KYC friction without Korean-language hand-holding, no Korean-language onboarding at the moment of hesitation, and a trust gap that a paid ad cannot close but a KOL can. This is exactly why the three channels have to operate as one funnel, not three campaigns. Naver and paid drive intent, but it is the KOL trust layer and Korean-language onboarding that carry a user across the deposit line.
+
+## Targeting That Converts
+
+Korean exchange UA is not a spray. The exchanges that convert target with precision.
+
+- **By competitor and intent.** Reach traders already active on rival exchanges and on high-intent trading terms, not a generic crypto-curious audience.
+- **By region and demographic.** Korean trading behavior varies sharply by age and region, and the creative and channel mix should too.
+- **By funnel stage.** Retarget installers who never funded with deposit-specific messaging and incentives, the cheapest volume you will ever buy is the user you already paid to acquire.
+
+> **"Exchanges love to report installs because installs are easy. We report cost per funded account, because that is the only number that turns into fee revenue. Everything else is a story you tell investors, not a business."**
+>, Tobi, Senior Analyst, ium Labs
+
+## Why It Matters More Now
+
+The case for disciplined, deposit-optimized acquisition got stronger this year.
+
+![Trading volume is the output the entire machine exists to produce](chart:volume)
+*As retail turnover cools, the exchange that acquires funded, repeat traders most efficiently wins the share that is left*
+
+As Korean retail turnover cooled and the market rebalanced toward [institutional flow](/blog/korea-corporate-crypto-ban-lifted-institutional-playbook-2026), the cost of a wasted impression went up. In a frothy market, sloppy UA still catches volume on the way past. In a cooler one, only the exchanges that convert efficiently, deposit by deposit, hold share. The Bybit and [KuCoin](/projects/kucoin) campaigns we ran were built on exactly this discipline: spend measured to the deposit, not the download.
+
+## Conclusion
+
+An exchange entering Korea does not need more impressions. It needs funded accounts that trade. That comes from a single integrated funnel, Naver SEO for discovery, KOLs for trust, paid ads for conversion, instrumented end to end and defended hardest at the deposit step. Measure backward from trading volume, target with Korea-native precision, and treat the three channels as one machine. That is how an exchange turns a marketing budget into the only number that matters.
+
+*For the channels behind this funnel, see our [SEO & Paid Ads](/services/seo-ads) and [KOL Marketing](/services/influencer) practices. For the exchange structure all this volume flows into, read [The CEX Power Map](/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics).*`,
+    isFeatured: false,
+  },
+  {
     id: "static-rwa-trust-gap",
     slug: "korea-rwa-tokenized-assets-trust-gap-sto-2026",
     title: "Korea's RWA Opening: Why Tokenized Assets Need a Trust-First GTM",
