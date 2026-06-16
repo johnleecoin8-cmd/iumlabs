@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { ProjectData } from "@/data/projectsData";
-import { caseStudyContent } from "@/data/caseStudyContent";
+import { getCaseStudyContent } from "@/data/caseStudyContent";
 
 /**
  * Long-form, Coinbound-style case study used for every project.
@@ -32,7 +32,7 @@ const CaseStudyLayout = ({
   slug: string;
 }) => {
   const accent = project.glowColor || "#9B59B6";
-  const content = caseStudyContent[slug] || {};
+  const content = getCaseStudyContent(slug);
 
   const metrics = project.metrics || [];
   const overviewBody =
