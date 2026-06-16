@@ -7,6 +7,8 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
@@ -64,6 +66,44 @@ const Eyebrow = ({ index, label }: { index: string; label: string }) => (
   </div>
 );
 
+// One shared header for every homepage section: left-aligned, same gutter, font and colours
+const SectionHeader = ({
+  index,
+  label,
+  heading,
+  subtitle,
+  action,
+}: {
+  index: string;
+  label: string;
+  heading?: ReactNode;
+  subtitle?: string;
+  action?: { label: string; href: string };
+}) => (
+  <div className="px-5 sm:px-6 lg:px-10 pt-20 md:pt-28 pb-8 sm:pb-10">
+    <div className="flex items-end justify-between gap-6">
+      <div>
+        <Eyebrow index={index} label={label} />
+        {heading && (
+          <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
+            {heading}
+          </h2>
+        )}
+        {subtitle && <p className="mt-3 text-xs sm:text-sm text-white/45">{subtitle}</p>}
+      </div>
+      {action && (
+        <Link
+          to={action.href}
+          className="group inline-flex shrink-0 items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors"
+        >
+          {action.label}
+          <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+        </Link>
+      )}
+    </div>
+  </div>
+);
+
 const Index = () => {
   return <div className="min-h-screen bg-[#0A0A0A] overflow-x-hidden">
       <SEOHead title="Korea Crypto Marketing Agency & Web3 GTM | ium Labs" description="Korea's Web3 & crypto marketing agency. Full-stack Go-To-Market (GTM): KOL/influencer, PR, community, and digital marketing for global blockchain projects entering the Korean market." path="/" keywords={['ium Labs', 'ium labs', 'iumlabs', 'Korea crypto marketing agency', 'crypto marketing agency', 'Web3 marketing agency', 'blockchain marketing agency', 'crypto GTM agency', 'Web3 go-to-market agency', 'crypto digital marketing agency', 'Web3 digital marketing', 'Korean KOL marketing', 'crypto influencer marketing Korea', 'crypto PR Korea', 'DePIN marketing agency', 'RWA marketing agency', 'AI crypto marketing', 'Korea market entry crypto', 'Web3 GTM Seoul']} />
@@ -96,14 +136,18 @@ const Index = () => {
 
       {/* Services */}
       <section id="services" className="border-t border-white/[0.07]">
-        <div className="mx-auto max-w-7xl px-6 md:px-10 pt-20 md:pt-28">
-          <Eyebrow index="01" label="Services" />
-        </div>
+        <SectionHeader index="01" label="Services" />
         <ServicesSection />
       </section>
 
       {/* Project Cards */}
       <section id="projects" className="border-t border-white/[0.07]">
+        <SectionHeader
+          index="02"
+          label="Work"
+          heading={<>Selected <span className="text-white/40">work.</span></>}
+          action={{ label: "View all", href: "/projects" }}
+        />
         <Suspense fallback={<SectionLoader />}>
           <ProjectCardsSection />
         </Suspense>
@@ -111,12 +155,13 @@ const Index = () => {
 
       {/* Insights */}
       <section id="insights" className="border-t border-white/[0.07]">
-        <div className="mx-auto max-w-7xl px-6 md:px-10 pt-20 md:pt-28">
-          <Eyebrow index="02" label="Insights" />
-          <h2 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
-            From the <span className="text-white/40">blog.</span>
-          </h2>
-        </div>
+        <SectionHeader
+          index="03"
+          label="Insights"
+          heading={<>From the <span className="text-white/40">blog.</span></>}
+          subtitle="Deep research on the Korean crypto market."
+          action={{ label: "All articles", href: "/blog" }}
+        />
         <Suspense fallback={<SectionLoader />}>
           <InsightsSection />
         </Suspense>
@@ -124,6 +169,11 @@ const Index = () => {
 
       {/* Testimonials */}
       <section id="testimonials" className="border-t border-white/[0.07]">
+        <SectionHeader
+          index="04"
+          label="Testimonials"
+          heading={<>Partners are <span className="text-white/40">yappin&rsquo;.</span></>}
+        />
         <MobileDeferredSection minHeight="60vh">
           <Suspense fallback={<SectionLoader />}>
             <TestimonialsSection />
@@ -133,13 +183,13 @@ const Index = () => {
 
       {/* Coverage */}
       <section id="coverage" className="border-t border-white/[0.07]">
-        <div className="mx-auto max-w-7xl px-6 md:px-10 py-20 md:py-28">
-          <Eyebrow index="04" label="Coverage" />
-          <h2 className="mt-6 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight mb-12 sm:mb-16">
-            Korea-first. <span className="font-semibold">Asia-wide.</span>
-          </h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start">
+        <SectionHeader
+          index="05"
+          label="Coverage"
+          heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
+        />
+        <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl">
             <div className="w-full max-w-lg lg:max-w-none mx-auto">
               <Suspense fallback={<div className="aspect-square bg-white/[0.02] rounded-xl animate-pulse" />}>
                 <EastAsiaMap />

@@ -99,15 +99,7 @@ const InsightsSection = () => {
   }
 
   return (
-    <section className="p-5 sm:p-6 md:p-8">
-      {/* Header */}
-      <div className="flex items-end justify-between mb-5">
-        <p className="text-xs sm:text-sm text-white/45">Deep research on the Korean crypto market.</p>
-        <Link to="/blog" className="group inline-flex items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors flex-shrink-0">
-          All articles <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-        </Link>
-      </div>
-
+    <section className="px-5 sm:px-6 lg:px-10 pb-10 sm:pb-14">
       {/* Filmstrip Gallery */}
       <div className="flex w-full items-center gap-2 sm:gap-3 lg:gap-4" style={{ height: 'clamp(280px, 50vh, 480px)' }}>
         {articles.map((article, index) => {

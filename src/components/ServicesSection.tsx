@@ -288,8 +288,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const ServicesSection = () => {
   return (
-    <section className="py-6 sm:py-10 md:py-14">
-      <div className="px-4 sm:px-4 lg:px-6">
+    <section className="pb-6 sm:pb-10 md:pb-14">
+      <div className="px-5 sm:px-6 lg:px-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {services.map((service, index) => (
             <ServiceCard key={service.number} service={service} index={index} />

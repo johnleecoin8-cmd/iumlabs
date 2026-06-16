@@ -84,11 +84,7 @@ const TestimonialsSection = () => {
   const row2 = testimonials.slice(mid);
 
   return (
-    <div className="py-20 md:py-28">
-      <h2 className="mb-14 text-center font-display text-4xl font-bold tracking-tight text-white sm:mb-20 sm:text-5xl md:text-6xl">
-        Partners are yappin&rsquo;
-      </h2>
-
+    <div className="pb-20 md:pb-28">
       <div
         className="group relative flex flex-col gap-14 overflow-hidden pb-12 pt-2"
         style={{
