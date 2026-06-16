@@ -37,6 +37,11 @@ import svcEventImg from "@/assets/services/events.jpg";
 import svcResearchImg from "@/assets/services/deep-research-blog.jpg";
 import svcSeoImg from "@/assets/services/seo-naver.jpg";
 import svcAmaImg from "@/assets/services/ama-spaces.jpg";
+import svcListingImg from "@/assets/services/listing-scorecard.webp";
+import svcLiquidityImg from "@/assets/services/liquidity-sizing.webp";
+import svcTokenomicsImg from "@/assets/services/tokenomics-hero.png";
+import svcCapitalImg from "@/assets/services/capital-hero.webp";
+import svcComplianceImg from "@/assets/services/comp-vasp-travelrule.webp";
 import EastAsiaMap from "@/components/EastAsiaMap";
 // Client logos (same as HeroSection)
 import bnbLogo from "@/assets/logos/bnb.png";
