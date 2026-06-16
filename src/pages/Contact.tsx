@@ -294,6 +294,40 @@ const Contact = () => {
                     <span>Mon–Fri 10:00–19:00 KST</span>
                   </div>
                 </div>
+
+                {/* Contact methods */}
+                <div className="border-t border-white/10 divide-y divide-white/10">
+                  <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between py-4 sm:py-5">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.15em] text-white/40 mb-0.5">Telegram</span>
+                        <span className="text-white/80 text-[13px] sm:text-sm">@hnes2</span>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-white/25 group-hover:text-white/60 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  </a>
+                  <a href={`mailto:${brand.email}`} className="group flex items-center justify-between py-4 sm:py-5">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.15em] text-white/40 mb-0.5">Email</span>
+                        <span className="text-white/80 text-[13px] sm:text-sm">{brand.email}</span>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-white/25 group-hover:text-white/60 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  </a>
+                  <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between py-4 sm:py-5">
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 flex-shrink-0" />
+                      <div>
+                        <span className="block text-[10px] sm:text-[11px] font-medium uppercase tracking-[0.15em] text-white/40 mb-0.5">LinkedIn</span>
+                        <span className="text-white/80 text-[13px] sm:text-sm">ium Labs</span>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-white/25 group-hover:text-white/60 group-hover:translate-x-1 transition-all flex-shrink-0" />
+                  </a>
+                </div>
               </div>
 
               {/* Right, Form */}
