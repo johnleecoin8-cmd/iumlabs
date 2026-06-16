@@ -13,7 +13,6 @@ import { ArrowRight } from "lucide-react";
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
-const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
@@ -140,23 +139,10 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Insights */}
-      <section id="insights" className="border-t border-white/[0.07]">
-        <SectionHeader
-          index="03"
-          heading={<>From the <span className="text-white/40">blog.</span></>}
-          subtitle="Deep research on the Korean crypto market."
-          action={{ label: "All articles", href: "/blog" }}
-        />
-        <Suspense fallback={<SectionLoader />}>
-          <InsightsSection />
-        </Suspense>
-      </section>
-
       {/* Testimonials */}
       <section id="testimonials" className="border-t border-white/[0.07]">
         <SectionHeader
-          index="04"
+          index="03"
           heading={<>Partners are <span className="text-white/40">yappin&rsquo;.</span></>}
         />
         <MobileDeferredSection minHeight="60vh">
@@ -169,7 +155,7 @@ const Index = () => {
       {/* Coverage */}
       <section id="coverage" className="border-t border-white/[0.07]">
         <SectionHeader
-          index="05"
+          index="04"
           heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
