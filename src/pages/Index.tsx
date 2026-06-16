@@ -58,37 +58,25 @@ const MobileDeferredSection = ({ children, minHeight = "60vh" }: { children: Rea
   );
 };
 
-// Consistent section eyebrow used across the homepage
-const Eyebrow = ({ index, label }: { index: string; label: string }) => (
-  <div className="flex items-baseline gap-4">
-    <span className="font-mono text-xs text-white/30">{index}</span>
-    <span className="text-xs uppercase tracking-[0.25em] text-white/40">{label}</span>
-  </div>
-);
-
-// One shared header for every homepage section: left-aligned, same gutter, font and colours
+// One shared header for every homepage section: a small number index plus a single heading
 const SectionHeader = ({
   index,
-  label,
   heading,
   subtitle,
   action,
 }: {
   index: string;
-  label: string;
-  heading?: ReactNode;
+  heading: ReactNode;
   subtitle?: string;
   action?: { label: string; href: string };
 }) => (
   <div className="px-5 sm:px-6 lg:px-10 pt-20 md:pt-28 pb-8 sm:pb-10">
     <div className="flex items-end justify-between gap-6">
       <div>
-        <Eyebrow index={index} label={label} />
-        {heading && (
-          <h2 className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
-            {heading}
-          </h2>
-        )}
+        <span className="font-mono text-xs text-white/30">{index}</span>
+        <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight">
+          {heading}
+        </h2>
         {subtitle && <p className="mt-3 text-xs sm:text-sm text-white/45">{subtitle}</p>}
       </div>
       {action && (
@@ -136,7 +124,7 @@ const Index = () => {
 
       {/* Services */}
       <section id="services" className="border-t border-white/[0.07]">
-        <SectionHeader index="01" label="Services" />
+        <SectionHeader index="01" heading="What we do." />
         <ServicesSection />
       </section>
 
@@ -144,7 +132,6 @@ const Index = () => {
       <section id="projects" className="border-t border-white/[0.07]">
         <SectionHeader
           index="02"
-          label="Work"
           heading={<>Selected <span className="text-white/40">work.</span></>}
           action={{ label: "View all", href: "/projects" }}
         />
@@ -157,7 +144,6 @@ const Index = () => {
       <section id="insights" className="border-t border-white/[0.07]">
         <SectionHeader
           index="03"
-          label="Insights"
           heading={<>From the <span className="text-white/40">blog.</span></>}
           subtitle="Deep research on the Korean crypto market."
           action={{ label: "All articles", href: "/blog" }}
@@ -171,7 +157,6 @@ const Index = () => {
       <section id="testimonials" className="border-t border-white/[0.07]">
         <SectionHeader
           index="04"
-          label="Testimonials"
           heading={<>Partners are <span className="text-white/40">yappin&rsquo;.</span></>}
         />
         <MobileDeferredSection minHeight="60vh">
@@ -185,7 +170,6 @@ const Index = () => {
       <section id="coverage" className="border-t border-white/[0.07]">
         <SectionHeader
           index="05"
-          label="Coverage"
           heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
