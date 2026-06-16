@@ -37,6 +37,11 @@ import svcEventImg from "@/assets/services/events.jpg";
 import svcResearchImg from "@/assets/services/deep-research-blog.jpg";
 import svcSeoImg from "@/assets/services/seo-naver.jpg";
 import svcAmaImg from "@/assets/services/ama-spaces.jpg";
+import svcListingImg from "@/assets/services/listing-scorecard.webp";
+import svcLiquidityImg from "@/assets/services/liquidity-sizing.webp";
+import svcTokenomicsImg from "@/assets/services/tokenomics-hero.png";
+import svcCapitalImg from "@/assets/services/capital-hero.webp";
+import svcComplianceImg from "@/assets/services/comp-vasp-travelrule.webp";
 import EastAsiaMap from "@/components/EastAsiaMap";
 // Client logos (same as HeroSection)
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -78,27 +83,42 @@ const services = [
   { num: "01", title: "GTM Strategy", tagline: "Full-stack Go-To-Market planning for Korean market entry. Competitive landscape, Korea-fit narrative, launch timeline.",
     desc: "We start with a full scan of the Korean crypto landscape. Competitor share-of-voice analysis, on-chain wallet profiling, opportunity mapping, and regulatory review. You get a clear picture of where you stand and where to move.",
     caps: ["Competitive Landscape Analysis","Korea-fit Narrative & Positioning","Launch Timeline & Milestone Planning","Market Sizing & Opportunity Mapping","Audience Segmentation","GTM Roadmap & Playbook"], href: "/services/gtm", img: svcGtmImg },
-  { num: "02", title: "KOL & Influencer", tagline: "250+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
+  { num: "02", title: "CEX Listing Advisory", tagline: "From listing-readiness diagnosis to application packaging and exchange relations. Upbit, Bithumb, Coinone, Korbit.",
+    desc: "We diagnose your readiness against each exchange's bar, coordinate application packaging and legal opinions, and manage exchange relations through to approval. Post-listing liquidity and maintenance included.",
+    caps: ["Readiness Diagnosis vs Exchange Bars","Application Packaging & Legal Opinion","Exchange Relations & Negotiation","Post-Listing Liquidity & Maintenance","DEX & Hybrid Venue Sequencing","Ongoing Compliance Support"], href: "/services/listing", img: svcListingImg },
+  { num: "03", title: "Market Making & Liquidity", tagline: "Exchange-grade order-book depth from listing day. Vetted market-maker desk matching, aligned incentives.",
+    desc: "A great listing into a thin order book is a failed listing. We architect your liquidity strategy, size the order book, and broker vetted market-making desks so you open into real depth and a tight spread.",
+    caps: ["Liquidity Strategy & Order-Book Sizing","Vetted Market-Maker Desk Matching","Listing-Day Depth & Spread Management","Retainer Model, Compliant & Aligned","Real Volume, Never Wash Trading","Post-Listing Maintenance"], href: "/services/liquidity", img: svcLiquidityImg },
+  { num: "04", title: "Tokenomics", tagline: "Token supply, distribution, and unlocks engineered for the Korean market. Disclosure-ready for exchange review.",
+    desc: "Korean retail trades the float and the unlock, not the whitepaper. We engineer your supply, vesting, and valuation for how this market actually behaves, built disclosure-ready for exchange review.",
+    caps: ["Supply, Emission & Allocation Design","Vesting & Unlock Scheduling","Listing Float & Circulating-Supply Planning","Utility, Value Accrual & FDV Benchmarking","Korea-Retail Optimized","Exchange-Disclosure Ready"], href: "/services/tokenomics", img: svcTokenomicsImg },
+  { num: "05", title: "Capital & OTC Introduction", tagline: "Warm access to Korea's crypto VCs, OTC desks, and institutional custody. Fund-ready structuring.",
+    desc: "Korea's real capital is relationship-gated and invisible from the outside. We open the door to crypto VCs, licensed OTC desks, and custody, plus the structuring to make you fund-ready.",
+    caps: ["Korean VC & Strategic Intros","Licensed OTC Desk Connections","Institutional Custody Onboarding","Offshore Entity & Fund-Ready Structuring","Token & Equity Rounds","Warm Introductions, Not Broker Networks"], href: "/services/capital", img: svcCapitalImg },
+  { num: "06", title: "KOL & Influencer", tagline: "250+ vetted Korean KOLs. YouTube, X, Telegram, Naver. Managed campaigns with fraud filtering and ROI tracking.",
     desc: "Korea's top crypto KOLs, direct relationships, not broker networks. S-tier thread campaigns, YouTube reviews, Twitter Spaces, AMA hosting. Every placement is audience-verified, content-approved, and performance-tracked.",
     caps: ["S / A / B-Tier KOL Campaigns","YouTube Review Placements","Thread & Long-form Content","Twitter Spaces & AMA Hosting","Audience Verification & Fraud Filtering","Performance Analytics & Reporting"], href: "/services/influencer", img: svcKolImg },
-  { num: "03", title: "PR & Media", tagline: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. Press releases, thought leadership, crisis comms.",
+  { num: "07", title: "PR & Media", tagline: "CoinDesk Korea, Block Media, TokenPost, mainstream outlets. Press releases, thought leadership, crisis comms.",
     desc: "Tier-1 Korean media coverage through direct journalist relationships. Korean press release writing, interview facilitation, thought leadership positioning, and crisis communication management.",
     caps: ["CoinDesk Korea / Block Media / TokenPost","Korean Press Release Writing","Mainstream Media (Chosun, MBN)","Interview & Thought Leadership","Crisis Communication","Coverage Analytics & Reporting"], href: "/services/pr", img: svcPrImg },
-  { num: "04", title: "Community Management", tagline: "24/7 native Korean managers. Telegram, Discord, KakaoTalk. Sentiment monitoring and engagement programs.",
+  { num: "08", title: "Community Management", tagline: "24/7 native Korean managers. Telegram, Discord, KakaoTalk. Sentiment monitoring and engagement programs.",
     desc: "We design community culture. Korean Telegram groups, Discord servers, and local platforms with localized moderation, governance integration, and weekly event programming that keeps communities active and loyal.",
     caps: ["Telegram & Discord (Korean Mods)","KakaoTalk Open Chat Management","24/7 Moderation & Support","Sentiment Monitoring & Reporting","Engagement Programs & Gamification","AMA & Event Programming"], href: "/services/community", img: svcCommImg },
-  { num: "05", title: "Offline Events", tagline: "KBW side events, Seoul meetups, VIP networking dinners. Full logistics, venue sourcing, and post-event content.",
-    desc: "End-to-end event production in Seoul. From 20-person VIP dinners to 500+ person parties during Korea Blockchain Week. Venue sourcing, speaker curation, full logistics management, and post-event content that outlasts the night.",
-    caps: ["Korea Blockchain Week Side Events","VIP Networking Dinners","Launch Parties & Meetups","Venue Sourcing & Full Logistics","Speaker & Guest Curation","Post-Event Content & Lead Capture"], href: "/services/offline-event", img: svcEventImg },
-  { num: "06", title: "Deep Research", tagline: "On-chain wallet profiling, competitor analysis, market ecosystem mapping. Reports in Korean and English.",
-    desc: "Data-driven market intelligence for Korean market entry. On-chain behavior analysis, competitor share-of-voice, investment thesis support. Reports delivered in both Korean and English, distributed through our media and KOL network.",
-    caps: ["Korean Market Ecosystem Mapping","On-chain Behavior & Wallet Profiling","Competitor Share-of-Voice Analysis","Investment Thesis & Due Diligence","Trend Reports & Forecasting","Distribution via Media & KOL Network"], href: "/services/deep-research", img: svcResearchImg },
-  { num: "07", title: "SEO & Paid Ads", tagline: "Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified.",
+  { num: "09", title: "SEO & Paid Ads", tagline: "Naver SEO, Google Ads, X Ads, crypto ad networks. We know which platforms ban crypto and how to get certified.",
     desc: "Naver SEO and keyword strategy, Google Ads, X Ads, crypto-native ad networks like Coinzilla and Bitmedia. We handle platform certifications to prevent ad blocking and optimize for Korean search behavior.",
     caps: ["Naver SEO & Keyword Strategy","Google Ads (Crypto Certified)","X / Twitter Ads","Crypto Ad Networks","A/B Testing & Conversion Optimization","Performance Tracking & ROI Reporting"], href: "/services/seo-ads", img: svcSeoImg },
-  { num: "08", title: "AMA Hosting", tagline: "Telegram, Discord, X Spaces AMAs with native Korean-speaking hosts. Pre-event promotion, post-AMA recap.",
+  { num: "10", title: "AMA Hosting", tagline: "Telegram, Discord, X Spaces AMAs with native Korean-speaking hosts. Pre-event promotion, post-AMA recap.",
     desc: "Structured AMA sessions that drive real engagement. Native Korean-speaking professional hosts, pre-event promotion and question curation, live moderation, and post-AMA recap content and analytics.",
     caps: ["Telegram & Discord AMAs","X Spaces & YouTube Live","Native Korean-Speaking Hosts","Pre-Event Promotion & Question Curation","Live Moderation & Pacing","Post-AMA Recap & Analytics"], href: "/services/ama", img: svcAmaImg },
+  { num: "11", title: "Deep Research", tagline: "On-chain wallet profiling, competitor analysis, market ecosystem mapping. Reports in Korean and English.",
+    desc: "Data-driven market intelligence for Korean market entry. On-chain behavior analysis, competitor share-of-voice, investment thesis support. Reports delivered in both Korean and English, distributed through our media and KOL network.",
+    caps: ["Korean Market Ecosystem Mapping","On-chain Behavior & Wallet Profiling","Competitor Share-of-Voice Analysis","Investment Thesis & Due Diligence","Trend Reports & Forecasting","Distribution via Media & KOL Network"], href: "/services/deep-research", img: svcResearchImg },
+  { num: "12", title: "Offline Events", tagline: "KBW side events, Seoul meetups, VIP networking dinners. Full logistics, venue sourcing, and post-event content.",
+    desc: "End-to-end event production in Seoul. From 20-person VIP dinners to 500+ person parties during Korea Blockchain Week. Venue sourcing, speaker curation, full logistics management, and post-event content that outlasts the night.",
+    caps: ["Korea Blockchain Week Side Events","VIP Networking Dinners","Launch Parties & Meetups","Venue Sourcing & Full Logistics","Speaker & Guest Curation","Post-Event Content & Lead Capture"], href: "/services/offline-event", img: svcEventImg },
+  { num: "13", title: "Regulations & Compliance", tagline: "VASP registration, VAUPA, PIPA, AML, and travel-rule advisory. Coordinated with licensed Korean counsel.",
+    desc: "Korea's framework is strict and fast-changing: VASP registration, the User Protection Act, AML, and the travel rule. We map what applies and coordinate licensed Korean counsel so you meet the rules, not stumble into them.",
+    caps: ["VASP Registration Guidance","VAUPA & PIPA Compliance","AML & Travel-Rule Advisory","Exchange Listing Disclosure","Licensed Korean Counsel Coordination","Ongoing Regulatory Monitoring"], href: "/services/compliance", img: svcComplianceImg },
 ];
 
 const workCards = [
