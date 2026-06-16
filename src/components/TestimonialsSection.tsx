@@ -10,6 +10,7 @@ import avMega from "@/assets/team/x/mega.jpg";
 import avFogo from "@/assets/team/x/fogo.jpg";
 import avStory from "@/assets/team/x/story.jpg";
 import avPolygon from "@/assets/team/x/polygon.jpg";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 type Testimonial = {
   name: string;
@@ -81,21 +82,25 @@ const Track = ({ items, offset = false }: { items: Testimonial[]; offset?: boole
 );
 
 const TestimonialsSection = () => {
-  const mid = Math.ceil(testimonials.length / 2);
-  const row1 = testimonials.slice(0, mid);
-  const row2 = testimonials.slice(mid);
+  const isMobile = useIsMobile();
+  const rowCount = isMobile ? 3 : 2; // denser 3-row wall on mobile, 2 rows on desktop
+  const perRow = Math.ceil(testimonials.length / rowCount);
+  const rows = Array.from({ length: rowCount }, (_, r) =>
+    testimonials.slice(r * perRow, (r + 1) * perRow)
+  );
 
   return (
     <div className="pb-20 md:pb-28">
       <div
-        className="group relative flex flex-col gap-14 overflow-hidden pb-12 pt-2"
+        className="group relative flex flex-col gap-8 sm:gap-14 overflow-hidden pb-12 pt-2"
         style={{
           maskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         }}
       >
-        <Track items={row1} />
-        <Track items={row2} offset />
+        {rows.map((items, i) => (
+          <Track key={i} items={items} offset={i % 2 === 1} />
+        ))}
       </div>
     </div>
   );
