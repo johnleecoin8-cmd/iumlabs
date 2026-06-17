@@ -69,7 +69,7 @@ const SectionHeader = ({
   subtitle?: string;
   action?: { label: string; href: string };
 }) => (
-  <div className="px-5 sm:px-6 lg:px-10 pt-20 md:pt-28 pb-8 sm:pb-10">
+  <div className="px-5 sm:px-6 lg:px-10 pt-10 md:pt-14 pb-6 sm:pb-8">
     <div className="flex items-end justify-between gap-6">
       <div>
         <span className="font-mono text-xs text-white/30">{index}</span>
