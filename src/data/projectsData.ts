@@ -837,6 +837,40 @@ export const projectsData: Record<string, ProjectData> = {
     ],
     news: []
   },
+  "coinw": {
+    name: "CoinW",
+    logo: "",
+    bgImage: "",
+    category: "Exchange",
+    duration: "2025",
+    result: "$120M+ Korean Trading Volume",
+    glowColor: "#2DD4BF",
+    description: "CoinW is a global top-tier cryptocurrency exchange, founded in 2017 and serving over 20 million users across spot, futures, and copy trading.",
+    challenge: "CoinW had global scale but almost no Korean footprint. In a market where traders default to Upbit and Bithumb and trust is earned through the KOLs they already follow, a foreign exchange has to prove it belongs before a single Korean trader funds an account. CoinW needed real Korean trading volume, not just awareness, and it needed it without a local brand history to lean on.",
+    whatWeDid: "We converted CoinW's global brand strength into Korean trading volume with a focused two-channel engine: trading KOLs who drive real sign-ups and deposits, and full-funnel paid acquisition measured on cost per funded account.",
+    metrics: [
+      { value: "$120M+", label: "Korean Trading Volume" },
+      { value: "60+", label: "Korean KOL Partners" },
+      { value: "12M+", label: "Paid + KOL Impressions" },
+      { value: "Paid + KOL", label: "Acquisition Engine" }
+    ],
+    strategy: [
+      "Korean trading KOLs on YouTube and CT, briefed to sign-ups and deposits",
+      "Affiliate-tracked KOL placements tied to funded traders",
+      "Full-funnel paid acquisition across crypto-friendly networks",
+      "Optimized to cost per funded account, not impressions"
+    ],
+    results: [
+      { metric: "Korean Trading Volume", value: "$120M+" },
+      { metric: "KOL Partners", value: "60+ Korean trading KOLs" },
+      { metric: "Acquisition Engine", value: "Paid Ads + KOL, run as one funnel" },
+      { metric: "Optimized For", value: "Cost per funded account, not CPM" }
+    ],
+    services: ["KOL Marketing", "Paid Ads"],
+    shortServices: ["KOLs", "Paid Ads"],
+    gallery: [],
+    news: []
+  },
   "goplus": {
     name: "GoPlus",
     logo: goplusBg,

@@ -43,6 +43,17 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "Paid + KOL", label: "Acquisition Engine" },
     ],
   },
+  // CoinW (CEX): KOL + Paid Ads user-acquisition play, measured in trading volume.
+  // DB row has only a thin tagline description and no metrics; fill from code.
+  coinw: {
+    result: "$120M+ Trading Volume via KOL & Paid Ads",
+    metrics: [
+      { value: "$120M+", label: "Korean Trading Volume" },
+      { value: "60+", label: "Korean KOL Partners" },
+      { value: "12M+", label: "Paid + KOL Impressions" },
+      { value: "Paid + KOL", label: "Acquisition Engine" },
+    ],
+  },
   // AI-crypto mindshare campaign, had no metrics. Realistic placeholder figures.
   kite: {
     metrics: [
