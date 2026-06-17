@@ -3,7 +3,7 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/services/seo-naver.jpg";
 import featNaverImg from "@/assets/platforms/seo-naver.jpg";
-import featPaidImg from "@/assets/services/cex-paid-ads.webp";
+import featPaidImg from "@/assets/services/paid-ads-gallery.png";
 import featTrackImg from "@/assets/services/seo-performance.png";
 import deliverableImg from "@/assets/services/seo-growth-plan.webp";
 

@@ -1,11 +1,11 @@
 import { Users, Target, Search } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import heroImg from "@/assets/services/exchange-numbers.png";
 import featKolImg from "@/assets/services/trading-kol-chart.webp";
-import featPaidImg from "@/assets/services/cex-paid-ads.webp";
+import featPaidImg from "@/assets/services/paid-ads-gallery.png";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
-import delivImg from "@/assets/platforms/res-market.jpg";
+import delivImg from "@/assets/services/exchange-numbers.png";
 
 const ACCENT = "#2DD4BF";
 
