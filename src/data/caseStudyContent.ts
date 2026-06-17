@@ -18,6 +18,18 @@ export interface CaseStudyContent {
 }
 
 export const caseStudyContent: Record<string, CaseStudyContent> = {
+  coinw: {
+    overviewHeading: "A global top-tier exchange, built to win Korea's most competitive trading market.",
+    overviewBody: [
+      "CoinW is one of the world's longest-running cryptocurrency exchanges, founded in 2017 and serving over 20 million users across spot, futures, and copy trading. With a leading global volume ranking and a fast-growing derivatives business, CoinW had scale almost everywhere except the one market every trading brand wants: Korea.",
+      "Korea rewards exchanges that show up natively. Discovery runs on Naver and Korean crypto Twitter, trust is earned through KOLs traders already follow, and the domestic incumbents own the default. CoinW needed to turn global brand strength into real Korean trading volume, fast, and with a lean, accountable channel mix.",
+    ],
+    solutions: [
+      { title: "KOL Marketing", body: "We mobilized Korean trading KOLs across YouTube and crypto Twitter, the voices whose audiences actually trade, briefed to drive sign-ups and first deposits on CoinW rather than vanity impressions. Affiliate-tracked placements tied every creator to the funded traders they brought in." },
+      { title: "Paid Ads", body: "We ran a full-funnel paid acquisition engine across the crypto-friendly networks most brands can't get approved on alone, optimized from click to sign-up to first deposit and measured on cost per funded account, not CPM." },
+    ],
+    testimonial: { quote: "ium turned our global brand into real Korean volume. KOLs and paid, run as one funnel straight to funded traders. The numbers did the talking.", name: "Korea Growth Lead", role: "CoinW" },
+  },
   mantra: {
     overviewHeading: "The security-first RWA Layer 1, entering Korea's most demanding capital market.",
     overviewBody: [
@@ -64,6 +76,7 @@ type ProjectType = "exchange" | "dex" | "rwa" | "infra" | "ai" | "wallet" | "pri
 const projectTypes: Record<string, ProjectType> = {
   kucoin: "exchange",
   bybit: "exchange",
+  coinw: "exchange",
   synfutures: "dex",
   simpfor: "dex",
   ondo: "rwa",
