@@ -17,6 +17,7 @@ import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerBg from "@/assets/campaigns/openledger-hero-official.jpg";
 import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
 import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
+import aptosBg from "@/assets/campaigns/aptos-seoul-event.jpg";
 
 import bnbLogo from "@/assets/logos/bnb-new.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -32,23 +33,26 @@ import zkpassLogo from "@/assets/logos/zkpass-icon.jpeg";
 import peaqLogo from "@/assets/logos/openledger-wordmark.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
+import aptosLogo from "@/assets/logos/aptos.png";
 
 const projects = [
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "50+", resultLabel: "VIP & Institutions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
-  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$150M+", resultLabel: "Trading Volume", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo, isIcon: false },
   { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "30K+", resultLabel: "Community", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
-  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
+  { name: "Aptos", slug: "aptos", category: "Layer 1", result: "15K+", resultLabel: "Community", bgImage: aptosBg, logo: aptosLogo, isIcon: true },
+  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$150M+", resultLabel: "Trading Volume", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "50+", resultLabel: "VIP & Institutions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
   { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo, isIcon: false },
   { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", bgImage: bybitBg, logo: bybitLogo, isIcon: false },
+  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
   { name: "FOGO", slug: "fogo", category: "Layer 1", result: "500+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo, isIcon: true },
   { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", bgImage: synfuturesBg, logo: synfuturesLogo, isIcon: true },
-  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo, isIcon: false },
   { name: "Tria", slug: "tria", category: "Wallet", result: "30K+", resultLabel: "Korean Wallets", bgImage: triaBg, logo: triaLogo, isIcon: true },
   { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo, isIcon: false },
   { name: "OpenLedger", slug: "openledger", category: "AI", result: "2M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo, isIcon: false },
   { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo, isIcon: false },
   { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", bgImage: talusThumb, logo: talusLogo, isIcon: true },
 ];
+
 
 const ProjectCard = ({ project, index }: { project: typeof projects[number]; index: number }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.08, rootMargin: '40px', triggerOnce: true });
