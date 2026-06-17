@@ -6,6 +6,7 @@ import aiAgentsImg from "@/assets/blog/kaito-mindshare.jpg";
 import kolImg from "@/assets/blog/kol-marketing.jpg";
 import listingImg from "@/assets/blog/korea-exchange-listing.jpg";
 import regulatoryImg from "@/assets/blog/ecosystem-chart-regulatory.jpg";
+import gtmStackCover from "@/assets/blog/korea-gtm-stack-cover.svg";
 
 import chartInstitutional from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import chartL2Adoption from "@/assets/blog/ecosystem-chart-l2-adoption.jpg";
@@ -532,7 +533,7 @@ The protocols that win will treat Korea as a regulated-finance market that happe
     id: "static-korea-gtm-stack",
     slug: "korea-gtm-stack-full-funnel-web3-framework-2026",
     title: "The Korea GTM Stack: A Full-Funnel Go-To-Market Framework for Web3",
-    image: chartGtmStrategy,
+    image: gtmStackCover,
     date: "June 10, 2026",
     readTime: "18 min read",
     category: "GTM Strategy",
