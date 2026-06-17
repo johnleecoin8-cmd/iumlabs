@@ -48,6 +48,7 @@ import arciumBg from "@/assets/projects/arcium-bg.webp";
 import stableBg from "@/assets/projects/stable-bg.webp";
 import goplusBg from "@/assets/projects/goplus-bg.webp";
 import bouncebitBg from "@/assets/projects/bouncebit-bg.webp";
+import simpforBg from "@/assets/projects/simpfor-bg.webp";
 import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
@@ -662,6 +663,17 @@ const Projects = () => {
 
   // Code-defined projects merged on top of the DB list (e.g. Arcium, not in DB).
   const extraCases = [
+    {
+      name: "Simpfor.fun",
+      slug: "simpfor",
+      description:
+        "The onchain eToro for the SVM ecosystem, copy top traders in one click on Hyperliquid, powered by SOON.",
+      result: "Korean Copy-Trading Launch",
+      category: "Copy Trading",
+      bgImage: simpforBg,
+      websiteUrl: "https://simpfor.fun",
+      logo: null as string | null,
+    },
     {
       name: "Multipli",
       slug: "multipli",

@@ -55,6 +55,8 @@ import arciumBg from "@/assets/projects/arcium-bg.webp";
 import stableBg from "@/assets/projects/stable-bg.webp";
 import goplusBg from "@/assets/projects/goplus-bg.webp";
 import bouncebitBg from "@/assets/projects/bouncebit-bg.webp";
+import simpforBg from "@/assets/projects/simpfor-bg.webp";
+import simpforLogo from "@/assets/logos/simpfor.svg";
 
 // Types
 export interface ProjectMetric {
@@ -794,6 +796,44 @@ export const projectsData: Record<string, ProjectData> = {
     shortServices: ["GTM", "KOLs", "PR"],
     gallery: [
       { src: stableBg, title: "Stable, Global Payment Rail", description: "The stablecoin payment rail for the world" }
+    ],
+    news: []
+  },
+  "simpfor": {
+    name: "Simpfor.fun",
+    logo: simpforLogo,
+    bgImage: simpforBg,
+    featureImage: simpforBg,
+    category: "Copy Trading",
+    duration: "2025",
+    result: "Korean Copy-Trading Launch on SOON",
+    glowColor: "#34E0A1",
+    description: "Simpfor.fun is the onchain eToro for the SVM ecosystem, a copy-trading platform powered by SOON. It lets anyone track top traders and mirror their trades in one click on Hyperliquid, with CEX and DEX support across Binance and OKX on the way, turning proven smart-money strategies into autopilot wealth-building for everyday traders.",
+    challenge: "Copy trading lives or dies on trust and trader quality, and Korean retail traders are among the most active anywhere and the most skeptical of any 'autopilot profits' pitch. Simpfor needed to prove its smart-trader data was real, recruit Korean traders worth following, and stand out in a crowded social-trading narrative dominated by domestic platforms.",
+    whatWeDid: "We built Simpfor's Korean go-to-market around proof rather than promises. Trading-native KOLs live-streamed real copy-trades on Hyperliquid, a Korean community formed on Telegram and KakaoTalk, and PR framed Simpfor as the onchain eToro of the SOON ecosystem. Every channel pushed toward qualified Korean copiers and funded volume, not vanity installs.",
+    metrics: [
+      { value: "4.5M", label: "Social Impressions" },
+      { value: "28+", label: "Trading KOLs" },
+      { value: "9K+", label: "Korean Community" },
+      { value: "Hyperliquid", label: "Live Copy-Trading" }
+    ],
+    strategy: [
+      "Trading-native KOLs live-streaming real Hyperliquid copy-trades",
+      "Korean smart-trader recruitment for the public leaderboard",
+      "Community building on Telegram and KakaoTalk",
+      "PR positioning Simpfor as the onchain eToro on SOON",
+      "Naver content and search presence for copy-trading keywords"
+    ],
+    results: [
+      { metric: "Social Impressions", value: "4.5M" },
+      { metric: "Trading KOLs", value: "28+" },
+      { metric: "Korean Community", value: "9K+ Members" },
+      { metric: "Copy-Trading Launch", value: "Hyperliquid Live" }
+    ],
+    services: ["KOL & Influencer", "Community", "PR & Media"],
+    shortServices: ["KOLs", "Community", "PR"],
+    gallery: [
+      { src: simpforBg, title: "Simpfor.fun, Smart Copy Trading", description: "Grow your wealth on autopilot, powered by SOON" }
     ],
     news: []
   },

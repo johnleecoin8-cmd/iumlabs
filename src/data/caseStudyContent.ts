@@ -65,6 +65,7 @@ const projectTypes: Record<string, ProjectType> = {
   kucoin: "exchange",
   bybit: "exchange",
   synfutures: "dex",
+  simpfor: "dex",
   ondo: "rwa",
   multipli: "rwa",
   mantra: "rwa",
