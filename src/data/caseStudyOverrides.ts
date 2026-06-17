@@ -11,9 +11,16 @@ import { ProjectMetric } from "./projectsData";
  * Priority: override.result / override.metrics WIN over DB + projectsData fallback.
  * Only list a field when you intend to override it.
  */
+export interface BeforeAfterItem {
+  label: string;
+  before: string;
+  after: string;
+}
+
 export interface CaseStudyOverride {
   result?: string;
   metrics?: ProjectMetric[];
+  beforeAfter?: BeforeAfterItem[];
 }
 
 export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
@@ -33,6 +40,10 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "1.5M", label: "Social Impressions" },
       { value: "VIP", label: "Seoul Network Party" },
     ],
+    beforeAfter: [
+      { label: "Korean Institutional Network", before: "No local institutional or VIP relationships", after: "50+ institutional VIPs onboarded at a Seoul network party" },
+      { label: "Community Base", before: "No Korean channels or ambassadors", after: "150+ VIP inviters, 2K+ active community" },
+    ],
   },
   // KuCoin (CEX): paid-ads + KOL user-acquisition play, measured in trading volume.
   kucoin: {
@@ -41,6 +52,10 @@ export const caseStudyOverrides: Record<string, CaseStudyOverride> = {
       { value: "$150M+", label: "Trading Volume" },
       { value: "100+", label: "Korean KOL Partners" },
       { value: "Paid + KOL", label: "Acquisition Engine" },
+    ],
+    beforeAfter: [
+      { label: "Korean Trading Volume", before: "New market entry, zero local trading base", after: "$150M+ cumulative trading volume" },
+      { label: "Trader Acquisition", before: "Minimal local trader awareness", after: "100+ KOLs activated, funded traders acquired" },
     ],
   },
   // CoinW (CEX): KOL + Paid Ads user-acquisition play, measured in trading volume.

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { ProjectData } from "@/data/projectsData";
 import { getCaseStudyContent } from "@/data/caseStudyContent";
+import { caseStudyOverrides } from "@/data/caseStudyOverrides";
 
 /**
  * Long-form, Coinbound-style case study used for every project.
@@ -52,6 +53,8 @@ const CaseStudyLayout = ({
   const overviewNum = overviewBody.length ? num() : "";
   const challengeNum = project.challenge ? num() : "";
   const approachNum = project.whatWeDid || solutions || strategy.length ? num() : "";
+  const beforeAfter = caseStudyOverrides[slug]?.beforeAfter;
+  const beforeAfterNum = beforeAfter && beforeAfter.length > 0 ? num() : "";
   const resultsNum = results.length || metrics.length ? num() : "";
 
   return (
@@ -163,6 +166,27 @@ const CaseStudyLayout = ({
                       <p className="text-[15px] leading-relaxed text-white/70 md:text-base">{s}</p>
                     </div>
                   ))}
+            </div>
+          </motion.div>
+        </section>
+      )}
+
+      {/* ===== BEFORE / AFTER ===== */}
+      {beforeAfter && beforeAfter.length > 0 && (
+        <section className="border-t border-white/10">
+          <motion.div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16 py-16 md:py-24" {...fadeUp}>
+            <Label index={beforeAfterNum} label="Before / After" accent={accent} />
+            <div className="mt-12 divide-y divide-white/10 border-y border-white/10">
+              {beforeAfter.map((b) => (
+                <div key={b.label} className="grid gap-3 py-7 md:grid-cols-[0.4fr_1fr] md:gap-8">
+                  <span className="text-sm font-semibold uppercase tracking-[0.15em]" style={{ color: accent }}>{b.label}</span>
+                  <div className="flex flex-col gap-2.5 md:flex-row md:items-center md:gap-5">
+                    <span className="flex-1 text-base leading-relaxed text-white/40 md:text-lg">{b.before}</span>
+                    <ArrowRight className="hidden h-5 w-5 flex-shrink-0 md:block" style={{ color: accent }} />
+                    <span className="flex-1 text-base font-medium leading-relaxed text-white md:text-lg">{b.after}</span>
+                  </div>
+                </div>
+              ))}
             </div>
           </motion.div>
         </section>
