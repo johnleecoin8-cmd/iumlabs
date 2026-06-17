@@ -4,8 +4,8 @@
   "description": "Korean Web3 GTM & Research Agency",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#FF6B00",
-  "background_color": "#FFFFFF",
+  "theme_color": "#34D399",
+  "background_color": "#0A0A0A",
   "icons": [
     {
       "src": "/favicon-16x16.png",
