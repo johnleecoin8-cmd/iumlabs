@@ -1,7 +1,7 @@
 import { Users, Target, Search } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/exchange-numbers.png";
+import heroImg from "@/assets/services/exchange-hero.webp";
 import featKolImg from "@/assets/services/trading-kol-chart.webp";
 import featPaidImg from "@/assets/services/paid-ads-gallery.png";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
