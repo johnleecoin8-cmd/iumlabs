@@ -175,13 +175,18 @@ const useGlobalAutoplay = () => {
     // iOS Safari decodes only a few inline videos at once. Only ever play the
     // ones currently on screen, and pause the rest, so a visible video always
     // has a free decoder slot (otherwise some videos never start on mobile).
-    const playAll = () => {
+    const syncPlayback = () => {
       document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach(v => {
         const r = v.getBoundingClientRect();
         const onScreen = r.bottom > 0 && r.top < window.innerHeight;
-        if (onScreen && v.paused) v.play().catch(() => {});
+        if (onScreen) {
+          if (v.paused) v.play().catch(() => {});
+        } else if (!v.paused) {
+          v.pause();
+        }
       });
     };
+    const playAll = syncPlayback;
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         const v = e.target as HTMLVideoElement;
