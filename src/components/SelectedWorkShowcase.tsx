@@ -64,8 +64,9 @@ const MobileShowcase = () => {
   const isInView = useInView(ref, { once: true, margin: "100px" });
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
 
-  // Play each card's video only while it's in view (mobile data + battery friendly)
+  // Play each card's video while it's in view; pause off-screen (mobile data + battery friendly).
   useEffect(() => {
+    const vids = Object.values(videoRefs.current).filter(Boolean) as HTMLVideoElement[];
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -74,10 +75,25 @@ const MobileShowcase = () => {
           else v.pause();
         });
       },
-      { threshold: 0.6 }
+      { threshold: 0.5 }
     );
-    Object.values(videoRefs.current).forEach((v) => v && io.observe(v));
-    return () => io.disconnect();
+    vids.forEach((v) => io.observe(v));
+
+    // iOS can block the first muted autoplay until a user gesture; kick the in-view ones once.
+    const kick = () => {
+      vids.forEach((v) => {
+        const r = v.getBoundingClientRect();
+        const visible = r.top < window.innerHeight && r.bottom > 0 && r.left < window.innerWidth && r.right > 0;
+        if (visible && v.paused) v.play().catch(() => {});
+      });
+    };
+    const events = ["touchstart", "scroll", "click"] as const;
+    events.forEach((e) => document.addEventListener(e, kick, { once: true, passive: true }));
+
+    return () => {
+      io.disconnect();
+      events.forEach((e) => document.removeEventListener(e, kick));
+    };
   }, []);
 
   return (
@@ -115,7 +131,8 @@ const MobileShowcase = () => {
                     muted
                     loop
                     playsInline
-                    preload="none"
+                    autoPlay
+                    preload="metadata"
                     poster={project.media}
                     className="absolute inset-0 w-full h-full object-cover"
                   >
