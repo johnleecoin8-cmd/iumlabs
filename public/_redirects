@@ -16,6 +16,7 @@
 
 # 301 Redirect for legacy service routes (prevent Soft 404)
 /services/social-media  /services/community  301
+/services/tokenomics  /services/exchange-marketing  301
 
 # SPA fallback
 /*  /index.html  200

@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 const services = [
   { slug: "listing", title: "CEX Listing Advisory" },
   { slug: "liquidity", title: "Market Making & Liquidity" },
-  { slug: "tokenomics", title: "Tokenomics" },
+  { slug: "exchange-marketing", title: "Exchange Marketing" },
   { slug: "capital", title: "Capital & OTC Introduction" },
   { slug: "gtm", title: "GTM Strategy" },
   { slug: "influencer", title: "KOL & Influencer" },

@@ -10,7 +10,7 @@ import {
   Newspaper,
   Landmark,
   Droplets,
-  Coins,
+  TrendingUp,
   Handshake,
   Mic,
   ArrowUpRight,
@@ -38,7 +38,7 @@ import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-coindesk.jpg";
 import listingImg from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImg from "@/assets/platforms/res-market.jpg";
-import tokenomicsImg from "@/assets/services/tokenomics-allocation.svg";
+import exchangeImg from "@/assets/services/cex-paid-ads.webp";
 import capitalImg from "@/assets/platforms/res-thesis.jpg";
 import amaImg from "@/assets/services/ama-spaces.jpg";
 
@@ -69,12 +69,12 @@ const services = [
     stats: "Vetted MM desks"
   },
   {
-    title: "Tokenomics",
-    description: "Supply, unlocks & FDV",
-    icon: Coins,
-    link: "/services/tokenomics",
-    poster: tokenomicsImg,
-    stats: "Korea-fit design"
+    title: "Exchange Marketing",
+    description: "CEX/DEX user acquisition",
+    icon: TrendingUp,
+    link: "/services/exchange-marketing",
+    poster: exchangeImg,
+    stats: "Measured in volume"
   },
   {
     title: "Capital & OTC",

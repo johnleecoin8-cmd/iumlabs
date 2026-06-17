@@ -28,7 +28,7 @@ const PRService = React.lazy(() => import("./pages/PRService"));
 const AMAService = React.lazy(() => import("./pages/AMAService"));
 const LiquidityService = React.lazy(() => import("./pages/LiquidityService"));
 const ListingService = React.lazy(() => import("./pages/ListingService"));
-const TokenomicsService = React.lazy(() => import("./pages/TokenomicsService"));
+const ExchangeMarketingService = React.lazy(() => import("./pages/ExchangeMarketingService"));
 const CapitalService = React.lazy(() => import("./pages/CapitalService"));
 const Terms = React.lazy(() => import("./pages/Terms"));
 const Privacy = React.lazy(() => import("./pages/Privacy"));
@@ -115,7 +115,8 @@ const AppRoutes = () => {
         <Route path="/services/ama" element={<AMAService />} />
         <Route path="/services/liquidity" element={<LiquidityService />} />
         <Route path="/services/listing" element={<ListingService />} />
-        <Route path="/services/tokenomics" element={<TokenomicsService />} />
+        <Route path="/services/exchange-marketing" element={<ExchangeMarketingService />} />
+        <Route path="/services/tokenomics" element={<Navigate to="/services/exchange-marketing" replace />} />
         <Route path="/services/capital" element={<CapitalService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />

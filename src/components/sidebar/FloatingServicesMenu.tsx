@@ -10,7 +10,7 @@ const serviceItems = [
   { name: "GTM Strategy", href: "/services/gtm" },
   { name: "CEX Listing Advisory", href: "/services/listing" },
   { name: "Market Making & Liquidity", href: "/services/liquidity" },
-  { name: "Tokenomics", href: "/services/tokenomics" },
+  { name: "Exchange Marketing", href: "/services/exchange-marketing" },
   { name: "Capital & OTC Introduction", href: "/services/capital" },
   { name: "Influencer/KOL", href: "/services/influencer" },
   { name: "Community Management", href: "/services/community" },

@@ -9,7 +9,7 @@ const navSections: { title: string; wide?: boolean; links: { name: string; href:
       { name: "GTM Strategy", href: "/services/gtm" },
       { name: "CEX Listing Advisory", href: "/services/listing" },
       { name: "Market Making & Liquidity", href: "/services/liquidity" },
-      { name: "Tokenomics", href: "/services/tokenomics" },
+      { name: "Exchange Marketing", href: "/services/exchange-marketing" },
       { name: "Capital & OTC Introduction", href: "/services/capital" },
       { name: "KOL & Influencer", href: "/services/influencer" },
       { name: "Community", href: "/services/community" },
