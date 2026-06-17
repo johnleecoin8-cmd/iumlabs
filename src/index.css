@@ -1209,3 +1209,32 @@ video {
   .animate-page-in { animation: none; }
 }
 
+/* ============================================
+   P4 — Accessible, on-brand keyboard focus
+   Low-specificity (:where) so components can still override.
+   ============================================ */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ============================================
+   P3 — Subtle global film grain for premium texture cohesion.
+   Very low opacity, sits over content but under top chrome (navbar/modals),
+   pointer-events:none. Tune --grain-opacity or remove to taste.
+   ============================================ */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { display: none; }
+}
+
