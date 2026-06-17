@@ -70,7 +70,7 @@ const services = [
     details: [
       "Trading KOL affiliation & referral",
       "Full-funnel paid acquisition",
-      "Organic user growth (Naver, community)",
+      "Organic SEO: PR, Naver Blog & Cafe",
       "Optimized to cost per funded account",
     ],
   },
