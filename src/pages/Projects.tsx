@@ -36,6 +36,10 @@ import synfuturesLogo from "@/assets/logos/synfutures.png";
 import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
+import openledgerLogo from "@/assets/logos/openledger-wordmark.png";
+import aptosLogo from "@/assets/logos/aptos.png";
+import kiteLogo from "@/assets/logos/kite.png";
 
 // Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
@@ -280,6 +284,10 @@ const logoMap: Record<string, string | null> = {
   "spacecoin": spacecoinLogo,
   "multipli": multipliLogo,
   "talus": talusLogo,
+  "peaq": peaqLogo,
+  "openledger": openledgerLogo,
+  "aptos": aptosLogo,
+  "kite": kiteLogo,
 };
 
 // Video mapping for projects that have videos
@@ -656,7 +664,7 @@ const Projects = () => {
           // Prefer bundled assets for known campaign files; otherwise use gallery src; never use video URLs as <img> src.
           bgImage: galleryAsset || backgroundImageFromDb || firstGallerySrc || fallback?.bgImage || "",
           websiteUrl: p.website_url || "",
-          logo: fallback?.logo || null,
+          logo: logoMap[p.slug] || fallback?.logo || null,
         };
       })
     : fallbackCases.map(f => ({ ...f, logo: f.logo }));
