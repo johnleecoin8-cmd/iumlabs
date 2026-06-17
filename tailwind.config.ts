@@ -18,7 +18,9 @@ export default {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
-        display: ['DM Sans', 'Inter', 'sans-serif'],
+        // Unified: headings share the body sans (was 'DM Sans') so the whole site reads as one type system.
+        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       colors: {
         border: "hsl(var(--border))",

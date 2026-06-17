@@ -178,7 +178,7 @@ const Index = () => {
                     <span className="text-base sm:text-lg font-medium text-white">{c.name}</span>
                     <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
                       c.tag === "HOME"
-                        ? "bg-blue-600 text-white"
+                        ? "bg-primary text-white"
                         : "bg-white/[0.08] text-white/50"
                     }`}>{c.tag}</span>
                   </div>

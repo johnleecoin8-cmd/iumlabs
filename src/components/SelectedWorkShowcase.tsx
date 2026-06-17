@@ -139,7 +139,7 @@ const MobileShowcase = () => {
                   <h3 className="text-xl font-bold text-white mb-0.5 tracking-tight">
                     {project.name}
                   </h3>
-                  <span className="text-[13px] text-violet-400 font-medium">
+                  <span className="text-[13px] text-primary font-medium">
                     {project.result}
                   </span>
                   <div className="flex items-center gap-1.5 mt-2.5 text-white/45 text-[11px]">
@@ -306,7 +306,7 @@ const DesktopShowcase = () => {
                   onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
                 >
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/35'}`}>
+                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/55 group-hover:text-white/80'}`}>
@@ -327,7 +327,7 @@ const DesktopShowcase = () => {
             <p className="text-[13px] text-white/35 leading-relaxed mb-4">
               Former Binance, KuCoin, Upbit operators. We engineer your Korea market entry.
             </p>
-            <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-violet-400">
+            <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-primary">
               View Our Work <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
@@ -343,7 +343,7 @@ const DesktopShowcase = () => {
           >
             <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">Our Mission</span>
             <h3 className="text-2xl xl:text-3xl 2xl:text-4xl font-bold mb-4 text-right leading-tight">
-              <span className="bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">Real Results.<br />No Recycled Playbooks.</span>
+              <span className="bg-gradient-to-r from-[#6ee7b7] via-[#34D399] to-[#6ee7b7] bg-clip-text text-transparent">Real Results.<br />No Recycled Playbooks.</span>
             </h3>
             <p className="text-white/40 text-sm xl:text-base leading-relaxed mb-8 text-right">
               With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.

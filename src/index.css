@@ -304,14 +304,14 @@ video {
 
   /* Headline accents — unified with site type system (was Cormorant/Playfair serif) */
   .headline-serif {
-    font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 700;
     letter-spacing: -0.03em;
     line-height: 1.1;
   }
 
   .headline-serif-light {
-    font-family: 'DM Sans', 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400;
     letter-spacing: -0.02em;
     line-height: 1.15;
