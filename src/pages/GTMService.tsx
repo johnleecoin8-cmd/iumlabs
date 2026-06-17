@@ -39,7 +39,7 @@ import svcSeoImg from "@/assets/services/seo-naver.jpg";
 import svcAmaImg from "@/assets/services/ama-spaces.jpg";
 import svcListingImg from "@/assets/services/listing-scorecard.webp";
 import svcLiquidityImg from "@/assets/services/liquidity-sizing.webp";
-import svcTokenomicsImg from "@/assets/services/tokenomics-hero.png";
+import svcExchangeImg from "@/assets/services/cex-paid-ads.webp";
 import svcCapitalImg from "@/assets/services/capital-hero.webp";
 import svcComplianceImg from "@/assets/services/comp-vasp-travelrule.webp";
 import EastAsiaMap from "@/components/EastAsiaMap";
@@ -89,9 +89,9 @@ const services = [
   { num: "03", title: "Market Making & Liquidity", tagline: "Exchange-grade order-book depth from listing day. Vetted market-maker desk matching, aligned incentives.",
     desc: "A great listing into a thin order book is a failed listing. We architect your liquidity strategy, size the order book, and broker vetted market-making desks so you open into real depth and a tight spread.",
     caps: ["Liquidity Strategy & Order-Book Sizing","Vetted Market-Maker Desk Matching","Listing-Day Depth & Spread Management","Retainer Model, Compliant & Aligned","Real Volume, Never Wash Trading","Post-Listing Maintenance"], href: "/services/liquidity", img: svcLiquidityImg },
-  { num: "04", title: "Tokenomics", tagline: "Token supply, distribution, and unlocks engineered for the Korean market. Disclosure-ready for exchange review.",
-    desc: "Korean retail trades the float and the unlock, not the whitepaper. We engineer your supply, vesting, and valuation for how this market actually behaves, built disclosure-ready for exchange review.",
-    caps: ["Supply, Emission & Allocation Design","Vesting & Unlock Scheduling","Listing Float & Circulating-Supply Planning","Utility, Value Accrual & FDV Benchmarking","Korea-Retail Optimized","Exchange-Disclosure Ready"], href: "/services/tokenomics", img: svcTokenomicsImg },
+  { num: "04", title: "Exchange Marketing", tagline: "Funded, repeat Korean traders for CEX and DEX, driven by trading KOL affiliation, paid acquisition, and organic growth.",
+    desc: "For an exchange the only metric that compounds is trading volume. We convert Korean attention into funded accounts that trade, through trading KOL affiliation, deposit-optimized paid ads, and the organic growth that makes it last.",
+    caps: ["Trading KOL Affiliation & Referral","Full-Funnel Paid Acquisition","Organic User Growth (Naver, Community)","CEX & DEX Funnels","Deposit-Optimized, Not CPM","Measured in Trading Volume"], href: "/services/exchange-marketing", img: svcExchangeImg },
   { num: "05", title: "Capital & OTC Introduction", tagline: "Warm access to Korea's crypto VCs, OTC desks, and institutional custody. Fund-ready structuring.",
     desc: "Korea's real capital is relationship-gated and invisible from the outside. We open the door to crypto VCs, licensed OTC desks, and custody, plus the structuring to make you fund-ready.",
     caps: ["Korean VC & Strategic Intros","Licensed OTC Desk Connections","Institutional Custody Onboarding","Offshore Entity & Fund-Ready Structuring","Token & Equity Rounds","Warm Introductions, Not Broker Networks"], href: "/services/capital", img: svcCapitalImg },

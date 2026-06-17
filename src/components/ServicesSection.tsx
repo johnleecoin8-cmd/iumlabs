@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileSearch, Droplets, Landmark, Coins, Handshake } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileSearch, Droplets, Landmark, TrendingUp, Handshake } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-strategy.webp";
@@ -10,7 +10,7 @@ import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
 import listingImage from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImage from "@/assets/platforms/res-market.jpg";
-import tokenomicsImage from "@/assets/services/tokenomics-hero.png";
+import exchangeImage from "@/assets/services/cex-paid-ads.webp";
 import capitalImage from "@/assets/platforms/res-thesis.jpg";
 
 const services = [
@@ -61,17 +61,17 @@ const services = [
   },
   {
     number: "04",
-    title: "Tokenomics",
-    description: "Token supply, distribution, and unlocks engineered for the Korean market.",
-    link: "/services/tokenomics",
-    icon: Coins,
-    image: tokenomicsImage,
-    accent: "#818CF8",
+    title: "Exchange Marketing",
+    description: "Funded, repeat Korean traders for CEX and DEX, measured in trading volume.",
+    link: "/services/exchange-marketing",
+    icon: TrendingUp,
+    image: exchangeImage,
+    accent: "#2DD4BF",
     details: [
-      "Supply, emission & allocation design",
-      "Vesting & unlock scheduling",
-      "Listing float & circulating-supply planning",
-      "Utility, value accrual & FDV benchmarking",
+      "Trading KOL affiliation & referral",
+      "Full-funnel paid acquisition",
+      "Organic user growth (Naver, community)",
+      "Optimized to cost per funded account",
     ],
   },
   {

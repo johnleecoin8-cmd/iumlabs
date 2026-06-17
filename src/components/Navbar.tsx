@@ -13,7 +13,7 @@ const serviceItems = [
   { name: "GTM Strategy", href: "/services/gtm" },
   { name: "CEX Listing Advisory", href: "/services/listing" },
   { name: "Market Making & Liquidity", href: "/services/liquidity" },
-  { name: "Tokenomics", href: "/services/tokenomics" },
+  { name: "Exchange Marketing", href: "/services/exchange-marketing" },
   { name: "Capital & OTC Introduction", href: "/services/capital" },
   { name: "Influencer / KOL Marketing", href: "/services/influencer" },
   { name: "Community Management", href: "/services/community" },
@@ -179,7 +179,7 @@ const Navbar = () => {
                       <Link to="/services/gtm" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">GTM Strategy</Link>
                       <Link to="/services/listing" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">CEX Listing Advisory</Link>
                       <Link to="/services/liquidity" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Market Making & Liquidity</Link>
-                      <Link to="/services/tokenomics" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Tokenomics</Link>
+                      <Link to="/services/exchange-marketing" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Exchange Marketing</Link>
                       <Link to="/services/capital" onClick={() => setIsMenuOpen(false)} className="block text-base text-white/60 hover:text-white transition-colors">Capital & OTC Introduction</Link>
                     </div>
                   </div>
@@ -249,7 +249,7 @@ const Navbar = () => {
                       { name: "GTM Strategy", href: "/services/gtm" },
                       { name: "CEX Listing", href: "/services/listing" },
                       { name: "Market Making", href: "/services/liquidity" },
-                      { name: "Tokenomics", href: "/services/tokenomics" },
+                      { name: "Exchange Marketing", href: "/services/exchange-marketing" },
                       { name: "Capital & OTC", href: "/services/capital" },
                       { name: "KOL Marketing", href: "/services/influencer" },
                       { name: "Community Management", href: "/services/community" },
