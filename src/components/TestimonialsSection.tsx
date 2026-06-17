@@ -36,7 +36,7 @@ const C = {
 // Avatars are Web3 PFPs (real X/Twitter NFT/character PFPs where available, pixel-art
 // crypto PFPs otherwise) — no real-person photos.
 const testimonials: Testimonial[] = [
-  { name: "Martin", role: "CBO, peaq", color: C.blue, avatar: avPeaq, text: "ium had us KBW-ready in three weeks, 6 AMAs, a real Korean community, zero bots. They don't hand you a list, they embed and run it.", time: "16:42" },
+  { name: "Martin", role: "CBO, peaq", color: C.blue, avatar: avPeaq, text: "ium Labs는 진정한 한국 로컬 에코 시스템 파트너다.", time: "16:42" },
   { name: "Mina S.", role: "Head of Marketing, MANTRA", color: C.purple, avatar: avMantra, text: "Upbit and Bithumb felt out of reach until ium. Listing groundwork plus a Korean KOL rollout in one motion. We finally cracked Korea.", time: "14:18" },
   { name: "Kevin L.", role: "CMO, KuCoin", color: C.green, avatar: avKucoin, text: "$150M+ in Korean trading volume off one campaign cycle. They know every KOL, every Kakao group, every Naver play.", time: "19:05" },
   { name: "Sofia T.", role: "Founder, Tria", color: C.orange, avatar: avTria, text: "30K Korean wallets in six months. They ran our UA like it was their own runway. gg.", time: "11:50" },
