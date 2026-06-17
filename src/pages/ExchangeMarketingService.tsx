@@ -1,7 +1,7 @@
 import { Users, Target, TrendingUp } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/platforms/comp-exchange.jpg";
+import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 import featKolImg from "@/assets/services/kol-campaign.webp";
 import featPaidImg from "@/assets/services/cex-paid-ads.webp";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
