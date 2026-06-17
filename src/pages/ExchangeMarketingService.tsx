@@ -2,7 +2,7 @@ import { Users, Target, Search } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
-import featKolImg from "@/assets/services/kol-campaign.webp";
+import featKolImg from "@/assets/services/trading-kol-chart.webp";
 import featPaidImg from "@/assets/services/cex-paid-ads.webp";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
 import delivImg from "@/assets/platforms/res-market.jpg";
@@ -46,7 +46,7 @@ const ExchangeMarketingService = () => (
       ],
     }}
     features={[
-      { icon: Users, eyebrow: "01 · Affiliate", title: "Trading KOL Affiliation", body: "We recruit trading-native Korean KOLs onto a tracked affiliate and referral structure, the ones whose audiences actually trade, and brief them to drive sign-ups and first deposits. They are paid for the funded traders they bring, so incentives align with your volume instead of their impressions.", points: ["Trading-native Korean KOLs", "Tracked referral & affiliate links", "Briefed to sign-ups and deposits", "Paid on funded accounts, not reach"], image: featKolImg },
+      { icon: Users, eyebrow: "01 · Affiliate", title: "Trading KOL Affiliation", body: "We recruit trading-native Korean KOLs, the ones whose audiences actually trade, onto a tracked affiliate and referral structure: live-streamed trading, chart calls, and content briefed to drive sign-ups and first deposits. They are paid for the funded traders they bring, so incentives align with your volume, not their impressions.", points: ["Trading-native Korean KOLs", "Live-streamed trading & chart calls", "Tracked referral & affiliate links", "Briefed to sign-ups and deposits", "Paid on funded accounts, not reach"], image: featKolImg },
       { icon: Target, eyebrow: "02 · Paid", title: "Paid Ads", body: "A full-funnel paid acquisition engine for exchanges, run across the crypto-friendly networks most agencies can't get approved on. We target by exchange, region, demographic, and intent, and optimize the whole funnel, install to sign-up to first deposit, to cost per funded account rather than CPM.", points: ["Install, sign-up, first deposit funnel", "Certified crypto channels (Google, X, Coinzilla)", "Exchange, region & demographic targeting", "Optimized to cost per funded account"], image: featPaidImg },
       { icon: Search, eyebrow: "03 · SEO", title: "Organic SEO Setup", body: "The compounding layer most exchanges skip: owning the Korean organic search results. We place PR that ranks on Naver, run a Naver Blog content engine, and build Naver Cafe presence in the communities where Korean traders gather, so your exchange shows up everywhere a trader searches, at near-zero marginal cost. Owned search holds volume long after the paid push stops.", points: ["PR placed to rank on Naver search", "Naver Blog content & SERP ranking", "Naver Cafe community presence", "An owned search footprint that compounds"], image: featOrganicImg },
     ]}
