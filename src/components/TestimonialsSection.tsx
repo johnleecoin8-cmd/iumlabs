@@ -70,10 +70,10 @@ const Card = ({ t }: { t: Testimonial }) => (
   </figure>
 );
 
-const Track = ({ items, offset = false }: { items: Testimonial[]; offset?: boolean }) => (
+const Track = ({ items, offset = false, reverse = false }: { items: Testimonial[]; offset?: boolean; reverse?: boolean }) => (
   <div
-    className="flex w-max animate-marquee group-hover:[animation-play-state:paused]"
-    style={{ animationDuration: "70s", marginLeft: offset ? "-179px" : undefined }}
+    className={`flex w-max ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
+    style={{ animationDuration: "58s", marginLeft: offset ? "-179px" : undefined }}
   >
     {[...items, ...items].map((t, i) => (
       <Card key={i} t={t} />
@@ -92,14 +92,14 @@ const TestimonialsSection = () => {
   return (
     <div className="pb-20 md:pb-28">
       <div
-        className="group relative flex flex-col gap-8 sm:gap-14 overflow-hidden pb-12 pt-2"
+        className="relative flex flex-col gap-8 sm:gap-14 overflow-hidden pb-12 pt-2"
         style={{
           maskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         }}
       >
         {rows.map((items, i) => (
-          <Track key={i} items={items} offset={i % 2 === 1} />
+          <Track key={i} items={items} offset={i % 2 === 1} reverse={i % 2 === 1} />
         ))}
       </div>
     </div>
