@@ -153,7 +153,7 @@ const MobileShowcase = () => {
                   <span className="text-[9px] text-white/45 uppercase tracking-[0.15em] block mb-1">
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-bold text-white mb-0.5 tracking-tight">
+                  <h3 className="text-xl font-extrabold text-white mb-0.5 tracking-[-0.02em] leading-[1.05]">
                     {project.name}
                   </h3>
                   <span className="text-[13px] text-primary font-medium">
@@ -296,7 +296,7 @@ const DesktopShowcase = () => {
 
       <div className="relative z-10 h-full flex flex-col lg:flex-row">
         <div
-          className="w-full lg:w-2/5 h-full flex flex-col justify-center px-5 py-6 lg:px-12 lg:py-0 lg:px-16"
+          className="w-full lg:w-2/5 h-full flex flex-col justify-center px-5 py-6 lg:px-16 lg:py-0"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
@@ -326,7 +326,7 @@ const DesktopShowcase = () => {
                     <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-bold transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/55 group-hover:text-white/80'}`}>
+                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] leading-[1.05] transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/60 group-hover:text-white/85'}`}>
                       {project.name}
                     </span>
                     <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 text-left ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>
@@ -341,7 +341,7 @@ const DesktopShowcase = () => {
 
           {/* Mobile mission + CTA */}
           <div className="lg:hidden mt-6 pt-5">
-            <p className="text-[13px] text-white/35 leading-relaxed mb-4">
+            <p className="text-[13px] text-white/55 leading-relaxed tracking-[-0.01em] mb-4">
               Former Binance, KuCoin, Upbit operators. We engineer your Korea market entry.
             </p>
             <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-primary">
@@ -359,10 +359,10 @@ const DesktopShowcase = () => {
             className="max-w-lg ml-auto"
           >
             <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">Our Mission</span>
-            <h3 className="text-2xl xl:text-3xl 2xl:text-4xl font-bold mb-4 text-right leading-tight">
-              <span className="bg-gradient-to-r from-[#6ee7b7] via-[#34D399] to-[#6ee7b7] bg-clip-text text-transparent">Real Results.<br />No Recycled Playbooks.</span>
+            <h3 className="text-2xl xl:text-3xl 2xl:text-4xl font-extrabold mb-4 text-right leading-[1.0] tracking-[-0.025em] text-white">
+              <span>Real Results.<br />No Recycled Playbooks.</span>
             </h3>
-            <p className="text-white/40 text-sm xl:text-base leading-relaxed mb-8 text-right">
+            <p className="text-white/60 text-sm xl:text-base leading-relaxed tracking-[-0.01em] mb-8 text-right">
               With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.
             </p>
             <div className="flex justify-end">

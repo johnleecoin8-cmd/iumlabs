@@ -64,8 +64,8 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Content with Parallax */}
           <motion.div style={{ y: contentY }}>
-            <motion.span 
-              className="text-label font-medium text-blue-600 tracking-wider mb-3 block uppercase"
+            <motion.span
+              className="text-label font-semibold text-blue-600 tracking-[0.18em] mb-4 block uppercase"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -73,8 +73,8 @@ const AboutSection = () => {
             >
               About Us
             </motion.span>
-            <motion.h2 
-              className="text-display-lg font-bold tracking-tight mb-4 text-foreground"
+            <motion.h2
+              className="text-display-lg font-extrabold tracking-[-0.04em] leading-[0.95] mb-5 text-foreground"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -83,8 +83,8 @@ const AboutSection = () => {
               Korea's Leading<br />
               <span className="text-gradient">Web3 Marketing</span> Agency
             </motion.h2>
-            <motion.p 
-              className="text-muted-foreground text-body leading-relaxed mb-6"
+            <motion.p
+              className="text-foreground/70 text-body leading-relaxed tracking-[-0.01em] mb-6 max-w-xl"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -110,8 +110,8 @@ const AboutSection = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   className="cursor-default"
                 >
-                  <div className={`text-2xl font-bold ${stat.color} stat-glow`}>{stat.value}</div>
-                  <div className="text-caption text-muted-foreground">{stat.label}</div>
+                  <div className={`text-3xl font-extrabold tracking-[-0.03em] ${stat.color}`}>{stat.value}</div>
+                  <div className="text-caption text-foreground/60 tracking-[-0.01em]">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
@@ -123,9 +123,9 @@ const AboutSection = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Link to="/contact">
-                <Button 
-                  size="lg" 
-                  className="rounded-full bg-primary hover:bg-primary/90 group shadow-md"
+                <Button
+                  size="lg"
+                  className="rounded-full bg-primary hover:bg-primary/90 font-semibold tracking-[-0.01em] group shadow-md"
                 >
                   Book a Meeting
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -166,9 +166,9 @@ const AboutSection = () => {
                     className="w-full h-full object-cover"
                   />
                 </motion.div>
-                <h3 className="text-lg font-semibold text-foreground">{founder.name}</h3>
-                <p className="text-sm text-primary mb-2">{founder.role}</p>
-                <p className="text-xs text-muted-foreground mb-4 line-clamp-2">{founder.background}</p>
+                <h3 className="text-lg font-bold tracking-[-0.02em] text-foreground">{founder.name}</h3>
+                <p className="text-sm font-medium text-primary mb-2">{founder.role}</p>
+                <p className="text-xs text-foreground/60 leading-relaxed tracking-[-0.01em] mb-4 line-clamp-2">{founder.background}</p>
                 
                 {/* Social Links */}
                 <div className="flex items-center gap-3">

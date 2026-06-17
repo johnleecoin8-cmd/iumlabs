@@ -82,7 +82,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline, each line slides in separately */}
-          <h2 className="font-display text-[clamp(1.5rem,5.5vw,5rem)] font-bold text-white mb-6 sm:mb-10 tracking-[-0.04em] leading-[1.02] sm:whitespace-nowrap">
+          <h2 className="font-display text-[clamp(1.75rem,6vw,5.25rem)] font-extrabold text-white mb-6 sm:mb-9 tracking-[-0.035em] sm:tracking-[-0.045em] leading-[0.95] sm:leading-[0.92] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -96,7 +96,7 @@ const WhyChooseUsSection = () => {
 
           {/* Description, blur reveal */}
           <motion.p
-            className="text-white/55 leading-[1.75] text-[13px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-wide px-3 sm:px-0"
+            className="text-white/75 leading-[1.6] text-[14px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-[-0.01em] px-3 sm:px-0"
             variants={descriptionVariants}>
             Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck, we rebuild your <span className="text-white/90 font-medium">narrative</span>, activate <span className="text-white/90 font-medium">real KOLs</span>, and run <span className="text-white/90 font-medium">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
           </motion.p>
@@ -125,7 +125,7 @@ const WhyChooseUsSection = () => {
               { value: STATS.eventsHosted.display, label: STATS.eventsHosted.label },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-[-0.03em] leading-none mb-2 sm:mb-3">
+                <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-[-0.035em] leading-none mb-2 sm:mb-3">
                   {stat.value}
                 </div>
                 <div className="text-[10px] sm:text-xs md:text-sm text-white/40 font-medium uppercase tracking-[0.2em]">
@@ -141,7 +141,7 @@ const WhyChooseUsSection = () => {
       <div className="relative z-10 overflow-hidden">
         <div className="flex items-center justify-center gap-3 pt-4 pb-2">
           <div className="h-px w-8 bg-gradient-to-r from-transparent to-white/20" />
-          <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase font-light">Media Spots</span>
+          <span className="text-[10px] text-white/40 tracking-[0.3em] uppercase font-medium">Media Spots</span>
           <div className="h-px w-8 bg-gradient-to-l from-transparent to-white/20" />
         </div>
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-black/60 to-transparent z-10" />

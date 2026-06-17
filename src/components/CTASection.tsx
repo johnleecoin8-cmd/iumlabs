@@ -119,10 +119,10 @@ const CTASection = () => {
           <div
             className="p-6 md:p-8 lg:p-10 lg:sticky lg:top-0 flex flex-col pt-8 md:pt-12"
           >
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-foreground tracking-[-0.035em] leading-[1.0] mb-5">
               Get in Touch
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-8">
+            <p className="text-base text-muted-foreground/90 tracking-[-0.01em] leading-relaxed mb-8">
               Ready to enter the Korean market? Let's discuss how we can help your project grow.
             </p>
 
@@ -362,7 +362,7 @@ const CTASection = () => {
                       Sending...
                     </motion.span>
                   ) : (
-                    <motion.span key="idle" className="relative z-10 inline-flex items-center gap-2">
+                    <motion.span key="idle" className="relative z-10 inline-flex items-center gap-2 tracking-[0.02em]">
                       SEND MESSAGE
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </motion.span>

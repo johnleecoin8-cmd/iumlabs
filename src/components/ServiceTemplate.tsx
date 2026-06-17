@@ -74,10 +74,10 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
           <div className="max-w-4xl">
             <span className="inline-block font-mono text-[11px] sm:text-xs font-bold tracking-[0.35em] mb-5" style={{ color: A, ...heroStep(0) }}>{p.hero.eyebrow}</span>
-            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-bold tracking-[-0.035em] leading-[0.98] mb-7" style={heroStep(1)}>
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-[4.25rem] font-extrabold tracking-[-0.04em] leading-[0.92] mb-7" style={heroStep(1)}>
               {p.hero.titleLead} <span style={{ color: A }}>{p.hero.titleAccent}</span>
             </h1>
-            <p className="font-sans font-light text-lg sm:text-xl text-white/75 leading-relaxed max-w-2xl mb-9" style={heroStep(2)}>{p.hero.lede}</p>
+            <p className="font-sans text-lg sm:text-xl text-white/75 tracking-[-0.01em] leading-[1.55] max-w-2xl mb-9" style={heroStep(2)}>{p.hero.lede}</p>
             <div className="flex flex-wrap items-center gap-3 mb-12" style={heroStep(3)}>
               <Link to={primaryCta.href} className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-[#0A0A0A] transition-transform hover:-translate-y-0.5" style={{ backgroundColor: A, boxShadow: `0 10px 40px -10px ${A}80` }}>
                 {primaryCta.label} <ArrowRight className="w-4 h-4" />
@@ -87,8 +87,8 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-white/[0.08] rounded-2xl overflow-hidden max-w-3xl border border-white/[0.08] backdrop-blur-md" style={heroStep(4)}>
               {p.stats.map((s) => (
                 <div key={s.l} className="bg-[#0A0A0A]/70 px-4 py-5">
-                  <div className="font-display text-2xl sm:text-3xl font-bold tracking-tight" style={{ color: A }}>{s.v}</div>
-                  <div className="text-[11px] sm:text-xs text-white/45 mt-1">{s.l}</div>
+                  <div className="font-display text-2xl sm:text-3xl font-extrabold tracking-[-0.03em]" style={{ color: A }}>{s.v}</div>
+                  <div className="text-[11px] sm:text-xs text-white/55 tracking-[-0.005em] mt-1.5">{s.l}</div>
                 </div>
               ))}
             </div>
@@ -128,10 +128,10 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         <Reveal>
           <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.reality.eyebrow ?? "THE REALITY"}</span>
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mt-6 items-start">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-[1.02]">
               {p.reality.heading} {p.reality.headingAccent && <span style={{ color: A }}>{p.reality.headingAccent}</span>}
             </h2>
-            <div className="space-y-5 font-sans text-[15px] sm:text-base text-white/80 leading-relaxed">
+            <div className="space-y-5 font-sans text-[15px] sm:text-base text-white/80 tracking-[-0.01em] leading-relaxed">
               {p.reality.body.map((para, i) => (<p key={i}>{para}</p>))}
             </div>
           </div>
@@ -143,15 +143,15 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 border-b border-white/[0.06]">
           <Reveal>
             <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.types.eyebrow ?? "WHAT WE COVER"}</span>
-            <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-3">{p.types.heading} {p.types.headingAccent && <span style={{ color: A }}>{p.types.headingAccent}</span>}</h2>
-            {p.types.sub && <p className="text-white/50 leading-relaxed max-w-2xl">{p.types.sub}</p>}
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4 mb-3">{p.types.heading} {p.types.headingAccent && <span style={{ color: A }}>{p.types.headingAccent}</span>}</h2>
+            {p.types.sub && <p className="text-white/60 tracking-[-0.01em] leading-relaxed max-w-2xl">{p.types.sub}</p>}
           </Reveal>
           <div className="grid md:grid-cols-3 gap-4 mt-10">
             {p.types.cards.map((c, i) => (
               <Reveal key={c.title} delay={i * 80}>
                 <div className="h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] p-7 hover:border-white/[0.14] transition-colors">
-                  <div className="font-display text-lg font-semibold mb-3" style={{ color: A }}>{c.title}</div>
-                  <p className="text-[14px] text-white/55 leading-relaxed">{c.body}</p>
+                  <div className="font-display text-lg font-bold tracking-[-0.01em] mb-3" style={{ color: A }}>{c.title}</div>
+                  <p className="text-[14px] text-white/60 leading-relaxed">{c.body}</p>
                 </div>
               </Reveal>
             ))}
@@ -163,15 +163,15 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
       <section id="process" className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24 bg-[#0D0D0D] border-y border-white/[0.06]">
         <Reveal>
           <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.process.eyebrow ?? "HOW IT WORKS"}</span>
-          <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-12">{p.process.heading} {p.process.headingAccent && <span style={{ color: A }}>{p.process.headingAccent}</span>}</h2>
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4 mb-12">{p.process.heading} {p.process.headingAccent && <span style={{ color: A }}>{p.process.headingAccent}</span>}</h2>
         </Reveal>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {p.process.steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
               <div className="h-full rounded-2xl bg-white/[0.03] border border-white/[0.06] border-t-2 p-6 hover:bg-white/[0.05] transition-colors" style={{ borderTopColor: `${A}66` }}>
-                <div className="font-display font-bold text-2xl leading-none mb-4" style={{ color: A }}>0{i + 1}</div>
-                <div className="font-display text-lg font-semibold mb-2">{s.title}</div>
-                <p className="text-[13px] text-white/50 leading-relaxed">{s.body}</p>
+                <div className="font-display font-extrabold text-2xl tracking-[-0.02em] leading-none mb-4" style={{ color: A }}>0{i + 1}</div>
+                <div className="font-display text-lg font-bold tracking-[-0.01em] mb-2">{s.title}</div>
+                <p className="text-[13px] text-white/60 leading-relaxed">{s.body}</p>
               </div>
             </Reveal>
           ))}
@@ -189,24 +189,21 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                 <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3]">
                   <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${A}1a, transparent 55%)` }} />
-                  <div className="absolute top-4 left-4 w-7 h-7 border-t-2 border-l-2 rounded-tl-lg" style={{ borderColor: `${A}aa` }} />
-                  <div className="absolute bottom-4 right-4 w-7 h-7 border-b-2 border-r-2 rounded-br-lg" style={{ borderColor: `${A}aa` }} />
                 </div>
                 <div className="relative">
                   <div className="flex items-baseline gap-4 mb-5">
-                    <span className="font-display text-5xl sm:text-6xl font-bold leading-none" style={{ color: A }}>{f.eyebrow.slice(0, 2)}</span>
+                    <span className="font-display text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-none" style={{ color: A }}>{f.eyebrow.slice(0, 2)}</span>
                     <div className="flex items-center gap-2.5">
                       <div className="w-9 h-9 rounded-full flex items-center justify-center border" style={{ backgroundColor: `${A}14`, borderColor: `${A}33` }}>
                         <Icon className="w-4 h-4" style={{ color: A }} />
                       </div>
-                      <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/35">{f.eyebrow.split("· ")[1] ?? f.eyebrow}</span>
+                      <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/45">{f.eyebrow.split("· ")[1] ?? f.eyebrow}</span>
                     </div>
                   </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-[-0.02em] mb-4">{f.title}</h3>
-                  <p className="text-white/55 leading-relaxed mb-6">{f.body}</p>
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] mb-4">{f.title}</h3>
+                  <p className="text-white/65 tracking-[-0.01em] leading-relaxed mb-6">{f.body}</p>
                   <ul className="space-y-2.5">
-                    {f.points.map((pt) => (<li key={pt} className="flex items-start gap-3 text-[14px] text-white/65"><Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{pt}</span></li>))}
+                    {f.points.map((pt) => (<li key={pt} className="flex items-start gap-3 text-[14px] text-white/70"><Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{pt}</span></li>))}
                   </ul>
                 </div>
               </div>
@@ -218,9 +215,9 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
       {/* PULL QUOTE */}
       {p.pullQuote && (
         <section className="relative px-5 sm:px-8 lg:px-20 py-24 sm:py-32 overflow-hidden border-y border-white/[0.06]">
-          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full blur-[140px] opacity-[0.12]" style={{ background: A }} />
+          <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[560px] h-[320px] rounded-full blur-[160px] opacity-[0.07]" style={{ background: A }} />
           <Reveal className="relative max-w-4xl mx-auto text-center">
-            <blockquote className="font-serif text-2xl sm:text-4xl lg:text-[2.7rem] leading-[1.28] text-white/90">
+            <blockquote className="font-serif text-2xl sm:text-4xl lg:text-[2.7rem] leading-[1.22] text-white/90">
               {p.pullQuote.lead} <span className="italic" style={{ color: A }}>{p.pullQuote.accent}</span>
             </blockquote>
           </Reveal>
@@ -233,22 +230,20 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           <Reveal>
             <div className="max-w-3xl mb-12">
               <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">OUR PROMISE</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4">{p.promise.heading} {p.promise.headingMuted && <span className="text-white/40">{p.promise.headingMuted}</span>}</h2>
+              <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4">{p.promise.heading} {p.promise.headingMuted && <span className="text-white/40">{p.promise.headingMuted}</span>}</h2>
             </div>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-4">
             <Reveal>
-              <div className="relative h-full rounded-3xl p-[1.5px]" style={{ background: `linear-gradient(140deg, ${A}99, ${A}10 55%, transparent)` }}>
-                <div className="h-full rounded-3xl p-7 sm:p-8" style={{ background: "#0C0C0E" }}>
-                  <div className="text-sm font-bold uppercase tracking-wider mb-5" style={{ color: A }}>{p.promise.doLabel ?? "What we do"}</div>
-                  <ul className="space-y-3">{p.promise.do.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/75"><Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{x}</span></li>))}</ul>
-                </div>
+              <div className="h-full rounded-3xl p-7 sm:p-8" style={{ background: "#0C0C0E", border: `1px solid ${A}33` }}>
+                <div className="text-sm font-bold uppercase tracking-wider mb-5" style={{ color: A }}>{p.promise.doLabel ?? "What we do"}</div>
+                <ul className="space-y-3">{p.promise.do.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/80"><Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{x}</span></li>))}</ul>
               </div>
             </Reveal>
             <Reveal delay={80}>
               <div className="h-full rounded-3xl border border-white/[0.08] bg-white/[0.02] p-7 sm:p-8">
                 <div className="text-sm font-bold uppercase tracking-wider mb-5 text-white/40">{p.promise.dontLabel ?? "What we never do"}</div>
-                <ul className="space-y-3">{p.promise.dont.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/55"><span className="mt-2.5 w-3 h-px bg-white/30 flex-shrink-0" /><span>{x}</span></li>))}</ul>
+                <ul className="space-y-3">{p.promise.dont.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/60"><span className="mt-2.5 w-3 h-px bg-white/30 flex-shrink-0" /><span>{x}</span></li>))}</ul>
               </div>
             </Reveal>
           </div>
@@ -262,8 +257,8 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <div className="relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
               <div>
                 <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.deliverable.eyebrow}</span>
-                <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-5">{p.deliverable.title}</h2>
-                <p className="text-white/55 leading-relaxed mb-6">{p.deliverable.body}</p>
+                <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4 mb-5">{p.deliverable.title}</h2>
+                <p className="text-white/65 tracking-[-0.01em] leading-relaxed mb-6">{p.deliverable.body}</p>
                 <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: A }}>{p.deliverable.cta} <ArrowRight className="w-4 h-4" /></Link>
               </div>
               <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[16/10]">
@@ -281,8 +276,8 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           <Reveal>
             <div className="lg:sticky lg:top-28">
               <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.faq.eyebrow ?? "FAQ"}</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-semibold tracking-[-0.02em] mt-4 mb-4">{p.faq.heading}</h2>
-              <p className="text-white/50 leading-relaxed mb-6">{p.faq.sub}</p>
+              <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4 mb-4">{p.faq.heading}</h2>
+              <p className="text-white/60 tracking-[-0.01em] leading-relaxed mb-6">{p.faq.sub}</p>
               <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: A }}>Still unsure? Talk to us <ArrowRight className="w-4 h-4" /></Link>
             </div>
           </Reveal>
@@ -294,7 +289,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                   <ChevronDown className="w-5 h-5 flex-shrink-0 transition-transform duration-300" style={{ color: openFaq === i ? A : "rgba(255,255,255,0.4)", transform: openFaq === i ? "rotate(180deg)" : "none" }} />
                 </button>
                 <div className={`overflow-hidden transition-all duration-300 ${openFaq === i ? "max-h-[600px] pb-6" : "max-h-0"}`}>
-                  <p className="text-white/55 leading-relaxed pr-6">{f.a}</p>
+                  <p className="text-white/65 tracking-[-0.01em] leading-relaxed pr-6">{f.a}</p>
                 </div>
               </div>
             ))}

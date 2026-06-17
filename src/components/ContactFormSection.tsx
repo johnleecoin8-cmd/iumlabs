@@ -156,7 +156,7 @@ const ContactFormSection = () => {
       <div className="border-t border-white/15">
         {/* Section Header */}
         <div className="px-5 sm:px-6 lg:px-10 pt-8 sm:pt-10 pb-4">
-          <h2 className="text-lg sm:text-xl font-semibold text-white tracking-[-0.01em]">Contact</h2>
+          <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-[-0.03em] leading-none">Contact</h2>
         </div>
 
 
@@ -252,8 +252,8 @@ const ContactFormSection = () => {
                       </div>
                       <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-emerald-400 animate-pulse" />
                     </div>
-                    <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">Message Sent!</h4>
-                    <p className="text-white/60 text-sm sm:text-base">We'll get back to you within 24 hours.</p>
+                    <h4 className="text-2xl sm:text-3xl font-extrabold text-white tracking-[-0.03em] leading-none mb-2.5">Message Sent!</h4>
+                    <p className="text-white/70 text-sm sm:text-base tracking-[-0.01em]">We'll get back to you within 24 hours.</p>
                   </motion.div>
                 ) : (
                   <motion.div
@@ -264,10 +264,10 @@ const ContactFormSection = () => {
                   >
                     {/* Header */}
                     <div className="mb-4 sm:mb-5">
-                      <h3 className="text-lg sm:text-xl font-bold text-white tracking-tight mb-1">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-[-0.03em] leading-[1.05] mb-1.5">
                         Let's start a conversation
                       </h3>
-                      <p className="text-sm text-white/55 leading-relaxed">
+                      <p className="text-sm text-white/70 tracking-[-0.01em] leading-relaxed">
                         Share your project details, we'll reply within 24 hours KST.
                       </p>
                     </div>
@@ -275,10 +275,10 @@ const ContactFormSection = () => {
                     {/* Step Indicator */}
                     <div className="mb-3 sm:mb-4">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs text-white/50">
+                        <span className="text-xs text-white/55 tracking-[-0.01em]">
                           Step {currentStep} of {totalSteps}
                         </span>
-                        <span className="text-xs text-white/40">
+                        <span className="text-xs text-white/55 tracking-[-0.01em]">
                           {currentStep === 1 ? "Project details" : "Review & send"}
                         </span>
                       </div>
@@ -441,8 +441,8 @@ const ContactFormSection = () => {
                             className="space-y-3"
                           >
                             <div className="mb-1">
-                              <h4 className="text-base font-semibold text-white mb-0.5">Review your request</h4>
-                              <p className="text-xs text-white/50">Make sure everything looks right before sending.</p>
+                              <h4 className="text-base font-bold text-white tracking-[-0.02em] mb-0.5">Review your request</h4>
+                              <p className="text-xs text-white/60 tracking-[-0.01em]">Make sure everything looks right before sending.</p>
                             </div>
 
                             {/* Summary Card */}
