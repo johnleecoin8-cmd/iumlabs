@@ -97,7 +97,7 @@
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/services/exchange-marketing</loc>
+    <loc>https://iumlabs.io/services/tokenomics</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -289,13 +289,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/projects/stable</loc>
+    <loc>https://iumlabs.io/projects/simpfor</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/projects/simpfor</loc>
+    <loc>https://iumlabs.io/projects/stable</loc>
     <lastmod>2026-06-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
