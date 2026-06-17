@@ -738,9 +738,18 @@ const Projects = () => {
       logo: null as string | null,
     },
   ];
-  const cases = [
+  const baseOrdered = [
     ...extraCases.filter((e) => !baseCases.some((c) => c.slug === e.slug)),
     ...baseCases,
+  ];
+
+  // John-specified ordering: surface these case studies at the top of the grid.
+  const PRIORITY_SLUGS = ["world", "bybit", "spacecoin", "sahara-ai", "aptos", "polygon"];
+  const cases = [
+    ...PRIORITY_SLUGS
+      .map((s) => baseOrdered.find((c) => c.slug === s))
+      .filter((c): c is (typeof baseOrdered)[number] => Boolean(c)),
+    ...baseOrdered.filter((c) => !PRIORITY_SLUGS.includes(c.slug)),
   ];
 
   // Transform cases to SelectedWorkProject format
