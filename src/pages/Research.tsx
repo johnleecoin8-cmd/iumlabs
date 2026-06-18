@@ -7,6 +7,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import BlogCover from "@/components/BlogCover";
 import { Link, useSearchParams } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -217,11 +218,7 @@ const Research = () => {
               {/* Main Featured */}
               <Link to={`/blog/${featuredPost.slug}`} className="group lg:col-span-2 block">
                 <div className="relative h-full min-h-[280px] sm:min-h-[400px] lg:min-h-[480px] rounded-xl overflow-hidden">
-                  {featuredPost.image ? (
-                    <img src={featuredPost.image} alt={featuredPost.title} loading="eager" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  ) : (
-                    <div className="absolute inset-0 bg-white/[0.03]" />
-                  )}
+                  <BlogCover post={featuredPost} variant="art" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10">
                     <div className="flex items-center gap-3 mb-3 sm:mb-4">
@@ -262,11 +259,7 @@ const Research = () => {
                 {secondaryPosts.map(post => (
                   <Link key={post.id} to={`/blog/${post.slug}`} className="group block flex-1">
                     <div className="relative h-full min-h-[180px] sm:min-h-[228px] rounded-xl overflow-hidden">
-                      {post.image ? (
-                        <img src={post.image} alt={post.title} loading="lazy" className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      ) : (
-                        <div className="absolute inset-0 bg-white/[0.03]" />
-                      )}
+                      <BlogCover post={post} variant="art" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
                         <div className="flex items-center gap-2 mb-2">
@@ -331,48 +324,13 @@ const Research = () => {
               {currentPosts.map(post => (
                 <Link key={post.id} to={`/blog/${post.slug}`} className="group block">
                   <article className="h-full">
-                    {/* Thumbnail */}
-                    <div className="aspect-[16/9] overflow-hidden rounded-xl">
-                      {post.image ? (
-                        <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                      ) : (
-                        <div className="w-full h-full bg-white/[0.03] flex items-center justify-center">
-                          <TrendingUp className="w-8 h-8 text-white/10" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="pt-4 sm:pt-5">
-                      <div className="flex items-center gap-3 mb-3">
-                        {post.category && (
-                          <span className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.18em]">
-                            {post.category}
-                          </span>
-                        )}
-                        <span className="text-white/40 text-[10px] sm:text-xs flex items-center gap-1">
-                          <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      <h3 className="text-base sm:text-lg font-light text-white leading-snug tracking-tight group-hover:text-[#d8b4fe] transition-colors duration-200 line-clamp-2 mb-2 sm:mb-3">
-                        {post.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-white/45 line-clamp-2 mb-4">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="flex items-center justify-between pt-3 border-t border-white/10">
-                        <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-white/[0.06] flex items-center justify-center text-[9px] font-medium text-white/60">
-                            {post.author.split(' ').map(n => n[0]).join('')}
-                          </div>
-                          <span className="text-[10px] sm:text-xs text-white/40">{post.author}</span>
-                        </div>
-                        <span className="text-[10px] sm:text-xs text-white/40">{post.date}</span>
-                      </div>
+                    <BlogCover post={post} variant="card" className="aspect-[3/4] rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]" />
+                    <div className="flex items-center justify-between pt-3.5">
+                      <span className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.18em]">{post.category}</span>
+                      <span className="text-white/40 text-[10px] sm:text-xs flex items-center gap-1.5">
+                        <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                        {post.readTime} · {post.date}
+                      </span>
                     </div>
                   </article>
                 </Link>

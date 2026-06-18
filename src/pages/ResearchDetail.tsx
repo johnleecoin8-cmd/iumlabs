@@ -9,6 +9,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import BlogCover from "@/components/BlogCover";
 import ArticleSchema from "@/components/ArticleSchema";
 import AutoFAQSchema from "@/components/AutoFAQSchema";
 import SEOHead from "@/components/SEOHead";
@@ -320,11 +321,7 @@ const ResearchDetail = () => {
       {/* Featured Image */}
       <section className="container mx-auto max-w-5xl px-4 mb-16">
         <div className="aspect-[21/9] rounded-2xl overflow-hidden">
-          <img 
-            src={post.image} 
-            alt={post.title}
-            className="w-full h-full object-cover"
-          />
+          <BlogCover post={post} variant="art" className="h-full w-full" />
         </div>
       </section>
 
