@@ -551,93 +551,82 @@ The protocols that win will treat Korea as a regulated-finance market that happe
       cityscape: seoulTech,
     },
     content: `>! **Key Takeaways**
->! Korea go-to-market fails when teams buy tactics (KOLs, AMAs, PR) instead of building a funnel, disconnected activity does not compound
->! The Korea GTM stack has four layers: **Awareness, Trust, Conversion, Retention**, each with Korea-specific channels that do not map cleanly to Western playbooks
->! Trust is the rate-limiting layer in Korea; skipping it caps conversion no matter how much awareness you buy
->! GTM should be anchored to the **listing cycle (T0)**, not a generic launch calendar, timing relative to the listing event is the single largest controllable variable
->! Projects that run all four layers see materially higher post-listing retention than those that spike awareness and stop
+>! Korea go-to-market fails when teams buy tactics instead of building a funnel; roughly 70% of Korean discovery runs on Naver, not Google, so a Western channel mix simply does not fire
+>! The stack has four layers, Awareness, Trust, Conversion, Retention, and Trust is the rate-limiter; skip it and conversion caps no matter how much reach you buy
+>! Everything is timed to the listing event (T0), not a generic launch calendar; timing relative to T0 is the single largest controllable variable in a Korean launch
+>! Projects that run all four layers hold materially more post-listing volume than those that spike awareness and stop
 
-## Executive Summary
+The most expensive mistake in Korean market entry is mistaking activity for strategy. A project buys a KOL package, runs an AMA, fires a press release, and calls it a go-to-market. Three weeks later awareness has spiked and collapsed, and nothing compounds. A real [go-to-market](/services/gtm) is a stack: four layers that hand off to each other, each measured, each built for how Korea actually works.
 
-The most expensive mistake in Korean market entry is mistaking activity for strategy. A project buys a KOL package, runs an AMA, fires a press release, and calls it a go-to-market. Three weeks later, awareness has spiked and collapsed, and nothing compounds.
+## 1. Why Western Playbooks Break in Korea
 
-![The Korea GTM funnel, four layers that have to connect for spend to compound](chart:funnel)
-*Tactics without a funnel produce a spike. A funnel produces a curve.*
+Korea is not a translation problem. The channels, the trust signals, and the timing are structurally different, and a playbook tuned for Western assumptions does not degrade gracefully here. It simply does not fire.
 
-A real [go-to-market](/services/gtm) is a stack: layers that hand off to each other, each measured, each Korea-specific. This is the framework we run, and why each layer exists.
+{{bars:Naver=68,Google=18,Other=14::Where Korean retail starts a crypto search (representative share of search, %)}}
 
-## Why Western Playbooks Break in Korea
+Discovery happens on Naver, not Google. Community lives in KakaoTalk Open Chats and Telegram, not Discord. Credibility is conferred by Korean-language media and recognizable KOLs, not a global brand. Each of those is a different surface with a different gatekeeper, and a campaign that assumes the Western surface never reaches the Korean one.
 
-Korea is not a translation problem. The channels, the trust signals, and the timing are structurally different.
+%%~70%::Share of Korean web search that runs on Naver, the single discovery surface most foreign teams under-resource%%
 
-%%Retail-first, trust-first::Korea is one of the most concentrated retail crypto markets on earth, and trust forms through native platforms, Naver, KakaoTalk, Telegram, not the channels Western GTM assumes%%
+## 2. The Stack: Four Layers
 
-Discovery happens on [Naver](https://www.naver.com/), not Google. Community lives in KakaoTalk Open Chats and Telegram, not Discord-first. Credibility is conferred by Korean-language media and recognizable KOLs, not a global brand. A playbook tuned for those assumptions does not degrade gracefully in Korea, it simply does not fire.
+A funnel, not a checklist. Each layer has a Korea-native channel set and a job, and spend only compounds when the layer below is ready to catch what the layer above sends it.
 
-![The Korea GTM stack, Korea-native channels mapped to each funnel layer](chart:stack)
-*Each layer has a Korea-native channel set that Western playbooks rarely account for*
+| Layer | Korea-native channel | The job | What we measure |
+| --- | --- | --- | --- |
+| Awareness | Naver SEO, tier-1 PR, KOL reach | Be legible where Koreans look | Search presence, reach |
+| Trust | Korean research, named partners, persistent KOLs | Convert attention into credibility | Sentiment, repeat mentions |
+| Conversion | Listing support, trading events, paid | Turn credibility into funded accounts | Sign-ups, first deposits |
+| Retention | Community, ongoing content | Hold volume after the spike | 30-day repeat volume |
 
-## Layer 1: Awareness
+## 3. Layer by Layer
 
-The goal of the awareness layer is legible presence in the places Korean investors actually look.
+### Awareness
 
-- **Naver SEO and blog presence**, the compounding discovery asset, covered in our [Naver effect](/blog/the-naver-effect-search-dominance-korean-crypto-discovery) analysis.
-- **Korean-language PR** through tier-1 crypto media, CoinDesk Korea, Block Media, TokenPost, handled by our [PR practice](/services/pr).
-- **KOL reach** across YouTube, X, and Telegram via our [vetted network](/services/influencer).
+The goal is legible presence in the places Korean investors actually look: Naver SEO and blog presence as the compounding discovery asset, Korean-language PR through CoinDesk Korea, Block Media and TokenPost, and KOL reach across YouTube, X and Telegram. Awareness is the cheapest layer to buy and the easiest to mistake for progress. It is necessary and insufficient, a spike that fades the moment spend stops.
 
-Awareness is necessary and insufficient. It is the cheapest layer to buy and the easiest to mistake for progress.
-
-## Layer 2: Trust
+### Trust
 
 This is the layer Western teams skip, and it is the rate-limiter.
 
 > **"In Korea, awareness without trust is just noise that fades in a week. Trust is what converts attention into capital, and it is built, not bought."**
 >, James, Co-Founder, ium Labs
 
-Trust forms through Korean-language research and thought leadership, named partnerships, consistent community presence, and KOLs who stake their own credibility rather than post a one-off. It is slower and less measurable than awareness, which is exactly why undisciplined teams underfund it, and why their conversion caps out.
+Trust forms through Korean-language research, named partnerships, consistent community presence, and KOLs who stake their own credibility rather than post once. It is slower and less measurable than awareness, which is precisely why undisciplined teams underfund it, and why their conversion caps out well below what their reach numbers would predict.
 
-## Layer 3: Conversion
+### Conversion
 
-Conversion is where the funnel meets the listing cycle.
+Conversion is where credibility becomes funded accounts: listing-day support, trading competitions, and paid acquisition optimized to first deposit rather than installs. In a market where the default venues already own attention, the job is narrow and concrete, give a primed audience a specific reason to act inside a specific window.
 
-![GTM anchored to the listing cycle, the highest-leverage timing variable in Korea](chart:timing)
-*Conversion compounds when activity is timed relative to T0, the listing event*
+### Retention
 
-The single largest controllable variable in Korean GTM is timing relative to the listing event (T0), not the calendar date. Awareness and trust built in the pre-listing window convert at the listing; the same spend dumped after the listing pop converts at a fraction of the rate. We sequence the full campaign, KOL activation, PR, AMAs, community mobilization, around T0, a pattern we break down in our [token launch timing](/blog/token-launch-timing-korea-quarterly-cycle) research.
+The spike is not the win, the curve is. Community management in KakaoTalk and Telegram plus a steady content cadence is what holds volume after the launch push stops. Retention is also the cheapest volume a project will ever acquire, because the audience was paid for once and then kept.
 
-| Funnel layer | Primary KPI | Korea-native channel |
-|---|---|---|
-| Awareness | Reach, Naver impressions | Naver, KOLs, PR |
-| Trust | Sentiment, repeat engagement | Research, named partners, community |
-| Conversion | On-chain entries, holders | Listing-timed activation |
-| Retention | 30-day active rate | KakaoTalk, Telegram, AMAs |
+## 4. Anchor Everything to T0
 
-## Layer 4: Retention
+Korea rewards timing. The listing event, T0, is the gravity well, and every layer is sequenced relative to it rather than to a generic launch calendar.
 
-The layer that separates a launch from a market position.
+{{bars:Pre-T0 (4-8 wks)=40,Launch window=35,Post-T0 retention=25::How a disciplined Korean launch allocates effort around the listing event (representative %)}}
 
-![Retention channels, where post-listing mindshare is held or lost](chart:channels)
-*The listing pop fades in days; retention is what is left, and it is won in community*
+Awareness and trust are front-loaded in the weeks before T0 so credibility already exists when liquidity arrives. Conversion concentrates in the launch window. Retention carries the months after. Run the same activities in the wrong order and the curve flattens, the same budget producing a fraction of the durable volume.
 
-Most projects spike at the listing and evaporate. Retention is held through 24/7 native [community management](/services/community), a steady AMA and content cadence, and ongoing PR that keeps the project in the Korean conversation. Retention is also where the next catalyst is seeded, the compounding base that makes the second listing or the next narrative cheaper to activate.
+## 5. What This Means for Operators
 
-## The Stack as a System
+If you are entering Korea, the practical implications are blunt. Budget the trust layer first, because it gates everything below it. Treat Naver as core infrastructure, not an afterthought. Sequence to your listing date, not your global calendar. And measure the funnel end to end, funded accounts and 30-day repeat volume, not impressions that look good in a deck and convert nothing.
 
-%%Four layers, one curve::Awareness, Trust, Conversion, and Retention are not a menu, run partially, the funnel leaks; run together, spend compounds into a market position%%
+## 6. What Breaks It
 
-![Seoul at night, a market entered as a system, not a campaign](chart:benchmark)
-*Korea rewards projects that build a position, not projects that buy a moment*
+The honest failure modes are worth naming. A stack with no trust layer is the most common, heavy awareness, thin credibility, and conversion that stalls at the deposit step. Mis-timed spend is the second, a polished campaign fired weeks before there is anywhere to trade. The third is borrowed credibility, KOLs who post once for a fee and never again, which Korean audiences read instantly. None of these is a budget problem. Each is a sequencing problem, and sequencing is the part you actually control.
 
-The reason to think in a stack rather than a tactic list is simple: the layers multiply, they do not add. Strong awareness with weak trust converts poorly. Strong conversion with no retention decays. The projects that win Korea are the ones that fund every layer and time the whole thing to the listing cycle.
+## 7. How We Run It
 
-![The integrated Korea GTM stack, the system behind a durable market position](chart:cityscape)
-*One integrated stack, timed to the listing cycle, is the entire framework*
+We build the four layers as one connected motion, sequenced to your listing, and we hold ourselves to funded accounts and retained volume rather than reach. If a Korean entry is on your roadmap, that is the [conversation to start](/contact).
 
-## Conclusion
+## Sources
 
-Korea go-to-market is not a checklist of tactics you can buy in parts. It is a four-layer funnel, awareness, trust, conversion, retention, built on Korea-native channels and anchored to the listing cycle. Buy a layer and you get a spike. Build the stack and you get a curve.
+Representative figures drawn from Korean search-share reporting (DataReportal, Internet Trends Korea), domestic exchange volume trackers, and ium Labs campaign data. Figures are directional and intended to illustrate structure, not to serve as a market-data source.
 
-*For the channel-level companion to this framework, see our breakdown of [KakaoTalk Open Chat](/blog/kakaotalk-open-chat-korea-crypto-distribution-2026), Korea's most underrated distribution layer.*`,
+*This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
   },
   {
     id: "static-kakaotalk-openchat",
