@@ -758,15 +758,7 @@ const ResearchDetail = () => {
                       transition={{ duration: 0.3 }}
                       className="block"
                     >
-                      <div className="aspect-[16/10] overflow-hidden rounded-xl">
-                        <motion.img
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.5 }}
-                          src={relatedPost.image}
-                          alt={relatedPost.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
+                      <BlogCover post={relatedPost} variant="art" className="aspect-[16/10] rounded-xl transition-transform duration-500 group-hover:scale-[1.03]" />
                       <div className="pt-5">
                         <div className="flex items-center gap-3 mb-3">
                           <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
