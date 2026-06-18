@@ -206,8 +206,8 @@ const KInfluenceGrid = () => {
                 <h1 className="text-sm sm:text-xl lg:text-2xl font-bold text-white tracking-tight">
                   K-Mindshare
                 </h1>
-                {/* Live indicator - compact on mobile */}
-                <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                {/* Live indicator - compact on mobile, hidden on desktop */}
+                <div className="lg:hidden flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
                   <div className="relative">
                     <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-teal-400" />
                     <div className="absolute inset-0 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-teal-400 animate-ping opacity-75" />
