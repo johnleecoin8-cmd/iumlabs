@@ -14,6 +14,7 @@ const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcas
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -139,10 +140,22 @@ const Index = () => {
         </Suspense>
       </section>
 
+      {/* Blog */}
+      <section id="blog" className="border-t border-white/[0.07]">
+        <SectionHeader
+          index="03"
+          heading={<>Latest <span className="text-white/40">insights.</span></>}
+          action={{ label: "View all", href: "/blog" }}
+        />
+        <Suspense fallback={<SectionLoader />}>
+          <BlogGridSection />
+        </Suspense>
+      </section>
+
       {/* Testimonials */}
       <section id="testimonials" className="border-t border-white/[0.07]">
         <SectionHeader
-          index="03"
+          index="04"
           heading={<>Partners are <span className="text-white/40">yappin&rsquo;.</span></>}
         />
         <MobileDeferredSection minHeight="60vh">
@@ -155,7 +168,7 @@ const Index = () => {
       {/* Coverage */}
       <section id="coverage" className="border-t border-white/[0.07]">
         <SectionHeader
-          index="04"
+          index="05"
           heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
