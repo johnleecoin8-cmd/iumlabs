@@ -73,7 +73,7 @@ const BlogGridSection = () => {
 
   return (
     <div className="px-5 sm:px-6 lg:px-10 pb-16 md:pb-24">
-      <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
         {posts.map((post) => (
           <Link
             key={post.id}
