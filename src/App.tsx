@@ -239,12 +239,33 @@ const AppContent = () => {
   // to Projects / case studies / blog doesn't pay a cold JS-download cost on click.
   useEffect(() => {
     const prefetch = () => {
-      import("./pages/Projects");
-      import("./pages/ProjectDetail");
-      import("./pages/Research");
-      import("./pages/ResearchDetail");
-      import("./pages/GTMService");
-      import("./pages/Contact");
+      [
+        () => import("./pages/Projects"),
+        () => import("./pages/ProjectDetail"),
+        () => import("./pages/Research"),
+        () => import("./pages/ResearchDetail"),
+        () => import("./pages/Contact"),
+        () => import("./pages/Jobs"),
+        () => import("./pages/KInfluenceGrid"),
+        () => import("./pages/BookMeeting"),
+        () => import("./pages/PitchDeck"),
+        () => import("./pages/GTMService"),
+        () => import("./pages/BrandingService"),
+        () => import("./pages/SEOAdsService"),
+        () => import("./pages/OfflineEventService"),
+        () => import("./pages/CommunityService"),
+        () => import("./pages/DeepResearchService"),
+        () => import("./pages/InfluencerService"),
+        () => import("./pages/PRService"),
+        () => import("./pages/AMAService"),
+        () => import("./pages/LiquidityService"),
+        () => import("./pages/ListingService"),
+        () => import("./pages/ExchangeMarketingService"),
+        () => import("./pages/CapitalService"),
+        () => import("./pages/CryptoMarketingKorea"),
+        () => import("./pages/KOLMarketingKorea"),
+        () => import("./pages/KoreaWeb3Guide"),
+      ].forEach((load) => load());
     };
     const w = window as typeof window & { requestIdleCallback?: (cb: () => void) => number };
     if (w.requestIdleCallback) w.requestIdleCallback(prefetch);
