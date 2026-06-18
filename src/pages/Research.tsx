@@ -238,7 +238,7 @@ const Research = () => {
               {currentPosts.map(post => (
                 <Link key={post.id} to={`/blog/${post.slug}`} className="group flex flex-col">
                   <div className="relative overflow-hidden rounded-2xl border border-white/[0.06]">
-                    <BlogCover post={post} variant="art" className="aspect-[16/10] transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+                    <BlogCover post={post} variant="art" className="aspect-[10/11] transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
                     <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-sm text-white/85 text-[10px] uppercase tracking-[0.16em] font-medium">
                       {post.category}
                     </span>
