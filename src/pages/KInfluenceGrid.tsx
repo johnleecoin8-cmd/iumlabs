@@ -225,8 +225,8 @@ const KInfluenceGrid = () => {
               )}
             </div>
 
-            {/* Control row: Mobile-first layout */}
-            <div className="flex items-center justify-between gap-2 sm:gap-3 pb-3 sm:pb-4">
+            {/* Control row: desktop only (Top 20 + stats + search). Hidden on mobile. */}
+            <div className="hidden sm:flex items-center justify-between gap-2 sm:gap-3 pb-3 sm:pb-4">
               {/* Left: View Toggle */}
               <div className="flex items-center gap-2 sm:gap-4">
                 <span className="text-[10px] sm:text-sm font-semibold text-white/60 sm:text-white/80">Top 20</span>
@@ -272,34 +272,6 @@ const KInfluenceGrid = () => {
                   )}
                 </div>
 
-              </div>
-            </div>
-
-            {/* Mobile: Search row */}
-            <div className="sm:hidden pb-3">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
-                <input
-                  type="text"
-                  placeholder="Search projects..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className={cn(
-                    "w-full pl-9 pr-9 py-2 text-xs",
-                    "bg-white/[0.03] border border-white/[0.08] rounded-xl",
-                    "text-white placeholder-white/30",
-                    "focus:outline-none focus:border-teal-500/40",
-                    "transition-all duration-200"
-                  )}
-                />
-                {searchQuery && (
-                  <button 
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 active:scale-95 transition-transform"
-                  >
-                    <X className="w-3.5 h-3.5 text-white/50" />
-                  </button>
-                )}
               </div>
             </div>
           </div>
