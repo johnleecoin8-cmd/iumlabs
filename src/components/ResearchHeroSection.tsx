@@ -59,7 +59,7 @@ const ResearchHeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="font-sans text-[clamp(2.2rem,8vw,5.5rem)] font-bold leading-[0.95] tracking-[-0.03em] mb-4 sm:mb-6 mt-8 sm:mt-20 text-white">
             <span className="block">Web3 Market Insights</span>
-            <span className="block bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc] bg-clip-text text-transparent">& Data-Driven Blog</span>
+            <span className="block bg-gradient-to-r from-primary via-emerald-300 to-emerald-400 bg-clip-text text-transparent">& Data-Driven Blog</span>
           </h1>
 
           <p className="text-[14px] sm:text-lg md:text-[22px] text-white/75 max-w-5xl mx-auto mb-5 sm:mb-10 font-light tracking-wide leading-[1.6] px-1 sm:px-0">

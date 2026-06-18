@@ -145,7 +145,7 @@ const Research = () => {
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                  className="w-full bg-white/[0.04] border-white/[0.08] rounded-full pl-11 pr-5 h-12 text-sm text-white placeholder:text-white/30 focus:border-[#b48cde]/40 focus:ring-0 transition-colors"
+                  className="w-full bg-white/[0.04] border-white/[0.08] rounded-full pl-11 pr-5 h-12 text-sm text-white placeholder:text-white/30 focus:border-primary/40 focus:ring-0 transition-colors"
                 />
               </div>
             </div>
@@ -172,7 +172,7 @@ const Research = () => {
           {selectedTag && (
             <div className="mt-4 flex items-center gap-2">
               <span className="text-xs text-white/30">Filtered by tag:</span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#b48cde]/15 border border-[#b48cde]/25 text-[#d8b4fe] text-xs font-medium">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/15 border border-primary/25 text-emerald-300 text-xs font-medium">
                 {selectedTag}
                 <button
                   onClick={() => { setSelectedTag(null); setSearchParams({}); }}
@@ -225,7 +225,7 @@ const Research = () => {
 
           {isLoading ? (
             <div className="flex items-center justify-center py-20">
-              <div className="w-6 h-6 border-2 border-white/20 border-t-[#b48cde] rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-white/20 border-t-primary rounded-full animate-spin" />
             </div>
           ) : currentPosts.length === 0 ? (
             <div className="text-center py-20">
@@ -234,19 +234,29 @@ const Research = () => {
               <p className="text-sm text-white/40">Try a different search or category.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 sm:gap-x-6 gap-y-8 sm:gap-y-10">
               {currentPosts.map(post => (
-                <Link key={post.id} to={`/blog/${post.slug}`} className="group block">
-                  <article className="h-full">
-                    <BlogCover post={post} variant="card" className="aspect-[3/4] rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]" />
-                    <div className="flex items-center justify-between pt-3.5">
-                      <span className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.18em]">{post.category}</span>
-                      <span className="text-white/40 text-[10px] sm:text-xs flex items-center gap-1.5">
-                        <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                        {post.readTime} · {post.date}
-                      </span>
-                    </div>
-                  </article>
+                <Link key={post.id} to={`/blog/${post.slug}`} className="group flex flex-col">
+                  <div className="relative overflow-hidden rounded-2xl border border-white/[0.06]">
+                    <BlogCover post={post} variant="art" className="aspect-[16/10] transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-sm text-white/85 text-[10px] uppercase tracking-[0.16em] font-medium">
+                      {post.category}
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-base sm:text-[17px] font-medium text-white leading-snug tracking-tight line-clamp-2 group-hover:text-primary transition-colors duration-300">
+                    {post.title}
+                  </h3>
+                  {post.excerpt && (
+                    <p className="mt-2 text-sm text-white/45 leading-relaxed line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                  )}
+                  <div className="mt-3.5 flex items-center gap-2 text-[11px] text-white/35">
+                    <Clock className="w-3 h-3" />
+                    <span>{post.readTime}</span>
+                    <span className="text-white/20">·</span>
+                    <span>{post.date}</span>
+                  </div>
                 </Link>
               ))}
             </div>
@@ -307,7 +317,7 @@ const Research = () => {
                 placeholder="your@email.com"
                 value={newsletterEmail}
                 onChange={e => setNewsletterEmail(e.target.value)}
-                className="flex-1 bg-white/[0.04] border-white/[0.08] rounded-full px-5 h-12 text-sm text-white placeholder:text-white/25 focus:border-[#b48cde]/40 focus:ring-0"
+                className="flex-1 bg-white/[0.04] border-white/[0.08] rounded-full px-5 h-12 text-sm text-white placeholder:text-white/25 focus:border-primary/40 focus:ring-0"
                 required
               />
               <button

@@ -71,7 +71,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
                     href={`#${h.id}`}
                     onClick={() => setIsOpen(false)}
                     className={`block text-sm leading-relaxed transition-colors ${
-                      activeId === h.id ? 'text-[#b48cde] font-medium' : 'text-white/40 hover:text-white/70'
+                      activeId === h.id ? 'text-primary font-medium' : 'text-white/40 hover:text-white/70'
                     }`}
                   >
                     {h.text}
@@ -94,7 +94,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
                   href={`#${h.id}`}
                   className={`block text-[13px] leading-relaxed py-0.5 transition-colors duration-200 ${
                     activeId === h.id
-                      ? 'text-[#b48cde] font-medium border-l-2 border-[#b48cde] -ml-[1px] pl-[11px]'
+                      ? 'text-primary font-medium border-l-2 border-primary -ml-[1px] pl-[11px]'
                       : 'text-white/35 hover:text-white/60'
                   }`}
                   style={activeId === h.id && h.level === 3 ? { paddingLeft: '19px' } : {}}
