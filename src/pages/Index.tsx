@@ -14,6 +14,7 @@ const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcas
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
