@@ -238,42 +238,78 @@ Drawn from Korea Financial Services Commission guidance and publicly reported in
       volume: exchangeImg,
     },
     content: `>! **Key Takeaways**
->! For a Korean exchange play, the only metric that pays is the funded account; installs and sign-ups are vanity that look good and convert nothing
->! The Korean funnel drops hardest at the deposit step, where bank-linked KYC friction and trust collide
->! Each stage runs on a different Korea-native channel, Naver for discovery, KOLs for trust, paid for scale, so a single-channel plan leaks at every handoff
->! Optimize to cost per funded account, not cost per install, and the whole campaign re-prioritizes around the step that actually matters
+>! Korea is one of the deepest retail crypto markets on earth: 9.7 million verified, trade-eligible users by the end of 2024, equal to roughly one in five Koreans (Source: Financial Services Commission / FIU, via KED Global).
+>! The market is winner-take-most. Upbit alone held 71.6 percent of domestic trading volume in the first half of 2025, and Upbit plus Bithumb account for about 90 percent of all users (Source: Financial Supervisory Service, via Cryptonews).
+>! The funnel does not break at the app store. It breaks at the deposit, where every won must move through a real-name bank account at the exchange's single partner bank (Source: FSC / FIU; Paybis).
+>! Discovery still runs through Naver, which holds roughly 42 percent of Korean search and far more of the high-intent informational queries (Source: Statcounter, May 2026).
 
-Exchange marketing in Korea fails the same way almost every time: a campaign spikes installs, the dashboard looks healthy, and trading volume barely moves. The reason is that installs and sign-ups are not the product. A funded account that trades is the product, and the Korean funnel is built to drop attention long before it gets there unless every stage is designed for the local context.
+In most markets a growth team can hide behind installs and sign-ups. In Korea you cannot. A Korean crypto exchange play has one metric that pays rent: the funded account. An install is a number a vendor sells you; a sign-up is a phone-verified email. Neither moves revenue. Trading fees, the entire business model of a Korean exchange, begin only after a real person links a real-name bank account and pushes won across it. Everything upstream of that deposit is vanity. This report walks the funnel stage by stage and explains why each runs on a different Korea-native channel.
 
-## 1. The Funnel Leaks at the Deposit
+## 1. The Funnel and the Korean Numbers
 
-{{bars:Install=100,Sign-up=46,First deposit=19::Representative drop-off through a Korean exchange acquisition funnel (indexed to installs)}}
+By year-end 2024 Korea had 9.7 million verified users eligible to trade digital assets, up 25 percent in six months, meaning roughly one in five Koreans holds an exchange account. Won deposits at domestic exchanges more than doubled to 10.7 trillion won, and daily average volume reached 7.3 trillion won. The base skews young: investors in their 30s are the largest cohort at 29 percent, followed by 40s at 27 percent.
 
-The shape is the point. Reach is cheap, sign-ups are moderate, and funded accounts are where the funnel collapses. A plan optimized to the top of this chart buys a great install number and a terrible volume number, which is the most common outcome in Korean exchange marketing.
+{{bars:Age 20s & under=19,Age 30s=29,Age 40s=27,Age 50s=18,Age 60s+=7::Share of Korean verified crypto users by age cohort, end-2024. The 30s lead. Source: FSC / FIU, via KED Global}}
 
-## 2. Where Korea Is Different
+This is a deep, fee-generating market, but a brutally concentrated one. The funnel does not just need to convert; it must convert against incumbents who already own the trust layer.
 
-The deposit step carries friction that Western funnels do not. Funding a Korean exchange account runs through bank-linked, real-name verification, which adds steps, identity checks, and a moment where a hesitant user simply stops. That friction is not a bug to route around, it is the regulatory reality, which means the answer is trust and motivation strong enough to carry a user through it, not a smoother-looking ad.
+%%71.6%::Upbit's share of Korean crypto trading volume, H1 2025 (Source: Financial Supervisory Service, via Cryptonews)%%
 
-## 3. Trust Gates Conversion
+## 2. Where Korea Differs: the Deposit Is the Wall
 
-Because the deposit is the hard step, trust is what determines whether a user takes it. A primed, skeptical Korean user does not fund an account on the strength of an ad; they fund it because a KOL they follow, a community they trust, or a search result they found makes the venue feel real. Awareness opens the funnel, trust is what moves a user across the deposit gap, and paid scales whatever conversion the trust layer has already earned.
+In a typical Western funnel the painful step is sign-up. In Korea sign-up is trivial and the deposit is the wall. To accept won, a licensed exchange must hold a real-name account agreement with a single domestic bank, and every deposit and withdrawal must flow through an account in the user's exact legal name at that bank. Upbit pairs with K-Bank, Bithumb with KB Kookmin, Coinone with Kakao Bank, Korbit with Shinhan. As of early 2026 only five exchanges hold such partnerships at all.
+
+The friction is unforgiving. When Upbit switched on mandatory verification, users could not transact above 1 million won without completing KYC, and won balances in unverified accounts were returned outright. The system rejects foreign accounts, joint accounts, and name mismatches with no human review. A new user must, in one sitting, verify identity, hold or open an account at the correct bank, and pass the name-match check before a single won lands. That is where installs go to die.
+
+{{source:/images/blog/korea-cex-user-acquisition-funnel-kol-naver-paid-ads-1.jpg::Source: KED Global, "S.Korea's crypto market doubles to $77.5 bn with 20% of population trading"}}
+
+This Korean walkthrough makes the friction visible: it has to teach viewers that you cannot deposit won directly to a global exchange and must instead route coins through Upbit, complete two-channel authentication, and wait on a transfer. Each added step is a place the funnel leaks.
+
+{{youtube:AtRj5BD0bUg}}
+
+## 3. Trust Gates the Conversion
+
+The deposit is not only procedural friction; it is the most expensive trust decision a Korean retail user makes. Linking a real-name bank account hands an exchange a verified identity tied directly to a bank ledger. Koreans do this readily for Upbit and Bithumb because those brands are effectively household infrastructure. They do not do it for an unknown brand on the strength of a banner ad.
+
+The concentration data proves it. Of roughly 10.2 million users, 53 percent sit on Upbit and 37 percent on Bithumb, leaving the other three licensed exchanges to split under one million users. Trust, not features or fees, sorts that distribution.
+
+> **"The domestic crypto market has effectively solidified into an Upbit monopoly."**
+>, Seoul Kyungjae, via Cryptonews
+
+That should reframe how an operator thinks about spend. You are not buying clicks. You are buying enough credibility for a stranger to attach their bank identity to your brand. Paid media cannot manufacture that alone. It is earned upstream, by voices the user already trusts, and only then scaled.
 
 ## 4. What This Means for Operators
 
-Measure cost per funded account from day one, and let that number reprioritize the whole plan. Use Naver to be discoverable, KOLs and community to build the trust that carries users across the deposit step, and paid to scale a funnel that already converts rather than to manufacture conversion that is not there. Treat the deposit friction as a trust problem, because that is what it is.
+Run the funnel as three distinct jobs on three Korea-native channels, and price the whole thing on one number: cost per funded account.
+
+Discovery runs on Naver, not Google. Naver holds roughly 42 percent of Korean search and a far larger slice of the long-form informational queries where a cautious first-time depositor researches an exchange, because so much Korean-language content lives inside Naver Blog and Cafe. If your brand is absent from Naver's index and communities, the consideration stage never happens.
+
+Trust runs on KOLs. A Korean crypto creator with a years-built audience does the one thing a banner cannot: vouch credibly enough that a viewer will complete real-name KYC and deposit. This is the conversion engine, not an awareness line item.
+
+Scale runs on paid. Once Naver is seeding discovery and KOLs are carrying trust, paid media amplifies a funnel that already converts. Paid is the multiplier, never the foundation.
+
+{{bars:Naver=42,Google=48,Bing=6::South Korea search engine share, May 2026. Naver still owns the high-intent informational layer. Source: Statcounter}}
 
 ## 5. What Breaks It
 
-The failures are familiar. Reporting installs and sign-ups as success while volume stays flat. Buying paid scale on top of a funnel that has no trust layer, which just buys more abandoned sign-ups. And ignoring the deposit-step friction entirely, as if a Korean account funds like a Western one. Each produces a good-looking dashboard and a dead order book.
+The fastest way to burn a Korean exchange budget is to optimize to the wrong metric. Buy installs and you get installs, sit at the deposit wall, and report a CAC that looks fine next to an empty revenue line.
+
+Three failure modes recur. Google-first SEO and Western paid playbooks that ignore Naver and miss the user during research. Treating KOLs as a cheap reach buy rather than the mechanism that unlocks the deposit, which yields views and no funded accounts. And optimizing to sign-ups because they are easy to measure, while the real-name bank link, the actual bottleneck, goes unmanaged. If your dashboard cannot show cost per funded account by channel, you are flying blind through the only stage that matters.
 
 ## 6. How We Run It
 
-We run the acquisition funnel end to end and hold it to funded accounts, combining Naver discovery, trading-native KOLs, and full-funnel paid through our [exchange marketing](/services/exchange-marketing) practice. The number we optimize is cost per funded account, not cost per install. If a Korean exchange launch is on the roadmap, that is the [conversation to start](/contact).
+ium Labs builds the Korean exchange funnel backward from the funded account. We map the deposit friction for your specific bank partner and onboarding flow, then assign each stage to the channel that moves it: Naver search and community presence for discovery, vetted Korean crypto KOLs for the trust gate that unlocks real-name KYC, and paid media to scale only once conversion is proven. Every channel reports to one metric, cost per funded account, so spend follows deposits, not vanity volume.
+
+If you are bringing an exchange or trading product into Korea and need a funnel measured in funded accounts, see how we run [exchange marketing](/services/exchange-marketing) or [get in touch](/contact).
 
 ## Sources
 
-Representative figures drawn from exchange acquisition benchmarks and ium Labs campaign data. Funnel ratios vary by venue and campaign; figures are directional and intended to illustrate structure, not to serve as a market-data source.
+- [KED Global: S.Korea's crypto market doubles to $77.5 bn with 20% of population trading](https://www.kedglobal.com/cryptocurrencies/newsView/ked202505200007)
+- [Cryptonews / Yahoo Finance: Upbit Corners 72% of S Korean Crypto Market](https://finance.yahoo.com/news/upbit-corners-72-korean-crypto-233000204.html)
+- [Maeil Business / Pulse: Upbit to mandate users to verify identity for crypto trade](https://pulse.mk.co.kr/news/english/10043646)
+- [Paybis: Best Crypto Exchanges in South Korea 2026](https://paybis.com/blog/best-crypto-exchanges-korea/)
+- [Statcounter: Search Engine Market Share Republic of Korea](https://gs.statcounter.com/search-engine-market-share/all/south-korea)
+- [YouTube: Binance sign-up and Upbit deposit guide (2026)](https://www.youtube.com/watch?v=AtRj5BD0bUg)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -742,44 +778,73 @@ Representative figures drawn from DePIN funding trackers and Korean mindshare es
       asiaBattlefield: seoulHanriver,
     },
     content: `>! **Key Takeaways**
->! Asia's dollar-settlement layer is a two-horse contest, USDT's incumbency versus USDC's compliance wedge, and the winner shapes how value moves across the region
->! USDT leads Asian retail and OTC flow on liquidity and habit; USDC competes on regulatory acceptability and institutional rails
->! The battleground is distribution and compliance, not technology; whichever dollar the on-ramps and regulators favor wins by default
->! For Korea specifically, the contest intersects with the won-stablecoin question, because a regulated local rail could reroute flow that USDT and USDC fight over today
+>! USDT's circulating supply sits near 186.4 billion dollars versus USDC's 74.8 billion, a roughly two-and-a-half-to-one lead that defines the incumbency gap. (Source: DefiLlama, Stablecoin dashboard)
+>! USDT processed roughly 703 billion dollars per month between June 2024 and June 2025, peaking at 1.01 trillion dollars in June 2025 in on-chain settlement volume. (Source: Chainalysis, 2025 Global Adoption Index)
+>! APAC was the fastest-growing region for on-chain crypto activity, up 69 percent year over year to 2.36 trillion dollars in value received. (Source: Chainalysis, 2025 Global Adoption Index)
+>! South Korea ranked as the world's second-largest fiat on-ramp at over 722 billion dollars, behind only the United States. (Source: Chainalysis, 2025 Global Adoption Index)
 
-Stablecoins are the quiet settlement layer under Asian crypto, and two dollars dominate it. The contest between USDT and USDC is usually framed as a brand rivalry. It is really a fight over rails, who the on-ramps default to, who regulators bless, and whose dollar ends up sitting in the region's wallets between trades. In a settlement layer measured in the trillions, that default is the entire prize.
+Asia's dollar-settlement layer is not a technology contest. The chains are commoditized, the pegs hold, and a transfer clears in seconds either way. What separates the two dominant dollar tokens is distribution and regulation. USDT owns the retail and OTC plumbing across Asian markets through sheer liquidity and incumbency. USDC is building the opposite wedge: compliance, banking relationships, and an institutional posture that regulators can underwrite. For operators bringing a token or a product into Korea, this split is the map. And it intersects with a live local question: whether a regulated won-stablecoin rail could reroute the flow that currently runs on someone else's dollar.
 
-## 1. The Two Dollars
+## 1. The Two Dollars, By the Numbers
 
-{{bars:USDT (Asia flow)=68,USDC (Asia flow)=27,Other=5::Representative share of Asian stablecoin settlement flow (%)}}
+The headline gap is supply. USDT and USDC together dwarf every other stablecoin, but they are not close to each other.
 
-%%~$1.2T::Representative scale of the Asian dollar-settlement layer the two stablecoins are fighting over%%
+{{bars:USDT (Tether)=186.4,USDC (Circle)=74.8,USDS (Sky)=8.2,USDe (Ethena)=4.5::Stablecoin circulating supply in billions of dollars. USDT leads USDC by roughly 2.5 to 1. Source: DefiLlama, Stablecoin dashboard, June 2026}}
 
-USDT carries the majority of Asian retail and OTC flow; USDC holds a smaller, more institutional and compliance-oriented share. The gap is wide, but it is a distribution gap, not a quality gap, which is exactly the kind of gap that policy and on-ramp decisions can move.
+Supply understates USDT's lead in movement. On-chain settlement volume tells the real story of which token is doing the work.
+
+%%1.01 trillion::USDT monthly on-chain settlement volume, peak in June 2025 (Source: Chainalysis, 2025 Global Adoption Index)%%
+
+USDC's volume over the same period was far more volatile, and its supply spent 2025 on what one analysis called a roller-coaster, recovering to a 73.4 billion dollar market cap by mid-year after a January low near 53.3 billion. USDT is the default unit of account for Asian crypto liquidity. USDC is the regulated alternative trying to win on terms USDT cannot easily match.
 
 ## 2. Why USDT Leads Asia
 
-Incumbency compounds. USDT got liquid first, embedded itself in OTC desks and exchanges across the region, and became the default quote and settlement asset for a generation of Asian traders. Liquidity attracts liquidity, and habit is sticky. For most Asian retail and OTC participants, USDT is simply where the depth and the counterparties already are.
+USDT's lead in Asia is a distribution moat, not a product advantage. It was first, it is everywhere, and liquidity compounds. Across most emerging markets USDT commands higher peer-to-peer rates than USDC because of its larger market share and deeper order books, which means the incumbent literally trades at a premium. That premium is the moat made visible.
+
+The more important shift is what USDT is used for. It has quietly become a payments rail, not just a trading instrument.
+
+> **"USDT is increasingly acting as a substitute for cash and bank wires in regions where access to dollars is limited or expensive."**
+>, Mohammad Shahid, BeInCrypto
+
+The numbers back the framing. Tether disclosed that USDT processed roughly 156 billion dollars in payments of 1,000 dollars or less during 2025, with average daily volumes for sub-1,000-dollar transfers climbing above 500 million dollars. These are remittances, payroll, and retail transfers, the non-speculative flows that make a settlement layer sticky. In Asia, where USD access through banks is uneven and OTC desks are dense, that stickiness is USDT's defining asset.
+
+{{youtube:IAChB5ls6eU}}
 
 ## 3. USDC's Compliance Wedge
 
-USDC's path is not to out-liquidity USDT but to out-comply it. As Asian jurisdictions write stablecoin rules, a dollar that is transparent, attested, and regulator-friendly becomes the safer institutional choice and the easier one for licensed on-ramps to support. The wedge is narrow today and widens every time a regulator picks acceptability over incumbency.
+USDC cannot out-liquidity USDT in Asian retail. So Circle is fighting on a different axis: regulation. The passage of the GENIUS Act in the United States, the first federal framework for payment stablecoins, drove strong institutional interest toward compliant dollar-backed tokens even before the rules took full effect.
 
-## 4. What This Means for Operators
+{{source:/images/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia-1.png::Source: Chainalysis, 2025 Global Adoption Index, "Stablecoins surge globally for a variety of use cases"}}
 
-For a project deciding which rail to build on in Asia, the answer is jurisdiction-dependent and changing. Default to where your users' liquidity already sits, usually USDT for retail-heavy flow, but design for a future where compliant rails gain ground, especially in regulated markets like Korea and Japan. Treat the stablecoin choice as a distribution decision tied to local policy, not a one-time technical pick.
+This is the wedge. USDC's growth is closely linked to US-based institutional rails and regulated corridors, while incumbents dominate the unregulated retail flow. Where USDT optimizes for reach, USDC optimizes for auditability, banking partners, and regulatory acceptance. In Asia that means a specific play: payment processors, licensed exchanges, fintechs, and tokenization platforms that need a stablecoin a compliance officer can sign off on. Visa, Mastercard, Stripe, and Citi are all building stablecoin settlement into traditional rails, and that institutional layer is the corridor USDC is built to win. It does not beat USDT on volume; it carves out the regulated segment USDT's lighter posture has more trouble serving.
 
-## 5. What Breaks It
+## What This Means for Operators
 
-The risks are regulatory and concentration-driven. A single major jurisdiction mandating compliant rails can move flow faster than years of marketing. Concentration in one dollar is also a systemic risk the whole region carries. And a regulated local-currency stablecoin, a won or yen rail, can reroute flow that both dollars assume is theirs.
+If you are launching a token or a product into Asia, the dollar layer is a routing decision, not a default. Retail liquidity, P2P depth, and OTC settlement run on USDT, so depth and listings follow it. Institutional, compliance-bound, and payments flows increasingly route through USDC, where banking partners and regulated venues sit. Picking one settlement asset commits you to its distribution and its regulatory profile. The smarter posture is corridor-by-corridor: USDT where you need reach, USDC where you need a counterparty who answers to a regulator. Korea sharpens this. Ranked the second-largest fiat on-ramp globally at over 722 billion dollars, its dollar flow is enormous, and where that settles after on-ramp is the question a go-to-market plan has to answer.
 
-## 6. How We Run It
+## What Breaks It
 
-We help projects pick and message the right rail per market and build Korea go-to-market that is ready for a regulated local-currency rail rather than anchored to today's dollar defaults. If an Asian or Korean settlement strategy is on the roadmap, that is the [conversation to start](/contact).
+The two-horse frame breaks if a regulated local rail captures the flow. In Korea, a won-stablecoin is exactly that threat. The legislation has stalled on a real divide: whether stablecoins are classified as currency or as digital assets, and whether issuance is limited to banks or open to private firms. Non-bank proposals require at least 5 billion won in capital and 100 percent reserves under the Financial Services Commission; the bank-based proposal treats stablecoins as part of the national currency system under the Bank of Korea and the finance ministry.
+
+%%5 billion won::Minimum capital proposed for non-bank KRW stablecoin issuers in Korea (Source: Tiger Research, 2025 KRW Stablecoins Status)%%
+
+The market is not waiting. The BDACS-Woori Bank consortium has already deployed a won stablecoin, KRW1, on Avalanche and is testing on Circle's ARC network, while Naver Pay and Dunamu explore their own rail. A credible regulated won token would not kill USDT or USDC, but it could reroute domestic settlement onto a rail Korean regulators control, shrinking the dollar-stablecoin footprint inside the country's borders. That is the scenario operators should price in.
+
+## How We Run It
+
+ium Labs treats the stablecoin question as a distribution problem, because that is what it is. For a project entering Korea we map which corridors your users actually settle in, match the dollar rail to the venue and the compliance posture, and sequence listings, OTC relationships, and payment integrations against the live regulatory timeline. When the won-stablecoin framework lands, the projects positioned across both the dollar rails and the emerging local rail will move first. That is the work: turning a two-horse settlement market into a routing strategy your launch can execute on.
+
+See how we structure market entry at [/services/gtm](/services/gtm), or talk to us directly at [/contact](/contact).
 
 ## Sources
 
-Representative figures drawn from regional stablecoin flow reporting and ium Labs analysis. Shares vary by segment and jurisdiction; figures are directional and intended to illustrate structure, not to serve as a market-data source.
+- [DefiLlama, Stablecoin Market Cap, Supply and Peg Data](https://defillama.com/stablecoins)
+- [Chainalysis, The 2025 Global Adoption Index](https://www.chainalysis.com/blog/2025-global-crypto-adoption-index/)
+- [BeInCrypto via Yahoo Finance, Tether's USDT Payment Stats Show the Real State of Crypto Adoption in 2025](https://finance.yahoo.com/news/tether-usdt-payment-stats-show-030000584.html)
+- [Tiger Research, 2025 KRW Stablecoins Status](https://reports.tiger-research.com/p/korea-stable-coin-eng)
+- [Crystal Intelligence, USDT maintains dominance while USDC faces headwinds](https://crystalintelligence.com/thought-leadership/usdt-maintains-dominance-while-usdc-faces-headwinds/)
+- [Law.asia, Guide to Korea's Stablecoin Regulation Framework](https://law.asia/korea-stablecoin-regulation-framework/)
+- [CNBC International, How Stablecoins Took Over Asia](https://www.youtube.com/watch?v=IAChB5ls6eU)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -870,48 +935,74 @@ Representative figures drawn from Korean exchange activity data and on-chain par
       engagementMetrics: kolPerformance,
     },
     content: `>! **Key Takeaways**
->! In Korea, KOLs are the trust layer, not the awareness layer; their job is to convert attention into credibility, which is the rate-limiter on conversion
->! The market is tiered, mega, macro, and micro, and the tiers do different jobs; using a mega voice for a micro job wastes budget and vice versa
->! Affiliation beats reach; paying KOLs for the funded traders or users they actually bring aligns incentives in a way a flat sponsorship never does
->! Vetting is the whole game; an unvetted roster buys bots and one-off posts that Korean audiences read instantly
+>! Korea has roughly 9.7 million verified crypto users, about one in five residents, with the 30s the largest cohort at 29 percent (Source: KED Global / FSC FIU, 2025).
+>! Korean won pairs account for around 30 percent of global spot crypto volume, second only to the US dollar, at about 26 billion dollars weekly (Source: Kaiko via BeInCrypto, 2026).
+>! KOLs function as a trust layer, not just reach: Tiger Research finds early-stage investors lean on a credible influencer's judgment rather than valuing the project themselves.
+>! Reach without vetting is fragile: independent analysis puts the macro tier (100k to 500k followers) at a 48.3 percent fraud rate, the highest of any tier (Source: SociaVault Labs, 2026).
 
-Most foreign teams buy Korean KOLs the way they buy ads, by reach. In Korea that is the wrong mental model. The reason to work with a Korean KOL is not the size of the audience, it is the transfer of trust, and trust does not scale linearly with follower count. Get the model right and KOLs are the layer that converts Korea; get it wrong and they are an expensive impressions buy.
+Korea is one of the densest retail crypto markets on earth, and the way projects win attention there does not follow the Western playbook of paid impressions. The key opinion leader (KOL) is less a billboard and more a referee: audiences do not just see a name, they borrow that person's judgment. This piece covers the Korean context, why KOLs operate as a trust layer, how the tiers divide the work, and where the model breaks when run carelessly.
 
-## 1. The KOL Map
+## 1. The Korean Context, in Numbers
 
-{{bars:YouTube=38,X (Twitter)=27,Telegram=20,Naver=15::Where Korean crypto KOL influence concentrates by surface (representative share of effective reach, %)}}
+According to the Financial Services Commission's Financial Intelligence Unit, reported by KED Global, verified users eligible to trade digital assets reached 9.7 million at the end of 2024, up 25 percent in six months: roughly one in five Koreans. The market nearly doubled to about 108 trillion won, and won-denominated pairs now represent close to 30 percent of global spot volume per research firm Kaiko.
 
-Korean crypto influence is spread across surfaces that a Western plan rarely weights correctly. YouTube carries long-form trust, X carries fast narrative, Telegram carries the trading-native core, and Naver carries the searchable record. A roster that lives on only one surface reaches only one slice of the market.
+%%9.7M::verified Korean crypto users, about 1 in 5 residents (Source: KED Global / FSC FIU, 2025)%%
 
-## 2. Tiers Do Different Jobs
+This is not a fringe audience. It skews young, professional, and mobile-native, and the age distribution tells you who the KOLs actually reach.
 
-| Tier | Role | Best for |
-| --- | --- | --- |
-| Mega | Mass legitimacy | Launch moments, broad trust |
-| Macro | Category authority | Narrative and education |
-| Micro | High-trust conversion | Trading communities, deposits |
+{{bars:30s=29,40s=27,Under 20s=19,50s=18,60s+=7::Share of Korean crypto investors by age band, percent. Source: KED Global / FSC Financial Intelligence Unit, May 2025.}}
 
-The mistake is treating tiers as a single budget line ranked by price. A launch needs mega legitimacy, but conversion to funded accounts usually happens through micro voices whose audiences actually act. Spending the whole budget at the top buys reach and starves the layer that converts.
+{{source:/images/blog/korea-kol-marketing-landscape-2026-guide-1.jpg::Source: Tiger Research, 인플루언서 크립토 마케팅 (Ryan Yoon)}}
 
-## 3. Reach Versus Affiliation
+## 2. Why KOLs Are the Trust Layer
 
-A flat sponsorship pays for a post. An affiliation pays for an outcome. When a KOL is on a tracked referral structure and earns on the funded traders or activated users they bring, the incentive shifts from posting once to actually moving their audience. That single change separates KOL spend that compounds from KOL spend that evaporates the day the post scrolls away.
+In a market this large and fast, attention is cheap but trust is scarce. Korean investors, especially at the early stage, do not model a token's value. They delegate that judgment. Tiger Research, an Asia-focused crypto research firm, put the dynamic plainly.
 
-## 4. What This Means for Operators
+> **"초기 단계에 있는 블록체인 시장 특성상 투자자들은 각 프로젝트에 대한 가치평가보다는 믿을만한 인플루언서의 판단에 신뢰를 보인다"**
+>, Ryan Yoon, Tiger Research
 
-Build the roster around the job, not the follower count. Use mega voices for legitimacy at the launch moment, macro voices to carry the narrative, and micro voices on tracked affiliation to convert. Weight the surfaces deliberately rather than buying whoever a vendor lists. And insist on measurement that ties spend to action, not to impressions.
+Translated: because the blockchain market is still early, investors trust a credible influencer's judgment rather than valuing each project themselves. That is the whole mechanism. A trusted creator's audience inherits vetting they could not perform alone. The same report warns this trust is exactly what gets abused when paid coverage is not disclosed, which is why vetting and transparency are not optional extras.
 
-## 5. What Breaks It
+The economics confirm the premium on trusted attention. In one Web3 KOL campaign documented by agency operator Leon Abboud, a 25,000 dollar budget produced 67,000 impressions, an effective 180 dollars per thousand views, against a typical 10 to 50 dollars for Web2 social ads. In crypto you pay not for eyeballs but for borrowed credibility.
 
-The recurring failures are unvetted rosters that quietly include bots and inactive accounts, one-off sponsored posts with no follow-through, and borrowed credibility from KOLs who clearly do not use or believe in the product. Korean audiences detect a paid drive-by quickly, and a single obviously transactional post can cost more trust than it buys.
+{{youtube:8Q7UmJfTqbc}}
 
-## 6. How We Run It
+## 3. The Tiers, and Why Affiliation Beats Reach
 
-We run KOLs as the trust layer they are, through a [vetted Korean network](/services/influencer) matched to the job by tier and surface, on tracked affiliation where conversion is the goal. The metric is action, sign-ups, deposits, activated users, not reach. If a Korean KOL motion is on the roadmap, that is the [conversation to start](/contact).
+Korean KOLs sort into rough tiers that do different jobs. Mega voices (large YouTube channels and well-known personalities) create the awareness event and social proof. Macro creators carry the narrative and lend authority. Micro and nano creators do the quiet, high-conversion work inside niche trading communities. The framework Abboud describes, tier one and tier two seeding the message and tier three amplifying it, maps closely onto how Korean campaigns sequence coverage.
+
+The conversion math is why you cannot just buy the biggest name: smaller creators consistently out-engage the mega tier.
+
+{{bars:Nano 1k-10k=3.86,Mega 1M+=1.2::Instagram engagement rate by influencer size, percent (high end of range). Source: PostAffiliatePro, 2026.}}
+
+This is the case for affiliation over raw reach. Affiliation means paying for funded, attributable results (referrals, sign-ups, deposits) rather than a flat fee for a post that may move no one. With 85 percent of Korean weekly trades flowing into altcoins beyond Bitcoin, per Kaiko, the audience is active and ready to act, but only when the recommendation is trusted and the path is clear.
+
+%%30%::share of global spot crypto volume in won pairs, second only to the US dollar (Source: Kaiko via BeInCrypto, 2026)%%
+
+## What This Means for Operators
+
+Treat KOL spend as trust acquisition, not a media buy. Three implications follow. First, sequence the tiers: earn social proof before approaching mega voices, because credible creators screen projects by perceived value before agreeing to a fair rate. Second, weight micro and niche creators heavily, since they convert and sit where decisions happen. Third, structure deals around funded outcomes so you buy results, not impressions.
+
+## What Breaks It
+
+The honest counter-case: this model fails loudly when trust is faked or rented. Independent analysis by SociaVault Labs of 100,000 accounts found 37.2 percent of influencer followers show signs of being fake or inauthentic, with the macro tier highest at 48.3 percent. Bots and bought followers inflate the exact tier projects most want to use.
+
+{{bars:Macro 100k-500k=48.3,Mid 50k-100k=41.3,Micro 10k-50k=34.9,Nano 1k-10k=27.6::Estimated fraud rate by influencer tier, percent. Source: SociaVault Labs, 2026.}}
+
+Disclosure is the other fault line. Tiger Research notes paid crypto coverage often is not marked as advertising, and cases from celebrity ICO promotions to undisclosed pre-sale buys by Korean streamers show what happens when the trust layer is exploited. Audiences detect one-off paid posts, and the credibility evaporates. A KOL strategy that skips vetting is not cheaper; it is a slower way to lose money and reputation.
+
+## How We Run It
+
+At ium Labs we treat Korean KOL marketing as a vetting problem first and a distribution problem second. We map creators to the job each tier does, screen for authentic engagement before any won changes hands, and structure campaigns around funded, attributable outcomes rather than flat-fee posts. The goal is borrowed credibility that holds up. If a Korea entry is on your roadmap, see our approach at [/services/influencer](/services/influencer) or start a conversation at [/contact](/contact).
 
 ## Sources
 
-Representative figures drawn from Korean creator-platform reporting and ium Labs campaign data. Figures are directional and intended to illustrate structure, not to serve as a market-data source.
+- [KED Global / FSC FIU data on the Korean crypto market](https://www.kedglobal.com/cryptocurrencies/newsView/ked202505200007)
+- [BeInCrypto via Yahoo Finance, on Kaiko's Korean volume data](https://finance.yahoo.com/markets/crypto/articles/30-global-crypto-trading-coming-183552726.html)
+- [Tiger Research, 인플루언서 크립토 마케팅, 어디까지가 옳은 범위일까? (Ryan Yoon)](https://reports.tiger-research.com/p/crypto-influencer-marketing-kor)
+- [Leon Abboud, Web3 Influencer Marketing 101](https://www.youtube.com/watch?v=8Q7UmJfTqbc)
+- [PostAffiliatePro, nano vs mega engagement rates](https://www.postaffiliatepro.com/blog/nano-influencers-vs-mega-influencers/)
+- [SociaVault Labs, 37.2% of Influencer Followers Are Fake](https://sociavault.com/blog/fake-follower-study-key-findings)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -940,49 +1031,65 @@ Representative figures drawn from Korean creator-platform reporting and ium Labs
       failureModes: vaspCompliance,
     },
     content: `>! **Key Takeaways**
->! A Korean listing is a process with a high, opaque bar, not an event you announce; treating it as a milestone is the most common and costly mistake
->! Two doors matter, Upbit and Bithumb, and they weight different things; the readiness work is venue-specific, not generic
->! Sequencing is the lever; awareness and trust built before the listing decide how the book behaves after it
->! The win is not the listing, it is the durable liquidity that follows it, which is engineered before day one, not chased after
+>! A Korean listing is a four-stage review run by exchanges that staff compliance teams, Upbit alone fields around 40 AML professionals (Source: Tiger Research)
+>! Two venues hold the book: Upbit 71.6% of H1 2025 domestic volume, Bithumb 25.8%, together roughly 96% of all Korean trading (Source: FSS / Cryptonews, Kaiko)
+>! About 20% of Koreans trade a market that hit 108 trillion won in H2 2024 (Source: FIU / KED Global)
+>! The win is durable liquidity engineered before day one, trust built ahead of the listing decides whether the book holds or fades
 
-Founders tend to talk about a Korean listing the way they talk about closing a round, a discrete event with a press release attached. In a market where won liquidity concentrates on two venues, that framing fails. The listing is the output of a readiness process and the input to a liquidity event, and the projects that treat it as a single dramatic moment are the ones that get a spike and a fade.
+A Korean exchange listing reads, from the outside, like an event: a notice drops, the pair goes live, a price prints. Treated that way, it almost always disappoints. The listing is the visible end of a process the exchange has been running quietly for weeks, and the projects that benefit understood the bar before they applied. Two venues matter, Upbit and Bithumb, they weight different things, and the sequencing of awareness and trust ahead of the listing decides how the book behaves once it opens.
 
-## 1. The Two Doors
+## 1. The Korea Context: A Small Country, An Outsized Book
 
-Korea's retail liquidity runs through two venues that carry the market. Clearing either is transformative, and the bar at each is high and only partly published. They are not interchangeable; each weights track record, compliance posture, liquidity readiness, and local credibility differently, which means a single generic application is a weak application at both.
+Korea is not a side market. The domestic crypto market reached roughly 108 trillion won (about $77.5 billion) in the second half of 2024, with daily average trading volume of 7.3 trillion won, per the Financial Intelligence Unit. Around one in five Koreans trades digital assets, with investors in their 30s the single largest cohort at 29%.
 
-%%Two venues::Carry the overwhelming majority of Korean won spot liquidity, which is why listing leverage concentrates there%%
+%%20%::Share of South Korea's population trading digital assets, on a market worth roughly $77.5B in H2 2024 (Source: FIU / KED Global)%%
 
-## 2. The Readiness Bar
+What makes this demand strategically valuable is its concentration. Two venues hold almost the entire book.
 
-| Dimension | What the venues weigh |
-| --- | --- |
-| Compliance | Legal opinion, token classification, disclosures |
-| Liquidity | Market-making, depth readiness for day one |
-| Credibility | Korean presence, media, partners |
-| Demand | Evidence of real Korean interest |
+{{bars:Upbit=71.6,Bithumb=25.8,Coinone=1.8,Korbit=0.5,Gopax=0.2::Share of South Korean domestic crypto trading volume, H1 2025. Source: Financial Supervisory Service, via Cryptonews}}
 
-The bar is a composite. A project strong on technology and weak on Korean credibility can fail for reasons it never sees, because the venues are underwriting downside risk, not rewarding ambition. Readiness means closing every dimension, not the one or two that come naturally.
+{{source:/images/blog/korean-exchange-listing-strategy-upbit-bithumb-2026-1.jpg::Source: Tiger Research, Korean Cryptocurrency Exchange Listing Support Guidelines}}
 
-## 3. Sequencing Is the Lever
+## 2. The Readiness Bar: What The Review Actually Tests
 
-The single most controllable variable is what exists before the listing. Awareness and trust built in the weeks prior decide whether liquidity arrives to a primed audience or an empty room. Run the awareness push after the listing and you pay full price to inform people the moment they could already have traded. Sequencing is cheap and decisive, and it is the part most teams leave to chance.
+The listing decision is a structured review, not a relationship favor. Tiger Research documents a four-part process across the major won-trading exchanges: sourcing candidates, a preliminary screen, in-depth deliberation, and listing with ongoing monitoring. The screen is staffed like a compliance function, Upbit runs roughly 40 AML professionals, Bithumb 36, Coinone and Korbit 13 each. Upbit and Coinone require a domestic legal opinion on whether the token is a security from the earliest stage, and the final review committee must include at least two external experts or 30% of seats, with at least one legal expert.
 
-## 4. What This Means for Operators
+> **"Each exchange operates a dedicated research team to help list cryptocurrency projects that have proven their business viability."**
+>, Tiger Research, Korean Cryptocurrency Exchange Listing Support Guidelines
 
-Start the readiness work early and close every dimension of the bar, not just the technical one. Choose and sequence the venues deliberately rather than applying everywhere at once. Build Korean trust and awareness before the listing so demand is waiting. And arrive with a liquidity plan for day one, because the first weeks set the reference price and the depth that everything later trades against.
+Read that as a checklist, not a hurdle. Securities classification, money-laundering risk, and demonstrated viability are scored before a human ever debates your token. A team that arrives with the legal opinion drafted, the token economics documented, and a clean compliance posture is not gaming the process, it is meeting it where it already is.
 
-## 5. What Breaks It
+## 3. Sequencing: Trust And Awareness Built Before The Print
 
-The failures are predictable. Treating the listing as the finish line and going quiet after it. Applying with a generic package that ignores what each venue actually weighs. Spending awareness budget before there is anywhere to trade. And showing up with no market-making, so the first volume hits a thin book and the chart never recovers.
+Here is the part most foreign teams invert. They treat the listing as the start of their Korea marketing. In practice it is a liquidity event that pays out against trust that already exists. The venues weight different things, Upbit's book is the deepest and its price increasingly sets the reference, while Bithumb has fought back hard, reaching 31.1% share on $86.5 billion in Q4 2025. A pair that lists into pre-built awareness opens to real bids. A cold listing opens to a thin book and a fast fade.
 
-## 6. How We Run It
+%%96%::Combined share of Korean trading volume held by Upbit and Bithumb, the two books worth engineering liquidity into (Source: Kaiko)%%
 
-We run listings as a sequenced process: [listing advisory](/services/listing) to close the readiness bar and time the venues, paired with the awareness, trust, and [exchange marketing](/services/exchange-marketing) that make the book deep on day one. The metric is durable liquidity, not a launch-day headline. If a Korean listing is on the roadmap, that is the [conversation to start](/contact).
+The mechanism behind durable liquidity is concrete. Korean retail is famously exchange-resident, most users never move assets to self-custody, which means the depth you build on Upbit and Bithumb is the depth that exists. Coin Bureau's research walks through why Korean demand funnels into these venues and stays there.
+
+{{youtube:FCBWt2U_bmQ}}
+
+## What This Means for Operators
+
+Plan backward from the order book, not forward from the announcement. Before the listing decision, the work is awareness and credibility, the discovery surfaces and community trust that become resting bids on day one. The application itself should arrive complete: securities opinion, token distribution schedule, audit reports, and a clean AML story, because that is what the screening teams score. Treat Upbit and Bithumb as two distinct decisions with different weightings, not one generic "Korea listing," and measure success on whether liquidity persists past the first week.
+
+## What Breaks It
+
+The counter-case is the cold listing. A team secures the slot, announces it as the milestone, and finds that an order book with no pre-built demand cannot hold a price. A second, structural risk: concentration cuts both ways. When the Korea Financial Intelligence Unit issued Bithumb a preliminary notice of a six-month partial suspension on new-customer external transfers in March 2026, analysts noted the likely effect was to push price discovery further onto Upbit, centralizing the book even more. A plan anchored to a single venue inherits that venue's regulatory risk. The fix is the same in both cases: build demand and trust ahead of time, and do not mistake the listing for the strategy.
+
+## How We Run It
+
+At ium Labs we run a Korean listing as a process with a liquidity target, not an announcement with a date. We sequence awareness and community trust on Korea-native surfaces months ahead, prepare the application to the standard the exchange screening teams actually apply, and engineer the depth that decides how the book behaves when the pair opens. If you are weighing Upbit, Bithumb, or both, see how we structure the work on our [listing strategy](/services/listing) and [exchange marketing](/services/exchange-marketing) services, or [get in touch](/contact) to map your sequence.
 
 ## Sources
 
-Drawn from publicly observable Korean exchange listing practices and ium Labs advisory experience. Listing criteria are partly undisclosed and move over time; this is a directional summary, not a guarantee of outcome.
+- [Upbit Corners 72% of S Korean Crypto Market as Smaller Exchanges 'Face Extinction' (Cryptonews via Yahoo Finance)](https://finance.yahoo.com/news/upbit-corners-72-korean-crypto-233000204.html)
+- [S.Korea's crypto market doubles to $77.5 bn with 20% of population trading (KED Global)](https://www.kedglobal.com/cryptocurrencies/newsView/ked202505200007)
+- [Korean Cryptocurrency Exchange Listing Support Guidelines (Tiger Research)](https://reports.tiger-research.com/p/korea-cex-listing-eng)
+- [The State of the Korean Crypto Market (Kaiko)](https://www.kaiko.com/resources/the-state-of-the-korean-crypto-market)
+- [Upbit's Dominance in South Korean Crypto Market Declines in Q4 2025 (KuCoin News)](https://www.kucoin.com/news/flash/upbit-s-dominance-in-south-korean-crypto-market-declines-in-q4-2025)
+- [Why Bitcoin's kimchi premium is on life support after South Korea targets crypto exchange (CryptoSlate)](https://cryptoslate.com/bitcoins-kimchi-premium-is-on-life-support-after-south-korea-targets-bithumb/)
+- [How South Korea's Crypto Market Skyrockets in 2025 (Coin Bureau, YouTube)](https://www.youtube.com/watch?v=FCBWt2U_bmQ)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1010,40 +1117,60 @@ Drawn from publicly observable Korean exchange listing practices and ium Labs ad
       complianceAdvantage: compLegal,
     },
     content: `>! **Key Takeaways**
->! Korea's crypto rulebook now has real teeth: the Virtual Asset User Protection Act sets the baseline, the travel rule governs transfers, and a Basic Act is taking shape on top
->! VAUPA reframes the market around user protection, custody segregation, reserve and insurance requirements, and enforceable penalties
->! The travel rule makes counterparty identity a compliance obligation on transfers above a threshold, which shapes how value moves between venues
->! For projects, compliance is no longer optional polish; it is table stakes for listing and operating, and the bar is rising toward institutional grade
+>! The Virtual Asset User Protection Act (VAUPA), in force since July 19, 2024, is now the baseline: exchanges must segregate customer cash at a bank and hold 80% or more of user assets in cold storage. Source: FSC, Act on the Protection of Virtual Asset Users.
+>! Reserves and insurance are mandatory: VASPs must hold liability cover or reserves of at least 5% of hot-wallet assets, with a floor of KRW 3 billion for won-market exchanges. Source: FSC enforcement decree.
+>! The travel rule already governs transfers: counterparty name and wallet data must move with transfers above KRW 1 million (about USD 842). Source: KoFIU / FSC, Financial Transaction Reports Act.
+>! A Digital Asset Basic Act is being written on top, including a contested won stablecoin regime, after the Bank of Korea and the FSC clashed over who may issue it. Source: CoinDesk, April 8, 2026.
 
-Korea spent years regulating crypto through guidance and bank-level controls. That era is ending. The Virtual Asset User Protection Act gave the market an enforceable baseline, the travel rule governs how assets move, and the Digital Asset Basic Act is being written above both. For any project operating in or entering Korea, compliance has moved from a nice-to-have to the price of admission.
+Korea spent years treating crypto as something to monitor rather than regulate. That era is over. The rulebook now has teeth, and it arrives in layers: the Virtual Asset User Protection Act sets a hard user-protection floor, the travel rule governs how value and identity move between providers, and a Digital Asset Basic Act is being drafted on top to cover issuance, stablecoins, and tokenized real-world assets. For any project that wants to list on a Korean exchange or serve Korean users, compliance is no longer a later-stage chore. It is the entry ticket.
 
-## 1. The Regulatory Stack
+## 1. The Regulatory Stack, Top to Bottom
 
-Korean crypto regulation now reads as layers, not a single rule. VAUPA sets user-protection fundamentals and penalties. The travel rule governs transfers and counterparty identity. The forthcoming Basic Act aims to consolidate the framework, including the contested question of a won stablecoin. Reading any one layer in isolation misses how they compound into a single, rising compliance bar.
+Korea regulates crypto through three stacked layers, not one statute. At the base is the Act on Reporting and Use of Certain Financial Transaction Information, the anti-money-laundering law forcing every virtual asset service provider (VASP) to register with the Korea Financial Intelligence Unit (KoFIU), obtain ISMS security certification, and run real-name banking. On top sits VAUPA, the user-protection law in effect since July 19, 2024. The newest layer, still in draft, is the Digital Asset Basic Act, governing issuance, disclosure, market conduct, and a won-pegged stablecoin. As CoinDesk reported, Korea's current system "remains focused on investor protection and lacks a comprehensive framework covering issuance, disclosure and market structure." The Basic Act is the attempt to close that gap.
 
 ## 2. What VAUPA Requires
 
-VAUPA centers on protecting the user. In practice that means segregating customer assets from operator funds, holding reserves and insurance against loss, monitoring for unfair trading, and facing real penalties for failure. The effect is to push the market toward operators that can meet institutional-grade custody and conduct standards, and away from those that cannot.
+VAUPA converts soft expectations into statutory duties. Customer cash must be kept separate from a VASP's own funds and trusted with a bank, investable only in safe assets such as government bonds. Exchanges must hold 80% or more of customer virtual assets in cold wallets, calculated monthly on economic value. To cover hacks and system failures, every VASP must carry liability insurance or reserves of at least 5% of hot-wallet assets, with hard floors below that level.
+
+{{bars:Cold wallet minimum (%)=80,Hot-wallet insurance/reserve (%)=5,Won-market reserve floor (KRW bn)=3::VAUPA core operational thresholds for exchanges. Source: FSC, enforcement decree of the Act on the Protection of Virtual Asset Users}}
+
+%%KRW 3 billion::minimum reserve/insurance floor for won-market exchanges; KRW 500 million for coin-only exchanges, wallets, and custodians (Source: FSC enforcement decree)%%
+
+VAUPA also criminalizes market abuse. It imports capital-markets logic on insider trading and manipulation, bans VASPs from arbitrarily freezing deposits and withdrawals, and obliges them to monitor and report abnormal trading to the FSC and Financial Supervisory Service, backed by criminal penalties and fines.
 
 ## 3. Travel Rule Mechanics
 
-The travel rule requires that, above a defined threshold, transferring entities share originator and beneficiary information. It turns counterparty identity into a compliance obligation and constrains how freely assets move between venues and across borders. For a project, it shapes which integrations and flows are even practical in the Korean perimeter.
+The travel rule ties identity to value as it crosses providers, and Korea adopted it ahead of most of Asia. Under the Financial Transaction Reports Act, a VASP sending a transfer above KRW 1 million (about USD 842) must transmit originator and beneficiary name and wallet address to the receiving VASP. On request from the beneficiary VASP or authorities, the originating VASP must hand over the customer's official identity number within three business days.
 
-## 4. What This Means for Operators
+> **"The amended act also mandated the crypto Travel Rule for international virtual asset transfers over 1 million won."**
+>
+> Notabene, Crypto Travel Rule Regulations in South Korea
 
-Treat compliance as a precondition, not a polish step. Map your token, custody, and transfer flows against VAUPA and the travel rule before you plan a listing, because venues underwrite that exact risk. Build relationships and documentation that anticipate the Basic Act rather than reacting to it. The teams that treat the rulebook as a design input move faster than the ones that treat it as a final hurdle.
+The thresholds are not uniform. FTRA reporting scales from KRW 1 million to KRW 3 million by transaction type, and exchanges layer their own surveillance on top: even low-risk transfers above roughly KRW 10 million can trigger suspicious-transaction reporting to the FIU. Transfers to self-hosted wallets sit in a softer zone today, exactly the gap the next legislative layer is expected to tighten.
 
-## 5. What Breaks It
+## What This Means for Operators
 
-The risks are misreading scope and timing. Assuming guidance-era flexibility under an enforceable regime invites penalties. Treating the travel rule as a back-office detail breaks integrations late. And ignoring the moving Basic Act, especially the stablecoin provisions, can leave a go-to-market designed for rules that are about to change.
+For a token project, listing in Korea now starts with a compliance checklist, not a business-development call. A counterparty exchange must prove ISMS certification, bank custody of customer cash, cold-wallet ratios, and reserve buffers before it can touch your asset, and travel-rule interoperability means a thinly integrated venue is a dead end for cross-venue flows. Stablecoin and tokenized-asset issuers should assume issuer-level authorization, full reserve backing, and redemption-at-par obligations on the way.
 
-## 6. How We Run It
+{{youtube:jS0LD_l3RCg}}
 
-We build Korea go-to-market that is compliant by construction, mapping token, custody, and transfer flows against the live rulebook through our [compliance](/services/compliance) practice and sequencing the rest of the [GTM](/services/gtm) around it. If a compliant Korean entry is on the roadmap, that is the [conversation to start](/contact).
+{{source:/images/blog/korea-crypto-regulation-2026-vaupa-travel-rule-1.jpg::Source: CoinDesk, "South Korea proposes cryptocurrency law with bank-style rules for stablecoins"}}
+
+## What Breaks It
+
+The unsettled pieces are upstream, in the Digital Asset Basic Act. The sharpest fight is over the won stablecoin: the Bank of Korea pushed for banks with majority ownership to be the only authorized issuers, while the FSC warned that bank-only issuance could choke innovation. The April 2026 draft also leaned toward folding stablecoins into the existing Foreign Exchange Transactions Act and requiring tokenized real-world assets to sit in managed trusts under the Capital Markets Act. None of that is final: the bill has slipped repeatedly, debate was pushed past elections, and lawmakers have not confirmed the reported drafts. For operators, the open risk is definitional scope. Whether your product is a payment instrument, a security-like token, or a plain virtual asset changes which regulator owns you and which capital rules apply.
+
+## How We Run It
+
+We treat Korean compliance as a launch precondition, not a cleanup task. Before a token goes near a Korean venue, we map it against VAUPA, the travel rule, and the emerging Basic Act, then sequence listing conversations around exchanges that already clear the custody, reserve, and travel-rule bars, with local counsel so regulatory posture and market entry move together. If you are planning a Korea listing or won-market presence, start with [compliance](/services/compliance), align it with your [go-to-market](/services/gtm) plan, and [talk to us](/contact) before committing to a timeline.
 
 ## Sources
 
-Drawn from the Virtual Asset User Protection Act, Korean travel-rule guidance, and Digital Asset Basic Act legislative materials, with ium Labs analysis. This is a directional summary of an evolving regime, not legal advice.
+- [FSC, enforcement decree of the Act on the Protection of Virtual Asset Users](https://www.fsc.go.kr/eng/pr010101/81217)
+- [Korea Law Translation Center, Act on the Protection of Virtual Asset Users](https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=63752&type=part&key=23)
+- [Notabene, Crypto Travel Rule Regulations in South Korea](https://notabene.id/world/south-korea)
+- [CoinDesk, South Korea proposes cryptocurrency law with bank-style rules for stablecoins (April 8, 2026)](https://www.coindesk.com/policy/2026/04/08/south-korea-proposes-cryptocurrency-law-with-bank-style-rules-for-stablecoins)
+- [CoinGeek, South Korea draft crypto bill covers stablecoins, RWAs (April 14, 2026)](https://coingeek.com/south-korea-draft-crypto-bill-covers-stablecoins-rwas/)
 
 *This report reflects ium Labs' operating view and is intended for general information, not legal advice.*`,
     isFeatured: false,
