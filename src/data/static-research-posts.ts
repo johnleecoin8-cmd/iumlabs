@@ -523,41 +523,45 @@ Representative figures drawn from Korean messaging-penetration reporting (DataRe
       delistingRisk: compLandscape,
     },
     content: `>! **Key Takeaways**
->! Korean won spot liquidity concentrates on a handful of venues and overwhelmingly on one, so a single listing decision can make or break a token's Korea liquidity
->! The market is a near-duopoly, Upbit plus Bithumb, which means listing leverage, fees, and timing sit in very few hands
+>! Upbit took 71.6% of all South Korean crypto trading volume in H1 2025, and with Bithumb the two venues control roughly 96% of the market (Source: FSS data via Seoul Kyungjae)
+>! When one venue intermediates the majority of won liquidity, a single listing decision is effectively a liquidity switch for a token's entire Korea presence
 >! Because liquidity concentrates, token economics in Korea are listing economics; where and when you list shapes price discovery more than almost anything else you control
 >! Projects that treat a Korean listing as a marketing milestone, rather than a liquidity event, mis-sequence everything around it
 
-In most markets, getting listed is one of many distribution steps. In Korea it is the distribution step, because won-denominated liquidity concentrates on a handful of venues, and overwhelmingly on one. That concentration is not a footnote. It rewrites how a token's economics behave the moment it touches the Korean market, and it punishes teams that plan for a fragmented market they do not actually face.
+In most markets, getting listed is one of many distribution steps. In Korea it is the distribution step, because won-denominated liquidity does not spread across venues, it concentrates, and overwhelmingly on one. The regulator's own numbers make the point starkly, and they rewrite how a token's economics behave the moment it touches the Korean market.
 
 ## 1. A Concentrated Market
 
-{{bars:Upbit=74,Bithumb=18,Coinone=5,Other=3::Representative Korean won-market spot volume share by venue (%)}}
+According to Financial Supervisory Service data reported by Seoul Kyungjae, Upbit took 71.6% of all domestic crypto trading volume in the first half of 2025, with Bithumb a distant second and the remaining exchanges effectively rounding errors.
 
-%%~74%::Representative share of Korean won spot volume intermediated by the single largest venue%%
+{{bars:Upbit=71.6,Bithumb=25.8,Coinone=1.8,Korbit/GOPAX=0.8::Korean crypto exchange share of domestic trading volume, H1 2025. Source: FSS data via Seoul Kyungjae / Cryptonews}}
 
-Korea's spot market behaves like a near-monopoly with a strong number two. The long tail of venues exists, but for the purpose of price discovery and depth, two names carry the market, and one carries most of it. For a foreign team used to liquidity spread across a dozen global venues, this is a different physics: there is one door that matters, and a smaller second door, and after that the room is mostly empty.
+%%71.6%::Upbit's share of South Korean domestic crypto trading volume in H1 2025, on 833 trillion won ($642B) of transactions (Source: FSS / Cryptonews)%%
+
+{{source:/images/blog/upbit-cryptonews.jpg::Cryptonews, "Upbit Corners 72% of S Korean Crypto Market as Smaller Exchanges Face Extinction"}}
+
+The user numbers are just as concentrated: of 10.17 million exchange customers, 53% are on Upbit and 37% on Bithumb, leaving the other three venues to split barely 10% between them.
 
 ## 2. Why Concentration Changes Token Economics
 
-When one venue holds the majority of won liquidity, its listing decision is effectively a liquidity switch. Listed, a token inherits deep won order books, retail reach, and the kimchi-premium dynamic that can open a pricing gap with global markets. Unlisted there, the same token can have a thriving global market and almost no Korean liquidity at all. The switch is binary in a way it simply is not in more fragmented markets.
+When one venue holds the majority of won liquidity, its listing decision is effectively a liquidity switch. Listed, a token inherits deep won order books, retail reach, and the kimchi-premium dynamic that can open a pricing gap with global markets. Unlisted there, the same token can have a thriving global market and almost no Korean liquidity at all.
 
-That binary nature also shifts negotiating leverage. When access to most of a country's retail liquidity runs through one venue, the venue sets the terms, the timing, and the bar. A project's entire Korea liquidity outcome can hinge on a single relationship and a single decision, which is why that decision deserves more preparation than most teams give it.
+> **"The domestic crypto market has effectively solidified into an Upbit monopoly."**
+>, Seoul Kyungjae, citing Financial Supervisory Service data
+
+That is not hyperbole from the data. Industry officials quoted in the same reporting warned that when a single exchange dominates listing policy and fee structures, the concentration risk spreads to the whole market. For a project, it means listing leverage and timing sit in very few hands.
 
 ## 3. The Listing Is a Liquidity Event, Not a PR Event
 
 The common mistake is to schedule the listing like a press milestone, announce it, celebrate it, and move on. In a concentrated market the listing is where price discovery actually begins, which means depth, market-making, and demand all have to be ready on the same day rather than chased afterward. A listing with no liquidity plan is a launch with no runway.
 
-| Treat the listing as | Result |
-| --- | --- |
-| A PR milestone | Spike, thin books, fast fade |
-| A liquidity event | Depth on day one, durable price discovery |
+{{youtube:FCBWt2U_bmQ}}
 
 The first weeks set the reference price and the depth that later flows trade against. Get them right and the book compounds. Get them wrong and you spend the next quarter fighting a thin, jumpy chart that scares off exactly the patient capital you wanted.
 
 ## 4. What This Means for Operators
 
-Sequence everything to the listing date, not a global calendar. Load awareness and trust in the weeks before it so demand exists when liquidity arrives. Have market-making and depth arranged for day one. And budget for the post-listing window, because in a concentrated market the difference between a durable book and a dead chart is decided in the first weeks, not the first hours. The listing is the most leveraged moment you get in Korea; treat it with the preparation that leverage deserves.
+Sequence everything to the listing date, not a global calendar. Load awareness and trust in the weeks before it so demand exists when liquidity arrives. Have market-making and depth arranged for day one. And budget for the post-listing window, because in a concentrated market the difference between a durable book and a dead chart is decided in the first weeks, not the first hours.
 
 ## 5. What Breaks It
 
@@ -569,7 +573,7 @@ We treat a Korean listing as the liquidity event it is: [listing advisory](/serv
 
 ## Sources
 
-Representative figures drawn from Korean exchange volume trackers and ium Labs analysis. Venue shares move with market cycles; figures are directional and intended to illustrate structure, not to serve as a market-data source.
+Upbit and exchange share, volume, and user figures: Financial Supervisory Service data reported by Seoul Kyungjae, via [Cryptonews](https://cryptonews.com/news/upbit-corners-72-of-s-korean-crypto-market-as-smaller-exchanges-face-extinction/). Duopoly concentration (~96%): [Kaiko, The State of the Korean Crypto Market](https://www.kaiko.com/resources/the-state-of-the-korean-crypto-market). Video: "How South Korea's Crypto Market Skyrockets in 2025". Figures are point-in-time and move with market cycles.
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: true,
