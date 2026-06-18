@@ -169,23 +169,18 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       return { ...project, normalizedSparkline: interpolated };
     });
 
-    // 95th percentile 기반 정규화 (이상치가 차트를 압도하지 않도록)
-    const allValues: number[] = [];
-    normalizedProjects.forEach(p => {
-      (p.normalizedSparkline || []).forEach(v => { if (v > 0) allValues.push(v); });
-    });
-    allValues.sort((a, b) => a - b);
-    const p95Idx = Math.floor(allValues.length * 0.95);
-    const p95Val = allValues.length > 0 ? allValues[Math.min(p95Idx, allValues.length - 1)] : 1;
-    const ceiling = Math.max(p95Val * 1.2, 1); // 95th percentile + 20% headroom
-
+    // 점유율(share)로 정규화한다 — 분모는 '최신 시점 전체 합'으로 고정.
+    // 최신 시점 합계가 100이 되고(=전체 총량 100), 과거도 같은 단위로 추이를 보여준다.
+    // 절대값을 쓰면 BTC처럼 압도적인 종목이 차트 상단(100)에 고정돼 나머지가 바닥에 깔린다.
+    const latestIdx = timeLabels.length - 1;
+    const denom = normalizedProjects.reduce(
+      (sum, p) => sum + Math.max(0, p.normalizedSparkline[latestIdx] || 0), 0
+    ) || 1;
     return timeLabels.map((time, timeIdx) => {
       const point: Record<string, string | number> = { time };
       normalizedProjects.forEach(project => {
-        const raw = project.normalizedSparkline[timeIdx] || 0;
-        // 정규화: ceiling 기준으로 0~100, 초과분은 cap
-        const scaled = Math.min((raw / ceiling) * 100, 100);
-        point[project.ticker] = Math.round(scaled * 100) / 100;
+        const raw = Math.max(0, project.normalizedSparkline[timeIdx] || 0);
+        point[project.ticker] = Math.round((raw / denom) * 100 * 100) / 100;
       });
       return point;
     });
@@ -203,6 +198,15 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
   // 현재 값 기준 정렬 (사이드바용) - score 기준
   const sortedByCurrentValue = useMemo(() => {
     return [...projects].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+  }, [projects]);
+
+  // 표시 종목(top 20)의 점유율 — 합계 100. 차트와 동일한 score 기반.
+  const shareByTicker = useMemo(() => {
+    const top = [...projects].sort((a, b) => (b.score ?? 0) - (a.score ?? 0)).slice(0, 20);
+    const total = top.reduce((s, p) => s + (Number(p.score) || 0), 0);
+    const map: Record<string, number> = {};
+    top.forEach(p => { map[p.ticker] = total > 0 ? (Number(p.score) || 0) / total * 100 : 0; });
+    return map;
   }, [projects]);
 
   // 범례 클릭 핸들러
@@ -333,9 +337,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                 tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10, opacity: 0.5 }} 
                 tickLine={false}
                 axisLine={false}
-                domain={[0, 100]}
+                domain={[0, 'auto']}
                 width={40}
-                tickFormatter={(val) => val.toFixed(1)}
+                tickFormatter={(val) => `${val.toFixed(0)}%`}
               />
               
               <Tooltip 
@@ -409,7 +413,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
             {sortedByCurrentValue.slice(0, 20).map((project, index) => {
               const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
               const isHovered = hoveredTicker === project.ticker;
-              const currentValue = project.mindshare ?? (project.score ? project.score / 100 : 0);
+              const currentValue = shareByTicker[project.ticker] ?? 0;
               
               return (
                 <button
