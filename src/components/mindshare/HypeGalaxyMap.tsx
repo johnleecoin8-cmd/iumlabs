@@ -302,9 +302,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row flex-1 min-h-0">
+      <div className="flex flex-row flex-1 min-h-0">
         {/* 차트 영역 */}
-        <div className="flex-1 min-h-[400px] lg:min-h-0 p-4 relative">
+        <div className="flex-1 min-w-0 min-h-[400px] lg:min-h-0 p-2 sm:p-4 relative">
           {/* 그라데이션 배경 */}
           <div className="absolute inset-0 bg-gradient-to-br from-teal-500/[0.03] via-transparent to-violet-500/[0.03] pointer-events-none rounded-lg" />
           <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent pointer-events-none" />
@@ -391,9 +391,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
           </ResponsiveContainer>
         </div>
 
-        {/* 사이드바 범례 (데스크탑) - Premium scrollbar */}
-        <div 
-          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto flex-shrink-0 relative
+        {/* 사이드바 범례 (모바일·데스크탑 공통, 우측) - Premium scrollbar */}
+        <div
+          className="block w-[116px] sm:w-[170px] lg:w-[200px] border-l border-white/[0.06] p-2 sm:p-3 overflow-y-auto flex-shrink-0 relative
             [&::-webkit-scrollbar]:w-[6px]
             [&::-webkit-scrollbar-track]:bg-gradient-to-b [&::-webkit-scrollbar-track]:from-white/[0.02] [&::-webkit-scrollbar-track]:to-white/[0.01] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:my-2
             [&::-webkit-scrollbar-thumb]:bg-gradient-to-b [&::-webkit-scrollbar-thumb]:from-teal-500/40 [&::-webkit-scrollbar-thumb]:via-violet-500/30 [&::-webkit-scrollbar-thumb]:to-teal-500/40
@@ -419,14 +419,14 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                   onMouseEnter={() => setHoveredTicker(project.ticker)}
                   onMouseLeave={() => setHoveredTicker(null)}
                   className={`
-                    w-full flex items-center justify-between gap-2 px-2 py-2 rounded-lg text-xs
+                    w-full flex items-center justify-between gap-1.5 sm:gap-2 px-1.5 sm:px-2 py-2 rounded-lg text-xs
                     transition-all duration-200
                     ${isSelected ? 'text-foreground' : 'text-muted-foreground/30'}
                     ${isHovered ? 'bg-white/[0.06] scale-[1.02]' : 'hover:bg-white/[0.03]'}
                   `}
                 >
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="text-[10px] text-muted-foreground/40 font-mono w-4 text-right">
+                  <div className="flex items-center gap-1.5 sm:gap-2.5 min-w-0">
+                    <span className="hidden sm:block text-[10px] text-muted-foreground/40 font-mono w-4 text-right">
                       {index + 1}
                     </span>
                     <span 
@@ -450,43 +450,6 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
               );
             })}
           </div>
-        </div>
-      </div>
-
-      {/* 하단 범례 (모바일) */}
-      <div className="lg:hidden border-t border-white/[0.06] p-3 overflow-x-auto">
-        <div className="flex gap-2 min-w-max">
-          {projects.slice(0, 20).map((project) => {
-            const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
-            const isHovered = hoveredTicker === project.ticker;
-            
-            return (
-              <button
-                key={project.ticker}
-                onClick={() => handleLegendClick(project.ticker)}
-                onMouseEnter={() => setHoveredTicker(project.ticker)}
-                onMouseLeave={() => setHoveredTicker(null)}
-                className={`
-                  flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium
-                  transition-all duration-150 border whitespace-nowrap
-                  ${isSelected 
-                    ? 'bg-white/[0.04] border-white/[0.08] text-foreground' 
-                    : 'bg-transparent border-transparent text-muted-foreground/40'
-                  }
-                  ${isHovered ? 'border-white/[0.15]' : ''}
-                `}
-              >
-                <span 
-                  className="w-1.5 h-1.5 rounded-sm"
-                  style={{ 
-                    backgroundColor: colorMap[project.ticker],
-                    opacity: isSelected ? 1 : 0.4
-                  }}
-                />
-                {project.ticker}
-              </button>
-            );
-          })}
         </div>
       </div>
     </div>
