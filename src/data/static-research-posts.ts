@@ -1679,7 +1679,6 @@ That is roughly a 5,500% jump in 24-hour volume for a single token on the day it
 
 The discipline, then, is to sequence two clocks at once. The macro clock is the Korean calendar, push the build toward the September peak or a Q4 follow-through window, avoid the holiday troughs. The micro clock is T0, concentrate the campaign so that awareness, community, and KOL coverage crest exactly as the listing goes live. When the two clocks align, a KBW-timed build feeding into a confirmed Q4 listing, the result is not additive. It is multiplicative.
 
-<KBW2024 official highlights, hosted by FactBlock>
 
 {{youtube:Q0D3GbElb7c}}
 
