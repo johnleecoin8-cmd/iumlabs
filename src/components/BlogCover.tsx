@@ -13,12 +13,15 @@ type Post = { slug?: string; title?: string; category?: string | null; date?: st
 export default function BlogCover({
   post,
   variant = "art",
+  titleAs = "h3",
   className = "",
 }: {
   post: Post;
   variant?: "art" | "card";
+  titleAs?: "h1" | "h3";
   className?: string;
 }) {
+  const TitleTag = titleAs;
   const wrap = useRef<HTMLDivElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
   const { motif, pal, year } = coverFor(post);
@@ -56,12 +59,12 @@ export default function BlogCover({
             className="absolute inset-0"
             style={{ background: "linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,0) 32%,rgba(0,0,0,0) 76%,rgba(0,0,0,.5))" }}
           />
-          <h3
+          <TitleTag
             className="absolute left-[7%] right-[9%] top-[6%] font-sans font-bold uppercase leading-[1.08] tracking-tight text-white"
             style={{ fontSize: "clamp(14px,5.2cqi,27px)", display: "-webkit-box", WebkitLineClamp: 7, WebkitBoxOrient: "vertical", overflow: "hidden" }}
           >
             {post.title}
-          </h3>
+          </TitleTag>
           <div className="absolute bottom-[5.5%] left-[7%] right-[7%] flex items-baseline justify-between">
             <span className="font-sans font-semibold tracking-wide text-white/90" style={{ fontSize: "clamp(9px,2.3cqi,13px)" }}>
               ium Labs
