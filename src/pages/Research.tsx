@@ -234,7 +234,7 @@ const Research = () => {
               <p className="text-sm text-white/40">Try a different search or category.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
               {currentPosts.map(post => (
                 <Link key={post.id} to={`/blog/${post.slug}`} className="group block">
                   <article className="h-full">
