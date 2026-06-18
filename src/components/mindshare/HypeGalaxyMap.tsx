@@ -169,18 +169,15 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       return { ...project, normalizedSparkline: interpolated };
     });
 
-    // 점유율(share)로 정규화한다 — 분모는 '최신 시점 전체 합'으로 고정.
-    // 최신 시점 합계가 100이 되고(=전체 총량 100), 과거도 같은 단위로 추이를 보여준다.
-    // 절대값을 쓰면 BTC처럼 압도적인 종목이 차트 상단(100)에 고정돼 나머지가 바닥에 깔린다.
-    const latestIdx = timeLabels.length - 1;
-    const denom = normalizedProjects.reduce(
-      (sum, p) => sum + Math.max(0, p.normalizedSparkline[latestIdx] || 0), 0
-    ) || 1;
+    // 각 시점에서 표시 종목들의 점유율(share)로 정규화 — 매 시점 합계가 100.
+    // 절대값을 쓰면 BTC처럼 압도적인 종목이 차트 상단에 고정돼 나머지가 바닥에 깔린다.
+    // 시점별 정규화라 sparkline 정렬/희소성에 영향받지 않고 라인이 전 구간에 그려진다.
     return timeLabels.map((time, timeIdx) => {
       const point: Record<string, string | number> = { time };
-      normalizedProjects.forEach(project => {
-        const raw = Math.max(0, project.normalizedSparkline[timeIdx] || 0);
-        point[project.ticker] = Math.round((raw / denom) * 100 * 100) / 100;
+      const vals = normalizedProjects.map(p => Math.max(0, p.normalizedSparkline[timeIdx] || 0));
+      const tot = vals.reduce((a, b) => a + b, 0);
+      normalizedProjects.forEach((project, i) => {
+        point[project.ticker] = tot > 0 ? Math.round((vals[i] / tot) * 100 * 100) / 100 : 0;
       });
       return point;
     });
