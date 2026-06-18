@@ -18,6 +18,13 @@ import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
 import TweetEmbed from "@/components/blog/TweetEmbed";
 import { staticResearchPosts } from "@/data/static-research-posts";
 
+// Author avatars + role overrides, keyed by author name (one place to manage them)
+const AUTHORS: Record<string, { img?: string; role?: string }> = {
+  Tobi: { img: "/images/authors/tobi.webp" },
+  James: { img: "/images/authors/james.jpg" },
+  David: { img: "/images/authors/david.webp", role: "Co-founder" },
+};
+
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
   if (!content) return "5 min read";
@@ -95,8 +102,8 @@ const ResearchDetail = () => {
     readTime: staticPost!.readTime,
     category: staticPost!.category,
     author: staticPost!.author,
-    authorRole: staticPost!.authorRole,
-    authorImage: '',
+    authorRole: AUTHORS[staticPost!.author]?.role || staticPost!.authorRole,
+    authorImage: AUTHORS[staticPost!.author]?.img || '',
     authorBio: (staticPost as any).authorBio || '',
     excerpt: staticPost!.excerpt,
     tags: staticPost!.tags,
@@ -111,8 +118,8 @@ const ResearchDetail = () => {
     readTime: dbPost.read_time || calculateReadTime(dbPost.content),
     category: dbPost.category || 'Blog',
     author: dbPost.author || 'Ium Labs',
-    authorRole: dbPost.author_role || 'Ium Labs Team',
-    authorImage: (dbPost as any).author_image || '',
+    authorRole: AUTHORS[dbPost.author || '']?.role || dbPost.author_role || 'Ium Labs Team',
+    authorImage: (dbPost as any).author_image || AUTHORS[dbPost.author || '']?.img || '',
     authorBio: '',
     excerpt: dbPost.excerpt || (dbPost.content ? dbPost.content.substring(0, 150) + '...' : ''),
     tags: dbPost.tags || [],
