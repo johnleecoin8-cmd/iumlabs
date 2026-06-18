@@ -53,7 +53,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
   return (
     <>
       {/* Mobile toggle */}
-      <div className="lg:hidden mb-8">
+      <div className="2xl:hidden mb-8">
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 text-sm font-medium w-full"
@@ -84,7 +84,7 @@ const TableOfContents = ({ content }: TableOfContentsProps) => {
       </div>
 
       {/* Desktop sidebar TOC */}
-      <aside className="hidden lg:block fixed top-32 right-[max(1rem,calc((100vw-72rem)/2-14rem))] w-56 xl:w-64">
+      <aside className="hidden 2xl:block fixed top-32 right-[max(1rem,calc((100vw-72rem)/2-14rem))] w-56 xl:w-64">
         <p className="text-[10px] uppercase tracking-[0.2em] text-white/25 mb-4 font-medium">On this page</p>
         <nav>
           <ul className="space-y-1.5 border-l border-white/[0.06]">

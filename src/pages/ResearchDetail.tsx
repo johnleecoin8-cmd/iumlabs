@@ -231,102 +231,106 @@ const ResearchDetail = () => {
             </Link>
           </div>
 
-          {/* Cover */}
-          <BlogCover post={post} variant="card" titleAs="h1" className="mt-6 mb-9 aspect-[3/4] w-full max-w-md rounded-2xl" />
-          
-          {/* Meta */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
-            <span className="text-[11px] uppercase tracking-[0.25em] text-white/40">
-              {post.category}
-            </span>
-            <span className="text-white/40 text-sm flex items-center gap-1">
-              <Clock className="w-4 h-4" />
-              {post.readTime}
-            </span>
-            <span className="text-white/40 text-sm flex items-center gap-1">
-              <Calendar className="w-4 h-4" />
-              {post.date}
-            </span>
-            {post.content && (
-              <span className="text-white/40 text-xs hidden sm:block">
-                {Math.round(post.content.split(/\s+/).length / 100) / 10}k words
-              </span>
-            )}
-          </div>
+          {/* Cover + meta: two-column on desktop so the portrait cover sits beside the byline */}
+          <div className="mt-6 grid items-center gap-8 lg:grid-cols-[minmax(0,340px)_1fr] lg:gap-14">
+            <BlogCover post={post} variant="card" titleAs="h1" className="aspect-[3/4] w-full max-w-[340px] lg:max-w-none mx-auto lg:mx-0 rounded-2xl" />
 
-          {/* Author & Share */}
-          <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
-            <div className="flex items-center gap-4">
-              {post.authorImage ? (
-                <img src={post.authorImage} alt={post.author} className="w-12 h-12 rounded-full object-cover ring-2 ring-white/10" />
-              ) : (
-                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
-                  {post.author.split(' ').map(n => n[0]).join('')}
+            <div className="min-w-0">
+              <span className="text-[11px] uppercase tracking-[0.25em] text-primary/80">
+                {post.category}
+              </span>
+
+              {post.excerpt && (
+                <p className="mt-4 text-lg sm:text-xl text-white/70 leading-relaxed font-light">
+                  {post.excerpt}
+                </p>
+              )}
+
+              {/* Meta */}
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-white/40 text-sm">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-4 h-4" />
+                  {post.readTime}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4" />
+                  {post.date}
+                </span>
+                {post.content && (
+                  <span className="text-xs">
+                    {Math.round(post.content.split(/\s+/).length / 100) / 10}k words
+                  </span>
+                )}
+              </div>
+
+              {/* Author & Share */}
+              <div className="mt-6 flex items-center justify-between flex-wrap gap-4 pt-6 border-t border-white/10">
+                <div className="flex items-center gap-3">
+                  {post.authorImage ? (
+                    <img src={post.authorImage} alt={post.author} className="w-11 h-11 rounded-full object-cover ring-2 ring-white/10" />
+                  ) : (
+                    <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center text-base font-medium text-white">
+                      {post.author.split(' ').map(n => n[0]).join('')}
+                    </div>
+                  )}
+                  <div>
+                    <p className="text-white font-medium leading-tight">{post.author}</p>
+                    <p className="text-white/40 text-sm">{post.authorRole}</p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="text-white/40 text-sm mr-1">Share:</span>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleShare("twitter")}
+                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
+                  >
+                    <Twitter className="w-4 h-4" />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => handleShare("linkedin")}
+                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleCopyLink}
+                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
+                  >
+                    <Copy className="w-4 h-4" />
+                  </motion.button>
+                </div>
+              </div>
+
+              {/* Tags */}
+              {post.tags && post.tags.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 mt-5">
+                  <Tag className="w-3.5 h-3.5 text-white/40" />
+                  {post.tags.map((tag) => (
+                    <Link
+                      key={tag}
+                      to={`/blog?tag=${encodeURIComponent(tag)}`}
+                      className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs hover:bg-white/[0.08] hover:text-white/70 transition-colors"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
                 </div>
               )}
-              <div>
-                <p className="text-white font-medium">{post.author}</p>
-                <p className="text-white/40 text-sm">{post.authorRole}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <span className="text-white/40 text-sm mr-2">Share:</span>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleShare("twitter")}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
-              >
-                <Twitter className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => handleShare("linkedin")}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
-              >
-                <Linkedin className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={handleCopyLink}
-                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
-              >
-                <Copy className="w-4 h-4" />
-              </motion.button>
             </div>
           </div>
-
-          {/* Tags */}
-          {post.tags && post.tags.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 pt-5">
-              <Tag className="w-3.5 h-3.5 text-white/40" />
-              {post.tags.map((tag) => (
-                <Link
-                  key={tag}
-                  to={`/blog?tag=${encodeURIComponent(tag)}`}
-                  className="px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-white/50 text-xs hover:bg-white/[0.08] hover:text-white/70 transition-colors"
-                >
-                  {tag}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
       </section>
 
       {/* Content */}
       <section className="container mx-auto max-w-4xl px-4 pb-20">
         <TableOfContents content={post.content} />
-
-        {/* Excerpt / Lead Paragraph */}
-        {post.excerpt && (
-          <div className="mb-12 text-lg sm:text-xl text-white/60 leading-relaxed font-light border-l-2 border-primary/30 pl-6">
-            {post.excerpt}
-          </div>
-        )}
 
         <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-[1.8] text-[16px] sm:text-[17px]">
