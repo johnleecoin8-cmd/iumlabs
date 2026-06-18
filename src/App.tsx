@@ -69,7 +69,16 @@ const AdminContacts = React.lazy(() => import("./pages/admin/AdminContacts"));
 const AdminJobApplications = React.lazy(() => import("./pages/admin/AdminJobApplications"));
 const AdminGSC = React.lazy(() => import("./pages/admin/AdminGSC"));
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 30 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 // Scroll to top on every route change
 const ScrollToTop = () => {
@@ -213,6 +222,21 @@ const useGlobalAutoplay = () => {
 const AppContent = () => {
   useGlobalAutoplay();
   useSmoothScroll();
+  // Prefetch the heavy/common route chunks while the browser is idle, so navigating
+  // to Projects / case studies / blog doesn't pay a cold JS-download cost on click.
+  useEffect(() => {
+    const prefetch = () => {
+      import("./pages/Projects");
+      import("./pages/ProjectDetail");
+      import("./pages/Research");
+      import("./pages/ResearchDetail");
+      import("./pages/GTMService");
+      import("./pages/Contact");
+    };
+    const w = window as typeof window & { requestIdleCallback?: (cb: () => void) => number };
+    if (w.requestIdleCallback) w.requestIdleCallback(prefetch);
+    else setTimeout(prefetch, 1500);
+  }, []);
   const location = useLocation();
   const [showIntro, setShowIntro] = useState(() => {
     // Only show intro on first visit in session and on home page
