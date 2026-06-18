@@ -229,6 +229,9 @@ const ResearchDetail = () => {
               Back to Blog
             </Link>
           </div>
+
+          {/* Cover */}
+          <BlogCover post={post} variant="card" titleAs="h1" className="mt-6 mb-9 aspect-[3/4] w-full max-w-md rounded-2xl" />
           
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-6">
@@ -250,11 +253,6 @@ const ResearchDetail = () => {
             )}
           </div>
 
-          {/* Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight mb-8">
-            {post.title}
-          </h1>
-          
           {/* Author & Share */}
           <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
             <div className="flex items-center gap-4">
@@ -315,13 +313,6 @@ const ResearchDetail = () => {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Featured Image */}
-      <section className="container mx-auto max-w-5xl px-4 mb-16">
-        <div className="aspect-[21/9] rounded-2xl overflow-hidden">
-          <BlogCover post={post} variant="art" className="h-full w-full" />
         </div>
       </section>
 

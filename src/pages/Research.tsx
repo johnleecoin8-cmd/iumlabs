@@ -76,14 +76,8 @@ const Research = () => {
 
   const posts = useMemo(() => [...staticResearchPosts, ...dbTransformed], [dbTransformed]);
 
-  const featuredPost = posts.find(p => p.isFeatured) || posts[0];
-  const secondaryPosts = posts.filter(p => p !== featuredPost).slice(0, 2);
-
   const filteredPosts = useMemo(() => {
     return posts.filter(post => {
-      const isFiltering = searchQuery || selectedCategory !== "All" || selectedTag;
-      if (!isFiltering && post === featuredPost && currentPage === 1) return false;
-      if (!isFiltering && secondaryPosts.includes(post) && currentPage === 1) return false;
       const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
       const matchesCategory = selectedCategory === "All" ||
@@ -91,7 +85,7 @@ const Research = () => {
       const matchesTag = !selectedTag || (post.tags && post.tags.some(t => t.toLowerCase() === selectedTag.toLowerCase()));
       return matchesSearch && matchesCategory && matchesTag;
     });
-  }, [posts, searchQuery, selectedCategory, selectedTag, currentPage, featuredPost, secondaryPosts]);
+  }, [posts, searchQuery, selectedCategory, selectedTag]);
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const currentPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
@@ -209,86 +203,6 @@ const Research = () => {
           )}
         </div>
       </section>
-
-      {/* Featured Bento Section */}
-      {currentPage === 1 && selectedCategory === "All" && !searchQuery && !selectedTag && featuredPost && (
-        <section className="px-4 sm:px-6 lg:px-10 pb-6 sm:pb-10">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
-              {/* Main Featured */}
-              <Link to={`/blog/${featuredPost.slug}`} className="group lg:col-span-2 block">
-                <div className="relative h-full min-h-[280px] sm:min-h-[400px] lg:min-h-[480px] rounded-xl overflow-hidden">
-                  <BlogCover post={featuredPost} variant="art" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8 lg:p-10">
-                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                      {featuredPost.category && (
-                        <span className="text-white/70 text-[10px] sm:text-xs uppercase tracking-[0.2em]">
-                          {featuredPost.category}
-                        </span>
-                      )}
-                      <span className="text-white/40 text-[10px] sm:text-xs flex items-center gap-1">
-                        <Clock className="w-3 h-3" />
-                        {featuredPost.readTime}
-                      </span>
-                    </div>
-                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-light text-white leading-tight tracking-tight mb-2 sm:mb-3 group-hover:text-[#d8b4fe] transition-colors duration-300">
-                      {featuredPost.title}
-                    </h2>
-                    <p className="text-sm sm:text-base text-white/50 line-clamp-2 max-w-2xl mb-4 sm:mb-5 hidden sm:block">
-                      {featuredPost.excerpt}
-                    </p>
-                    <div className="flex items-center gap-3">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center text-[10px] sm:text-xs font-medium text-white">
-                        {featuredPost.author.split(' ').map(n => n[0]).join('')}
-                      </div>
-                      <div>
-                        <p className="text-xs sm:text-sm text-white/80">{featuredPost.author}</p>
-                        <p className="text-[10px] sm:text-xs text-white/30">{featuredPost.date}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="absolute top-5 right-5 sm:top-6 sm:right-6 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                  </div>
-                </div>
-              </Link>
-
-              {/* Secondary Posts Stack */}
-              <div className="flex flex-col gap-3 sm:gap-4">
-                {secondaryPosts.map(post => (
-                  <Link key={post.id} to={`/blog/${post.slug}`} className="group block flex-1">
-                    <div className="relative h-full min-h-[180px] sm:min-h-[228px] rounded-xl overflow-hidden">
-                      <BlogCover post={post} variant="art" className="absolute inset-0 h-full w-full transition-transform duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                        <div className="flex items-center gap-2 mb-2">
-                          {post.category && (
-                            <span className="text-white/70 text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">
-                              {post.category}
-                            </span>
-                          )}
-                          <span className="text-white/30 text-[9px] sm:text-[10px] flex items-center gap-1">
-                            <Clock className="w-2.5 h-2.5" />
-                            {post.readTime}
-                          </span>
-                        </div>
-                        <h3 className="text-sm sm:text-base lg:text-lg font-light text-white leading-snug group-hover:text-[#d8b4fe] transition-colors duration-300 line-clamp-2">
-                          {post.title}
-                        </h3>
-                        <p className="mt-1.5 text-[10px] sm:text-xs text-white/30">{post.author} · {post.date}</p>
-                      </div>
-                      <div className="absolute top-3 right-3 sm:top-4 sm:right-4 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                        <ArrowUpRight className="w-3.5 h-3.5 text-white" />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Article Grid */}
       <section className="px-4 sm:px-6 lg:px-10 py-12 sm:py-16 border-t border-white/10" id="articles">
