@@ -15,6 +15,7 @@ import AutoFAQSchema from "@/components/AutoFAQSchema";
 import SEOHead from "@/components/SEOHead";
 import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
+import TweetEmbed from "@/components/blog/TweetEmbed";
 import { staticResearchPosts } from "@/data/static-research-posts";
 
 // Helper function to calculate read time from content
@@ -456,6 +457,13 @@ const ResearchDetail = () => {
                     );
                     i++; continue;
                   }
+                }
+
+                // Live X/Tweet embed: {{xpost:TWEET_URL}}
+                if (line.startsWith('{{xpost:') && line.endsWith('}}')) {
+                  const url = line.slice(8, -2).trim();
+                  rendered.push(<TweetEmbed key={key} url={url} />);
+                  i++; continue;
                 }
 
                 // Tweet/X embed screenshot: {{tweet:IMAGE_URL::@handle, tweet text}}
