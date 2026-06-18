@@ -426,6 +426,38 @@ const ResearchDetail = () => {
                   i++; continue;
                 }
 
+                // Native bar chart: {{bars:Label=value,Label=value::caption}}
+                if (line.startsWith('{{bars:') && line.endsWith('}}')) {
+                  const inner = line.slice(7, -2);
+                  const sepIdx = inner.indexOf('::');
+                  const dataStr = sepIdx !== -1 ? inner.slice(0, sepIdx) : inner;
+                  const caption = sepIdx !== -1 ? inner.slice(sepIdx + 2) : '';
+                  const items = dataStr.split(',').map(p => {
+                    const eq = p.lastIndexOf('=');
+                    return { label: p.slice(0, eq).trim(), value: parseFloat(p.slice(eq + 1)) };
+                  }).filter(it => it.label && !isNaN(it.value));
+                  if (items.length) {
+                    const max = Math.max(...items.map(it => it.value));
+                    rendered.push(
+                      <figure key={key} className="my-10 rounded-2xl border border-white/10 bg-white/[0.02] p-6 sm:p-8">
+                        <div className="space-y-3.5">
+                          {items.map((it, j) => (
+                            <div key={j} className="flex items-center gap-3 sm:gap-4">
+                              <span className="w-24 sm:w-32 shrink-0 text-right text-[12px] sm:text-[13px] text-white/55">{it.label}</span>
+                              <div className="relative h-7 flex-1 overflow-hidden rounded-md bg-white/[0.04]">
+                                <div className="absolute inset-y-0 left-0 rounded-md bg-primary/80" style={{ width: `${Math.max(2, (it.value / max) * 100)}%` }} />
+                              </div>
+                              <span className="w-12 shrink-0 text-[13px] font-medium text-white/85 tabular-nums">{it.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                        {caption && <figcaption className="mt-5 text-xs text-white/40 italic">{caption}</figcaption>}
+                      </figure>
+                    );
+                    i++; continue;
+                  }
+                }
+
                 // Tweet/X embed screenshot: {{tweet:IMAGE_URL::@handle, tweet text}}
                 if (line.startsWith('{{tweet:') && line.endsWith('}}')) {
                   const inner = line.slice(8, -2);
