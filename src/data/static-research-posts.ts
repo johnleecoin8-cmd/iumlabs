@@ -222,6 +222,8 @@ For nine years Korea ran one of the deepest retail crypto markets on earth with 
 
 Korea's crypto demand was never the problem. By the Bank of Korea's count, the country had 15.6 million crypto investors as of end-November 2024, close to 30% of the population, across Upbit, Bithumb, Coinone, Korbit, and Gopax (Source: KED Global / Bank of Korea, Feb 13 2025). What was missing was the institutional side of the ledger. Since 2017 the authorities had effectively barred corporations and banks from trading crypto, citing money laundering risk and "overheated speculation." The mechanism was simple: no corporate real-name bank account, no access.
 
+{{source:/images/blog/corpban-nonprofits-sell.jpg::Korea Times, FSC officials at a virtual-asset committee session on corporate access}}
+
 %%15.6 million retail crypto investors, roughly 30% of the population::Korea's market was built almost entirely on individuals (Source: KED Global / Bank of Korea, Feb 13 2025)%%
 
 The result is a market that is liquid and fast but thin on patient capital. The Kimchi Premium, the persistent gap between Korean and global prices, is partly a symptom of a closed, retail-driven pool with no institutional desk to flatten it.
@@ -229,6 +231,8 @@ The result is a market that is liquid and fast but thin on patient capital. The 
 ## What Actually Changed, and in What Order
 
 On February 13, 2025, the Financial Services Commission used its Virtual Asset Committee to publish a roadmap for corporate participation. The sequencing matters more than the headline.
+
+{{source:/images/blog/corpban-kim-soyoung.jpg::Chosun Biz, FSC Vice Chairman Kim So-young at the 2025 Virtual Assets Conference}}
 
 > **"We reached the consensus on the need to allow corporate participation in the virtual asset market. A phased and gradual approach will be desirable to minimize potential risks."**
 >, Kim Soyoung, FSC Vice Chairman, KED Global
@@ -249,6 +253,8 @@ One exclusion defines the whole design. Banks and brokerages stay out for now, w
 
 The instinct from the retail era is to reach for reach: influencers, community, airdrops, listing buzz. That motion does not move an institutional buyer. A Korean corporate treasury, a registered professional investor, or a university endowment does not need to be convinced a token is exciting. It needs to say yes without legal, audit, and compliance saying no. The constraint is internal sign-off, not awareness.
 
+{{source:/images/blog/corpban-institutional.jpg::Decrypt, Bitcoin against the South Korean flag as institutional access opens}}
+
 So the playbook inverts. First, compliance is the product. The phased design is conditional: audited operating history, internal vetting committees, approved-token lists, anti-money-laundering parity with existing virtual asset service providers (Source: CoinDesk, May 21 2025). Whoever helps a counterparty satisfy those conditions cleanly is the one who gets the account opened.
 
 Second, custody is the gate. An institution cannot hold what it cannot custody to its auditors' satisfaction, so the won-based exchange and bank rails a corporate account depends on are the real go-to-market step. Third, the asset universe is narrow by rule. Phase-one selling was restricted to roughly the top 20 coins by market cap, and exchanges were ordered to purge low-volume "zombie" tokens and raise the bar for memecoins (Source: CoinDesk, May 21 2025). An institutional Korea strategy built around long-tail tokens is built against the regulation.
@@ -258,6 +264,8 @@ Second, custody is the gate. An institution cannot hold what it cannot custody t
 ## What This Means for Operators
 
 If you want Korean institutional flow, your first hire is not a community manager, it is a compliance lead who can map the FSC conditions to a specific counterparty. Lead with custody readiness and a clean, listed-asset thesis. The buyers in scope are operating companies and professional investors, so the pitch is a treasury and allocation pitch framed against the 5% cap, not a hype cycle. The shorthand for the prize is real: a Korean version of Strategy, a listed firm accumulating Bitcoin on its balance sheet, is now legally conceivable where it was not before (Source: KED Global, Feb 13 2025).
+
+{{youtube:YgLbZ56WWQk}}
 
 ## What Breaks It
 
@@ -275,6 +283,10 @@ We treat Korea institutional entry as a regulatory sequencing problem first. We 
 - [The Block, South Korea sees first institution sell crypto holdings since ban lift](https://www.theblock.co/post/356493/south-korea-sees-first-institution-sell-crypto-holdings-since-ban-lift)
 - [Korea Times, Delayed corporate access fuels frustration in Korea's shrinking crypto market](https://www.koreatimes.co.kr/economy/cryptocurrency/20260112/delayed-corporate-access-fuels-frustration-in-koreas-shrinking-crypto-market)
 - [Chambers, Blockchain and Crypto-Assets 2026: South Korea Trends and Developments](https://practiceguides.chambers.com/practice-guides/blockchain-crypto-assets-2026/south-korea/trends-and-developments)
+- [Korea Times, Nonprofits, crypto exchanges allowed to sell crypto from June 1](https://www.koreatimes.co.kr/economy/cryptocurrency/20250501/nonprofits-crypto-exchanges-allowed-to-sell-crypto-from-june-1)
+- [Chosun Biz, Kim So-young to finalize review on real-name accounts for virtual asset firms](https://biz.chosun.com/en/en-finance/2025/01/16/YIFSJILI7FGP7JILNHC7YDK4W4/)
+- [Decrypt, South Korea Wants to Lift Its Ban on Institutional Crypto Trading](https://decrypt.co/299985/south-korea-lift-ban-institutional-crypto-trading)
+- [YouTube, RWA Revolution: Transforming Global Finance at KBW2025](https://www.youtube.com/watch?v=YgLbZ56WWQk)
 
 *This report reflects ium Labs' operating view and is intended for general information, not legal advice.*`,
     isFeatured: false,
@@ -322,6 +334,8 @@ This is a deep, fee-generating market, but a brutally concentrated one. The funn
 
 In a typical Western funnel the painful step is sign-up. In Korea sign-up is trivial and the deposit is the wall. To accept won, a licensed exchange must hold a real-name account agreement with a single domestic bank, and every deposit and withdrawal must flow through an account in the user's exact legal name at that bank. Upbit pairs with K-Bank, Bithumb with KB Kookmin, Coinone with Kakao Bank, Korbit with Shinhan. As of early 2026 only five exchanges hold such partnerships at all.
 
+{{youtube:y5gnkr3fQUg}}
+
 The friction is unforgiving. When Upbit switched on mandatory verification, users could not transact above 1 million won without completing KYC, and won balances in unverified accounts were returned outright. The system rejects foreign accounts, joint accounts, and name mismatches with no human review. A new user must, in one sitting, verify identity, hold or open an account at the correct bank, and pass the name-match check before a single won lands. That is where installs go to die.
 
 {{source:/images/blog/korea-cex-user-acquisition-funnel-kol-naver-paid-ads-1.jpg::Source: KED Global, "S.Korea's crypto market doubles to $77.5 bn with 20% of population trading"}}
@@ -333,6 +347,8 @@ This Korean walkthrough makes the friction visible: it has to teach viewers that
 ## 3. Trust Gates the Conversion
 
 The deposit is not only procedural friction; it is the most expensive trust decision a Korean retail user makes. Linking a real-name bank account hands an exchange a verified identity tied directly to a bank ledger. Koreans do this readily for Upbit and Bithumb because those brands are effectively household infrastructure. They do not do it for an unknown brand on the strength of a banner ad.
+
+{{source:/images/blog/cexfunnel-upbit-liquidity-kaiko.png::Kaiko, market share of major Korean exchanges shows Upbit dominance through 2025}}
 
 The concentration data proves it. Of roughly 10.2 million users, 53 percent sit on Upbit and 37 percent on Bithumb, leaving the other three licensed exchanges to split under one million users. Trust, not features or fees, sorts that distribution.
 
@@ -373,6 +389,8 @@ If you are bringing an exchange or trading product into Korea and need a funnel 
 - [Paybis: Best Crypto Exchanges in South Korea 2026](https://paybis.com/blog/best-crypto-exchanges-korea/)
 - [Statcounter: Search Engine Market Share Republic of Korea](https://gs.statcounter.com/search-engine-market-share/all/south-korea)
 - [YouTube: Binance sign-up and Upbit deposit guide (2026)](https://www.youtube.com/watch?v=AtRj5BD0bUg)
+- [YouTube, Upbit Tutorial 2025 Account Setup Security Transfers Withdrawals](https://www.youtube.com/watch?v=y5gnkr3fQUg)
+- [Bitcoin.com, Upbit Towers Over Rivals as South Korea Primary Liquidity Hub Kaiko](https://news.bitcoin.com/upbit-towers-over-rivals-as-south-koreas-primary-crypto-liquidity-hub-research-finds/)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -412,6 +430,8 @@ This is what most RWA teams get wrong. They arrive with a yield number and a cha
 
 This is not a roadmap. On January 15, 2026, the National Assembly passed amendments recognizing tokenized securities as legitimate financial instruments and defining how they are issued, distributed, and traded under Korean law. The rules take effect in January 2027 after a one-year preparation period, building on STO guidelines the Financial Services Commission first issued in 2023.
 
+{{source:/images/blog/rwa-ksd-krx.jpg::Regulation Asia, KSD and KRX launch real-time securities data sharing system}}
+
 > **"We expect token securities to enable distributed ledger-based securities account management and greater utilization of smart contracts. We also anticipate more active use of smart contracts in blockchain-based securities infrastructure."**
 >
 > Financial Services Commission, official release via The Block
@@ -429,6 +449,8 @@ The infrastructure is forming around it. Three consortiums, led respectively by 
 ## Why RWA Is a Trust Product
 
 A tokenized asset is a claim. Its value rests on the belief that the token faithfully represents something real, that the issuer is solvent and regulated, that custody is sound, and that a court will honor the claim. The blockchain handles settlement; it does not manufacture that trust. A memecoin asks you to believe in momentum. A tokenized real estate note asks you to believe in a chain running from a property deed through an issuer, a custodian, a depository, and a regulator. Korea's framework makes this explicit, routing tokenized securities through the Korea Securities Depository, the Financial Supervisory Service, and licensed brokerages.
+
+{{source:/images/blog/rwa-korea-securities-depository.jpg::The Korea Times, Korea Securities Depository expands non-face-to-face shareholder services}}
 
 The technology is the easy part; the trust scaffolding is the product. Korean institutions, whose default posture is caution, treat that scaffolding as the lens for everything from the first email. A pitch that opens with an APY has misread the room; one that opens with legal structure, named custodian, and regulatory pathway signals a peer.
 
@@ -449,6 +471,8 @@ This briefing on the legislation captures the regulated framing now governing th
 ## What This Means for Operators
 
 Reorder your motion. Open with the legal and custody architecture, name your partners early, and present a thesis grounded in Korean regulation before you mention returns. Then sequence by who underwrites trust for everyone else: a signal from a depository-adjacent player or a Korea Exchange consortium cascades, and the rest of the market re-rates you.
+
+{{youtube:hVwyrY2TKqU}}
 
 ## What Breaks It
 
@@ -475,6 +499,9 @@ If you are bringing a tokenized real-world asset to Korea and want a motion that
 - [Financial Services Commission, official press release on security token framework](https://www.fsc.go.kr/eng/pr010101/86076)
 - [Yahoo Finance / Bloomberg, "South Korea Advances Bill to Legalize Issuance, Trading of Tokenized Securities"](https://finance.yahoo.com/news/south-korea-advances-bill-legalize-052222582.html)
 - [Crypto World Daily, "South Korea Advances Bill to Legalize Issuance, Trading of Tokenized Securities" (video)](https://www.youtube.com/watch?v=QCKDCWKyM-U)
+- [The Korea Times, Korea Securities Depository expands non-face-to-face shareholder services](https://www.koreatimes.co.kr/economy/20260519/korea-securities-depository-expands-non-face-to-face-shareholder-services)
+- [Regulation Asia, KSD and KRX Launch Real-Time Securities Data Sharing System](https://www.regulationasia.com/articles/south-korea-s-ksd-and-krx-launch-real-time-securities-data-sharing-system)
+- [YouTube, Real World Asset Revolution Ultimate 2026 RWA Guide](https://www.youtube.com/watch?v=hVwyrY2TKqU)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
   },
@@ -511,6 +538,8 @@ Most Web3 teams arrive in Korea with a shopping list. A KOL package here, a batc
 
 Start with the size of the prize. By the end of 2025 Korea had 11.13 million verified users eligible to trade digital assets, an all-time high in a country of about 51.7 million. Korean Won is traded against crypto more than any other currency on earth, ahead of the U.S. dollar, which is why the "kimchi premium" exists at all.
 
+{{source:/images/blog/gtmstack-tiger-market-guide-c.png::Tiger Research, Korea verified crypto users climb to an all-time high in 2025 H2}}
+
 %%11.13M::verified Korean crypto users, end-2025, an all-time high (Source: FSC, via Tiger Research)%%
 
 But the channels that move it are not the ones in a global growth team's muscle memory. Discovery runs on Naver, not Google: it holds roughly 42 percent of Korean search and a far larger share of the long-form informational queries where a cautious investor researches a token, because so much Korean-language content lives inside Naver Blog and Cafe. Messaging runs on KakaoTalk, which reaches almost the entire country, not WhatsApp or Discord alone.
@@ -526,6 +555,8 @@ The second break is subtler. As a16z crypto observed after Korea Blockchain Week
 
 The fix is to stop buying tactics and build a funnel. The stack has four layers, each doing one job, each on a different Korea-native channel, each dependent on the layer above.
 
+{{youtube:cXAKdkvEu4o}}
+
 | Layer | The job | Korea-native channel | What it produces |
 | --- | --- | --- | --- |
 | Awareness | Get found during research | Naver search, Blog, Cafe | Qualified discovery |
@@ -538,6 +569,8 @@ Read top to bottom, this is a dependency chain, not a menu. Awareness without Tr
 ## Inside the Layers, and the T0 Clock
 
 Awareness is the index layer. If your project is absent from Naver's results and communities, the consideration stage never happens for the majority of Korean users who start there. This is Korean-language content and search work seeded weeks ahead, not a launch-day press blast.
+
+{{source:/images/blog/gtmstack-naver-dunamu-bloomberg.jpg::Bloomberg, Upbit and token tickers as Naver moves to acquire Dunamu}}
 
 Trust is the rate-limiter, and the reason this is a stack and not a list. A Korean retail user does not act on a banner. They act when a voice they have followed for years vouches credibly, inside KakaoTalk and Telegram channels and on Korean-language YouTube. The credibility ceiling here caps everything below it: you can buy unlimited Awareness and Conversion, but if the Trust layer is thin, the funnel converts at the trust rate, not the spend rate.
 
@@ -583,6 +616,8 @@ If you are bringing a token into Korea and need a funnel measured in committed u
 - [a16z crypto, Korea Blockchain Week 2025: Field Notes](https://a16zcrypto.com/posts/article/korea-blockchain-week-trip-report-gtm/)
 - [KED Global, S.Korea's crypto market doubles to $77.5 bn with 20% of population trading](https://www.kedglobal.com/cryptocurrencies/newsView/ked202505200007)
 - [Arirang News, Naver, Dunamu to invest nearly US$ 7 bil. into AI, Web3 technology](https://www.youtube.com/watch?v=qaMacXt03Gk)
+- [Bloomberg, Naver to Buy Top Korea Crypto Exchange in 10.3 Billion Dollar Deal](https://www.bloomberg.com/news/articles/2025-11-26/naver-to-acquire-crypto-exchange-upbit-s-parent-dunamu)
+- [YouTube, World top crypto leaders gather at KBW 2025](https://www.youtube.com/watch?v=cXAKdkvEu4o)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
   },
@@ -619,6 +654,8 @@ Most foreign teams build their Korea community plan around Telegram and Discord 
 
 Start with reach, because reach is what makes the rest matter. KakaoTalk is the messenger almost every Korean carries. According to mobile tracker IGAWorks, the app counted 44.97 million monthly active users in March 2024 and peaked at 47.07 million in April 2023, against a national population near 51 million. There is no real second messenger. KakaoTalk is the phone book, the group chat with your family, the way your bank and your delivery app reach you. When a graph is that universal, it stops being an app and becomes infrastructure.
 
+{{source:/images/blog/kakao-ked-messenger.jpeg::KED Global, KakaoTalk, South Korea top messaging app}}
+
 %%44.97 million::KakaoTalk monthly active users, March 2024, against a population near 51 million (Source: IGAWorks via Korea JoongAng Daily)%%
 
 KakaoTalk is so dominant that its only domestic rival for attention is YouTube, which edged past it for the top spot among Korean apps in late 2023. Even then, KakaoTalk held the largest share of any messaging or social platform by a wide margin, far ahead of Instagram. The point for an operator is simple. If you want to reach Korean retail where they already are, you do not start a new venue. You enter the one they never leave.
@@ -626,6 +663,8 @@ KakaoTalk is so dominant that its only domestic rival for attention is YouTube, 
 ## How Open Chat Works
 
 Open Chat is the part foreign teams underrate. Ordinary KakaoTalk is a friends-based graph, built on people who already have each other's numbers. Open Chat is the opposite. Anyone can create or join a room around a topic, often anonymously under a room-specific nickname, with no phone number exchanged and no existing relationship required. It is a stranger graph layered on top of the friend graph, and it is where interest-based communities form. Crypto is one of the densest of those interests.
+
+{{source:/images/blog/kakao-open-chat-screen.png::Financial News, KakaoTalk Open Chat room interface}}
 
 This is not a side feature with a handful of users. In its fourth-quarter 2023 earnings call, Kakao reported that the daily active users of the Open Chat tab had climbed to 12 million, alongside 37 million on the friends-based tab. Twelve million Koreans opening a discovery surface every day, sorting themselves into rooms by subject, is a distribution channel by any honest definition.
 
@@ -658,6 +697,8 @@ That quote is a warning and a tell at once. It is a warning that Open Chat is wh
 
 Stop treating KakaoTalk as a support inbox and start treating it as a primary distribution surface. Korean retail discovers, debates, and coordinates positions in Open Chat rooms long before they touch your Discord. If you are not present there, you are absent from the conversation that actually moves Korean volume. Build a Korean-language presence in the rooms your audience already occupies, run it with operators who hold standing inside those rooms, and measure it as a channel with its own funnel, not as a ticket queue. The reach is enormous and the competition for genuine native presence is thin, because most of your competitors never even see the venue.
 
+{{youtube:edYF5bAPtSA}}
+
 ## What Breaks It
 
 The failures are predictable. Running rooms in English-first broadcast mode, which Korean members tune out instantly. Outsourcing to a generic agency with no project knowledge, so the room fills with off-topic noise and the moderator hides more messages than they answer. Trying to automate or forward your way to scale on a platform that restricts exactly that. And treating anonymity as a license for hype, on a layer where the platform purges manipulation and the audience punishes obvious shilling. A Korean room that smells of a foreign launch deck dies on arrival.
@@ -673,6 +714,9 @@ ium Labs runs KakaoTalk as the distribution layer it actually is. We deploy nati
 - [Kakao Safety Report, Open Chat Enforcement](https://talksafety.kakao.com/en/report/enforcement/openchat?period=2502)
 - [Airdrop Live, Problems with Blockchain Marketing in Korea Part 1: Open Chat](https://medium.com/@airdroplive/problems-with-blockchain-marketing-in-korea-part-1-open-chat-6427ffe4a8da)
 - [Naver and Kakao (Ep 2.), YouTube](https://www.youtube.com/watch?v=xIuXw9V20Jc)
+- [KED Global, ChatGPT now available on KakaoTalk S.Korea top messaging app](https://www.kedglobal.com/artificial-intelligence/newsView/ked202510280008)
+- [Financial News, KakaoTalk Open Chat replaces Reply with Comment feature](https://en.fnnews.com/news/202601282031097660)
+- [YouTube, AI Super Apps Kakao vs Toss The Battle for Dominance](https://www.youtube.com/watch?v=edYF5bAPtSA)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
   },
@@ -711,6 +755,8 @@ In most markets, getting listed is one of many distribution steps. In Korea it i
 
 According to Financial Supervisory Service data reported by Seoul Kyungjae, Upbit took 71.6% of all domestic crypto trading volume in the first half of 2025, with Bithumb a distant second and the remaining exchanges effectively rounding errors.
 
+{{source:/images/blog/upbit-kaiko-liquidity.png::Bitcoin.com / Kaiko, market share of major Korean exchanges with Upbit dominant}}
+
 {{bars:Upbit=71.6,Bithumb=25.8,Coinone=1.8,Korbit/GOPAX=0.8::Korean crypto exchange share of domestic trading volume, H1 2025. Source: FSS data via Seoul Kyungjae / Cryptonews}}
 
 %%71.6%::Upbit's share of South Korean domestic crypto trading volume in H1 2025, on 833 trillion won ($642B) of transactions (Source: FSS / Cryptonews)%%
@@ -722,6 +768,8 @@ The user numbers are just as concentrated: of 10.17 million exchange customers, 
 ## 2. Why Concentration Changes Token Economics
 
 When one venue holds the majority of won liquidity, its listing decision is effectively a liquidity switch. Listed, a token inherits deep won order books, retail reach, and the kimchi-premium dynamic that can open a pricing gap with global markets. Unlisted there, the same token can have a thriving global market and almost no Korean liquidity at all.
+
+{{source:/images/blog/upbit-fee-war.webp::Kaiko, Korean exchange volume share around the Bithumb zero-fee period}}
 
 > **"The domestic crypto market has effectively solidified into an Upbit monopoly."**
 >, Seoul Kyungjae, citing Financial Supervisory Service data
@@ -740,6 +788,8 @@ The first weeks set the reference price and the depth that later flows trade aga
 
 Sequence everything to the listing date, not a global calendar. Load awareness and trust in the weeks before it so demand exists when liquidity arrives. Have market-making and depth arranged for day one. And budget for the post-listing window, because in a concentrated market the difference between a durable book and a dead chart is decided in the first weeks, not the first hours.
 
+{{youtube:PeMPMSIDRTw}}
+
 ## 5. What Breaks It
 
 The recurring failures are concentration-specific. Treating the listing as a finish line rather than a starting line. Spending the awareness budget weeks before there is anywhere for primed demand to trade. And arriving with no liquidity or market-making plan, so the first wave of volume has nothing to trade against and the book thins immediately. Each of these is recoverable in a fragmented market and close to fatal in a concentrated one.
@@ -751,6 +801,9 @@ We treat a Korean listing as the liquidity event it is: [listing advisory](/serv
 ## Sources
 
 Upbit and exchange share, volume, and user figures: Financial Supervisory Service data reported by Seoul Kyungjae, via [Cryptonews](https://cryptonews.com/news/upbit-corners-72-of-s-korean-crypto-market-as-smaller-exchanges-face-extinction/). Duopoly concentration (~96%): [Kaiko, The State of the Korean Crypto Market](https://www.kaiko.com/resources/the-state-of-the-korean-crypto-market). Video: "How South Korea's Crypto Market Skyrockets in 2025". Figures are point-in-time and move with market cycles.
+- [Bitcoin.com, Upbit Towers Over Rivals as South Korea Primary Crypto Liquidity Hub](https://news.bitcoin.com/upbit-towers-over-rivals-as-south-koreas-primary-crypto-liquidity-hub-research-finds/)
+- [Kaiko, Crypto Fee War Heats Up in South Korea](https://www.kaiko.com/resources/crypto-fee-war-heats-up-in-south-korea)
+- [YouTube, Crypto Fee War Intensifies in South Korea CoinDesk Chart of the Day](https://www.youtube.com/watch?v=PeMPMSIDRTw)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: true,
@@ -789,6 +842,8 @@ Korea is one of the most active memecoin markets on earth and one of the least g
 
 The clearest tell is what Korean retail actually trades. XRP was the single most-traded asset on Upbit across all of 2025, with cumulative volume north of $1 trillion, and DOGE and XRP volumes have repeatedly flipped Bitcoin's on Korean venues. None of those originated in Korea.
 
+{{source:/images/blog/memecoin-upbit-vol-panews.png::PANews, XRP analysis showing roughly 70 percent of net spot buy pressure came from Korea Upbit}}
+
 %%$1T+::XRP's 2025 trading volume on Upbit, where a foreign asset, not a Korean one, was the single most-traded coin (Source: Phemex / Cryptorank)%%
 
 That is the paradox in one data point: enormous appetite, almost entirely directed at coins created elsewhere.
@@ -796,6 +851,8 @@ That is the paradox in one data point: enormous appetite, almost entirely direct
 ## 2. The Demand Pool Is Cyclical
 
 The pool also runs hot and cold. Through late 2025, Korean crypto activity cooled sharply as retail rotated into a state-backed AI equities rally, and exchange volumes fell with it.
+
+{{source:/images/blog/memecoin-upbit-volume-drop.png::CoinGecko via TechFlow, Upbit average daily trading volume fell from 9.05B to 1.79B over 2025}}
 
 {{bars:Dec 2024=9.0,Nov 2025=1.8::Upbit average daily trading volume, $B (Source: Wu Blockchain via CoinDesk)}}
 
@@ -818,6 +875,8 @@ Stop trying to make Korea the origin of the meme and start treating it as the pl
 
 The common failures are trying to engineer organic virality in a market that does not originate, spending on awareness before there is anywhere liquid to buy, and assuming Korean attention is permanent. Korean retail is fast but not loyal to a venue or an asset; momentum without credibility produces a one-day spike, and even strong demand can rotate out of crypto entirely.
 
+{{youtube:I0iqgARD7bc}}
+
 ## 6. How We Run It
 
 We treat Korea as the demand market it is: liquidity and access first through [exchange marketing](/services/exchange-marketing) and listing support, trust through Korean KOLs who actually move traders, and timing that puts you in front of the pool when momentum is real. If a token wants Korean demand, that is the [conversation to start](/contact).
@@ -825,6 +884,9 @@ We treat Korea as the demand market it is: liquidity and access first through [e
 ## Sources
 
 XRP and altcoin dominance: [Cryptorank](https://cryptorank.io/news/feed/e2dfc-xrp-upbit-most-traded-2025) and [Phemex](https://phemex.com/news/article/xrp-tops-south-koreas-2025-trading-volume-with-1-trillion-on-upbit-54050); DOGE/XRP versus Bitcoin: [Yahoo Finance](https://finance.yahoo.com/news/dogecoin-xrp-trading-volumes-flip-084646851.html). Volume decline and chart: [CoinDesk, "The Great Korean Pivot"](https://www.coindesk.com/business/2025/11/09/the-great-korean-pivot-from-memecoins-to-machine-chips), citing Wu Blockchain and Dune Analytics. Figures are point-in-time and move with cycles.
+- [PANews, The Korean market soars Upbit daily volume tops 10B](https://www.panewslab.com/en/articles/o5k85f6r)
+- [TechFlow, Even Koreans have stopped trading crypto CoinGecko data](https://www.panewslab.com/en/articles/c58b958f-c52c-4d5d-ab47-a8359fee0b79)
+- [YouTube, South Korean Experts Use AI to Halt Crypto Pump and Dumps](https://www.youtube.com/watch?v=I0iqgARD7bc)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -875,6 +937,8 @@ Now the Korean side. Korea has long been the demand anchor for altcoins, with sm
 
 The instinct is to assume Koreans did not get the memo; the data says they got a better one. Through 2025, Korean retail pulled savings, fixed deposits, and even life insurance to chase the SK Hynix and Samsung AI hardware rally, and crypto turnover fell sharply as that equity money moved. They did not reject artificial intelligence; they bought the version they could touch, value, and exit: listed chipmakers with earnings, charts, and a clear payoff.
 
+{{source:/images/blog/aidepin-skhynix-1trn-chart.jpg::Reuters, top memory chipmakers in the 1 trillion dollar club}}
+
 > **"One simple way to create a network that has good adoption is to get your potential users to not only pay for it in advance, but also to own and operate it."**
 >, Guy Wuollet, a16z crypto
 
@@ -886,6 +950,8 @@ That sentence captures both the elegance and the problem. DePIN's pitch is that 
 
 The fix is not a louder deck but a different unit of explanation. Korean retail moved into semiconductors because they offered a concrete, locally legible story with a visible cash mechanism. AI x crypto has to be retold in that register.
 
+{{source:/images/blog/aidepin-korean-investors-chips.png::Seoul Economic Daily, Korean investors buy Samsung and SK Hynix via RIA accounts}}
+
 That means three translations. First, lead with the payoff, not the architecture: replace "decentralized physical infrastructure" with the specific thing a Korean participant gets, a device that earns, a yield in won-legible terms, a service whose price they already understand. Second, anchor it locally. The same holiday week Korean retail poured roughly $1.24 billion into US tech and crypto-linked equities, the appetite for AI exposure was obvious; crypto's AI story had no on-ramp as crisp as buying a chip stock. Third, show the cycle honestly: Korean retail is fast but not loyal, and the base that floods an asset can be parked in equities the next quarter, so the thesis needs a reason to hold beyond momentum.
 
 The point is not to dumb the thesis down, but to deliver it in the currency Korean retail prices in: concrete, immediate, locally framed value.
@@ -893,6 +959,8 @@ The point is not to dumb the thesis down, but to deliver it in the currency Kore
 ## What This Means for Operators
 
 If you run an AI x crypto or DePIN project and Korea is on your map, stop treating Korean indifference as an awareness deficit you can spend your way out of. You can buy impressions; you cannot buy comprehension. The work is to rebuild the explanation so a Korean trader can answer, in one sentence and in their own terms, what they get and why the number moves.
+
+{{youtube:TLAVY52fy8c}}
 
 Practically, localize the core claim before scaling distribution, map the token's value to a payoff Koreans already understand, and sequence the push around the local attention cycle, not the global launch calendar. The global capital proves the thesis is fundable; Korea proves fundable and legible are different problems.
 
@@ -913,6 +981,9 @@ We start from the Korean unit of value, not the global deck. Through [deep resea
 - [BeInCrypto, "South Koreans Liquidate Savings and Insurance to Chase SK Hynix and Samsung Rally"](https://beincrypto.com/korea-retail-sk-hynix-samsung-rally/)
 - [Korea Herald, "Kospi rally drains momentum from Korea's crypto market"](https://www.koreaherald.com/article/10761134)
 - [a16z crypto, "What is DePIN? The Case for Decentralizing the Real World, with Guy Wuollet"](https://www.youtube.com/watch?v=b3vndSjUSfY)
+- [Reuters, SK Hynix market capitalisation tops 1 trln](https://www.reuters.com/world/asia-pacific/sk-hynix-market-capitalisation-tops-1-trln-2026-05-27/)
+- [Seoul Economic Daily, Korean Investors Dump US Big Tech Buy Samsung and SK Hynix](https://en.sedaily.com/finance/2026/05/21/korean-investors-dump-us-big-tech-buy-samsung-and-sk-hynix)
+- [YouTube, AI is not a bubble South Korea is](https://www.youtube.com/watch?v=TLAVY52fy8c)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -951,6 +1022,8 @@ Asia's dollar-settlement layer is not a technology contest. The chains are commo
 
 The headline gap is supply. USDT and USDC together dwarf every other stablecoin, but they are not close to each other.
 
+{{source:/images/blog/siege-defillama-stablecoins.png::DefiLlama, stablecoin dashboard showing total market cap and USDT dominance near 59 percent}}
+
 {{bars:USDT (Tether)=186.4,USDC (Circle)=74.8,USDS (Sky)=8.2,USDe (Ethena)=4.5::Stablecoin circulating supply in billions of dollars. USDT leads USDC by roughly 2.5 to 1. Source: DefiLlama, Stablecoin dashboard, June 2026}}
 
 Supply understates USDT's lead in movement. On-chain settlement volume tells the real story of which token is doing the work.
@@ -962,6 +1035,8 @@ USDC's volume over the same period was far more volatile, and its supply spent 2
 ## 2. Why USDT Leads Asia
 
 USDT's lead in Asia is a distribution moat, not a product advantage. It was first, it is everywhere, and liquidity compounds. Across most emerging markets USDT commands higher peer-to-peer rates than USDC because of its larger market share and deeper order books, which means the incumbent literally trades at a premium. That premium is the moat made visible.
+
+{{source:/images/blog/siege-tether-wallets-per-quarter.jpg::Tether, new USDT on-chain wallets and accounts per quarter rising through 2024}}
 
 The more important shift is what USDT is used for. It has quietly become a payments rail, not just a trading instrument.
 
@@ -975,6 +1050,8 @@ The numbers back the framing. Tether disclosed that USDT processed roughly 156 b
 ## 3. USDC's Compliance Wedge
 
 USDC cannot out-liquidity USDT in Asian retail. So Circle is fighting on a different axis: regulation. The passage of the GENIUS Act in the United States, the first federal framework for payment stablecoins, drove strong institutional interest toward compliant dollar-backed tokens even before the rules took full effect.
+
+{{youtube:996EUIoAqms}}
 
 {{source:/images/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia-1.png::Source: Chainalysis, 2025 Global Adoption Index, "Stablecoins surge globally for a variety of use cases"}}
 
@@ -1007,6 +1084,8 @@ See how we structure market entry at [/services/gtm](/services/gtm), or talk to 
 - [Crystal Intelligence, USDT maintains dominance while USDC faces headwinds](https://crystalintelligence.com/thought-leadership/usdt-maintains-dominance-while-usdc-faces-headwinds/)
 - [Law.asia, Guide to Korea's Stablecoin Regulation Framework](https://law.asia/korea-stablecoin-regulation-framework/)
 - [CNBC International, How Stablecoins Took Over Asia](https://www.youtube.com/watch?v=IAChB5ls6eU)
+- [Tether, How Many USDT Users Are There](https://tether.io/news/how-many-usdt-users-are-there/)
+- [YouTube, Different Stablecoins Which Should You Choose and Why](https://www.youtube.com/watch?v=996EUIoAqms)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1057,6 +1136,8 @@ The demand is unambiguous and cyclical. Daily volume across the five exchanges r
 
 The first reason is the most boring and the most powerful: it is the law. Korea requires that crypto be bought and sold through a real-name bank account directly linked to a licensed exchange.
 
+{{source:/images/blog/defi-korea-exchange-photo.jpg::Korea Times, a trader checks a Bitcoin chart at a Korean exchange}}
+
 > **"The FSC announced measures that only allow cryptocurrency trading through real-name bank accounts linked to cryptocurrency exchanges."**
 >, Financial Services Commission, Real Name Policy press release
 
@@ -1078,6 +1159,8 @@ This is where the paradox resolves. The barrier is not ideological resistance to
 
 If you launch a protocol and treat Korea as a DeFi-native audience, you will misallocate your entire go-to-market. The Korean user does not start on-chain. They start on Upbit or Bithumb, inside a real-name account, with bank-grade trust expectations. The market is not under-interested. It is under-bridged. The winning move is to meet users at the exchange layer they already trust, then make the single step toward on-chain feel safe, localized, and obvious. Treat the CEX-to-on-chain handoff as the core conversion event, not an afterthought.
 
+{{youtube:6Ebv6Dc18uw}}
+
 ## What Breaks It
 
 The lock-in cracks when the on-chain step stops feeling like leaving safety behind. Three forces are already chipping at it: clearer regulation that legitimizes broader activity, KRW stablecoin infrastructure that could extend won-denominated trust onto chains, and tighter overseas-transfer rules that paradoxically force users to confront wallets directly. None alone flips the market. What flips it is trust transfer: a credible, Korean-language, exchange-adjacent experience that carries CEX-level confidence one step further out. Whoever owns that bridge moment owns Korean on-chain growth.
@@ -1092,6 +1175,8 @@ We build the bridge as a trust operation, not a tech demo. On the community side
 - [Financial Services Commission, "Real Name Policy" press release](https://www.fsc.go.kr/eng/pr010101/22173)
 - [crypto.news, "South Korea crypto trading crashes to one-tenth of stock market volume"](https://crypto.news/south-korea-crypto-trading-crashes-to-one-tenth-of-stock-market-volume/)
 - [YouTube, "Why Korea is Now Leading the Global Crypto Revolution"](https://www.youtube.com/watch?v=L1NYG6MQ6QU)
+- [Korea Times, Global expansion remains distant dream for Korean crypto exchanges](https://www.koreatimes.co.kr/economy/cryptocurrency/20250722/global-expansion-remains-distant-dream-for-korean-crypto-exchanges)
+- [YouTube, D-Day for Korean Crypto Exchanges The Daily Forkast](https://www.youtube.com/watch?v=6Ebv6Dc18uw)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1130,6 +1215,8 @@ Korea is one of the densest retail crypto markets on earth, and the way projects
 
 According to the Financial Services Commission's Financial Intelligence Unit, reported by KED Global, verified users eligible to trade digital assets reached 9.7 million at the end of 2024, up 25 percent in six months: roughly one in five Koreans. The market nearly doubled to about 108 trillion won, and won-denominated pairs now represent close to 30 percent of global spot volume per research firm Kaiko.
 
+{{source:/images/blog/kol-korea-second-largest.png::Sherwood News / Kaiko, KRW is the second-largest fiat crypto market after the USD}}
+
 %%9.7M::verified Korean crypto users, about 1 in 5 residents (Source: KED Global / FSC FIU, 2025)%%
 
 This is not a fringe audience. It skews young, professional, and mobile-native, and the age distribution tells you who the KOLs actually reach.
@@ -1155,6 +1242,8 @@ The economics confirm the premium on trusted attention. In one Web3 KOL campaign
 
 Korean KOLs sort into rough tiers that do different jobs. Mega voices (large YouTube channels and well-known personalities) create the awareness event and social proof. Macro creators carry the narrative and lend authority. Micro and nano creators do the quiet, high-conversion work inside niche trading communities. The framework Abboud describes, tier one and tier two seeding the message and tier three amplifying it, maps closely onto how Korean campaigns sequence coverage.
 
+{{source:/images/blog/kol-kaiko-marketshare.webp::Kaiko, altcoins take the majority share of Korean-linked crypto trade volume}}
+
 The conversion math is why you cannot just buy the biggest name: smaller creators consistently out-engage the mega tier.
 
 {{bars:Nano 1k-10k=3.86,Mega 1M+=1.2::Instagram engagement rate by influencer size, percent (high end of range). Source: PostAffiliatePro, 2026.}}
@@ -1166,6 +1255,8 @@ This is the case for affiliation over raw reach. Affiliation means paying for fu
 ## What This Means for Operators
 
 Treat KOL spend as trust acquisition, not a media buy. Three implications follow. First, sequence the tiers: earn social proof before approaching mega voices, because credible creators screen projects by perceived value before agreeing to a fair rate. Second, weight micro and niche creators heavily, since they convert and sit where decisions happen. Third, structure deals around funded outcomes so you buy results, not impressions.
+
+{{youtube:OJ9HmeHqOfk}}
 
 ## What Breaks It
 
@@ -1187,6 +1278,9 @@ At ium Labs we treat Korean KOL marketing as a vetting problem first and a distr
 - [Leon Abboud, Web3 Influencer Marketing 101](https://www.youtube.com/watch?v=8Q7UmJfTqbc)
 - [PostAffiliatePro, nano vs mega engagement rates](https://www.postaffiliatepro.com/blog/nano-influencers-vs-mega-influencers/)
 - [SociaVault Labs, 37.2% of Influencer Followers Are Fake](https://sociavault.com/blog/fake-follower-study-key-findings)
+- [Sherwood News, South Korea has the second-largest crypto market in the world](https://sherwood.news/crypto/south-korea-has-the-second-largest-crypto-market-in-the-world/)
+- [Kaiko, XRP Volume Surpasses BTC Following Landmark Ruling](https://www.kaiko.com/resources/xrp-volume-surpasses-btc-following-landmark-ruling)
+- [YouTube, Crypto KOL Marketing Explained Rates Funnels Contracts](https://www.youtube.com/watch?v=OJ9HmeHqOfk)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1226,6 +1320,8 @@ A Korean exchange listing reads, from the outside, like an event: a notice drops
 
 Korea is not a side market. The domestic crypto market reached roughly 108 trillion won (about $77.5 billion) in the second half of 2024, with daily average trading volume of 7.3 trillion won, per the Financial Intelligence Unit. Around one in five Koreans trades digital assets, with investors in their 30s the single largest cohort at 29%.
 
+{{source:/images/blog/listing-korea-market-coingecko.webp::CoinGecko, South Korea five won exchanges Q4 2025 vs Q1 2026 with Upbit and Bithumb leading}}
+
 %%20%::Share of South Korea's population trading digital assets, on a market worth roughly $77.5B in H2 2024 (Source: FIU / KED Global)%%
 
 What makes this demand strategically valuable is its concentration. Two venues hold almost the entire book.
@@ -1238,6 +1334,8 @@ What makes this demand strategically valuable is its concentration. Two venues h
 
 The listing decision is a structured review, not a relationship favor. Tiger Research documents a four-part process across the major won-trading exchanges: sourcing candidates, a preliminary screen, in-depth deliberation, and listing with ongoing monitoring. The screen is staffed like a compliance function, Upbit runs roughly 40 AML professionals, Bithumb 36, Coinone and Korbit 13 each. Upbit and Coinone require a domestic legal opinion on whether the token is a security from the earliest stage, and the final review committee must include at least two external experts or 30% of seats, with at least one legal expert.
 
+{{youtube:32jOwFjhxUA}}
+
 > **"Each exchange operates a dedicated research team to help list cryptocurrency projects that have proven their business viability."**
 >, Tiger Research, Korean Cryptocurrency Exchange Listing Support Guidelines
 
@@ -1246,6 +1344,8 @@ Read that as a checklist, not a hurdle. Securities classification, money-launder
 ## 3. Sequencing: Trust And Awareness Built Before The Print
 
 Here is the part most foreign teams invert. They treat the listing as the start of their Korea marketing. In practice it is a liquidity event that pays out against trust that already exists. The venues weight different things, Upbit's book is the deepest and its price increasingly sets the reference, while Bithumb has fought back hard, reaching 31.1% share on $86.5 billion in Q4 2025. A pair that lists into pre-built awareness opens to real bids. A cold listing opens to a thin book and a fast fade.
+
+{{source:/images/blog/listing-virtual-upbit-coindesk.png::CoinDesk, VIRTUAL spikes from 2.04 to 2.62 dollars on its Upbit listing day, a real KRW liquidity event}}
 
 %%96%::Combined share of Korean trading volume held by Upbit and Bithumb, the two books worth engineering liquidity into (Source: Kaiko)%%
 
@@ -1272,6 +1372,9 @@ At ium Labs we run a Korean listing as a process with a liquidity target, not an
 - [Upbit's Dominance in South Korean Crypto Market Declines in Q4 2025 (KuCoin News)](https://www.kucoin.com/news/flash/upbit-s-dominance-in-south-korean-crypto-market-declines-in-q4-2025)
 - [Why Bitcoin's kimchi premium is on life support after South Korea targets crypto exchange (CryptoSlate)](https://cryptoslate.com/bitcoins-kimchi-premium-is-on-life-support-after-south-korea-targets-bithumb/)
 - [How South Korea's Crypto Market Skyrockets in 2025 (Coin Bureau, YouTube)](https://www.youtube.com/watch?v=FCBWt2U_bmQ)
+- [CoinGecko, South Korea Crypto Market in 2026 Maturity Regulation Growth](https://www.coingecko.com/learn/south-korea-crypto-market-maturation-2026)
+- [YouTube, Top 5 Crypto Exchanges in South Korea A Comprehensive Guide](https://www.youtube.com/watch?v=32jOwFjhxUA)
+- [CoinDesk, VIRTUAL Surges 28pct as Upbit Listing Exposes Token to South Koreans](https://www.coindesk.com/markets/2025/01/31/virtual-surges-28-as-upbit-listing-exposes-the-token-to-altcoin-savvy-south-koreans)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1310,6 +1413,8 @@ Korea spent years treating crypto as something to monitor rather than regulate. 
 
 Korea regulates crypto through three stacked layers, not one statute. At the base is the Act on Reporting and Use of Certain Financial Transaction Information, the anti-money-laundering law forcing every virtual asset service provider (VASP) to register with the Korea Financial Intelligence Unit (KoFIU), obtain ISMS security certification, and run real-name banking. On top sits VAUPA, the user-protection law in effect since July 19, 2024. The newest layer, still in draft, is the Digital Asset Basic Act, governing issuance, disclosure, market conduct, and a won-pegged stablecoin. As CoinDesk reported, Korea's current system "remains focused on investor protection and lacks a comprehensive framework covering issuance, disclosure and market structure." The Basic Act is the attempt to close that gap.
 
+{{source:/images/blog/vaupa-fsc-restructuring.jpg::The Korea Times, Korea financial regulatory framework faces major restructuring (FSC)}}
+
 ## 2. What VAUPA Requires
 
 VAUPA converts soft expectations into statutory duties. Customer cash must be kept separate from a VASP's own funds and trusted with a bank, investable only in safe assets such as government bonds. Exchanges must hold 80% or more of customer virtual assets in cold wallets, calculated monthly on economic value. To cover hacks and system failures, every VASP must carry liability insurance or reserves of at least 5% of hot-wallet assets, with hard floors below that level.
@@ -1323,6 +1428,8 @@ VAUPA also criminalizes market abuse. It imports capital-markets logic on inside
 ## 3. Travel Rule Mechanics
 
 The travel rule ties identity to value as it crosses providers, and Korea adopted it ahead of most of Asia. Under the Financial Transaction Reports Act, a VASP sending a transfer above KRW 1 million (about USD 842) must transmit originator and beneficiary name and wallet address to the receiving VASP. On request from the beneficiary VASP or authorities, the originating VASP must hand over the customer's official identity number within three business days.
+
+{{youtube:eoDtWmlaBFw}}
 
 > **"The amended act also mandated the crypto Travel Rule for international virtual asset transfers over 1 million won."**
 >
@@ -1342,6 +1449,8 @@ For a token project, listing in Korea now starts with a compliance checklist, no
 
 The unsettled pieces are upstream, in the Digital Asset Basic Act. The sharpest fight is over the won stablecoin: the Bank of Korea pushed for banks with majority ownership to be the only authorized issuers, while the FSC warned that bank-only issuance could choke innovation. The April 2026 draft also leaned toward folding stablecoins into the existing Foreign Exchange Transactions Act and requiring tokenized real-world assets to sit in managed trusts under the Capital Markets Act. None of that is final: the bill has slipped repeatedly, debate was pushed past elections, and lawmakers have not confirmed the reported drafts. For operators, the open risk is definitional scope. Whether your product is a payment instrument, a security-like token, or a plain virtual asset changes which regulator owns you and which capital rules apply.
 
+{{source:/images/blog/vaupa-bank-of-korea.png::International Banker, Bank of Korea headquarters in Seoul}}
+
 ## How We Run It
 
 We treat Korean compliance as a launch precondition, not a cleanup task. Before a token goes near a Korean venue, we map it against VAUPA, the travel rule, and the emerging Basic Act, then sequence listing conversations around exchanges that already clear the custody, reserve, and travel-rule bars, with local counsel so regulatory posture and market entry move together. If you are planning a Korea listing or won-market presence, start with [compliance](/services/compliance), align it with your [go-to-market](/services/gtm) plan, and [talk to us](/contact) before committing to a timeline.
@@ -1353,6 +1462,9 @@ We treat Korean compliance as a launch precondition, not a cleanup task. Before 
 - [Notabene, Crypto Travel Rule Regulations in South Korea](https://notabene.id/world/south-korea)
 - [CoinDesk, South Korea proposes cryptocurrency law with bank-style rules for stablecoins (April 8, 2026)](https://www.coindesk.com/policy/2026/04/08/south-korea-proposes-cryptocurrency-law-with-bank-style-rules-for-stablecoins)
 - [CoinGeek, South Korea draft crypto bill covers stablecoins, RWAs (April 14, 2026)](https://coingeek.com/south-korea-draft-crypto-bill-covers-stablecoins-rwas/)
+- [The Korea Times, 17-year-old financial regulatory framework faces major restructuring](https://www.koreatimes.co.kr/economy/policy/20250604/17-year-old-financial-regulatory-framework-faces-major-restructuring)
+- [International Banker, Can New Entrants Disrupt South Korea Banking Oligopoly](https://internationalbanker.com/banking/can-impending-new-entrants-do-enough-to-disrupt-south-koreas-banking-oligopoly/)
+- [YouTube, Why Asian Banks Are Taking Over Crypto](https://www.youtube.com/watch?v=eoDtWmlaBFw)
 
 *This report reflects ium Labs' operating view and is intended for general information, not legal advice.*`,
     isFeatured: false,
@@ -1391,6 +1503,8 @@ For a decade, Korea sat under one heading in global crypto: retail. High volumes
 
 The catalyst is not price. It is permission. On February 13, 2025, the Financial Services Commission laid out a phased roadmap for corporate participation in the virtual asset market. In the second quarter, nonprofits including universities, plus virtual asset exchanges and law enforcement bodies, were cleared to open bank accounts to sell digital assets. From the second half of 2025, "about 3,500 listed companies and professional investment corporations registered under the Capital Markets Act" were to be permitted to open corporate accounts for ownership and trading on a pilot basis.
 
+{{source:/images/blog/instvc-reuters-institutional-demand-chart.png::Reuters, Bitcoin open interest by exchange as institutional demand builds}}
+
 Until now, Korean companies could not open real-name crypto accounts at local banks at all. The door was shut. The FSC is opening it deliberately, in stages, and has been explicit about why institutions want in.
 
 > **"Professional investors are already allowed to invest in high-risk, high-return derivatives. We see significant demand among these institutions for blockchain-related business and investment opportunities."**
@@ -1404,6 +1518,8 @@ The demand floor underneath all of this is the retail base institutions can now 
 
 Three distinct pools are moving, and conflating them is the first mistake operators make.
 
+{{source:/images/blog/instvc-reuters-asia-wealthy.jpg::Reuters, Asia wealthy investors seek more crypto in their portfolios}}
+
 Family offices are the most visible. Across Asia, wealth managers report a shift from wanting a token allocation to treating it as a must-have, with UBS noting some overseas Chinese family offices plan to raise crypto exposure to around 5% of portfolios. The behavioral change matters as much as the number.
 
 > **"Last year, they started to dip their feet into bitcoin ETFs. Now they have begun to learn the difference of holding a token directly."**
@@ -1416,6 +1532,8 @@ Venture capital is the second pool, and it is thesis-driven. Korean and Korea-fo
 ## How This Capital Actually Allocates
 
 Here is what most outreach gets wrong. None of these pools allocates on momentum. They allocate on trust, mandate, and the ability to clear compliance, and each weights those differently.
+
+{{youtube:e5IEpxn-gD0}}
 
 Family offices lead with trust and discretion. The decision often sits with a second- or third-generation principal still learning the asset class, so the question is not "what is the APY" but "who is bringing me this, and can I rely on them," and capital flows through warm introductions and wealth managers who have already done the compliance work. Venture capital leads with thesis and upside: the investment must map to a fund mandate and a view of where value accrues, so the conversation is market structure and team, not token price. Corporates lead with strategic fit, asking whether digital assets reinforce an existing business line, inside a compliance envelope built on Korea's real-name trading system, which covers close to 100% of local exchange accounts.
 
@@ -1448,6 +1566,8 @@ We treat Korean institutional access as a structured motion, not a campaign. Our
 - [The Block, "South Korean authorities seek 5% cap on corporate crypto investments: report"](https://www.theblock.co/post/385040/south-korea-limit-corporate-crypto-investment)
 - [CoinDesk, "South Korea proposes 5% limit for listed firms' crypto exposure"](https://www.coindesk.com/markets/2026/01/12/south-korea-proposes-5-limit-for-listed-firms-crypto-exposure)
 - [Chainalysis, "2025 Global Crypto Adoption Index"](https://www.chainalysis.com/blog/2025-global-crypto-adoption-index/)
+- [Reuters, Bitcoin rally driven more by institutional demand than speculation](https://www.reuters.com/sustainability/boards-policy-regulation/bitcoin-rally-driven-more-by-institutional-demand-than-speculation-2025-07-14/)
+- [YouTube, Terry Kim The Future of Institutional Crypto at KBW2025](https://www.youtube.com/watch?v=e5IEpxn-gD0)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1486,6 +1606,8 @@ Ask a foreign founder how Koreans will find their project and you usually hear "
 
 Per market-research firm InternetTrend, Naver's domestic search share averaged 65.1% in February and 63.8% in March, exceeding 70% on individual days (70.6% on Feb 28), with Google a distant second around 28.7%.
 
+{{source:/images/blog/naver-statcounter-share.jpg::iCrossborder via StatCounter, Korea search engine share, Naver vs Google}}
+
 {{bars:Naver=62.9,Google=28.7,Bing=3.9,Daum=3.1::Korean domestic search market share, 2025 average (%). Source: InternetTrend via BusinessKorea}}
 
 {{source:/images/blog/naver-share-businesskorea.jpg::BusinessKorea / InternetTrend, "Naver's Search Market Share Hits 64% While Google Ranked 2nd"}}
@@ -1497,6 +1619,8 @@ Methodology matters here: StatCounter, which measures by tracked page views rath
 ## 2. Naver Is a Stack, Not a Page
 
 Naver is four surfaces, each with different rules and different gatekeepers.
+
+{{source:/images/blog/naver-search-ecosystem.webp::InterAd, Naver search ecosystem, crawling, indexing and serving}}
 
 | Surface | What it is | Why it ranks |
 | --- | --- | --- |
@@ -1520,6 +1644,8 @@ Paid reach is a faucet, Naver presence is a reservoir. A ranked blog post or an 
 
 Treat Naver as core infrastructure, not a translation afterthought. Budget a sustained blog cadence rather than a one-off burst, build a Cafe presence in the communities where Korean traders gather, and place PR that is written to rank on Naver rather than only to read well in English. Measure presence by where you surface for high-intent Korean queries, not by a global SEO score that never queried Naver.
 
+{{youtube:YzOV-F0dyc4}}
+
 ## 5. What Breaks It
 
 Three failure modes recur. Thin, machine-translated content that Naver's freshness and engagement signals quietly ignore. One-off blog activity with no cadence, which never accumulates ranking authority. And skipping Cafe entirely, which means skipping the surface where Korean trust is actually negotiated. None of these is a budget problem. Each is a discipline problem.
@@ -1531,6 +1657,9 @@ Our [Naver SEO practice](/services/seo-ads) runs the full stack as one motion: a
 ## Sources
 
 Search-share figures: [BusinessKorea](https://www.businesskorea.co.kr/news/articleView.html?idxno=267839) and [Pulse / Maeil Business](https://pulse.mk.co.kr/news/english/11923196), citing InternetTrend; cross-checked against [StatCounter](https://gs.statcounter.com/search-engine-market-share/all/south-korea). Video: "How Naver Beat Google Search in South Korea". Figures vary by measurement methodology and are point-in-time.
+- [iCrossborder via StatCounter, Naver Search Engine How to Market on Korea Answer to Google](https://www.icrossborderjapan.com/en/blog/asian-marketing/naver-search-engine-korea-google/)
+- [InterAd, Naver SEO A Complete Guide](https://www.interad.com/en/insights/naver-seo-guide)
+- [YouTube, Naver What Is Naver and How Do We Use It](https://www.youtube.com/watch?v=YzOV-F0dyc4)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1569,6 +1698,8 @@ Show a founder a 50,000-member Telegram group and they see success. Show a Korea
 
 A large Korean crypto community is a stack of platforms doing different jobs. Telegram is where the on-chain crowd lives. DeSpread Research counts at least 500 Telegram channels targeting Korean audiences across airdrops, exchange announcements, news, signals, and research, making it the most actively used platform by Korea's on-chain community. KakaoTalk is the mass layer: 48 million monthly active users at the end of 2023 against a population of 51.3 million, so effectively every Korean is reachable there. But Kakao Open Chat caps each room at 1,500 participants and strips out forwarding and bots, so it spreads wide and shallow. Coinpan, the largest crypto forum, drew 5.3 million monthly users and once logged 8,636 posts on its free board in a single day.
 
+{{source:/images/blog/telegram-channel-activity.jpeg::DeSpread Research, monthly message volume across 110 Korean crypto Telegram channels}}
+
 Inside any one room, participation is a pyramid, not a flat crowd. Most members are lurkers, and that is normal. The health sits in the small engaged core that seeds conversation and the active middle that carries it.
 
 {{bars:Lurker tail=80,Active middle=16,Engaged core=4::Representative participation split inside a healthy large Korean community. Most members never post; the small core decides whether the room is alive. Source: ium Labs operating model}}
@@ -1578,6 +1709,8 @@ A 50,000-member group with a dead core is a billboard. A 5,000-member group with
 ## 2. How It Is Built
 
 Real Korean communities are built, not bought, and the build is slow on purpose. Native community managers set a daily cadence, moderate consistently, and earn trust over months. They run in Korean, by Korean norms, and treat the room as a relationship rather than a broadcast. KakaoTalk's own constraints reinforce this: with a 1,500-person ceiling, limited bots, and no forwarding, you cannot automate your way to scale the way you can on Telegram. Growth that sticks comes from members inviting members because the room is worth being in. DeSpread also notes Kakao's crypto rooms draw a broader, less specialist audience than Telegram, so a project often needs a Telegram core for depth and a Kakao presence for reach.
+
+{{source:/images/blog/telegram-active-hours.jpeg::DeSpread Research, hourly Korean Telegram activity peaks around 4-5 PM KST}}
 
 %%48 million::KakaoTalk monthly active users at end-2023, against a 51.3 million population (Source: DeSpread Research, DI-03)%%
 
@@ -1604,6 +1737,8 @@ That principle scales straight into crypto. A community's credibility is its act
 
 Measure the community by what the core does, not by how many joined. Track daily active posters, reply depth, and how many conversations the core seeds unprompted. Staff with native Korean managers, set a sustainable cadence, and resource it as a retention channel rather than a launch prop. Pick the platform for the job: Telegram for the engaged on-chain core, KakaoTalk for broad reach inside the 1,500-person rooms, Coinpan and forums for discovery. Buying the headline number converts nothing, and it signals weakness to the exact audience you are trying to win.
 
+{{youtube:MIWt2Cj3RkE}}
+
 ## 5. What Breaks It
 
 The failures are predictable. Buying members for the headline, which collapses the engagement ratio and leaves a large quiet space that reads as abandoned. Running the room in English-first broadcast mode, which Korean members tune out. Showing up only at launch, then letting the cadence die. And trusting automation on a platform that punishes it: with Kakao purging hundreds of thousands of manipulation accounts every half-year, a bot-padded Korean room is not just hollow, it is fragile. A community that is not tended daily decays faster than it grew.
@@ -1618,6 +1753,7 @@ ium Labs builds Korean communities for the core, not the headline. We run native
 - [Kakao Safety Report: Open Chat Enforcement, H2 2025](https://talksafety.kakao.com/en/report/enforcement/openchat?period=2502)
 - [Tsuchiya et al., A Large-Scale Study of Telegram Bots (ICWSM 2026), Carnegie Mellon](https://www.andrew.cmu.edu/user/nicolasc/publications/Tsuchiya-ICWSM26.pdf)
 - [NBC TODAY: Inside 'Click Farms' And Their Social Media Impact](https://www.youtube.com/watch?v=YZhlU2_YsPE)
+- [YouTube, Community and Crypto Insights From a Former Binance Executive](https://www.youtube.com/watch?v=MIWt2Cj3RkE)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1655,6 +1791,8 @@ South Korea is one of the deepest retail crypto markets on earth, and it does no
 
 Korea has a predictable attention structure. The defining anchor is Korea Blockchain Week, held in Seoul every September since 2018. It is the gravitational center of the regional year, the week when global founders, exchanges, media, and local capital are all physically in one city at the same time. Around it sit the quarterly narrative waves that drive retail flows, and the holiday troughs, Lunar New Year (Seollal) and Chuseok, when domestic attention collapses for the better part of a week.
 
+{{source:/images/blog/timing-kbw2024-koreatimes.jpg::Korea Times, attendees queue at Korea Blockchain Week 2024 (Sept 3-4, Walkerhill Seoul)}}
+
 %%16M::Koreans holding a crypto account, now exceeding domestic stock investors (Source: Fintech Weekly, 2025)%%
 
 | Window | Approximate timing | Attention level |
@@ -1673,6 +1811,8 @@ The September peak is not a marketing claim. Korea Blockchain Week 2024 opened w
 ## Why Timing Moves Outcomes
 
 The reason timing matters so much in Korea is that the audience is unusually synchronized. This is a market where local attendees, not just the traveling conference circuit, show up in force.
+
+{{source:/images/blog/timing-kbw2025-trump-koreatimes.jpg::Korea Times, a packed KBW 2025 main stage with a speaker lineup including Donald Trump Jr}}
 
 > **"In 2024, more than 66% of attendees were based in Korea, underscoring the country's pivotal role in shaping the region's blockchain narrative."**
 >, The Block, on Korea Blockchain Week
@@ -1714,6 +1854,8 @@ We start from the listing and the calendar, not from the creative. For each enga
 - [CryptoRank, Upbit and Bithumb new KRW listings and the Pearl (PRL) volume spike](https://cryptorank.io/news/feed/a593f-upbit-bithumb-new-listings-krw-trading)
 - [Crypto Briefing, "$SLX surges 103.8% following listing on Upbit"](https://cryptobriefing.com/slx-surges-upbit-listing/)
 - [Korea Blockchain Week, KBW2024 Impact Highlights (video)](https://www.youtube.com/watch?v=Q0D3GbElb7c)
+- [Korea Times, KBW 2024 focuses on convergence of blockchain with physical world](https://www.koreatimes.co.kr/economy/cryptocurrency/20240903/korea-blockchain-week-2024-focuses-on-convergence-of-blockchain-with-physical-world)
+- [Korea Times, Trump family takes center stage at Korea Blockchain Week 2025](https://www.koreatimes.co.kr/economy/cryptocurrency/20250923/trump-family-takes-center-stage-at-korea-blockchain-week-2025)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1762,6 +1904,8 @@ The capital behind those users tells the same story. Korean holders sat on about
 
 Korea is fast, retail-led, and concentrated. Liquidity does not spread evenly across venues; it pools. Upbit alone has accounted for roughly 72 percent of domestic spot volume, with the rest splitting among Bithumb, Coinone, Korbit, and Gopax. For an operator, that concentration is a feature: win one or two listings and you reach almost the entire market.
 
+{{source:/images/blog/vsjapan-korea-exchange-share.png::Bloomberg, Bithumb expands share of South Korea crypto market (Upbit, Bithumb, Coinone, Korbit)}}
+
 %%72::percent of South Korean spot crypto volume handled by a single exchange, Upbit (Source: Yahoo Finance / CCData)%%
 
 Attention moves just as fast as liquidity. Demand routes through Naver search, KakaoTalk groups, and a dense KOL layer, and a well-timed launch can capture a wave in days rather than quarters. The market rewards momentum and native channels around the listing event, and it punishes hesitation. Korea also shows how mainstream this has become: even among public officials covered by disclosure rules, one in five reported holding crypto.
@@ -1771,6 +1915,10 @@ Attention moves just as fast as liquidity. Demand routes through Naver search, K
 ## Japan's Profile
 
 Japan is the inverse on nearly every axis. Where Korea optimizes for speed, Japan optimizes for protection, and its 2026 reform agenda makes the posture explicit. The government has moved to reclassify digital assets from the Payment Services Act to the Financial Instruments and Exchange Act, the same framework that governs securities, complete with pre-sale disclosures, third-party code audits, issuer identification, and an insider-trading ban. Penalties for unregistered selling rise from up to three years to up to ten.
+
+{{youtube:k41_cczM7ZU}}
+
+{{source:/images/blog/vsjapan-japan-exchange-share.jpg::Reuters, growth in crypto accounts at exchanges in Japan (JVCEA data)}}
 
 > **"The FIEA is based on the concept of building a comprehensive investor protection framework covering a wide range of highly investment-oriented financial products. The fact that many crypto asset transactions are conducted with the expectation of returns from price fluctuations aligns with the investment-oriented consideration of financial products."**
 >, Japan Financial Services Agency, via CoinGeek / Nikkei
@@ -1813,6 +1961,9 @@ We build market-specific motions: a Korea-native [GTM](/services/gtm) sequenced 
 - [CoinGeek, "Japan reclassifies digital assets as financial instruments"](https://coingeek.com/japan-reclassifies-digital-assets-as-financial-instruments/)
 - [Finance Magnates, "Japan Plans 20% Crypto Tax and FIEA Oversight in 2026"](https://www.financemagnates.com/cryptocurrency/regulation/japan-plans-20-crypto-tax-reclassifies-digital-assets-as-financial-products/)
 - [Yahoo Finance, "Upbit Corners 72% of S Korean Crypto Market"](https://finance.yahoo.com/news/upbit-corners-72-korean-crypto-233000204.html)
+- [Bloomberg, Bithumb Claims Larger Slice of Korea Crypto Space Ahead of IPO](https://www.bloomberg.com/news/articles/2025-05-19/bithumb-claims-larger-slice-of-korea-s-crypto-space-ahead-of-ipo)
+- [Reuters, Japan crypto players jostle for market share on regulatory easing hopes](https://www.reuters.com/business/finance/japans-crypto-players-jostle-market-share-regulatory-easing-hopes-2025-11-04/)
+- [YouTube, Japan parliament poised to pass bill to regulate crypto like stocks](https://www.youtube.com/watch?v=k41_cczM7ZU)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1851,6 +2002,8 @@ For anyone running a token, an exchange, or a campaign in Korea, the kimchi prem
 
 The kimchi premium is the gap between a crypto asset's price on Korean won exchanges and its price on global dollar exchanges, in percent. When Bitcoin trades higher on Upbit than on Coinbase after converting won to dollars, the premium is positive. The name, coined after Korea's pickled-cabbage staple, stuck because the gap is uniquely large and durable.
 
+{{source:/images/blog/kimchi-coindesk-premium-spike.png::CoinDesk, CryptoQuant chart of the Bitcoin kimchi premium, Upbit vs Coinbase price difference}}
+
 The numbers are not small. In May 2021 the spread soared to 20.8 percent on May 19, with Bitcoin around 4,000 dollars higher in Korea than on Bitstamp. In the January 2018 retail frenzy it reached nearly 8,000 dollars per coin. Most recently it hit a 10-month high of 9.7 percent in early April 2026.
 
 {{bars:Apr 2026=9.7,May 2021 peak=20.8,Structural floor=1.24::Bitcoin kimchi premium, percent gap vs global average. The April 2026 high against the long-run floor. Source: CoinGecko / IQ.wiki; ScienceDirect}}
@@ -1860,6 +2013,8 @@ It is a stubborn gap that should not exist if capital moved freely. Why it persi
 ## Why It Exists: Capital Controls and Broken Arbitrage
 
 In an efficient market a price gap is an invitation: a trader buys Bitcoin cheaply abroad, sells it at the Korean premium, and the act pulls the prices together. That loop normally keeps the law of one price intact. In Korea it is deliberately broken.
+
+{{youtube:J4nedeflYwU}}
 
 The breakage is fiscal, not technical. Korea runs strict capital controls to curb hot money in the won, and individuals can buy only 50,000 dollars of foreign currency a year. A trader who spots the premium cannot just wire millions abroad, buy coins, and ship them home at scale. Coins cross borders in seconds; the won to fund them does not.
 
@@ -1873,6 +2028,8 @@ The asymmetry matters: it is easier to move funds into Korea than out, so correc
 ## What It Signals, Including the Reverse Premium
 
 Because arbitrage cannot equalize prices, the premium becomes a pure expression of local supply and demand. A widening positive premium means Korean buyers are paying up, demand inside the wall is outrunning trapped supply, and conviction is high. The April 2026 reading of 9.7 percent tracked a market where retail enthusiasm was intense even as global prices held in a band.
+
+{{source:/images/blog/kimchi-cryptoslate-bithumb.jpg::CryptoSlate, the kimchi premium has become more unstable, swinging from over 10 percent to negative}}
 
 The more revealing signal is when the premium goes negative. A reverse kimchi premium, Korean prices below global, is rare. In January 2026 it hit major assets: USDT traded at 1,473 won against an official won-dollar rate of 1,473.7, and Bitcoin showed a roughly -0.07 percent discount on Upbit.
 
@@ -1897,6 +2054,8 @@ A fat positive premium on your asset on Upbit is the clearest live evidence of K
 
 The premium narrows when the wall thins or the demand behind it fades. Tighter rules on cross-border transfers can paradoxically dampen it by choking the speculative inflows that inflate it, while deeper integration and a unified domestic price index let the two prices converge. The 2026 cooling that CoinGecko called a "Digital Ice Age," with average monthly won-exchange volume down 21.7 percent from Q4 2025 to Q1 2026, is exactly the regime that flattens the premium toward its floor. What it does not do is vanish. As long as the 50,000-dollar cap and real-name banking stand, arbitrage stays broken and the floor holds.
 
+{{source:/images/blog/kimchi-chosun-reverse-premium.jpg::Chosun Biz, Korean price tracker showing Bitcoin at a negative kimchi premium on Upbit}}
+
 ## How We Run It
 
 At ium Labs we treat the kimchi premium as a standing input. Before a campaign, our [deep research](/services/deep-research) desk reads it alongside on-chain flows and exchange concentration so spend lands when the market is leaning in. For exchanges and token teams, our [exchange marketing](/services/exchange-marketing) practice uses it as a live liquidity and demand signal to time listings, size market-making, and sequence KOL activation around the windows when Korea is actually buying. To get the premium read against your asset, [get in touch](/contact).
@@ -1910,6 +2069,10 @@ At ium Labs we treat the kimchi premium as a standing input. Before a campaign, 
 - [BitcoinWorld, "Reverse Kimchi Premium Stuns Markets: BTC and USDT Trade Below Official Rates in South Korea"](https://bitcoinworld.co.in/reverse-kimchi-premium-btc-usdt/)
 - [CNBC, "South Korea's 'kimchi premium' is in the spotlight again"](https://www.cnbc.com/2024/04/03/south-koreas-kimchi-premium-in-the-spotlight-after-btcs-record-highs.html)
 - [Investopedia, "Understanding Kimchi Premium: Bitcoin Price Differences in South Korea"](https://www.investopedia.com/terms/k/kimchi-premium.asp)
+- [CoinDesk, Bitcoin Kimchi Premium Spikes as South Korea Political Turmoil Escalates](https://www.coindesk.com/markets/2024/12/27/bitcoin-kimchi-premium-spikes-as-south-koreas-political-turmoil-escalates)
+- [CryptoSlate, Why Bitcoin kimchi premium is on life support after South Korea targets Bithumb](https://cryptoslate.com/bitcoins-kimchi-premium-is-on-life-support-after-south-korea-targets-bithumb/)
+- [Chosun Biz, Bitcoin trades cheaper in South Korea as reverse premium widens](https://biz.chosun.com/en/en-finance/2026/06/04/AXZZBSR4SFG5JHRTVBMKESAQWA/)
+- [YouTube, Kimchi Premium A Crypto Investors Overview](https://www.youtube.com/watch?v=J4nedeflYwU)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
