@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import { brand } from "@/config/content";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import gtmHeroImage from "@/assets/services/gtm-hero.jpg";
+import gtmHeroImage from "@/assets/services/gtm-hero-night.webp";
 import bnbImg from "@/assets/campaigns/bnb-hanok-event.jpg";
 import kucoinImg from "@/assets/campaigns/kucoin-party-event.jpg";
 import mantraImg from "@/assets/campaigns/mantra-party.jpg";
