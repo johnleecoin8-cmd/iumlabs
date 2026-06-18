@@ -601,44 +601,55 @@ Upbit and exchange share, volume, and user figures: Financial Supervisory Servic
       solutionFramework: megaethLaunch,
     },
     content: `>! **Key Takeaways**
->! Korea trades memecoins at enormous volume yet originates almost none; the country is a demand pool, not a launchpad
->! The paradox is structural, not cultural; exchange gatekeeping and a retail base that buys liquidity rather than narrative concentrate demand on tokens that launched elsewhere
->! For a foreign memecoin, Korea is where demand pools, not where it starts, which inverts the usual "go viral, then expand" playbook
->! The opportunity is distribution: arrive with liquidity and trust already in place, and Korean demand is yours to capture rather than to create
+>! Korea trades memecoins and altcoins at enormous scale yet originates almost none; its most-traded assets are foreign, XRP was Upbit's single most-traded coin in 2025 with over $1T in volume
+>! The country is a demand pool, not a launchpad; DOGE and XRP volumes have repeatedly topped Bitcoin's on Korean exchanges
+>! Even that consumption is cyclical: Upbit's average daily volume fell roughly 80% year-over-year into late 2025 as retail rotated toward AI equities
+>! For a foreign token, Korea is where demand pools, not where it starts, which inverts the usual "go viral, then expand" playbook
 
-Korea is one of the most active memecoin markets on earth and one of the least generative. Billions in volume churn through tokens that were conceived, launched, and memed into existence somewhere else. Understanding why is the difference between treating Korea as a market to win and treating it as a market to seed, and only one of those is correct.
+Korea is one of the most active memecoin markets on earth and one of the least generative. Billions in volume churn through tokens conceived, launched, and memed into existence somewhere else. Understanding why is the difference between treating Korea as a market to win and a market to seed, and only one of those is correct.
 
-## 1. The Paradox in One Picture
+## 1. Consumes Foreign, Originates None
 
-{{bars:Memecoin trading volume=100,Domestic memecoin originations=4::Korea consumes memecoins at scale but originates almost none (representative index, volume vs new launches)}}
+The clearest tell is what Korean retail actually trades. XRP was the single most-traded asset on Upbit across all of 2025, with cumulative volume north of $1 trillion, and DOGE and XRP volumes have repeatedly flipped Bitcoin's on Korean venues. None of those originated in Korea.
 
-%%~$4.7B::Representative scale of Korean memecoin trading volume, almost all of it on tokens launched outside Korea%%
+%%$1T+::XRP's 2025 trading volume on Upbit, where a foreign asset, not a Korean one, was the single most-traded coin (Source: Phemex / Cryptorank)%%
 
-Korean retail shows up in size for memecoins. What it rarely does is start them. The volume is real and the origination is near zero, and that mismatch is the whole story.
+That is the paradox in one data point: enormous appetite, almost entirely directed at coins created elsewhere.
 
-## 2. Why Korea Consumes But Does Not Create
+## 2. The Demand Pool Is Cyclical
 
-The cause is structural. Liquidity concentrates on a few exchanges, and those exchanges are the gatekeepers of what Korean retail can easily buy. A memecoin that wants Korean demand does not need a Korean origin story, it needs to clear the listing and liquidity bar that the venues control. Korean retail, in turn, is a fast and decisive liquidity base that piles into tokens with momentum rather than tokens with a local creation myth. Demand follows liquidity, and liquidity is curated, so origination has little to do with where the buyers are.
+The pool also runs hot and cold. Through late 2025, Korean crypto activity cooled sharply as retail rotated into a state-backed AI equities rally, and exchange volumes fell with it.
+
+{{bars:Dec 2024=9.0,Nov 2025=1.8::Upbit average daily trading volume, $B (Source: Wu Blockchain via CoinDesk)}}
+
+{{source:/images/blog/korea-exchange-tx-dune.png::Dune Analytics, via CoinDesk, "The Great Korean Pivot: From Memecoins to Machine Chips"}}
+
+CoinDesk captured the consequence for everyone downstream of Korean demand:
+
+> **"Without Korean retail as a liquidity anchor, global crypto markets have lost one of their most consistent buyers. Memecoin rallies that once lit up Korean chatrooms now fizzle faster."**
+>, CoinDesk, The Great Korean Pivot
 
 ## 3. The Demand Pool Mechanics
 
 A demand pool behaves differently from a creator scene. It does not reward the earliest builders, it rewards whoever arrives with momentum and accessibility at the right moment. That makes timing and access the levers, not virality-from-scratch. A token that is already liquid and already credible can tap Korean demand quickly; a token still trying to manufacture a meme has nothing for the pool to pile into.
 
+{{youtube:FCBWt2U_bmQ}}
+
 ## 4. What This Means for Operators
 
-If you run a memecoin, stop trying to make Korea the origin of the meme and start treating it as the place the meme gets monetized. That means arriving with liquidity, exchange access, and enough local trust that Korean retail can act without friction. The sequence is reversed from the Western instinct: not "go viral, then expand to Korea," but "build the conditions for Korean demand, then let the existing momentum pool there."
+Stop trying to make Korea the origin of the meme and start treating it as the place the meme gets monetized. Arrive with liquidity, exchange access, and enough local trust that Korean retail can act without friction. And respect the cycle: read the demand pool's temperature, because the same retail base that floods a coin can be parked in AI stocks the next quarter. The sequence is reversed from the Western instinct, not "go viral, then expand to Korea," but "build the conditions for Korean demand, then let momentum pool there when it is hot."
 
 ## 5. What Breaks It
 
-The common failures are trying to engineer organic virality in a market that does not originate, spending on awareness before there is anywhere liquid to buy, and assuming Korean attention converts without trust. Korean retail is fast but not naive; momentum without credibility produces a one-day spike and a dead chart. The demand pool rewards readiness, not noise.
+The common failures are trying to engineer organic virality in a market that does not originate, spending on awareness before there is anywhere liquid to buy, and assuming Korean attention is permanent. Korean retail is fast but not loyal to a venue or an asset; momentum without credibility produces a one-day spike, and even strong demand can rotate out of crypto entirely.
 
 ## 6. How We Run It
 
-We treat Korea as the demand market it is: liquidity and access first through [exchange marketing](/services/exchange-marketing) and listing support, trust through Korean KOLs who actually move traders, and timing that puts you in front of the pool when momentum is real. If a token wants Korean memecoin demand, that is the [conversation to start](/contact).
+We treat Korea as the demand market it is: liquidity and access first through [exchange marketing](/services/exchange-marketing) and listing support, trust through Korean KOLs who actually move traders, and timing that puts you in front of the pool when momentum is real. If a token wants Korean demand, that is the [conversation to start](/contact).
 
 ## Sources
 
-Representative figures drawn from Korean exchange volume trackers and ium Labs analysis. Figures are directional and intended to illustrate structure, not to serve as a market-data source.
+XRP and altcoin dominance: [Cryptorank](https://cryptorank.io/news/feed/e2dfc-xrp-upbit-most-traded-2025) and [Phemex](https://phemex.com/news/article/xrp-tops-south-koreas-2025-trading-volume-with-1-trillion-on-upbit-54050); DOGE/XRP versus Bitcoin: [Yahoo Finance](https://finance.yahoo.com/news/dogecoin-xrp-trading-volumes-flip-084646851.html). Volume decline and chart: [CoinDesk, "The Great Korean Pivot"](https://www.coindesk.com/business/2025/11/09/the-great-korean-pivot-from-memecoins-to-machine-chips), citing Wu Blockchain and Dune Analytics. Figures are point-in-time and move with cycles.
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
@@ -1127,20 +1138,24 @@ Drawn from Korean institutional-market observations and ium Labs network experie
       roi: kolPerformance,
     },
     content: `>! **Key Takeaways**
->! Korean crypto discovery runs on Naver, not Google; high-end estimates put roughly 70% of Korean search activity on Naver surfaces, so a project invisible there is invisible to most of the market
+>! Korean discovery runs on Naver, not Google; Naver's domestic search share averaged 62.9% in 2025 and peaked above 70% on individual days (Source: InternetTrend via BusinessKorea)
 >! Naver is not one page but a stack, Search, Blog, Cafe, and News, each with its own ranking logic and gatekeepers
 >! Naver presence is an owned, compounding asset; unlike paid reach it keeps working after spend stops, which makes it the cheapest durable discovery in Korea
 >! Foreign teams under-resource Naver because their analytics, tuned to Google, never show them the traffic they are missing
 
-Ask a foreign founder how Koreans will find their project and you usually hear "SEO." Ask which engine and the answer is Google. That single wrong assumption quietly caps discovery for most projects entering Korea, because the country runs its own search stack, and it is anchored by Naver. The gap is not cosmetic. It decides whether a Korean investor researching your token finds your narrative or a competitor's.
+Ask a foreign founder how Koreans will find their project and you usually hear "SEO." Ask which engine and the answer is Google. That single wrong assumption quietly caps discovery for most projects entering Korea, because the country runs its own search stack, and it is anchored by Naver.
 
 ## 1. The Search Map Is Different
 
-{{bars:Naver=62,Google=30,Daum=5,Other=3::Representative share of Korean web search by engine (%)}}
+Per market-research firm InternetTrend, Naver's domestic search share averaged 65.1% in February and 63.8% in March, exceeding 70% on individual days (70.6% on Feb 28), with Google a distant second around 28.7%.
 
-Google has gained ground in Korea over the past decade, but Naver still anchors how most Koreans research anything, including which crypto project to trust. A discovery plan built only for Google reaches a minority of the funnel and reports healthy numbers the whole time, because the dashboard never sees what it never indexed. This is the quiet failure mode: the analytics look fine while the most important audience never finds you.
+{{bars:Naver=62.9,Google=28.7,Bing=3.9,Daum=3.1::Korean domestic search market share, 2025 average (%). Source: InternetTrend via BusinessKorea}}
 
-%%~70%::High-end estimates of Korean search activity that touches Naver across its surfaces, the layer Google-tuned analytics never report%%
+{{source:/images/blog/naver-share-businesskorea.jpg::BusinessKorea / InternetTrend, "Naver's Search Market Share Hits 64% While Google Ranked 2nd"}}
+
+%%70.6%::Naver's single-day domestic search share peak (Feb 28), the discovery surface most foreign teams under-resource (Source: InternetTrend / BusinessKorea)%%
+
+Methodology matters here: StatCounter, which measures by tracked page views rather than query origin, puts Google ahead at 47.9% with Naver at 41.66%. Either way, Naver is not a minority channel you can skip, it is half the market at minimum and the majority by the domestic measure that counts.
 
 ## 2. Naver Is a Stack, Not a Page
 
@@ -1153,29 +1168,32 @@ Naver is four surfaces, each with different rules and different gatekeepers.
 | Cafe | Community forums, high trust | Member activity and moderation depth |
 | News | Media aggregation | Tier-1 Korean outlet pickup |
 
-A project that buys one blog post and calls it Naver coverage has touched one surface of four, and usually not the one where trust forms. Search is where intent starts, but Cafe is where a skeptical Korean investor goes to ask whether a project is real, and a thin presence there reads as a thin project.
+A project that buys one blog post and calls it Naver coverage has touched one surface of four, and usually not the one where trust forms. BusinessKorea attributes Naver's staying power to exactly this local depth:
+
+> **"Naver's accumulation of locally relevant information, along with content reflecting South Korea's social and cultural context, continues to attract users in ways that are difficult for global search engines or overseas AI services to replicate."**
+>, BusinessKorea, citing InternetTrend data
 
 ## 3. Why It Compounds
 
-Paid reach is a faucet, Naver presence is a reservoir. A ranked blog post or an active Cafe thread keeps surfacing for months, acquiring readers at near-zero marginal cost long after the campaign that seeded it has ended. That is the opposite of paid acquisition, where the traffic stops the moment the invoice does.
+Paid reach is a faucet, Naver presence is a reservoir. A ranked blog post or an active Cafe thread keeps surfacing for months, acquiring readers at near-zero marginal cost long after the campaign that seeded it has ended. The compounding is also defensive: once you own the first page for your name and high-intent category terms, that real estate is expensive for a competitor to take back, and it is the first thing a Korean investor sees when they check you out.
 
-The compounding is also defensive. Once you own the first page for your own name and for the high-intent queries around your category, that real estate is expensive for a competitor to take back, and it is the first thing a Korean investor sees when they check you out. The reservoir fills slowly and drains slowly, which is exactly what you want from a trust surface.
+{{youtube:ldMWgKLrags}}
 
 ## 4. What This Means for Operators
 
-Treat Naver as core infrastructure, not a translation afterthought. Budget a sustained blog cadence rather than a one-off burst, build a Cafe presence in the communities where Korean traders already gather, and place PR that is written to rank on Naver rather than only to read well in English. Measure presence by where you actually surface for high-intent Korean queries, not by a global SEO score that never queried Naver. The teams that win Korean discovery are rarely the ones that spent the most; they are the ones that started the cadence early and never stopped it.
+Treat Naver as core infrastructure, not a translation afterthought. Budget a sustained blog cadence rather than a one-off burst, build a Cafe presence in the communities where Korean traders gather, and place PR that is written to rank on Naver rather than only to read well in English. Measure presence by where you surface for high-intent Korean queries, not by a global SEO score that never queried Naver.
 
 ## 5. What Breaks It
 
-Three failure modes recur. Thin, machine-translated content that Naver's freshness and engagement signals quietly ignore. One-off blog activity with no cadence, which never accumulates ranking authority. And skipping Cafe entirely, which means skipping the surface where Korean trust is actually negotiated. None of these is a budget problem. Each is a discipline problem, and discipline is the part you control.
+Three failure modes recur. Thin, machine-translated content that Naver's freshness and engagement signals quietly ignore. One-off blog activity with no cadence, which never accumulates ranking authority. And skipping Cafe entirely, which means skipping the surface where Korean trust is actually negotiated. None of these is a budget problem. Each is a discipline problem.
 
 ## 6. How We Run It
 
-Our [Naver SEO practice](/services/seo-ads) runs the full stack as one motion: a Korean-language blog engine, Cafe presence in the right communities, and PR placed to rank, so a project compounds discovery instead of renting it. The goal is simple and measurable, to own the Korean search results a serious investor will actually run before they buy. If Korea is on the roadmap, that is the [conversation to start](/contact).
+Our [Naver SEO practice](/services/seo-ads) runs the full stack as one motion: a Korean-language blog engine, Cafe presence in the right communities, and PR placed to rank, so a project compounds discovery instead of renting it. If Korea is on the roadmap, that is the [conversation to start](/contact).
 
 ## Sources
 
-Representative figures drawn from Korean search-share reporting (DataReportal "Digital Korea", Internet Trends Korea) and ium Labs campaign data. Figures are directional and intended to illustrate structure, not to serve as a market-data source.
+Search-share figures: [BusinessKorea](https://www.businesskorea.co.kr/news/articleView.html?idxno=267839) and [Pulse / Maeil Business](https://pulse.mk.co.kr/news/english/11923196), citing InternetTrend; cross-checked against [StatCounter](https://gs.statcounter.com/search-engine-market-share/all/south-korea). Video: "How Naver Beat Google Search in South Korea". Figures vary by measurement methodology and are point-in-time.
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
