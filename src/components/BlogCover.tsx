@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { coverFor, drawCover } from "@/lib/blogCover";
+import { drawCover, coverYear } from "@/lib/blogCover";
 
 type Post = { slug?: string; title?: string; category?: string | null; date?: string };
 
@@ -24,7 +24,7 @@ export default function BlogCover({
   const TitleTag = titleAs;
   const wrap = useRef<HTMLDivElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
-  const { motif, pal, year } = coverFor(post);
+  const year = coverYear(post.date);
   const key = post.slug || post.title || "";
 
   useEffect(() => {
@@ -38,13 +38,13 @@ export default function BlogCover({
       canvas.height = Math.round(h * dpr);
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      drawCover(canvas, motif, pal, key);
+      drawCover(canvas, key);
     };
     draw();
     const ro = new ResizeObserver(draw);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [motif, pal, key]);
+  }, [key]);
 
   return (
     <div
