@@ -102,12 +102,25 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// Route-level loading: a thin indeterminate top bar instead of a blank black screen.
+const RouteLoading = () => (
+  <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="fixed inset-x-0 top-0 z-[100] h-[2px] overflow-hidden bg-white/5">
+      <div
+        className="h-full w-1/3 bg-gradient-to-r from-transparent via-white/70 to-transparent"
+        style={{ animation: "routebar 1.1s ease-in-out infinite" }}
+      />
+    </div>
+    <style>{"@keyframes routebar{0%{transform:translateX(-120%)}100%{transform:translateX(420%)}}"}</style>
+  </div>
+);
+
 const AppRoutes = () => {
   const location = useLocation();
 
   return (
     <PageTransitionWrapper key={location.pathname}>
-      <Suspense fallback={<div className="min-h-screen bg-[#0A0A0A]" />}>
+      <Suspense fallback={<RouteLoading />}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Navigate to="/services/gtm" replace />} />
