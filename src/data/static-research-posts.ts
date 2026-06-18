@@ -115,6 +115,8 @@ Korea is one of Asia's largest retail crypto markets, and it has run without a c
 
 The Democratic Party introduced DABA to the National Assembly on June 10, 2025, under President Lee Jae-myung, who campaigned on legalizing won-based stablecoins. It defines digital asset types, sets licensing and conduct standards for service providers, and writes rules for issuance, circulation, and disclosure. In parallel, the Bank of Korea suspended its retail central bank digital currency pilot, citing overlap with stablecoins. The won stablecoin, not a central-bank digital won, is the instrument Korea is betting on.
 
+{{source:/images/blog/wonstable-financial-sector.jpg::Chosun, "Financial Sector Preempts Stablecoin Market Amid Legislation"}}
+
 ## Why the won stablecoin is the battleground
 
 A stablecoin is the bridge between bank money and tokens. In Korea today, moving cash into crypto runs through exchange accounts tied to a handful of banks, with friction at every step. A regulated KRW stablecoin collapses that into one on-chain instrument: deposit won, hold a token worth one won, move it anywhere a wallet is accepted. Whoever issues that token sits at the chokepoint where fiat becomes crypto.
@@ -122,6 +124,8 @@ A stablecoin is the bridge between bank money and tokens. In Korea today, moving
 That is why the fight over DABA is about who owns the ramp, not trading. The draft places stablecoins close to electronic money, with issuers required to hold a minimum of 5 billion won (about USD 3.5 million) in capital and to back tokens with 100 percent reserves in safe assets such as bank deposits. Those terms decide who can compete.
 
 %%100% reserves::A won stablecoin issuer would need about 5B won (~$3.5M) minimum capital and 100% safe-asset reserve backing under the draft (Source: Cryptonews; Yahoo Finance)%%
+
+{{youtube:FisGILIohSU}}
 
 ## Who issues it
 
@@ -132,6 +136,8 @@ This is where the framework has stalled. The Bank of Korea argues that only bank
 > , Ahn Do-geol, Democratic Party lawmaker, via CoinDesk
 
 The contest is already visible. KB Kookmin, Korea's largest bank, filed stablecoin trademarks ahead of a banking consortium, with Shinhan, Woori, NH Nonghyup and others alongside it. On the non-bank side, Naver Financial is building a Web3 payment network on its fintech base, while KakaoBank, KakaoPay, and Viva Republica (Toss) realign. Foreign issuers are not locked out, but under the FSC draft a token like Circle's USDC would need a licensed local branch or subsidiary to be used legally in Korea.
+
+{{source:/images/blog/wonstable-competition.webp::ChainCatcher, "The competition for the Korean won stablecoin has officially begun: bank alliances, tech giants, and Web3 companies"}}
 
 | Camp | Lead players | Edge | Constraint under DABA |
 | --- | --- | --- | --- |
@@ -153,6 +159,8 @@ Timeline is the first risk. The bill has been repeatedly delayed over the issuer
 
 The second risk is the Bank of Korea's core worry: capital flight. The central bank has warned that won stablecoins, especially if bridged to dollar-pegged tokens, could move money across borders fast enough to weaken capital controls and complicate monetary policy. If that concern dominates the final text, the rail could arrive narrower and slower than expected.
 
+{{source:/images/blog/wonstable-bok-supervision.jpg::Ledger Insights, "Korean central bank won't oppose won stablecoin, gets role in supervision"}}
+
 > **"It is desirable to first allow banks, which are under a high level of regulations, to issue won-based stablecoins, and gradually expand to the non-bank sector with the experience."**
 >
 > , Ryoo Sang-dai, Senior Deputy Governor, Bank of Korea, via Reuters
@@ -171,6 +179,10 @@ Our [go-to-market practice](/services/gtm) sequences the launch around the regul
 - [Cryptonews, South Korea's New Crypto Bill Sets $3.5M Minimum for Stablecoin Issuers](https://cryptonews.com/news/south-koreas-new-crypto-bill-sets-3-5m-minimum-for-stablecoin-issuers-can-it-pass/)
 - [The Block, South Korea's largest bank files stablecoin trademarks for upcoming banking consortium](https://www.theblock.co/post/359526/south-korea-largest-bank-applies-stablecoin-trademarks)
 - [Korea Times, Financial groups race to partner with big tech for stablecoin edge](https://www.koreatimes.co.kr/business/banking-finance/20251110/financial-groups-race-to-partner-with-big-tech-for-stablecoin-edge)
+- [ChainCatcher, "The competition for the Korean won stablecoin has officially begun"](https://www.chaincatcher.com/en/article/2188358)
+- [Chosun, "Financial Sector Preempts Stablecoin Market Amid Legislation"](https://www.chosun.com/english/industry-en/2026/02/04/DFDOXRW6R5CEDBGE6BN4CDXQXU/)
+- [Ledger Insights, "Korean central bank won't oppose won stablecoin, gets role in supervision"](https://www.ledgerinsights.com/korean-central-bank-wont-oppose-won-stablecoin-gets-role-in-supervision/)
+- [YouTube, "South Korea's Stablecoin Dilemma: Banks vs Fintech in the Race for Digital Money"](https://www.youtube.com/watch?v=FisGILIohSU)
 
 {{source:/images/blog/korea-won-stablecoin-digital-asset-basic-act-2026-1.jpg::Source: CoinDesk, "South Korea's long-awaited crypto law stalls over who can issue stablecoins"}}
 
