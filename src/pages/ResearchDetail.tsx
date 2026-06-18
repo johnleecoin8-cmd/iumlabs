@@ -322,7 +322,7 @@ const ResearchDetail = () => {
 
         {/* Excerpt / Lead Paragraph */}
         {post.excerpt && (
-          <div className="mb-12 text-lg sm:text-xl text-white/60 leading-relaxed font-light border-l-2 border-[#b48cde]/30 pl-6">
+          <div className="mb-12 text-lg sm:text-xl text-white/60 leading-relaxed font-light border-l-2 border-primary/30 pl-6">
             {post.excerpt}
           </div>
         )}
@@ -344,9 +344,9 @@ const ResearchDetail = () => {
                   if (linkMatch) {
                     const [, linkText, linkUrl] = linkMatch;
                     if (linkUrl.startsWith('/')) {
-                      return <Link key={j} to={linkUrl} className="text-[#b48cde] hover:text-[#d8b4fe] underline underline-offset-2 decoration-[#b48cde]/30 hover:decoration-[#d8b4fe]/50 transition-colors">{linkText}</Link>;
+                      return <Link key={j} to={linkUrl} className="text-primary hover:text-emerald-300 underline underline-offset-2 decoration-primary/30 hover:decoration-emerald-300/50 transition-colors">{linkText}</Link>;
                     }
-                    return <a key={j} href={linkUrl} target="_blank" rel="noopener noreferrer" className="text-[#b48cde] hover:text-[#d8b4fe] underline underline-offset-2 decoration-[#b48cde]/30 hover:decoration-[#d8b4fe]/50 transition-colors">{linkText}</a>;
+                    return <a key={j} href={linkUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-emerald-300 underline underline-offset-2 decoration-primary/30 hover:decoration-emerald-300/50 transition-colors">{linkText}</a>;
                   }
                   return part;
                 });
@@ -367,9 +367,9 @@ const ResearchDetail = () => {
                   const body = calloutLines.slice(1);
                   const isKeyTakeaways = title.toLowerCase().includes('key takeaway') || title.toLowerCase().includes('tl;dr');
                   rendered.push(
-                    <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-[#b48cde]/[0.04] border-[#b48cde]/20' : 'bg-white/[0.02] border-white/10'}`}>
+                    <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-primary/[0.04] border-primary/20' : 'bg-white/[0.02] border-white/10'}`}>
                       {title.startsWith('**') ? (
-                        <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-[#d8b4fe]' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
+                        <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-emerald-300' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
                       ) : (
                         <p className="text-white/80 mb-4 font-medium">{title}</p>
                       )}
@@ -377,7 +377,7 @@ const ResearchDetail = () => {
                         <ul className="space-y-3">
                           {body.map((item, j) => (
                             <li key={j} className="flex items-start gap-3 text-[15px] text-white/65 leading-relaxed">
-                              <span className={`w-1.5 h-1.5 rounded-full mt-[9px] flex-shrink-0 ${isKeyTakeaways ? 'bg-[#b48cde]' : 'bg-white/30'}`} />
+                              <span className={`w-1.5 h-1.5 rounded-full mt-[9px] flex-shrink-0 ${isKeyTakeaways ? 'bg-primary' : 'bg-white/30'}`} />
                               <span>{renderInline(item.replace(/^-\s*/, ''))}</span>
                             </li>
                           ))}
@@ -563,7 +563,7 @@ const ResearchDetail = () => {
                   const isCitation = firstLine.startsWith('**') && firstLine.includes('**');
 
                   rendered.push(
-                    <blockquote key={key} className="my-8 border-l-[3px] border-[#b48cde]/40 pl-5 sm:pl-6 py-4 bg-white/[0.02] rounded-r-xl">
+                    <blockquote key={key} className="my-8 border-l-[3px] border-primary/40 pl-5 sm:pl-6 py-4 bg-white/[0.02] rounded-r-xl">
                       {quoteLines.map((ql, j) => {
                         if (ql.startsWith('**') && ql.includes('**')) {
                           return <p key={j} className="text-white/80 font-medium mb-1">{ql.replace(/\*\*/g, '')}</p>;
@@ -753,7 +753,7 @@ const ResearchDetail = () => {
               <div>
                 <p className="text-[11px] text-white/40 uppercase tracking-[0.25em] mb-2">Written by</p>
                 <p className="text-lg font-medium text-white">{post.author}</p>
-                <p className="text-sm text-[#b48cde]/80 mb-3">{post.authorRole} at ium Labs</p>
+                <p className="text-sm text-primary/80 mb-3">{post.authorRole} at ium Labs</p>
                 <p className="text-sm text-white/50 leading-relaxed">{post.authorBio}</p>
               </div>
             </div>

@@ -38,7 +38,7 @@ const RouteProgressBar = () => {
   return (
     <div className="fixed top-0 left-0 right-0 z-[99999] h-[2px]">
       <div
-        className="h-full bg-gradient-to-r from-[#a78bfa] to-[#c084fc] transition-all ease-out"
+        className="h-full bg-gradient-to-r from-emerald-300 to-emerald-400 transition-all ease-out"
         style={{
           width: `${progress}%`,
           transitionDuration: progress === 100 ? '200ms' : '400ms',
