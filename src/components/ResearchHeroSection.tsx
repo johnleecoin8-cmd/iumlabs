@@ -1,7 +1,7 @@
 import { BookOpen } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import { useVideoPlayer, useHdVideoSrc } from "@/hooks/useVideoPlayer";
 
 const stats = [
   { value: 6, label: "Blog Posts", suffix: "" },
@@ -12,6 +12,7 @@ const stats = [
 
 const ResearchHeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const heroVideoSrc = useHdVideoSrc('/videos/research-background.mp4');
 
   const {
     videoRef,
@@ -45,7 +46,7 @@ const ResearchHeroSection = () => {
             className="absolute inset-0 w-full h-full object-cover z-10"
             style={{ ...videoProps.style, WebkitAppearance: 'none' }}
           >
-            <source src="/videos/research-background.mp4#t=0.001" type="video/mp4" />
+            <source src={`${heroVideoSrc}#t=0.001`} type="video/mp4" />
           </video>
         )}
       </div>

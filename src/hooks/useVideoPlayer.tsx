@@ -119,6 +119,19 @@ export const appendVersion = (url: string): string => {
   return `${url}${sep}v=${VIDEO_VERSION}`;
 };
 
+// Desktop high-quality (720p) variant: /videos/x.mp4 -> /videos/x-hd.mp4
+// (inserts -hd before the extension, preserving any ?query or #hash).
+export const hdVariant = (url: string): string =>
+  url.replace(/\.(mp4|webm)(?=$|[?#])/i, '-hd.$1');
+
+// Returns the HD variant on desktop and the original (lighter, mobile) source
+// on mobile. Use in components that render a raw <source> instead of the hook's
+// optimizedSrc. High quality on web, low quality on mobile.
+export const useHdVideoSrc = (src: string): string => {
+  const { isMobile } = useMobileOptimization();
+  return isMobile ? src : hdVariant(src);
+};
+
 const getVideoSource = (src: string, forceFirstFrame: boolean): string => {
   const versioned = appendVersion(src);
   if (forceFirstFrame && !versioned.includes('#t=')) {
@@ -264,7 +277,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   // Get optimized video source based on quality with first frame support
   const optimizedSrc = useCallback(() => {
     let baseSrc = src;
-    
+
     if (qualityVariants) {
       switch (quality) {
         case 'low':
@@ -276,10 +289,14 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         default:
           baseSrc = src;
       }
+    } else if (!isMobile && quality !== 'low') {
+      // Desktop on a decent connection -> high-quality (720p) variant.
+      // Mobile (and data-saver / slow networks) keep the lighter default source.
+      baseSrc = hdVariant(src);
     }
 
     return getVideoSource(baseSrc, forceFirstFrame);
-  }, [src, quality, qualityVariants, forceFirstFrame])();
+  }, [src, quality, qualityVariants, forceFirstFrame, isMobile])();
 
   const markVideoReady = useCallback(() => {
     if (readyRef.current) return; // single, irreversible poster→video transition

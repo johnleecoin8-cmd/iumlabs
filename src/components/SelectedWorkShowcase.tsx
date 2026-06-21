@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { hdVariant } from '@/hooks/useVideoPlayer';
 // All project media uses video first-frame posters from /images/posters/
 
 const projects = [
@@ -282,7 +283,7 @@ const DesktopShowcase = () => {
                   isActive && isVideoReady ? 'opacity-100' : 'opacity-0'
                 }`}
               >
-                <source src={`${project.video}#t=0.001`} type="video/mp4" />
+                <source src={`${hdVariant(project.video)}#t=0.001`} type="video/mp4" />
               </video>
             )}
             <div className="absolute inset-0 bg-black/50" />
