@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
+import { useHdVideoSrc } from "@/hooks/useVideoPlayer";
 
 
 const allServices = [
@@ -61,6 +62,7 @@ const ServicePageLayout = ({
   currentSlug,
 }: ServicePageLayoutProps) => {
   const defaultPosterSrc = posterSrc || (videoSrc ? videoSrc.replace('/videos/', '/images/posters/').replace('.mp4', '.jpg') : '/images/hero-poster.jpg');
+  const heroVideoSrc = useHdVideoSrc(videoSrc);
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   return (
@@ -82,7 +84,7 @@ const ServicePageLayout = ({
               className="absolute inset-0 w-full h-full object-cover z-[1]"
               style={{ filter: "brightness(0.55)" }}
             >
-              <source src={`${videoSrc}#t=0.001`} type="video/mp4" />
+              <source src={`${heroVideoSrc}#t=0.001`} type="video/mp4" />
             </video>
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30 z-[2]" />
             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8 lg:p-10 z-[3]">

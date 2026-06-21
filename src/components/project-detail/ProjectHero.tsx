@@ -2,7 +2,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import { useVideoPlayer, useHdVideoSrc } from "@/hooks/useVideoPlayer";
 
 interface ProjectHeroProps {
   project: {
@@ -32,6 +32,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
     ? `/images/posters/${project.bgVideo!.split('/').pop()?.replace(/\.(mp4|mov|webm)$/, '-poster.jpg')}`
     : null;
   const posterImage = videoPoster || project.bgImage || "/images/hero-poster.jpg";
+  const heroVideoSrc = useHdVideoSrc(project.bgVideo || '');
 
   const {
     videoRef,
@@ -148,7 +149,7 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
                       {...videoProps}
                       className="absolute inset-0 h-full w-full object-cover"
                     >
-                      <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
+                      <source src={`${heroVideoSrc}#t=0.001`} type="video/mp4" />
                     </video>
                   )}
                 </>

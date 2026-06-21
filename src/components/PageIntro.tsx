@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { appendVersion } from '@/hooks/useVideoPlayer';
+import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -46,15 +46,18 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     // by the time the user scrolls down. MAX_LOAD_TIME is the hard ceiling either way.
     // Match the exact versioned URLs the <video> elements request, so the prefetch
     // warms the same cache entry (no double download).
+    // Desktop (>=1024) plays the high-quality -hd variant, so warm that exact file.
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
+    const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
     const GATED = [
-      appendVersion('/videos/hero-background.mp4?v=20260601b'),
-      appendVersion('/videos/about-background.mp4?v=3'),
+      appendVersion(hq('/videos/hero-background.mp4?v=20260601b')),
+      appendVersion(hq('/videos/about-background.mp4?v=3')),
     ];
     const WARM = [
       '/videos/projects/bnb-hero.mp4', '/videos/projects/aptos-hero.mp4',
       '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
       '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
-    ];
+    ].map(hq);
 
     WARM.forEach((u) => {
       fetch(u, { cache: 'force-cache' }).catch(() => {});
