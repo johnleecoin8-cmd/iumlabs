@@ -1,6 +1,7 @@
 import { Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import heroVideo from "@/assets/videos/hero-background.mp4.asset.json";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -116,12 +117,16 @@ const HeroSection = () => {
     ErrorOverlay,
     DebugBanner,
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4?v=20260601b',
+    src: heroVideo.url,
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
     preload: 'auto',
     lazyLoad: false,
     lazyRootMargin: '100px',
+    qualityVariants: {
+      low: heroVideo.url,
+      high: heroVideo.url,
+    },
   });
 
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
