@@ -76,15 +76,15 @@ const clientLogos = [{
   noInvert: true,
   slug: "synfutures"
 }, {
-  name: "MegaETH",
-  logo: megaethLogo,
+  name: "Peaq",
+  logo: peaqLogo,
   noInvert: true,
-  slug: "megaeth"
+  slug: "peaq"
 }, {
-  name: "zkPass",
-  logo: zkpassLogo,
+  name: "Aptos",
+  logo: aptosLogo,
   noInvert: true,
-  slug: "zkpass"
+  slug: "aptos"
 }, {
   name: "OpenLedger",
   logo: openledgerLogo,
