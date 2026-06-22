@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
+import heroVideo from '@/assets/videos/hero-background.mp4.asset.json';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -44,13 +45,13 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     // Gate the reveal on the two full-bleed loops (hero + Why-Choose) finishing,
     // and warm the Selected-Work gallery clips in the background so they're cached
     // by the time the user scrolls down. MAX_LOAD_TIME is the hard ceiling either way.
-    // Match the exact versioned URLs the <video> elements request, so the prefetch
+    // Match the exact versioned URL the <video> element requests, so the prefetch
     // warms the same cache entry (no double download).
-    // Desktop (>=1024) plays the high-quality -hd variant, so warm that exact file.
+    // Desktop (>=1024) plays the high-quality -hd variant for project clips.
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
     const GATED = [
-      appendVersion(hq('/videos/hero-background.mp4?v=20260601b')),
+      appendVersion(heroVideo.url),
       appendVersion(hq('/videos/about-background.mp4?v=3')),
     ];
     const WARM = [
