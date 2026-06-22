@@ -14,11 +14,11 @@ import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import megaethLogo from "@/assets/logos/megaeth-icon.png";
-import zkpassLogo from "@/assets/logos/zkpass-icon.jpeg";
 import openledgerLogo from "@/assets/logos/openledger-wordmark.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
+import peaqLogo from "@/assets/logos/peaq.png";
+import aptosLogo from "@/assets/logos/aptos.png";
 
 const clientLogos = [{
   name: "BNB",
