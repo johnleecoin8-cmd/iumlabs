@@ -131,17 +131,19 @@ const HeroSection = () => {
         <img {...posterProps} decoding="async" />
         <ShimmerOverlay />
         <ErrorOverlay />
-        {!shouldDisableVideo && !hasVideoError &&
+      {!shouldDisableVideo && !hasVideoError &&
       <video
         ref={videoRef}
         {...videoProps}
         className="absolute inset-0 w-full h-full object-cover z-10"
         style={{
           ...videoProps.style,
-          WebkitAppearance: 'none'
+          WebkitAppearance: 'none',
+          imageRendering: '-webkit-optimize-contrast',
+          filter: 'contrast(1.06) saturate(1.08)',
+          transform: 'translateZ(0) scale(1.01)',
         }}>
-          </video>
-
+      </video>
       }
       </div>
 
