@@ -22,7 +22,7 @@ const BlogGridSection = () => {
         .select("*")
         .eq("is_published", true)
         .order("display_order", { ascending: true })
-        .limit(6);
+        .limit(8);
       if (error) throw error;
       return data;
     },
@@ -67,13 +67,13 @@ const BlogGridSection = () => {
       isFeatured: p.isFeatured,
     })),
     ...dbTransformed,
-  ].slice(0, 6);
+  ].slice(0, 8);
 
   if (posts.length === 0) return null;
 
   return (
     <div className="px-5 sm:px-6 lg:px-10 pb-16 md:pb-24">
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
         {posts.map((post) => (
           <Link
             key={post.id}
