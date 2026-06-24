@@ -28,7 +28,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       setTimeout(() => {
         setPhase('done');
         onComplete();
-      }, 500);
+      }, 750);
     }, remaining);
   }, [startTime, onComplete]);
 
@@ -140,28 +140,76 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
   if (phase === 'done') return null;
 
+  const WORD = 'ium Labs';
+  const lift = phase === 'fadeout';
+
   return (
     <div
-      className={`fixed inset-0 z-[10002] flex items-center justify-center bg-[#0A0A0A] transition-opacity duration-500 ${
-        phase === 'fadeout' ? 'opacity-0' : 'opacity-100'
-      }`}
+      aria-hidden
+      className="fixed inset-0 z-[10002] grid place-items-center bg-[#0A0A0A]"
+      style={{
+        transform: lift ? 'translateY(-100%)' : 'translateY(0)',
+        transition: 'transform 700ms cubic-bezier(.76,0,.24,1)',
+      }}
     >
-      <div className={`flex flex-col items-center transition-all duration-400 ${
-        phase === 'fadeout' ? 'scale-95 opacity-0' : 'scale-100 opacity-100'
-      }`}>
-        <span
-          className="text-7xl sm:text-8xl md:text-9xl font-bold tracking-tighter text-white tabular-nums"
-          style={{ fontFeatureSettings: '"tnum"' }}
-        >
-          {String(progress).padStart(3, '0')}
-        </span>
-        <div className="w-48 sm:w-64 h-[1px] bg-white/10 mt-6 overflow-hidden">
-          <div
-            className="h-full bg-white/60 transition-all duration-100 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
+      {/* brand accent frame */}
+      <span
+        className="pointer-events-none fixed inset-[14px] border"
+        style={{ borderColor: 'hsl(var(--brand) / 0.4)' }}
+      />
+
+      {/* corner meta */}
+      <div className="fixed top-6 left-7 font-mono text-[11px] uppercase tracking-[0.15em] text-white/90">
+        ium&nbsp;Labs®
       </div>
+      <div className="fixed top-6 right-7 font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">
+        Korea Crypto GTM
+      </div>
+
+      {/* wordmark — letters rise from behind a mask */}
+      <div className="flex overflow-hidden" style={{ paddingBottom: '0.12em' }}>
+        {WORD.split('').map((ch, i) =>
+          ch === ' ' ? (
+            <span key={i} style={{ width: '0.32em' }} />
+          ) : (
+            <span
+              key={i}
+              className="inline-block font-display font-extrabold text-white"
+              style={{
+                fontSize: 'clamp(44px, 11vw, 128px)',
+                letterSpacing: '-0.04em',
+                lineHeight: 1,
+                transform: 'translateY(110%)',
+                animation: 'pageIntroRise .9s cubic-bezier(.22,1,.36,1) forwards',
+                animationDelay: `${0.05 + i * 0.05}s`,
+              }}
+            >
+              {ch}
+            </span>
+          )
+        )}
+      </div>
+
+      {/* counter */}
+      <div
+        className="fixed right-7 bottom-6 font-mono text-xs text-white/45"
+        style={{ fontVariantNumeric: 'tabular-nums' }}
+      >
+        {String(progress).padStart(3, '0')}
+      </div>
+
+      {/* label */}
+      <div className="fixed left-7 bottom-6 font-mono text-[11px] uppercase tracking-[0.15em] text-white/45">
+        Loading experience
+      </div>
+
+      {/* progress line */}
+      <div
+        className="fixed left-0 bottom-0 h-[2px] w-full origin-left"
+        style={{ background: 'hsl(var(--brand))', transform: `scaleX(${progress / 100})` }}
+      />
+
+      <style>{`@keyframes pageIntroRise { to { transform: translateY(0); } }`}</style>
     </div>
   );
 };
