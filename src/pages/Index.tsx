@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
+import WorkgridHero from "@/components/hero/WorkgridHero";
 import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
@@ -101,9 +101,9 @@ const Index = () => {
       {/* SEO H1, visually hidden, matches document title for semantic alignment */}
       <h1 className="sr-only">Korea Crypto Marketing Agency &amp; Web3 GTM | ium Labs</h1>
 
-      {/* Hero - Full Bleed */}
+      {/* Hero - WebGL workgrid (curved bowl of case studies) */}
       <main id="hero">
-        <HeroSection />
+        <WorkgridHero />
       </main>
 
       {/* About */}
