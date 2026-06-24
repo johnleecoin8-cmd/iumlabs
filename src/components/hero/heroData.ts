@@ -19,7 +19,8 @@ export type Cell = {
 };
 
 function toCell(slug: string, p: ProjectData): Cell {
-  const img = (p.featureImage ?? p.bgImage) as string;
+  // prefer the cleaner project background over the busy campaign feature photo
+  const img = (p.bgImage ?? p.featureImage) as string;
   return {
     id: slug,
     slug,
