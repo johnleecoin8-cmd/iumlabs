@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import officeImage from "@/assets/office/ium-labs-office.webp";
+import heroImage from "@/assets/images/hero-background.jpg.asset.json";
 import confetti from "canvas-confetti";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
 const contactInfo = [{
@@ -52,56 +53,6 @@ const mobileFloatingTags = [{
   label: "24h Response",
   position: "top-[12%] right-[3%]"
 }];
-
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-
-// Video component with poster fallback using useVideoPlayer hook
-const ContactHeroVideo = () => {
-  const {
-    videoRef,
-    isVideoReady,
-    hasVideoError,
-    shouldDisableVideo,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-  } = useVideoPlayer({
-    src: '/videos/contact-hero.mp4',
-    poster: '/images/posters/contact-hero-poster.jpg',
-    preload: window.innerWidth <= 768 ? 'none' : 'metadata',
-    loadTimeout: 5000,
-  });
-
-  return (
-    <>
-      {/* Poster image shown while video loads */}
-      <img
-        {...posterProps}
-        style={{ 
-          ...posterProps.style,
-          filter: "brightness(0.35)",
-        }}
-      />
-
-      {/* Shimmer loading overlay */}
-      <ShimmerOverlay />
-
-      {!shouldDisableVideo && !hasVideoError && (
-        <video
-          ref={videoRef}
-          {...videoProps}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ 
-            ...videoProps.style,
-            filter: "brightness(0.35)",
-          }}
-        >
-          <source src="/videos/contact-hero.mp4#t=0.001" type="video/mp4" />
-        </video>
-      )}
-    </>
-  );
-};
 
 const Contact = () => {
   const location = useLocation();
