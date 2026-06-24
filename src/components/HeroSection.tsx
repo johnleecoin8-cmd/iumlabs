@@ -1,4 +1,4 @@
-import { Send, Download } from "lucide-react";
+import { Send, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
@@ -171,7 +171,7 @@ const HeroSection = () => {
 
       {/* Playbook lead-magnet card (desktop) */}
       <a
-        href="/contact"
+        href="/blog"
         className="hidden lg:flex items-center gap-3 absolute right-10 bottom-28 z-[15] w-[262px] p-3 rounded-2xl bg-zinc-900/85 backdrop-blur-md border border-white/15 hover:border-white/30 hover:bg-zinc-900 transition-all duration-300 group"
       >
         <div className="w-14 h-20 rounded-lg shrink-0 bg-gradient-to-br from-primary to-[#141414] border border-white/10 flex items-end p-1.5">
@@ -183,7 +183,7 @@ const HeroSection = () => {
             Korea Crypto GTM Playbook 2026
           </div>
           <span className="inline-flex items-center gap-1 text-[11px] text-white font-medium">
-            Download <Download className="w-3 h-3 group-hover:translate-y-0.5 transition-transform" />
+            Read guide <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
           </span>
         </div>
       </a>
