@@ -150,25 +150,6 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-black/40 z-[11]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0A0A0A] z-[12]" />
 
-      {/* Floating service pills (desktop) */}
-      <div className="hidden lg:block absolute inset-0 z-[13] pointer-events-none">
-        {[
-          { label: "KOL & Influencer", pos: "top-[27%] left-[6%]", delay: "0s" },
-          { label: "PR & Media", pos: "top-[60%] left-[9%]", delay: "1.1s" },
-          { label: "Community", pos: "top-[31%] right-[7%]", delay: "0.6s" },
-          { label: "Exchange Listing", pos: "top-[63%] right-[6%]", delay: "1.6s" },
-        ].map((p) => (
-          <span
-            key={p.label}
-            className={`hero-float absolute ${p.pos} inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.07] backdrop-blur-md border border-white/15 text-white/80 text-xs font-medium whitespace-nowrap`}
-            style={{ animationDelay: p.delay }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            {p.label}
-          </span>
-        ))}
-      </div>
-
       {/* Playbook lead-magnet card (desktop) */}
       <a
         href="/blog"
