@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
-import heroVideo from '@/assets/videos/hero-background.mp4.asset.json';
+import heroImage from '@/assets/images/hero-background.jpg.asset.json';
 
 interface PageIntroProps {
   onComplete: () => void;
