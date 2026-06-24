@@ -150,7 +150,18 @@ const Contact = () => {
       <main className="p-2 sm:p-3 md:p-4 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] sm:min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
           <div className="absolute inset-0 overflow-hidden">
-            <ContactHeroVideo />
+            <img
+              src={heroImage.url}
+              alt="Korean palace architecture at night"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                imageRendering: '-webkit-optimize-contrast',
+                filter: 'contrast(1.06) saturate(1.08) brightness(0.35)',
+                transform: 'translateZ(0) scale(1.01)',
+              }}
+            />
             <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
           </div>
 
