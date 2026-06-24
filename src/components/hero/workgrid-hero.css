@@ -20,16 +20,15 @@
   inset: 0;
   z-index: 0;
   display: flex;
-  justify-content: center;
-  gap: clamp(10px, 1.4vw, 22px);
-  padding: 0 clamp(10px, 1.4vw, 22px);
+  justify-content: stretch;
+  gap: clamp(10px, 1.2vw, 18px);
+  padding: 0;
   overflow: hidden;
 }
 
 .wgh-col {
   position: relative;
   flex: 1 1 0;
-  max-width: 460px;
   overflow: hidden;
 }
 
