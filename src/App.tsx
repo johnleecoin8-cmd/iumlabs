@@ -197,12 +197,22 @@ const useGlobalAutoplay = () => {
     // iOS Safari decodes only a few inline videos at once. Only ever play the
     // ones currently on screen, and pause the rest, so a visible video always
     // has a free decoder slot (otherwise some videos never start on mobile).
+    // React doesn't reliably reflect the JSX `muted` prop onto the DOM element,
+    // so Safari treats the video as unmuted and blocks autoplay (poster + a play
+    // button show instead). Force muted + inline imperatively before every play.
+    const ensurePlayable = (v: HTMLVideoElement) => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.setAttribute("muted", "");
+      v.playsInline = true;
+      v.setAttribute("playsinline", "");
+    };
     const syncPlayback = () => {
       document.querySelectorAll<HTMLVideoElement>("video[autoplay]").forEach(v => {
         const r = v.getBoundingClientRect();
         const onScreen = r.bottom > 0 && r.top < window.innerHeight;
         if (onScreen) {
-          if (v.paused) v.play().catch(() => {});
+          if (v.paused) { ensurePlayable(v); v.play().catch(() => {}); }
         } else if (!v.paused) {
           v.pause();
         }
@@ -213,7 +223,7 @@ const useGlobalAutoplay = () => {
       entries.forEach(e => {
         const v = e.target as HTMLVideoElement;
         if (e.isIntersecting) {
-          if (v.paused) v.play().catch(() => {});
+          if (v.paused) { ensurePlayable(v); v.play().catch(() => {}); }
         } else if (!v.paused) {
           v.pause();
         }
