@@ -1,42 +1,7 @@
-import { Canvas } from "@react-three/fiber";
-import {
-  Component,
-  type ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Cell, workgridCells } from "./heroData";
-import Workgrid from "./Workgrid";
 import "./workgrid-hero.css";
-
-// WebGL can be missing (old/blocked GPUs, some mobiles, headless). Detect once
-// so we render a static fallback instead of crashing the hero.
-function webglSupported(): boolean {
-  if (typeof document === "undefined") return false;
-  try {
-    const c = document.createElement("canvas");
-    return !!(c.getContext("webgl2") || c.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
-
-// Belt-and-suspenders: if the Canvas throws at runtime (context lost mid-render),
-// swallow it so the headline + CTAs stay on screen.
-class CanvasBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
-  state = { failed: false };
-  static getDerivedStateFromError() {
-    return { failed: true };
-  }
-  render() {
-    if (this.state.failed) return null;
-    return this.props.children;
-  }
-}
 
 // the word that riffles through the split-flap board in the headline
 const ROLL_WORDS = ["Korea", "Seoul", "Asia"];
@@ -45,8 +10,6 @@ const FLAP_GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const prefersReducedMotion = () =>
   typeof window !== "undefined" &&
   window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-const isCoarse = () =>
-  typeof window !== "undefined" && window.matchMedia?.("(pointer: coarse)").matches;
 
 // one character on a solari split-flap board: when its target letter changes it
 // riffles through a few random glyphs and flips up into place, airport-board style.
@@ -84,7 +47,7 @@ function FlapCell({ target, index }: { target: string; index: number }) {
     };
   }, [target, index]);
 
-  const ch = shown === " " ? " " : shown;
+  const ch = shown === " " ? " " : shown;
   return (
     <span className="wgh-flap-cell">
       <span key={tick} className="wgh-flap-glyph">
@@ -151,34 +114,76 @@ const Arrow = () => (
   </svg>
 );
 
+// one vertically-flowing column of project tiles. content is rendered twice and
+// the track translates by -50% so the loop is seamless; direction "down" plays
+// the same loop in reverse. hovering a column pauses it (see CSS).
+function MarqueeColumn({
+  items,
+  direction,
+  duration,
+  onSelect,
+}: {
+  items: Cell[];
+  direction: "up" | "down";
+  duration: number;
+  onSelect: (cell: Cell) => void;
+}) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="wgh-col">
+      <div
+        className="wgh-col-track"
+        style={{
+          animationName: direction === "up" ? "wghFlowUp" : "wghFlowDown",
+          animationDuration: `${duration}s`,
+        }}
+      >
+        {doubled.map((cell, i) => (
+          <button
+            key={`${cell.id}-${i}`}
+            className="wgh-tile"
+            onClick={() => onSelect(cell)}
+            aria-label={`${cell.title} case study`}
+            style={cell.glowColor ? ({ "--tile-glow": cell.glowColor } as CSSProperties) : undefined}
+          >
+            <img src={cell.poster ?? ""} alt="" loading="lazy" decoding="async" />
+            <span className="wgh-tile-label">
+              <span className="wgh-tile-name">{cell.title}</span>
+              {cell.zone && <span className="wgh-tile-zone wgh-mono">{cell.zone}</span>}
+            </span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function WorkgridHero() {
   const navigate = useNavigate();
-  const [hovered, setHovered] = useState<Cell | null>(null);
-  const coarse = useMemo(() => isCoarse(), []);
-  const [glOk] = useState(() => webglSupported());
-
-  const cells = useMemo(() => workgridCells, []);
-
   const onSelect = (cell: Cell) => navigate(`/projects/${cell.slug}`);
+
+  // split the case studies across three columns; flow down / up / down
+  const columns = useMemo(() => {
+    const cols: Cell[][] = [[], [], []];
+    workgridCells.forEach((c, i) => cols[i % 3].push(c));
+    return cols;
+  }, []);
+  const directions: ("up" | "down")[] = ["down", "up", "down"];
+  const durations = [42, 36, 46];
 
   return (
     <section className="wgh-root" aria-label="ium Labs — selected work">
-      {glOk ? (
-        <CanvasBoundary>
-          <Canvas
-            className="wgh-canvas"
-            camera={{ position: [0, 0, 9], fov: 50 }}
-            dpr={[1, 2]}
-            gl={{ antialias: true, alpha: false }}
-            style={{ touchAction: coarse ? "pan-y" : "none", cursor: hovered ? "pointer" : "grab" }}
-          >
-            <color attach="background" args={["#0a0a0a"]} />
-            <Workgrid cells={cells} onHover={setHovered} onSelect={onSelect} />
-          </Canvas>
-        </CanvasBoundary>
-      ) : (
-        <div aria-hidden className="wgh-canvas wgh-canvas--fallback" />
-      )}
+      <div className="wgh-grid" aria-hidden>
+        {columns.map((items, i) => (
+          <MarqueeColumn
+            key={i}
+            items={items}
+            direction={directions[i]}
+            duration={durations[i]}
+            onSelect={onSelect}
+          />
+        ))}
+      </div>
 
       <div aria-hidden className="wgh-vignette" />
       <div aria-hidden className="wgh-grain" />
@@ -220,45 +225,6 @@ export default function WorkgridHero() {
             </button>
           </div>
         </div>
-      </div>
-
-      {/* hovered tile label */}
-      <div
-        className="wgh-hovered"
-        style={{
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? "translateY(0)" : "translateY(8px)",
-        }}
-      >
-        {hovered && (
-          <>
-            <div
-              className="wgh-mono"
-              style={{ fontSize: 11, color: "var(--wgh-muted)", marginBottom: 6 }}
-            >
-              {hovered.client ?? "ium Labs"}
-              {hovered.zone ? ` — ${hovered.zone}` : ""}
-            </div>
-            <div
-              style={{ fontSize: 34, fontWeight: 800, lineHeight: 1.02, letterSpacing: "-0.02em" }}
-            >
-              {hovered.title}
-            </div>
-            {hovered.features.length > 0 && (
-              <div
-                className="wgh-mono"
-                style={{ fontSize: 10, color: "var(--wgh-muted)", marginTop: 8 }}
-              >
-                {hovered.features.slice(0, 5).join(" · ")}
-              </div>
-            )}
-          </>
-        )}
-      </div>
-
-      {/* hint */}
-      <div className="wgh-mono wgh-hint" style={{ opacity: hovered ? 0 : 0.7 }}>
-        {coarse ? "tap a tile to explore" : "drag to explore · click to open"}
       </div>
     </section>
   );
