@@ -3,6 +3,22 @@ import { ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 
+import bnbBg from "@/assets/campaigns/bnb-event.jpg";
+import kucoinBg from "@/assets/campaigns/kucoin-oldschool.jpg";
+import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
+import mantraBg from "@/assets/campaigns/mantra-party.jpg";
+import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
+import bybitBg from "@/assets/campaigns/bybit-event.jpg";
+import fogoBg from "@/assets/campaigns/fogo-fest.avif";
+import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
+import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
+import triaBg from "@/assets/campaigns/tria-app.png";
+import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+import openledgerBg from "@/assets/campaigns/openledger-hero-official.jpg";
+import multipliBg from "@/assets/campaigns/multipli-hero.jpg";
+import talusThumb from "@/assets/campaigns/talus-thumbnail.png";
+import aptosBg from "@/assets/campaigns/aptos-seoul-event.jpg";
+
 import bnbLogo from "@/assets/logos/bnb-new.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import saharaAiLogo from "@/assets/logos/sahara-ai-wordmark.png";
@@ -19,32 +35,24 @@ import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
 import aptosLogo from "@/assets/logos/aptos.png";
 
-// Lunar-style case tiles: a brand-colored gradient with the project logo
-// centered, ium's proof metric kept at the bottom. `color` drives the gradient.
 const projects = [
-  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", color: "#6E56CF", logo: spacecoinLogo, isIcon: false },
-  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "30K+", resultLabel: "Community", color: "#00D4FF", logo: saharaAiLogo, isIcon: false },
-  { name: "Aptos", slug: "aptos", category: "Layer 1", result: "15K+", resultLabel: "Community", color: "#4AE8A0", logo: aptosLogo, isIcon: true },
-  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$150M+", resultLabel: "Trading Volume", color: "#23AF91", logo: kucoinLogo, isIcon: false },
-  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "50+", resultLabel: "VIP & Institutions", color: "#F3BA2F", logo: bnbLogo, isIcon: true },
-  { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", color: "#FF6B9D", logo: megaethLogo, isIcon: false },
-  { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", color: "#F7931A", logo: bybitLogo, isIcon: false },
-  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", color: "#00D4FF", logo: mantraLogo, isIcon: true },
-  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "500+", resultLabel: "Attendees", color: "#FF6B35", logo: fogoLogo, isIcon: true },
-  { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", color: "#9B59B6", logo: synfuturesLogo, isIcon: true },
-  { name: "Tria", slug: "tria", category: "Wallet", result: "30K+", resultLabel: "Korean Wallets", color: "#4169E1", logo: triaLogo, isIcon: true },
-  { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", color: "#2DD4BF", logo: zkpassLogo, isIcon: true },
-  { name: "OpenLedger", slug: "openledger", category: "AI", result: "2M+", resultLabel: "Reach", color: "#10B981", logo: peaqLogo, isIcon: false },
-  { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", color: "#8B5CF6", logo: multipliLogo, isIcon: false },
-  { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", color: "#00E5A0", logo: talusLogo, isIcon: true },
+  { name: "Spacecoin", slug: "spacecoin", category: "DePIN", result: "200K+", resultLabel: "Impressions", bgImage: spacecoinBg, logo: spacecoinLogo, isIcon: false },
+  { name: "Sahara AI", slug: "sahara-ai", category: "AI", result: "30K+", resultLabel: "Community", bgImage: saharaAiBg, logo: saharaAiLogo, isIcon: false },
+  { name: "Aptos", slug: "aptos", category: "Layer 1", result: "15K+", resultLabel: "Community", bgImage: aptosBg, logo: aptosLogo, isIcon: true },
+  { name: "KuCoin", slug: "kucoin", category: "Exchange", result: "$150M+", resultLabel: "Trading Volume", bgImage: kucoinBg, logo: kucoinLogo, isIcon: false },
+  { name: "BNB Chain", slug: "bnb-chain", category: "Infrastructure", result: "50+", resultLabel: "VIP & Institutions", bgImage: bnbBg, logo: bnbLogo, isIcon: true },
+  { name: "MegaETH", slug: "megaeth", category: "Layer 2", result: "2M+", resultLabel: "Reach", bgImage: megaethBg, logo: megaethLogo, isIcon: false },
+  { name: "Bybit", slug: "bybit", category: "Exchange", result: "#2", resultLabel: "Korea Traffic", bgImage: bybitBg, logo: bybitLogo, isIcon: false },
+  { name: "Mantra", slug: "mantra", category: "RWA", result: "$50M+", resultLabel: "Pipeline", bgImage: mantraBg, logo: mantraLogo, isIcon: true },
+  { name: "FOGO", slug: "fogo", category: "Layer 1", result: "500+", resultLabel: "Attendees", bgImage: fogoBg, logo: fogoLogo, isIcon: true },
+  { name: "SynFutures", slug: "synfutures", category: "DeFi", result: "5M+", resultLabel: "OOH", bgImage: synfuturesBg, logo: synfuturesLogo, isIcon: true },
+  { name: "Tria", slug: "tria", category: "Wallet", result: "30K+", resultLabel: "Korean Wallets", bgImage: triaBg, logo: triaLogo, isIcon: true },
+  { name: "zkPass", slug: "zkpass", category: "Privacy", result: "The Verifiable", resultLabel: "Nights", bgImage: zkpassBg, logo: zkpassLogo, isIcon: false },
+  { name: "OpenLedger", slug: "openledger", category: "AI", result: "2M+", resultLabel: "Reach", bgImage: openledgerBg, logo: peaqLogo, isIcon: false },
+  { name: "Multipli", slug: "multipli", category: "RWA", result: "90K+", resultLabel: "Investors", bgImage: multipliBg, logo: multipliLogo, isIcon: false },
+  { name: "Talus", slug: "talus", category: "AI", result: "AI Agents", resultLabel: "On+Offchain", bgImage: talusThumb, logo: talusLogo, isIcon: true },
 ];
 
-// brand gradient: vivid glow from the top fading into near-black (8-digit hex
-// alpha: F2≈95%, 59≈35%, 00=0%, 30≈19%).
-const tileBg = (c: string) => ({
-  backgroundColor: "#0a0a0a",
-  backgroundImage: `radial-gradient(120% 85% at 50% 2%, ${c}F2 0%, ${c}59 38%, ${c}00 72%), linear-gradient(180deg, ${c}30 0%, #0a0a0a 84%)`,
-});
 
 const ProjectCard = ({ project, index }: { project: typeof projects[number]; index: number }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.08, rootMargin: '40px', triggerOnce: true });
@@ -61,53 +69,50 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden border border-white/[0.06]"
+        className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden"
       >
-        {/* brand gradient backdrop */}
-        <div
-          className="absolute inset-0 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.04]"
-          style={tileBg(project.color)}
+        <img
+          src={project.bgImage}
+          alt={project.name}
+          loading={index < 8 ? "eager" : "lazy"}
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover object-center transition-all duration-[1.4s] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.06] saturate-[0.8] brightness-[0.88] group-hover:saturate-100 group-hover:brightness-100"
         />
-        {/* deepen the bottom for the label */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
 
-        {/* category */}
-        <div className="absolute top-4 left-4">
-          <span className="text-[8px] sm:text-[9px] text-white/45 uppercase tracking-[0.18em] font-medium">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/5" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-black/95 via-black/50 to-black/15" />
+
+        <div className="absolute top-4 right-4">
+          <span className="text-[8px] sm:text-[9px] text-white/25 uppercase tracking-[0.15em] font-medium">
             {project.category}
           </span>
         </div>
 
-        {/* centered logo (the Lunar signature) */}
-        <div className="absolute inset-0 flex items-center justify-center p-6 pb-16">
+        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
           <img
             src={project.logo}
             alt={project.name}
-            loading={index < 8 ? "eager" : "lazy"}
-            decoding="async"
             className={cn(
-              "object-contain drop-shadow-[0_4px_18px_rgba(0,0,0,0.35)] transition-transform duration-500 group-hover:scale-[1.06]",
+              "object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500 mb-3",
               project.isIcon
-                ? "h-12 w-12 sm:h-16 sm:w-16 rounded-2xl"
-                : "max-h-9 sm:max-h-11 w-auto max-w-[72%] brightness-0 invert"
+                ? "h-7 sm:h-9 w-7 sm:w-9 rounded-lg"
+                : "h-6 sm:h-8 w-auto max-w-[60%] brightness-0 invert"
             )}
           />
-        </div>
 
-        {/* bottom: name + proof metric */}
-        <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight mb-1">
+          <h3 className="text-sm sm:text-base font-bold text-white tracking-tight leading-tight mb-1.5">
             {project.name}
           </h3>
+
           <div className="flex items-baseline gap-1.5">
             <span className="text-base sm:text-lg font-black text-white leading-none tracking-tight">
               {project.result}
             </span>
-            <span className="text-[9px] sm:text-[10px] text-white/45 font-medium">{project.resultLabel}</span>
+            <span className="text-[9px] sm:text-[10px] text-white/35 font-medium">{project.resultLabel}</span>
           </div>
 
           <div className="overflow-hidden h-0 group-hover:h-5 transition-all duration-500 ease-out">
-            <div className="flex items-center gap-1.5 pt-2 text-white/60 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
+            <div className="flex items-center gap-1.5 pt-2 text-white/50 translate-y-2 group-hover:translate-y-0 transition-transform duration-500">
               <span className="text-[9px] font-medium tracking-wider uppercase">View Case</span>
               <ArrowUpRight className="w-3 h-3" />
             </div>
@@ -121,6 +126,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
 const ProjectCardsSection = () => {
   return (
     <div className="px-5 sm:px-6 lg:px-10 pb-12 sm:pb-16">
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
         {projects.slice(0, 12).map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
