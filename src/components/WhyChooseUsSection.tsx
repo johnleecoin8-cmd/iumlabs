@@ -98,7 +98,7 @@ const WhyChooseUsSection = () => {
           <motion.p
             className="text-white/75 leading-[1.6] text-[14px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-[-0.01em] px-3 sm:px-0"
             variants={descriptionVariants}>
-            Korea is retail-driven, trust-first, and brutally fast. We don't localize your deck, we rebuild your <span className="text-white/90 font-medium">narrative</span>, activate <span className="text-white/90 font-medium">real KOLs</span>, and run <span className="text-white/90 font-medium">campaigns that convert</span>. 25+ projects. Zero recycled playbooks.
+            Korea is <span className="text-purple-300 font-semibold">retail-driven, trust-first, and brutally fast</span>. We don't localize your deck, we rebuild your <span className="text-purple-300 font-semibold">narrative</span>, activate <span className="text-purple-300 font-semibold">real KOLs</span>, and run <span className="text-purple-300 font-semibold">campaigns that convert</span>. <span className="text-purple-300 font-semibold">25+ projects</span>. Zero recycled playbooks.
           </motion.p>
 
 
