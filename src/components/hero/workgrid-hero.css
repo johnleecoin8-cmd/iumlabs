@@ -41,10 +41,10 @@
   z-index: 20;
   pointer-events: none;
   background: radial-gradient(
-    120% 120% at 50% 42%,
-    rgba(10, 10, 10, 0) 52%,
-    rgba(8, 8, 8, 0.55) 82%,
-    rgba(6, 6, 6, 0.92) 100%
+    135% 135% at 50% 44%,
+    rgba(10, 10, 10, 0) 68%,
+    rgba(8, 8, 8, 0.22) 88%,
+    rgba(6, 6, 6, 0.5) 100%
   );
 }
 

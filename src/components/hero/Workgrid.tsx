@@ -21,9 +21,9 @@ const COLS = 11; // lattice columns before wrap
 // the viewport centre as they move outward, anchored to the viewport not content.
 const CURVE = 0.05; // z = -CURVE * (px^2 + py^2)
 const MAX_TILT = 0.46; // clamp tile tilt (radians)
-const FADE_START = STEP * 1.7; // radial distance where edge fade begins
-const FADE_END = STEP * 3.2; // fully faded
-const DEPTH_SHADE = 0.17; // how much receding cards darken (depth cue)
+const FADE_START = STEP * 4.2; // radial distance where edge fade begins (pushed far out)
+const FADE_END = STEP * 5.4; // fully faded — only off-frame tiles
+const DEPTH_SHADE = 0.1; // how much receding cards darken (gentle depth cue)
 
 // gentle idle float so the hero feels alive without interaction
 const DRIFT_X = 0.0016;
@@ -199,13 +199,15 @@ export default function Workgrid({ cells, onHover, onSelect }: Props) {
         mesh.position.set(px, py, z);
         mesh.rotation.y = Math.max(-MAX_TILT, Math.min(MAX_TILT, Math.atan(2 * CURVE * px)));
         mesh.rotation.x = Math.max(-MAX_TILT, Math.min(MAX_TILT, -Math.atan(2 * CURVE * py)));
+        // edges stay crisp: only the very last sliver fades, just enough to
+        // hide tiles recycling in/out beyond the frame.
         const r = Math.sqrt(px * px + py * py);
         const fade =
           r <= FADE_START ? 1 : r >= FADE_END ? 0 : 1 - (r - FADE_START) / (FADE_END - FADE_START);
         const matF = mesh.material as THREE.MeshBasicMaterial;
-        matF.opacity = fade * fade;
+        matF.opacity = fade;
         const isHover = pool[k].assigned === hoverIndex.current;
-        matF.color.setScalar(isHover ? 1 : Math.max(0.52, 1 + z * DEPTH_SHADE));
+        matF.color.setScalar(isHover ? 1 : Math.max(0.72, 1 + z * DEPTH_SHADE));
         mesh.visible = fade > 0.01;
         const idx = cellIndex(col, row, n);
         const slot = pool[k];
