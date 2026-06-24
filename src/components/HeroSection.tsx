@@ -1,4 +1,4 @@
-import { Send } from "lucide-react";
+import { Send, Download } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
@@ -149,6 +149,44 @@ const HeroSection = () => {
       {/* Overlays */}
       <div className="absolute inset-0 bg-black/40 z-[11]" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0A0A0A] z-[12]" />
+
+      {/* Floating service pills (desktop) */}
+      <div className="hidden lg:block absolute inset-0 z-[13] pointer-events-none">
+        {[
+          { label: "KOL & Influencer", pos: "top-[27%] left-[6%]", delay: "0s" },
+          { label: "PR & Media", pos: "top-[60%] left-[9%]", delay: "1.1s" },
+          { label: "Community", pos: "top-[31%] right-[7%]", delay: "0.6s" },
+          { label: "Exchange Listing", pos: "top-[63%] right-[6%]", delay: "1.6s" },
+        ].map((p) => (
+          <span
+            key={p.label}
+            className={`hero-float absolute ${p.pos} inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.07] backdrop-blur-md border border-white/15 text-white/80 text-xs font-medium whitespace-nowrap`}
+            style={{ animationDelay: p.delay }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            {p.label}
+          </span>
+        ))}
+      </div>
+
+      {/* Playbook lead-magnet card (desktop) */}
+      <a
+        href="/contact"
+        className="hidden lg:flex items-center gap-3 absolute right-10 bottom-28 z-[15] w-[262px] p-3 rounded-2xl bg-zinc-900/85 backdrop-blur-md border border-white/15 hover:border-white/30 hover:bg-zinc-900 transition-all duration-300 group"
+      >
+        <div className="w-14 h-20 rounded-lg shrink-0 bg-gradient-to-br from-primary to-[#141414] border border-white/10 flex items-end p-1.5">
+          <span className="text-[7px] font-bold text-white leading-[1.15]">KOREA CRYPTO GTM PLAYBOOK</span>
+        </div>
+        <div className="min-w-0">
+          <div className="text-[9px] text-white/45 uppercase tracking-[0.14em] mb-1">Free Guide</div>
+          <div className="text-[13px] font-semibold text-white leading-tight mb-2">
+            Korea Crypto GTM Playbook 2026
+          </div>
+          <span className="inline-flex items-center gap-1 text-[11px] text-white font-medium">
+            Download <Download className="w-3 h-3 group-hover:translate-y-0.5 transition-transform" />
+          </span>
+        </div>
+      </a>
 
 
       {/* Main Content */}

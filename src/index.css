@@ -423,6 +423,16 @@ video {
   animation: float 4s ease-in-out infinite;
 }
 
+/* gentle drift for hero service pills */
+.hero-float {
+  animation: float 6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-float {
+    animation: none;
+  }
+}
+
 /* Fade Up Animation */
 @keyframes fadeUp {
   from {
