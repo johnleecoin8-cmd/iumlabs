@@ -1,6 +1,6 @@
 import { Send, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/images/hero-background.jpg.asset.json";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -104,21 +104,43 @@ const clientLogos = [{
 
 
 const HeroSection = () => {
+  const {
+    videoRef,
+    hasVideoError,
+    shouldDisableVideo,
+    optimizedSrc,
+    videoProps,
+    posterProps,
+    ShimmerOverlay,
+    ErrorOverlay,
+    DebugBanner,
+  } = useVideoPlayer({
+    src: '/videos/hero-background.mp4?v=20260601b',
+    poster: '/images/posters/hero-background-poster.jpg',
+    autoPlay: true,
+    preload: 'auto',
+    lazyLoad: false,
+    lazyRootMargin: '100px',
+  });
+
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Image */}
+      <DebugBanner />
+      {/* Background Layer - Video */}
       <div className="absolute inset-0">
-        <img
-          src={heroImage.url}
-          alt="Korean palace architecture at night"
-          fetchPriority="high"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            imageRendering: '-webkit-optimize-contrast',
-            filter: 'contrast(1.06) saturate(1.08)',
-            transform: 'translateZ(0) scale(1.01)',
-          }}
-        />
+        <img {...posterProps} decoding="async" />
+        <ShimmerOverlay />
+        <ErrorOverlay />
+        {!shouldDisableVideo && !hasVideoError &&
+      <video
+        ref={videoRef}
+        {...videoProps}
+        className="absolute inset-0 w-full h-full object-cover z-10"
+        style={{
+          ...videoProps.style,
+          WebkitAppearance: 'none'
+        }}>
+          </video>
+      }
       </div>
 
 
