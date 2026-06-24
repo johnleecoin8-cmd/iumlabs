@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
+import heroImage from '@/assets/images/hero-background.jpg.asset.json';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -38,19 +39,25 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       fontsReady.current = true;
     }
 
-    // The intro should not lift until the page's top videos are actually loaded.
-    // The Why-Choose / Selected-Work clips are lazy, so at intro time only the hero
-    // has begun loading — we proactively prefetch the rest into HTTP cache here.
-    // Gate the reveal on the two full-bleed loops (hero + Why-Choose) finishing,
-    // and warm the Selected-Work gallery clips in the background so they're cached
-    // by the time the user scrolls down. MAX_LOAD_TIME is the hard ceiling either way.
-    // Match the exact versioned URLs the <video> elements request, so the prefetch
+    // The intro should not lift until the page's top assets are actually loaded.
+    // The Why-Choose / Selected-Work clips are lazy, so at intro time only the
+    // about section video has begun loading — we proactively prefetch the rest
+    // into HTTP cache here. Gate the reveal on the hero image and the
+    // about-background video finishing, and warm the Selected-Work gallery clips
+    // in the background so they're cached by the time the user scrolls down.
+    // MAX_LOAD_TIME is the hard ceiling either way.
+    // Match the exact versioned URL the <video> element requests, so the prefetch
     // warms the same cache entry (no double download).
-    // Desktop (>=1024) plays the high-quality -hd variant, so warm that exact file.
+    // Desktop (>=1024) plays the high-quality -hd variant for project clips.
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
     const GATED = [
-      appendVersion(hq('/videos/hero-background.mp4?v=20260601b')),
+      new Promise<void>((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve();
+        img.onerror = () => resolve();
+        img.src = heroImage.url;
+      }),
       appendVersion(hq('/videos/about-background.mp4?v=3')),
     ];
     const WARM = [
@@ -69,10 +76,14 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       if (remaining <= 0) videoReady.current = true;
     };
     GATED.forEach((u) => {
-      fetch(u, { cache: 'force-cache' })
-        .then((r) => r.blob())
-        .catch(() => {})
-        .finally(markIfDone);
+      if (typeof u === 'string') {
+        fetch(u, { cache: 'force-cache' })
+          .then((r) => r.blob())
+          .catch(() => {})
+          .finally(markIfDone);
+      } else {
+        u.finally(markIfDone);
+      }
     });
 
     // Nudge any mounted <video> into muted autoplay so the hero paints promptly.

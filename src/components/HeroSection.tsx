@@ -1,6 +1,6 @@
 import { Send, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+import heroImage from "@/assets/images/hero-background.jpg.asset.json";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -14,11 +14,11 @@ import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import megaethLogo from "@/assets/logos/megaeth-icon.png";
-import zkpassLogo from "@/assets/logos/zkpass-icon.jpeg";
 import openledgerLogo from "@/assets/logos/openledger-wordmark.png";
 import multipliLogo from "@/assets/logos/multipli.png";
 import talusLogo from "@/assets/logos/talus.png";
+import peaqLogo from "@/assets/logos/peaq.png";
+import aptosLogo from "@/assets/logos/aptos.png";
 
 const clientLogos = [{
   name: "BNB",
@@ -76,15 +76,15 @@ const clientLogos = [{
   noInvert: true,
   slug: "synfutures"
 }, {
-  name: "MegaETH",
-  logo: megaethLogo,
+  name: "Peaq",
+  logo: peaqLogo,
   noInvert: true,
-  slug: "megaeth"
+  slug: "peaq"
 }, {
-  name: "zkPass",
-  logo: zkpassLogo,
+  name: "Aptos",
+  logo: aptosLogo,
   noInvert: true,
-  slug: "zkpass"
+  slug: "aptos"
 }, {
   name: "OpenLedger",
   logo: openledgerLogo,
@@ -104,45 +104,21 @@ const clientLogos = [{
 
 
 const HeroSection = () => {
-  const {
-    videoRef,
-    hasVideoError,
-    shouldDisableVideo,
-    shouldLoad,
-    optimizedSrc,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-    ErrorOverlay,
-    DebugBanner,
-  } = useVideoPlayer({
-    src: '/videos/hero-background.mp4?v=20260601b',
-    poster: '/images/posters/hero-background-poster.jpg',
-    autoPlay: true,
-    preload: 'auto',
-    lazyLoad: false,
-    lazyRootMargin: '100px',
-  });
-
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
-      <DebugBanner />
-      {/* Background Layer - Video */}
+      {/* Background Layer - Image */}
       <div className="absolute inset-0">
-        <img {...posterProps} decoding="async" />
-        <ShimmerOverlay />
-        <ErrorOverlay />
-        {!shouldDisableVideo && !hasVideoError &&
-      <video
-        ref={videoRef}
-        {...videoProps}
-        className="absolute inset-0 w-full h-full object-cover z-10"
-        style={{
-          ...videoProps.style,
-          WebkitAppearance: 'none'
-        }}>
-          </video>
-
-      }
+        <img
+          src={heroImage.url}
+          alt="Korean palace architecture at night"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            imageRendering: '-webkit-optimize-contrast',
+            filter: 'contrast(1.06) saturate(1.08)',
+            transform: 'translateZ(0) scale(1.01)',
+          }}
+        />
       </div>
 
 

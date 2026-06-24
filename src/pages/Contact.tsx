@@ -12,6 +12,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import officeImage from "@/assets/office/ium-labs-office.webp";
+import heroImage from "@/assets/images/hero-background.jpg.asset.json";
 import confetti from "canvas-confetti";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
 const contactInfo = [{
@@ -52,56 +53,6 @@ const mobileFloatingTags = [{
   label: "24h Response",
   position: "top-[12%] right-[3%]"
 }];
-
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-
-// Video component with poster fallback using useVideoPlayer hook
-const ContactHeroVideo = () => {
-  const {
-    videoRef,
-    isVideoReady,
-    hasVideoError,
-    shouldDisableVideo,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-  } = useVideoPlayer({
-    src: '/videos/contact-hero.mp4',
-    poster: '/images/posters/contact-hero-poster.jpg',
-    preload: window.innerWidth <= 768 ? 'none' : 'metadata',
-    loadTimeout: 5000,
-  });
-
-  return (
-    <>
-      {/* Poster image shown while video loads */}
-      <img
-        {...posterProps}
-        style={{ 
-          ...posterProps.style,
-          filter: "brightness(0.35)",
-        }}
-      />
-
-      {/* Shimmer loading overlay */}
-      <ShimmerOverlay />
-
-      {!shouldDisableVideo && !hasVideoError && (
-        <video
-          ref={videoRef}
-          {...videoProps}
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ 
-            ...videoProps.style,
-            filter: "brightness(0.35)",
-          }}
-        >
-          <source src="/videos/contact-hero.mp4#t=0.001" type="video/mp4" />
-        </video>
-      )}
-    </>
-  );
-};
 
 const Contact = () => {
   const location = useLocation();
@@ -199,7 +150,18 @@ const Contact = () => {
       <main className="p-2 sm:p-3 md:p-4 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] sm:min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
           <div className="absolute inset-0 overflow-hidden">
-            <ContactHeroVideo />
+            <img
+              src={heroImage.url}
+              alt="Korean palace architecture at night"
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{
+                imageRendering: '-webkit-optimize-contrast',
+                filter: 'contrast(1.06) saturate(1.08) brightness(0.35)',
+                transform: 'translateZ(0) scale(1.01)',
+              }}
+            />
             <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
           </div>
 
