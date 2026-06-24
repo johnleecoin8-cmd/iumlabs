@@ -17,9 +17,9 @@ const GAP = 0.14 * CARD_SCALE;
 const STEP = CELL + GAP;
 const COLS = 11; // lattice columns before wrap
 
-// spherical-bowl curvature (phantom.land signature): tiles recede + tilt toward
-// the viewport centre as they move outward, anchored to the viewport not content.
-const CURVE = 0.05; // z = -CURVE * (px^2 + py^2)
+// flat grid (no spherical bowl): tiles sit on a plane facing the camera.
+// set CURVE > 0 to bring back the phantom-style bowl curvature.
+const CURVE = 0; // z = -CURVE * (px^2 + py^2)
 const MAX_TILT = 0.46; // clamp tile tilt (radians)
 const FADE_START = STEP * 4.2; // radial distance where edge fade begins (pushed far out)
 const FADE_END = STEP * 5.4; // fully faded — only off-frame tiles
