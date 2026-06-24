@@ -1,7 +1,6 @@
 import { Send } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useVideoPlayer } from "@/hooks/useVideoPlayer";
-import heroVideo from "@/assets/videos/hero-background.mp4.asset.json";
+import heroImage from "@/assets/images/hero-background.jpg.asset.json";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -105,51 +104,21 @@ const clientLogos = [{
 
 
 const HeroSection = () => {
-  const {
-    videoRef,
-    hasVideoError,
-    shouldDisableVideo,
-    shouldLoad,
-    optimizedSrc,
-    videoProps,
-    posterProps,
-    ShimmerOverlay,
-    ErrorOverlay,
-    DebugBanner,
-  } = useVideoPlayer({
-    src: heroVideo.url,
-    poster: '/images/posters/hero-background-poster.jpg',
-    autoPlay: true,
-    preload: 'auto',
-    lazyLoad: false,
-    lazyRootMargin: '100px',
-    qualityVariants: {
-      low: heroVideo.url,
-      high: heroVideo.url,
-    },
-  });
-
   return <div className="relative h-full min-h-[100vh] sm:min-h-screen flex flex-col justify-between overflow-hidden">
-      <DebugBanner />
-      {/* Background Layer - Video */}
+      {/* Background Layer - Image */}
       <div className="absolute inset-0">
-        <img {...posterProps} decoding="async" />
-        <ShimmerOverlay />
-        <ErrorOverlay />
-      {!shouldDisableVideo && !hasVideoError &&
-      <video
-        ref={videoRef}
-        {...videoProps}
-        className="absolute inset-0 w-full h-full object-cover z-10"
-        style={{
-          ...videoProps.style,
-          WebkitAppearance: 'none',
-          imageRendering: '-webkit-optimize-contrast',
-          filter: 'contrast(1.06) saturate(1.08)',
-          transform: 'translateZ(0) scale(1.01)',
-        }}>
-      </video>
-      }
+        <img
+          src={heroImage.url}
+          alt="Korean palace architecture at night"
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            imageRendering: '-webkit-optimize-contrast',
+            filter: 'contrast(1.06) saturate(1.08)',
+            transform: 'translateZ(0) scale(1.01)',
+          }}
+        />
       </div>
 
 
