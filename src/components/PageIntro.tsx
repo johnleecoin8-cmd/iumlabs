@@ -7,7 +7,10 @@ interface PageIntroProps {
 }
 
 const MIN_DISPLAY_TIME = 600;
-const MAX_LOAD_TIME = 3500; // hard cap: reveal after 3.5s even if videos still buffering
+// Failsafe only: the loader is meant to wait until EVERY home video has fully
+// downloaded. This cap exists purely so a dead/stalled network can never hang
+// the page forever; on any working connection the real gate is asset load.
+const MAX_LOAD_TIME = 60000;
 const VIDEO_POLL_INTERVAL = 200;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
@@ -18,6 +21,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
   const rafRef = useRef<number | null>(null);
   const videoReady = useRef(false);
   const fontsReady = useRef(false);
+  const loadedAssets = useRef(0);
+  const totalAssets = useRef(1);
 
   const handleComplete = useCallback(() => {
     const elapsed = Date.now() - startTime;
@@ -39,52 +44,48 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       fontsReady.current = true;
     }
 
-    // The intro should not lift until the page's top assets are actually loaded.
-    // The Why-Choose / Selected-Work clips are lazy, so at intro time only the
-    // about section video has begun loading — we proactively prefetch the rest
-    // into HTTP cache here. Gate the reveal on the hero image and the
-    // about-background video finishing, and warm the Selected-Work gallery clips
-    // in the background so they're cached by the time the user scrolls down.
-    // MAX_LOAD_TIME is the hard ceiling either way.
-    // Match the exact versioned URL the <video> element requests, so the prefetch
-    // warms the same cache entry (no double download).
-    // Desktop (>=1024) plays the high-quality -hd variant for project clips.
+    // The intro must not lift until EVERY video the home page will play has
+    // fully downloaded into the HTTP cache, so the page never reveals while a
+    // clip is still buffering. We fetch each one to completion (await blob) and
+    // only mark videoReady once all of them, plus the hero image, are in.
+    // Match the exact versioned URL each <video> requests so the fetch warms the
+    // same cache entry (no double download). Desktop (>=1024) plays the -hd
+    // variant, so gate on whichever variant this device will actually request.
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
-    const GATED = [
-      new Promise<void>((resolve) => {
-        const img = new Image();
-        img.onload = () => resolve();
-        img.onerror = () => resolve();
-        img.src = heroImage.url;
-      }),
+    // Every video on the home route: hero + about backgrounds and the six
+    // Selected-Work gallery clips. Keep in sync with the home sections.
+    const HOME_VIDEOS = [
+      appendVersion(hq('/videos/hero-background.mp4')),
       appendVersion(hq('/videos/about-background.mp4?v=3')),
+      ...[
+        '/videos/projects/aptos-hero.mp4', '/videos/projects/bnb-hero.mp4',
+        '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
+        '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
+      ].map((u) => appendVersion(hq(u))),
     ];
-    const WARM = [
-      '/videos/projects/bnb-hero.mp4', '/videos/projects/aptos-hero.mp4',
-      '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
-      '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
-    ].map(hq);
 
-    WARM.forEach((u) => {
-      fetch(u, { cache: 'force-cache' }).catch(() => {});
+    const heroImagePromise = new Promise<void>((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = heroImage.url;
     });
 
+    const GATED: Array<Promise<unknown>> = [
+      heroImagePromise,
+      ...HOME_VIDEOS.map((u) => fetch(u, { cache: 'force-cache' }).then((r) => r.blob())),
+    ];
+
+    totalAssets.current = GATED.length;
+    loadedAssets.current = 0;
     let remaining = GATED.length;
     const markIfDone = () => {
+      loadedAssets.current += 1;
       remaining -= 1;
       if (remaining <= 0) videoReady.current = true;
     };
-    GATED.forEach((u) => {
-      if (typeof u === 'string') {
-        fetch(u, { cache: 'force-cache' })
-          .then((r) => r.blob())
-          .catch(() => {})
-          .finally(markIfDone);
-      } else {
-        u.finally(markIfDone);
-      }
-    });
+    GATED.forEach((p) => { p.catch(() => {}).finally(markIfDone); });
 
     // Nudge any mounted <video> into muted autoplay so the hero paints promptly.
     const nudge = setInterval(() => {
@@ -111,12 +112,15 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       const current = displayProgress.current;
       let target: number;
 
+      // Progress tracks the real download: the bar fills as each home video
+      // lands and only reaches 100 once every asset (and fonts) is in.
+      const frac = loadedAssets.current / Math.max(1, totalAssets.current);
       if (videoReady.current && fontsReady.current) {
         target = 100;
-      } else if (videoReady.current || fontsReady.current) {
-        target = Math.min(90, 30 + elapsed * 0.012);
       } else {
-        target = Math.min(60, elapsed * 0.015);
+        // Reserve the last few percent for fonts/the final asset so the bar
+        // never sits at 100 while something is still loading.
+        target = Math.min(97, 5 + 92 * frac * (fontsReady.current ? 1 : 0.96));
       }
 
       if (current < target) {

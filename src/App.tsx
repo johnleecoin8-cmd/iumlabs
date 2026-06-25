@@ -282,15 +282,24 @@ const AppContent = () => {
     else setTimeout(prefetch, 1500);
   }, []);
   const location = useLocation();
+  // The home page is video-heavy, so its loader must run every time the user
+  // lands on "/", not just on first visit, and must fully preload before reveal.
   const [showIntro, setShowIntro] = useState(() => {
-    // Only show intro on first visit in session and on home page
     if (typeof window === 'undefined') return false;
-    const hasSeenIntro = sessionStorage.getItem('ium_intro_seen');
-    return !hasSeenIntro && window.location.pathname === '/';
+    return window.location.pathname === '/';
   });
+  const prevPath = useRef(location.pathname);
+
+  // Re-trigger the intro loader whenever we navigate INTO the home page.
+  useEffect(() => {
+    const from = prevPath.current;
+    prevPath.current = location.pathname;
+    if (location.pathname === '/' && from !== '/') {
+      setShowIntro(true);
+    }
+  }, [location.pathname]);
 
   const handleIntroComplete = useCallback(() => {
-    sessionStorage.setItem('ium_intro_seen', 'true');
     setShowIntro(false);
     requestAnimationFrame(() => {
       setTimeout(() => {
