@@ -28,7 +28,6 @@ const navSections: { title: string; wide?: boolean; links: { name: string; href:
       { name: "Blog", href: "/blog" },
       { name: "Careers", href: "/jobs" },
       { name: "Contact", href: "/contact" },
-      { name: "Company Deck", href: "/deck" },
     ],
   },
   {
