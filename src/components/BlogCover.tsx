@@ -38,13 +38,13 @@ export default function BlogCover({
       canvas.height = Math.round(h * dpr);
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
-      drawCover(canvas, key);
+      drawCover(canvas, key, post.category || undefined);
     };
     draw();
     const ro = new ResizeObserver(draw);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [key]);
+  }, [key, post.category]);
 
   return (
     <div
