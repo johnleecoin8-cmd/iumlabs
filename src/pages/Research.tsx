@@ -74,7 +74,13 @@ const Research = () => {
     isFeatured: (post as any).is_featured || false
   }));
 
-  const posts = useMemo(() => [...staticResearchPosts, ...dbTransformed], [dbTransformed]);
+  const posts = useMemo(
+    () =>
+      [...staticResearchPosts, ...dbTransformed].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      ),
+    [dbTransformed]
+  );
 
   const filteredPosts = useMemo(() => {
     return posts.filter(post => {

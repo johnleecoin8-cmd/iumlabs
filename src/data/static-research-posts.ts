@@ -2127,4 +2127,237 @@ At ium Labs we treat the kimchi premium as a standing input. Before a campaign, 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
     isFeatured: false,
   },
+  {
+    id: "static-korea-spot-crypto-etf",
+    slug: "korea-spot-crypto-etf-framework-act-2026",
+    title: "Korea's Spot Crypto ETF Countdown: Why One Stalled Law Holds the Whole Prize",
+    image: chartInstitutional,
+    date: "June 5, 2026",
+    readTime: "9 min read",
+    category: "Regulation",
+    author: "David",
+    authorRole: "CEO",
+    authorBio: "David is the CEO and co-founder of ium Labs, leading strategic direction for one of Korea's most active Web3 marketing agencies. His background spans traditional finance and blockchain infrastructure, with a focus on institutional market dynamics and cross-border crypto flows.",
+    excerpt: "Korea has the holders, the political pledge, and the offshore benchmarks for a spot crypto ETF. What it does not have is the one law that makes a virtual asset a legal ETF underlying. A breakdown of the Framework Act bottleneck, the US and Hong Kong comparison, and why the ETF is a channel operators should position for now.",
+    tags: ["spot Bitcoin ETF", "Korea ETF", "Digital Asset Framework Act", "FSC", "Capital Markets Act", "crypto ETF", "institutional crypto"],
+    content: `>! **Key Takeaways**
+>! Korea has the demand for spot crypto ETFs, over 16 million domestic holders, and the political will, a presidential pledge, but not the law: the Digital Asset Framework Act that would make a virtual asset a legal ETF underlying is stalled in the National Assembly
+>! The prize is benchmarked against a US market that reached roughly $100B in spot Bitcoin ETF assets within two years, yet that same market shows ETFs flow both ways after heavy 2026 outflows
+>! Even if the Framework Act passes, launch is not instant, because Korea still lacks institutional custody, an OTC desk for block trades, and a compliant price index
+>! For exchanges and projects, the ETF is a distribution unlock, not a starting gun; the work that matters now is positioning for the listed-product channel before it opens
+
+Korea keeps announcing that spot crypto ETFs are coming, and Korea keeps not shipping them. The 2026 Economic Growth Strategy named spot Bitcoin ETFs as a goal for the year. The Korea Exchange chairman says the venue is ready. The president campaigned on it. And still, through spring 2026, you cannot buy a domestic spot Bitcoin ETF in Seoul. Understanding why is the difference between timing the Korean listed-product channel correctly and waiting on an announcement that keeps slipping.
+
+## 1. The Will Is There, the Law Is Not
+
+Spot crypto ETFs are blocked in Korea for one structural reason. An ETF can only track an asset the law recognizes as an eligible underlying, and virtual assets are not recognized underlyings under the current Capital Markets Act. The fix is the Digital Asset Framework Act, which would widen that definition. As of early April 2026 the bill had not even reached the Legislation Review Subcommittee agenda, and a ruling-party official conceded that first-half-2026 passage may be difficult. The hold-up is not crypto skepticism. It is an unresolved fight between the Financial Services Commission and the Bank of Korea over who governs won stablecoins, and the ETF rides in the same legislative vehicle. The [won-stablecoin endgame](/blog/korea-won-stablecoin-digital-asset-basic-act-2026) and the ETF are, in practice, the same bottleneck.
+
+%%16M+::South Koreans holding crypto by early 2025, roughly a third of the population, the latent demand pool waiting on an ETF wrapper (Source: Disruption Banking)%%
+
+## 2. Sizing the Prize
+
+The bull case is plain arithmetic on a deep retail base plus an institutional channel that cannot currently participate. The reference points sit offshore.
+
+| Market | Spot crypto ETF status | Scale signal | Enabling rule |
+|---|---|---|---|
+| United States | Live since Jan 2024 | ~$100B AUM, $4.6B first-day volume | SEC approval |
+| Hong Kong | Live since Apr 2024 | ~$112M first-day turnover | SFC approval |
+| Korea | Not yet | 16M+ domestic holders waiting | Framework Act stalled |
+| Japan | Targeted by 2028 | Reform in progress | FIEA amendment pending |
+
+The distance between the US and Hong Kong launches is the cautionary note for anyone modeling Korea on the US number alone.
+
+{{bars:US day-one (Jan 2024)=4.6,Hong Kong day-one (Apr 2024)=0.11::First-day spot Bitcoin ETF trading volume, $B. A deep home market matters more than the wrapper. (Source: Reuters)}}
+
+Demand is not the same as durability, either. US assets show the channel runs in both directions.
+
+{{bars:Sept 2025 peak=200,Early 2026=100::US spot Bitcoin ETF assets under management, $B. (Source: Bloomingbit, NFT Plazas)}}
+
+%%$100B::US spot Bitcoin ETF assets roughly two years after the January 2024 launch, the benchmark Korea measures itself against (Source: Bloomingbit, NFT Plazas)%%
+
+## 3. Why the Framework Act Is the Only Domino
+
+Passing the law is necessary but not sufficient. Even once a virtual asset is a recognized underlying, Korea still lacks the plumbing a regulated ETF requires: institutional-grade custody, an over-the-counter desk for creation and redemption in size, a compliant price index, and a liquidity-provision structure.
+
+> **"The very first step toward introducing spot ETFs is enacting the framework act."**
+>, Cho Jin-seok, CEO of Korea Digital Asset (KODA)
+
+The corporate on-ramp is further along than the fund channel. In 2025 the FSC began easing the 2017 ban on institutional trading, and by early 2026 it was finalizing a guideline letting listed firms and professional investors put up to 5% of equity capital into crypto, limited to the top 20 coins on five regulated exchanges. Brokerages, the entities that would actually run an ETF, stay restricted, which is why the corporate unlock and the ETF are not the same milestone. The [9-year corporate ban lift](/blog/korea-corporate-crypto-ban-lifted-institutional-playbook-2026) opened the door for balance sheets, not for funds.
+
+%%5%::Cap on equity capital that listed Korean firms may allocate to crypto under the FSC 2026 guideline, limited to top-20 coins on five regulated exchanges (Source: Cointelegraph)%%
+
+## 4. What It Means for Operators
+
+For exchanges, a domestic spot ETF is both threat and windfall. It routes some retail flow into a passive wrapper that competes with active trading, but it also legitimizes the asset class and pulls in institutional money the exchanges custody and settle. For token projects, the first-cohort ETF channel will be top-20 only, so the near-term play is not "get into an ETF" but "be the asset institutions are comfortable holding when the channel opens." That comfort is already forming: Korea's National Pension Service held $437.9M in crypto-linked equities (Strategy, Coinbase, Robinhood, Block) at the end of 2025 through index tracking, a quiet signal that the institutional rails are warm even before the law lands.
+
+%%$437.9M::Korea's National Pension Service crypto-linked equity holdings at end-2025, evidence institutional appetite is already in motion (Source: TokenPost)%%
+
+## 5. What Breaks It
+
+The clean risks are three. The Framework Act stays hostage to the stablecoin dispute and slips past 2026 entirely, which is the base case a ruling-party official already hinted at. The infrastructure gap delays a real launch by quarters even after the law passes, because custody and OTC desks do not appear overnight. And demand is not one-directional: US spot Bitcoin ETF assets fell below $100B after heavy May 2026 outflows from a roughly $200B peak, so a Korean product that lists into a risk-off retail mood could open thin and stay thin. A wrapper guarantees access, not inflows.
+
+## 6. How We Run It
+
+We treat the ETF as a channel that opens on a political timeline, not a product you can schedule. That means positioning now: [compliance and VASP groundwork](/services/compliance) so a token qualifies the moment institutional capital can hold it, [deep research](/services/deep-research) that tracks the Framework Act vote count rather than the press releases, and [capital-markets positioning](/services/capital) for the funds and desks that will run the Korean product when it lists. If you want to be in the first cohort the channel can reach, that is the [conversation to start](/contact).
+
+## Sources
+
+ETF plan and Framework Act status: [Cryptonews via Yahoo Finance, "South Korea to Allow Spot Bitcoin ETFs"](https://finance.yahoo.com/news/south-korea-allow-spot-bitcoin-150559916.html) and [Bloomingbit, "Spot crypto ETFs effectively impossible without the framework act"](https://en.bloomingbit.io/feed/news/109125). Corporate investment guideline: [Cointelegraph via TradingView](https://www.tradingview.com/news/cointelegraph:51c76a8f0094b:0-south-korea-to-lift-ban-on-corporate-crypto-investment-report/) and [Korea Economic Daily](https://www.kedglobal.com/cryptocurrencies/newsView/ked202502130004). US and Hong Kong benchmarks: [Reuters, "Asia's first spot bitcoin, ether ETFs gain in Hong Kong debut"](https://www.reuters.com/markets/currencies/asias-first-spot-bitcoin-ether-etfs-gain-hong-kong-debut-2024-04-30/). NPS holdings: [TokenPost](https://www.tokenpost.com/news/business/18869). Retail base: [Disruption Banking](https://www.disruptionbanking.com/2026/01/05/koreas-crypto-crash-80-volume-drop-and-%E2%82%A9160t-exodus/). Figures are point-in-time and move with cycles and the legislative calendar.
+
+*This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
+    isFeatured: false,
+  },
+  {
+    id: "static-bithumb-upbit-squeeze",
+    slug: "bithumb-upbit-squeeze-korea-exchange-duopoly-2026",
+    title: "The Bithumb Squeeze: How Korea's #2 Exchange Surged, Stalled, and Reset the Listing Game",
+    image: listingImg,
+    date: "June 18, 2026",
+    readTime: "9 min read",
+    category: "Market Research",
+    author: "James",
+    authorRole: "Co-Founder",
+    authorBio: "James is co-founder of ium Labs, specializing in Korean market entry strategy for Web3 projects. With deep expertise in exchange listing dynamics and token economics, he has advised 30+ projects on their Korean expansion across Upbit, Bithumb, and the broader VASP ecosystem.",
+    excerpt: "Bithumb clawed from 26% to a 45.6% single-day peak against Upbit in 2025, then a March 2026 AML suspension reset the race. A breakdown of Korea's exchange duopoly, how the two venues now differ on liquidity and listing speed, and what it means for a project deciding where to list.",
+    tags: ["Bithumb", "Upbit", "Korea exchange", "exchange listing", "market share", "crypto exchange", "KRW"],
+    content: `>! **Key Takeaways**
+>! Korea's exchange market is a duopoly, Upbit and Bithumb together hold north of 87% of won volume, but the split between them is the most volatile number in Korean crypto
+>! Bithumb clawed from roughly 26% to a 45.6% single-day peak in September 2025 on zero-fee campaigns and aggressive listings, then a March 2026 AML suspension reversed the momentum
+>! The two venues now play different games: Upbit is the deep, defensive price-discovery pool; Bithumb is the faster, promotional challenger carrying a regulatory overhang
+>! For a project choosing where to list, the decision is no longer "the big one," it is a liquidity-versus-speed trade with a banking-risk asterisk on Bithumb
+
+For years the Korean exchange question had one answer: list on Upbit, and if you can, Bithumb too. The hierarchy felt permanent. Then 2025 happened. Bithumb went on the offensive, the gap with Upbit nearly closed on some days, and the duopoly briefly looked like a race. Then a regulator stepped in. The story of how Bithumb surged and stalled is the story of how listing strategy in Korea actually works.
+
+## 1. A Duopoly, Not a Monopoly
+
+Start with the structure. Upbit has dominated for years, peaking above 80% of domestic volume in early 2024, but its share compressed as Bithumb fought back. By 2026 the two together control more than 87% of all won-denominated volume, and after foreign venues like Binance, OKX, and Bybit were pulled from Korean app stores in January 2026 for failing to register, that duopoly is effectively sealed. Everyone below the top two, Coinone, Korbit, and GOPAX, splits low single digits.
+
+%%87%+::Share of Korean won crypto volume Upbit and Bithumb together control in 2026, a duopoly foreign exchanges can no longer touch after the January 2026 app-store delistings (Source: Tiger Research)%%
+
+## 2. The Surge and the Reversal
+
+The headline of 2025 was Bithumb refusing to stay second. Official first-half data put Upbit at 71.6% and Bithumb at 25.8% of volume. Then Bithumb waived trading fees on 200 coins in its won market in September 2025, and the gap collapsed.
+
+{{bars:H1 2025=25.8,Sept 9 2025 peak=45.6,Q4 2025=31.1::Bithumb's share of Korean spot volume swung hard across 2025, %. (Source: FSS, Mobile Index, CoinGecko)}}
+
+The peak did not hold. By the fourth quarter Bithumb settled near 31% against Upbit's 65%, and the depth gap stayed wide.
+
+{{bars:Upbit=3.36,Bithumb=1.2::Average daily trading volume, first half 2025, $B. (Source: FSS via Cryptonews)}}
+
+%%45.6%::Bithumb's single-day share of Korean spot volume on September 9, 2025, within six points of Upbit before the gap reopened (Source: Mobile Index via BeInCrypto)%%
+
+Then came the reset. In March 2026 the Financial Intelligence Unit fined Bithumb 36.8 billion won (about $24.6M) and imposed a six-month partial suspension on onboarding new transfer users, over roughly 6.65 million AML violations. A separate February 2026 system error briefly credited users some 620,000 BTC during a promotion. Momentum swung back to Upbit.
+
+%%$24.6M::AML fine plus a six-month partial suspension the FIU handed Bithumb in March 2026, the event that reversed its momentum (Source: The Block)%%
+
+## 3. How the Two Venues Differ
+
+| Dimension | Upbit | Bithumb |
+|---|---|---|
+| Q4 2025 market share | 65.0% ($180.7B) | 31.1% ($86.5B) |
+| Share of users (H1 2025) | 53% of 10.17M | 37% of 10.17M |
+| Banking partner | K Bank | KB Kookmin (from NH NongHyup, Mar 2025) |
+| Listing posture | Reactive, broad defensive listings | Aggressive, lists first, zero-fee campaigns |
+| Public-market path | Listing via Naver Financial tie-up | IPO slipped to after 2028 |
+| 2026 development | Gaining share post-suspension | $24.6M AML fine, 6-month partial suspension |
+
+The clearest behavioral split is listing posture. Bithumb is the aggressor, listing more new tokens than Upbit through 2025 and chasing competitively traded coins; Upbit defends, often listing the same names shortly after to neutralize the edge. Both moves matter to a project, because a fresh listing on either venue routinely triggers a double-digit price reaction, with one recent token jumping 43% on its listing day.
+
+## 4. What It Means for Projects
+
+The "where to list" question now has structure. Upbit is the deeper pool and the price-discovery venue: you go there for liquidity, credibility, and the cleanest reference price. Bithumb is faster to engage, more willing to run promotional muscle behind a listing, and hungry for share, which can mean more marketing lift for a new pair. The asterisk is regulatory: Bithumb's six-month onboarding suspension and a June 2026 bank audit that shortened its real-name account renewal to six months put a question mark on KRW-access continuity that Upbit does not carry right now. The realistic playbook for a serious token is still both venues, sequenced, with Upbit as the anchor and Bithumb as the amplifier. Our read on the broader [Upbit dominance dynamic](/blog/upbit-dominance-how-78-percent-market-share-reshapes-token-economics) and the mechanics of a [Korean listing](/blog/korean-exchange-listing-strategy-upbit-bithumb-2026) go deeper on sequencing.
+
+## 5. What Breaks It
+
+Three things undercut the "Bithumb is catching up" narrative. First, the surge was bought: zero-fee campaigns and listing aggression lift share while they run and fade when they stop, and the AML suspension stopped the engine. Second, the share numbers are measurement artifacts as much as facts, since a 45.6% day on Mobile Index sits next to a 31% quarter on CoinGecko, so anyone quoting one number is choosing a window. Third, the structural constraints bind both venues equally: a single-bank rule, a new 20% ownership cap with a three-year clock, and banking partners that can shorten or pull real-name account contracts. Bithumb's IPO, once slated for 2025, has slipped to after 2028, which tells you how much of the comeback story is still aspiration.
+
+## 6. How We Run It
+
+We treat exchange selection as a sequencing problem, not a popularity contest. That means [exchange marketing](/services/exchange-marketing) tuned to each venue's audience, [listing support](/services/listing) that reads the current regulatory state of each exchange rather than last year's hierarchy, and timing that puts the amplifier listing where it does the most work. If you are mapping a Korean listing across Upbit and Bithumb, that is the [conversation to start](/contact).
+
+## Sources
+
+Market share and volume: [Cryptonews via Yahoo Finance, "Upbit corners 72% of Korean crypto"](https://finance.yahoo.com/news/upbit-corners-72-korean-crypto-233000204.html), [KuCoin via Odaily on Q4 2025 share](https://www.kucoin.com/news/flash/upbit-s-dominance-in-south-korean-crypto-market-declines-in-q4-2025), and [Tiger Research via CoinGecko, 2026 Korea market guide](https://www.coingecko.com/learn/2026-korea-crypto-market-guide-tiger-research). Zero-fee campaign and the September 2025 spike: [BeInCrypto](https://beincrypto.com/bithumb-launches-fee-free-campaign-to-upturn-upbit/). AML fine and IPO delay: [The Block](https://www.theblock.co/post/396088/bithumb-crypto-exchange-stretches-ipo-timeline-2028). Banking partners and the single-bank rule: [Korea Times](https://www.koreatimes.co.kr/business/banking-finance/20260328/banks-push-ahead-with-crypto-exchange-partnerships-despite-reputational-risks). Figures are point-in-time and swing with the measurement window.
+
+*This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
+    isFeatured: false,
+  },
+  {
+    id: "static-korea-crypto-tax-2027",
+    slug: "korea-crypto-tax-2027-22-percent-gtm-fallout",
+    title: "Korea's 2027 Crypto Tax Is Real This Time: The 22% Reckoning and Its GTM Fallout",
+    image: regulatoryImg,
+    date: "June 24, 2026",
+    readTime: "9 min read",
+    category: "Regulation",
+    author: "Helen",
+    authorRole: "Head of Research",
+    authorBio: "Helen leads the research division at ium Labs, producing institutional-grade market intelligence on Korea's crypto ecosystem. Her analysis covers regulatory frameworks, DeFi adoption patterns, and market microstructure across Asian crypto markets.",
+    excerpt: "Korea's 22% crypto gains tax is set for January 2027 after four delays, and the Finance Ministry says it is proceeding. A breakdown of the rate and the 2.5 million won floor, how Korea compares to Japan, the US, and Germany, and the behavioral fallout operators should plan for now.",
+    tags: ["Korea crypto tax", "crypto gains tax", "2027 tax", "Korea regulation", "virtual asset tax", "Ministry of Finance", "offshore outflows"],
+    content: `>! **Key Takeaways**
+>! Korea's 20% crypto gains tax, 22% with the local surcharge, on annual profits above a 2.5 million won floor, is now set for January 1, 2027, and the Finance Ministry says it will proceed as scheduled
+>! It has been "set" before: the tax was first planned for 2022 and pushed back repeatedly, so the credibility question is fair, but the politics that drove past delays have flipped
+>! Korea's 2.5 million won tax-free floor is twenty times lower than the 50 million won stock investors get, and closing that gap is the central fairness fight
+>! The GTM fallout is behavioral, not just fiscal: expect pre-2027 selling, accelerated offshore migration, and a heavier reporting burden on domestic exchanges
+
+Korea has announced a crypto tax so many times that the market has learned to ignore it. The 20% levy was supposed to start in 2022, then 2023, then 2025, and each time it slipped. Now the Ministry of Economy and Finance says January 1, 2027 is firm. The difference this time is not the rate, it is the politics around it, and operators who treat the date as another bluff are mispricing a real behavioral shift coming to Korean retail.
+
+## 1. The Tax That Kept Not Happening
+
+The design has been stable across every delay. Crypto profits are classified as "other income" and taxed at 20% plus a 2% local surcharge, a 22% combined rate, on annual gains above 2.5 million won (about $1,800). What changed is who wants it. In 2024 the then-ruling People Power Party pushed to delay, arguing premature taxation would drive investors offshore, while the Democratic Party resisted. By 2026 the roles flipped: the Democratic Party holds the presidency and the Finance Ministry is proceeding, while the People Power Party, now in opposition, has filed a bill to scrap the tax outright. The ministry's position is that it proceeds unless the law is changed first.
+
+> **"We will proceed with virtual asset taxation as scheduled in January next year."**
+>, Moon Kyung-ho, Income Tax Division Director, Korea Ministry of Economy and Finance
+
+%%22%::Combined rate (20% income plus 2% local) Korea will levy on annual crypto gains above 2.5 million won from January 1, 2027 (Source: Blockhead)%%
+
+## 2. The Numbers That Will Bite
+
+The tax is broad and the exempt floor is low. It is expected to touch roughly 13.26 million investors, with the first filings due in May 2028 for 2027 income. Against a holder base estimated above 15 million, more than 30% of the population, this is not a niche levy.
+
+%%13.26M::Korean investors the gains tax is expected to touch, with first filings due May 2028 (Source: Blockhead)%%
+
+The fairness fight is the threshold. Stock investors get a 50 million won basic deduction; crypto investors get 2.5 million.
+
+{{bars:Crypto (2.5M won floor)=2.5,Stock (proposed parity)=50::Annual gains exempted before tax applies, million won. (Source: Forkast)}}
+
+%%2.5M won::Annual gain Korean crypto investors can make tax-free, twenty times lower than the 50 million won floor stock investors receive (Source: Forkast)%%
+
+## 3. How Korea Compares
+
+Korea's 22% flat rate is harsh on the floor but mild on the ceiling next to Asia's other regulated market.
+
+| Country | Crypto gains tax | Threshold or carve-out |
+|---|---|---|
+| Korea (from 2027) | 22% flat (20% + 2% local) | First 2.5M won (~$1,800) exempt |
+| Japan | Up to 55% as misc. income; flat ~20.315% reform proposed | Reform covers ~105 designated tokens, not yet enacted |
+| United States | 0/15/20% long-term, 10-37% short-term | Holding period sets the rate |
+| Germany | 0% if held over 12 months | Up to 45% within 12 months |
+
+{{bars:Korea=22,Japan current=55,Germany under 1yr=45,Germany over 1yr=0::Headline crypto gains tax ceilings, %. (Source: PwC, NerdWallet, Koinly)}}
+
+The takeaway for a project planning Korean retail incentives: a flat 22% is predictable, but the low floor means even modest gains are taxable, which changes how retail thinks about churn.
+
+## 4. What It Means for Operators
+
+The fallout is behavioral. Expect three moves. Investors front-run the start date, realizing gains in 2026 before the rule bites, which can pull volume forward and leave a softer tape into 2027. Offshore migration accelerates: outflows were already estimated near $110 billion in 2025 with a majority routed to Binance for leverage, and a tax on domestic gains sharpens that incentive. And domestic exchanges absorb a reporting burden, with the industry body DAXA warning that a proposed rule flagging overseas-linked transfers above 10 million won as suspicious would lift reported cases from about 63,000 a year to more than 5.4 million. For projects, the second-order effect is a Korean retail base that rebalances toward lower-churn holding and pays closer attention to tax-efficient structures, which makes credible educational content a trust lever rather than a nicety.
+
+%%$110B::Estimated Korean crypto outflows in 2025, much of it to offshore venues, the leakage a domestic gains tax can worsen (Source: Yahoo Finance, estimated)%%
+
+## 5. What Breaks It
+
+The obvious risk is history: this tax has been "final" before and slipped every time, so another delay is not unthinkable, especially with an opposition bill to abolish it on the table. A second path is dilution: if the Democratic Party's own proposal to raise the floor from 2.5 million to 50 million won passes, the headline rate survives but the taxable base shrinks dramatically, and most retail investors fall out of scope. A third is enforcement reality: a tax is only as real as the reporting behind it, and as long as offshore venues like Binance absorb Korean flow, the effective take undershoots the projection. Treat 2027 as the base case, not a certainty.
+
+## 6. How We Run It
+
+We help projects plan for the behavior, not just the policy. That means [deep research](/services/deep-research) that tracks the bill and the threshold debate vote by vote, [compliance positioning](/services/compliance) for the reporting environment domestic partners will operate in, and [GTM planning](/services/gtm) that prices in a more tax-aware, lower-churn Korean retail base. Our work on the [kimchi premium](/blog/korean-premium-decoded-kimchi-premium-mechanics-2026) and Korea's wider [2026 regulatory map](/blog/korea-crypto-regulation-2026-vaupa-travel-rule) sits alongside this. If tax is reshaping your Korean plan, that is the [conversation to start](/contact).
+
+## Sources
+
+Rate, threshold, and 2027 confirmation: [Blockhead, "South Korea sets January 2027 for crypto tax"](https://www.blockhead.co/2026/05/08/south-korea-sets-january-2027-for-crypto-tax-after-years-of-delays/) and [IFC Review on the delay history](https://www.ifcreview.com/news/2024/december/asia-south-korea-to-delay-crypto-tax/). Opposition abolition bill: [The Block](https://www.theblock.co/post/394298/south-korean-lawmakers-abolish-crypto-tax). Threshold parity debate: [Forkast](https://forkast.news/south-korea-finance-minister-backs-crypto-tax/). Country comparison: [PwC Japan tax summary](https://taxsummaries.pwc.com/japan/individual/significant-developments), [NerdWallet on US rates](https://www.nerdwallet.com/investing/learn/crypto-tax-rate), and [Koinly on Germany](https://koinly.io/guides/crypto-tax-germany/). The offshore outflow figure is an estimate: [Yahoo Finance](https://finance.yahoo.com/markets/crypto/articles/regulatory-backlash-110b-outflows-forces-154635406.html). Figures are point-in-time and subject to legislative change.
+
+*This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
+    isFeatured: false,
+  },
 ];
