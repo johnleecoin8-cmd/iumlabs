@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
  * Maps routes to their likely next video preloads
  */
 const routeVideoMap: Record<string, string[]> = {
-  '/': ['/videos/projects-background.mp4', '/videos/services-background.mp4'],
+  '/': ['/videos/projects/bnb-hero.mp4', '/videos/projects/sahara-hero.mp4'],
   '/projects': ['/videos/projects/story-hero.mp4', '/videos/projects/mantra-hero.mp4'],
   '/services': ['/videos/services-background.mp4'],
   '/contact': [],
