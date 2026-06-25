@@ -168,6 +168,24 @@ video {
   }
 }
 
+/* ============================================
+   INTRO WORDMARK TYPE — unified across all display headlines
+   The PageIntro loader sets the brand voice: Inter / extrabold (800) /
+   -0.04em tracking. Apply that identical signature to every heavy heading
+   sitewide so the type reads as one system from the loader into each page.
+   Scoped to bold/extrabold/black headings only — subtitles (font-light/
+   medium/normal) and eyebrow labels keep their intended weight & spacing.
+   Declared OUTSIDE @layer on purpose: unlayered rules beat Tailwind's
+   layered utilities (tracking-*, font-*), so this wins the cascade.
+   ============================================ */
+:is(h1, h2, h3, h4, h5, h6).font-bold,
+:is(h1, h2, h3, h4, h5, h6).font-extrabold,
+:is(h1, h2, h3, h4, h5, h6).font-black {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
 @layer components {
 
   /* Lunar Strategy Tags - Dark variant (with background) */
