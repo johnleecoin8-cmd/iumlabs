@@ -160,29 +160,45 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
         Korea Crypto GTM
       </div>
 
-      {/* wordmark — letters rise from behind a mask */}
-      <div className="flex overflow-hidden" style={{ paddingBottom: '0.12em' }}>
-        {WORD.split('').map((ch, i) =>
-          ch === ' ' ? (
-            <span key={i} style={{ width: '0.32em' }} />
-          ) : (
-            <span
-              key={i}
-              className="inline-block font-display font-extrabold text-white"
-              style={{
-                fontSize: 'clamp(44px, 11vw, 128px)',
-                letterSpacing: '-0.04em',
-                lineHeight: 1,
-                transform: 'translateY(110%)',
-                animation: 'pageIntroRise .9s cubic-bezier(.22,1,.36,1) forwards',
-                animationDelay: `${0.05 + i * 0.05}s`,
-              }}
-            >
-              {ch}
-            </span>
-          )
-        )}
-      </div>
+      {/* wordmark: 'ium Labs' for the first half, then the brand line */}
+      {progress < 50 ? (
+        <div key="brand" className="flex overflow-hidden" style={{ paddingBottom: '0.12em' }}>
+          {WORD.split('').map((ch, i) =>
+            ch === ' ' ? (
+              <span key={i} style={{ width: '0.32em' }} />
+            ) : (
+              <span
+                key={i}
+                className="inline-block font-display font-extrabold text-white"
+                style={{
+                  fontSize: 'clamp(44px, 11vw, 128px)',
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1,
+                  transform: 'translateY(110%)',
+                  animation: 'pageIntroRise .9s cubic-bezier(.22,1,.36,1) forwards',
+                  animationDelay: `${0.05 + i * 0.05}s`,
+                }}
+              >
+                {ch}
+              </span>
+            )
+          )}
+        </div>
+      ) : (
+        <div
+          key="tagline"
+          className="flex flex-col items-center text-center px-6 font-display font-extrabold text-white"
+          style={{
+            fontSize: 'clamp(30px, 6vw, 84px)',
+            letterSpacing: '-0.04em',
+            lineHeight: 0.98,
+            animation: 'pageIntroFade .7s cubic-bezier(.22,1,.36,1) both',
+          }}
+        >
+          <span>Your Crypto Ecosystem</span>
+          <span>Growth Partner</span>
+        </div>
+      )}
 
       {/* counter */}
       <div
@@ -203,7 +219,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
         style={{ background: 'rgba(255,255,255,0.45)', transform: `scaleX(${progress / 100})` }}
       />
 
-      <style>{`@keyframes pageIntroRise { to { transform: translateY(0); } }`}</style>
+      <style>{`@keyframes pageIntroRise { to { transform: translateY(0); } } @keyframes pageIntroFade { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }`}</style>
     </div>
   );
 };
