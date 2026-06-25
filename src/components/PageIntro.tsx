@@ -152,12 +152,6 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
         transition: 'transform 700ms cubic-bezier(.76,0,.24,1)',
       }}
     >
-      {/* brand accent frame */}
-      <span
-        className="pointer-events-none fixed inset-[14px] border"
-        style={{ borderColor: 'hsl(var(--brand) / 0.4)' }}
-      />
-
       {/* corner meta */}
       <div className="fixed top-6 left-7 font-mono text-[11px] uppercase tracking-[0.15em] text-white/90">
         ium&nbsp;Labs®
@@ -205,8 +199,8 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
       {/* progress line */}
       <div
-        className="fixed left-0 bottom-0 h-[2px] w-full origin-left"
-        style={{ background: 'hsl(var(--brand))', transform: `scaleX(${progress / 100})` }}
+        className="fixed left-0 bottom-0 h-[1px] w-full origin-left"
+        style={{ background: 'rgba(255,255,255,0.45)', transform: `scaleX(${progress / 100})` }}
       />
 
       <style>{`@keyframes pageIntroRise { to { transform: translateY(0); } }`}</style>
