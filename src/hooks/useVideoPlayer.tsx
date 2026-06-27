@@ -569,21 +569,29 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       }
     }, 1200);
 
-    // Also try on user interaction (for strict autoplay policies)
+    // Also try on user interaction (for strict autoplay policies like
+    // Naver/KakaoTalk in-app browsers). Reset the attempt counter on each
+    // gesture so the retry loop gets a fresh budget once the browser unlocks.
     const handleUserInteraction = () => {
+      playAttemptsRef.current = 0;
+      lastPlayAttemptRef.current = 0;
       tryPlay(video);
     };
 
     const handleVisibilityResume = () => {
       if (document.visibilityState === 'visible') {
+        playAttemptsRef.current = 0;
         playNow();
       }
     };
 
     document.addEventListener('touchstart', handleUserInteraction, { passive: true });
+    document.addEventListener('touchend', handleUserInteraction, { passive: true });
     document.addEventListener('touchmove', handleUserInteraction, { passive: true });
+    document.addEventListener('pointerdown', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
     window.addEventListener('scroll', handleUserInteraction, { passive: true });
+    window.addEventListener('orientationchange', handleUserInteraction, { passive: true });
     window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
     window.addEventListener('focus', handleVisibilityResume, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
