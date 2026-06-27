@@ -604,9 +604,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('playing', handlePlaying);
       document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('touchend', handleUserInteraction);
       document.removeEventListener('touchmove', handleUserInteraction);
+      document.removeEventListener('pointerdown', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
       window.removeEventListener('scroll', handleUserInteraction);
+      window.removeEventListener('orientationchange', handleUserInteraction);
       window.removeEventListener('pageshow', handleVisibilityResume);
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
