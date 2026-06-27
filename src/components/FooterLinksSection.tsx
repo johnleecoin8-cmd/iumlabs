@@ -58,16 +58,6 @@ const FooterLinksSection = () => {
                 Korea's leading Web3 growth partner. From strategy to execution, we engineer your market entry.
               </p>
 
-              {/* Partner deck download */}
-              <a
-                href="/decks/iumLabs-Partner-Deck.pdf"
-                download
-                className="group inline-flex items-center gap-2.5 px-5 py-3 mb-8 rounded-full bg-white text-black text-sm font-semibold hover:bg-white/90 transition-all active:scale-[0.97]"
-              >
-                <Download className="w-4 h-4 transition-transform group-hover:translate-y-0.5" />
-                <span>Get the Partner Deck</span>
-              </a>
-
               <div className="flex items-center gap-5">
 
                 <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">LinkedIn</a>
