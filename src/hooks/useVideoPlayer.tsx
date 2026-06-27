@@ -105,8 +105,12 @@ interface UseVideoPlayerReturn {
   DebugBanner: React.FC;
 }
 
-const MAX_PLAY_ATTEMPTS = 10;
-const PLAY_COOLDOWN_MS = 1200;
+// Naver/KakaoTalk in-app browsers block autoplay until a user gesture;
+// keep a high cap and reset on any interaction so the retry loop survives
+// until the browser finally accepts play() (no perceptible CPU cost — bounded
+// throttle + only fires while paused).
+const MAX_PLAY_ATTEMPTS = 60;
+const PLAY_COOLDOWN_MS = 900;
 const PLAY_RETRY_THROTTLE_MS = 120;
 const MOBILE_STALL_WINDOW_MS = 1800;
 const MOBILE_RELOAD_COOLDOWN_MS = 1600;
