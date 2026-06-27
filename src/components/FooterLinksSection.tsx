@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
 import { brand } from "@/config/content";
 
 const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
