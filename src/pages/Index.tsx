@@ -106,11 +106,10 @@ const Index = () => {
         <HeroSection />
       </main>
 
-      {/* About */}
+      {/* About — must mount immediately so the background video starts loading
+          during PageIntro instead of waiting for scroll-into-view. */}
       <section id="why-choose-us">
-        <MobileDeferredSection minHeight="90vh">
-          <WhyChooseUsSection />
-        </MobileDeferredSection>
+        <WhyChooseUsSection />
       </section>
 
       {/* Selected Work */}
