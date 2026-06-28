@@ -50,9 +50,11 @@ const WhyChooseUsSection = () => {
     src: '/videos/about-background.mp4?v=3',
     poster: '/images/posters/about-background-poster.jpg',
     forceFirstFrame: true,
-    lazyLoad: true,
-    lazyRootMargin: isMobile ? '0px' : '200px',
-    preload: isMobile ? 'none' : 'metadata',
+    // PageIntro preloads videos before reveal — start loading immediately so the
+    // about video is ready by the time the user lands on the section, instead of
+    // waiting for scroll-into-view.
+    lazyLoad: false,
+    preload: 'auto',
     loadTimeout: 12000,
   });
 
