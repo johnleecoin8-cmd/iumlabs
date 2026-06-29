@@ -114,11 +114,9 @@ const Index = () => {
 
       {/* Selected Work */}
       <section id="selected-work" className="border-t border-white/[0.07]">
-        <MobileDeferredSection minHeight="70vh">
-          <Suspense fallback={<SectionLoader />}>
-            <SelectedWorkShowcase />
-          </Suspense>
-        </MobileDeferredSection>
+        <Suspense fallback={<SectionLoader />}>
+          <SelectedWorkShowcase />
+        </Suspense>
       </section>
 
       {/* Services */}

@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { hdVariant } from '@/hooks/useVideoPlayer';
+import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
 // All project media uses video first-frame posters from /images/posters/
 
 const projects = [
@@ -58,44 +58,125 @@ const projects = [
 ];
 
 const BUFFER_RANGE = 2;
+const MOBILE_VIDEO_MAX_ATTEMPTS = 24;
+const MOBILE_VIDEO_RETRY_MS = 750;
 
 /* ─── Mobile horizontal-scroll gallery (native touch swipe) ─── */
 const MobileShowcase = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "100px" });
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const cardRefs = useRef<Record<number, HTMLDivElement | null>>({});
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
+  const visibleVideosRef = useRef<Set<number>>(new Set());
+  const playAttemptsRef = useRef<Record<number, number>>({});
+  const retryTimersRef = useRef<Record<number, ReturnType<typeof setTimeout> | null>>({});
+  const [loadedVideos, setLoadedVideos] = useState<Record<number, boolean>>({ 0: true, 1: true });
+  const [readyVideos, setReadyVideos] = useState<Record<number, boolean>>({});
 
-  // Play each card's video while it's in view; pause off-screen (mobile data + battery friendly).
+  const markReady = useCallback((index: number) => {
+    setReadyVideos(prev => (prev[index] ? prev : { ...prev, [index]: true }));
+  }, []);
+
+  const setMobileVideoAttrs = useCallback((video: HTMLVideoElement) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.controls = false;
+    video.disablePictureInPicture = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', 'true');
+    video.setAttribute('x5-playsinline', 'true');
+    video.setAttribute('x5-video-player-type', 'h5');
+    video.removeAttribute('controls');
+  }, []);
+
+  const tryPlay = useCallback((index: number) => {
+    const video = videoRefs.current[index];
+    if (!video || !visibleVideosRef.current.has(index)) return;
+    if (!video.paused && video.readyState >= 2) {
+      markReady(index);
+      return;
+    }
+
+    const attempts = playAttemptsRef.current[index] ?? 0;
+    if (attempts >= MOBILE_VIDEO_MAX_ATTEMPTS) return;
+    playAttemptsRef.current[index] = attempts + 1;
+    setMobileVideoAttrs(video);
+
+    video.play()
+      .then(() => {
+        if (video.readyState >= 2) markReady(index);
+      })
+      .catch(() => {
+        if (!visibleVideosRef.current.has(index)) return;
+        retryTimersRef.current[index] = setTimeout(() => tryPlay(index), MOBILE_VIDEO_RETRY_MS);
+      });
+  }, [markReady, setMobileVideoAttrs]);
+
+  const refreshVisibleCards = useCallback(() => {
+    const scroller = scrollRef.current;
+    if (!scroller) return;
+
+    const root = scroller.getBoundingClientRect();
+    const nextVisible = new Set<number>();
+    const nextLoaded: Record<number, boolean> = {};
+    projects.forEach((_, index) => {
+      const card = cardRefs.current[index];
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      const shouldLoad = rect.right >= root.left - 220 && rect.left <= root.right + 220;
+      const isVisible = rect.right >= root.left + 12 && rect.left <= root.right - 12;
+      if (shouldLoad) nextLoaded[index] = true;
+      if (isVisible) nextVisible.add(index);
+    });
+
+    setLoadedVideos(prev => Object.keys(nextLoaded).some(key => !prev[Number(key)]) ? { ...prev, ...nextLoaded } : prev);
+    visibleVideosRef.current.forEach(index => {
+      if (!nextVisible.has(index)) {
+        videoRefs.current[index]?.pause();
+        if (retryTimersRef.current[index]) {
+          clearTimeout(retryTimersRef.current[index]!);
+          retryTimersRef.current[index] = null;
+        }
+      }
+    });
+    visibleVideosRef.current = nextVisible;
+    nextVisible.forEach(index => tryPlay(index));
+  }, [tryPlay]);
+
+  // Mobile in-app browsers can show a native play overlay when autoplay is blocked.
+  // Only load near-visible cards and keep the poster until playback has really started.
   useEffect(() => {
-    const vids = Object.values(videoRefs.current).filter(Boolean) as HTMLVideoElement[];
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const v = entry.target as HTMLVideoElement;
-          if (entry.isIntersecting) v.play().catch(() => {});
-          else v.pause();
-        });
-      },
-      { threshold: 0.5 }
-    );
-    vids.forEach((v) => io.observe(v));
+    const vids = Object.entries(videoRefs.current).filter((entry): entry is [string, HTMLVideoElement] => Boolean(entry[1]));
+    vids.forEach(([index, v]) => {
+      setMobileVideoAttrs(v);
+      v.dataset.index = index;
+    });
+    refreshVisibleCards();
 
-    // iOS can block the first muted autoplay until a user gesture; kick the in-view ones once.
     const kick = () => {
-      vids.forEach((v) => {
-        const r = v.getBoundingClientRect();
-        const visible = r.top < window.innerHeight && r.bottom > 0 && r.left < window.innerWidth && r.right > 0;
-        if (visible && v.paused) v.play().catch(() => {});
+      visibleVideosRef.current.forEach(index => {
+        playAttemptsRef.current[index] = 0;
+        tryPlay(index);
       });
     };
-    const events = ["touchstart", "scroll", "click"] as const;
-    events.forEach((e) => document.addEventListener(e, kick, { once: true, passive: true }));
+
+    const events = ["touchstart", "touchmove", "scroll", "visibilitychange", "pageshow", "focus"] as const;
+    events.forEach((e) => window.addEventListener(e, kick, { passive: true }));
+    const scroller = scrollRef.current;
+    scroller?.addEventListener('scroll', refreshVisibleCards, { passive: true });
+    window.addEventListener('resize', refreshVisibleCards, { passive: true });
 
     return () => {
-      io.disconnect();
-      events.forEach((e) => document.removeEventListener(e, kick));
+      Object.values(retryTimersRef.current).forEach(timer => timer && clearTimeout(timer));
+      events.forEach((e) => window.removeEventListener(e, kick));
+      scroller?.removeEventListener('scroll', refreshVisibleCards);
+      window.removeEventListener('resize', refreshVisibleCards);
     };
-  }, []);
+  }, [loadedVideos, refreshVisibleCards, setMobileVideoAttrs, tryPlay]);
 
   return (
     <section ref={ref} className="relative bg-black py-10">
@@ -111,10 +192,11 @@ const MobileShowcase = () => {
       </motion.div>
 
       {/* Horizontal scroll container */}
-      <div className="overflow-x-auto scrollbar-hide -mx-0">
+      <div ref={scrollRef} className="overflow-x-auto scrollbar-hide -mx-0">
         <div className="flex gap-3 px-4" style={{ width: `${projects.length * 72 + 25}vw` }}>
           {projects.map((project, i) => (
             <motion.div
+              ref={(el) => { cardRefs.current[i] = el; }}
               key={project.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -127,18 +209,42 @@ const MobileShowcase = () => {
                 className="group relative block w-full h-full rounded-xl overflow-hidden"
               >
                 {project.video ? (
-                  <video
-                    ref={(el) => { videoRefs.current[i] = el; }}
-                    muted
-                    loop
-                    playsInline
-                    autoPlay
-                    preload="metadata"
-                    poster={project.media}
-                    className="absolute inset-0 w-full h-full object-cover"
-                  >
-                    <source src={`${project.video}#t=0.001`} type="video/mp4" />
-                  </video>
+                  <>
+                    <img
+                      src={project.media}
+                      alt={project.name}
+                      loading={i <= 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                        readyVideos[i] ? 'opacity-0' : 'opacity-100'
+                      }`}
+                    />
+                    {loadedVideos[i] && (
+                      <video
+                        ref={(el) => { videoRefs.current[i] = el; }}
+                        data-index={i}
+                        muted
+                        loop
+                        playsInline
+                        autoPlay={i === 0}
+                        preload={i <= 1 ? "auto" : "metadata"}
+                        poster={project.media}
+                        controls={false}
+                        disablePictureInPicture
+                        aria-hidden="true"
+                        tabIndex={-1}
+                        onPlaying={() => markReady(i)}
+                        onTimeUpdate={(e) => {
+                          if (e.currentTarget.currentTime > 0.02) markReady(i);
+                        }}
+                        className={`absolute inset-0 w-full h-full object-cover pointer-events-none transition-opacity duration-500 ${
+                          readyVideos[i] ? 'opacity-100' : 'opacity-0'
+                        }`}
+                      >
+                        <source src={`${appendVersion(project.video)}#t=0.001`} type="video/mp4" />
+                      </video>
+                    )}
+                  </>
                 ) : (
                   <img
                     src={project.media}
