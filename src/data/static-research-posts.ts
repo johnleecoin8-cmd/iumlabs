@@ -7,6 +7,12 @@ import kolImg from "@/assets/blog/kol-marketing.jpg";
 import listingImg from "@/assets/blog/korea-exchange-listing.jpg";
 import regulatoryImg from "@/assets/blog/ecosystem-chart-regulatory.jpg";
 import gtmStackCover from "@/assets/blog/korea-gtm-stack-cover.svg";
+import regulationVaupaImg from "@/assets/blog/korea-regulation-vaupa.jpg";
+import cryptoTax2027Img from "@/assets/blog/korea-crypto-tax-2027.jpg";
+import spotEtfImg from "@/assets/blog/korea-spot-etf.jpg";
+import kolLandscapeImg from "@/assets/blog/korea-kol-landscape.jpg";
+import stablecoinSiegeImg from "@/assets/blog/stablecoin-siege-asia.jpg";
+import bithumbSqueezeImg from "@/assets/blog/bithumb-squeeze.jpg";
 
 import chartInstitutional from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import chartL2Adoption from "@/assets/blog/ecosystem-chart-l2-adoption.jpg";
@@ -1151,7 +1157,7 @@ We start from the Korean unit of value, not the global deck. Through [deep resea
     id: "static-stablecoin-siege",
     slug: "the-stablecoin-siege-usdt-vs-usdc-in-asia",
     title: "The Stablecoin Siege: USDT vs USDC in Asia's $1.2T Settlement Layer",
-    image: stablecoinImg,
+    image: stablecoinSiegeImg,
     date: "May 11, 2026",
     readTime: "18 min read",
     category: "Stablecoins",
@@ -1396,7 +1402,7 @@ We build the bridge as a trust operation, not a tech demo. On the community side
     id: "static-kol-landscape",
     slug: "korea-kol-marketing-landscape-2026-guide",
     title: "Korea KOL Marketing: The 2026 Landscape for Web3 Projects",
-    image: kolImg,
+    image: kolLandscapeImg,
     date: "May 14, 2026",
     readTime: "12 min read",
     category: "Marketing",
@@ -1639,7 +1645,7 @@ At ium Labs we run a Korean listing as a process with a liquidity target, not an
     id: "static-regulatory-landscape",
     slug: "korea-crypto-regulation-2026-vaupa-travel-rule",
     title: "Korea Crypto Regulation in 2026: VAUPA, Travel Rule, and What's Next",
-    image: regulatoryImg,
+    image: regulationVaupaImg,
     date: "May 16, 2026",
     readTime: "13 min read",
     category: "Strategy",
@@ -2448,7 +2454,7 @@ At ium Labs we treat the kimchi premium as a standing input. Before a campaign, 
     id: "static-korea-spot-crypto-etf",
     slug: "korea-spot-crypto-etf-framework-act-2026",
     title: "Korea's Spot Crypto ETF Countdown: Why One Stalled Law Holds the Whole Prize",
-    image: chartInstitutional,
+    image: spotEtfImg,
     date: "June 5, 2026",
     readTime: "9 min read",
     category: "Regulation",
@@ -2528,7 +2534,7 @@ ETF plan and Framework Act status: [Cryptonews via Yahoo Finance, "South Korea t
     id: "static-bithumb-upbit-squeeze",
     slug: "bithumb-upbit-squeeze-korea-exchange-duopoly-2026",
     title: "The Bithumb Squeeze: How Korea's #2 Exchange Surged, Stalled, and Reset the Listing Game",
-    image: listingImg,
+    image: bithumbSqueezeImg,
     date: "June 18, 2026",
     readTime: "9 min read",
     category: "Market Research",
@@ -2603,7 +2609,7 @@ Market share and volume: [Cryptonews via Yahoo Finance, "Upbit corners 72% of Ko
     id: "static-korea-crypto-tax-2027",
     slug: "korea-crypto-tax-2027-22-percent-gtm-fallout",
     title: "Korea's 2027 Crypto Tax Is Real This Time: The 22% Reckoning and Its GTM Fallout",
-    image: regulatoryImg,
+    image: cryptoTax2027Img,
     date: "June 24, 2026",
     readTime: "9 min read",
     category: "Regulation",
