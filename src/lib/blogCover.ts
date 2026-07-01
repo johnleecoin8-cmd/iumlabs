@@ -2,16 +2,17 @@
  * Generative halftone cover engine for the blog.
  *
  * Each post's cover renders a TOPICAL SYMBOL in the halftone dot style, chosen
- * from the title/slug/category: KakaoTalk gets a Kakao speech bubble, the Korea
- * GTM framework gets the taegeuk flag, Telegram a paper plane, Naver an N,
- * DeFi interlocking chain links, AI a chip, stablecoins a ₩ coin, exchanges a
- * candlestick chart, and so on. Symbols are drawn in their real brand/topic
- * colours onto an offscreen canvas, then sampled cell-by-cell into a halftone
- * grid so the dot size and dot COLOUR both come from the artwork. A faint
- * topical dot field sits behind the symbol. Posts with no symbol match fall
- * back to a seeded abstract field (still title-derived, so still unique).
- * Even when multiple articles share a topic glyph, the slug/title seed drives a
- * unique micro-pixel fingerprint, palette shift, glyph offset, and field rhythm.
+ * from ~100 keyword archetypes in the title/slug/category: KakaoTalk gets a
+ * Kakao speech bubble, corporate-ban posts get institutional columns, RWA gets
+ * a tokenized-asset grid, funnels get a conversion path, ETF posts get fund
+ * bars, and so on. Symbols are drawn in their real brand/topic colours onto an
+ * offscreen canvas, then sampled cell-by-cell into a halftone grid so the dot
+ * size and dot COLOUR both come from the artwork. A faint topical dot field sits
+ * behind the symbol. Posts with no symbol match fall back to a seeded abstract
+ * field (still title-derived, so still unique). Even when multiple articles
+ * share a glyph family, the matched archetype + slug/title seed drives a unique
+ * micro-pixel fingerprint, palette shift, glyph offset, pattern grammar, and
+ * field rhythm.
  * Rendered onto a <canvas> by BlogCover; title/footer chrome lives there.
  */
 
@@ -352,34 +353,218 @@ function gRisingSun(o: CanvasRenderingContext2D, W: number, H: number) {
   o.beginPath(); o.arc(rx, cy, R * 0.9, 0, 6.2832); o.fill();
 }
 
+function gAssetGrid(o: CanvasRenderingContext2D, W: number, H: number, rand: () => number) {
+  // Tokenized real-world assets: a hard-edged asset cube split into on-chain tiles.
+  const cx = W * 0.5, cy = H * 0.5, s = Math.min(W, H) * 0.38;
+  const colors = ["#62D6D6", "#7A8CFF", "#E8D66B", "#6BE38F"];
+  o.save();
+  o.translate(cx, cy); o.rotate((rand() - 0.5) * 0.22);
+  const n = 4, gap = s * 0.045, tile = (s - gap * (n - 1)) / n;
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      const px = -s / 2 + x * (tile + gap), py = -s / 2 + y * (tile + gap);
+      o.fillStyle = colors[(x + y * 2 + Math.floor(rand() * 3)) % colors.length];
+      o.fillRect(px, py, tile, tile);
+    }
+  }
+  o.strokeStyle = "#EAFBFF"; o.lineWidth = s * 0.045;
+  o.strokeRect(-s / 2 - gap, -s / 2 - gap, s + gap * 2, s + gap * 2);
+  o.restore();
+}
+
+function gGateOpen(o: CanvasRenderingContext2D, W: number, H: number) {
+  // Ban lifted / market opening: two heavy gates opening into a bright lane.
+  const cx = W * 0.5, top = H * 0.28, bot = H * 0.74, w = W * 0.44;
+  o.fillStyle = "#8C7CFF";
+  o.save(); o.translate(cx - w * 0.31, (top + bot) / 2); o.rotate(-0.22); o.fillRect(-w * 0.24, -(bot - top) / 2, w * 0.32, bot - top); o.restore();
+  o.save(); o.translate(cx + w * 0.31, (top + bot) / 2); o.rotate(0.22); o.fillRect(-w * 0.08, -(bot - top) / 2, w * 0.32, bot - top); o.restore();
+  o.fillStyle = "#F0E6A0";
+  o.beginPath(); o.moveTo(cx - w * 0.08, bot); o.lineTo(cx + w * 0.08, bot); o.lineTo(cx + w * 0.03, top + H * 0.08); o.lineTo(cx - w * 0.03, top + H * 0.08); o.closePath(); o.fill();
+  o.fillRect(cx - w * 0.4, top - H * 0.035, w * 0.8, H * 0.05);
+}
+
+function gNetworkNodes(o: CanvasRenderingContext2D, W: number, H: number, rand: () => number) {
+  const pts = Array.from({ length: 9 }, (_, i) => {
+    const a = (i / 9) * TAU + rand() * 0.18;
+    const r = Math.min(W, H) * (0.12 + (i % 3) * 0.055 + rand() * 0.025);
+    return [W * 0.5 + Math.cos(a) * r, H * 0.5 + Math.sin(a) * r] as const;
+  });
+  o.strokeStyle = "#55D7FF"; o.lineWidth = W * 0.018; o.lineCap = "round";
+  for (let i = 0; i < pts.length; i++) {
+    const [x, y] = pts[i], [nx, ny] = pts[(i + 2 + (i % 3)) % pts.length];
+    o.beginPath(); o.moveTo(x, y); o.lineTo(nx, ny); o.stroke();
+  }
+  pts.forEach(([x, y], i) => { o.fillStyle = i % 3 === 0 ? "#F7F7F7" : i % 3 === 1 ? "#55D7FF" : "#A7FF6A"; o.beginPath(); o.arc(x, y, W * (0.035 + (i % 2) * 0.012), 0, TAU); o.fill(); });
+}
+
+function gSearchLens(o: CanvasRenderingContext2D, W: number, H: number) {
+  const cx = W * 0.45, cy = H * 0.45, R = Math.min(W, H) * 0.2;
+  o.strokeStyle = "#6BF3A0"; o.lineWidth = R * 0.28;
+  o.beginPath(); o.arc(cx, cy, R, 0, TAU); o.stroke();
+  o.beginPath(); o.moveTo(cx + R * 0.7, cy + R * 0.7); o.lineTo(cx + R * 1.65, cy + R * 1.65); o.stroke();
+  o.strokeStyle = "#E8FFF0"; o.lineWidth = R * 0.1;
+  for (let i = -1; i <= 1; i++) { o.beginPath(); o.moveTo(cx - R * 0.58, cy + i * R * 0.36); o.lineTo(cx + R * 0.52, cy + i * R * 0.36); o.stroke(); }
+}
+
+function gEventStage(o: CanvasRenderingContext2D, W: number, H: number) {
+  const cx = W * 0.5, base = H * 0.72, s = Math.min(W, H) * 0.42;
+  o.fillStyle = "#FFB14A";
+  o.fillRect(cx - s * 0.5, base - s * 0.12, s, s * 0.18);
+  o.fillStyle = "#FF6C6C";
+  o.beginPath(); o.moveTo(cx - s * 0.52, base - s * 0.12); o.lineTo(cx, base - s * 0.62); o.lineTo(cx + s * 0.52, base - s * 0.12); o.closePath(); o.fill();
+  o.strokeStyle = "#FFE5A7"; o.lineWidth = s * 0.04;
+  for (const x of [-0.34, 0, 0.34]) { o.beginPath(); o.moveTo(cx + x * s, base - s * 0.16); o.lineTo(cx + x * s, base - s * 0.74); o.stroke(); }
+}
+
+function gWallet(o: CanvasRenderingContext2D, W: number, H: number) {
+  const cx = W * 0.5, cy = H * 0.52, s = Math.min(W, H) * 0.38;
+  o.fillStyle = "#42D190"; o.fillRect(cx - s * 0.58, cy - s * 0.34, s * 1.16, s * 0.68);
+  o.fillStyle = "#0B2D22"; o.fillRect(cx + s * 0.08, cy - s * 0.15, s * 0.45, s * 0.3);
+  o.fillStyle = "#F4FFB8"; o.beginPath(); o.arc(cx + s * 0.23, cy, s * 0.055, 0, TAU); o.fill();
+}
+
+function gStack(o: CanvasRenderingContext2D, W: number, H: number, rand: () => number) {
+  const cx = W * 0.5, cy = H * 0.5, s = Math.min(W, H) * 0.34;
+  const colors = ["#EF476F", "#FFD166", "#06D6A0", "#6C8CFF"];
+  for (let i = 0; i < 4; i++) {
+    o.fillStyle = colors[(i + Math.floor(rand() * 2)) % colors.length];
+    o.fillRect(cx - s * 0.55 + i * s * 0.07, cy - s * 0.38 + i * s * 0.17, s * 0.86, s * 0.14);
+  }
+}
+
 // ---- topic router: slug/title/category -> {symbol glyph, ambient hue} ----
-interface Topic { draw: Glyph; hue: number; }
+interface Topic { draw: Glyph; hue: number; archetype: number; label: string; }
+
+const TOPIC_ARCHETYPES: Array<{ label: string; keywords: string[]; draw: Glyph; hue: number }> = [
+  { label: "won stablecoin", keywords: ["won-stablecoin", "krw stablecoin", "won stablecoin", "stablecoin", "daba", "digital asset basic act", "bank of korea"], draw: gCoin, hue: 204 },
+  { label: "corporate ban lift", keywords: ["corporate-crypto-ban", "corporate ban", "crypto ban", "ban lifted", "institutional playbook"], draw: gGateOpen, hue: 262 },
+  { label: "cex acquisition funnel", keywords: ["cex-user-acquisition", "user-acquisition", "acquisition", "install", "sign-up", "first deposit", "funnel"], draw: gFunnel, hue: 220 },
+  { label: "rwa tokenization", keywords: ["rwa", "tokenized assets", "tokenized asset", "real world asset", "trust-first"], draw: gAssetGrid, hue: 184 },
+  { label: "gtm stack", keywords: ["gtm-stack", "go-to-market framework", "gtm framework", "market entry stack"], draw: gTaegeuk, hue: 224 },
+  { label: "kakaotalk", keywords: ["kakaotalk", "kakao", "open chat", "openchat"], draw: gSpeechBubble, hue: 84 },
+  { label: "upbit dominance", keywords: ["upbit", "dominance", "power map", "market share"], draw: gCandles, hue: 206 },
+  { label: "memecoin paradox", keywords: ["memecoin", "meme coin", "zero organic", "$4.7b"], draw: gCandles, hue: 318 },
+  { label: "naver search", keywords: ["naver", "search", "seo", "serp", "blog seo"], draw: gSearchLens, hue: 146 },
+  { label: "telegram", keywords: ["telegram", "tg channel", "paper plane"], draw: gPaperPlane, hue: 200 },
+  { label: "defi", keywords: ["defi", "yield", "liquidity pool", "amm", "dex"], draw: gChain, hue: 264 },
+  { label: "ai crypto", keywords: ["ai-crypto", "ai agent", "agents", "machine learning", "artificial intelligence"], draw: gChip, hue: 158 },
+  { label: "depin", keywords: ["depin", "physical infrastructure", "robotics", "iot"], draw: gNetworkNodes, hue: 174 },
+  { label: "kol influencer", keywords: ["kol", "influencer", "creator", "youtube", "twitter", "x spaces"], draw: gMegaphone, hue: 330 },
+  { label: "token launch", keywords: ["token-launch", "tge", "launch token", "launching token"], draw: gRocket, hue: 24 },
+  { label: "spot etf", keywords: ["spot etf", "etf", "fund", "asset manager"], draw: gFundUp, hue: 168 },
+  { label: "tax", keywords: ["tax", "2027", "capital gains", "withholding"], draw: gPercent, hue: 14 },
+  { label: "regulation", keywords: ["regulation", "vaupa", "travel-rule", "travel rule", "compliance", "fsc", "fiU", "vasp", "aml"], draw: gShield, hue: 222 },
+  { label: "family office", keywords: ["vc-family", "family-office", "family office", "venture capital", "allocators"], draw: gCoin, hue: 280 },
+  { label: "institutional", keywords: ["institutional", "corporate treasury", "treasury", "pension", "custody"], draw: gColumns, hue: 42 },
+  { label: "bithumb", keywords: ["bithumb", "squeeze", "exchange war"], draw: gCandles, hue: 38 },
+  { label: "kimchi premium", keywords: ["kimchi", "premium", "arbitrage"], draw: gCandles, hue: 112 },
+  { label: "listing", keywords: ["exchange-listing", "listing", "cex listing", "upbit listing", "bithumb listing"], draw: gRocket, hue: 28 },
+  { label: "community", keywords: ["community", "discord", "chat", "moderation", "ambassador"], draw: gNetworkNodes, hue: 96 },
+  { label: "offline event", keywords: ["offline", "event", "kbw", "conference", "meetup", "summit", "side event"], draw: gEventStage, hue: 32 },
+  { label: "pr media", keywords: ["pr", "media", "press", "newsroom", "interview", "coverage"], draw: gMegaphone, hue: 350 },
+  { label: "wallet", keywords: ["wallet", "account abstraction", "aa", "onboarding", "paymaster"], draw: gWallet, hue: 140 },
+  { label: "payments", keywords: ["payment", "payments", "pay", "fintech", "toss"], draw: gWallet, hue: 110 },
+  { label: "layer 2", keywords: ["layer 2", "l2", "rollup", "zk", "optimistic"], draw: gStack, hue: 252 },
+  { label: "tokenomics", keywords: ["tokenomics", "emission", "vesting", "supply", "float"], draw: gPercent, hue: 54 },
+  { label: "otc capital", keywords: ["otc", "capital", "market making", "liquidity", "mm"], draw: gCandles, hue: 174 },
+  { label: "gaming", keywords: ["gaming", "gamefi", "game", "metaverse"], draw: gAssetGrid, hue: 292 },
+  { label: "nft", keywords: ["nft", "collectible", "pfp", "creator economy"], draw: gAssetGrid, hue: 312 },
+  { label: "security", keywords: ["security", "audit", "exploit", "hack", "risk"], draw: gShield, hue: 10 },
+  { label: "bridge", keywords: ["bridge", "cross-chain", "interoperability", "interop"], draw: gChain, hue: 188 },
+  { label: "oracle", keywords: ["oracle", "data feed", "price feed"], draw: gNetworkNodes, hue: 52 },
+  { label: "socialfi", keywords: ["socialfi", "social", "attention", "mindshare"], draw: gMegaphone, hue: 300 },
+  { label: "dao", keywords: ["dao", "governance", "voting", "proposal"], draw: gColumns, hue: 72 },
+  { label: "staking", keywords: ["staking", "restaking", "validator", "delegation"], draw: gFundUp, hue: 126 },
+  { label: "stablecoin rails", keywords: ["rails", "settlement", "remittance", "onramp", "offramp"], draw: gWallet, hue: 190 },
+  { label: "korea market", keywords: ["korea market", "korean market", "korea crypto", "korea web3", "korean crypto"], draw: gTaegeuk, hue: 224 },
+  { label: "japan comparison", keywords: ["vs-japan", "japan", "jp market"], draw: gRisingSun, hue: 0 },
+  { label: "china hk", keywords: ["hong kong", "china", "mainland", "hk"], draw: gColumns, hue: 4 },
+  { label: "asia", keywords: ["asia", "apac", "asian"], draw: gNetworkNodes, hue: 180 },
+  { label: "legal entity", keywords: ["local entity", "subsidiary", "entity", "license"], draw: gShield, hue: 236 },
+  { label: "banking", keywords: ["bank", "banking", "kookmin", "shinhan", "woori", "nh"], draw: gColumns, hue: 46 },
+  { label: "exchange", keywords: ["exchange", "cex", "order book", "trading"], draw: gCandles, hue: 152 },
+  { label: "research", keywords: ["research", "report", "market intelligence", "thesis"], draw: gSearchLens, hue: 196 },
+  { label: "growth", keywords: ["growth", "scale", "retention", "activation"], draw: gFundUp, hue: 92 },
+  { label: "paid ads", keywords: ["paid ads", "ads", "performance marketing", "cpi", "cpa"], draw: gFunnel, hue: 34 },
+  { label: "ama", keywords: ["ama", "ask me anything", "space", "live session"], draw: gSpeechBubble, hue: 58 },
+  { label: "branding", keywords: ["brand", "branding", "positioning", "narrative"], draw: gStack, hue: 338 },
+  { label: "analytics", keywords: ["analytics", "data", "dashboard", "metrics", "kpi"], draw: gCandles, hue: 214 },
+  { label: "fundraising", keywords: ["fundraising", "raise", "investor", "deal flow"], draw: gCoin, hue: 286 },
+  { label: "airdrop", keywords: ["airdrop", "points", "quest", "campaign"], draw: gRocket, hue: 72 },
+  { label: "mining", keywords: ["mining", "hash", "pow", "bitcoin miner"], draw: gChip, hue: 48 },
+  { label: "bitcoin", keywords: ["bitcoin", "btc", "satoshi"], draw: gCoin, hue: 34 },
+  { label: "ethereum", keywords: ["ethereum", "eth", "evm"], draw: gAssetGrid, hue: 250 },
+  { label: "solana", keywords: ["solana", "sol"], draw: gNetworkNodes, hue: 286 },
+  { label: "aptos", keywords: ["aptos", "move language", "movevm"], draw: gStack, hue: 172 },
+  { label: "sui", keywords: ["sui", "object model"], draw: gStack, hue: 200 },
+  { label: "bnb", keywords: ["bnb", "binance"], draw: gNetworkNodes, hue: 48 },
+  { label: "polygon", keywords: ["polygon", "matic"], draw: gChain, hue: 276 },
+  { label: "bybit", keywords: ["bybit"], draw: gCandles, hue: 48 },
+  { label: "peaq", keywords: ["peaq"], draw: gNetworkNodes, hue: 166 },
+  { label: "spacecoin", keywords: ["spacecoin", "satellite", "space"], draw: gNetworkNodes, hue: 226 },
+  { label: "sahara ai", keywords: ["sahara", "sahara ai"], draw: gChip, hue: 154 },
+  { label: "mantra", keywords: ["mantra"], draw: gAssetGrid, hue: 26 },
+  { label: "ondo", keywords: ["ondo"], draw: gAssetGrid, hue: 192 },
+  { label: "privacy", keywords: ["privacy", "zkpass", "zero knowledge", "zk", "identity"], draw: gShield, hue: 276 },
+  { label: "identity", keywords: ["identity", "did", "credential", "kyc"], draw: gShield, hue: 206 },
+  { label: "real name", keywords: ["real-name", "real name", "bank account"], draw: gColumns, hue: 54 },
+  { label: "retail", keywords: ["retail", "retail investors", "users"], draw: gNetworkNodes, hue: 94 },
+  { label: "institutional custody", keywords: ["custodian", "custody", "qualified investor"], draw: gColumns, hue: 210 },
+  { label: "market maker", keywords: ["market maker", "market-making", "liquidity provider"], draw: gCandles, hue: 176 },
+  { label: "otc desk", keywords: ["otc desk", "block trade", "broker"], draw: gCoin, hue: 174 },
+  { label: "stablecoin issuer", keywords: ["issuer", "issuance", "mint", "reserve"], draw: gCoin, hue: 202 },
+  { label: "reserves", keywords: ["reserves", "100% reserve", "cash equivalent"], draw: gColumns, hue: 58 },
+  { label: "capital controls", keywords: ["capital flight", "capital controls", "cross-border"], draw: gShield, hue: 12 },
+  { label: "compliance calendar", keywords: ["timeline", "calendar", "deadline", "implementation"], draw: gStack, hue: 22 },
+  { label: "naver cafe", keywords: ["naver cafe", "cafe", "knowledge in"], draw: gNaver, hue: 146 },
+  { label: "youtube", keywords: ["youtube", "video", "shorts"], draw: gMegaphone, hue: 4 },
+  { label: "discord", keywords: ["discord", "guild"], draw: gNetworkNodes, hue: 246 },
+  { label: "reddit", keywords: ["reddit"], draw: gSpeechBubble, hue: 16 },
+  { label: "content", keywords: ["content", "editorial", "article", "blog"], draw: gSearchLens, hue: 198 },
+  { label: "localization", keywords: ["localization", "translation", "korean copy"], draw: gTaegeuk, hue: 350 },
+  { label: "trust", keywords: ["trust", "credibility", "reputation"], draw: gShield, hue: 186 },
+  { label: "distribution", keywords: ["distribution", "channel", "channels"], draw: gNetworkNodes, hue: 78 },
+  { label: "competition", keywords: ["competitor", "competitive", "landscape"], draw: gCandles, hue: 294 },
+  { label: "playbook", keywords: ["playbook", "framework", "strategy"], draw: gStack, hue: 226 },
+  { label: "seoul", keywords: ["seoul", "gangnam", "han river"], draw: gEventStage, hue: 204 },
+  { label: "policy", keywords: ["policy", "law", "bill", "national assembly"], draw: gShield, hue: 218 },
+  { label: "consumer app", keywords: ["consumer", "app", "mobile"], draw: gWallet, hue: 104 },
+  { label: "enterprise", keywords: ["enterprise", "b2b", "saas"], draw: gColumns, hue: 232 },
+  { label: "infrastructure", keywords: ["infrastructure", "middleware", "protocol"], draw: gNetworkNodes, hue: 168 },
+  { label: "founder", keywords: ["founder", "operator", "team"], draw: gRocket, hue: 20 },
+  { label: "bear market", keywords: ["bear", "downturn", "winter"], draw: gCandles, hue: 204 },
+  { label: "bull market", keywords: ["bull", "cycle", "rally"], draw: gFundUp, hue: 88 },
+  { label: "education", keywords: ["education", "guide", "primer", "explained"], draw: gSearchLens, hue: 52 },
+  { label: "advisory", keywords: ["advisory", "consulting", "consultation"], draw: gColumns, hue: 188 },
+];
+
+function archetypeIndex(label: string, keywords: string[]) {
+  return xmur3(`${label}|${keywords.join("|")}`)() % 100;
+}
+
 function route(k: string, category?: string): Topic | null {
-  const has = (...ws: string[]) => ws.some((w) => k.includes(w));
-  if (has("kakao")) return { draw: gSpeechBubble, hue: 47 };
-  if (has("telegram")) return { draw: gPaperPlane, hue: 200 };
-  if (has("naver")) return { draw: gNaver, hue: 146 };
-  if (has("gtm-stack")) return { draw: gTaegeuk, hue: 224 };
-  if (has("vs-japan", "japan")) return { draw: gRisingSun, hue: 0 };
-  if (has("defi")) return { draw: gChain, hue: 264 };
-  if (has("ai-crypto", "depin")) return { draw: gChip, hue: 158 };
-  if (has("kol", "influencer")) return { draw: gMegaphone, hue: 330 };
-  if (has("funnel", "acquisition")) return { draw: gFunnel, hue: 220 };
-  if (has("token-launch")) return { draw: gRocket, hue: 24 };
-  if (has("etf")) return { draw: gFundUp, hue: 168 };
-  if (has("tax")) return { draw: gPercent, hue: 14 };
-  if (has("regulation", "vaupa", "travel-rule")) return { draw: gShield, hue: 222 };
-  if (has("rwa")) return { draw: gFundUp, hue: 190 };
-  if (has("corporate-crypto-ban", "corporate-ban")) return { draw: gShield, hue: 42 };
-  if (has("vc-family", "family-office")) return { draw: gCoin, hue: 280 };
-  if (has("institutional")) return { draw: gColumns, hue: 42 };
-  if (has("stablecoin", "won-stablecoin")) return { draw: gCoin, hue: 204 };
-  if (has("upbit", "bithumb", "exchange-listing", "memecoin", "kimchi", "premium", "squeeze", "candlestick")) return { draw: gCandles, hue: 150 };
+  let best: { spec: (typeof TOPIC_ARCHETYPES)[number]; score: number } | null = null;
+  for (const spec of TOPIC_ARCHETYPES) {
+    for (const raw of spec.keywords) {
+      const needle = raw.toLowerCase();
+      if (!needle || !k.includes(needle)) continue;
+      const exactBoost = new RegExp(`(^|[^a-z0-9])${needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}([^a-z0-9]|$)`).test(k) ? 80 : 0;
+      const score = needle.length * 3 + exactBoost + spec.keywords.length;
+      if (!best || score > best.score) best = { spec, score };
+    }
+  }
+  if (best) return { draw: best.spec.draw, hue: best.spec.hue, archetype: archetypeIndex(best.spec.label, best.spec.keywords), label: best.spec.label };
+
   // category fallback before abstract
   const c = (category || "").toLowerCase();
-  if (c === "marketing") return { draw: gMegaphone, hue: 330 };
-  if (c === "regulation") return { draw: gShield, hue: 222 };
-  if (c === "community") return { draw: gPaperPlane, hue: 200 };
+  if (c === "marketing") return { draw: gFunnel, hue: 330, archetype: 61, label: "category marketing" };
+  if (c === "regulation") return { draw: gShield, hue: 222, archetype: 62, label: "category regulation" };
+  if (c === "community") return { draw: gNetworkNodes, hue: 96, archetype: 63, label: "category community" };
+  if (c === "market research") return { draw: gSearchLens, hue: 196, archetype: 64, label: "category market research" };
+  if (c === "strategy") return { draw: gStack, hue: 226, archetype: 65, label: "category strategy" };
+  if (c === "defi") return { draw: gChain, hue: 264, archetype: 66, label: "category defi" };
+  if (c === "technology") return { draw: gChip, hue: 158, archetype: 67, label: "category technology" };
+  if (c === "stablecoins") return { draw: gCoin, hue: 204, archetype: 68, label: "category stablecoins" };
   return null;
 }
 
