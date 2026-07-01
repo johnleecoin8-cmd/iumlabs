@@ -10,6 +10,8 @@
  * grid so the dot size and dot COLOUR both come from the artwork. A faint
  * topical dot field sits behind the symbol. Posts with no symbol match fall
  * back to a seeded abstract field (still title-derived, so still unique).
+ * Even when multiple articles share a topic glyph, the slug/title seed drives a
+ * unique micro-pixel fingerprint, palette shift, glyph offset, and field rhythm.
  * Rendered onto a <canvas> by BlogCover; title/footer chrome lives there.
  */
 
@@ -41,6 +43,7 @@ function mulberry32(a: number): () => number {
 
 const clamp = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const TAU = Math.PI * 2;
 
 function hsl(h: number, s: number, l: number): RGB {
   h = ((h % 360) + 360) % 360 / 360;
@@ -52,6 +55,7 @@ function hsl(h: number, s: number, l: number): RGB {
   return [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
 }
 function rgbStr(c: RGB) { return `rgb(${c[0]},${c[1]},${c[2]})`; }
+function rgbaStr(c: RGB, a: number) { return `rgba(${c[0]},${c[1]},${c[2]},${a})`; }
 
 function ramp(s: Stop[], v: number): string {
   v = clamp(v);
@@ -403,6 +407,65 @@ function makeField(rand: () => number): (x: number, y: number) => number {
   return (x, y) => { const d = Math.hypot(x - cx, y - cy); return 0.16 + 0.6 * (0.5 + 0.5 * Math.sin(f1 * d - ph)); };
 }
 
+function fillSeededBackdrop(ctx: CanvasRenderingContext2D, W: number, H: number, baseHue: number, rand: () => number) {
+  const hue = baseHue + (rand() - 0.5) * 74;
+  const bg0 = hsl(hue, 0.46 + rand() * 0.18, 0.035 + rand() * 0.02);
+  const bg1 = hsl(hue + 38 + rand() * 90, 0.42 + rand() * 0.22, 0.075 + rand() * 0.035);
+  const bg2 = hsl(hue - 70 - rand() * 60, 0.38 + rand() * 0.22, 0.055 + rand() * 0.028);
+  const grad = ctx.createLinearGradient(W * rand(), 0, W * (1 - rand()), H);
+  grad.addColorStop(0, rgbStr(bg0));
+  grad.addColorStop(0.58, rgbStr(bg1));
+  grad.addColorStop(1, rgbStr(bg2));
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+}
+
+function makeMicroParams(rand: () => number) {
+  return [
+    rand() * TAU,
+    rand() * TAU,
+    2.6 + rand() * 8.5,
+    3.2 + rand() * 10.5,
+    4.5 + rand() * 14,
+    0.18 + rand() * 0.64,
+    0.18 + rand() * 0.64,
+    2 + Math.floor(rand() * 7),
+  ];
+}
+
+function seededMicroValue(x: number, y: number, params: number[]) {
+  const [a, b, f1, f2, f3, px, py, arms] = params;
+  const u = x * Math.cos(a) + y * Math.sin(a);
+  const v = -x * Math.sin(a) + y * Math.cos(a);
+  const d = Math.hypot(x - px, y - py);
+  const th = Math.atan2(y - py, x - px);
+  const waves = Math.sin((u * f1 + b) * TAU) * 0.36 + Math.cos((v * f2 - b) * TAU) * 0.28;
+  const spiral = Math.sin(d * f3 * TAU + th * arms + b * 2.7) * Math.exp(-d * 0.85) * 0.42;
+  return clamp(0.38 + waves + spiral);
+}
+
+function drawFingerprintMarks(ctx: CanvasRenderingContext2D, W: number, H: number, hue: number, rand: () => number) {
+  const a = hsl(hue + 155 + rand() * 80, 0.62, 0.58);
+  const b = hsl(hue - 110 - rand() * 60, 0.55, 0.46);
+  const count = 34 + Math.floor(rand() * 52);
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  for (let i = 0; i < count; i++) {
+    const edge = Math.floor(rand() * 4);
+    const x = edge < 2 ? W * rand() : edge === 2 ? W * (0.04 + rand() * 0.18) : W * (0.78 + rand() * 0.18);
+    const y = edge === 0 ? H * (0.04 + rand() * 0.18) : edge === 1 ? H * (0.78 + rand() * 0.17) : H * rand();
+    const w = W * (0.004 + rand() * 0.018);
+    const h = H * (0.003 + rand() * 0.014);
+    ctx.fillStyle = rgbaStr(rand() > 0.5 ? a : b, 0.12 + rand() * 0.2);
+    if (rand() > 0.58) {
+      ctx.beginPath(); ctx.arc(x, y, Math.max(w, h) * (0.55 + rand()), 0, TAU); ctx.fill();
+    } else {
+      ctx.fillRect(x, y, w, h);
+    }
+  }
+  ctx.restore();
+}
+
 /** Render a topic-derived halftone cover onto a canvas (uses backing-store size). */
 export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string) {
   const W = canvas.width, H = canvas.height;
@@ -419,32 +482,47 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
     o.lineCap = "round"; o.lineJoin = "round";
     o.filter = `blur(${Math.max(1, W * 0.003)}px)`;
+    o.save();
+    o.translate(W * (0.5 + (rand() - 0.5) * 0.12), H * (0.5 + (rand() - 0.5) * 0.1));
+    o.rotate((rand() - 0.5) * 0.18);
+    const glyphScale = 0.9 + rand() * 0.22;
+    o.scale(glyphScale, glyphScale);
+    o.translate(-W * 0.5, -H * 0.5);
     topic.draw(o, W, H, rand);
+    o.restore();
     o.filter = "none";
     const data = o.getImageData(0, 0, W, H).data;
 
-    const bg = hsl(topic.hue, 0.45, 0.045);
-    ctx.fillStyle = rgbStr(bg); ctx.fillRect(0, 0, W, H);
-    const ambient = hsl(topic.hue, 0.5, 0.2);
+    const hue = topic.hue + (rand() - 0.5) * 58;
+    fillSeededBackdrop(ctx, W, H, hue, rand);
+    drawFingerprintMarks(ctx, W, H, hue, rand);
+    const ambient = hsl(hue + (rand() - 0.5) * 90, 0.5 + rand() * 0.2, 0.2 + rand() * 0.08);
+    const accent = hsl(hue + 120 + rand() * 110, 0.55 + rand() * 0.18, 0.38 + rand() * 0.16);
+    const micro = makeMicroParams(rand);
 
-    const cols = 30 + Math.floor(rand() * 12);
+    const cols = 34 + Math.floor(rand() * 18);
     const s = W / cols, rows = Math.ceil(H / s) + 1, half = s / 2;
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const cx = (c + 0.5) * s, cy = (r + 0.5) * s;
+        const microV = seededMicroValue(cx / W, cy / H, micro);
         const px = Math.min(W - 1, Math.round(cx)), py = Math.min(H - 1, Math.round(cy));
         const idx = (py * W + px) * 4;
         const pr = data[idx], pg = data[idx + 1], pb = data[idx + 2];
         const L = (0.299 * pr + 0.587 * pg + 0.114 * pb) / 255;
         if (L < 0.1) {
-          // faint ambient grid behind the symbol
-          const n = ((c * 5 + r * 11) % 7);
-          const a = 0.22 + (n === 0 ? 0.22 : 0);
-          ctx.fillStyle = `rgba(${ambient[0]},${ambient[1]},${ambient[2]},${a})`;
-          ctx.beginPath(); ctx.arc(cx, cy, half * 0.16, 0, 6.2832); ctx.fill();
+          // Seeded micro-pixel field behind the symbol. Same glyph category can
+          // never collapse to the same cover because this field is slug/title-derived.
+          const pulse = ((c * 3 + r * 7 + Math.floor(micro[1] * 10)) % 11) === 0;
+          ctx.fillStyle = rgbaStr(pulse ? accent : ambient, 0.08 + microV * 0.34 + (pulse ? 0.16 : 0));
+          ctx.beginPath(); ctx.arc(cx, cy, half * (0.09 + microV * 0.22 + (pulse ? 0.1 : 0)), 0, TAU); ctx.fill();
         } else {
-          ctx.fillStyle = `rgb(${pr},${pg},${pb})`;
-          ctx.beginPath(); ctx.arc(cx, cy, half * (0.32 + 0.62 * L), 0, 6.2832); ctx.fill();
+          const mix = microV * 0.18;
+          const rr = Math.round(lerp(pr, accent[0], mix));
+          const gg = Math.round(lerp(pg, accent[1], mix));
+          const bb = Math.round(lerp(pb, accent[2], mix));
+          ctx.fillStyle = `rgb(${rr},${gg},${bb})`;
+          ctx.beginPath(); ctx.arc(cx, cy, half * (0.28 + 0.6 * L + microV * 0.12), 0, TAU); ctx.fill();
         }
       }
     }
