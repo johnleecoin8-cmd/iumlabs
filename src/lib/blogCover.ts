@@ -654,6 +654,86 @@ function drawFingerprintMarks(ctx: CanvasRenderingContext2D, W: number, H: numbe
   ctx.restore();
 }
 
+function drawArchetypeTexture(ctx: CanvasRenderingContext2D, W: number, H: number, hue: number, archetype: number, rand: () => number) {
+  const primary = hsl(hue + archetype * 7.3, 0.56, 0.52);
+  const secondary = hsl(hue - 120 + archetype * 3.1, 0.48, 0.4);
+  const mode = archetype % 10;
+  ctx.save();
+  ctx.globalCompositeOperation = "screen";
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = rgbaStr(primary, 0.16);
+  ctx.fillStyle = rgbaStr(secondary, 0.12);
+  ctx.lineWidth = W * (0.003 + (archetype % 5) * 0.0016);
+
+  if (mode === 0) {
+    const bands = 5 + (archetype % 7);
+    for (let i = 0; i < bands; i++) {
+      const y = H * (0.18 + i * 0.11 + rand() * 0.025);
+      ctx.beginPath();
+      for (let x = W * 0.08; x <= W * 0.92; x += W * 0.07) {
+        const yy = y + Math.sin((x / W) * TAU * (1.2 + archetype * 0.03) + i) * H * 0.025;
+        x === W * 0.08 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy);
+      }
+      ctx.stroke();
+    }
+  } else if (mode === 1) {
+    const n = 3 + (archetype % 4);
+    for (let i = 0; i < n; i++) {
+      ctx.strokeRect(W * (0.12 + i * 0.07), H * (0.17 + i * 0.055), W * (0.58 - i * 0.07), H * (0.46 - i * 0.035));
+    }
+  } else if (mode === 2) {
+    const rays = 9 + (archetype % 11), cx = W * (0.25 + rand() * 0.5), cy = H * (0.25 + rand() * 0.45);
+    for (let i = 0; i < rays; i++) {
+      const a = (i / rays) * TAU + rand() * 0.05;
+      ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + Math.cos(a) * W * 0.45, cy + Math.sin(a) * H * 0.45); ctx.stroke();
+    }
+  } else if (mode === 3) {
+    const steps = 7 + (archetype % 8);
+    for (let i = 0; i < steps; i++) {
+      ctx.fillRect(W * (0.12 + i * 0.085), H * (0.76 - i * 0.04), W * 0.045, H * (0.035 + i * 0.012));
+    }
+  } else if (mode === 4) {
+    const cx = W * (0.5 + (rand() - 0.5) * 0.18), cy = H * (0.5 + (rand() - 0.5) * 0.18);
+    for (let r = 0; r < 5 + (archetype % 5); r++) {
+      ctx.beginPath(); ctx.arc(cx, cy, W * (0.06 + r * 0.045), 0, TAU); ctx.stroke();
+    }
+  } else if (mode === 5) {
+    const cols = 4 + (archetype % 5), rows = 4 + ((archetype >> 1) % 5);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      if ((x + y + archetype) % 3 === 0) ctx.fillRect(W * (0.12 + x * 0.17), H * (0.18 + y * 0.13), W * 0.045, H * 0.045);
+    }
+  } else if (mode === 6) {
+    const nodes = 8 + (archetype % 7);
+    let px = W * (0.14 + rand() * 0.1), py = H * (0.18 + rand() * 0.12);
+    for (let i = 1; i < nodes; i++) {
+      const x = W * (0.14 + i * 0.72 / nodes + (rand() - 0.5) * 0.08), y = H * (0.2 + rand() * 0.55);
+      ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(x, y); ctx.stroke();
+      ctx.beginPath(); ctx.arc(x, y, W * 0.012, 0, TAU); ctx.fill();
+      px = x; py = y;
+    }
+  } else if (mode === 7) {
+    const count = 18 + (archetype % 20);
+    for (let i = 0; i < count; i++) {
+      const x = W * (0.1 + rand() * 0.8), y = H * (0.16 + rand() * 0.66);
+      ctx.beginPath(); ctx.arc(x, y, W * (0.006 + rand() * 0.018), 0, TAU); ctx.fill();
+    }
+  } else if (mode === 8) {
+    const cx = W * 0.5, cy = H * 0.5;
+    for (let i = 0; i < 3 + (archetype % 4); i++) {
+      const a = rand() * TAU;
+      ctx.save(); ctx.translate(cx, cy); ctx.rotate(a); ctx.strokeRect(-W * (0.1 + i * 0.04), -H * (0.19 + i * 0.035), W * (0.2 + i * 0.08), H * (0.38 + i * 0.07)); ctx.restore();
+    }
+  } else {
+    const bars = 6 + (archetype % 9);
+    for (let i = 0; i < bars; i++) {
+      const x = W * (0.14 + i * 0.72 / bars);
+      ctx.beginPath(); ctx.moveTo(x, H * 0.18); ctx.lineTo(x + W * (rand() - 0.5) * 0.12, H * 0.82); ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
 /** Render a topic-derived halftone cover onto a canvas (uses backing-store size). */
 export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string) {
   const W = canvas.width, H = canvas.height;
@@ -669,14 +749,16 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     const o = off.getContext("2d")!;
     o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
     o.lineCap = "round"; o.lineJoin = "round";
-    const hueRot = Math.floor((rand() - 0.5) * 260);
-    const sat = 0.75 + rand() * 0.9;
-    const mirror = rand() > 0.5 ? -1 : 1;
+    const archetypeRand = mulberry32(xmur3(`${k}|${topic.label}|${topic.archetype}`)());
+    const hueRot = Math.floor((archetypeRand() - 0.5) * 300 + (topic.archetype - 50) * 1.5);
+    const sat = 0.8 + archetypeRand() * 1.1;
+    const mirror = archetypeRand() > 0.5 ? -1 : 1;
     o.filter = `blur(${Math.max(1, W * 0.003)}px) hue-rotate(${hueRot}deg) saturate(${sat})`;
     o.save();
-    o.translate(W * (0.5 + (rand() - 0.5) * 0.34), H * (0.5 + (rand() - 0.5) * 0.28));
-    o.rotate((rand() - 0.5) * 0.9);
-    const glyphScale = 0.72 + rand() * 0.55;
+    const orbit = (topic.archetype % 12) / 12 * TAU;
+    o.translate(W * (0.5 + Math.cos(orbit) * (0.04 + archetypeRand() * 0.13)), H * (0.5 + Math.sin(orbit) * (0.035 + archetypeRand() * 0.11)));
+    o.rotate((archetypeRand() - 0.5) * 1.05 + ((topic.archetype % 5) - 2) * 0.07);
+    const glyphScale = 0.68 + archetypeRand() * 0.64 + (topic.archetype % 4) * 0.035;
     o.scale(glyphScale * mirror, glyphScale);
     o.translate(-W * 0.5, -H * 0.5);
     topic.draw(o, W, H, rand);
@@ -684,14 +766,15 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     o.filter = "none";
     const data = o.getImageData(0, 0, W, H).data;
 
-    const hue = topic.hue + hueRot + (rand() - 0.5) * 120;
+    const hue = topic.hue + hueRot + (topic.archetype % 17) * 5.5 + (rand() - 0.5) * 80;
     fillSeededBackdrop(ctx, W, H, hue, rand);
+    drawArchetypeTexture(ctx, W, H, hue, topic.archetype, archetypeRand);
     drawFingerprintMarks(ctx, W, H, hue, rand);
     const ambient = hsl(hue + (rand() - 0.5) * 90, 0.5 + rand() * 0.2, 0.2 + rand() * 0.08);
     const accent = hsl(hue + 120 + rand() * 110, 0.55 + rand() * 0.18, 0.38 + rand() * 0.16);
-    const micro = makeMicroParams(rand);
+    const micro = makeMicroParams(archetypeRand);
 
-    const cols = 34 + Math.floor(rand() * 18);
+    const cols = 32 + (topic.archetype % 7) * 3 + Math.floor(rand() * 10);
     const s = W / cols, rows = Math.ceil(H / s) + 1, half = s / 2;
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
