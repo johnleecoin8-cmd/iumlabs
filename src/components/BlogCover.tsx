@@ -25,7 +25,7 @@ export default function BlogCover({
   const wrap = useRef<HTMLDivElement>(null);
   const cv = useRef<HTMLCanvasElement>(null);
   const year = coverYear(post.date);
-  const key = post.slug || post.title || "";
+  const key = [post.slug, post.title, post.category].filter(Boolean).join("|");
 
   useEffect(() => {
     const el = wrap.current, canvas = cv.current;
