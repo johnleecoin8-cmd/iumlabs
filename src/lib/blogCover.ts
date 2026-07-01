@@ -369,7 +369,10 @@ function route(k: string, category?: string): Topic | null {
   if (has("etf")) return { draw: gFundUp, hue: 168 };
   if (has("tax")) return { draw: gPercent, hue: 14 };
   if (has("regulation", "vaupa", "travel-rule")) return { draw: gShield, hue: 222 };
-  if (has("institutional", "vc-family", "family-office", "corporate-crypto-ban", "rwa")) return { draw: gColumns, hue: 42 };
+  if (has("rwa")) return { draw: gFundUp, hue: 190 };
+  if (has("corporate-crypto-ban", "corporate-ban")) return { draw: gShield, hue: 42 };
+  if (has("vc-family", "family-office")) return { draw: gCoin, hue: 280 };
+  if (has("institutional")) return { draw: gColumns, hue: 42 };
   if (has("stablecoin", "won-stablecoin")) return { draw: gCoin, hue: 204 };
   if (has("upbit", "bithumb", "exchange-listing", "memecoin", "kimchi", "premium", "squeeze", "candlestick")) return { draw: gCandles, hue: 150 };
   // category fallback before abstract
