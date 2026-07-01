@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 768">
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#07132b"/><stop offset=".5" stop-color="#111113"/><stop offset="1" stop-color="#2a070c"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect width="1280" height="768" fill="url(#bg)"/>
+  <path d="M640 70v628" stroke="#ffffff" stroke-width="4" opacity=".18"/>
+  <g transform="translate(355 380)" filter="url(#glow)"><circle r="150" fill="#f4f7fb"/><path d="M-106 0a106 106 0 0 1 212 0H0a53 53 0 0 0-106 0z" fill="#d83342" transform="rotate(-28)"/><path d="M106 0a106 106 0 0 1-212 0H0a53 53 0 0 0 106 0z" fill="#2364c9" transform="rotate(-28)"/></g>
+  <g transform="translate(925 380)" filter="url(#glow)"><circle r="150" fill="#f4f7fb"/><circle r="76" fill="#bc002d"/><g fill="#bc002d" opacity=".75"><path d="M0 0l190-18v36z"/><path d="M0 0l190-18v36z" transform="rotate(45)"/><path d="M0 0l190-18v36z" transform="rotate(90)"/><path d="M0 0l190-18v36z" transform="rotate(135)"/><path d="M0 0l190-18v36z" transform="rotate(180)"/><path d="M0 0l190-18v36z" transform="rotate(225)"/><path d="M0 0l190-18v36z" transform="rotate(270)"/><path d="M0 0l190-18v36z" transform="rotate(315)"/></g></g>
+  <path d="M170 622c150-76 300-76 450 0s300 76 490 0" fill="none" stroke="#65e0b4" stroke-width="12" stroke-linecap="round"/>
+</svg>
