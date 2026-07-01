@@ -484,19 +484,22 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     const o = off.getContext("2d")!;
     o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
     o.lineCap = "round"; o.lineJoin = "round";
-    o.filter = `blur(${Math.max(1, W * 0.003)}px)`;
+    const hueRot = Math.floor((rand() - 0.5) * 260);
+    const sat = 0.75 + rand() * 0.9;
+    const mirror = rand() > 0.5 ? -1 : 1;
+    o.filter = `blur(${Math.max(1, W * 0.003)}px) hue-rotate(${hueRot}deg) saturate(${sat})`;
     o.save();
-    o.translate(W * (0.5 + (rand() - 0.5) * 0.12), H * (0.5 + (rand() - 0.5) * 0.1));
-    o.rotate((rand() - 0.5) * 0.18);
-    const glyphScale = 0.9 + rand() * 0.22;
-    o.scale(glyphScale, glyphScale);
+    o.translate(W * (0.5 + (rand() - 0.5) * 0.34), H * (0.5 + (rand() - 0.5) * 0.28));
+    o.rotate((rand() - 0.5) * 0.9);
+    const glyphScale = 0.72 + rand() * 0.55;
+    o.scale(glyphScale * mirror, glyphScale);
     o.translate(-W * 0.5, -H * 0.5);
     topic.draw(o, W, H, rand);
     o.restore();
     o.filter = "none";
     const data = o.getImageData(0, 0, W, H).data;
 
-    const hue = topic.hue + (rand() - 0.5) * 58;
+    const hue = topic.hue + hueRot + (rand() - 0.5) * 120;
     fillSeededBackdrop(ctx, W, H, hue, rand);
     drawFingerprintMarks(ctx, W, H, hue, rand);
     const ambient = hsl(hue + (rand() - 0.5) * 90, 0.5 + rand() * 0.2, 0.2 + rand() * 0.08);
