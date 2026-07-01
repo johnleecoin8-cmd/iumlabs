@@ -232,6 +232,167 @@ function gColumns(o: CanvasRenderingContext2D, W: number, H: number) {
   }
 }
 
+function gInstitutionalUnlock(o: CanvasRenderingContext2D, W: number, H: number) {
+  // Corporate/institutional crypto opening: office tower + unlocked vault shackle.
+  const cx = W * 0.5, cy = H * 0.5, s = Math.min(W, H) * 0.3;
+  o.fillStyle = "#BFD0E8";
+  o.fillRect(cx - s * 0.42, cy - s * 0.72, s * 0.84, s * 1.35);
+  o.fillStyle = "#132033";
+  const ww = s * 0.13, gap = s * 0.14;
+  for (let row = 0; row < 5; row++) {
+    for (let col = 0; col < 3; col++) {
+      o.fillRect(cx - gap + col * gap - ww / 2, cy - s * 0.53 + row * s * 0.23, ww, ww);
+    }
+  }
+  o.strokeStyle = "#F0C763";
+  o.lineWidth = s * 0.11;
+  o.lineCap = "round";
+  o.beginPath();
+  o.arc(cx + s * 0.2, cy + s * 0.02, s * 0.42, Math.PI * 1.05, Math.PI * 1.88);
+  o.stroke();
+  o.fillStyle = "#F0C763";
+  o.fillRect(cx - s * 0.38, cy + s * 0.05, s * 0.76, s * 0.46);
+}
+
+function gRwaTokenizedAsset(o: CanvasRenderingContext2D, W: number, H: number) {
+  // RWA/STO: real-estate block split into tokenized parcels.
+  const cx = W * 0.5, cy = H * 0.5, s = Math.min(W, H) * 0.32;
+  o.fillStyle = "#D6BB72";
+  o.beginPath();
+  o.moveTo(cx - s * 0.9, cy - s * 0.05);
+  o.lineTo(cx, cy - s * 0.72);
+  o.lineTo(cx + s * 0.9, cy - s * 0.05);
+  o.lineTo(cx + s * 0.62, cy - s * 0.05);
+  o.lineTo(cx + s * 0.62, cy + s * 0.72);
+  o.lineTo(cx - s * 0.62, cy + s * 0.72);
+  o.lineTo(cx - s * 0.62, cy - s * 0.05);
+  o.closePath();
+  o.fill();
+  o.fillStyle = "#231A0B";
+  const w = s * 0.26;
+  for (let row = 0; row < 2; row++) {
+    for (let col = 0; col < 3; col++) {
+      o.fillRect(cx - s * 0.43 + col * s * 0.31, cy + s * 0.1 + row * s * 0.27, w, w * 0.72);
+    }
+  }
+  o.strokeStyle = "#7EF2B8";
+  o.lineWidth = s * 0.08;
+  o.beginPath();
+  o.arc(cx + s * 0.72, cy + s * 0.58, s * 0.24, 0, 6.2832);
+  o.stroke();
+  o.fillStyle = "#7EF2B8";
+  o.beginPath();
+  o.arc(cx + s * 0.72, cy + s * 0.58, s * 0.08, 0, 6.2832);
+  o.fill();
+}
+
+function gExchangeOrderBook(o: CanvasRenderingContext2D, W: number, H: number, rand: () => number) {
+  // Exchange dominance: vertical order-book depth with a central execution line.
+  const m = W * 0.18, top = H * 0.3, row = H * 0.042, cx = W * 0.5;
+  for (let i = 0; i < 12; i++) {
+    const side = i < 6 ? -1 : 1;
+    const yy = top + i * row;
+    const len = W * (0.14 + rand() * 0.25 + Math.abs(i - 5.5) * 0.02);
+    o.fillStyle = i < 6 ? "#D84B4B" : "#28C977";
+    if (side < 0) o.fillRect(cx - len - W * 0.025, yy, len, row * 0.55);
+    else o.fillRect(cx + W * 0.025, yy, len, row * 0.55);
+  }
+  o.strokeStyle = "#E8EAED";
+  o.lineWidth = W * 0.012;
+  o.beginPath();
+  o.moveTo(cx, top - row * 0.4);
+  o.lineTo(cx, top + row * 11.8);
+  o.stroke();
+  o.fillStyle = "#E8EAED";
+  o.fillRect(m, top + row * 5.25, W - m * 2, row * 0.7);
+}
+
+function gMemeCoin(o: CanvasRenderingContext2D, W: number, H: number) {
+  // Meme liquidity: playful coin face plus an organic volume curve.
+  const cx = W * 0.48, cy = H * 0.48, r = Math.min(W, H) * 0.23;
+  o.fillStyle = "#F7D84B";
+  o.beginPath(); o.arc(cx, cy, r, 0, 6.2832); o.fill();
+  o.fillStyle = "#35220A";
+  o.beginPath(); o.arc(cx - r * 0.35, cy - r * 0.18, r * 0.12, 0, 6.2832); o.fill();
+  o.beginPath(); o.arc(cx + r * 0.35, cy - r * 0.18, r * 0.12, 0, 6.2832); o.fill();
+  o.strokeStyle = "#35220A";
+  o.lineWidth = r * 0.12;
+  o.lineCap = "round";
+  o.beginPath(); o.arc(cx, cy + r * 0.08, r * 0.5, 0.18, Math.PI - 0.18); o.stroke();
+  o.strokeStyle = "#33D18F";
+  o.lineWidth = r * 0.1;
+  o.beginPath();
+  o.moveTo(W * 0.18, H * 0.78);
+  o.quadraticCurveTo(W * 0.42, H * 0.88, W * 0.58, H * 0.68);
+  o.quadraticCurveTo(W * 0.72, H * 0.5, W * 0.86, H * 0.32);
+  o.stroke();
+}
+
+function gStablecoinBattle(o: CanvasRenderingContext2D, W: number, H: number) {
+  // USDT vs USDC: two dollar rails in opposition, not the KRW-stablecoin coin.
+  const cy = H * 0.5, r = Math.min(W, H) * 0.18;
+  const coin = (cx: number, color: string, label: string) => {
+    o.fillStyle = color;
+    o.beginPath(); o.arc(cx, cy, r, 0, 6.2832); o.fill();
+    o.fillStyle = "#06110D";
+    o.font = `bold ${r * 0.78}px Arial`;
+    o.textAlign = "center"; o.textBaseline = "middle";
+    o.fillText(label, cx, cy + r * 0.05);
+  };
+  coin(W * 0.34, "#26A17B", "₮");
+  coin(W * 0.66, "#2775CA", "$");
+  o.strokeStyle = "#F2F2F2";
+  o.lineWidth = r * 0.12;
+  o.beginPath();
+  o.moveTo(W * 0.47, H * 0.38); o.lineTo(W * 0.53, H * 0.62);
+  o.moveTo(W * 0.53, H * 0.38); o.lineTo(W * 0.47, H * 0.62);
+  o.stroke();
+}
+
+function gListingLadder(o: CanvasRenderingContext2D, W: number, H: number) {
+  const cx = W * 0.5, top = H * 0.25, bottom = H * 0.78, s = Math.min(W, H);
+  o.strokeStyle = "#4BA3FF";
+  o.lineWidth = s * 0.045;
+  o.lineCap = "round";
+  o.beginPath();
+  o.moveTo(cx - s * 0.2, bottom); o.lineTo(cx - s * 0.08, top);
+  o.moveTo(cx + s * 0.2, bottom); o.lineTo(cx + s * 0.08, top);
+  for (let i = 0; i < 6; i++) {
+    const y = top + (bottom - top) * (i / 5);
+    o.moveTo(cx - s * (0.08 + 0.12 * (i / 5)), y);
+    o.lineTo(cx + s * (0.08 + 0.12 * (i / 5)), y);
+  }
+  o.stroke();
+  o.fillStyle = "#F6C85F";
+  o.beginPath();
+  o.arc(cx, top - s * 0.04, s * 0.11, 0, 6.2832);
+  o.fill();
+}
+
+function gKimchiPremium(o: CanvasRenderingContext2D, W: number, H: number) {
+  const cx = W * 0.5, cy = H * 0.5, s = Math.min(W, H) * 0.34;
+  o.fillStyle = "#D93131";
+  const x = cx - s * 0.62, y = cy - s * 0.42, bw = s * 1.24, bh = s * 0.84, rr = s * 0.15;
+  o.beginPath();
+  o.moveTo(x + rr, y);
+  o.arcTo(x + bw, y, x + bw, y + bh, rr);
+  o.arcTo(x + bw, y + bh, x, y + bh, rr);
+  o.arcTo(x, y + bh, x, y, rr);
+  o.arcTo(x, y, x + bw, y, rr);
+  o.closePath();
+  o.fill();
+  o.fillStyle = "#F6EFE0";
+  o.beginPath(); o.arc(cx - s * 0.26, cy, s * 0.18, 0, 6.2832); o.fill();
+  o.beginPath(); o.arc(cx + s * 0.18, cy + s * 0.05, s * 0.14, 0, 6.2832); o.fill();
+  o.strokeStyle = "#35D17F";
+  o.lineWidth = s * 0.11;
+  o.lineCap = "round";
+  o.beginPath();
+  o.moveTo(cx - s * 0.72, cy + s * 0.7);
+  o.quadraticCurveTo(cx - s * 0.18, cy + s * 0.48, cx + s * 0.58, cy - s * 0.74);
+  o.stroke();
+}
+
 function gRocket(o: CanvasRenderingContext2D, W: number, H: number) {
   const cx = W * 0.5, cy = H * 0.48, s = Math.min(W, H) * 0.3;
   o.fillStyle = "#FF8A4C";
@@ -352,15 +513,23 @@ function gRisingSun(o: CanvasRenderingContext2D, W: number, H: number) {
 interface Topic { draw: Glyph; hue: number; }
 function route(k: string, category?: string): Topic | null {
   const has = (...ws: string[]) => ws.some((w) => k.includes(w));
+  if (has("cex-user-acquisition", "funnel", "acquisition")) return { draw: gFunnel, hue: 214 };
   if (has("kakao")) return { draw: gSpeechBubble, hue: 47 };
   if (has("telegram")) return { draw: gPaperPlane, hue: 200 };
   if (has("naver")) return { draw: gNaver, hue: 146 };
   if (has("gtm-stack")) return { draw: gTaegeuk, hue: 224 };
   if (has("vs-japan", "japan")) return { draw: gRisingSun, hue: 0 };
+  if (has("stablecoin-siege", "usdt-vs-usdc")) return { draw: gStablecoinBattle, hue: 188 };
+  if (has("won-stablecoin", "digital-asset-basic-act")) return { draw: gCoin, hue: 204 };
+  if (has("corporate-crypto-ban", "institutional-playbook")) return { draw: gInstitutionalUnlock, hue: 214 };
+  if (has("rwa-tokenized", "tokenized-assets", "sto-2026")) return { draw: gRwaTokenizedAsset, hue: 42 };
+  if (has("exchange-listing")) return { draw: gListingLadder, hue: 210 };
+  if (has("kimchi", "premium-decoded")) return { draw: gKimchiPremium, hue: 8 };
+  if (has("memecoin")) return { draw: gMemeCoin, hue: 142 };
+  if (has("upbit-dominance", "bithumb-upbit", "exchange-duopoly", "squeeze")) return { draw: gExchangeOrderBook, hue: 158 };
   if (has("defi")) return { draw: gChain, hue: 264 };
   if (has("ai-crypto", "depin")) return { draw: gChip, hue: 158 };
   if (has("kol", "influencer")) return { draw: gMegaphone, hue: 330 };
-  if (has("funnel", "acquisition")) return { draw: gFunnel, hue: 220 };
   if (has("token-launch")) return { draw: gRocket, hue: 24 };
   if (has("etf")) return { draw: gFundUp, hue: 168 };
   if (has("tax")) return { draw: gPercent, hue: 14 };
