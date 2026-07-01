@@ -1,9 +1,7 @@
-import stablecoinImg from "@/assets/blog/ecosystem-chart-institutional.jpg";
-import defiImg from "@/assets/blog/defai-ai-agents.jpg";
-import memecoinImg from "@/assets/blog/sui-chart-tvl-price.jpg";
+import defiParadoxCover from "@/assets/blog/korea-defi-paradox-cover.svg";
+import memecoinParadoxCover from "@/assets/blog/korea-memecoin-paradox-cover.svg";
 import exchangeImg from "@/assets/blog/ecosystem-chart-market-growth.jpg";
-import aiAgentsImg from "@/assets/blog/kaito-mindshare.jpg";
-import kolImg from "@/assets/blog/kol-marketing.jpg";
+import aiDepinCover from "@/assets/blog/korea-ai-depin-cover.svg";
 import listingImg from "@/assets/blog/korea-exchange-listing.jpg";
 import regulatoryImg from "@/assets/blog/ecosystem-chart-regulatory.jpg";
 import gtmStackCover from "@/assets/blog/korea-gtm-stack-cover.svg";
@@ -13,6 +11,12 @@ import spotEtfImg from "@/assets/blog/korea-spot-etf.jpg";
 import kolLandscapeImg from "@/assets/blog/korea-kol-landscape.jpg";
 import stablecoinSiegeImg from "@/assets/blog/stablecoin-siege-asia.jpg";
 import bithumbSqueezeImg from "@/assets/blog/bithumb-squeeze.jpg";
+import wonStablecoinCover from "@/assets/blog/korea-won-stablecoin-cover.svg";
+import corporateUnlockCover from "@/assets/blog/korea-corporate-unlock-cover.svg";
+import cexAcquisitionFunnelCover from "@/assets/blog/korea-cex-acquisition-funnel-cover.svg";
+import rwaTokenizedAssetsCover from "@/assets/blog/korea-rwa-tokenized-assets-cover.svg";
+import koreaVsJapanCover from "@/assets/blog/korea-vs-japan-cover.svg";
+import kimchiPremiumCover from "@/assets/blog/korea-kimchi-premium-cover.svg";
 
 import chartInstitutional from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import chartL2Adoption from "@/assets/blog/ecosystem-chart-l2-adoption.jpg";
@@ -88,7 +92,7 @@ export const staticResearchPosts = [
     id: "static-won-stablecoin-basic-act",
     slug: "korea-won-stablecoin-digital-asset-basic-act-2026",
     title: "Korea's Won-Stablecoin Endgame: What the Digital Asset Basic Act Changes",
-    image: regulatoryImg,
+    image: wonStablecoinCover,
     date: "June 16, 2026",
     readTime: "16 min read",
     category: "Regulation",
@@ -209,7 +213,7 @@ Our [go-to-market practice](/services/gtm) sequences the launch around the regul
     id: "static-corporate-crypto-2026",
     slug: "korea-corporate-crypto-ban-lifted-institutional-playbook-2026",
     title: "Korea Lifts Its 9-Year Corporate Crypto Ban: The 2026 Institutional Playbook",
-    image: chartInstitutional,
+    image: corporateUnlockCover,
     date: "June 14, 2026",
     readTime: "15 min read",
     category: "Market Research",
@@ -331,7 +335,7 @@ We treat Korea institutional entry as a regulatory sequencing problem first. We 
     id: "static-cex-ua-funnel",
     slug: "korea-cex-user-acquisition-funnel-kol-naver-paid-ads",
     title: "The CEX User-Acquisition Funnel in Korea: Install, Sign-up, First Deposit",
-    image: kolImg,
+    image: cexAcquisitionFunnelCover,
     date: "June 13, 2026",
     readTime: "14 min read",
     category: "GTM Strategy",
@@ -453,7 +457,7 @@ If you are bringing an exchange or trading product into Korea and need a funnel 
     id: "static-rwa-trust-gap",
     slug: "korea-rwa-tokenized-assets-trust-gap-sto-2026",
     title: "Korea's RWA Opening: Why Tokenized Assets Need a Trust-First GTM",
-    image: stablecoinImg,
+    image: rwaTokenizedAssetsCover,
     date: "June 12, 2026",
     readTime: "17 min read",
     category: "Market Research",
