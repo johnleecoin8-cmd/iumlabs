@@ -1,7 +1,9 @@
-import defiParadoxCover from "@/assets/blog/korea-defi-paradox-cover.svg";
-import memecoinParadoxCover from "@/assets/blog/korea-memecoin-paradox-cover.svg";
+import stablecoinImg from "@/assets/blog/ecosystem-chart-institutional.jpg";
+import defiImg from "@/assets/blog/defai-ai-agents.jpg";
+import memecoinImg from "@/assets/blog/sui-chart-tvl-price.jpg";
 import exchangeImg from "@/assets/blog/ecosystem-chart-market-growth.jpg";
-import aiDepinCover from "@/assets/blog/korea-ai-depin-cover.svg";
+import aiAgentsImg from "@/assets/blog/kaito-mindshare.jpg";
+import kolImg from "@/assets/blog/kol-marketing.jpg";
 import listingImg from "@/assets/blog/korea-exchange-listing.jpg";
 import regulatoryImg from "@/assets/blog/ecosystem-chart-regulatory.jpg";
 import gtmStackCover from "@/assets/blog/korea-gtm-stack-cover.svg";
@@ -11,12 +13,6 @@ import spotEtfImg from "@/assets/blog/korea-spot-etf.jpg";
 import kolLandscapeImg from "@/assets/blog/korea-kol-landscape.jpg";
 import stablecoinSiegeImg from "@/assets/blog/stablecoin-siege-asia.jpg";
 import bithumbSqueezeImg from "@/assets/blog/bithumb-squeeze.jpg";
-import wonStablecoinCover from "@/assets/blog/korea-won-stablecoin-cover.svg";
-import corporateUnlockCover from "@/assets/blog/korea-corporate-unlock-cover.svg";
-import cexAcquisitionFunnelCover from "@/assets/blog/korea-cex-acquisition-funnel-cover.svg";
-import rwaTokenizedAssetsCover from "@/assets/blog/korea-rwa-tokenized-assets-cover.svg";
-import koreaVsJapanCover from "@/assets/blog/korea-vs-japan-cover.svg";
-import kimchiPremiumCover from "@/assets/blog/korea-kimchi-premium-cover.svg";
 
 import chartInstitutional from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import chartL2Adoption from "@/assets/blog/ecosystem-chart-l2-adoption.jpg";
@@ -92,7 +88,7 @@ export const staticResearchPosts = [
     id: "static-won-stablecoin-basic-act",
     slug: "korea-won-stablecoin-digital-asset-basic-act-2026",
     title: "Korea's Won-Stablecoin Endgame: What the Digital Asset Basic Act Changes",
-    image: wonStablecoinCover,
+    image: regulatoryImg,
     date: "June 16, 2026",
     readTime: "16 min read",
     category: "Regulation",
@@ -213,7 +209,7 @@ Our [go-to-market practice](/services/gtm) sequences the launch around the regul
     id: "static-corporate-crypto-2026",
     slug: "korea-corporate-crypto-ban-lifted-institutional-playbook-2026",
     title: "Korea Lifts Its 9-Year Corporate Crypto Ban: The 2026 Institutional Playbook",
-    image: corporateUnlockCover,
+    image: chartInstitutional,
     date: "June 14, 2026",
     readTime: "15 min read",
     category: "Market Research",
@@ -335,7 +331,7 @@ We treat Korea institutional entry as a regulatory sequencing problem first. We 
     id: "static-cex-ua-funnel",
     slug: "korea-cex-user-acquisition-funnel-kol-naver-paid-ads",
     title: "The CEX User-Acquisition Funnel in Korea: Install, Sign-up, First Deposit",
-    image: cexAcquisitionFunnelCover,
+    image: kolImg,
     date: "June 13, 2026",
     readTime: "14 min read",
     category: "GTM Strategy",
@@ -457,7 +453,7 @@ If you are bringing an exchange or trading product into Korea and need a funnel 
     id: "static-rwa-trust-gap",
     slug: "korea-rwa-tokenized-assets-trust-gap-sto-2026",
     title: "Korea's RWA Opening: Why Tokenized Assets Need a Trust-First GTM",
-    image: rwaTokenizedAssetsCover,
+    image: stablecoinImg,
     date: "June 12, 2026",
     readTime: "17 min read",
     category: "Market Research",
@@ -943,7 +939,7 @@ Upbit and exchange share, volume, and user figures: Financial Supervisory Servic
     id: "static-memecoin-paradox",
     slug: "korea-memecoin-paradox-4-7b-volume-zero-organic-projects",
     title: "Korea's Memecoin Paradox: $4.7B Volume, Zero Organic Projects",
-    image: memecoinParadoxCover,
+    image: memecoinImg,
     date: "May 11, 2026",
     readTime: "16 min read",
     category: "Market Research",
@@ -1044,7 +1040,7 @@ XRP and altcoin dominance: [Cryptorank](https://cryptorank.io/news/feed/e2dfc-xr
     id: "static-ai-depin-korea",
     slug: "ai-crypto-korea-why-800m-depin-narrative-hasnt-landed",
     title: "AI × Crypto in Korea: Why the $800M DePIN Narrative Hasn't Landed",
-    image: aiDepinCover,
+    image: aiAgentsImg,
     date: "May 11, 2026",
     readTime: "15 min read",
     category: "Technology",
@@ -1290,7 +1286,7 @@ See how we structure market entry at [/services/gtm](/services/gtm), or talk to 
     id: "static-defi-paradox",
     slug: "korea-defi-paradox-why-active-traders-wont-touch-onchain",
     title: "Korea's DeFi Paradox: Why the World's Most Active Traders Won't Touch On-Chain",
-    image: defiParadoxCover,
+    image: defiImg,
     date: "May 11, 2026",
     readTime: "14 min read",
     category: "DeFi",
@@ -2206,7 +2202,7 @@ We start from the listing and the calendar, not from the creative. For each enga
     id: "static-korea-vs-japan",
     slug: "korea-vs-japan-crypto-market-structural-comparison-2026",
     title: "Korea vs Japan: A Structural Comparison of Asia's Two Regulated Crypto Markets",
-    image: koreaVsJapanCover,
+    image: koreaPalace,
     date: "May 19, 2026",
     readTime: "16 min read",
     category: "Market Research",
@@ -2331,7 +2327,7 @@ We build market-specific motions: a Korea-native [GTM](/services/gtm) sequenced 
     id: "static-kimchi-premium",
     slug: "korean-premium-decoded-kimchi-premium-mechanics-2026",
     title: "The Korean Premium Decoded: Kimchi Premium Mechanics in 2026",
-    image: kimchiPremiumCover,
+    image: nftEvolution,
     date: "May 19, 2026",
     readTime: "14 min read",
     category: "Market Research",

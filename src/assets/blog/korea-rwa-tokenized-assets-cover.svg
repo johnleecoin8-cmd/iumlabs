@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 768">
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d1609"/><stop offset=".5" stop-color="#08221e"/><stop offset="1" stop-color="#020807"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
-  <rect width="1280" height="768" fill="url(#bg)"/>
-  <g opacity=".18" fill="#d6ba69"><circle cx="145" cy="120" r="5"/><circle cx="235" cy="205" r="4"/><circle cx="1040" cy="165" r="5"/><circle cx="1130" cy="520" r="4"/><circle cx="985" cy="660" r="5"/></g>
-  <g transform="translate(310 250)" filter="url(#glow)"><path d="M0 118L205 0l205 118v250H0z" fill="#d9bb6f"/><path d="M58 152h294v216H58z" fill="#94723b"/><g fill="#15120b"><rect x="86" y="184" width="54" height="54"/><rect x="178" y="184" width="54" height="54"/><rect x="270" y="184" width="54" height="54"/><rect x="86" y="272" width="54" height="54"/><rect x="178" y="272" width="54" height="54"/><rect x="270" y="272" width="54" height="54"/></g></g>
-  <g stroke="#71f0bd" stroke-width="10" fill="none" stroke-linecap="round"><path d="M745 318l110-62 126 76v150l-126 75-126-75V362"/><path d="M855 256v150l126 76M855 406l-126 76"/></g>
-  <g fill="#71f0bd" filter="url(#glow)"><circle cx="855" cy="256" r="22"/><circle cx="981" cy="332" r="20"/><circle cx="981" cy="482" r="20"/><circle cx="855" cy="557" r="22"/><circle cx="729" cy="482" r="20"/><circle cx="729" cy="362" r="20"/></g>
-  <path d="M150 610h980" stroke="#d6ba69" stroke-width="8" stroke-linecap="round" opacity=".45"/>
-</svg>

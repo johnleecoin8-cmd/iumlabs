@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { drawCover, coverYear } from "@/lib/blogCover";
 
-type Post = { slug?: string; title?: string; category?: string | null; date?: string; image?: string };
+type Post = { slug?: string; title?: string; category?: string | null; date?: string };
 
 /**
  * Generative halftone cover for a blog post.
@@ -26,11 +26,10 @@ export default function BlogCover({
   const cv = useRef<HTMLCanvasElement>(null);
   const year = coverYear(post.date);
   const key = post.slug || post.title || "";
-  const image = post.image?.trim();
 
   useEffect(() => {
     const el = wrap.current, canvas = cv.current;
-    if (!el || !canvas || image) return;
+    if (!el || !canvas) return;
     const draw = () => {
       const w = el.clientWidth, h = el.clientHeight;
       if (!w || !h) return;
@@ -45,7 +44,7 @@ export default function BlogCover({
     const ro = new ResizeObserver(draw);
     ro.observe(el);
     return () => ro.disconnect();
-  }, [key, post.category, image]);
+  }, [key, post.category]);
 
   return (
     <div
@@ -53,17 +52,7 @@ export default function BlogCover({
       className={`relative overflow-hidden ${className}`}
       style={variant === "card" ? { containerType: "inline-size" } : undefined}
     >
-      {image ? (
-        <img
-          src={image}
-          alt={post.title || "Blog cover"}
-          loading="lazy"
-          decoding="async"
-          className="absolute inset-0 block h-full w-full object-cover"
-        />
-      ) : (
-        <canvas ref={cv} className="absolute inset-0 block h-full w-full" aria-hidden="true" />
-      )}
+      <canvas ref={cv} className="absolute inset-0 block h-full w-full" aria-hidden="true" />
       {variant === "card" && (
         <>
           <div
