@@ -227,9 +227,18 @@ const Navbar = () => {
       {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" aria-label="ium Labs HQ" className="flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:bg-black/80 hover:border-white/[0.14] transition-swift">
-            <img src={logoImage} alt="ium Labs" className="w-7 h-7 sm:w-9 sm:h-9 object-contain rounded-lg" />
-            <span className="text-xs sm:text-[15px] font-semibold text-white tracking-tight">ium Labs</span>
+          <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
+            <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(120px 40px at 20% 50%, rgba(52,211,153,0.18), transparent 70%)" }} />
+            <span aria-hidden className="pointer-events-none absolute -inset-px rounded-full" style={{ background: "linear-gradient(120deg, rgba(52,211,153,0.35), rgba(255,255,255,0.04) 40%, rgba(66,133,244,0.28))", WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
+            <img src={logoImage} alt="ium Labs" className="relative w-7 h-7 sm:w-9 sm:h-9 object-contain rounded-lg" />
+            <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight">ium Labs</span>
+            <span className="relative hidden sm:flex items-center gap-1.5 pl-2.5 ml-1 border-l border-white/[0.08]">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+              </span>
+              <span className="text-[10px] uppercase tracking-[0.18em] text-white/45 font-medium">Seoul</span>
+            </span>
           </Link>
 
           {/* Service Marquee - center (min-width to prevent crush on small screens) */}
