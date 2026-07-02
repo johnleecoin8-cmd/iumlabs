@@ -1,4 +1,5 @@
 import { categoryHslParts } from "@/lib/categoryTheme";
+import { COVER_ASSIGN, type CoverAssignment } from "@/lib/coverAssignments";
 
 // Photo pool for dithered-photograph covers (the reference technique:
 // a real photograph halftoned in a single hue). Iconic, no faces.
@@ -802,6 +803,7 @@ function renderPhotoHalftone(
   ctx: CanvasRenderingContext2D, W: number, H: number,
   img: HTMLImageElement, rand: () => number,
   hue: number, catSat: number, catLig: number,
+  fixed?: CoverAssignment,
 ) {
   const off = document.createElement("canvas"); off.width = W; off.height = H;
   const o = off.getContext("2d")!;
@@ -832,12 +834,13 @@ function renderPhotoHalftone(
   // ---- Variation axes (the combination space is what makes every cover
   // unique): screen ANGLE like a real print halftone, hex-offset rows,
   // dot shape, posterized tone, coarse-to-fine density. ----
-  const density = 34 + Math.floor(rand() * 42);           // 34-75 cols
-  const angle = (rand() - 0.5) * 0.62;                    // ±18deg screen angle
-  const hexOffset = rand() > 0.45;
+  const density = fixed ? fixed.density : 34 + Math.floor(rand() * 42);
+  const angle = fixed ? (fixed.angle * Math.PI) / 180 : (rand() - 0.5) * 0.62;
+  const hexOffset = fixed ? fixed.hex : rand() > 0.45;
   const shapeRoll = rand();
-  const shape = shapeRoll < 0.5 ? "circle" : shapeRoll < 0.7 ? "square" : shapeRoll < 0.85 ? "diamond" : "dash";
-  const posterLevels = rand() < 0.35 ? 3 + Math.floor(rand() * 2) : 0; // 0 = continuous
+  const shape = fixed ? fixed.shape
+    : shapeRoll < 0.5 ? "circle" : shapeRoll < 0.7 ? "square" : shapeRoll < 0.85 ? "diamond" : "dash";
+  const posterLevels = fixed ? fixed.poster : (rand() < 0.35 ? 3 + Math.floor(rand() * 2) : 0);
   const gamma = 0.75 + rand() * 0.4;
 
   ctx.fillStyle = "#050505";
@@ -894,17 +897,17 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
   // category hue. Falls back to the procedural scene while loading/on error.
   const cat0 = categoryHslParts(category);
   const hue0 = (category ? cat0.h : (topic ? topic.hue : 220)) + (rand() - 0.5) * 14;
-  const photoUrl = PHOTO_POOL[Math.floor(rand() * PHOTO_POOL.length)];
-  const cropRand = mulberry32(xmur3(k + "|crop")());
+  const slug = k.split("|")[0];
+  const assign = COVER_ASSIGN[slug];
+  const photoUrl = PHOTO_POOL[assign ? assign.photo % PHOTO_POOL.length : Math.floor(rand() * PHOTO_POOL.length)];
   const img = poolImage(photoUrl);
   const paintPhoto = () => {
     if (canvas.width !== W || canvas.height !== H) return; // stale after resize
     renderPhotoHalftone(ctx, W, H, img, mulberry32(xmur3(k + "|crop")()),
-      hue0, category ? cat0.s : 0.55, category ? cat0.l : 0.62);
+      hue0, category ? cat0.s : 0.55, category ? cat0.l : 0.62, assign);
   };
   if (img.complete && img.naturalWidth > 0) { paintPhoto(); return; }
   img.addEventListener("load", paintPhoto, { once: true });
-  void cropRand;
 
   // ---- Fallback: full-bleed GRAYSCALE SCENE offscreen ----
   // Book-cover halftone: a seeded landscape — sky gradient, one celestial
