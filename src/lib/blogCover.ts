@@ -13,10 +13,16 @@ import phMars from "@/assets/backgrounds/mars-surface.jpg";
 import phNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 import phEarth from "@/assets/backgrounds/earth-space.jpg";
 import phSun from "@/assets/backgrounds/sun-corona.jpg";
+import phHanok from "@/assets/campaigns/bnb-hanok-event.jpg";
+import phFisheye from "@/assets/campaigns/event-fisheye.jpg";
+import phBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
+import phMegaeth from "@/assets/campaigns/megaeth-launch.jpg";
+import phAptosEvent from "@/assets/campaigns/aptos-seoul-event.jpg";
 
 const PHOTO_POOL = [
   phSeoulGangnam, phSeoulDdp, phSeoulHanriver, phSeoulTech, phPalace,
   phMoon, phSaturn, phMars, phNebula, phEarth, phSun,
+  phHanok, phFisheye, phBillboard, phMegaeth, phAptosEvent,
 ];
 const IMG_CACHE: Record<string, HTMLImageElement> = {};
 function poolImage(url: string): HTMLImageElement {
@@ -806,7 +812,10 @@ function renderPhotoHalftone(
   const dw = iw * scale, dh = ih * scale;
   const dx = -(dw - W) * rand();
   const dy = -(dh - H) * rand();
-  o.drawImage(img, dx, dy, dw, dh);
+  const flip = rand() > 0.5;
+  if (flip) { o.save(); o.translate(W, 0); o.scale(-1, 1); }
+  o.drawImage(img, flip ? W - dx - dw : dx, dy, dw, dh);
+  if (flip) o.restore();
   const data = o.getImageData(0, 0, W, H).data;
 
   // luma histogram stretch (5th-95th percentile-ish via coarse sampling)
@@ -820,22 +829,55 @@ function renderPhotoHalftone(
   hi = samples[Math.floor(samples.length * 0.96)] ?? 1;
   const span = Math.max(0.12, hi - lo);
 
+  // ---- Variation axes (the combination space is what makes every cover
+  // unique): screen ANGLE like a real print halftone, hex-offset rows,
+  // dot shape, posterized tone, coarse-to-fine density. ----
+  const density = 34 + Math.floor(rand() * 42);           // 34-75 cols
+  const angle = (rand() - 0.5) * 0.62;                    // ±18deg screen angle
+  const hexOffset = rand() > 0.45;
+  const shapeRoll = rand();
+  const shape = shapeRoll < 0.5 ? "circle" : shapeRoll < 0.7 ? "square" : shapeRoll < 0.85 ? "diamond" : "dash";
+  const posterLevels = rand() < 0.35 ? 3 + Math.floor(rand() * 2) : 0; // 0 = continuous
+  const gamma = 0.75 + rand() * 0.4;
+
   ctx.fillStyle = "#050505";
   ctx.fillRect(0, 0, W, H);
-  const cols = 54 + Math.floor(rand() * 16);
-  const s2 = W / cols, rows = Math.ceil(H / s2) + 1, half = s2 / 2;
+  const s2 = W / density, half = s2 / 2;
   const satPct = Math.round(catSat * 100);
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const cx = (c + 0.5) * s2, cy = (r + 0.5) * s2;
-      const px = Math.min(W - 1, Math.round(cx)), py = Math.min(H - 1, Math.round(cy));
+  const cosA = Math.cos(angle), sinA = Math.sin(angle);
+  const diag = Math.ceil(Math.hypot(W, H) / s2) + 2;
+  const midX = W / 2, midY = H / 2;
+
+  for (let r = -diag; r < diag; r++) {
+    for (let c = -diag; c < diag; c++) {
+      const gx = (c + (hexOffset && (r & 1) ? 0.5 : 0)) * s2;
+      const gy = r * s2;
+      const cx = midX + gx * cosA - gy * sinA;
+      const cy = midY + gx * sinA + gy * cosA;
+      if (cx < -s2 || cx > W + s2 || cy < -s2 || cy > H + s2) continue;
+      const px = Math.min(W - 1, Math.max(0, Math.round(cx)));
+      const py = Math.min(H - 1, Math.max(0, Math.round(cy)));
       const idx = (py * W + px) * 4;
       const raw = (0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]) / 255;
-      const L = Math.min(1, Math.max(0, (raw - lo) / span));
-      const radius = half * (0.14 + 0.88 * Math.pow(L, 0.9));
+      let L = Math.min(1, Math.max(0, (raw - lo) / span));
+      if (posterLevels) L = Math.round(L * (posterLevels - 1)) / (posterLevels - 1);
+      const radius = half * (0.14 + 0.88 * Math.pow(L, gamma));
       const lig = 10 + Math.pow(L, 0.92) * (catLig * 100 + 30 - 10);
       ctx.fillStyle = `hsl(${hue}, ${satPct}%, ${Math.min(95, Math.round(lig))}%)`;
-      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.fill();
+      if (shape === "circle") {
+        ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.fill();
+      } else if (shape === "square") {
+        ctx.fillRect(cx - radius, cy - radius, radius * 2, radius * 2);
+      } else if (shape === "diamond") {
+        ctx.save(); ctx.translate(cx, cy); ctx.rotate(Math.PI / 4);
+        ctx.fillRect(-radius, -radius, radius * 2, radius * 2);
+        ctx.restore();
+      } else {
+        // dash: horizontal tick, scanline feel
+        ctx.beginPath();
+        ctx.roundRect(cx - radius * 1.3, cy - radius * 0.45, radius * 2.6, radius * 0.9, radius * 0.45);
+        ctx.fill();
+      }
     }
   }
 }
