@@ -111,6 +111,11 @@ This is the first entry in Korea Radar, a recurring series where we take the pro
 
 Robinhood announced the [public mainnet of Robinhood Chain](https://robinhood.com/us/en/newsroom/robinhood-accelerates-global-expansion-robinhood-chain-mainnet-stock-tokens-agentic-trading/) on July 1 at its London keynote, [Robinhood Presents: The World is Flat](https://robinhood.com/us/en/newsroom/robinhood-presents-the-world-is-flat/), an Arbitrum-based Layer 2 purpose-built for tokenized stocks and DeFi; [Arbitrum's own announcement](https://blog.arbitrum.io/robinhood-chain-mainnet/) confirms the chain is built on the Arbitrum Platform. Launch partners are not testnet names: Uniswap for trading, Chainlink for oracles, Alchemy and BitGo for infrastructure and custody, and [1inch integrating swaps and tokenized-RWA liquidity](https://1inch.com/blog/post/1inch-lands-on-robinhood-chain) from day one. The bigger signal came alongside: dYdX Labs is launching [Arcus](https://arcus.xyz/blog/arcus-x-robinhood-trade-stocks-perpetuals-24-7), a new stocks-and-perpetuals DEX built with Robinhood on Robinhood Chain, while the [community-owned dYdX Chain continues unchanged](https://www.dydx.foundation/blog/dydx-chain-community-owned-unchanged). HOOD stock rallied on the announcement.
 
+{{source:/images/blog/primary-robinhood-newsroom.png::Source: Robinhood Newsroom, July 1, 2026, "Robinhood Accelerates Global Expansion with Robinhood Chain Mainnet"}}
+
+> **"In 2013, Robinhood removed the fees. In 2026, Arcus removes the limits."**
+>, Arcus launch announcement, July 2026
+
 %%July 1::Robinhood Chain public mainnet announcement at the London "The World is Flat" keynote, with Uniswap, Chainlink, Alchemy, BitGo, and 1inch at launch (Source: Robinhood Newsroom)%%
 
 ## 2. Why This Launch Is Different
@@ -1767,6 +1772,10 @@ Here is the part most foreign teams invert. They treat the listing as the start 
 
 %%96%::Combined share of Korean trading volume held by Upbit and Bithumb, the two books worth engineering liquidity into (Source: Kaiko)%%
 
+{{source:/images/blog/primary-fsc-vasp-survey-h2-2024.png::Source: FSC/KoFIU, H2 2024 Virtual Asset Service Provider survey, press release of May 20, 2025}}
+
+{{source:/images/blog/primary-upbit-notices.png::Source: Upbit official notice board, July 2026. Listing and suspension notices land here first, which is why monitoring it beats reading recaps.}}
+
 The mechanism behind durable liquidity is concrete. Korean retail is famously exchange-resident, most users never move assets to self-custody, which means the depth you build on Upbit and Bithumb is the depth that exists. Coin Bureau's research walks through why Korean demand funnels into these venues and stays there. Because that demand never leaves the exchange, the awareness work done before the print is not marketing spend that evaporates, it converts directly into resting bids on a book that does not bleed out to self-custody.
 
 ## 5. What This Means for Operators
@@ -2733,6 +2742,9 @@ Then came the reset. In March 2026 the Financial Intelligence Unit fined Bithumb
 
 %%36.8B won::Fine (~$24.5M) plus a six-month partial business suspension (Mar 27-Sep 26, 2026) the FIU handed Bithumb over roughly 6.65 million Specific Financial Information Act violations, the event that reversed its momentum (Source: [FSC sanction notice](https://www.fsc.go.kr/no010101/86467))%%
 
+> **"Suspension of business days for 6 months, and a total fine of 36.8 billion won."**
+>, FSC/KoFIU sanction notice on Bithumb, March 17, 2026 (translated from the Korean original)
+
 ## 3. How the Two Venues Differ
 
 | Dimension | Upbit | Bithumb |
@@ -2753,6 +2765,8 @@ The "where to list" question now has structure. Upbit is the deeper pool and the
 ## 5. What Breaks It
 
 Three things undercut the "Bithumb is catching up" narrative. First, the surge was bought: zero-fee campaigns and listing aggression lift share while they run and fade when they stop, and the AML suspension stopped the engine. Second, the share numbers are measurement artifacts as much as facts, since a 45.6% day on Mobile Index sits next to a 31% quarter on CoinGecko, so anyone quoting one number is choosing a window. Third, the structural constraints bind both venues equally: a single-bank rule, a new 20% ownership cap with a three-year clock, and banking partners that can shorten or pull real-name account contracts. Bithumb's IPO, once slated for 2025, has slipped to after 2028, which tells you how much of the comeback story is still aspiration.
+
+{{source:/images/blog/primary-dart-dunamu-q1-2026.png::Source: FSS DART, Dunamu Q1 2026 quarterly report (filed May 15, 2026). We read the filings so you don't have to.}}
 
 ## 6. How We Run It
 
