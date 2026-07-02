@@ -47,10 +47,13 @@ Other verified curves: stripe cubic-bezier(.25,1,.5,1) .3s (23x) · raycast cubi
 - .btn-glass — raycast glass button (nav pills)
 - .bg-dots — vercel dot grid (coverage section)
 - fading scrollbar — activetheory --baropacity (App.tsx scroll listener)
-- .cb-cursor — cuberto cursor system (CustomCursor.tsx, data-cursor-text)
 - lusion menu double-text roll (Navbar desktop menu links)
 - exoape staggered grid (ProjectCardsSection even-column offset)
 - Work-row accent fill — zajno: row hover floods brand color, text flips dark, .2s
+
+## Removed by John (do NOT re-add)
+- cuberto cursor system (2026-07-02 removed same day: John's call, native cursor stays)
+- homepage team section (team lives on the GTM page only)
 
 ## Not yet ported (next candidates)
 - Lusion preloader odometer percent digits clamp(7em,8vw,20em)
