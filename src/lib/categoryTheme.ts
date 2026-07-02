@@ -20,6 +20,7 @@ const CATEGORY_HEX: Record<string, string> = {
   "Stablecoins": "#06D6A0",
   "DeFi": "#B882ED",
   "Community": "#FF9DD7",
+  "Projects": "#D6F31F",
 };
 
 const DEFAULT_HSL = "158 64% 52%"; // site emerald (--brand)
