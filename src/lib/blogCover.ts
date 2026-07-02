@@ -1,3 +1,5 @@
+import { categoryHslParts } from "@/lib/categoryTheme";
+
 /**
  * Generative halftone cover engine for the blog.
  *
@@ -735,6 +737,31 @@ function drawArchetypeTexture(ctx: CanvasRenderingContext2D, W: number, H: numbe
 }
 
 /** Render a topic-derived halftone cover onto a canvas (uses backing-store size). */
+/** Premium duotone backdrop: near-black field, one faint category-tinted
+ * radial glow (raycast.com card-glow language) and a whisper dot grid
+ * (vercel.com). Replaces the old multi-hue gradient + confetti marks. */
+function fillPremiumBackdrop(ctx: CanvasRenderingContext2D, W: number, H: number, h: number, sat: number, rand: () => number) {
+  const g = ctx.createLinearGradient(0, 0, 0, H);
+  g.addColorStop(0, `hsl(${h}, ${Math.round(sat * 28)}%, 4.5%)`);
+  g.addColorStop(1, `hsl(${h}, ${Math.round(sat * 22)}%, 3%)`);
+  ctx.fillStyle = g;
+  ctx.fillRect(0, 0, W, H);
+  const gx = W * (0.3 + rand() * 0.4), gy = H * (0.3 + rand() * 0.35);
+  const glow = ctx.createRadialGradient(gx, gy, 0, gx, gy, Math.max(W, H) * 0.75);
+  glow.addColorStop(0, `hsla(${h}, ${Math.round(sat * 100)}%, 60%, 0.10)`);
+  glow.addColorStop(1, "hsla(0, 0%, 0%, 0)");
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+  // whisper dot grid
+  const step = Math.max(14, W / 40);
+  ctx.fillStyle = `hsla(${h}, ${Math.round(sat * 60)}%, 70%, 0.05)`;
+  for (let y = step / 2; y < H; y += step) {
+    for (let x = step / 2; x < W; x += step) {
+      ctx.beginPath(); ctx.arc(x, y, 0.7, 0, TAU); ctx.fill();
+    }
+  }
+}
+
 export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string) {
   const W = canvas.width, H = canvas.height;
   const ctx = canvas.getContext("2d");
@@ -750,10 +777,9 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
     o.lineCap = "round"; o.lineJoin = "round";
     const archetypeRand = mulberry32(xmur3(`${k}|${topic.label}|${topic.archetype}`)());
-    const hueRot = Math.floor((archetypeRand() - 0.5) * 300 + (topic.archetype - 50) * 1.5);
-    const sat = 0.8 + archetypeRand() * 1.1;
+    archetypeRand(); archetypeRand(); // keep seed cadence stable for layout draws below
     const mirror = archetypeRand() > 0.5 ? -1 : 1;
-    o.filter = `blur(${Math.max(1, W * 0.003)}px) hue-rotate(${hueRot}deg) saturate(${sat})`;
+    o.filter = `blur(${Math.max(1, W * 0.003)}px)`;
     o.save();
     const orbit = (topic.archetype % 12) / 12 * TAU;
     o.translate(W * (0.5 + Math.cos(orbit) * (0.04 + archetypeRand() * 0.13)), H * (0.5 + Math.sin(orbit) * (0.035 + archetypeRand() * 0.11)));
@@ -766,12 +792,16 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
     o.filter = "none";
     const data = o.getImageData(0, 0, W, H).data;
 
-    const hue = topic.hue + hueRot + (topic.archetype % 17) * 5.5 + (rand() - 0.5) * 80;
-    fillSeededBackdrop(ctx, W, H, hue, rand);
-    drawArchetypeTexture(ctx, W, H, hue, topic.archetype, archetypeRand);
-    drawFingerprintMarks(ctx, W, H, hue, rand);
-    const ambient = hsl(hue + (rand() - 0.5) * 90, 0.5 + rand() * 0.2, 0.2 + rand() * 0.08);
-    const accent = hsl(hue + 120 + rand() * 110, 0.55 + rand() * 0.18, 0.38 + rand() * 0.16);
+    // Single-hue duotone: the category accent is the ONLY color on the
+    // cover (a16z one-brand-color rule; ninjapromo single-gradient system).
+    // Per-post ±8 deg jitter keeps siblings from being identical.
+    const cat = categoryHslParts(category);
+    const hue = (category ? cat.h : topic.hue) + (rand() - 0.5) * 16;
+    const catSat = category ? cat.s : 0.6;
+    const catLig = category ? cat.l : 0.6;
+    fillPremiumBackdrop(ctx, W, H, hue, catSat, rand);
+    const ambient = hsl(hue, catSat * 0.4, 0.17);
+    const accent = hsl(hue, catSat, catLig);
     const micro = makeMicroParams(archetypeRand);
 
     const cols = 32 + (topic.archetype % 7) * 3 + Math.floor(rand() * 10);
@@ -791,12 +821,11 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
           ctx.fillStyle = rgbaStr(pulse ? accent : ambient, 0.08 + microV * 0.34 + (pulse ? 0.16 : 0));
           ctx.beginPath(); ctx.arc(cx, cy, half * (0.09 + microV * 0.22 + (pulse ? 0.1 : 0)), 0, TAU); ctx.fill();
         } else {
-          const mix = microV * 0.18;
-          const rr = Math.round(lerp(pr, accent[0], mix));
-          const gg = Math.round(lerp(pg, accent[1], mix));
-          const bb = Math.round(lerp(pb, accent[2], mix));
-          ctx.fillStyle = `rgb(${rr},${gg},${bb})`;
-          ctx.beginPath(); ctx.arc(cx, cy, half * (0.28 + 0.6 * L + microV * 0.12), 0, TAU); ctx.fill();
+          // True halftone: dot size carries the luma; color stays on the
+          // category ramp (shadow -> accent -> highlight), never confetti.
+          const lig = lerp(0.30, Math.min(0.92, catLig + 0.24), L) + microV * 0.05;
+          ctx.fillStyle = `hsl(${hue}, ${Math.round(catSat * 100)}%, ${Math.round(lig * 100)}%)`;
+          ctx.beginPath(); ctx.arc(cx, cy, half * (0.24 + 0.62 * L + microV * 0.1), 0, TAU); ctx.fill();
         }
       }
     }

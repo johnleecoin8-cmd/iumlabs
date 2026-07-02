@@ -59,3 +59,9 @@ export function categoryAccentStyle(category?: string | null): Record<string, st
 export function categoryHex(category?: string | null): string {
   return (category && CATEGORY_HEX[category]) || "#36d399";
 }
+
+/** Raw HSL parts of a category accent (for canvas rendering). */
+export function categoryHslParts(category?: string | null): { h: number; s: number; l: number } {
+  const [h, s, l] = categoryHsl(category).split(" ");
+  return { h: parseFloat(h), s: parseFloat(s) / 100, l: parseFloat(l) / 100 };
+}
