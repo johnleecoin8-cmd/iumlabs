@@ -126,7 +126,9 @@ export const appendVersion = (url: string): string => {
 // Desktop high-quality (720p) variant: /videos/x.mp4 -> /videos/x-hd.mp4
 // (inserts -hd before the extension, preserving any ?query or #hash).
 export const hdVariant = (url: string): string =>
-  url.replace(/\.(mp4|webm)(?=$|[?#])/i, '-hd.$1');
+  url.includes('/__l5e/assets-v1/')
+    ? url
+    : url.replace(/\.(mp4|webm)(?=$|[?#])/i, '-hd.$1');
 
 // Returns the HD variant on desktop and the original (lighter, mobile) source
 // on mobile. Use in components that render a raw <source> instead of the hook's
@@ -179,6 +181,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [retryCount, setRetryCount] = useState(0);
   const [shouldLoad, setShouldLoad] = useState(!lazyLoad);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const retryTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const readyRef = useRef(false);
   const loadStartRef = useRef<number | null>(null);
   const firstByteLoggedRef = useRef(false);
@@ -303,10 +306,16 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   }, [src, quality, qualityVariants, forceFirstFrame, isMobile])();
 
   const markVideoReady = useCallback(() => {
+    if (retryTimerRef.current) {
+      clearTimeout(retryTimerRef.current);
+      retryTimerRef.current = null;
+    }
     if (readyRef.current) return; // single, irreversible poster→video transition
     readyRef.current = true;
     frameReadyRef.current = true;
     setIsVideoReady(true);
+    setHasVideoError(false);
+    setRetryCount(0);
     setDebugTick((t) => t + 1);
   }, []);
 
@@ -422,11 +431,25 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   // Handle network error with retry
   const handleError = useCallback(() => {
+    const video = videoRef.current;
+
+    if (readyRef.current || (video && !video.paused && video.currentTime > 0)) {
+      if (retryTimerRef.current) {
+        clearTimeout(retryTimerRef.current);
+        retryTimerRef.current = null;
+      }
+      return;
+    }
+
+    if (retryTimerRef.current) return;
+
     if (retryCount < maxRetries) {
       const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff: 1s, 2s, 4s
       console.log(`Video load failed, retrying in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
       
-      setTimeout(() => {
+      retryTimerRef.current = setTimeout(() => {
+        retryTimerRef.current = null;
+        if (readyRef.current || (videoRef.current && !videoRef.current.paused && videoRef.current.currentTime > 0)) return;
         setRetryCount(prev => prev + 1);
         setHasVideoError(false);
         
@@ -474,6 +497,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return () => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
+      }
+      if (retryTimerRef.current) {
+        clearTimeout(retryTimerRef.current);
+        retryTimerRef.current = null;
       }
     };
   }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout, tryPlay]);
@@ -647,6 +674,10 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
   // Reset state when source changes
   useEffect(() => {
+    if (retryTimerRef.current) {
+      clearTimeout(retryTimerRef.current);
+      retryTimerRef.current = null;
+    }
     readyRef.current = false;
     frameReadyRef.current = false;
     frameCallbackIdRef.current = null;
