@@ -84,7 +84,7 @@ const BlogGridSection = () => {
               <BlogCover
                 post={post}
                 variant="card"
-                className="aspect-[3/4] rounded-2xl transition-transform duration-500 group-hover:scale-[1.02]"
+                className="aspect-[3/4] rounded-2xl surface-edge transition-transform duration-[220ms] ease-[cubic-bezier(0.19,1,0.22,1)] group-hover:scale-[1.02] group-active:scale-100"
               />
               <div className="flex items-center justify-between pt-3.5">
                 <span className="text-white/50 text-[10px] sm:text-xs uppercase tracking-[0.18em]">

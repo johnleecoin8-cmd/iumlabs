@@ -1366,3 +1366,99 @@ body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
   .reveal-line > span { transform: none; transition: none; }
   .reveal-fade { opacity: 1; transform: none; transition: none; }
 }
+
+/* ============================================
+   Reference batch 2 (2026-07-02) — 17-site parallel extraction.
+   Every value below is verbatim from a live reference stylesheet.
+   ============================================ */
+
+/* raycast.com — the dark-card top edge light (their most repeated shadow) */
+.surface-edge {
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+/* vercel.com — dark hero gradient text (their exact stops) */
+.text-gradient-hero {
+  background: linear-gradient(#fff 0%, #adadad 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* buzzworthystudio.com — directional underline: in from left, out to right,
+   0.5s cubic-bezier(0.19,1,0.22,1). Their exact keyframes. */
+@keyframes sweep-in {
+  0% { transform-origin: 0 0; transform: scaleX(0); }
+  1% { transform: scaleX(0); }
+  100% { transform-origin: 0 0; transform: scaleX(1); }
+}
+@keyframes sweep-out {
+  0% { transform-origin: 100% 0; transform: scaleX(1); }
+  1% { transform: scaleX(1); }
+  100% { transform-origin: 100% 0; transform: scaleX(0); }
+}
+.link-sweep {
+  position: relative;
+}
+.link-sweep::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  animation: sweep-out 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+.link-sweep:hover::before,
+.group:hover .link-sweep::before {
+  animation: sweep-in 0.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* cuberto.com — CTA label roll: duplicate text via attr(data-text) sits at
+   110% below, both roll up on group hover, 0.8s their reveal curve */
+.text-roll {
+  display: block;
+  overflow: hidden;
+}
+.text-roll > span {
+  display: block;
+  position: relative;
+  transition: transform 0.8s var(--ease-reveal);
+}
+.text-roll > span::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+}
+.group:hover .text-roll > span {
+  transform: translateY(-110%);
+}
+
+/* zajno.com — hover meta cascade: children rise from 150% with 70ms
+   stagger, 1000ms their --o6 (cubic-bezier(.19,1,.22,1)) */
+.stagger-rise > * {
+  opacity: 0;
+  transform: translate3d(0, 150%, 0);
+  transition-property: opacity, transform;
+  transition-duration: 350ms;
+  transition-timing-function: var(--ease-expo);
+}
+.group:hover .stagger-rise > * {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-duration: 1000ms;
+}
+.group:hover .stagger-rise > *:nth-child(1) { transition-delay: 0ms; }
+.group:hover .stagger-rise > *:nth-child(2) { transition-delay: 70ms; }
+.group:hover .stagger-rise > *:nth-child(3) { transition-delay: 140ms; }
+.group:hover .stagger-rise > *:nth-child(4) { transition-delay: 210ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-rise > * { opacity: 1; transform: none; transition: none; }
+  .text-roll > span { transition: none; }
+  .link-sweep::before { animation: none; }
+}

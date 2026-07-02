@@ -84,7 +84,7 @@ const SectionHeader = ({
           to={action.href}
           className="group inline-flex shrink-0 items-center gap-1.5 text-xs text-white/40 hover:text-white transition-colors"
         >
-          {action.label}
+          <span className="link-sweep">{action.label}</span>
           <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
         </Link>
       )}

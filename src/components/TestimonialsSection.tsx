@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const Card = ({ t }: { t: Testimonial }) => (
-  <figure className="relative mr-8 w-[300px] shrink-0 rounded-[20px] border border-white/[0.06] bg-[#121214] p-5 pb-6 transition-colors duration-300 hover:bg-[#161618] sm:w-[330px]">
+  <figure className="relative mr-8 w-[300px] shrink-0 rounded-[20px] border border-white/[0.06] bg-[#121214] surface-edge p-5 pb-6 transition-colors duration-300 hover:bg-[#161618] sm:w-[330px]">
     <p className="text-[15px] font-semibold leading-tight" style={{ color: t.color }}>
       {t.name}
     </p>

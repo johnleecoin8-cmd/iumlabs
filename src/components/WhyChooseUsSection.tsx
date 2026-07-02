@@ -127,7 +127,8 @@ const WhyChooseUsSection = () => {
               { value: STATS.eventsHosted.display, label: STATS.eventsHosted.label },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-[-0.035em] leading-none mb-2 sm:mb-3">
+                {/* vercel.com dark-hero gradient text, applied to stat numbers */}
+                <div className="text-gradient-hero text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.035em] leading-none mb-2 sm:mb-3">
                   {stat.value}
                 </div>
                 <div className="text-[10px] sm:text-xs md:text-sm text-white/40 font-medium uppercase tracking-[0.2em]">

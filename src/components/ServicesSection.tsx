@@ -211,7 +211,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden hover:-translate-y-1 transition-all duration-500"
+        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500"
         style={{ minHeight: 'clamp(320px, 60vh, 520px)' }}
       >
         {/* Full bleed background image */}

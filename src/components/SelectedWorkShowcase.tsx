@@ -425,21 +425,23 @@ const DesktopShowcase = () => {
               >
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="group block py-3 sm:py-4 border-b border-white/10 hover:border-white/20 transition-colors"
+                  className="group block py-3 sm:py-4 px-2 -mx-2 border-b border-white/10 hover:border-transparent hover:bg-primary transition-[background-color,border-color] duration-200"
                   onMouseEnter={() => setActiveIndex(i)}
                   onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
                 >
+                  {/* zajno.com work-row accent-fill hover: row floods with the
+                      brand color, all inner text flips dark (their .2s ease) */}
                   <div className="flex items-center gap-3 sm:gap-4">
-                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-300 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
+                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-200 group-hover:text-black/60 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] leading-[1.05] transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/60 group-hover:text-white/85'}`}>
+                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] leading-[1.05] transition-colors duration-200 group-hover:text-black ${activeIndex === i ? 'text-white' : 'text-white/60'}`}>
                       {project.name}
                     </span>
-                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-300 text-left ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>
+                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-200 text-left group-hover:text-black/60 ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>
                       {project.category}
                     </span>
-                    <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
+                    <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-200 group-hover:text-black group-hover:opacity-100 group-hover:translate-x-0 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
                   </div>
                 </Link>
               </motion.div>

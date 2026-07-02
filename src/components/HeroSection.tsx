@@ -153,8 +153,8 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <p className="font-display text-[clamp(2.5rem,8.2vw,7.25rem)] font-extrabold leading-[0.94] sm:leading-[0.9] tracking-[-0.035em] sm:tracking-[-0.04em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
-            <span className="reveal-line"><span>Your Crypto Ecosystem</span></span>
-            <span className="reveal-line"><span>Growth Partner</span></span>
+            <span className="reveal-line"><span className="text-gradient-hero">Your Crypto Ecosystem</span></span>
+            <span className="reveal-line"><span className="text-gradient-hero">Growth Partner</span></span>
           </p>
 
           {/* Subtext */}
@@ -169,7 +169,7 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
               className="group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full [box-shadow:var(--shadow-linear)] hover:bg-white/90 transition-swift hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
             >
               <Send className="w-4 h-4 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300" />
-              <span>Get Your Free Proposal</span>
+              <span className="text-roll"><span data-text="Get Your Free Proposal">Get Your Free Proposal</span></span>
             </a>
             <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs text-white/30">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400/80 animate-pulse" />
