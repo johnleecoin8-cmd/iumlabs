@@ -66,3 +66,7 @@ Other verified curves: stripe cubic-bezier(.25,1,.5,1) .3s (23x) · raycast cubi
 
 ## Font substitution map (all reference faces are commercial)
 Suisse Intl/Aeonik/TT Lakes/NB -> Inter (current) is fine; serif contrast option: Playfair (already loaded) ~ Saol/Clarendon role.
+
+## Blog editorial system (2026-07-02, batch 6)
+Mechanism: a16zcrypto per-category whole-surface accent swap (their html.color-theme-* / --brand-color) implemented as scoped --primary/--brand override (src/lib/categoryTheme.ts). Devices: a16z heading highlighter (.hl-swap, brand box + dark text) on article H2 + TOC active + card-title hover fills; theverge inset-shadow link underline with half-em highlighter hover (.link-editorial); paradigm numbered sections (mono index before H2, hand-numbered prefixes stripped) + tabular-nums mono metadata; theverge top-story featured hero on /blog; every.to solid-accent progress bar. Category hex map: MarketResearch #7A8CFF / Strategy·GTM #FFD166 / Regulation #F46565 / Marketing #D6ABF7 / Technology #62D6D6 / Stablecoins #06D6A0 / DeFi #B882ED / Community #FF9DD7.
+Extraction reports: theverge tokens are obfuscated vanilla-extract (accent #5200FF light / #3CFFD0 dark, kicker mono 11px ls1.1px); every.to Signifier serif 20px/150% + #C0F0FB accent; a16z ABC Favorit + Utopia clamp scale + dotted-rule grid; paradigm serif/semimono split + sidenotes + 4%-dim hover.

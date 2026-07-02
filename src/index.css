@@ -1565,3 +1565,40 @@ h1, h2, h3,
 .footer-cta-type {
   font-family: 'Clash Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
 }
+
+/* ============================================
+   Blog editorial system (2026-07-02) — a16zcrypto + theverge +
+   paradigm.xyz extraction. Category accent arrives via a scoped
+   --primary/--brand override (see src/lib/categoryTheme.ts).
+   ============================================ */
+
+/* a16zcrypto.com heading highlighter: brand-color box with dark text
+   (their H1/H2 signature: span.bg-[var(--brand-color)].text-neutral-5) */
+.hl-swap {
+  display: inline;
+  background: hsl(var(--primary));
+  color: #0a0a0a;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.06em 0.28em;
+}
+
+/* theverge.com article link: 1px inset-shadow underline; on hover a
+   half-em accent highlighter rises from the baseline (their exact
+   box-shadow: inset 0 -0.5em 0 0 <accent> device). */
+.link-editorial {
+  color: #fff;
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 0 hsl(var(--primary) / 0.6);
+  transition: box-shadow 0.15s ease, color 0.15s ease;
+}
+.link-editorial:hover {
+  color: #0a0a0a;
+  box-shadow: inset 0 -1.5em 0 0 hsl(var(--primary));
+}
+
+/* a16z TOC active item: solid accent fill, same highlighter language */
+.toc-active-fill {
+  background: hsl(var(--primary));
+  color: #0a0a0a !important;
+}

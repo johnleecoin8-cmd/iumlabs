@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
+import { categoryAccentStyle } from '@/lib/categoryTheme';
 import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, ArrowUpRight, TrendingUp, X } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -240,17 +241,59 @@ const Research = () => {
               <p className="text-sm text-white/40">Try a different search or category.</p>
             </div>
           ) : (
+            <>
+            {(() => {
+              const showFeature = !searchQuery && !selectedTag && selectedCategory === "All" && currentPage === 1 && currentPosts.length > 0;
+              const feature = showFeature ? currentPosts[0] : null;
+              const gridPosts = showFeature ? currentPosts.slice(1) : currentPosts;
+              return (
+                <>
+            {feature && (
+              /* Featured story — theverge.com top-story emphasis + a16z
+                 highlighter title hover; accent scoped per category */
+              <Link
+                to={`/blog/${feature.slug}`}
+                style={categoryAccentStyle(feature.category) as React.CSSProperties}
+                className="group mb-12 sm:mb-16 grid gap-6 lg:grid-cols-2 lg:gap-12 items-center rounded-3xl border border-white/[0.07] surface-edge bg-white/[0.02] p-5 sm:p-8 hover:border-white/[0.14] transition-colors duration-200"
+              >
+                <div className="order-2 lg:order-1 min-w-0">
+                  <span className="inline-block px-2 py-0.5 rounded-[4px] bg-primary text-black font-mono text-[10px] uppercase tracking-[0.14em]">
+                    Latest · {feature.category}
+                  </span>
+                  <h3 className="mt-4 font-display text-2xl sm:text-4xl lg:text-[2.75rem] font-medium leading-[1.05] tracking-[-0.02em] text-white">
+                    <span className="[box-decoration-break:clone] group-hover:bg-primary group-hover:text-black transition-colors duration-150 px-1 -mx-1">
+                      {feature.title}
+                    </span>
+                  </h3>
+                  {feature.excerpt && (
+                    <p className="mt-4 text-sm sm:text-base text-white/50 leading-relaxed line-clamp-3 max-w-xl">
+                      {feature.excerpt}
+                    </p>
+                  )}
+                  <div className="mt-5 flex items-center gap-2 font-mono text-[11px] text-white/40 [font-feature-settings:'lnum','tnum']">
+                    <span>{feature.date}</span>
+                    <span className="text-white/20">·</span>
+                    <span>{feature.readTime}</span>
+                  </div>
+                </div>
+                <div className="order-1 lg:order-2 relative overflow-hidden rounded-2xl border border-white/[0.06]">
+                  <BlogCover post={feature} variant="art" className="aspect-[16/10] transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+                </div>
+              </Link>
+            )}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 sm:gap-x-6 gap-y-8 sm:gap-y-10">
-              {currentPosts.map(post => (
-                <Link key={post.id} to={`/blog/${post.slug}`} className="group flex flex-col">
+              {gridPosts.map(post => (
+                <Link key={post.id} to={`/blog/${post.slug}`} style={categoryAccentStyle(post.category) as React.CSSProperties} className="group flex flex-col">
                   <div className="relative overflow-hidden rounded-2xl border border-white/[0.06]">
                     <BlogCover post={post} variant="art" className="aspect-[10/11] transition-transform duration-700 ease-out group-hover:scale-[1.04]" />
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-black/45 backdrop-blur-sm text-white/85 text-[10px] uppercase tracking-[0.16em] font-medium">
+                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary text-black font-mono text-[10px] uppercase tracking-[0.14em] font-medium">
                       {post.category}
                     </span>
                   </div>
-                  <h3 className="mt-4 text-base sm:text-[17px] font-medium text-white leading-snug tracking-tight line-clamp-2 group-hover:text-primary transition-colors duration-300">
-                    {post.title}
+                  <h3 className="mt-4 text-base sm:text-[17px] font-medium text-white leading-snug tracking-tight line-clamp-2">
+                    <span className="[box-decoration-break:clone] group-hover:bg-primary group-hover:text-black transition-colors duration-150 px-0.5 -mx-0.5">
+                      {post.title}
+                    </span>
                   </h3>
                   {post.excerpt && (
                     <p className="mt-2 text-sm text-white/45 leading-relaxed line-clamp-2">
@@ -266,6 +309,10 @@ const Research = () => {
                 </Link>
               ))}
             </div>
+                </>
+              );
+            })()}
+            </>
           )}
 
           {/* Pagination */}

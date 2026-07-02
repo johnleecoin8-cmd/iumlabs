@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { categoryAccentStyle } from '@/lib/categoryTheme';
 import { useEffect, useMemo } from "react";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight, Tag } from "lucide-react";
 import { motion } from "framer-motion";
@@ -209,7 +210,7 @@ const ResearchDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+    <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2" style={categoryAccentStyle(post.category) as React.CSSProperties}>
       <ReadingProgressBar />
       <SEOHead
         title={seoTitle}
@@ -345,6 +346,8 @@ const ResearchDetail = () => {
               const lines = post.content.split('\n');
               const rendered: React.ReactNode[] = [];
               let i = 0;
+              // paradigm.xyz numbered sections (data-section-index device)
+              let sectionIndex = 0;
 
               const renderInline = (text: string): React.ReactNode => {
                 if (!text.includes('**') && !text.includes('[')) return text;
@@ -356,9 +359,9 @@ const ResearchDetail = () => {
                   if (linkMatch) {
                     const [, linkText, linkUrl] = linkMatch;
                     if (linkUrl.startsWith('/')) {
-                      return <Link key={j} to={linkUrl} className="text-primary hover:text-emerald-300 underline underline-offset-2 decoration-primary/30 hover:decoration-emerald-300/50 transition-colors">{linkText}</Link>;
+                      return <Link key={j} to={linkUrl} className="link-editorial">{linkText}</Link>;
                     }
-                    return <a key={j} href={linkUrl} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-emerald-300 underline underline-offset-2 decoration-primary/30 hover:decoration-emerald-300/50 transition-colors">{linkText}</a>;
+                    return <a key={j} href={linkUrl} target="_blank" rel="noopener noreferrer" className="link-editorial">{linkText}</a>;
                   }
                   return part;
                 });
@@ -599,9 +602,15 @@ const ResearchDetail = () => {
 
                 // Headings
                 if (line.startsWith('## ') && !line.startsWith('### ')) {
-                  const text = line.replace('## ', '');
+                  // strip any hand-numbered "N." prefix — the mono index renders it
+                  const text = line.replace('## ', '').replace(/^\d+[.)]\s*/, '');
+                  sectionIndex += 1;
                   rendered.push(
-                    <h2 key={key} id={slugify(text)} className="text-2xl md:text-3xl font-light tracking-tight text-white mt-16 mb-6 scroll-mt-24">{text}</h2>
+                    // a16z heading highlighter + paradigm mono section index
+                    <h2 key={key} id={slugify(text)} className="text-2xl md:text-3xl font-light tracking-tight text-white mt-16 mb-6 scroll-mt-24">
+                      <span className="font-mono text-xs align-middle text-primary/70 tracking-[0.02em] mr-3 [font-feature-settings:'lnum','tnum']">{String(sectionIndex).padStart(2, '0')}</span>
+                      <span className="hl-swap font-normal">{text}</span>
+                    </h2>
                   );
                   i++; continue;
                 }
