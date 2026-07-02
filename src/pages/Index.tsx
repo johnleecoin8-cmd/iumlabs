@@ -162,8 +162,8 @@ const Index = () => {
         </MobileDeferredSection>
       </section>
 
-      {/* Coverage */}
-      <section id="coverage" className="border-t border-white/[0.07]">
+      {/* Coverage — vercel.com dot-grid section background */}
+      <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
           index="05"
           heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}

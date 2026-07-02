@@ -42,18 +42,21 @@ Other verified curves: stripe cubic-bezier(.25,1,.5,1) .3s (23x) · raycast cubi
 - .surface-edge / .text-gradient-hero (vercel #fff->#adadad 110%)
 - .footer-cta-type — cuberto 108px/w300/uppercase/ls -3%/lh .95
 - .reveal-line / .reveal-fade — unseen line-mask entrance (body.intro-done gate)
+- .mask-swap — buzzworthy clip-path text swap (footer CTA)
+- .dim-list — hellomonday sibling dimming (footer columns, menu nav)
+- .btn-glass — raycast glass button (nav pills)
+- .bg-dots — vercel dot grid (coverage section)
+- fading scrollbar — activetheory --baropacity (App.tsx scroll listener)
 - Work-row accent fill — zajno: row hover floods brand color, text flips dark, .2s
 
 ## Not yet ported (next candidates)
 - Lusion nav double-text roll + pill bg (scale .85->1, opacity .1)
 - Lusion preloader odometer percent digits clamp(7em,8vw,20em)
-- Hello Monday dimming list (rows .4 opacity, hovered 1) + inline video slide-up
-- Buzzworthy mask-link clip-path text swap (data-id red duplicate) — great for footer giant links
+- Hello Monday inline video slide-up on list rows
 - Buzzworthy follow-cursor pill with rolling label (work slider)
-- Active Theory fading scrollbar (--baropacity JS)
 - Cuberto card video-on-hover + cursor system (data-cursor-text)
 - Exo Ape asymmetric 12-col work grid (explicit grid-line placement)
-- Vercel dot-grid bg, conic rotating border, shimmer text; Stripe arrow-in nav hover, dashed hairlines
+- Vercel conic rotating border, shimmer text; Stripe arrow-in nav hover, dashed hairlines
 - Raycast kbd keycap, noise data-URI, mouse-follow spotlight (--gradient-x/y)
 - Competitor trust devices: per-service outcome stats + verb CTAs (coinbound), one-giant-number case cards (marketacross), live coverage wall (marketacross), named-person Calendly section (lunar), homepage pricing (ninjapromo)
 

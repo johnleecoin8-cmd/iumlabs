@@ -105,7 +105,7 @@ const FooterLinksSection = () => {
                   </h3>
                   <div className={section.wide ? "grid grid-cols-2 gap-x-6" : ""}>
                     {columns.map((col, ci) => (
-                      <ul key={ci} className="space-y-2.5 sm:space-y-3">
+                      <ul key={ci} className="dim-list space-y-2.5 sm:space-y-3">
                         {col.map((link) => (
                           <li key={link.name}>
                             <Link
