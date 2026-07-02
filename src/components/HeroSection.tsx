@@ -153,17 +153,17 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <p className="font-display text-[clamp(2.5rem,8.2vw,7.25rem)] font-extrabold leading-[0.94] sm:leading-[0.9] tracking-[-0.035em] sm:tracking-[-0.04em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
-            <span className="block">Your Crypto Ecosystem</span>
-            <span className="block">Growth Partner</span>
+            <span className="reveal-line"><span>Your Crypto Ecosystem</span></span>
+            <span className="reveal-line"><span>Growth Partner</span></span>
           </p>
 
           {/* Subtext */}
-          <h2 className="text-[14px] sm:text-xl md:text-2xl text-white/75 max-w-5xl mx-auto mb-8 sm:mb-14 font-normal tracking-[-0.01em] leading-[1.55] px-2 sm:px-0">
+          <h2 className="reveal-fade reveal-d1 text-[14px] sm:text-xl md:text-2xl text-white/75 max-w-5xl mx-auto mb-8 sm:mb-14 font-normal tracking-[-0.01em] leading-[1.55] px-2 sm:px-0">
 Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide.
           </h2>
 
           {/* CTA */}
-          <div className="flex flex-col items-center gap-4">
+          <div className="reveal-fade reveal-d2 flex flex-col items-center gap-4">
             <a
               href="/contact"
               className="group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full [box-shadow:var(--shadow-linear)] hover:bg-white/90 transition-swift hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"

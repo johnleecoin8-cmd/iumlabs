@@ -299,6 +299,13 @@ const AppContent = () => {
     }
   }, [location.pathname]);
 
+  // Gate for CSS entrance choreography (hero line-mask reveal): the
+  // .intro-done class flips the moment the loader is gone, so transitions
+  // start exactly when the page becomes visible instead of behind the loader.
+  useEffect(() => {
+    document.body.classList.toggle('intro-done', !showIntro);
+  }, [showIntro]);
+
   const handleIntroComplete = useCallback(() => {
     setShowIntro(false);
     requestAnimationFrame(() => {

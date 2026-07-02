@@ -1325,3 +1325,44 @@ body::after {
   line-height: 0.95;
   text-transform: uppercase;
 }
+
+/* ============================================
+   Hero entrance choreography — unseen.co line-mask reveal pattern
+   (overflow-hidden line wrappers, inner spans rise from 110%) driven by
+   the extracted easings: --ease-expo cubic-bezier(0.19,1,0.22,1) for the
+   line rise (unseen.co), --ease-reveal (cuberto.com 0.8s) for fades.
+   Gated on body.intro-done so it plays when the loader lifts, not behind it.
+   ============================================ */
+.reveal-line {
+  display: block;
+  overflow: hidden;
+}
+.reveal-line > span {
+  display: block;
+  transform: translateY(112%);
+  will-change: transform;
+}
+body.intro-done .reveal-line > span {
+  transform: translateY(0);
+  transition: transform 1.1s var(--ease-expo);
+}
+body.intro-done .reveal-line:nth-of-type(2) > span {
+  transition-delay: 0.09s;
+}
+
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(24px);
+}
+body.intro-done .reveal-fade {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s var(--ease-reveal), transform 0.8s var(--ease-reveal);
+}
+body.intro-done .reveal-fade.reveal-d1 { transition-delay: 0.3s; }
+body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-line > span { transform: none; transition: none; }
+  .reveal-fade { opacity: 1; transform: none; transition: none; }
+}
