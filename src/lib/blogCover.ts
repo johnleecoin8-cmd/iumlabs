@@ -770,81 +770,121 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
   const rand = mulberry32(xmur3(k)());
   const topic = route(k, category);
 
-  if (topic) {
-    // Symbol mode: draw the glyph in colour offscreen, halftone-sample colour + luma.
-    const off = document.createElement("canvas"); off.width = W; off.height = H;
-    const o = off.getContext("2d")!;
-    o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
-    o.lineCap = "round"; o.lineJoin = "round";
-    const archetypeRand = mulberry32(xmur3(`${k}|${topic.label}|${topic.archetype}`)());
-    archetypeRand(); archetypeRand(); // keep seed cadence stable for layout draws below
-    const mirror = archetypeRand() > 0.5 ? -1 : 1;
-    o.filter = `blur(${Math.max(1, W * 0.003)}px)`;
+  // ---- 1) Compose a full-bleed GRAYSCALE SCENE offscreen (the "photo") ----
+  // Book-cover halftone: a seeded landscape — sky gradient, one celestial
+  // object (the topic glyph or a moon disc), and 2-3 silhouette ridges —
+  // then the whole canvas is dithered edge-to-edge, dot size carrying luma.
+  const off = document.createElement("canvas"); off.width = W; off.height = H;
+  const o = off.getContext("2d")!;
+  o.fillStyle = "#000"; o.fillRect(0, 0, W, H);
+  o.lineCap = "round"; o.lineJoin = "round";
+
+  // Sky: seeded brightness falling toward the horizon.
+  const horizon = H * (0.52 + rand() * 0.24);
+  const skyTop = 0.10 + rand() * 0.10;
+  const sky = o.createLinearGradient(0, 0, 0, horizon * 1.15);
+  const g0 = Math.round(skyTop * 255), g1 = Math.round(0.07 * 255);
+  sky.addColorStop(0, `rgb(${g0},${g0},${g0})`);
+  sky.addColorStop(1, `rgb(${g1},${g1},${g1})`);
+  o.fillStyle = sky; o.fillRect(0, 0, W, H);
+
+  // Celestial object: topic glyph lifted to near-white, or a moon disc.
+  const ccx = W * (0.22 + rand() * 0.56), ccy = H * (0.14 + rand() * 0.3);
+  const useGlyph = !!topic && rand() < 0.78;
+  if (useGlyph && topic) {
+    const gcv = document.createElement("canvas"); gcv.width = W; gcv.height = H;
+    const g = gcv.getContext("2d")!;
+    g.lineCap = "round"; g.lineJoin = "round";
+    g.save();
+    g.translate(ccx, ccy);
+    g.rotate((rand() - 0.5) * 0.5);
+    const gs = 0.34 + rand() * 0.22;
+    g.scale(gs * (rand() > 0.5 ? -1 : 1), gs);
+    g.translate(-W * 0.5, -H * 0.5);
+    topic.draw(g, W, H, rand);
+    g.restore();
     o.save();
-    const orbit = (topic.archetype % 12) / 12 * TAU;
-    o.translate(W * (0.5 + Math.cos(orbit) * (0.04 + archetypeRand() * 0.13)), H * (0.5 + Math.sin(orbit) * (0.035 + archetypeRand() * 0.11)));
-    o.rotate((archetypeRand() - 0.5) * 1.05 + ((topic.archetype % 5) - 2) * 0.07);
-    const glyphScale = 0.68 + archetypeRand() * 0.64 + (topic.archetype % 4) * 0.035;
-    o.scale(glyphScale * mirror, glyphScale);
-    o.translate(-W * 0.5, -H * 0.5);
-    topic.draw(o, W, H, rand);
+    o.filter = `grayscale(1) brightness(1.55) contrast(0.9) blur(${Math.max(1, W * 0.0025)}px)`;
+    o.globalCompositeOperation = "lighter";
+    o.drawImage(gcv, 0, 0);
     o.restore();
-    o.filter = "none";
-    const data = o.getImageData(0, 0, W, H).data;
-
-    // Single-hue duotone: the category accent is the ONLY color on the
-    // cover (a16z one-brand-color rule; ninjapromo single-gradient system).
-    // Per-post ±8 deg jitter keeps siblings from being identical.
-    const cat = categoryHslParts(category);
-    const hue = (category ? cat.h : topic.hue) + (rand() - 0.5) * 16;
-    const catSat = category ? cat.s : 0.6;
-    const catLig = category ? cat.l : 0.6;
-    fillPremiumBackdrop(ctx, W, H, hue, catSat, rand);
-    const ambient = hsl(hue, catSat * 0.4, 0.17);
-    const accent = hsl(hue, catSat, catLig);
-    const micro = makeMicroParams(archetypeRand);
-
-    const cols = 32 + (topic.archetype % 7) * 3 + Math.floor(rand() * 10);
-    const s = W / cols, rows = Math.ceil(H / s) + 1, half = s / 2;
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const cx = (c + 0.5) * s, cy = (r + 0.5) * s;
-        const microV = seededMicroValue(cx / W, cy / H, micro);
-        const px = Math.min(W - 1, Math.round(cx)), py = Math.min(H - 1, Math.round(cy));
-        const idx = (py * W + px) * 4;
-        const pr = data[idx], pg = data[idx + 1], pb = data[idx + 2];
-        const L = (0.299 * pr + 0.587 * pg + 0.114 * pb) / 255;
-        if (L < 0.1) {
-          // Seeded micro-pixel field behind the symbol. Same glyph category can
-          // never collapse to the same cover because this field is slug/title-derived.
-          const pulse = ((c * 3 + r * 7 + Math.floor(micro[1] * 10)) % 11) === 0;
-          ctx.fillStyle = rgbaStr(pulse ? accent : ambient, 0.08 + microV * 0.34 + (pulse ? 0.16 : 0));
-          ctx.beginPath(); ctx.arc(cx, cy, half * (0.09 + microV * 0.22 + (pulse ? 0.1 : 0)), 0, TAU); ctx.fill();
-        } else {
-          // True halftone: dot size carries the luma; color stays on the
-          // category ramp (shadow -> accent -> highlight), never confetti.
-          const lig = lerp(0.30, Math.min(0.92, catLig + 0.24), L) + microV * 0.05;
-          ctx.fillStyle = `hsl(${hue}, ${Math.round(catSat * 100)}%, ${Math.round(lig * 100)}%)`;
-          ctx.beginPath(); ctx.arc(cx, cy, half * (0.24 + 0.62 * L + microV * 0.1), 0, TAU); ctx.fill();
-        }
-      }
-    }
-    return;
+    // faint halo behind the glyph so it breathes like the reference moon
+    const halo = o.createRadialGradient(ccx, ccy, 0, ccx, ccy, W * 0.4);
+    halo.addColorStop(0, "rgba(255,255,255,0.26)");
+    halo.addColorStop(1, "rgba(255,255,255,0)");
+    o.save(); o.globalCompositeOperation = "lighter";
+    o.fillStyle = halo; o.fillRect(0, 0, W, H); o.restore();
+  } else {
+    const mr = W * (0.05 + rand() * 0.07);
+    const glow = o.createRadialGradient(ccx, ccy, 0, ccx, ccy, mr * 5);
+    glow.addColorStop(0, "rgba(255,255,255,0.95)");
+    glow.addColorStop(0.12, "rgba(255,255,255,0.7)");
+    glow.addColorStop(1, "rgba(255,255,255,0)");
+    o.fillStyle = glow;
+    o.beginPath(); o.arc(ccx, ccy, mr * 5, 0, TAU); o.fill();
+    o.fillStyle = "#fff"; o.beginPath(); o.arc(ccx, ccy, mr, 0, TAU); o.fill();
   }
 
-  // Abstract fallback.
-  const pal = palette(rand);
-  ctx.fillStyle = pal.bg; ctx.fillRect(0, 0, W, H);
-  const val = makeField(rand);
-  const cols = 32 + Math.floor(rand() * 16);
-  const s = W / cols, rows = Math.ceil(H / s) + 1, half = s / 2;
+  // Silhouette ridges: 2-3 seeded layers, darker as they come forward.
+  const layers = 2 + Math.floor(rand() * 2);
+  for (let i = 0; i < layers; i++) {
+    const base = horizon + (H - horizon) * (i / layers) * 0.72;
+    const amp = H * (0.05 + rand() * 0.11) * (1 - i * 0.18);
+    const f1 = 1.2 + rand() * 2.4, f2 = 3.1 + rand() * 4.2;
+    const p1 = rand() * TAU, p2 = rand() * TAU;
+    const sharp = rand() > 0.55; // peaked vs rolling
+    // moonlit bodies: nearer layers darker, all above the sky floor
+    const lum = Math.max(0.09, 0.34 - i * 0.11 + rand() * 0.04);
+    const gl = Math.round(lum * 255);
+    const pts: Array<[number, number]> = [];
+    for (let x = -2; x <= W + 2; x += Math.max(3, W / 160)) {
+      const t = x / W;
+      let y = base - amp * (0.62 * Math.sin(t * f1 * TAU + p1) + 0.38 * Math.sin(t * f2 * TAU + p2));
+      if (sharp) y = base - Math.abs(base - y) * 1.25;
+      pts.push([x, y]);
+    }
+    o.fillStyle = `rgb(${gl},${gl},${gl})`;
+    o.beginPath();
+    o.moveTo(-2, H + 2);
+    pts.forEach(([x, y]) => o.lineTo(x, y));
+    o.lineTo(W + 2, H + 2);
+    o.closePath();
+    o.fill();
+    // lit ridge edge
+    const el = Math.min(0.62, lum + 0.24 + rand() * 0.08);
+    const egl = Math.round(el * 255);
+    o.strokeStyle = `rgb(${egl},${egl},${egl})`;
+    o.lineWidth = Math.max(2, W * 0.006);
+    o.beginPath();
+    pts.forEach(([x, y], j) => (j === 0 ? o.moveTo(x, y) : o.lineTo(x, y)));
+    o.stroke();
+  }
+
+  // ---- 2) Halftone the whole scene, edge to edge ----
+  const data = o.getImageData(0, 0, W, H).data;
+  const cat = categoryHslParts(category);
+  const hue = (category ? cat.h : (topic ? topic.hue : 220)) + (rand() - 0.5) * 14;
+  const catSat = category ? cat.s : 0.55;
+  const catLig = category ? cat.l : 0.62;
+
+  ctx.fillStyle = "#050505";
+  ctx.fillRect(0, 0, W, H);
+
+  const cols = 48 + Math.floor(rand() * 14);
+  const s2 = W / cols, rows = Math.ceil(H / s2) + 1, half = s2 / 2;
+  const satPct = Math.round(catSat * 100);
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
-      const cx = (c + 0.5) * s, cy = (r + 0.5) * s;
-      let v = val(cx / W, cy / H);
-      v = clamp(v + (((c * 7 + r * 13) % 5) - 2) * 0.008);
-      ctx.fillStyle = ramp(pal.stops, v);
-      ctx.beginPath(); ctx.arc(cx, cy, half * (0.24 + 0.72 * v), 0, 6.2832); ctx.fill();
+      const cx = (c + 0.5) * s2, cy = (r + 0.5) * s2;
+      const px = Math.min(W - 1, Math.round(cx)), py = Math.min(H - 1, Math.round(cy));
+      const idx = (py * W + px) * 4;
+      const L = (0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]) / 255;
+      // Every cell gets a dot (the reference texture has no voids): tone
+      // lives in dot RADIUS first, lightness second.
+      const radius = half * (0.16 + 0.86 * Math.pow(L, 0.85));
+      const lig = 12 + Math.pow(L, 0.9) * (catLig * 100 + 26 - 12);
+      ctx.fillStyle = `hsl(${hue}, ${satPct}%, ${Math.min(94, Math.round(lig))}%)`;
+      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.fill();
     }
   }
 }
