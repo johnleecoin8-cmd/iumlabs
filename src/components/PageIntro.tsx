@@ -1,6 +1,18 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { appendVersion, hdVariant } from '@/hooks/useVideoPlayer';
 import heroImage from '@/assets/images/hero-background.jpg.asset.json';
+import gtmImage from '@/assets/services/gtm-hero-night.webp';
+import communityImage from '@/assets/services/community-hero.webp';
+import kolImage from '@/assets/services/kol-avatars.webp';
+import prImage from '@/assets/services/pr-hero.webp';
+import seoAdsImage from '@/assets/services/seo-naver.jpg';
+import deepResearchImage from '@/assets/services/deep-research-blog.jpg';
+import amaImage from '@/assets/services/ama-spaces.jpg';
+import listingImage from '@/assets/platforms/comp-exchange.jpg';
+import liquidityImage from '@/assets/platforms/res-market.jpg';
+import exchangeImage from '@/assets/services/cex-paid-ads.webp';
+import capitalImage from '@/assets/platforms/res-thesis.jpg';
+import complianceImage from '@/assets/services/compliance-hero.avif';
 
 interface PageIntroProps {
   onComplete: () => void;
