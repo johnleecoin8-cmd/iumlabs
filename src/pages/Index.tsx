@@ -129,7 +129,7 @@ const Index = () => {
       <section id="projects" className="border-t border-white/[0.07]">
         <SectionHeader
           index="02"
-          heading={<>Selected <span className="text-white/40">work.</span></>}
+          heading={<>Selected <span className="text-white/40">work</span></>}
           action={{ label: "View all", href: "/projects" }}
         />
         <Suspense fallback={<SectionLoader />}>
