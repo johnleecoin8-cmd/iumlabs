@@ -1,6 +1,5 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileSearch, Droplets, Landmark, TrendingUp, Handshake } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import gtmImage from "@/assets/services/gtm-hero-night.webp";
 import communityImage from "@/assets/services/community-hero.webp";
 import kolImage from "@/assets/services/kol-avatars.webp";
