@@ -198,27 +198,22 @@ const services = [
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.05, rootMargin: '100px', triggerOnce: true });
 
   return (
     <div
-      ref={ref}
-      className={`transition-all ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-      style={{
-        transitionDuration: '600ms',
-        transitionDelay: `${(index % 3) * 80}ms`,
-      }}
+      className="transition-all ease-out opacity-100 translate-y-0"
+      style={{ transitionDuration: '600ms', transitionDelay: `${(index % 3) * 80}ms` }}
     >
       <Link
         to={service.link}
         className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500"
         style={{ minHeight: 'clamp(320px, 60vh, 520px)' }}
       >
-        {/* Full bleed background image */}
+        {/* Full bleed background image - eager so PageIntro can preload them */}
         <img
           src={service.image}
           alt={service.title}
-          loading="lazy"
+          loading="eager"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
         />
