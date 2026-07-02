@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-route
 import React, { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import PageIntro from "@/components/PageIntro";
-import CustomCursor from '@/components/CustomCursor';
 import RouteProgressBar from "@/components/RouteProgressBar";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 import Index from "./pages/Index";
@@ -338,7 +337,6 @@ const AppContent = () => {
   return (
     <>
       {showIntro && <PageIntro onComplete={handleIntroComplete} />}
-      <CustomCursor />
       <RouteProgressBar />
       <ScrollToTop />
       <AppRoutes />

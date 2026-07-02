@@ -69,7 +69,6 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        data-cursor-text="Explore"
         className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden surface-edge transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[0.98]"
       >
         {/* cuberto.com counter-zoom: frame shrinks to .98 while the media
