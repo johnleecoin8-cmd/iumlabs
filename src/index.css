@@ -1266,3 +1266,62 @@ body::after {
   body::after { display: none; }
 }
 
+
+/* ============================================
+   Reference-ported motion & interaction system (2026-07-02)
+   Real values extracted from live sites via computed-style audit:
+   - locomotive.ca  → --ease-loco (their dominant curve, 46 rule uses)
+                      + .link-underline (their exact background-size sweep)
+   - cuberto.com    → --ease-reveal (their 0.8–1.2s reveal curve)
+                      + footer big-type CTA metrics (108px / lh 0.95 / ls -3%)
+   - unseen.co      → --ease-wipe (mask/wipe inOut), --ease-spring (back-out)
+   - linear.app     → --ease-swift 0.16s micro-interaction + layered shadow
+   ============================================ */
+:root {
+  --ease-loco: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-wipe: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-swift: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* linear.app button shadow stack (5 layers, computed from their CTA) */
+  --shadow-linear: 0 8px 2px rgba(0,0,0,0), 0 5px 2px rgba(0,0,0,0.01),
+    0 3px 2px rgba(0,0,0,0.04), 0 1px 1px rgba(0,0,0,0.07),
+    0 0 1px rgba(0,0,0,0.08);
+}
+
+/* locomotive.ca link underline — exact port:
+   gradient of currentcolor, grows 0→100% via background-size in 0.25s */
+.link-underline {
+  background-image: linear-gradient(currentcolor, currentcolor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0 1px;
+  transition: background-size 0.25s, color 0.25s;
+}
+.link-underline:hover {
+  background-size: 100% 1px;
+}
+
+/* linear.app micro-interaction: every hover-able property in 0.16s */
+.transition-swift {
+  transition: border 0.16s var(--ease-swift), background-color 0.16s var(--ease-swift),
+    color 0.16s var(--ease-swift), box-shadow 0.16s var(--ease-swift),
+    opacity 0.16s var(--ease-swift), transform 0.16s var(--ease-swift);
+}
+
+/* Brand selection color — ties the emerald accent into text selection */
+::selection {
+  background: hsl(var(--brand) / 0.28);
+  color: hsl(0 0% 100%);
+}
+
+/* cuberto.com footer CTA metrics: 108px / fw300 / uppercase /
+   letter-spacing -3% / line-height 0.95, footer padding 108px 0 */
+.footer-cta-type {
+  font-size: clamp(3.25rem, 9.5vw, 6.75rem);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}

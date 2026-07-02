@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import { brand } from "@/config/content";
 
 const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
@@ -46,6 +47,28 @@ const FooterLinksSection = () => {
     <footer className="bg-[#0A0A0A] text-white border-t border-white/[0.06]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="px-5 sm:px-6 lg:px-10">
 
+        {/* Big-type CTA — ported from cuberto.com footer "Tell us" CTA
+            (computed-style audit 2026-07-02: 108px / fw300 / uppercase /
+            ls -3% / lh 0.95 / 108px vertical padding). Underline sweep is
+            locomotive.ca's background-size pattern, scaled to display size. */}
+        <Link
+          to="/contact"
+          className="group block pt-16 sm:pt-24 lg:pt-[108px] pb-14 sm:pb-24 border-b border-white/[0.06]"
+        >
+          <p className="text-[10px] sm:text-[11px] font-mono text-white/30 uppercase tracking-[0.25em] mb-6 sm:mb-9">
+            Got a project in Korea?
+          </p>
+          <span className="footer-cta-type flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-white">
+            <span className="link-underline [background-size:0_0.045em] group-hover:[background-size:100%_0.045em] pb-[0.06em]">
+              Let&apos;s talk
+            </span>
+            <ArrowUpRight
+              className="w-[0.8em] h-[0.8em] text-primary transition-transform duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"
+              strokeWidth={1.5}
+            />
+          </span>
+        </Link>
+
         <div className="py-12 sm:py-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6">
 
@@ -59,9 +82,9 @@ const FooterLinksSection = () => {
 
               <div className="flex items-center gap-5">
 
-                <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">LinkedIn</a>
-                <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="text-white/30 hover:text-white transition-colors text-sm font-medium">Telegram</a>
-                <a href={`mailto:${brand.email}`} className="text-white/30 hover:text-white transition-colors text-sm font-medium">Email</a>
+                <a href={brand.linkedin} target="_blank" rel="noopener noreferrer" className="link-underline text-white/30 hover:text-white text-sm font-medium">LinkedIn</a>
+                <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="link-underline text-white/30 hover:text-white text-sm font-medium">Telegram</a>
+                <a href={`mailto:${brand.email}`} className="link-underline text-white/30 hover:text-white text-sm font-medium">Email</a>
               </div>
             </div>
 
@@ -85,7 +108,7 @@ const FooterLinksSection = () => {
                           <li key={link.name}>
                             <Link
                               to={link.href}
-                              className="text-[13px] sm:text-sm text-white/45 hover:text-white transition-colors duration-300"
+                              className="link-underline text-[13px] sm:text-sm text-white/45 hover:text-white"
                             >
                               {link.name}
                             </Link>

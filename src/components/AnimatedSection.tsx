@@ -32,14 +32,16 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       )}
       style={{
         transitionDelay: `${delay}ms`,
-        transitionDuration: '600ms',
+        transitionDuration: '750ms',
+        // locomotive.ca dominant reveal curve (computed-style audit 2026-07-02)
+        transitionTimingFunction: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
         opacity: isVisible ? 1 : 0,
         transform: isVisible
           ? 'translate3d(0,0,0)'
-          : direction === 'up' ? 'translate3d(0,20px,0)'
-          : direction === 'down' ? 'translate3d(0,-20px,0)'
-          : direction === 'left' ? 'translate3d(20px,0,0)'
-          : direction === 'right' ? 'translate3d(-20px,0,0)'
+          : direction === 'up' ? 'translate3d(0,28px,0)'
+          : direction === 'down' ? 'translate3d(0,-28px,0)'
+          : direction === 'left' ? 'translate3d(28px,0,0)'
+          : direction === 'right' ? 'translate3d(-28px,0,0)'
           : 'none',
       }}
     >
@@ -84,7 +86,9 @@ export const StaggeredChildren: React.FC<StaggeredChildrenProps> = ({
           )}
           style={{
             transitionDelay: `${baseDelay + index * staggerDelay}ms`,
-            transitionDuration: '500ms',
+            transitionDuration: '650ms',
+            // locomotive.ca dominant reveal curve (computed-style audit 2026-07-02)
+            transitionTimingFunction: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
             opacity: isVisible ? 1 : 0,
             transform: isVisible
               ? 'translate3d(0,0,0)'

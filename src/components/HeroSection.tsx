@@ -166,7 +166,7 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
           <div className="flex flex-col items-center gap-4">
             <a
               href="/contact"
-              className="group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full hover:bg-white/90 transition-all hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
+              className="group inline-flex items-center gap-2.5 px-7 py-3.5 sm:px-9 sm:py-4 bg-white text-black font-semibold text-[13px] sm:text-sm rounded-full [box-shadow:var(--shadow-linear)] hover:bg-white/90 transition-swift hover:shadow-[0_0_30px_rgba(255,255,255,0.15)] active:scale-[0.97]"
             >
               <Send className="w-4 h-4 sm:w-4 sm:h-4 group-hover:rotate-12 transition-transform duration-300" />
               <span>Get Your Free Proposal</span>
