@@ -1,0 +1,278 @@
+{
+ "dataset": "Upbit new trading-support (listing) notices, 2026 YTD",
+ "method": "Parsed from Upbit official announcements API (api-manager.upbit.com), category=trade, titles matching 신규 거래지원 안내. Batch notices expanded per ticker.",
+ "asOf": "2026-07-03",
+ "count": 45,
+ "items": [
+  {
+   "date": "2026-01-01",
+   "name": "테더골드",
+   "ticker": "XAUT",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-01-06",
+   "name": "지케이싱크",
+   "ticker": "ZK",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-01-07",
+   "name": "브레비스",
+   "ticker": "BREV",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-01-14",
+   "name": "유에스디이",
+   "ticker": "USDE",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-01-22",
+   "name": "헤이엘사",
+   "ticker": "ELSA",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-01-29",
+   "name": "센티언트",
+   "ticker": "SENT",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-03",
+   "name": "문버드",
+   "ticker": "BIRB",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-16",
+   "name": "비트텐서",
+   "ticker": "TAO",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-20",
+   "name": "아즈텍",
+   "ticker": "AZTEC",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-24",
+   "name": "에스프레소",
+   "ticker": "ESP",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-24",
+   "name": "시커",
+   "ticker": "SKR",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-02-26",
+   "name": "센트리퓨즈",
+   "ticker": "CFG",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-03-04",
+   "name": "디피니티브",
+   "ticker": "EDGE",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-03-11",
+   "name": "인터넷컴퓨터",
+   "ticker": "ICP",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-03-26",
+   "name": "카타나",
+   "ticker": "KAT",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-14",
+   "name": "자마",
+   "ticker": "ZAMA",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-15",
+   "name": "캔톤",
+   "ticker": "CC",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-20",
+   "name": "파이버스",
+   "ticker": "PIEVERSE",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-21",
+   "name": "유에스디에이아이",
+   "ticker": "CHIP",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-27",
+   "name": "펄",
+   "ticker": "PRL",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-27",
+   "name": "오닉스코인",
+   "ticker": "XCN",
+   "markets": "KRW,USDT마켓"
+  },
+  {
+   "date": "2026-04-29",
+   "name": "플루언트",
+   "ticker": "BLEND",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-04-30",
+   "name": "메가이더",
+   "ticker": "MEGA",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-06",
+   "name": "도그위프햇",
+   "ticker": "WIF",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-08",
+   "name": "파로스",
+   "ticker": "PROS",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-12",
+   "name": "베니스토큰",
+   "ticker": "VVV",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-13",
+   "name": "슈퍼폼",
+   "ticker": "UP2",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-15",
+   "name": "아이리스",
+   "ticker": "IRYS",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-05-18",
+   "name": "오리진트레일",
+   "ticker": "TRAC",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-01",
+   "name": "솔스티스",
+   "ticker": "SLX",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-09",
+   "name": "시트레아",
+   "ticker": "CTR",
+   "markets": "BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-15",
+   "name": "오픈그라디언트",
+   "ticker": "OPG",
+   "markets": "BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-16",
+   "name": "에스피엑스6900",
+   "ticker": "SPX",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "AMP2",
+   "ticker": "AMP2",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "GRAM",
+   "ticker": "GRAM",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "KMNO",
+   "ticker": "KMNO",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "LDO",
+   "ticker": "LDO",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "LIT",
+   "ticker": "LIT",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "MORPHO",
+   "ticker": "MORPHO",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "OSMO",
+   "ticker": "OSMO",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "PAXG",
+   "ticker": "PAXG",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "PEAQ",
+   "ticker": "PEAQ",
+   "markets": "BTC,USDT"
+  },
+  {
+   "date": "2026-06-19",
+   "name": "리",
+   "ticker": "RE",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-23",
+   "name": "아르키움",
+   "ticker": "ARX",
+   "markets": "KRW,BTC,USDT마켓"
+  },
+  {
+   "date": "2026-06-30",
+   "name": "젠신",
+   "ticker": "AI",
+   "markets": "KRW,BTC,USDT마켓"
+  }
+ ]
+}

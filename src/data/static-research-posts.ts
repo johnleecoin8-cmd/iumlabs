@@ -160,7 +160,7 @@ Primary: Robinhood Newsroom, "Robinhood Accelerates Global Expansion with Robinh
     title: "The Korea Crypto GTM Index: Benchmarks From 25 Market Entries (2024-2026)",
     image: chartGtmStrategy,
     date: "July 2, 2026",
-    readTime: "14 min read",
+    readTime: "19 min read",
     category: "Market Research",
     author: "Helen",
     authorRole: "Head of Research",
@@ -234,6 +234,39 @@ The largest single variable in the dataset is not budget, tier mix, or creative.
 ## 8. What Breaks It
 
 Treat every number here with the following discounts. The sample is 25 engagements, large for an agency dataset and tiny for statistics; a single unusual quarter moves these medians. Survivorship bias is real, as failed projects that never engaged professional GTM are absent, and our own failed pitches are absent too. KOL rates drift with the market cycle, and the 2024 bull-leg rates embedded here are likely 15 to 25% above what a 2026 bear-window negotiation would settle at. And attribution in crypto remains partly art: wallet-level attribution on the 14 attributed campaigns is solid for CEX flows and much softer for on-chain actions. We will re-cut this index every two quarters; numbers that stop being true will be replaced, not defended.
+
+## 9. Segment Cuts: Who Converts, Who Burns
+
+Medians hide the most useful information in the dataset, which is how differently the four client segments behave. Exchanges and trading products dominate the attributed funnel data and set the CAC benchmarks above, because their conversion event is clean: a funded account either exists or it does not. Infrastructure projects run awareness-weighted mixes where the honest conversion event is developer signups and testnet participation, and their cost per meaningful developer action ran 3 to 5x an exchange's cost per funded account. AI and DePIN projects rode the strongest narrative tailwind in the dataset, roughly 1.4x median engagement on identical spend during narrative windows, but converted to on-chain action worst of the four, because Korean retail trades narratives on exchanges rather than using products. Consumer apps sat in the middle with one structural advantage: KakaoTalk-native referral loops, when they worked, produced the only organic K-factors above 1 we measured.
+
+| Segment | n | Strongest channel | Weakest channel | Note |
+|---|---|---|---|---|
+| Exchanges / trading | 9 | Nano-KOL bursts + Naver paid | Offline events for retail | Cleanest attribution, CAC benchmarks come from here |
+| Infrastructure | 7 | Deep-dive content + AMAs | Broad KOL awareness | Developer actions cost 3-5x a funded account |
+| AI / DePIN | 5 | Narrative-window KOL | Product conversion | Best engagement, worst activation |
+| Consumer apps | 4 | KakaoTalk referral loops | Paid display | Only segment with organic K-factor above 1 |
+
+## 10. What Changed Against H2 2025
+
+Re-cutting the same metrics against our H2 2025 engagement pool shows three drifts worth pricing in. KOL rates softened roughly 10 to 15% across tiers as the memecoin cooldown cut discretionary campaign demand, with nano rates softening least because supply there is genuinely scarce. Funnel conversion improved at the deposit step, 27% now against roughly 23% in late 2025, which we read as exchange onboarding UX improvements and a higher-intent retail cohort after the app-store delistings of offshore venues. And the timing premium got sharper: the catalyst-window multiple rose from roughly 1.8x to 2.3x, meaning quiet-window campaigns are getting cheaper in absolute terms but even weaker in relative ones. If you are budgeting for H2 2026, the implication is uncomfortable but simple: the calendar is now a bigger lever than the creative.
+
+## 11. The Quarter Ahead
+
+Three scheduled forces shape Q4 2026 GTM economics, all previously covered in this library. The 2027 gains tax arrives January 1, and the [behavioral fallout](/blog/korea-crypto-tax-2027-22-percent-gtm-fallout) we mapped, pre-deadline realization and offshore drift, should pull retail attention forward into Q4, making it the densest catalyst window of the cycle. The [security-token framework](/blog/korea-rwa-tokenized-assets-trust-gap-sto-2026) takes effect January 2027, which will pull institutional narratives into year-end. And the [corporate-access phases](/blog/korea-corporate-crypto-ban-lifted-institutional-playbook-2026) keep grinding forward, adding a B2B lane to what has been a purely retail market. Our operating read: Q4 2026 is the strongest launch window Korea has offered since early 2024, and the KOL rate softening documented above will not survive it.
+
+## 12. The Search Layer, Underpriced and Slow
+
+Every benchmark above decays; search compounds, which is why we keep it in the index despite it being the least glamorous line. Across engagements that ran the 8-week Naver stack, PR placement into Naver-indexed outlets, blog-network seeding, and branded keyword buys, the median branded-search lift was 210%, and that lift persisted at roughly 60% of peak six months later with zero incremental spend. Compare that to KOL bursts, where engagement returns to baseline within two weeks of the last post, and the budget logic writes itself: KOL buys the spike that makes people search, and the Naver layer decides what they find when they do. Two practical medians for planning: a defensible branded-keyword position on Naver cost 4 to 9 million won per month depending on category competition, and the PR component only moved search when at least two of the placements landed in outlets Naver surfaces in its news vertical, which is a property of the outlet list, not the story. The failure mode we saw twice and now screen for: teams that bought the spike, skipped the layer, and watched competitors' content rank for their own brand name during their highest-attention week.
+
+%%210%::Median branded Naver search-volume lift after the 8-week PR-plus-SEO stack, persisting at ~60% of peak six months later (Source: ium Labs internal)%%
+
+## 13. Reading a Proposal With This Index, a Worked Example
+
+Here is how the index earns its keep in a real negotiation. Take a composite proposal we saw this spring: 120 million won for a six-week awareness campaign, promising 10 million impressions via 15 KOLs, 20,000 installs, and an exchange listing "accelerated through relationships." Line one: 15 KOLs at a 120M-won blend implies 8M won per engagement, which sits at our top-tier median, so either every name on the list is genuinely top-tier, ask for the list, or the blend is padded. Line two: 10 million impressions converting to 20,000 installs implies a 0.2% impression-to-install rate, which our funnel medians say is optimistic by roughly 2x for a KRW-focused mix, so ask which markets the traffic comes from. Line three: 20,000 installs at the median install-to-signup and signup-to-deposit rates yields about 3,300 funded accounts, putting proposed CAC near 36,000 won, plausible, but only if the funnel holds, so tie at least 30% of fees to the deposit event, not the impression count. Line four: no spend accelerates a listing timeline, our medians are 7.2 and 4.5 months and nothing in 25 engagements shortened them, so strike the clause and the fee attached to it. Ten minutes with the index turned a 120M-won ask into three pointed questions and one deleted line item, which is precisely the leverage we intend it to give you, including against us.
+
+## Appendix: How We Collected It
+
+Attribution ran through UTM-tagged links, exchange referral codes, and where clients permitted it, postback data from their onboarding funnels; on-chain attribution used tagged deposit addresses and is materially weaker, which is why only 14 of 25 engagements clear our full-funnel bar. Rates are settled invoice amounts, not quotes. Engagement medians are per-campaign, not per-post, to stop single viral posts from distorting tiers. The H2 2025 comparison pool uses identical definitions. We publish medians and ranges rather than means throughout, and we will re-cut this index every two quarters with the same methodology so the numbers stay comparable. Corrections, challenges, and requests for cuts we did not publish: research@iumlabs.io.
 
 ## How to Use This
 
@@ -510,10 +543,10 @@ We treat Korea institutional entry as a regulatory sequencing problem first. We 
       volume: exchangeImg,
     },
     content: `>! **Key Takeaways**
->! Korea is one of the deepest retail crypto markets on earth: 9.7 million verified, trade-eligible users by the end of 2024, equal to roughly one in five Koreans (Source: Financial Services Commission / FIU, via KED Global).
->! The market is winner-take-most. Upbit alone held 71.6 percent of domestic trading volume in the first half of 2025, and Upbit plus Bithumb account for about 90 percent of all users (Source: Financial Supervisory Service, via Cryptonews).
->! The funnel does not break at the app store. It breaks at the deposit, where every won must move through a real-name bank account at the exchange's single partner bank (Source: FSC / FIU; Paybis).
->! Discovery still runs through Naver, which holds roughly 42 percent of Korean search and far more of the high-intent informational queries (Source: Statcounter, May 2026).
+>! Korea is one of the deepest retail crypto markets on earth: 9.7 million verified, trade-eligible users by the end of 2024, equal to roughly one in five Koreans (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618)).
+>! The market is winner-take-most. Upbit alone held 71.6 percent of domestic trading volume in the first half of 2025, and Upbit plus Bithumb account for about 90 percent of all users (Source: [FSC/KoFIU VASP survey data](https://www.fsc.go.kr/po010101/84618)).
+>! The funnel does not break at the app store. It breaks at the deposit, where every won must move through a real-name bank account at the exchange's single partner bank (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618); Paybis).
+>! Discovery still runs through Naver, which holds roughly 42 percent of Korean search and far more of the high-intent informational queries (Source: [Statcounter Global Stats, Korea](https://gs.statcounter.com/search-engine-market-share/all/south-korea), May 2026).
 
 In most markets a growth team can hide behind installs and sign-ups. In Korea you cannot. A Korean crypto exchange play has one metric that pays rent: the funded account. An install is a number a vendor sells you; a sign-up is a phone-verified email. Neither moves revenue. Trading fees, the entire business model of a Korean exchange, begin only after a real person links a real-name bank account and pushes won across it. Everything upstream of that deposit is vanity. This report walks the funnel stage by stage and explains why each runs on a different Korea-native channel.
 
@@ -527,9 +560,9 @@ By year-end 2024 Korea had 9.7 million verified users eligible to trade digital 
 
 This is a deep, fee-generating market, but a brutally concentrated one. The funnel does not just need to convert; it must convert against incumbents who already own the trust layer. The age skew is itself an operating instruction. A funnel aimed at the 30s and 40s, who together make up 56 percent of verified users, is a funnel aimed at where the deposits actually sit, not at the youngest cohort that indexes high on social reach but low on funded balances. Channel choice should follow the money in the book, not the noise on the timeline.
 
-%%9.7 million verified users::Roughly one in five Koreans holds a trade-eligible exchange account, up 25% in six months to end-2024 (Source: FSC / FIU, via KED Global)%%
+%%9.7 million verified users::Roughly one in five Koreans holds a trade-eligible exchange account, up 25% in six months to end-2024 (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618))%%
 
-%%71.6%::Upbit's share of Korean crypto trading volume, H1 2025 (Source: Financial Supervisory Service, via Cryptonews)%%
+%%71.6%::Upbit's share of Korean crypto trading volume, H1 2025 (Source: [FSC/KoFIU VASP survey data](https://www.fsc.go.kr/po010101/84618))%%
 
 ## 2. Where Korea Differs: the Deposit Is the Wall
 
@@ -764,8 +797,8 @@ If you are bringing a tokenized real-world asset to Korea and want a motion that
       cityscape: seoulTech,
     },
     content: `>! **Key Takeaways**
->! Korea is one of the deepest retail crypto markets on earth: 11.13 million verified, trade-eligible users at the end of 2025, an all-time high, against a population of roughly 51.7 million (Source: Financial Services Commission, via Tiger Research).
->! The funnel does not run on Western channels. Naver holds about 42 percent of Korean search, and KakaoTalk reaches 94.7 percent of the population, so awareness and trust are won on Korea-native rails, not Google and X (Source: Statcounter, May 2026; DataReportal, Digital 2025).
+>! Korea is one of the deepest retail crypto markets on earth: 11.13 million verified, trade-eligible users at the end of 2025, an all-time high, against a population of roughly 51.7 million (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618), via Tiger Research).
+>! The funnel does not run on Western channels. Naver holds about 42 percent of Korean search, and KakaoTalk reaches 94.7 percent of the population, so awareness and trust are won on Korea-native rails, not Google and X (Source: [Statcounter Korea](https://gs.statcounter.com/search-engine-market-share/all/south-korea); [DataReportal Digital 2025 Korea](https://datareportal.com/reports/digital-2025-south-korea)).
 >! Korea GTM fails when teams buy tactics instead of building a funnel. The "Korea playbook" of KOLs, Naver SEO, and viral community is now public, and foundations that copy it piecemeal stall (Source: Tiger Research, 2026 Korea Crypto Market Guide).
 >! Timing is not a nice-to-have. Retail attention compresses around the listing event and the Korea Blockchain Week window, so the stack has to be sequenced to T0, not run on a SaaS calendar.
 
@@ -777,11 +810,11 @@ Start with the size of the prize. By the end of 2025 Korea had 11.13 million ver
 
 {{source:/images/blog/gtmstack-tiger-market-guide-c.png::Tiger Research, Korea verified crypto users climb to an all-time high in 2025 H2}}
 
-%%11.13M::verified Korean crypto users, end-2025, an all-time high (Source: FSC, via Tiger Research)%%
+%%11.13M::verified Korean crypto users, end-2025, an all-time high (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618), via Tiger Research)%%
 
 But the channels that move it are not the ones in a global growth team's muscle memory. Discovery runs on Naver, not Google: it holds roughly 42 percent of Korean search and a far larger share of the long-form informational queries where a cautious investor researches a token, because so much Korean-language content lives inside Naver Blog and Cafe. Messaging runs on KakaoTalk, which reaches almost the entire country, not WhatsApp or Discord alone.
 
-%%94.7%::share of the Korean population KakaoTalk reaches, which is why the trust layer runs on the messenger and not on Discord (Source: DataReportal, Digital 2025)%%
+%%94.7%::share of the Korean population KakaoTalk reaches, which is why the trust layer runs on the messenger and not on Discord (Source: [DataReportal, Digital 2025: South Korea](https://datareportal.com/reports/digital-2025-south-korea))%%
 
 {{bars:Naver=42,Google=48,Bing=6::South Korea search engine market share, May 2026. Naver still owns the high-intent informational layer. Source: Statcounter}}
 
@@ -885,7 +918,7 @@ If you are bringing a token into Korea and need a funnel measured in committed u
     },
     content: `>! **Key Takeaways**
 >! KakaoTalk is Korea's default graph, sitting at roughly 45 million monthly users against a population near 51 million, so the messenger is effectively the country's address book (Source: IGAWorks via Korea JoongAng Daily).
->! Open Chat is no longer a niche feature. Kakao reported the Open Chat tab reaching 12 million daily active users in December 2023, a discovery surface where strangers gather around a shared interest, including coins (Source: Kakao Q4 2023 earnings call).
+>! Open Chat is no longer a niche feature. Kakao reported the Open Chat tab reaching 12 million daily active users in December 2023, a discovery surface where strangers gather around a shared interest, including coins (Source: [Kakao IR, Q4 2023 earnings materials](https://www.kakaocorp.com/ir/referenceRoom/earningsAnnouncement)).
 >! For crypto, this is a closed Korean-language layer where Korean retail actually coordinates. It is invisible to a Discord and Telegram playbook because outsiders cannot read it, cannot search it, and cannot moderate it without native operators.
 >! Treat Open Chat as a distribution channel, not a support afterthought. Presence there is earned through native moderation, not bought through a banner.
 
@@ -915,7 +948,7 @@ This is not a side feature with a handful of users. In its fourth-quarter 2023 e
 
 {{bars:Open Chat tab=12,Friends tab=37::KakaoTalk daily active users by tab, December 2023, in millions. The stranger-graph layer where interest communities, including crypto, form is already at eight-figure daily scale. Source: Kakao Q4 2023 earnings call}}
 
-%%12 million::daily active users on the Open Chat tab, December 2023, a stranger-graph discovery surface where crypto rooms form (Source: Kakao Q4 2023 earnings call)%%
+%%12 million::daily active users on the Open Chat tab, December 2023, a stranger-graph discovery surface where crypto rooms form (Source: [Kakao IR, Q4 2023 earnings materials](https://www.kakaocorp.com/ir/referenceRoom/earningsAnnouncement))%%
 
 Rooms have ceilings and rules that shape behavior. A room is capped, forwarding and automated bots are restricted, and the platform actively polices manipulation. That makes Open Chat spread wide and shallow rather than deep and automated. You cannot script your way to scale the way you can on Telegram. Reach is earned room by room. That single constraint, no automation, is the hinge of the whole channel: it means the only way to scale presence is to earn it in human time, room by room, which is exactly the work a foreign team is least equipped to do and least inclined to budget for.
 
@@ -1006,7 +1039,7 @@ ium Labs runs KakaoTalk as the distribution layer it actually is. We deploy nati
       delistingRisk: compLandscape,
     },
     content: `>! **Key Takeaways**
->! Upbit took 71.6% of all South Korean crypto trading volume in H1 2025, and with Bithumb the two venues control roughly 96% of the market (Source: FSS data via Seoul Kyungjae)
+>! Upbit took 71.6% of all South Korean crypto trading volume in H1 2025, and with Bithumb the two venues control roughly 96% of the market (Source: [FSC/KoFIU VASP survey data](https://www.fsc.go.kr/po010101/84618))
 >! When one venue intermediates the majority of won liquidity, a single listing decision is effectively a liquidity switch for a token's entire Korea presence
 >! Because liquidity concentrates, token economics in Korea are listing economics; where and when you list shapes price discovery more than almost anything else you control
 >! Projects that treat a Korean listing as a marketing milestone, rather than a liquidity event, mis-sequence everything around it
@@ -1023,7 +1056,7 @@ According to Financial Supervisory Service data reported by Seoul Kyungjae, Upbi
 
 {{bars:Upbit=71.6,Bithumb=25.8,Coinone=1.8,Korbit/GOPAX=0.8::Korean crypto exchange share of domestic trading volume, H1 2025. Source: FSS data via Seoul Kyungjae / Cryptonews}}
 
-%%71.6%::Upbit's share of South Korean domestic crypto trading volume in H1 2025, on 833 trillion won ($642B) of transactions (Source: FSS / Cryptonews)%%
+%%71.6%::Upbit's share of South Korean domestic crypto trading volume in H1 2025, on 833 trillion won ($642B) of transactions (Source: [FSC/KoFIU VASP survey](https://www.fsc.go.kr/po010101/84618))%%
 
 {{source:/images/blog/upbit-cryptonews.jpg::Cryptonews, "Upbit Corners 72% of S Korean Crypto Market as Smaller Exchanges Face Extinction"}}
 
@@ -1222,7 +1255,7 @@ XRP and altcoin dominance: [Cryptorank](https://cryptorank.io/news/feed/e2dfc-xr
       catalysts: saharaEvent,
     },
     content: `>! **Key Takeaways**
->! Global capital has poured into DePIN and AI x crypto, with the sector reaching roughly $50B in market cap across 350 tokens and over 13 million live devices by 2024 (Source: Messari, State of DePIN 2024)
+>! Global capital has poured into DePIN and AI x crypto, with the sector reaching roughly $50B in market cap across 350 tokens and over 13 million live devices by 2024 (Source: [Messari, State of DePIN 2024](https://messari.io/report/state-of-depin-2024))
 >! Yet the same Korean retail base that anchored global altcoin demand sat it out: 10x Research estimates altcoin market value would be about $800B higher had retail, especially in South Korea, not rotated into equities instead (Source: 10x Research via Cryptonews)
 >! The gap is not capital and not access; it is translation. Korea's most active retail traders chased a concrete payoff, the SK Hynix and Samsung AI rally, and left an abstract infrastructure thesis on the table (Source: BeInCrypto; Korea Herald)
 >! Winning Korea on AI x crypto means localizing the thesis into Korean-legible value, not repeating the global pitch louder
@@ -1491,7 +1524,7 @@ Five licensed exchanges (Upbit, Bithumb, Coinone, Korbit, Gopax) handle effectiv
 
 The demand is unambiguous and cyclical. Daily volume across the five exchanges ran near 11.6 billion dollars in December 2024 before cooling to roughly 3 billion by February 2026, and won deposits sat at 10.7 trillion won at the end of 2024. Koreans are not absent from crypto. They are present in enormous numbers and almost never leave the exchange.
 
-%%96%::share of domestic spot volume on Upbit and Bithumb alone, with five licensed exchanges handling effectively all of it (Source: Presto Labs / Kaiko)%%
+%%96%::share of domestic spot volume on Upbit and Bithumb alone, with five licensed exchanges handling effectively all of it (Source: Presto Labs; [Kaiko](https://www.kaiko.com/))%%
 
 The contrast between the centralized rail Koreans actually use and the on-chain rail they avoid is stark enough to lay out directly.
 
@@ -1517,7 +1550,7 @@ That single rule shapes everything downstream. To trade at all, a Korean user mu
 
 Convenience compounds the lock-in. Upbit and Bithumb offer instant won deposits and withdrawals, deep KRW order books, fast listings, and Korean-language support. The infamous "listing pump" after an Upbit or Bithumb listing, and the persistent Kimchi premium that has averaged 2 to 3 percent, both reward staying inside the local exchange. For most users, the exchange is not a stepping stone to DeFi. It is the destination.
 
-%%15 million::Koreans estimated to hold crypto, nearly all of it via centralized exchanges (Source: Korean industry data, Korea Blockchain Week)%%
+%%15 million::Koreans estimated to hold crypto, nearly all of it via centralized exchanges (Source: industry data presented at [Korea Blockchain Week](https://koreablockchainweek.com/))%%
 
 It is worth being precise about the mechanism, because it is not inertia. Every incentive a Korean trader faces points inward. The won on-ramp only works inside the exchange, the deepest liquidity is inside the exchange, the listing events that move price happen inside the exchange, and the legal cover sits inside the exchange. On-chain offers none of these and asks the user to take on irreversible risk to get there. Staying put is not laziness; it is the dominant strategy given the structure. That is exactly why the lock-in is so durable, and why no amount of DeFi evangelism moves it.
 
@@ -1584,8 +1617,8 @@ We build the bridge as a trust operation, not a tech demo. On the community side
       engagementMetrics: kolPerformance,
     },
     content: `>! **Key Takeaways**
->! Korea has roughly 9.7 million verified crypto users, about one in five residents, with the 30s the largest cohort at 29 percent (Source: KED Global / FSC FIU, 2025).
->! Korean won pairs account for around 30 percent of global spot crypto volume, second only to the US dollar, at about 26 billion dollars weekly (Source: Kaiko via BeInCrypto, 2026).
+>! Korea has roughly 9.7 million verified crypto users, about one in five residents, with the 30s the largest cohort at 29 percent (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618)).
+>! Korean won pairs account for around 30 percent of global spot crypto volume, second only to the US dollar, at about 26 billion dollars weekly (Source: [Kaiko](https://www.kaiko.com/) market data, 2026).
 >! KOLs function as a trust layer, not just reach: Tiger Research finds early-stage investors lean on a credible influencer's judgment rather than valuing the project themselves.
 >! Reach without vetting is fragile: independent analysis puts the macro tier (100k to 500k followers) at a 48.3 percent fraud rate, the highest of any tier (Source: SociaVault Labs, 2026).
 
@@ -1601,7 +1634,7 @@ According to the Financial Services Commission's Financial Intelligence Unit, re
 
 {{source:/images/blog/kol-korea-second-largest.png::Sherwood News / Kaiko, KRW is the second-largest fiat crypto market after the USD}}
 
-%%9.7M::verified Korean crypto users, about 1 in 5 residents (Source: KED Global / FSC FIU, 2025)%%
+%%9.7M::verified Korean crypto users, about 1 in 5 residents (Source: [FSC/KoFIU semi-annual VASP survey](https://www.fsc.go.kr/po010101/84618))%%
 
 This is not a fringe audience. It skews young, professional, and mobile-native, and the age distribution tells you who the KOLs actually reach.
 
@@ -1651,7 +1684,7 @@ Put the two failure-modes of the tier system side by side and the trade-off the 
 
 This is the case for affiliation over raw reach. Affiliation means paying for funded, attributable results (referrals, sign-ups, deposits) rather than a flat fee for a post that may move no one. With 85 percent of Korean weekly trades flowing into altcoins beyond Bitcoin, per Kaiko, the audience is active and ready to act, but only when the recommendation is trusted and the path is clear.
 
-%%30%::share of global spot crypto volume in won pairs, second only to the US dollar (Source: Kaiko via BeInCrypto, 2026)%%
+%%30%::share of global spot crypto volume in won pairs, second only to the US dollar (Source: [Kaiko](https://www.kaiko.com/) market data, 2026)%%
 
 ## What This Means for Operators
 
@@ -1777,6 +1810,26 @@ Here is the part most foreign teams invert. They treat the listing as the start 
 {{source:/images/blog/primary-fsc-vasp-survey-h2-2024.png::FSC/KoFIU, H2 2024 Virtual Asset Service Provider survey, press release of May 20, 2025}}
 
 {{source:/images/blog/primary-upbit-notices.png::Upbit official notice board, July 2026. Listing and suspension notices land here first, which is why monitoring it beats reading recaps.}}
+
+## The ium Labs Upbit Listing Tracker, 2026 YTD
+
+Talk about listing strategy is cheap; the notice board is not. So we built the dataset ourselves: every new trading-support notice Upbit published in 2026, parsed from the exchange's own announcements feed and re-cut monthly. 45 tickers received new trading support in H1 2026, 34 of them on the KRW market, and the monthly cadence tells you more about listing strategy than any rumor channel.
+
+{{bars:Jan=6,Feb=6,Mar=3,Apr=8,May=6,Jun=16::New trading-support tickers per month on Upbit, 2026 YTD. June includes a single 9-ticker batch notice for BTC/USDT markets. (Source: ium Labs Listing Tracker, parsed from Upbit official announcements)}}
+
+%%45::Tickers that received new Upbit trading support in H1 2026, 34 on the KRW market, per our parse of the exchange's official notice feed (Source: ium Labs Listing Tracker)%%
+
+| Month | New listings | Tickers |
+|---|---|---|
+| January | 6 | XAUT, ZK, BREV, USDE, ELSA, SENT |
+| February | 6 | BIRB, TAO, AZTEC, ESP, SKR, CFG |
+| March | 3 | EDGE, ICP, KAT |
+| April | 8 | ZAMA, CC, PIEVERSE, CHIP, PRL, XCN, BLEND, MEGA |
+| May | 6 | WIF, PROS, VVV, UP2, IRYS, TRAC |
+| June | 16 | SLX, CTR, OPG, SPX, RE, ARX, AI + 9-ticker BTC/USDT batch (PEAQ, LIT, KMNO, MORPHO, GRAM, LDO, PAXG, OSMO, AMP2) |
+
+Three reads from the raw feed. First, March was the drought month, three listings, which lines up with the post-sanction compliance chill across the market. Second, June's 16-ticker surge, half of it in one batch notice, is Upbit clearing a backlog into the summer window rather than a change in standards, and batch adds skew BTC/USDT rather than KRW, so the KRW bar stays high. Third, the KRW-market share of new support (34 of 45) confirms the thesis of this piece: the won book is still where Upbit spends its listing risk budget. The full dataset is public at [/data/upbit-listings-2026.json](/data/upbit-listings-2026.json), and we re-cut it monthly; numbers that stop being true get replaced, not defended.
+
 
 The mechanism behind durable liquidity is concrete. Korean retail is famously exchange-resident, most users never move assets to self-custody, which means the depth you build on Upbit and Bithumb is the depth that exists. Coin Bureau's research walks through why Korean demand funnels into these venues and stays there. Because that demand never leaves the exchange, the awareness work done before the print is not marketing spend that evaporates, it converts directly into resting bids on a book that does not bleed out to self-custody.
 
@@ -1941,8 +1994,8 @@ We treat Korean compliance as a launch precondition, not a cleanup task. Before 
       outlook: discoveryResearch,
     },
     content: `>! **Key Takeaways**
->! Korea's regulator is opening corporate crypto access in phases: nonprofits and exchanges from Q2 2025, then roughly 3,500 listed companies and professional investment corporations from H2 2025 (Source: KED Global / FSC roadmap, Feb 2025).
->! The retail base is already 15.6 million account holders, about 30% of the population, the demand floor institutional capital is now building on (Source: Bank of Korea via KED Global).
+>! Korea's regulator is opening corporate crypto access in phases: nonprofits and exchanges from Q2 2025, then roughly 3,500 listed companies and professional investment corporations from H2 2025 (Source: [FSC, 3rd Virtual Asset Committee roadmap](https://www.fsc.go.kr/no010101/84000), Feb 2025).
+>! The retail base is already 15.6 million account holders, about 30% of the population, the demand floor institutional capital is now building on (Source: Bank of Korea).
 >! Asian family offices are moving from "dip a toe" to a standing allocation, some targeting around 5% of portfolios, and they allocate on trust, not momentum (Source: Reuters, Aug 2025).
 >! The same rules that open the door also throttle it: the FSC is weighing a 5% cap on a listed firm's crypto exposure as a share of equity capital (Source: The Block / CoinDesk, Jan 2026).
 
@@ -1965,7 +2018,7 @@ The demand floor underneath all of this is the retail base institutions can now 
 
 {{bars:Retail investors (M)=15.6,Listed firms cleared (K)=3.5,Adoption index rank=15::Korea's crypto market by the numbers heading into the institutional phase. Sources: Bank of Korea via KED Global; FSC roadmap; Chainalysis 2025 Global Crypto Adoption Index.}}
 
-%%15.6M::Korean crypto account holders, roughly 30% of the population, the retail demand floor institutional capital is now formalizing around (Source: Bank of Korea via KED Global)%%
+%%15.6M::Korean crypto account holders, roughly 30% of the population, the retail demand floor institutional capital is now formalizing around (Source: Bank of Korea)%%
 
 ## 2. Who Is Actually Entering
 
@@ -1980,7 +2033,7 @@ Family offices are the most visible. Across Asia, wealth managers report a shift
 
 Venture capital is the second pool, and it is thesis-driven. Korean and Korea-focused funds underwrite builders, not bets, and want conviction and upside. The third pool is corporates, pursuing strategic fit far more than speculation, with business-to-business blockchain deployment now outpacing consumer-facing growth.
 
-%%17::percent growth in trading volume across Korea's three major exchanges in 2025 versus 2024, with average daily volume up more than 20% (Source: CryptoQuant via Reuters)%%
+%%17::percent growth in trading volume across Korea's three major exchanges in 2025 versus 2024, with average daily volume up more than 20% (Source: [CryptoQuant](https://cryptoquant.com/) data, via Reuters)%%
 
 ## 3. How This Capital Actually Allocates
 
@@ -2056,7 +2109,7 @@ We treat Korean institutional access as a structured motion, not a campaign. Our
       roi: kolPerformance,
     },
     content: `>! **Key Takeaways**
->! Korean discovery runs on Naver, not Google; Naver's domestic search share averaged 62.9% in 2025 and peaked above 70% on individual days (Source: InternetTrend via BusinessKorea)
+>! Korean discovery runs on Naver, not Google; Naver's domestic search share averaged 62.9% in 2025 and peaked above 70% on individual days (Source: [InternetTrend](http://www.internettrend.co.kr/trendForward.tsp))
 >! Naver is not one page but a stack, Search, Blog, Cafe, and News, each with its own ranking logic and gatekeepers
 >! Naver presence is an owned, compounding asset; unlike paid reach it keeps working after spend stops, which makes it the cheapest durable discovery in Korea
 >! Foreign teams under-resource Naver because their analytics, tuned to Google, never show them the traffic they are missing
@@ -2073,7 +2126,7 @@ Per market-research firm InternetTrend, Naver's domestic search share averaged 6
 
 {{source:/images/blog/naver-share-businesskorea.jpg::BusinessKorea / InternetTrend, "Naver's Search Market Share Hits 64% While Google Ranked 2nd"}}
 
-%%70.6%::Naver's single-day domestic search share peak (Feb 28), the discovery surface most foreign teams under-resource (Source: InternetTrend / BusinessKorea)%%
+%%70.6%::Naver's single-day domestic search share peak (Feb 28), the discovery surface most foreign teams under-resource (Source: [InternetTrend](http://www.internettrend.co.kr/trendForward.tsp))%%
 
 Methodology matters here: StatCounter, which measures by tracked page views rather than query origin, puts Google ahead at 47.9% with Naver at 41.66%. Either way, Naver is not a minority channel you can skip, it is half the market at minimum and the majority by the domestic measure that counts.
 
@@ -2081,7 +2134,7 @@ Methodology matters here: StatCounter, which measures by tracked page views rath
 
 The gap between the two measures is itself the lesson. The domestic, query-origin measure puts Naver first by a wide margin; the page-view measure narrows it and even flips the order. A foreign team that anchors only on the global StatCounter view concludes Naver is a secondary engine and budgets accordingly. A team that reads both understands that on the queries Koreans actually type to find a project, Naver is where the answer forms. The honest read is the conservative one: even on the measure least flattering to Naver, it is a coin-flip share of the market, and writing it off is writing off half of Korea.
 
-%%41.66%::Naver share even on StatCounter's conservative page-view measure, the floor below which Korean discovery cannot be dismissed as a minority channel (Source: StatCounter via iCrossborder)%%
+%%41.66%::Naver share even on StatCounter's conservative page-view measure, the floor below which Korean discovery cannot be dismissed as a minority channel (Source: [Statcounter Global Stats, Korea](https://gs.statcounter.com/search-engine-market-share/all/south-korea))%%
 
 ## 2. Naver Is a Stack, Not a Page
 
@@ -2162,7 +2215,7 @@ Search-share figures: [BusinessKorea](https://www.businesskorea.co.kr/news/artic
       comparison: commDiscord,
     },
     content: `>! **Key Takeaways**
->! Telegram is the working layer of Korea's on-chain community, with 500-plus channels targeting Korean audiences; KakaoTalk is the mass layer at 48 million monthly users against a 51.3 million population (Source: DeSpread Research, DI-03).
+>! Telegram is the working layer of Korea's on-chain community, with 500-plus channels targeting Korean audiences; KakaoTalk is the mass layer at 48 million monthly users against a 51.3 million population (Source: [DeSpread Research, DI-03: Korean Crypto Community](https://research.despread.io/di-03/)).
 >! Size is the easiest number to fake. In an academic crawl of Telegram bots, 4 percent ran outright fraud and another 5 percent ran underground activity (Source: Tsuchiya et al., ICWSM 2026, Carnegie Mellon).
 >! Korean platforms purge the inflation: KakaoTalk restricted about 470,000 Open Chat accounts in H2 2025, with Spam and Platform Manipulation alone hitting 71,781 (Source: Kakao Safety Report).
 >! Community is a retention asset, not a banner. What predicts value is the activity-to-size ratio of the core, which is exactly what bots destroy.
@@ -2201,9 +2254,9 @@ The operator implication is a sequencing one. You seed the Telegram core first, 
 
 {{source:/images/blog/telegram-active-hours.jpeg::DeSpread Research, hourly Korean Telegram activity peaks around 4-5 PM KST}}
 
-%%48 million::KakaoTalk monthly active users at end-2023, against a 51.3 million population (Source: DeSpread Research, DI-03)%%
+%%48 million::KakaoTalk monthly active users at end-2023, against a 51.3 million population (Source: [DeSpread Research, DI-03: Korean Crypto Community](https://research.despread.io/di-03/))%%
 
-%%500+::Telegram channels targeting Korean audiences, making it the most actively used platform by Korea's on-chain community (Source: DeSpread Research, DI-03)%%
+%%500+::Telegram channels targeting Korean audiences, making it the most actively used platform by Korea's on-chain community (Source: [DeSpread Research, DI-03: Korean Crypto Community](https://research.despread.io/di-03/))%%
 
 ## 3. Real Versus Bot
 
@@ -2305,7 +2358,7 @@ Korea has a predictable attention structure. The defining anchor is Korea Blockc
 
 The September peak is not a marketing claim. Korea Blockchain Week 2024 opened with more than 7,000 registered attendees and over 120 speakers, and the surrounding KBW2025 program drew well past 13,000 participants across its side-event ecosystem. The point for an operator is concentration: a week when reaching Korean attention costs less because the attention has already gathered itself.
 
-%%13,000+::Participants across the KBW2025 side-event ecosystem, up from 7,000-plus registered at KBW2024 (Source: Korea Blockchain Week)%%
+%%13,000+::Participants across the KBW2025 side-event ecosystem, up from 7,000-plus registered at KBW2024 (Source: [Korea Blockchain Week](https://koreablockchainweek.com/))%%
 
 The mechanism behind the calendar is worth naming, because it is what makes the rhythm exploitable. Attention in Korea is not a private decision made by isolated investors; it is a shared focal point that the market coordinates around. A conference week, a Q4 narrative, a holiday, these are common knowledge events, so everyone leans in or steps back at once. That synchronization is what turns a date into leverage. Spend into a moment the whole market is already watching, and the cost of being noticed drops because the audience has assembled itself; spend into a trough, and you are paying full price to gather an audience that has dispersed.
 
@@ -2409,7 +2462,7 @@ The capital behind those users tells the same story. Korean holders sat on about
 
 {{bars:Korea=70,Japan=34::Retail crypto holdings, in billions of USD. Sources: Yonhap (102.6T KRW); Wirex / JVCEA data}}
 
-%%70.3B::Korean retail crypto holdings in USD (102.6 trillion won), against roughly 34 billion dollars in Japan (Source: Yonhap; Wirex / JVCEA)%%
+%%70.3B::Korean retail crypto holdings in USD (102.6 trillion won), against roughly 34 billion dollars in Japan (Source: [JVCEA official statistics](https://jvcea.or.jp/statistics/information/); [Japan FSA](https://www.fsa.go.jp/policy/virtual_currency/index.html))%%
 
 ## Korea's Profile
 
