@@ -47,15 +47,16 @@ Other verified curves: stripe cubic-bezier(.25,1,.5,1) .3s (23x) · raycast cubi
 - .btn-glass — raycast glass button (nav pills)
 - .bg-dots — vercel dot grid (coverage section)
 - fading scrollbar — activetheory --baropacity (App.tsx scroll listener)
+- .cb-cursor — cuberto cursor system (CustomCursor.tsx, data-cursor-text)
+- lusion menu double-text roll (Navbar desktop menu links)
+- exoape staggered grid (ProjectCardsSection even-column offset)
 - Work-row accent fill — zajno: row hover floods brand color, text flips dark, .2s
 
 ## Not yet ported (next candidates)
-- Lusion nav double-text roll + pill bg (scale .85->1, opacity .1)
 - Lusion preloader odometer percent digits clamp(7em,8vw,20em)
 - Hello Monday inline video slide-up on list rows
 - Buzzworthy follow-cursor pill with rolling label (work slider)
-- Cuberto card video-on-hover + cursor system (data-cursor-text)
-- Exo Ape asymmetric 12-col work grid (explicit grid-line placement)
+- Cuberto card video-on-hover
 - Vercel conic rotating border, shimmer text; Stripe arrow-in nav hover, dashed hairlines
 - Raycast kbd keycap, noise data-URI, mouse-follow spotlight (--gradient-x/y)
 - Competitor trust devices: per-service outcome stats + verb CTAs (coinbound), one-giant-number case cards (marketacross), live coverage wall (marketacross), named-person Calendly section (lunar), homepage pricing (ninjapromo)
