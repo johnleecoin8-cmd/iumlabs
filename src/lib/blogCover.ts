@@ -1,5 +1,33 @@
 import { categoryHslParts } from "@/lib/categoryTheme";
 
+// Photo pool for dithered-photograph covers (the reference technique:
+// a real photograph halftoned in a single hue). Iconic, no faces.
+import phSeoulGangnam from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import phSeoulDdp from "@/assets/backgrounds/seoul-ddp-night.jpg";
+import phSeoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+import phSeoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
+import phPalace from "@/assets/backgrounds/korea-palace-modern.jpg";
+import phMoon from "@/assets/backgrounds/realistic-moon.png";
+import phSaturn from "@/assets/backgrounds/saturn-rings.jpg";
+import phMars from "@/assets/backgrounds/mars-surface.jpg";
+import phNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
+import phEarth from "@/assets/backgrounds/earth-space.jpg";
+import phSun from "@/assets/backgrounds/sun-corona.jpg";
+
+const PHOTO_POOL = [
+  phSeoulGangnam, phSeoulDdp, phSeoulHanriver, phSeoulTech, phPalace,
+  phMoon, phSaturn, phMars, phNebula, phEarth, phSun,
+];
+const IMG_CACHE: Record<string, HTMLImageElement> = {};
+function poolImage(url: string): HTMLImageElement {
+  if (!IMG_CACHE[url]) {
+    const im = new Image();
+    im.src = url;
+    IMG_CACHE[url] = im;
+  }
+  return IMG_CACHE[url];
+}
+
 /**
  * Generative halftone cover engine for the blog.
  *
@@ -762,6 +790,56 @@ function fillPremiumBackdrop(ctx: CanvasRenderingContext2D, W: number, H: number
   }
 }
 
+/** The reference technique: a real photograph, seeded crop, luma-normalized,
+ * halftoned edge-to-edge in the category hue. Dot radius carries the tone. */
+function renderPhotoHalftone(
+  ctx: CanvasRenderingContext2D, W: number, H: number,
+  img: HTMLImageElement, rand: () => number,
+  hue: number, catSat: number, catLig: number,
+) {
+  const off = document.createElement("canvas"); off.width = W; off.height = H;
+  const o = off.getContext("2d")!;
+  // seeded cover-crop: zoom 1.05-1.4 with a seeded focal point
+  const zoom = 1.05 + rand() * 0.35;
+  const iw = img.naturalWidth, ih = img.naturalHeight;
+  const scale = Math.max(W / iw, H / ih) * zoom;
+  const dw = iw * scale, dh = ih * scale;
+  const dx = -(dw - W) * rand();
+  const dy = -(dh - H) * rand();
+  o.drawImage(img, dx, dy, dw, dh);
+  const data = o.getImageData(0, 0, W, H).data;
+
+  // luma histogram stretch (5th-95th percentile-ish via coarse sampling)
+  let lo = 1, hi = 0;
+  const samples: number[] = [];
+  for (let i = 0; i < data.length; i += 4 * 97) {
+    samples.push((0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2]) / 255);
+  }
+  samples.sort((a, b) => a - b);
+  lo = samples[Math.floor(samples.length * 0.04)] ?? 0;
+  hi = samples[Math.floor(samples.length * 0.96)] ?? 1;
+  const span = Math.max(0.12, hi - lo);
+
+  ctx.fillStyle = "#050505";
+  ctx.fillRect(0, 0, W, H);
+  const cols = 54 + Math.floor(rand() * 16);
+  const s2 = W / cols, rows = Math.ceil(H / s2) + 1, half = s2 / 2;
+  const satPct = Math.round(catSat * 100);
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const cx = (c + 0.5) * s2, cy = (r + 0.5) * s2;
+      const px = Math.min(W - 1, Math.round(cx)), py = Math.min(H - 1, Math.round(cy));
+      const idx = (py * W + px) * 4;
+      const raw = (0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2]) / 255;
+      const L = Math.min(1, Math.max(0, (raw - lo) / span));
+      const radius = half * (0.14 + 0.88 * Math.pow(L, 0.9));
+      const lig = 10 + Math.pow(L, 0.92) * (catLig * 100 + 30 - 10);
+      ctx.fillStyle = `hsl(${hue}, ${satPct}%, ${Math.min(95, Math.round(lig))}%)`;
+      ctx.beginPath(); ctx.arc(cx, cy, radius, 0, TAU); ctx.fill();
+    }
+  }
+}
+
 export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string) {
   const W = canvas.width, H = canvas.height;
   const ctx = canvas.getContext("2d");
@@ -770,7 +848,23 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
   const rand = mulberry32(xmur3(k)());
   const topic = route(k, category);
 
-  // ---- 1) Compose a full-bleed GRAYSCALE SCENE offscreen (the "photo") ----
+  // Photo-dither path (the reference look): seeded photo + seeded crop +
+  // category hue. Falls back to the procedural scene while loading/on error.
+  const cat0 = categoryHslParts(category);
+  const hue0 = (category ? cat0.h : (topic ? topic.hue : 220)) + (rand() - 0.5) * 14;
+  const photoUrl = PHOTO_POOL[Math.floor(rand() * PHOTO_POOL.length)];
+  const cropRand = mulberry32(xmur3(k + "|crop")());
+  const img = poolImage(photoUrl);
+  const paintPhoto = () => {
+    if (canvas.width !== W || canvas.height !== H) return; // stale after resize
+    renderPhotoHalftone(ctx, W, H, img, mulberry32(xmur3(k + "|crop")()),
+      hue0, category ? cat0.s : 0.55, category ? cat0.l : 0.62);
+  };
+  if (img.complete && img.naturalWidth > 0) { paintPhoto(); return; }
+  img.addEventListener("load", paintPhoto, { once: true });
+  void cropRand;
+
+  // ---- Fallback: full-bleed GRAYSCALE SCENE offscreen ----
   // Book-cover halftone: a seeded landscape — sky gradient, one celestial
   // object (the topic glyph or a moon disc), and 2-3 silhouette ridges —
   // then the whole canvas is dithered edge-to-edge, dot size carrying luma.
