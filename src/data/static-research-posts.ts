@@ -88,7 +88,7 @@ export const staticResearchPosts = [
   {
     id: "static-korea-radar-robinhood-chain",
     slug: "robinhood-chain-korea-radar-tokenized-stocks-2026",
-    title: "Korea Radar: Robinhood Chain Launched Today. Korea Is the Market It Cannot Touch, Yet",
+    title: "Korea Radar: Robinhood Chain Just Launched. Korea Is the Market It Cannot Touch, Yet",
     image: chartGrowth2025,
     coverMark: robinhoodLogo,
     date: "July 2, 2026",
@@ -100,7 +100,7 @@ export const staticResearchPosts = [
     excerpt: "Robinhood put its own Arbitrum-based L2 on mainnet today with tokenized stocks, Uniswap and Chainlink at launch, and dYdX rebranding as Arcus to join it. The uncomfortable irony: the retail market most obsessed with US stocks on the planet, Korea, is the one it cannot legally reach. Here is what that gap means, and who gets to arbitrage it.",
     tags: ["Robinhood Chain", "tokenized stocks", "Korea Radar", "RWA Korea", "Arbitrum L2", "Arcus dYdX", "STO Korea"],
     content: `>! **Key Takeaways**
->! Robinhood Chain went to public mainnet on July 2, an Arbitrum-based L2 built for tokenized stocks and DeFi, launching with Uniswap, Chainlink, Alchemy, BitGo, and a 1inch integration, and with dYdX rebranding as Arcus to deploy perpetuals on it this month
+>! Robinhood announced the Robinhood Chain public mainnet on July 1 at its London keynote, an Arbitrum-based L2 built for tokenized stocks and DeFi, launching with Uniswap, Chainlink, Alchemy, BitGo, and a 1inch integration, and with dYdX Labs launching Arcus on it this month
 >! The strategic novelty is distribution-first chain design: Robinhood ships a chain to tens of millions of existing brokerage users instead of shipping infrastructure and praying for users
 >! Korean retail is the most aggressive US-stock-buying retail base in the world, which makes Korea the single best product-market fit for 24/7 tokenized equities, and simultaneously the market Robinhood Chain cannot legally serve
 >! For every project watching: the Korea gap is structural, not temporary, and the winners will be the ones who build the compliant bridge rather than wait for it
@@ -109,13 +109,13 @@ This is the first entry in Korea Radar, a recurring series where we take the pro
 
 ## 1. What Actually Shipped
 
-Robinhood launched the public mainnet of Robinhood Chain on July 2 at its London keynote, an Arbitrum-based Layer 2 purpose-built for tokenized stocks and DeFi. Launch partners are not testnet names: Uniswap for trading, Chainlink for oracles, Alchemy and BitGo for infrastructure and custody, and 1inch integrating swaps and RWA liquidity from day one. Reporting around the launch cites 24/7 tokenized stock trading and DeFi lending yields around 7% APY at launch. The bigger signal came a few hours later: dYdX Labs is rebranding dYdX as Arcus and deploying on Robinhood Chain this month, bringing perpetuals and tokenized-stock derivatives onto a brokerage-owned network. HOOD stock rallied on the announcement (Source: CryptoBriefing, CCN, TradingView, July 2, 2026).
+Robinhood announced the [public mainnet of Robinhood Chain](https://robinhood.com/us/en/newsroom/robinhood-accelerates-global-expansion-robinhood-chain-mainnet-stock-tokens-agentic-trading/) on July 1 at its London keynote, [Robinhood Presents: The World is Flat](https://robinhood.com/us/en/newsroom/robinhood-presents-the-world-is-flat/), an Arbitrum-based Layer 2 purpose-built for tokenized stocks and DeFi; [Arbitrum's own announcement](https://blog.arbitrum.io/robinhood-chain-mainnet/) confirms the chain is built on the Arbitrum Platform. Launch partners are not testnet names: Uniswap for trading, Chainlink for oracles, Alchemy and BitGo for infrastructure and custody, and [1inch integrating swaps and tokenized-RWA liquidity](https://1inch.com/blog/post/1inch-lands-on-robinhood-chain) from day one. The bigger signal came alongside: dYdX Labs is launching [Arcus](https://arcus.xyz/blog/arcus-x-robinhood-trade-stocks-perpetuals-24-7), a new stocks-and-perpetuals DEX built with Robinhood on Robinhood Chain, while the [community-owned dYdX Chain continues unchanged](https://www.dydx.foundation/blog/dydx-chain-community-owned-unchanged). HOOD stock rallied on the announcement.
 
-%%July 2::Robinhood Chain public mainnet date, launched at the London "The World is Flat" keynote with Uniswap, Chainlink, Alchemy, BitGo, and 1inch (Source: CryptoBriefing)%%
+%%July 1::Robinhood Chain public mainnet announcement at the London "The World is Flat" keynote, with Uniswap, Chainlink, Alchemy, BitGo, and 1inch at launch (Source: Robinhood Newsroom)%%
 
 ## 2. Why This Launch Is Different
 
-Every chain launch of the last cycle followed the same script: raise, build infrastructure, incentivize liquidity, and hope users arrive. Robinhood inverted it. The chain ships into an existing brokerage base that reporting around the 1inch integration puts at 27 million users, with a regulated on-ramp already in their pocket (Source: CCN). That is distribution-first chain design, and it moves the competitive question from "whose tech is better" to "whose users are closer." For every infrastructure project still marketing to developers first, this is the uncomfortable benchmark: the fastest-growing chains of this cycle are increasingly the ones bolted onto existing distribution, an exchange, a broker, a wallet, a super-app.
+Every chain launch of the last cycle followed the same script: raise, build infrastructure, incentivize liquidity, and hope users arrive. Robinhood inverted it. The chain ships into Robinhood's existing brokerage base of tens of millions of funded accounts, with a regulated on-ramp already in their pocket (Source: Robinhood Newsroom; user-scale figure per 1inch's launch post). That is distribution-first chain design, and it moves the competitive question from "whose tech is better" to "whose users are closer." For every infrastructure project still marketing to developers first, this is the uncomfortable benchmark: the fastest-growing chains of this cycle are increasingly the ones bolted onto existing distribution, an exchange, a broker, a wallet, a super-app.
 
 ## 3. The Korea Irony
 
@@ -145,7 +145,7 @@ Robinhood Chain is the strongest distribution-first chain launch yet, and its mo
 
 Sources
 
-CryptoBriefing, "Robinhood launches Arbitrum-based Layer 2 mainnet at London keynote," July 2026. CCN, "1inch Integrates Robinhood Chain to Bring Tokenized Stocks and RWAs to 27M Users," July 2026. TradingView/Coindar launch notes and dYdX-Arcus rebrand coverage, July 2026. Incrypted, Robinhood Chain launch partner list, July 2026. Korea framework context: ium Labs research desk, see linked internal analyses on STO, kimchi premium, VAUPA, and the 2027 gains tax.`,
+Primary: Robinhood Newsroom, "Robinhood Accelerates Global Expansion with Robinhood Chain Mainnet, Stock Tokens, Agentic Trading" (July 1, 2026) and the "Robinhood Presents: The World is Flat" event page. Arbitrum official blog, "Robinhood Chain mainnet is live, built with the Arbitrum Platform." Arcus, "Arcus x Robinhood: Trade Stocks and Perpetuals, 24/7." dYdX Foundation, "dYdX Chain: Community Owned, Unchanged." 1inch, "1inch lands on Robinhood Chain." All linked inline. Korea framework context: ium Labs research desk, see linked internal analyses on STO, kimchi premium, VAUPA, and the 2027 gains tax.`,
   },
   {
     id: "static-korea-gtm-index-2026",
