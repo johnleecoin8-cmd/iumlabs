@@ -1462,3 +1462,54 @@ body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
   .text-roll > span { transition: none; }
   .link-sweep::before { animation: none; }
 }
+
+/* ============================================
+   Reference batch 3 (2026-07-02)
+   ============================================ */
+
+/* buzzworthystudio.com mask-link: a colored duplicate of the text wipes in
+   via clip-path while the base wipes out — their exact 500ms
+   cubic-bezier(1,0,0,1) with the .1s delay on the incoming layer. */
+.mask-swap {
+  position: relative;
+  display: inline-block;
+}
+.mask-swap > span {
+  display: inline-block;
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 500ms cubic-bezier(1, 0, 0, 1);
+}
+.mask-swap::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  color: hsl(var(--brand));
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 500ms cubic-bezier(1, 0, 0, 1);
+}
+.group:hover .mask-swap > span,
+.mask-swap:hover > span {
+  clip-path: inset(0 100% 0 0);
+}
+.group:hover .mask-swap::before,
+.mask-swap:hover::before {
+  transition-delay: 0.1s;
+  clip-path: inset(0 0 0 0);
+}
+
+/* activetheory.net fading scrollbar: thumb opacity driven by --baropacity,
+   raised on scroll by JS, decays back to 0 when idle. Their exact recipe. */
+:root { --baropacity: 0; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, var(--baropacity, 0));
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mask-swap > span, .mask-swap::before { transition: none; }
+}

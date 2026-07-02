@@ -59,8 +59,10 @@ const FooterLinksSection = () => {
             Got a project in Korea?
           </p>
           <span className="footer-cta-type flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-white">
-            <span className="link-underline [background-size:0_0.045em] group-hover:[background-size:100%_0.045em] pb-[0.06em]">
-              Let&apos;s talk
+            {/* buzzworthystudio.com mask-swap: brand-colored duplicate wipes
+                across on hover (500ms cubic-bezier(1,0,0,1)) */}
+            <span className="mask-swap" data-text="Let's talk">
+              <span>Let&apos;s talk</span>
             </span>
             <ArrowUpRight
               className="w-[0.8em] h-[0.8em] text-primary transition-transform duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"

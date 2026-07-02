@@ -306,6 +306,20 @@ const AppContent = () => {
     document.body.classList.toggle('intro-done', !showIntro);
   }, [showIntro]);
 
+  // activetheory.net fading scrollbar: thumb appears while scrolling
+  // (--baropacity), decays ~700ms after the last scroll event.
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+    const root = document.documentElement;
+    const onScroll = () => {
+      root.style.setProperty('--baropacity', '0.35');
+      clearTimeout(timer);
+      timer = setTimeout(() => root.style.setProperty('--baropacity', '0'), 700);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(timer); };
+  }, []);
+
   const handleIntroComplete = useCallback(() => {
     setShowIntro(false);
     requestAnimationFrame(() => {
