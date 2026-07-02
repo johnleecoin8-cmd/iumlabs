@@ -117,7 +117,7 @@ const HeroSection = () => {
     ErrorOverlay,
     DebugBanner,
   } = useVideoPlayer({
-    src: '/videos/hero-background.mp4?v=20260625',
+    src: heroVideoAsset.url,
     poster: '/images/posters/hero-background-poster.jpg',
     autoPlay: true,
     preload: 'auto',
