@@ -11,6 +11,7 @@ import listingImage from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImage from "@/assets/platforms/res-market.jpg";
 import exchangeImage from "@/assets/services/cex-paid-ads.webp";
 import capitalImage from "@/assets/platforms/res-thesis.jpg";
+import complianceImage from "@/assets/services/compliance-hero.avif";
 
 const services = [
   {
