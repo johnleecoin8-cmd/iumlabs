@@ -24,6 +24,7 @@ const AUTHORS: Record<string, { img?: string; role?: string }> = {
   Tobi: { img: "/images/authors/tobi.webp" },
   James: { img: "/images/authors/james.jpg" },
   David: { img: "/images/authors/david.webp", role: "Co-founder" },
+  Helen: { img: "/images/authors/helen.jpeg" },
 };
 
 // Helper function to calculate read time from content
