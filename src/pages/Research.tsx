@@ -132,7 +132,7 @@ const Research = () => {
             <div className="max-w-2xl">
               <div className="flex items-center gap-3 mb-3 sm:mb-4">
                 <span className="text-[10px] sm:text-xs text-white/40 font-mono">01</span>
-                <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.25em]">Research & Insights</span>
+                <span className="text-[10px] sm:text-xs text-white/40 uppercase tracking-[0.25em]">ium Research</span>
               </div>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-[1.05] tracking-tight">
                 Web3 Market

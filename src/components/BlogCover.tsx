@@ -67,7 +67,7 @@ export default function BlogCover({
           </TitleTag>
           <div className="absolute bottom-[5.5%] left-[7%] right-[7%] flex items-baseline justify-between">
             <span className="font-sans font-semibold tracking-wide text-white/90" style={{ fontSize: "clamp(9px,2.3cqi,13px)" }}>
-              ium Labs
+              ium Research
             </span>
             <span className="font-sans tracking-wider text-white/55" style={{ fontSize: "clamp(9px,2.3cqi,13px)" }}>
               {year}
