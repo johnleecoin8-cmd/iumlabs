@@ -56,14 +56,10 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       fontsReady.current = true;
     }
 
-    // Loader gate relaxed (John-approved 2026-07-02): only the videos of the
-    // first two viewports (hero + about backgrounds) block the reveal. The six
-    // Selected-Work clips still start downloading here (fire-and-forget cache
-    // warm) but stream in the background — they sit below the fold behind
-    // posters, so first paint no longer waits ~20MB on slow connections.
-    // Match the exact versioned URL each <video> requests so the fetch warms
-    // the same cache entry (no double download). Desktop (>=1024) plays the
-    // -hd variant, so gate on whichever variant this device will request.
+    // Loader gate now includes the 12 "01 What we do" service card images so
+    // they are in cache when the hero appears, instead of lazily loading on
+    // scroll. The hero + about videos still gate the reveal, and the six
+    // Selected-Work clips still warm in the background without blocking.
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
     const GATE_VIDEOS = [
@@ -78,15 +74,25 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
     // Warm the cache without blocking the reveal.
     BACKGROUND_VIDEOS.forEach((u) => { fetch(u, { cache: 'force-cache' }).catch(() => {}); });
 
-    const heroImagePromise = new Promise<void>((resolve) => {
+    const preloadImage = (src: string) => new Promise<void>((resolve) => {
       const img = new Image();
       img.onload = () => resolve();
       img.onerror = () => resolve();
-      img.src = heroImage.url;
+      img.src = src;
     });
+
+    const heroImagePromise = preloadImage(heroImage.url);
+
+    const SERVICE_IMAGES = [
+      gtmImage, communityImage, kolImage, prImage, seoAdsImage,
+      deepResearchImage, amaImage, listingImage, liquidityImage,
+      exchangeImage, capitalImage, complianceImage,
+    ];
+    const serviceImagePromises = SERVICE_IMAGES.map((src) => preloadImage(src));
 
     const GATED: Array<Promise<unknown>> = [
       heroImagePromise,
+      ...serviceImagePromises,
       ...GATE_VIDEOS.map((u) => fetch(u, { cache: 'force-cache' }).then((r) => r.blob())),
     ];
 
