@@ -19,7 +19,7 @@ export default {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
         // Unified: headings share the body sans (was 'DM Sans') so the whole site reads as one type system.
-        display: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        display: ['Clash Display', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         mono: ['IBM Plex Mono', 'ui-monospace', 'monospace'],
       },
       colors: {

@@ -152,13 +152,13 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <p className="font-display text-[clamp(2.5rem,8.2vw,7.25rem)] font-extrabold leading-[0.94] sm:leading-[0.9] tracking-[-0.035em] sm:tracking-[-0.04em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
+          <p className="font-display text-[clamp(2.4rem,7.4vw,6.5rem)] font-semibold leading-[0.96] sm:leading-[0.92] tracking-[-0.02em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
             <span className="reveal-line"><span className="text-gradient-hero">Your Crypto Ecosystem</span></span>
             <span className="reveal-line"><span className="text-gradient-hero">Growth Partner</span></span>
           </p>
 
           {/* Subtext */}
-          <h2 className="reveal-fade reveal-d1 text-[14px] sm:text-xl md:text-2xl text-white/75 max-w-5xl mx-auto mb-8 sm:mb-14 font-normal tracking-[-0.01em] leading-[1.55] px-2 sm:px-0">
+          <h2 className="reveal-fade reveal-d1 font-sans text-[14px] sm:text-xl md:text-2xl text-white/75 max-w-5xl mx-auto mb-8 sm:mb-14 font-normal tracking-[-0.01em] leading-[1.55] px-2 sm:px-0">
 Most agencies sell you a list. We embed operators.<br className="hidden sm:block" /><span className="sm:hidden"> </span>Korea-native, Asia-wide.
           </h2>
 

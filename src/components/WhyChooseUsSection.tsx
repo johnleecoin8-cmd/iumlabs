@@ -84,7 +84,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true, margin: "-50px" }}>
 
           {/* Headline, each line slides in separately */}
-          <h2 className="font-display text-[clamp(1.75rem,6vw,5.25rem)] font-extrabold text-white mb-6 sm:mb-9 tracking-[-0.035em] sm:tracking-[-0.045em] leading-[0.95] sm:leading-[0.92] sm:whitespace-nowrap">
+          <h2 className="font-display text-[clamp(1.75rem,6vw,5.25rem)] font-semibold text-white mb-6 sm:mb-9 tracking-[-0.02em] leading-[0.95] sm:leading-[0.92] sm:whitespace-nowrap">
             <motion.span className="block" variants={headlineLineVariants}>
               Seoul Moves Fast.
             </motion.span>
@@ -128,7 +128,7 @@ const WhyChooseUsSection = () => {
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 {/* vercel.com dark-hero gradient text, applied to stat numbers */}
-                <div className="text-gradient-hero text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-[-0.035em] leading-none mb-2 sm:mb-3">
+                <div className="text-gradient-hero font-display text-3xl sm:text-5xl md:text-6xl font-semibold tracking-[-0.02em] leading-none mb-2 sm:mb-3">
                   {stat.value}
                 </div>
                 <div className="text-[10px] sm:text-xs md:text-sm text-white/40 font-medium uppercase tracking-[0.2em]">

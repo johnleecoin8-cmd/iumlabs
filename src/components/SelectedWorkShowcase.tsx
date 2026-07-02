@@ -435,7 +435,7 @@ const DesktopShowcase = () => {
                     <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-200 group-hover:text-black/60 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className={`flex-1 text-base sm:text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] leading-[1.05] transition-colors duration-200 group-hover:text-black ${activeIndex === i ? 'text-white' : 'text-white/60'}`}>
+                    <span className={`flex-1 font-display text-base sm:text-2xl lg:text-3xl font-semibold tracking-[-0.01em] leading-[1.05] transition-colors duration-200 group-hover:text-black ${activeIndex === i ? 'text-white' : 'text-white/60'}`}>
                       {project.name}
                     </span>
                     <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-200 text-left group-hover:text-black/60 ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>

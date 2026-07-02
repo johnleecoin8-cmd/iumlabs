@@ -1612,3 +1612,15 @@ body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
   * { cursor: none !important; }
   input, textarea, select, [contenteditable="true"] { cursor: auto !important; }
 }
+
+
+/* ============================================
+   Display face: Clash Display (John-approved 2026-07-02).
+   Free analog of the studio-consensus grotesks (Suisse Intl / Aeonik /
+   TWK Lausanne). Body stays Inter; display surfaces switch.
+   Weight cap is 700 (no 800 in Clash) — browsers clamp higher requests.
+   ============================================ */
+h1, h2, h3,
+.footer-cta-type {
+  font-family: 'Clash Display', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
