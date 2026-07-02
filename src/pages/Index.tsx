@@ -15,6 +15,7 @@ const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
+const TeamStripSection = lazy(() => import("@/components/TeamStripSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
@@ -162,10 +163,22 @@ const Index = () => {
         </MobileDeferredSection>
       </section>
 
+      {/* Team */}
+      <section id="team" className="border-t border-white/[0.07]">
+        <SectionHeader
+          index="05"
+          heading={<>The <span className="text-white/40">operators.</span></>}
+          subtitle="Binance, KuCoin, Upbit alumni. Real people, embedded in your team."
+        />
+        <Suspense fallback={<SectionLoader />}>
+          <TeamStripSection />
+        </Suspense>
+      </section>
+
       {/* Coverage — vercel.com dot-grid section background */}
       <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
-          index="05"
+          index="06"
           heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">

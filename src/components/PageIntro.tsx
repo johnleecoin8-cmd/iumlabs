@@ -7,10 +7,10 @@ interface PageIntroProps {
 }
 
 const MIN_DISPLAY_TIME = 600;
-// Failsafe only: the loader is meant to wait until EVERY home video has fully
-// downloaded. This cap exists purely so a dead/stalled network can never hang
+// Failsafe only: the loader gates on the first two viewports (hero + about
+// videos). This cap exists purely so a dead/stalled network can never hang
 // the page forever; on any working connection the real gate is asset load.
-const MAX_LOAD_TIME = 60000;
+const MAX_LOAD_TIME = 20000;
 const VIDEO_POLL_INTERVAL = 200;
 
 const PageIntro = ({ onComplete }: PageIntroProps) => {
@@ -44,26 +44,27 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
       fontsReady.current = true;
     }
 
-    // The intro must not lift until EVERY video the home page will play has
-    // fully downloaded into the HTTP cache, so the page never reveals while a
-    // clip is still buffering. We fetch each one to completion (await blob) and
-    // only mark videoReady once all of them, plus the hero image, are in.
-    // Match the exact versioned URL each <video> requests so the fetch warms the
-    // same cache entry (no double download). Desktop (>=1024) plays the -hd
-    // variant, so gate on whichever variant this device will actually request.
+    // Loader gate relaxed (John-approved 2026-07-02): only the videos of the
+    // first two viewports (hero + about backgrounds) block the reveal. The six
+    // Selected-Work clips still start downloading here (fire-and-forget cache
+    // warm) but stream in the background — they sit below the fold behind
+    // posters, so first paint no longer waits ~20MB on slow connections.
+    // Match the exact versioned URL each <video> requests so the fetch warms
+    // the same cache entry (no double download). Desktop (>=1024) plays the
+    // -hd variant, so gate on whichever variant this device will request.
     const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
     const hq = (u: string) => (isDesktop ? hdVariant(u) : u);
-    // Every video on the home route: hero + about backgrounds and the six
-    // Selected-Work gallery clips. Keep in sync with the home sections.
-    const HOME_VIDEOS = [
+    const GATE_VIDEOS = [
       appendVersion(hq('/videos/hero-background.mp4')),
       appendVersion(hq('/videos/about-background.mp4?v=3')),
-      ...[
-        '/videos/projects/aptos-hero.mp4', '/videos/projects/bnb-hero.mp4',
-        '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
-        '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
-      ].map((u) => appendVersion(hq(u))),
     ];
+    const BACKGROUND_VIDEOS = [
+      '/videos/projects/aptos-hero.mp4', '/videos/projects/bnb-hero.mp4',
+      '/videos/projects/bybit-hero.mp4', '/videos/projects/sahara-hero.mp4',
+      '/videos/projects/kite-hero.mp4', '/videos/projects/mantra-hero.mp4',
+    ].map((u) => appendVersion(hq(u)));
+    // Warm the cache without blocking the reveal.
+    BACKGROUND_VIDEOS.forEach((u) => { fetch(u, { cache: 'force-cache' }).catch(() => {}); });
 
     const heroImagePromise = new Promise<void>((resolve) => {
       const img = new Image();
@@ -74,7 +75,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
 
     const GATED: Array<Promise<unknown>> = [
       heroImagePromise,
-      ...HOME_VIDEOS.map((u) => fetch(u, { cache: 'force-cache' }).then((r) => r.blob())),
+      ...GATE_VIDEOS.map((u) => fetch(u, { cache: 'force-cache' }).then((r) => r.blob())),
     ];
 
     totalAssets.current = GATED.length;
