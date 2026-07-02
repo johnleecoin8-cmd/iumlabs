@@ -1,3 +1,4 @@
+import robinhoodLogo from "@/assets/logos/robinhood.png";
 import stablecoinImg from "@/assets/blog/ecosystem-chart-institutional.jpg";
 import defiImg from "@/assets/blog/defai-ai-agents.jpg";
 import memecoinImg from "@/assets/blog/sui-chart-tvl-price.jpg";
@@ -89,6 +90,7 @@ export const staticResearchPosts = [
     slug: "robinhood-chain-korea-radar-tokenized-stocks-2026",
     title: "Korea Radar: Robinhood Chain Launched Today. Korea Is the Market It Cannot Touch, Yet",
     image: chartGrowth2025,
+    coverMark: robinhoodLogo,
     date: "July 2, 2026",
     readTime: "11 min read",
     category: "Projects",

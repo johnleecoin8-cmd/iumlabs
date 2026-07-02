@@ -804,6 +804,7 @@ function renderPhotoHalftone(
   img: HTMLImageElement, rand: () => number,
   hue: number, catSat: number, catLig: number,
   fixed?: CoverAssignment,
+  mark?: HTMLCanvasElement | HTMLImageElement | null,
 ) {
   const off = document.createElement("canvas"); off.width = W; off.height = H;
   const o = off.getContext("2d")!;
@@ -818,6 +819,31 @@ function renderPhotoHalftone(
   if (flip) { o.save(); o.translate(W, 0); o.scale(-1, 1); }
   o.drawImage(img, flip ? W - dx - dw : dx, dy, dw, dh);
   if (flip) o.restore();
+  // Subject mark (project logo or topic glyph) composited INTO the photo
+  // before dithering, so it prints as part of the halftone like a moon:
+  // a dark pocket behind it for contrast, then the mark lifted to bright.
+  if (mark) {
+    const mw2 = (mark as HTMLImageElement).naturalWidth || (mark as HTMLCanvasElement).width;
+    const mh2 = (mark as HTMLImageElement).naturalHeight || (mark as HTMLCanvasElement).height;
+    if (mw2 > 0 && mh2 > 0) {
+      const targetW = W * (0.34 + rand() * 0.16);
+      const ratio = mh2 / mw2;
+      const targetH = targetW * ratio;
+      const mx = W * (0.28 + rand() * 0.44);
+      const my = H * (0.26 + rand() * 0.3);
+      const pocket = o.createRadialGradient(mx, my, 0, mx, my, Math.max(targetW, targetH) * 0.85);
+      pocket.addColorStop(0, "rgba(0,0,0,0.62)");
+      pocket.addColorStop(1, "rgba(0,0,0,0)");
+      o.fillStyle = pocket;
+      o.fillRect(0, 0, W, H);
+      o.save();
+      o.filter = `grayscale(1) brightness(1.9) blur(${Math.max(1, W * 0.002)}px)`;
+      o.globalCompositeOperation = "lighter";
+      o.drawImage(mark, mx - targetW / 2, my - targetH / 2, targetW, targetH);
+      o.restore();
+    }
+  }
+
   const data = o.getImageData(0, 0, W, H).data;
 
   // luma histogram stretch (5th-95th percentile-ish via coarse sampling)
@@ -834,13 +860,17 @@ function renderPhotoHalftone(
   // ---- Variation axes (the combination space is what makes every cover
   // unique): screen ANGLE like a real print halftone, hex-offset rows,
   // dot shape, posterized tone, coarse-to-fine density. ----
-  const density = fixed ? fixed.density : 34 + Math.floor(rand() * 42);
-  const angle = fixed ? (fixed.angle * Math.PI) / 180 : (rand() - 0.5) * 0.62;
+  // Logos need dot resolution to stay recognizable: enforce a fine grid
+  // and a gentle screen angle whenever an explicit mark is present.
+  const isLogo = !!mark && (mark as HTMLImageElement).naturalWidth !== undefined && (mark as HTMLImageElement).naturalWidth > 0;
+  let density = fixed ? fixed.density : 34 + Math.floor(rand() * 42);
+  let angle = fixed ? (fixed.angle * Math.PI) / 180 : (rand() - 0.5) * 0.62;
+  if (isLogo) { density = Math.max(density, 56); angle = Math.max(-0.14, Math.min(0.14, angle)); }
   const hexOffset = fixed ? fixed.hex : rand() > 0.45;
   const shapeRoll = rand();
   const shape = fixed ? fixed.shape
     : shapeRoll < 0.5 ? "circle" : shapeRoll < 0.7 ? "square" : shapeRoll < 0.85 ? "diamond" : "dash";
-  const posterLevels = fixed ? fixed.poster : (rand() < 0.35 ? 3 + Math.floor(rand() * 2) : 0);
+  const posterLevels = isLogo ? 0 : (fixed ? fixed.poster : (rand() < 0.35 ? 3 + Math.floor(rand() * 2) : 0));
   const gamma = 0.75 + rand() * 0.4;
 
   ctx.fillStyle = "#050505";
@@ -885,7 +915,7 @@ function renderPhotoHalftone(
   }
 }
 
-export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string) {
+export function drawCover(canvas: HTMLCanvasElement, key: string, category?: string, markUrl?: string) {
   const W = canvas.width, H = canvas.height;
   const ctx = canvas.getContext("2d");
   if (!ctx || W === 0 || H === 0) return;
@@ -901,13 +931,30 @@ export function drawCover(canvas: HTMLCanvasElement, key: string, category?: str
   const assign = COVER_ASSIGN[slug];
   const photoUrl = PHOTO_POOL[assign ? assign.photo % PHOTO_POOL.length : Math.floor(rand() * PHOTO_POOL.length)];
   const img = poolImage(photoUrl);
+  // Subject mark: explicit logo takes priority; otherwise the topic glyph
+  // keeps every cover on-subject (John: the picture must relate to the topic).
+  const markImg = markUrl ? poolImage(markUrl) : null;
+  const glyphMark = (!markImg && topic) ? (() => {
+    const gcv = document.createElement("canvas");
+    gcv.width = 900; gcv.height = 900;
+    const g = gcv.getContext("2d")!;
+    g.lineCap = "round"; g.lineJoin = "round";
+    topic.draw(g, 900, 900, mulberry32(xmur3(k + "|glyph")()));
+    return gcv;
+  })() : null;
   const paintPhoto = () => {
     if (canvas.width !== W || canvas.height !== H) return; // stale after resize
+    if (markImg && !(markImg.complete && markImg.naturalWidth > 0)) return;
     renderPhotoHalftone(ctx, W, H, img, mulberry32(xmur3(k + "|crop")()),
-      hue0, category ? cat0.s : 0.55, category ? cat0.l : 0.62, assign);
+      hue0, category ? cat0.s : 0.55, category ? cat0.l : 0.62, assign,
+      markImg ?? glyphMark);
   };
-  if (img.complete && img.naturalWidth > 0) { paintPhoto(); return; }
-  img.addEventListener("load", paintPhoto, { once: true });
+  const photoReady = img.complete && img.naturalWidth > 0;
+  const markReady = !markImg || (markImg.complete && markImg.naturalWidth > 0);
+  if (photoReady && markReady) { paintPhoto(); return; }
+  if (!photoReady) img.addEventListener("load", paintPhoto, { once: true });
+  if (markImg && !markReady) markImg.addEventListener("load", paintPhoto, { once: true });
+  if (photoReady || markReady) { /* one of them will fire paintPhoto */ }
 
   // ---- Fallback: full-bleed GRAYSCALE SCENE offscreen ----
   // Book-cover halftone: a seeded landscape — sky gradient, one celestial
