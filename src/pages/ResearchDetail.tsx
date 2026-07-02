@@ -19,13 +19,9 @@ import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
 import TweetEmbed from "@/components/blog/TweetEmbed";
 import { staticResearchPosts } from "@/data/static-research-posts";
 
-// Author avatars + role overrides, keyed by author name (one place to manage them)
-const AUTHORS: Record<string, { img?: string; role?: string }> = {
-  Tobi: { img: "/images/authors/tobi.webp" },
-  James: { img: "/images/authors/james.jpg" },
-  David: { img: "/images/authors/david.webp", role: "Co-founder" },
-  Helen: { img: "/images/authors/helen.jpeg" },
-};
+// Author avatars + roles + bios live in src/lib/authors.ts (shared with the
+// author archive pages at /blog/author/:name).
+import { AUTHORS } from "@/lib/authors";
 
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
@@ -283,7 +279,7 @@ const ResearchDetail = () => {
                     </div>
                   )}
                   <div>
-                    <p className="text-white font-medium leading-tight">{post.author}</p>
+                    <Link to={`/blog/author/${(post.author || "").toLowerCase()}`} className="text-white font-medium leading-tight link-underline">{post.author}</Link>
                     <p className="text-white/40 text-sm">{post.authorRole}</p>
                   </div>
                 </div>
@@ -781,7 +777,7 @@ const ResearchDetail = () => {
               )}
               <div>
                 <p className="text-[11px] text-white/40 uppercase tracking-[0.25em] mb-2">Written by</p>
-                <p className="text-lg font-medium text-white">{post.author}</p>
+                <Link to={`/blog/author/${(post.author || "").toLowerCase()}`} className="text-lg font-medium text-white link-underline">{post.author}</Link>
                 <p className="text-sm text-primary/80 mb-3">{post.authorRole} at ium Labs</p>
                 <p className="text-sm text-white/50 leading-relaxed">{post.authorBio}</p>
               </div>
