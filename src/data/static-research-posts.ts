@@ -127,7 +127,7 @@ And Korea is precisely where Robinhood Chain cannot go. Tokenized equities are s
 
 ## 4. Who Arbitrages the Gap
 
-Structural gaps like this do not stay empty; they get arbitraged, and there are three plausible paths. First, licensed domestic issuance: Korean securities firms have spent two years building STO pilots, and a Robinhood-style 24/7 tokenized equity product delivered through a licensed Korean broker is the most defensible version, slow but durable. Second, offshore access with local distribution-lite: global venues serving Korean users through Korean-language education, community, and KOL coverage without onshore solicitation, the gray-zone playbook that already moves Korean volume offshore. Third, the partnership route: a global chain or issuer white-labeling into a Korean licensed entity, which is where the real BD race will happen if the security-token amendments pass the National Assembly. Which path wins is a regulatory question, but attention arrives before regulation, and Korean retail attention on tokenized US equities is already forming.
+Structural gaps like this do not stay empty; they get arbitraged, and there are three plausible paths. First, licensed domestic issuance: Korean securities firms have spent two years building STO pilots, and a Robinhood-style 24/7 tokenized equity product delivered through a licensed Korean broker is the most defensible version, slow but durable. Second, offshore access with local distribution-lite: global venues serving Korean users through Korean-language education, community, and KOL coverage without onshore solicitation, the gray-zone playbook that already moves Korean volume offshore. Third, the partnership route: a global chain or issuer white-labeling into a Korean licensed entity, and that BD race now has a statutory floor, because the security-token amendments to the Electronic Securities Act and Capital Markets Act [passed the National Assembly on January 15, 2026](https://www.fsc.go.kr/no010101/86064) and take effect in January 2027. Which path wins is a regulatory question, but attention arrives before regulation, and Korean retail attention on tokenized US equities is already forming.
 
 {{bars:Licensed domestic STO=3,Offshore + local distribution=2,White-label partnership=1::Plausible paths to serving Korean demand for tokenized equities, ranked by durability (ium Labs research desk view)}}
 
@@ -137,7 +137,7 @@ Three lessons travel beyond Robinhood. Distribution beats decentralization in th
 
 ## 6. What Breaks It
 
-The bear case is real. Tokenized-equity volumes at prior venues have repeatedly underwhelmed their announcements, and 24/7 access matters less when liquidity concentrates in US hours anyway. Robinhood's user base is US-centric, so the 27 million figure overstates the chain's day-one addressable market outside America. Arcus is a rebrand with an uncertain migration, not a guaranteed liquidity engine. And in Korea specifically, the National Assembly has slipped security-token timelines before, so the compliant path may stay closed longer than the optimists expect. If tokenized equities end up a feature rather than a market, the Korea gap stops mattering.
+The bear case is real. Tokenized-equity volumes at prior venues have repeatedly underwhelmed their announcements, and 24/7 access matters less when liquidity concentrates in US hours anyway. Robinhood's user base is US-centric, so the 27 million figure overstates the chain's day-one addressable market outside America. Arcus is a rebrand with an uncertain migration, not a guaranteed liquidity engine. And in Korea specifically, the National Assembly has slipped security-token timelines before, so the compliant path, legislated but not effective until January 2027, may open more slowly than the optimists expect. If tokenized equities end up a feature rather than a market, the Korea gap stops mattering.
 
 ## The Radar Read
 
@@ -271,7 +271,7 @@ Korea is one of Asia's largest retail crypto markets, and it has run without a c
 
 %%KRW 104 trillion::Korean individuals held roughly KRW 104 trillion (about USD 80 billion) in digital assets at end-2024, near 5% of GDP (Source: Bank of Korea, via U.S. International Trade Administration)%%
 
-The Democratic Party introduced DABA to the National Assembly on June 10, 2025, under President Lee Jae-myung, who campaigned on legalizing won-based stablecoins. It defines digital asset types, sets licensing and conduct standards for service providers, and writes rules for issuance, circulation, and disclosure. In parallel, the Bank of Korea suspended its retail central bank digital currency pilot, citing overlap with stablecoins. The won stablecoin, not a central-bank digital won, is the instrument Korea is betting on.
+The Democratic Party introduced DABA to the National Assembly in June 2025 ([Bill No. 2210736](https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_T2R5S0Q6P0P5X0Y9W1W1V3V0U7C4C1), Rep. Min Byoung-dug and 36 co-sponsors, filed June 11), under President Lee Jae-myung, who campaigned on legalizing won-based stablecoins; the FSC's Virtual Asset Committee had already [named stablecoin rules the top priority](https://www.fsc.go.kr/no010101/83855) of phase-two legislation. It defines digital asset types, sets licensing and conduct standards for service providers, and writes rules for issuance, circulation, and disclosure. In parallel, the Bank of Korea suspended its retail central bank digital currency pilot, citing overlap with stablecoins. The won stablecoin, not a central-bank digital won, is the instrument Korea is betting on.
 
 The shift matters because guidance and statute create very different planning environments. A circular can be reissued or reinterpreted, which is why operators have historically treated Korea as a gray zone to be navigated rather than a market to be built on. A primary law with defined issuer classes, capital floors, and reserve rules turns that gray zone into a set of fixed lanes. Once the lanes exist, the question for a foreign project is no longer whether Korea will allow a funded-account flow, but which licensed counterparty sits at the front of it. That is a planning problem we can solve in advance, rather than a risk we have to price as permanent uncertainty.
 
@@ -291,7 +291,7 @@ The capital floor and the reserve rule are not the same lever, and operators sho
 
 ## 3. Who issues it
 
-This is where the framework has stalled. The Bank of Korea argues that only banks holding majority (51 percent) ownership of an issuer should be permitted to mint won stablecoins, on the logic that banks already carry strict solvency and anti-money-laundering obligations. The Financial Services Commission pushed back, warning that a hard 51 percent rule would block fintechs with the depth to build scalable infrastructure, and pointing to the EU's MiCA regime and Japan's fintech-led yen projects as precedents for non-bank issuance. The ruling party sided against the central bank.
+This is where the framework has stalled. [The Bank of Korea argues](https://www.bok.or.kr/portal/bbs/B0000232/view.do?menuNo=200706&nttId=10094188) that only banks holding majority (51 percent) ownership of an issuer should be permitted to mint won stablecoins, on the logic that banks already carry strict solvency and anti-money-laundering obligations. The Financial Services Commission pushed back, warning that a hard 51 percent rule would block fintechs with the depth to build scalable infrastructure, and pointing to the EU's MiCA regime and Japan's fintech-led yen projects as precedents for non-bank issuance. The ruling party sided against the central bank.
 
 > **"A majority of participating experts voiced concerns about the BOK's proposal, with many questioning whether such a framework could deliver innovation or generate strong network effects. It is also hard to find global legislative precedents in which institutions from a specific sector are required to hold a 51%."**
 >
@@ -350,7 +350,9 @@ Our [go-to-market practice](/services/gtm) sequences the launch around the regul
 - [ChainCatcher, "The competition for the Korean won stablecoin has officially begun"](https://www.chaincatcher.com/en/article/2188358)
 - [Chosun, "Financial Sector Preempts Stablecoin Market Amid Legislation"](https://www.chosun.com/english/industry-en/2026/02/04/DFDOXRW6R5CEDBGE6BN4CDXQXU/)
 - [Ledger Insights, "Korean central bank won't oppose won stablecoin, gets role in supervision"](https://www.ledgerinsights.com/korean-central-bank-wont-oppose-won-stablecoin-gets-role-in-supervision/)
-- [YouTube, "South Korea's Stablecoin Dilemma: Banks vs Fintech in the Race for Digital Money"](https://www.youtube.com/watch?v=FisGILIohSU)
+- [국회 의안정보시스템, 디지털자산기본법안 (의안번호 2210736)](https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_T2R5S0Q6P0P5X0Y9W1W1V3V0U7C4C1)
+- [한국은행, 원화 스테이블코인의 주요 이슈와 대응방안 (2025.10)](https://www.bok.or.kr/portal/bbs/B0000232/view.do?menuNo=200706&nttId=10094188)
+- [금융위원회, 제2차 가상자산위원회 보도자료 (2025.1)](https://www.fsc.go.kr/no010101/83855)
 
 {{source:/images/blog/korea-won-stablecoin-digital-asset-basic-act-2026-1.jpg::Source: CoinDesk, "South Korea's long-awaited crypto law stalls over who can issue stablecoins"}}
 
@@ -379,8 +381,8 @@ Our [go-to-market practice](/services/gtm) sequences the launch around the regul
       sequence: chartAvoidFlop,
     },
     content: `>! **Key Takeaways**
->! Korea is unwinding a roughly nine-year de facto ban on corporate crypto accounts, a restriction in place since 2017 (Source: CoinDesk, May 21 2025).
->! The rollout is phased, not a single switch: nonprofits, universities, and exchanges first, then about 3,500 listed firms and professional investors (Source: KED Global, Feb 13 2025).
+>! Korea is unwinding a roughly nine-year de facto ban on corporate crypto accounts, a restriction in place since 2017 (Source: FSC, 4th Virtual Asset Committee, May 2025).
+>! The rollout is phased, not a single switch: nonprofits, universities, and exchanges first, then about 3,500 listed firms and professional investors (Source: FSC, 3rd Virtual Asset Committee, Feb 13 2025).
 >! Listed companies face a proposed 5% cap on crypto as a share of total assets, so this is a regulated allocation, not open speculation (Source: Yahoo Finance / Bloomberg, Jan 2026).
 >! The market that retail built, 15.6 million investors and no institutional buyer, is finally getting one (Source: KED Global / Bank of Korea, Feb 13 2025).
 
@@ -398,7 +400,7 @@ The result is a market that is liquid and fast but thin on patient capital. The 
 
 ## 2. What Actually Changed, and in What Order
 
-On February 13, 2025, the Financial Services Commission used its Virtual Asset Committee to publish a roadmap for corporate participation. The sequencing matters more than the headline.
+On February 13, 2025, the Financial Services Commission used its third Virtual Asset Committee to publish a [roadmap for corporate participation](https://www.fsc.go.kr/no010101/84000). The sequencing matters more than the headline.
 
 {{xpost:https://twitter.com/Cointelegraph/status/2010615406495412347}}
 
@@ -407,17 +409,17 @@ On February 13, 2025, the Financial Services Commission used its Virtual Asset C
 > **"We reached the consensus on the need to allow corporate participation in the virtual asset market. A phased and gradual approach will be desirable to minimize potential risks."**
 >, Kim Soyoung, FSC Vice Chairman, KED Global
 
-Phase one began mid-2025. Nonprofits, universities, and crypto exchanges were allowed to open accounts to sell holdings. The conditions are strict: nonprofits need at least five years of audited operations and an internal committee to vet donations, and may generally only handle tokens listed on at least three won-based exchanges (Source: CoinDesk, May 21 2025). The first concrete move was universities including Seoul National University and Korea University cashing out a combined 1 billion won of WEMIX donated by game maker WeMade (Source: KED Global, Feb 13 2025).
+Phase one began mid-2025, with the FSC [confirming in May 2025](https://www.fsc.go.kr/no010101/84478) that nonprofits and exchanges could sell from June. Nonprofits, universities, and crypto exchanges were allowed to open accounts to sell holdings. The conditions are strict: nonprofits need at least five years of audited operations and an internal committee to vet donations, and may generally only handle tokens listed on at least three won-based exchanges (Source: FSC, 4th Virtual Asset Committee, May 2025). The first concrete move was universities including Seoul National University and Korea University cashing out a combined 1 billion won of WEMIX donated by game maker WeMade (Source: FSC, 3rd Virtual Asset Committee, Feb 13 2025).
 
 {{youtube:NO8pv6i1FhE}}
 
-Phase two opens corporate trading accounts to roughly 3,500 listed companies and professional investment firms registered under the Capital Markets Act, on a pilot basis (Source: KED Global, Feb 13 2025). To keep this from becoming a balance-sheet casino, regulators have proposed capping a listed firm's crypto holdings at 5% of total assets (Source: Yahoo Finance / Bloomberg, Jan 2026).
+Phase two opens corporate trading accounts to roughly 3,500 listed companies and professional investment firms registered under the Capital Markets Act, on a pilot basis (Source: FSC, 3rd Virtual Asset Committee, Feb 13 2025). To keep this from becoming a balance-sheet casino, regulators have proposed capping a listed firm's crypto holdings at 5% of total assets (Source: Yahoo Finance / Bloomberg, Jan 2026).
 
 {{bars:Phase 1 launch year=2025,Listed firms in scope=3500,Asset cap percent=5::Phase 1 launched in 2025; roughly 3,500 listed firms enter in the pilot phase, capped near 5% of assets. Source: KED Global, Feb 2025; Yahoo Finance, Jan 2026.}}
 
 Read in order, the sequencing reveals the regulator's risk model. Phase one admits only sellers under tight conditions, which lets the authorities watch how custody, reporting, and AML behave under real volume before any new buying pressure enters. Phase two then admits buyers, but ring-fences them with a portfolio cap and a registration requirement, so the first wave of corporate demand cannot concentrate into a few balance sheets. This is deliberately the opposite of a single deregulation switch. It is a controlled commissioning, where each stage has to prove itself before the next is widened.
 
-One exclusion defines the whole design. Banks and brokerages stay out for now, which means no spot Bitcoin ETF yet, because a financial firm would need to hold the underlying asset to run one (Source: KED Global, Feb 13 2025). Korea is letting operating companies in before it lets the financial system in.
+One exclusion defines the whole design. Banks and brokerages stay out for now, which means no spot Bitcoin ETF yet, because a financial firm would need to hold the underlying asset to run one (Source: FSC, 3rd Virtual Asset Committee, Feb 13 2025). Korea is letting operating companies in before it lets the financial system in.
 
 {{source:/images/blog/korea-corporate-crypto-ban-lifted-institutional-playbook-2026-1.jpg::Source: KED Global, "S.Korea to allow listed firms to trade cryptocurrencies in second half"}}
 
@@ -439,15 +441,15 @@ A Korean corporate treasury, a registered professional investor, or a university
 
 {{source:/images/blog/corpban-institutional.jpg::Decrypt, Bitcoin against the South Korean flag as institutional access opens}}
 
-So the playbook inverts. First, compliance is the product. The phased design is conditional: audited operating history, internal vetting committees, approved-token lists, anti-money-laundering parity with existing virtual asset service providers (Source: CoinDesk, May 21 2025). Whoever helps a counterparty satisfy those conditions cleanly is the one who gets the account opened.
+So the playbook inverts. First, compliance is the product. The phased design is conditional: audited operating history, internal vetting committees, approved-token lists, anti-money-laundering parity with existing virtual asset service providers (Source: FSC, 4th Virtual Asset Committee, May 2025). Whoever helps a counterparty satisfy those conditions cleanly is the one who gets the account opened.
 
-Second, custody is the gate. An institution cannot hold what it cannot custody to its auditors' satisfaction, so the won-based exchange and bank rails a corporate account depends on are the real go-to-market step. Third, the asset universe is narrow by rule. Phase-one selling was restricted to roughly the top 20 coins by market cap, and exchanges were ordered to purge low-volume "zombie" tokens and raise the bar for memecoins (Source: CoinDesk, May 21 2025). An institutional Korea strategy built around long-tail tokens is built against the regulation.
+Second, custody is the gate. An institution cannot hold what it cannot custody to its auditors' satisfaction, so the won-based exchange and bank rails a corporate account depends on are the real go-to-market step. Third, the asset universe is narrow by rule. Phase-one selling was restricted to roughly the top 20 coins by market cap, and exchanges were ordered to purge low-volume "zombie" tokens and raise the bar for memecoins (Source: FSC, 4th Virtual Asset Committee, May 2025). An institutional Korea strategy built around long-tail tokens is built against the regulation.
 
 %%Listed-firm crypto holdings proposed to be capped at 5% of total assets::Sizing and risk controls, not maximum exposure, win the mandate (Source: Yahoo Finance / Bloomberg, Jan 2026)%%
 
 ## 4. What This Means for Operators
 
-If you want Korean institutional flow, your first hire is not a community manager, it is a compliance lead who can map the FSC conditions to a specific counterparty. Lead with custody readiness and a clean, listed-asset thesis. The buyers in scope are operating companies and professional investors, so the pitch is a treasury and allocation pitch framed against the 5% cap, not a hype cycle. The shorthand for the prize is real: a Korean version of Strategy, a listed firm accumulating Bitcoin on its balance sheet, is now legally conceivable where it was not before (Source: KED Global, Feb 13 2025).
+If you want Korean institutional flow, your first hire is not a community manager, it is a compliance lead who can map the FSC conditions to a specific counterparty. Lead with custody readiness and a clean, listed-asset thesis. The buyers in scope are operating companies and professional investors, so the pitch is a treasury and allocation pitch framed against the 5% cap, not a hype cycle. The shorthand for the prize is real: a Korean version of Strategy, a listed firm accumulating Bitcoin on its balance sheet, is now legally conceivable where it was not before (Source: FSC, 3rd Virtual Asset Committee, Feb 13 2025).
 
 This institutional opening does not stand alone. It arrives in the same window as a regulated won stablecoin, and the two reinforce each other: the corporate buyer needs a funding rail and a custody chain as much as it needs permission. Operators who want to see how the funding side develops should read our breakdown of the [won-stablecoin endgame](/blog/korea-won-stablecoin-digital-asset-basic-act-2026), and those weighing the parallel tokenized-securities track should look at Korea's [RWA opening](/blog/korea-rwa-tokenized-assets-trust-gap-sto-2026), which is sold to the same caution-first incumbents through the same trust-first lens.
 
@@ -634,7 +636,7 @@ This is what most RWA teams get wrong. They arrive with a yield number and a cha
 
 ## 1. The Opening Is Real, and It Is Dated
 
-This is not a roadmap. On January 15, 2026, the National Assembly passed amendments recognizing tokenized securities as legitimate financial instruments and defining how they are issued, distributed, and traded under Korean law. The rules take effect in January 2027 after a one-year preparation period, building on STO guidelines the Financial Services Commission first issued in 2023.
+This is not a roadmap. On January 15, 2026, the National Assembly passed amendments recognizing tokenized securities as legitimate financial instruments and defining how they are issued, distributed, and traded under Korean law. The rules take effect in January 2027 after a one-year preparation period; the amendments were [promulgated as Act No. 21318](https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2H5M1Q1Y2R6A1J3G4I4K0T5S3H5P8) in February 2026, the FSC [confirmed the plenary passage](https://www.fsc.go.kr/no010101/86064), and the framework builds on the [regulatory blueprint the FSC first issued in February 2023](https://www.fsc.go.kr/no010101/79386).
 
 {{xpost:https://x.com/tokenforge/status/2030762821139763367}}
 
@@ -727,7 +729,9 @@ If you are bringing a tokenized real-world asset to Korea and want a motion that
 - [Crypto World Daily, "South Korea Advances Bill to Legalize Issuance, Trading of Tokenized Securities" (video)](https://www.youtube.com/watch?v=QCKDCWKyM-U)
 - [The Korea Times, Korea Securities Depository expands non-face-to-face shareholder services](https://www.koreatimes.co.kr/economy/20260519/korea-securities-depository-expands-non-face-to-face-shareholder-services)
 - [Regulation Asia, KSD and KRX Launch Real-Time Securities Data Sharing System](https://www.regulationasia.com/articles/south-korea-s-ksd-and-krx-launch-real-time-securities-data-sharing-system)
-- [YouTube, Real World Asset Revolution Ultimate 2026 RWA Guide](https://www.youtube.com/watch?v=hVwyrY2TKqU)
+- [금융위원회, 토큰증권 발행·유통 규율체계 정비방안 (2023.2)](https://www.fsc.go.kr/no010101/79386)
+- [금융위원회, 전자증권법·자본시장법 개정안 국회 본회의 통과 (2026.1)](https://www.fsc.go.kr/no010101/86064)
+- [국회 의안정보시스템, 전자증권법 일부개정법률안(대안) 2214886](https://likms.assembly.go.kr/bill/billDetail.do?billId=PRC_F2H5M1Q1Y2R6A1J3G4I4K0T5S3H5P8)
 
 *This report reflects ium Labs' operating view and is intended for general information, not investment advice.*`,
   },
@@ -1825,7 +1829,7 @@ Korea spent years treating crypto as something to monitor rather than regulate. 
 
 ## 1. The Regulatory Stack, Top to Bottom
 
-Korea regulates crypto through three stacked layers, not one statute. At the base is the Act on Reporting and Use of Certain Financial Transaction Information, the anti-money-laundering law forcing every virtual asset service provider (VASP) to register with the Korea Financial Intelligence Unit (KoFIU), obtain ISMS security certification, and run real-name banking. On top sits VAUPA, the user-protection law in effect since July 19, 2024. The newest layer, still in draft, is the Digital Asset Basic Act, governing issuance, disclosure, market conduct, and a won-pegged stablecoin. As CoinDesk reported, Korea's current system "remains focused on investor protection and lacks a comprehensive framework covering issuance, disclosure and market structure." The Basic Act is the attempt to close that gap.
+Korea regulates crypto through three stacked layers, not one statute. At the base is the Act on Reporting and Use of Certain Financial Transaction Information, the anti-money-laundering law forcing every virtual asset service provider (VASP) to register with the Korea Financial Intelligence Unit (KoFIU), obtain ISMS security certification, and run real-name banking. On top sits VAUPA, the user-protection law [in force since July 19, 2024](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099), whose commencement the FSC [announced the day before it took effect](https://www.fsc.go.kr/no010101/82682). The newest layer, still in draft, is the Digital Asset Basic Act, governing issuance, disclosure, market conduct, and a won-pegged stablecoin. As CoinDesk reported, Korea's current system "remains focused on investor protection and lacks a comprehensive framework covering issuance, disclosure and market structure." The Basic Act is the attempt to close that gap.
 
 The layering matters for sequencing. The base AML layer decides whether a venue can legally exist at all; VAUPA decides how it must hold and protect customer assets once it does; the Basic Act will decide what can be issued and sold on top. A foreign team reading only the headline about the Basic Act misses that the two lower layers are already live and already enforced, and those are the ones a listing has to clear today.
 
@@ -1853,7 +1857,7 @@ VAUPA also criminalizes market abuse. It imports capital-markets logic on inside
 
 ## 3. Travel Rule Mechanics
 
-The travel rule ties identity to value as it crosses providers, and Korea adopted it ahead of most of Asia. Under the Financial Transaction Reports Act, a VASP sending a transfer above KRW 1 million (about USD 842) must transmit originator and beneficiary name and wallet address to the receiving VASP. On request from the beneficiary VASP or authorities, the originating VASP must hand over the customer's official identity number within three business days.
+The travel rule, grounded in Article 5-3 of the [Specific Financial Information Act](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787), ties identity to value as it crosses providers, and Korea adopted it ahead of most of Asia; VASP registration itself runs through the [KoFIU process](https://www.kofiu.go.kr/kor/notification/notice_view.do?ntcnYardOrdrNo=209&seCd=0007). Under the Financial Transaction Reports Act, a VASP sending a transfer above KRW 1 million (about USD 842) must transmit originator and beneficiary name and wallet address to the receiving VASP. On request from the beneficiary VASP or authorities, the originating VASP must hand over the customer's official identity number within three business days.
 
 {{youtube:eoDtWmlaBFw}}
 
@@ -1896,7 +1900,9 @@ We treat Korean compliance as a launch precondition, not a cleanup task. Before 
 - [CoinGeek, South Korea draft crypto bill covers stablecoins, RWAs (April 14, 2026)](https://coingeek.com/south-korea-draft-crypto-bill-covers-stablecoins-rwas/)
 - [The Korea Times, 17-year-old financial regulatory framework faces major restructuring](https://www.koreatimes.co.kr/economy/policy/20250604/17-year-old-financial-regulatory-framework-faces-major-restructuring)
 - [International Banker, Can New Entrants Disrupt South Korea Banking Oligopoly](https://internationalbanker.com/banking/can-impending-new-entrants-do-enough-to-disrupt-south-koreas-banking-oligopoly/)
-- [YouTube, Why Asian Banks Are Taking Over Crypto](https://www.youtube.com/watch?v=eoDtWmlaBFw)
+- [국가법령정보센터, 가상자산 이용자 보호 등에 관한 법률 전문](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099)
+- [국가법령정보센터, 특정 금융거래정보의 보고 및 이용 등에 관한 법률](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787)
+- [금융정보분석원, 가상자산사업자 신고 안내](https://www.kofiu.go.kr/kor/notification/notice_view.do?ntcnYardOrdrNo=209&seCd=0007)
 
 *This report reflects ium Labs' operating view and is intended for general information, not legal advice.*`,
     isFeatured: false,
@@ -2773,31 +2779,31 @@ Market share and volume: [Cryptonews via Yahoo Finance, "Upbit corners 72% of Ko
     content: `>! **Key Takeaways**
 >! Korea's 20% crypto gains tax, 22% with the local surcharge, on annual profits above a 2.5 million won floor, is now set for January 1, 2027, and the Finance Ministry says it will proceed as scheduled
 >! It has been "set" before: the tax was first planned for 2022 and pushed back repeatedly, so the credibility question is fair, but the politics that drove past delays have flipped
->! Korea's 2.5 million won tax-free floor is twenty times lower than the 50 million won stock investors get, and closing that gap is the central fairness fight
+>! The fairness gap got wider, not narrower: the financial investment income tax that would have given stock investors a 50 million won deduction was repealed in December 2024, so listed-stock retail gains stay untaxed while crypto gains above 2.5 million won get taxed at 22%
 >! The GTM fallout is behavioral, not just fiscal: expect pre-2027 selling, accelerated offshore migration, and a heavier reporting burden on domestic exchanges
 
 Korea has announced a crypto tax so many times that the market has learned to ignore it. The 20% levy was supposed to start in 2022, then 2023, then 2025, and each time it slipped. Now the Ministry of Economy and Finance says January 1, 2027 is firm. The difference this time is not the rate, it is the politics around it, and operators who treat the date as another bluff are mispricing a real behavioral shift coming to Korean retail.
 
 ## 1. The Tax That Kept Not Happening
 
-The design has been stable across every delay. Crypto profits are classified as "other income" and taxed at 20% plus a 2% local surcharge, a 22% combined rate, on annual gains above 2.5 million won (about $1,800). What changed is who wants it. In 2024 the then-ruling People Power Party pushed to delay, arguing premature taxation would drive investors offshore, while the Democratic Party resisted. By 2026 the roles flipped: the Democratic Party holds the presidency and the Finance Ministry is proceeding, while the People Power Party, now in opposition, has filed a bill to scrap the tax outright. The ministry's position is that it proceeds unless the law is changed first.
+The design has been stable across every delay. Crypto profits are classified as "other income" under [Article 21 of the Income Tax Act](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%86%8C%EB%93%9D%EC%84%B8%EB%B2%95) and taxed at 20% plus a 2% local income surcharge, a 22% combined rate, on annual gains above the 2.5 million won floor set by Article 84 (about $1,800); the [National Tax Service overview](https://www.nts.go.kr/nts/cm/cntnts/cntntsView.do?mi=40370&cntntsId=238935) confirms the 2027 start after the December 2024 amendment [passed the National Assembly](https://www.moef.go.kr/nw/nes/detailNesDtaView.do?searchBbsId1=MOSFBBS_000000000028&searchNttId1=MOSF_000000000071702&menuNo=4010100). What changed is who wants it. In 2024 the then-ruling People Power Party pushed to delay, arguing premature taxation would drive investors offshore, while the Democratic Party resisted. By 2026 the roles flipped: the Democratic Party holds the presidency and the Finance Ministry is proceeding, while the People Power Party, now in opposition, has filed a bill to scrap the tax outright. The ministry's position is that it proceeds unless the law is changed first.
 
 > **"We will proceed with virtual asset taxation as scheduled in January next year."**
 >, Moon Kyung-ho, Income Tax Division Director, Korea Ministry of Economy and Finance
 
-%%22%::Combined rate (20% income plus 2% local) Korea will levy on annual crypto gains above 2.5 million won from January 1, 2027 (Source: Blockhead)%%
+%%22%::Combined rate (20% income tax plus 2% local income tax) on annual crypto gains above 2.5 million won from January 1, 2027 (Source: NTS, Income Tax Act Art. 64-3)%%
 
 ## 2. The Numbers That Will Bite
 
 The tax is broad and the exempt floor is low. It is expected to touch roughly 13.26 million investors, with the first filings due in May 2028 for 2027 income. Against a holder base estimated above 15 million, more than 30% of the population, this is not a niche levy.
 
-%%13.26M::Korean investors the gains tax is expected to touch, with first filings due May 2028 (Source: Blockhead)%%
+%%13.26M::Korean investors the gains tax is expected to touch, with first filings due May 2028 (Source: industry estimate; taxable scope per NTS guidance)%%
 
-The fairness fight is the threshold. Stock investors get a 50 million won basic deduction; crypto investors get 2.5 million.
+The fairness fight is the threshold, and it is sharper than the usual telling. The financial investment income tax that would have given stock investors a 50 million won basic deduction was repealed in December 2024 before ever taking effect, so listed-stock retail gains are currently not taxed at all outside large-shareholder rules, while crypto gets a 2.5 million won floor.
 
-{{bars:Crypto (2.5M won floor)=2.5,Stock (proposed parity)=50::Annual gains exempted before tax applies, million won. (Source: Forkast)}}
+{{bars:Crypto floor from 2027=2.5,Stock floor under repealed FIIT=50::Annual exemption, million won. The 50M stock deduction died with the Dec 2024 FIIT repeal, leaving stock gains untaxed for retail. (Source: Income Tax Act; MOEF 2024 tax revision)}}
 
-%%2.5M won::Annual gain Korean crypto investors can make tax-free, twenty times lower than the 50 million won floor stock investors receive (Source: Forkast)%%
+%%2.5M won::Annual crypto gain exempt from 2027 under Income Tax Act Art. 84, while listed-stock retail gains remain untaxed entirely after the Dec 2024 FIIT repeal (Source: law.go.kr; MOEF)%%
 
 ## 3. How Korea Compares
 
