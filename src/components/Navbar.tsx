@@ -283,6 +283,7 @@ const Navbar = () => {
                   </div>
                 ))}
               </div>
+              </div>
             </div>
 
             {/* Desktop service dropdown, outside overflow-hidden container */}
