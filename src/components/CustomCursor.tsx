@@ -1,106 +1,53 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+// cuberto.com cursor system port (computed-style audit 2026-07-02).
+// Single fixed element moved via style.transform (no React re-render per
+// mousemove). States as classes, exactly like their .cb-cursor:
+//   rest      -> small brand dot (::before circle scaled down)
+//   -pointer  -> grows over interactive elements, mix-blend exclusion
+//   -text     -> full circle with the label from data-cursor-text
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const [label, setLabel] = useState('');
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-      setIsVisible(true);
-      
-      // Check if hovering over clickable element
-      const target = e.target as HTMLElement;
-      const isClickable = 
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'A' ||
-        !!target.closest('button') ||
-        !!target.closest('a') ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
-      setIsPointer(isClickable);
+    const el = ref.current;
+    if (!el) return;
+
+    const move = (e: MouseEvent) => {
+      el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      el.classList.add('is-visible');
+
+      const t = e.target as HTMLElement;
+      const textEl = t.closest?.('[data-cursor-text]') as HTMLElement | null;
+      if (textEl) {
+        setLabel(textEl.dataset.cursorText || '');
+        el.classList.add('-text');
+        el.classList.remove('-pointer');
+      } else {
+        el.classList.remove('-text');
+        el.classList.toggle('-pointer', !!t.closest?.('a, button, [role="button"], input, textarea, select, label'));
+      }
     };
+    const leave = () => el.classList.remove('is-visible');
 
-    const handleMouseDown = () => setIsClicking(true);
-    const handleMouseUp = () => setIsClicking(false);
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.documentElement.addEventListener('mouseleave', handleMouseLeave);
-    document.documentElement.addEventListener('mouseenter', handleMouseEnter);
-
+    window.addEventListener('mousemove', move, { passive: true });
+    document.documentElement.addEventListener('mouseleave', leave);
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.documentElement.removeEventListener('mouseleave', handleMouseLeave);
-      document.documentElement.removeEventListener('mouseenter', handleMouseEnter);
+      window.removeEventListener('mousemove', move);
+      document.documentElement.removeEventListener('mouseleave', leave);
     };
   }, []);
 
-  // Don't render on touch devices
-  if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+  // Touch devices keep the native experience
+  if (typeof window !== 'undefined' && window.matchMedia?.('(hover: none)').matches) {
     return null;
   }
 
   return (
-    <>
-      {/* Main cursor dot */}
-      <div
-        className="fixed pointer-events-none z-[10001] mix-blend-difference"
-        style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -50%)',
-          opacity: isVisible ? 1 : 0,
-          transition: 'opacity 0.3s ease',
-        }}
-      >
-        <div
-          className="rounded-full bg-white"
-          style={{
-            width: isClicking ? '8px' : '10px',
-            height: isClicking ? '8px' : '10px',
-            transition: 'width 0.15s ease, height 0.15s ease',
-          }}
-        />
-      </div>
-      
-      {/* Outer ring with lag */}
-      <div
-        className="fixed pointer-events-none z-[10000] mix-blend-difference"
-        style={{
-          left: position.x,
-          top: position.y,
-          transform: 'translate(-50%, -50%)',
-          opacity: isVisible ? 1 : 0,
-          transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s ease',
-        }}
-      >
-        <div
-          className="rounded-full border-2 border-white"
-          style={{
-            width: isPointer ? '50px' : isClicking ? '30px' : '40px',
-            height: isPointer ? '50px' : isClicking ? '30px' : '40px',
-            transition: 'width 0.2s ease, height 0.2s ease',
-          }}
-        />
-      </div>
-
-      {/* Hide default cursor */}
-      <style>{`
-        @media (hover: hover) and (pointer: fine) {
-          * {
-            cursor: none !important;
-          }
-        }
-      `}</style>
-    </>
+    <div ref={ref} className="cb-cursor" aria-hidden="true">
+      <span className="cb-cursor-text">{label}</span>
+    </div>
   );
 };
 

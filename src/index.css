@@ -1554,3 +1554,61 @@ body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
   background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
   background-size: 24px 24px;
 }
+
+/* ============================================
+   Reference batch 5 (2026-07-02)
+   ============================================ */
+
+/* cuberto.com cursor system — their .cb-cursor recipe: fixed element,
+   ::before circle, state classes, transform .3s / opacity .1s.
+   Dot is brand-colored; -text state shows the data-cursor-text label. */
+@media (hover: hover) and (pointer: fine) {
+  .cb-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.1s;
+    contain: layout style;
+  }
+  .cb-cursor.is-visible { opacity: 1; }
+  .cb-cursor::before {
+    content: "";
+    position: absolute;
+    top: -4rem;
+    left: -4rem;
+    width: 8rem;
+    height: 8rem;
+    background: hsl(var(--brand));
+    border-radius: 50%;
+    transform: scale(0.09);
+    transition: transform 0.3s var(--ease-reveal), opacity 0.1s;
+  }
+  .cb-cursor.-pointer::before { transform: scale(0.2); }
+  .cb-cursor.-text::before { transform: scale(1); }
+  .cb-cursor-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 8rem;
+    margin-left: 0;
+    color: #0a0a0a;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .cb-cursor.-text .cb-cursor-text { opacity: 1; }
+
+  /* cuberto hides the native cursor globally; keep it for text fields */
+  * { cursor: none !important; }
+  input, textarea, select, [contenteditable="true"] { cursor: auto !important; }
+}

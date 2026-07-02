@@ -69,6 +69,7 @@ const ProjectCard = ({ project, index }: { project: typeof projects[number]; ind
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
+        data-cursor-text="Explore"
         className="group relative block w-full aspect-[4/5] sm:aspect-[3/4] rounded-xl overflow-hidden surface-edge transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] hover:scale-[0.98]"
       >
         {/* cuberto.com counter-zoom: frame shrinks to .98 while the media
@@ -129,7 +130,8 @@ const ProjectCardsSection = () => {
   return (
     <div className="px-5 sm:px-6 lg:px-10 pb-12 sm:pb-16">
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3">
+      {/* exoape.com staggered grid rhythm: even columns offset down on lg */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-3 lg:[&>*:nth-child(4n+2)]:translate-y-10 lg:[&>*:nth-child(4n)]:translate-y-10 lg:pb-10">
         {projects.slice(0, 12).map((project, index) => (
           <ProjectCard key={project.slug} project={project} index={index} />
         ))}

@@ -169,7 +169,10 @@ const Navbar = () => {
                             </div>
                           );
                         }
-                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="block text-3xl lg:text-4xl font-bold text-white hover:text-white/50 transition-colors py-2">{link.label}</Link>;
+                        return <Link key={link.to} to={link.to} onClick={() => setIsMenuOpen(false)} className="group block text-3xl lg:text-4xl font-bold text-white py-2">
+                          {/* lusion.co menu-link double-text roll */}
+                          <span className="text-roll"><span data-text={link.label}>{link.label}</span></span>
+                        </Link>;
                       })}
                     </nav>
                   </div>
