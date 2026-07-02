@@ -1385,7 +1385,7 @@ The more important shift is what USDT is used for. It has quietly become a payme
 > **"USDT is increasingly acting as a substitute for cash and bank wires in regions where access to dollars is limited or expensive."**
 >, Mohammad Shahid, BeInCrypto
 
-The numbers back the framing. Tether disclosed that USDT processed roughly 156 billion dollars in payments of 1,000 dollars or less during 2025, with average daily volumes for sub-1,000-dollar transfers climbing above 500 million dollars. These are remittances, payroll, and retail transfers, the non-speculative flows that make a settlement layer sticky. In Asia, where USD access through banks is uneven and OTC desks are dense, that stickiness is USDT's defining asset.
+The numbers back the framing. Tether, whose reserve composition is published through its [official attestations](https://tether.to/en/transparency/), disclosed that USDT processed roughly 156 billion dollars in payments of 1,000 dollars or less during 2025, with average daily volumes for sub-1,000-dollar transfers climbing above 500 million dollars. These are remittances, payroll, and retail transfers, the non-speculative flows that make a settlement layer sticky. In Asia, where USD access through banks is uneven and OTC desks are dense, that stickiness is USDT's defining asset.
 
 %%156 billion::USDT processed in sub-1,000-dollar payments during 2025, the remittance and retail flow that makes the rail sticky (Source: Tether)%%
 
@@ -1393,7 +1393,7 @@ The numbers back the framing. Tether disclosed that USDT processed roughly 156 b
 
 ## 3. USDC's Compliance Wedge
 
-USDC cannot out-liquidity USDT in Asian retail. So Circle is fighting on a different axis: regulation. The passage of the GENIUS Act in the United States, the first federal framework for payment stablecoins, drove strong institutional interest toward compliant dollar-backed tokens even before the rules took full effect.
+USDC cannot out-liquidity USDT in Asian retail. So Circle, which publishes [monthly USDC reserve attestations](https://www.circle.com/transparency), is fighting on a different axis: regulation. The passage of the GENIUS Act in the United States, the first federal framework for payment stablecoins, drove strong institutional interest toward compliant dollar-backed tokens even before the rules took full effect.
 
 {{youtube:996EUIoAqms}}
 
@@ -1707,9 +1707,9 @@ At ium Labs we treat Korean KOL marketing as a vetting problem first and a distr
       failureModes: vaspCompliance,
     },
     content: `>! **Key Takeaways**
->! A Korean listing is a four-stage review run by exchanges that staff compliance teams, Upbit alone fields around 40 AML professionals (Source: Tiger Research)
+>! A Korean listing is a four-stage review run by exchanges under [DAXA's self-regulatory listing standards](https://www.kdaxa.org/support/regulation.php), with compliance teams that Tiger Research pegs at around 40 AML professionals at Upbit alone
 >! Two venues hold the book: Upbit 71.6% of H1 2025 domestic volume, Bithumb 25.8%, together roughly 96% of all Korean trading (Source: FSS / Cryptonews, Kaiko)
->! About 20% of Koreans trade a market that hit 108 trillion won in H2 2024 (Source: FIU / KED Global)
+>! About 20% of Koreans trade a market whose listed-asset capitalization reached [107.7 trillion won in H2 2024](https://www.fsc.go.kr/po010101/84618) per the FSC/KoFIU semi-annual VASP survey
 >! The win is durable liquidity engineered before day one, trust built ahead of the listing decides whether the book holds or fades
 
 A Korean exchange listing reads, from the outside, like an event: a notice drops, the pair goes live, a price prints. Treated that way, it almost always disappoints. The listing is the visible end of a process the exchange has been running quietly for weeks, and the projects that benefit understood the bar before they applied. Two venues matter, Upbit and Bithumb, they weight different things, and the sequencing of awareness and trust ahead of the listing decides how the book behaves once it opens.
@@ -1720,7 +1720,7 @@ Korea is not a side market. The domestic crypto market reached roughly 108 trill
 
 {{source:/images/blog/listing-korea-market-coingecko.webp::CoinGecko, South Korea five won exchanges Q4 2025 vs Q1 2026 with Upbit and Bithumb leading}}
 
-%%20%::Share of South Korea's population trading digital assets, on a market worth roughly $77.5B in H2 2024 (Source: FIU / KED Global)%%
+%%20%::Share of South Korea's population trading digital assets; listed-asset market cap 107.7 trillion won (~$77.5B) in H2 2024 (Source: FSC/KoFIU 실태조사)%%
 
 What makes this demand strategically valuable is its concentration. Two venues hold almost the entire book. The figure matters more than its size: a market this concentrated means a foreign team is not choosing among a dozen distribution points, it is choosing between two, and each clears tokens on its own logic. Getting the read wrong on which venue fits the token wastes the one piece of leverage a project has before it applies.
 
@@ -2505,7 +2505,7 @@ We build market-specific motions: a Korea-native [GTM](/services/gtm) sequenced 
     },
     content: `>! **Key Takeaways**
 >! The kimchi premium, the gap between Korean and global crypto prices, hit a 10-month high of 9.7 percent in early April 2026 (Source: CoinGecko / IQ.wiki, "South Korea Crypto Market in 2026").
->! It persists because capital controls block arbitrage: Korea caps individual annual foreign-currency purchases at 50,000 dollars (Source: Reuters, "'Kimchi Premium' due to capital flow controls - BofA").
+>! It persists because capital controls block arbitrage: Korea caps no-documentation overseas remittances at 100,000 dollars a year, raised from 50,000 in July 2023 and consolidated across bank and non-bank channels from 2026 (Source: MOEF; 외국환거래법fA").
 >! It has a structural floor, not zero, near 1.24 percent for Bitcoin while controls remain (Source: CoinGecko / IQ.wiki; ScienceDirect, "Nonlinear dynamics of Kimchi premium").
 >! When it inverts it signals fear: in January 2026 USDT traded at 1,473 won against an official 1,473.7, with Bitcoin at a -0.07 percent reverse premium (Source: BitcoinWorld, via CryptoRank).
 
@@ -2531,7 +2531,7 @@ In an efficient market a price gap is an invitation: a trader buys Bitcoin cheap
 
 {{youtube:J4nedeflYwU}}
 
-The breakage is fiscal, not technical. Korea runs strict capital controls to curb hot money in the won, and individuals can buy only 50,000 dollars of foreign currency a year. A trader who spots the premium cannot just wire millions abroad, buy coins, and ship them home at scale. Coins cross borders in seconds; the won to fund them does not.
+The breakage is fiscal, not technical. Korea runs strict capital controls under the [Foreign Exchange Transactions Act](https://www.law.go.kr/%EB%B2%95%EB%A0%B9/%EC%99%B8%EA%B5%AD%ED%99%98%EA%B1%B0%EB%9E%98%EB%B2%95) to curb hot money in the won: individuals face a 100,000-dollar annual ceiling on no-documentation overseas remittances, a limit [raised from 50,000 dollars in July 2023 and unified across banks and fintechs from 2026](https://www.korea.kr/news/policyNewsView.do?newsId=148956081). A trader who spots the premium cannot just wire millions abroad, buy coins, and ship them home at scale. Coins cross borders in seconds; the won to fund them does not.
 
 > **"The onshore price for cryptocurrencies in Korea is persistently above international prices suggesting this to be a result of effective capital control that prevents effective arbitrage of onshore and offshore prices."**
 >, Bank of America report, via Reuters
@@ -2581,7 +2581,7 @@ The operational discipline that follows is to read the premium per asset, not pe
 
 ## What Breaks It
 
-The premium narrows when the wall thins or the demand behind it fades. Tighter rules on cross-border transfers can paradoxically dampen it by choking the speculative inflows that inflate it, while deeper integration and a unified domestic price index let the two prices converge. The 2026 cooling that CoinGecko called a "Digital Ice Age," with average monthly won-exchange volume down 21.7 percent from Q4 2025 to Q1 2026, is exactly the regime that flattens the premium toward its floor. What it does not do is vanish. As long as the 50,000-dollar cap and real-name banking stand, arbitrage stays broken and the floor holds.
+The premium narrows when the wall thins or the demand behind it fades. Tighter rules on cross-border transfers can paradoxically dampen it by choking the speculative inflows that inflate it, while deeper integration and a unified domestic price index let the two prices converge. The 2026 cooling that CoinGecko called a "Digital Ice Age," with average monthly won-exchange volume down 21.7 percent from Q4 2025 to Q1 2026, is exactly the regime that flattens the premium toward its floor. What it does not do is vanish. As long as the remittance ceiling and real-name banking stand, arbitrage stays broken and the floor holds; a higher cap since 2023 loosened the wall without removing it.
 
 The counter-case operators should hold in mind: the premium is a thermometer, not a forecast. It tells you the temperature of Korean demand right now, not where it goes next. A fat premium can compress in a day if global prices rip and the local book lags; a reverse premium can flip back as fast as fear arrives. Read it as a live state, size positions and spend to its volatility, and never confuse a hot reading for a guarantee that the heat lasts.
 
@@ -2660,6 +2660,8 @@ Demand is not the same as durability, either. US assets show the channel runs in
 
 Passing the law is necessary but not sufficient. Even once a virtual asset is a recognized underlying, Korea still lacks the plumbing a regulated ETF requires: institutional-grade custody, an over-the-counter desk for creation and redemption in size, a compliant price index, and a liquidity-provision structure.
 
+The legal vehicle is concrete: a [Capital Markets Act amendment (Bill No. 2211117)](https://opinion.lawmaking.go.kr/gcom/nsmLmSts/out/2211117/detailRP) adding digital assets to the underlying-asset scope sits in the National Assembly, and the government's [2026 economic growth strategy](https://www.moef.go.kr/2026/plan.do) names spot digital-asset ETF introduction explicitly.
+
 > **"The very first step toward introducing spot ETFs is enacting the framework act."**
 >, Cho Jin-seok, CEO of Korea Digital Asset (KODA)
 
@@ -2729,7 +2731,7 @@ The peak did not hold. By the fourth quarter Bithumb settled near 31% against Up
 
 Then came the reset. In March 2026 the Financial Intelligence Unit fined Bithumb 36.8 billion won (about $24.6M) and imposed a six-month partial suspension on onboarding new transfer users, over roughly 6.65 million AML violations. A separate February 2026 system error briefly credited users some 620,000 BTC during a promotion. Momentum swung back to Upbit.
 
-%%$24.6M::AML fine plus a six-month partial suspension the FIU handed Bithumb in March 2026, the event that reversed its momentum (Source: The Block)%%
+%%36.8B won::Fine (~$24.5M) plus a six-month partial business suspension (Mar 27-Sep 26, 2026) the FIU handed Bithumb over roughly 6.65 million Specific Financial Information Act violations, the event that reversed its momentum (Source: [FSC sanction notice](https://www.fsc.go.kr/no010101/86467))%%
 
 ## 3. How the Two Venues Differ
 
