@@ -141,7 +141,7 @@ const Index = () => {
       <section id="blog" className="border-t border-white/[0.07]">
         <SectionHeader
           index="03"
-          heading={<>Latest <span className="text-white/40">insights.</span></>}
+          heading={<>Latest <span className="text-white/40">insights</span></>}
           action={{ label: "View all", href: "/blog" }}
         />
         <Suspense fallback={<SectionLoader />}>
@@ -153,7 +153,7 @@ const Index = () => {
       <section id="testimonials" className="border-t border-white/[0.07]">
         <SectionHeader
           index="04"
-          heading={<>Partners are <span className="text-white/40">yappin&rsquo;.</span></>}
+          heading={<>Partners are <span className="text-white/40">yappin&rsquo;</span></>}
         />
         <MobileDeferredSection minHeight="60vh">
           <Suspense fallback={<SectionLoader />}>
@@ -166,7 +166,7 @@ const Index = () => {
       <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
           index="05"
-          heading={<>Korea-first. <span className="text-white/40">Asia-wide.</span></>}
+          heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl">
