@@ -121,7 +121,7 @@ const Index = () => {
 
       {/* Services */}
       <section id="services" className="border-t border-white/[0.07]">
-        <SectionHeader index="01" heading="What we do." />
+        <SectionHeader index="01" heading="What we do" />
         <ServicesSection />
       </section>
 
