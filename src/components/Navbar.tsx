@@ -7,7 +7,7 @@ import { brand, navigation } from "@/config/content";
 import CalendlyButton from "./CalendlyButton";
 
 const LiveChatModal = lazy(() => import("./LiveChatModal"));
-import logoImage from "@/assets/ium-logo.png";
+import logoImage from "@/assets/ium-logo-transparent.png";
 
 const serviceItems = [
   { name: "GTM Strategy", href: "/services/gtm" },
@@ -31,7 +31,7 @@ const Navbar = () => {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
+  
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/ium-admin");
 
@@ -227,92 +227,13 @@ const Navbar = () => {
       {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
         <div className="flex items-center justify-between">
-          <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-3 sm:px-5 h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
+          <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-2 sm:px-3 h-[40px] sm:h-[52px] rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
             <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(120px 40px at 20% 50%, rgba(52,211,153,0.18), transparent 70%)" }} />
             <span aria-hidden className="pointer-events-none absolute -inset-px rounded-full" style={{ background: "linear-gradient(120deg, rgba(52,211,153,0.35), rgba(255,255,255,0.04) 40%, rgba(66,133,244,0.28))", WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
-            <img src={logoImage} alt="ium Labs" className="relative w-7 h-7 sm:w-9 sm:h-9 object-contain rounded-lg" />
-            <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight">ium Labs</span>
-            <span className="relative hidden sm:flex items-center gap-1.5 pl-2.5 ml-1 border-l border-white/[0.08]">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.18em] text-white/45 font-medium">Seoul</span>
-            </span>
+            <img src={logoImage} alt="ium Labs" className="relative w-7 h-7 sm:w-9 sm:h-9 object-contain" />
+            <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
-          {/* Service Marquee - center (min-width to prevent crush on small screens) */}
-          <div
-            className="relative flex-1 mx-1.5 sm:mx-2.5 min-w-0"
-            onMouseEnter={() => setServiceDropdownOpen(true)}
-            onMouseLeave={() => setServiceDropdownOpen(false)}
-          >
-            <div
-              className="relative flex items-center h-[40px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl border border-white/[0.08] overflow-hidden marquee-container"
-            >
-              <div className="hidden md:flex items-center gap-2 pl-4 pr-3 h-full border-r border-white/[0.06] bg-gradient-to-r from-white/[0.04] to-transparent">
-                <span className="w-1 h-1 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.9)]" />
-                <span className="text-[10px] uppercase tracking-[0.2em] text-white/55 font-medium">Services</span>
-              </div>
-              <div
-                className="flex-1 overflow-hidden px-3 sm:px-4"
-                style={{
-                  maskImage: 'linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%)',
-                  WebkitMaskImage: 'linear-gradient(to right, transparent 0, black 40px, black calc(100% - 40px), transparent 100%)',
-                }}
-              >
-              <div className="flex items-center gap-5 logo-marquee-fast whitespace-nowrap" style={{ animationDirection: 'reverse' }}>
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="flex items-center gap-5">
-                    {[
-                      { name: "GTM Strategy", href: "/services/gtm" },
-                      { name: "CEX Listing", href: "/services/listing" },
-                      { name: "Market Making", href: "/services/liquidity" },
-                      { name: "Exchange Marketing", href: "/services/exchange-marketing" },
-                      { name: "Capital & OTC", href: "/services/capital" },
-                      { name: "KOL Marketing", href: "/services/influencer" },
-                      { name: "Community Management", href: "/services/community" },
-                      { name: "PR & Media", href: "/services/pr" },
-                      { name: "SEO & Paid Ads", href: "/services/seo-ads" },
-                      { name: "AMA Hosting", href: "/services/ama" },
-                      { name: "Deep Research", href: "/services/deep-research" },
-                      { name: "Compliance", href: "/services/compliance" },
-                    ].map((svc) => (
-                      <Link key={`${i}-${svc.name}`} to={svc.href} className="text-[10px] sm:text-[13px] text-white/50 font-medium hover:text-white transition-colors px-1">{svc.name}</Link>
-                    ))}
-                  </div>
-                ))}
-              </div>
-              </div>
-            </div>
-
-            {/* Desktop service dropdown, outside overflow-hidden container */}
-            <AnimatePresence>
-              {serviceDropdownOpen && (
-                <motion.div
-                  className="hidden md:block absolute top-full left-0 right-0 mt-2 z-50"
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -8 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                >
-                  <div className="bg-black/80 backdrop-blur-2xl border border-white/[0.08] rounded-2xl p-5 shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
-                    <div className="grid grid-cols-3 gap-1">
-                      {serviceItems.map((item) => (
-                        <Link
-                          key={item.href}
-                          to={item.href}
-                          className="px-3 py-2.5 rounded-lg text-[13px] text-white/60 hover:text-white hover:bg-white/[0.04] transition-all"
-                        >
-                          {item.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5">
             <button onClick={() => setIsLiveChatOpen(true)} aria-label="Start Live Chat" className="btn-glass hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] font-medium text-white/80">
