@@ -57,24 +57,29 @@ const FooterLinksSection = () => {
             reads clean on top. The whole panel lifts the cloud on hover. */}
         <Link
           to="/contact"
-          className="group relative block overflow-hidden border-b border-white/[0.06] py-24 sm:py-36 lg:py-48"
+          className="group relative block overflow-hidden border-b border-white/[0.06] py-14 sm:py-16 lg:py-20"
         >
-          {/* Background logo cloud */}
+          {/* Background logo cloud — dense monochrome tiling that reads as a
+              woven texture behind the headline. Radially masked + darkened at
+              center for legibility; the whole field brightens and drifts on
+              hover. */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
           >
             <div
-              className="grid w-full grid-cols-4 place-items-center gap-x-8 gap-y-10 px-2 opacity-[0.15] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.24] group-hover:scale-[1.03] sm:grid-cols-6 sm:gap-x-14 lg:grid-cols-8 lg:gap-x-16"
+              className="grid w-[112%] grid-cols-6 place-items-center gap-x-5 gap-y-6 opacity-[0.17] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.28] group-hover:scale-[1.04] sm:grid-cols-9 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-12 lg:gap-x-10"
               style={{
                 maskImage:
-                  "radial-gradient(ellipse 62% 82% at center, transparent 8%, rgba(0,0,0,0.35) 34%, black 72%)",
+                  "radial-gradient(ellipse 58% 78% at center, transparent 6%, rgba(0,0,0,0.3) 30%, black 70%)",
                 WebkitMaskImage:
-                  "radial-gradient(ellipse 62% 82% at center, transparent 8%, rgba(0,0,0,0.35) 34%, black 72%)",
+                  "radial-gradient(ellipse 58% 78% at center, transparent 6%, rgba(0,0,0,0.3) 30%, black 70%)",
               }}
             >
-              {Array.from({ length: 40 }, (_, i) => {
-                const client = clientLogos[i % clientLogos.length];
+              {Array.from({ length: 96 }, (_, i) => {
+                // offset the repeat each wrap so identical marks never stack
+                // vertically into obvious columns
+                const client = clientLogos[(i * 7 + Math.floor(i / 12) * 3) % clientLogos.length];
                 return (
                   <img
                     key={i}
@@ -82,7 +87,7 @@ const FooterLinksSection = () => {
                     alt=""
                     loading="lazy"
                     decoding="async"
-                    className="h-5 w-auto max-w-[64px] object-contain brightness-0 invert sm:h-6 sm:max-w-[80px]"
+                    className="h-4 w-auto max-w-[52px] object-contain brightness-0 invert sm:h-5 sm:max-w-[64px]"
                   />
                 );
               })}
@@ -95,13 +100,24 @@ const FooterLinksSection = () => {
             className="pointer-events-none absolute inset-0"
             style={{
               background:
-                "radial-gradient(ellipse 56% 70% at center, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.55) 45%, transparent 78%)",
+                "radial-gradient(ellipse 52% 64% at center, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 42%, transparent 74%)",
+            }}
+          />
+
+          {/* Accent glow — a whisper of brand green blooms behind the type on
+              hover, giving the panel depth without color-washing the marks */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-700 group-hover:opacity-100"
+            style={{
+              background:
+                "radial-gradient(ellipse 40% 46% at center, hsl(var(--primary) / 0.14) 0%, transparent 70%)",
             }}
           />
 
           {/* Centered headline */}
           <div className="relative z-10 flex flex-col items-center text-center">
-            <p className="text-[10px] sm:text-[11px] font-mono text-white/35 uppercase tracking-[0.3em] mb-6 sm:mb-9">
+            <p className="text-[10px] sm:text-[11px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 sm:mb-5">
               Got a project in Korea?
             </p>
             <span className="footer-cta-type flex items-center justify-center gap-x-4 sm:gap-x-8 text-white">
@@ -115,7 +131,8 @@ const FooterLinksSection = () => {
                 strokeWidth={1.5}
               />
             </span>
-            <span className="mt-7 sm:mt-9 text-[10px] font-mono text-white/25 uppercase tracking-[0.28em]">
+            <span className="mt-5 sm:mt-6 inline-flex items-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-[0.28em]">
+              <span className="h-1 w-1 rounded-full bg-primary/70" />
               Trusted by {clientLogos.length}+ Web3 teams
             </span>
           </div>
