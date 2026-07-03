@@ -17,6 +17,7 @@ import SEOHead from "@/components/SEOHead";
 import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
 import TweetEmbed from "@/components/blog/TweetEmbed";
+import ReportDownloadPanel from "@/components/blog/ReportDownloadPanel";
 import { staticResearchPosts } from "@/data/research-index.gen";
 
 // Author avatars + roles + bios live in src/lib/authors.ts (shared with the
@@ -119,6 +120,7 @@ const ResearchDetail = () => {
     excerpt: staticPost!.excerpt,
     tags: staticPost!.tags,
     content: staticContent,
+    download: (staticPost as any).download as string | undefined,
     chartImages: (staticPost as any).chartImages as Record<string, string> | undefined,
   } : dbPost ? {
     id: dbPost.id,
@@ -135,6 +137,7 @@ const ResearchDetail = () => {
     excerpt: dbPost.excerpt || (dbPost.content ? dbPost.content.substring(0, 150) + '...' : ''),
     tags: dbPost.tags || [],
     content: dbPost.content || '',
+    download: undefined as string | undefined,
     chartImages: undefined as Record<string, string> | undefined,
   } : null;
   
@@ -350,6 +353,8 @@ const ResearchDetail = () => {
       <section className="container mx-auto max-w-4xl px-4 pb-20">
         <TableOfContents content={post.content} />
 
+        {post.download && <ReportDownloadPanel href={post.download} title={post.title} />}
+
         <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-[1.8] text-[16px] sm:text-[17px]">
             {(() => {
@@ -394,7 +399,7 @@ const ResearchDetail = () => {
                   rendered.push(
                     <div key={key} className={`my-10 rounded-2xl border p-6 sm:p-8 ${isKeyTakeaways ? 'bg-primary/[0.04] border-primary/20' : 'bg-white/[0.02] border-white/10'}`}>
                       {title.startsWith('**') ? (
-                        <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-emerald-300' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
+                        <p className={`font-semibold text-lg mb-4 ${isKeyTakeaways ? 'text-primary' : 'text-white'}`}>{title.replace(/\*\*/g, '')}</p>
                       ) : (
                         <p className="text-white/80 mb-4 font-medium">{title}</p>
                       )}

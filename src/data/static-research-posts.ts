@@ -158,6 +158,7 @@ Primary: Robinhood Newsroom, "Robinhood Accelerates Global Expansion with Robinh
     id: "static-korea-gtm-index-2026",
     slug: "korea-crypto-gtm-index-2026-benchmarks-25-market-entries",
     title: "The Korea Crypto GTM Index: Benchmarks From 25 Market Entries (2024-2026)",
+    download: "/downloads/korea-crypto-gtm-index-2026.pdf",
     image: chartGtmStrategy,
     date: "July 2, 2026",
     readTime: "19 min read",
