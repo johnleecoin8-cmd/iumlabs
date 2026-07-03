@@ -110,11 +110,13 @@ interface UseVideoPlayerReturn {
 // until the browser finally accepts play() (no perceptible CPU cost — bounded
 // throttle + only fires while paused).
 const MAX_PLAY_ATTEMPTS = 60;
-const PLAY_COOLDOWN_MS = 900;
-const PLAY_RETRY_THROTTLE_MS = 120;
-const MOBILE_STALL_WINDOW_MS = 1800;
-const MOBILE_RELOAD_COOLDOWN_MS = 1600;
-const MAX_HARD_RELOADS = 4;
+const PLAY_COOLDOWN_MS = 1500;
+const PLAY_RETRY_THROTTLE_MS = 400;
+// Mobile networks buffer for several seconds during 4G→3G handoffs or in-app
+// browsers. Keep the stall window generous so we don't nuke a healthy download.
+const MOBILE_STALL_WINDOW_MS = 12000;
+const MOBILE_RELOAD_COOLDOWN_MS = 15000;
+const MAX_HARD_RELOADS = 1;
 
 // Exported so the intro loader can prefetch the exact same versioned URLs the
 // <video> elements request (shared module-singleton VIDEO_VERSION = exact cache match).
