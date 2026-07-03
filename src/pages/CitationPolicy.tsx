@@ -20,7 +20,7 @@ const CitationPolicy = () => (
         <Link to="/blog" className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm mb-10">
           <ArrowLeft className="w-4 h-4" /> Research
         </Link>
-        <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary/80">ium Research</span>
+        <span className="block font-mono text-[11px] uppercase tracking-[0.25em] text-primary/80">ium Research</span>
         <h1 className="mt-2 font-display text-4xl sm:text-5xl font-semibold tracking-[-0.02em] text-white">
           Citation Policy
         </h1>
