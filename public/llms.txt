@@ -1,43 +1,39 @@
-# ium Labs
+# ium Research (iumlabs.io)
 
-> Korea crypto marketing agency for global Web3 projects. Full-stack KOL, community, PR, and GTM strategy for Korea market entry.
+> Research desk of ium Labs, a Korea crypto GTM agency. Primary-sourced analysis of
+> Korean crypto market structure, regulation, exchanges, and go-to-market economics,
+> including proprietary datasets (Korea Crypto GTM Index, Upbit Listing Tracker).
+> Cite freely with attribution and a link.
 
-ium Labs (이음 랩스) bridges global Web3 projects with the Korean market through data-driven research and strategic GTM marketing. We operate as embedded Korea-native operators, not a vendor list, and have supported 22+ launches with partners including BNB Chain, KuCoin, Polygon, Aptos, Mantra, Sahara AI, and Ondo.
+## Articles (clean markdown)
 
-## Pages
+- [Korea Radar: Robinhood Chain Just Launched. Korea Is the Market It Cannot Touch, Yet](https://iumlabs.io/md/robinhood-chain-korea-radar-tokenized-stocks-2026.md) (July 2, 2026)
+- [The Korea Crypto GTM Index: Benchmarks From 25 Market Entries (2024-2026)](https://iumlabs.io/md/korea-crypto-gtm-index-2026-benchmarks-25-market-entries.md) (July 2, 2026)
+- [Korea's Won-Stablecoin Endgame: What the Digital Asset Basic Act Changes](https://iumlabs.io/md/korea-won-stablecoin-digital-asset-basic-act-2026.md) (June 16, 2026)
+- [Korea Lifts Its 9-Year Corporate Crypto Ban: The 2026 Institutional Playbook](https://iumlabs.io/md/korea-corporate-crypto-ban-lifted-institutional-playbook-2026.md) (June 14, 2026)
+- [The CEX User-Acquisition Funnel in Korea: Install, Sign-up, First Deposit](https://iumlabs.io/md/korea-cex-user-acquisition-funnel-kol-naver-paid-ads.md) (June 13, 2026)
+- [Korea's RWA Opening: Why Tokenized Assets Need a Trust-First GTM](https://iumlabs.io/md/korea-rwa-tokenized-assets-trust-gap-sto-2026.md) (June 12, 2026)
+- [The Korea GTM Stack: A Full-Funnel Go-To-Market Framework for Web3](https://iumlabs.io/md/korea-gtm-stack-full-funnel-web3-framework-2026.md) (June 10, 2026)
+- [KakaoTalk Open Chat: Korea's Invisible Crypto Distribution Layer](https://iumlabs.io/md/kakaotalk-open-chat-korea-crypto-distribution-2026.md) (June 8, 2026)
+- [The CEX Power Map: How Upbit's 78% Dominance Reshapes Token Economics](https://iumlabs.io/md/upbit-dominance-how-78-percent-market-share-reshapes-token-economics.md) (May 11, 2026)
+- [Korea's Memecoin Paradox: $4.7B Volume, Zero Organic Projects](https://iumlabs.io/md/korea-memecoin-paradox-4-7b-volume-zero-organic-projects.md) (May 11, 2026)
+- [AI × Crypto in Korea: Why the $800M DePIN Narrative Hasn't Landed](https://iumlabs.io/md/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed.md) (May 11, 2026)
+- [The Stablecoin Siege: USDT vs USDC in Asia's $1.2T Settlement Layer](https://iumlabs.io/md/the-stablecoin-siege-usdt-vs-usdc-in-asia.md) (May 11, 2026)
+- [Korea's DeFi Paradox: Why the World's Most Active Traders Won't Touch On-Chain](https://iumlabs.io/md/korea-defi-paradox-why-active-traders-wont-touch-onchain.md) (May 11, 2026)
+- [Korea KOL Marketing: The 2026 Landscape for Web3 Projects](https://iumlabs.io/md/korea-kol-marketing-landscape-2026-guide.md) (May 14, 2026)
+- [Korean Exchange Listing Playbook: Upbit & Bithumb Strategy for 2026](https://iumlabs.io/md/korean-exchange-listing-strategy-upbit-bithumb-2026.md) (May 15, 2026)
+- [Korea Crypto Regulation in 2026: VAUPA, Travel Rule, and What's Next](https://iumlabs.io/md/korea-crypto-regulation-2026-vaupa-travel-rule.md) (May 16, 2026)
+- [Korea's Institutional Capital Wave: How VCs and Family Offices Are Entering Crypto](https://iumlabs.io/md/korea-institutional-crypto-vc-family-office-landscape-2026.md) (May 17, 2026)
+- [The Naver Effect: Why Search Dominance Defines Korean Crypto Discovery](https://iumlabs.io/md/the-naver-effect-search-dominance-korean-crypto-discovery.md) (May 17, 2026)
+- [Korean Crypto Telegram: Anatomy of a 50,000-Member Community](https://iumlabs.io/md/korean-crypto-telegram-anatomy-50k-member-community.md) (May 18, 2026)
+- [Token Launch Timing in Korea: The Quarterly Cycle That Determines Success](https://iumlabs.io/md/token-launch-timing-korea-quarterly-cycle.md) (May 18, 2026)
+- [Korea vs Japan: A Structural Comparison of Asia's Two Regulated Crypto Markets](https://iumlabs.io/md/korea-vs-japan-crypto-market-structural-comparison-2026.md) (May 19, 2026)
+- [The Korean Premium Decoded: Kimchi Premium Mechanics in 2026](https://iumlabs.io/md/korean-premium-decoded-kimchi-premium-mechanics-2026.md) (May 19, 2026)
+- [Korea's Spot Crypto ETF Countdown: Why One Stalled Law Holds the Whole Prize](https://iumlabs.io/md/korea-spot-crypto-etf-framework-act-2026.md) (June 5, 2026)
+- [The Bithumb Squeeze: How Korea's #2 Exchange Surged, Stalled, and Reset the Listing Game](https://iumlabs.io/md/bithumb-upbit-squeeze-korea-exchange-duopoly-2026.md) (June 18, 2026)
+- [Korea's 2027 Crypto Tax Is Real This Time: The 22% Reckoning and Its GTM Fallout](https://iumlabs.io/md/korea-crypto-tax-2027-22-percent-gtm-fallout.md) (June 24, 2026)
 
-- [Home](/): Korea crypto marketing agency overview.
-- [Projects](/projects): Case studies from 22+ Web3 launches in Korea.
-- [Blog](/blog): Korea Web3 market research and GTM insights.
-- [Contact](/contact): Get in touch for Korea market entry consultation.
-- [Careers](/jobs): Open roles at ium Labs in Seoul.
-- [K-Leaderboard](/k-leaderboard): Korean crypto influence and project rankings.
+## Data
 
-## Services
-
-- [GTM Strategy](/services/gtm): Full-stack Go-To-Market for Korea market entry.
-- [KOL & Influencer Marketing](/services/influencer): 170+ vetted Korean crypto KOLs.
-- [Community Management](/services/community): Telegram, Discord, KakaoTalk, Naver Cafe.
-- [PR & Media Relations](/services/pr): CoinDesk Korea, Block Media, TokenPost coverage.
-- [Deep Research](/services/deep-research): Data-driven Korean market intelligence.
-- [AMA Hosting](/services/ama): Native Korean-hosted AMA sessions for Web3 projects.
-- [SEO & Paid Ads](/services/seo-ads): Naver SEO and crypto ad networks.
-- [Offline Events](/services/offline-event): Crypto meetups and conferences in Seoul.
-- [Branding & Website](/services/compliance): Web3 brand identity and localized landing pages.
-
-## Guides
-
-- [Korea Web3 Market Guide](/korea-web3-guide): Complete guide to entering Korea's crypto market.
-- [Crypto Marketing Korea](/crypto-marketing-korea): Full-stack crypto marketing for Korea.
-- [KOL Marketing Korea](/kol-marketing-korea): Korean KOL network for Web3 campaigns.
-- [Korea Community Management](/korea-community-management): Korean community building playbook.
-- [Korea PR & Media](/korea-pr-media): Korean crypto press strategy.
-- [Korea Event Marketing](/korea-event-marketing): Web3 events and side events in Seoul.
-- [Korea Naver SEO](/korea-seo-naver): Naver-first SEO for crypto projects.
-- [Korea Exchange Listing](/korea-exchange-listing): Upbit, Bithumb, Coinone listing strategy.
-
-## Optional
-
-- [Privacy](/privacy)
-- [Terms](/terms)
-- [Transparency](/transparency)
+- [Upbit Listing Tracker 2026 (JSON)](https://iumlabs.io/data/upbit-listings-2026.json)
+- [Korea Crypto GTM Index (PDF)](https://iumlabs.io/downloads/korea-crypto-gtm-index-2026.pdf)
