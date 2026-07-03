@@ -181,71 +181,60 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         </div>
       </section>
 
-      {/* FEATURES */}
-      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-28 space-y-24 sm:space-y-32">
-        {p.features.map((f, i) => {
-          const Icon = f.icon;
-          const flip = i % 2 === 1;
-          return (
-            <Reveal key={f.title}>
-              <div className={`relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
-                <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3] bg-[#0c0c0e]">
-                  {f.video ? (
-                    <>
-                      {/* Real ad creative, self-hosted, muted autoplay loop.
-                          Poster shows on reduced-motion / mobile no-autoplay. */}
-                      <video
-                        className="absolute inset-0 w-full h-full object-cover"
-                        src={f.video}
-                        poster={f.poster}
-                        muted
-                        loop
-                        autoPlay
-                        playsInline
-                        preload="metadata"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent pointer-events-none" />
-                      {f.mediaLabel && (
-                        <span className="absolute bottom-3 left-3 z-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/15 px-3 py-1 font-mono text-[10px] tracking-[0.12em] text-white/70">
-                          {f.mediaLabel}
-                        </span>
-                      )}
-                    </>
-                  ) : f.image ? (
-                    <>
-                      <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
-                    </>
-                  ) : (
-                    <>
-                      {/* Photo-less feature: clean branded panel with the section
-                          accent and an oversized ghost icon. */}
-                      <div className="absolute inset-0" style={{ background: `radial-gradient(90% 80% at 82% 6%, ${A}18, transparent 60%)` }} />
-                      <div className="absolute inset-0 bg-dots opacity-[0.6]" />
-                      <Icon className="absolute -bottom-8 -right-6 w-52 h-52 transition-transform duration-700 ease-out group-hover:scale-105" style={{ color: A, opacity: 0.08 }} strokeWidth={1} />
-                    </>
-                  )}
-                </div>
-                <div className="relative">
-                  <div className="flex items-baseline gap-4 mb-5">
-                    <span className="font-display text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-none" style={{ color: A }}>{f.eyebrow.slice(0, 2)}</span>
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-full flex items-center justify-center border" style={{ backgroundColor: `${A}14`, borderColor: `${A}33` }}>
-                        <Icon className="w-4 h-4" style={{ color: A }} />
-                      </div>
-                      <span className="font-mono text-xs font-bold tracking-[0.25em] text-white/45">{f.eyebrow.split("· ")[1] ?? f.eyebrow}</span>
-                    </div>
-                  </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold tracking-[-0.03em] mb-4">{f.title}</h3>
-                  <p className="text-white/65 tracking-[-0.01em] leading-relaxed mb-6">{f.body}</p>
-                  <ul className="space-y-2.5">
-                    {f.points.map((pt) => (<li key={pt} className="flex items-start gap-3 text-[14px] text-white/70"><Check className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{pt}</span></li>))}
+      {/* CAPABILITIES — editorial index list (replaces alternating image rows).
+          Real media (ad video / photo) is lifted out into ONE signature
+          "moment" below, so the list stays clean and confident. */}
+      <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-28">
+        <Reveal>
+          <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">WHAT WE RUN</span>
+        </Reveal>
+        <div className="mt-8 sm:mt-12 border-b border-white/[0.1]">
+          {p.features.map((f, i) => (
+            <Reveal key={f.title} delay={i * 50}>
+              <div
+                className="group grid grid-cols-1 lg:grid-cols-[56px_minmax(0,1fr)_minmax(0,1.05fr)] gap-3 lg:gap-12 py-8 sm:py-10 border-t border-white/[0.1] transition-colors duration-300 hover:bg-white/[0.015]"
+                style={{ ['--a' as string]: A }}
+              >
+                <span className="font-mono text-sm text-white/25 pt-1.5 group-hover:text-[var(--a)] transition-colors">{f.eyebrow.slice(0, 2)}</span>
+                <h3 className="font-display text-2xl sm:text-3xl lg:text-[2.35rem] font-bold tracking-[-0.02em] leading-[1.02]">{f.title}</h3>
+                <div>
+                  <p className="text-[15px] sm:text-base text-white/60 tracking-[-0.01em] leading-relaxed">{f.body}</p>
+                  <ul className="mt-5 space-y-2">
+                    {f.points.map((pt) => (
+                      <li key={pt} className="flex items-start gap-3 text-[13px] text-white/45">
+                        <span className="mt-[7px] h-1 w-1 rounded-full shrink-0" style={{ backgroundColor: A }} />
+                        <span>{pt}</span>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
             </Reveal>
+          ))}
+        </div>
+
+        {/* Signature moment: the one real visual, big. */}
+        {(() => {
+          const m = p.features.find((f) => f.video || f.image);
+          if (!m) return null;
+          return (
+            <Reveal>
+              <div className="relative mt-14 sm:mt-20 rounded-2xl sm:rounded-3xl overflow-hidden border border-white/[0.1] aspect-video sm:aspect-[21/9] bg-[#0c0c0e]">
+                {m.video ? (
+                  <video className="absolute inset-0 w-full h-full object-cover" src={m.video} poster={m.poster} muted loop autoPlay playsInline preload="metadata" />
+                ) : (
+                  <img src={m.image} alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 via-transparent to-transparent pointer-events-none" />
+                {m.mediaLabel && (
+                  <span className="absolute bottom-4 left-4 z-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 px-3.5 py-1.5 font-mono text-[10px] tracking-[0.14em] text-white/70">
+                    {m.mediaLabel}
+                  </span>
+                )}
+              </div>
+            </Reveal>
           );
-        })}
+        })()}
       </section>
 
       {/* PULL QUOTE */}
