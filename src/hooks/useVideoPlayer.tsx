@@ -801,36 +801,53 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     return null;
   };
 
-  // Mobile debug banner, only renders on mobile when ?vdebug=1 is in the URL
-  // or localStorage.videoDebug === '1'. Shows readyState / frame / attempts /
-  // poster state so we can diagnose mobile playback issues live on-device.
+  // Mobile debug overlay. Enabled by default on mobile so we can diagnose
+  // stalls live on-device. Disable by setting localStorage.videoDebug='0' or
+  // appending ?vdebug=0 to the URL. Shows readyState, buffered end, stall
+  // window, play attempts, hard reloads, and network conditions.
   const DebugBanner: React.FC = () => {
     const [, force] = useState(0);
     useEffect(() => {
-      const id = setInterval(() => force((n) => n + 1), 500);
+      const id = setInterval(() => force((n) => n + 1), 400);
       return () => clearInterval(id);
     }, []);
     const enabled = (() => {
       if (typeof window === 'undefined') return false;
       try {
-        if (new URLSearchParams(window.location.search).get('vdebug') === '1') return true;
-        if (window.localStorage?.getItem('videoDebug') === '1') return true;
+        const qp = new URLSearchParams(window.location.search).get('vdebug');
+        if (qp === '0') return false;
+        if (qp === '1') return true;
+        const ls = window.localStorage?.getItem('videoDebug');
+        if (ls === '0') return false;
+        if (ls === '1') return true;
       } catch {}
-      return false;
+      return true; // default ON on mobile so we always have live diagnostics
     })();
     if (!enabled || !isMobile) return null;
     const v = videoRef.current;
     const rs = v?.readyState ?? -1;
     const rsLabels = ['NOTHING', 'METADATA', 'CURRENT', 'FUTURE', 'ENOUGH'];
+    let bufferedEnd = 0;
+    try {
+      if (v && v.buffered.length > 0) bufferedEnd = v.buffered.end(v.buffered.length - 1);
+    } catch {}
+    const now = performance.now();
+    const stallMs = lastProgressAtRef.current > 0 ? Math.max(0, now - lastProgressAtRef.current) : 0;
+    const sinceLoadMs = loadGateOpenedAtRef.current > 0 ? Math.max(0, now - loadGateOpenedAtRef.current) : 0;
+    const net = networkInfo;
     return (
       <div
-        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/80 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none"
+        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/85 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none max-w-[220px] break-all"
         aria-hidden
       >
-        <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''}</div>
+        <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''} · t: {(v?.currentTime ?? 0).toFixed(2)}s</div>
+        <div>buf: {bufferedEnd.toFixed(2)}s · stall: {(stallMs / 1000).toFixed(1)}s</div>
+        <div>load-age: {(sinceLoadMs / 1000).toFixed(1)}s · qual: {quality}</div>
         <div>frame: {frameReadyRef.current ? '✓' : '…'} · ready: {isVideoReady ? '✓' : '…'}</div>
         <div>poster: {(!isVideoReady || hasVideoError || shouldDisableVideo) ? 'shown' : 'hidden'}</div>
-        <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} {v?.paused ? '(paused)' : '(playing)'}</div>
+        <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} · retry: {retryCount}/{maxRetries}</div>
+        <div>reload: {hardReloadCountRef.current}/{MAX_HARD_RELOADS} · {v?.paused ? 'paused' : 'playing'}</div>
+        <div>net: {net ? `${net.effectiveType} ${net.downlink}Mb${net.saveData ? ' saver' : ''}` : 'n/a'}</div>
         <div>err: {hasVideoError ? 'yes' : 'no'} · tick: {debugTick}</div>
       </div>
     );
