@@ -236,7 +236,7 @@ const Navbar = () => {
             <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
-          <div className="hidden md:flex flex-1 justify-center px-2 min-w-0">
+          <div className="hidden md:flex flex-1 justify-center px-2 md:px-0 min-w-0">
             <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center w-full min-w-0">
               <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
                 {[...serviceItems, ...serviceItems, ...serviceItems].map((item, i) => (
