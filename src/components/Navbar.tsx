@@ -233,7 +233,7 @@ const Navbar = () => {
             <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(120px 40px at 20% 50%, rgba(52,211,153,0.18), transparent 70%)" }} />
             <span aria-hidden className="pointer-events-none absolute -inset-px rounded-full" style={{ background: "linear-gradient(120deg, rgba(52,211,153,0.35), rgba(255,255,255,0.04) 40%, rgba(66,133,244,0.28))", WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
             <img src={logoImage} alt="ium Labs" className="relative w-7 h-7 sm:w-9 sm:h-9 object-contain" />
-            <span className="relative text-xs sm:text-[15px] leading-[16px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
+            <span className="relative text-xs sm:text-[14px] leading-[16px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
           <div className="hidden md:flex flex-1 justify-center px-2">
