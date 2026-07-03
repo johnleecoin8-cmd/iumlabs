@@ -863,9 +863,17 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const stallMs = lastProgressAtRef.current > 0 ? Math.max(0, now - lastProgressAtRef.current) : 0;
     const sinceLoadMs = loadGateOpenedAtRef.current > 0 ? Math.max(0, now - loadGateOpenedAtRef.current) : 0;
     const net = networkInfo;
+    const analytics = (() => {
+      try {
+        const raw = window.localStorage.getItem('ium.videoAnalytics.v1');
+        if (!raw) return null;
+        return JSON.parse(raw) as { counts?: Record<string, number> };
+      } catch { return null; }
+    })();
+    const c = analytics?.counts ?? {};
     return (
       <div
-        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/85 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none max-w-[220px] break-all"
+        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/85 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none max-w-[240px] break-all"
         aria-hidden
       >
         <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''} · t: {(v?.currentTime ?? 0).toFixed(2)}s</div>
@@ -876,6 +884,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} · retry: {retryCount}/{maxRetries}</div>
         <div>reload: {hardReloadCountRef.current}/{MAX_HARD_RELOADS} · {v?.paused ? 'paused' : 'playing'}</div>
         <div>net: {net ? `${net.effectiveType} ${net.downlink}Mb${net.saveData ? ' saver' : ''}` : 'n/a'}</div>
+        <div>Σ ready:{c.ready ?? 0} stall:{c.stall ?? 0} reload:{c.reload ?? 0} err:{c.error ?? 0}</div>
         <div>err: {hasVideoError ? 'yes' : 'no'} · tick: {debugTick}</div>
       </div>
     );
