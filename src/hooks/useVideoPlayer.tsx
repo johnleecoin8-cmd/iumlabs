@@ -765,6 +765,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       firstByteLoggedRef.current = false;
       playLoggedRef.current = false;
       console.log('[VideoPlayer] loadstart', { src, t: 0 });
+      logVideoEvent('loadstart', src);
     },
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
       if (loadStartRef.current != null) {
