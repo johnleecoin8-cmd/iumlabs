@@ -5,7 +5,6 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
-import LetsTalkCTA from "@/components/LetsTalkCTA";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
@@ -201,18 +200,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Let's talk — big-type CTA that leads directly into the form */}
-      <section id="lets-talk" className="border-t border-white/[0.07]">
-        <LetsTalkCTA />
-      </section>
-
       {/* Contact */}
       <section id="contact" className="border-t border-white/[0.07]">
         <ContactFormSection />
       </section>
 
-      {/* Footer — CTA suppressed here; it leads the contact section above */}
-      <FooterLinksSection showCTA={false} />
+      {/* Footer */}
+      <FooterLinksSection />
     </div>;
 };
 export default Index;

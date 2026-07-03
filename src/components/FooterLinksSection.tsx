@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { brand } from "@/config/content";
-import LetsTalkCTA from "@/components/LetsTalkCTA";
 
 const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
   {
@@ -41,19 +40,11 @@ const navSections: { title: string; wide?: boolean; links: { name: string; href:
   },
 ];
 
-// showCTA renders the big "Let's talk" panel at the top of the footer.
-// The homepage sets it false because it renders LetsTalkCTA above the
-// contact form instead; every other page keeps the footer CTA.
-const FooterLinksSection = ({ showCTA = true }: { showCTA?: boolean }) => {
+const FooterLinksSection = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#0A0A0A] text-white border-t border-white/[0.06]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      {showCTA && (
-        <div className="border-b border-white/[0.06]">
-          <LetsTalkCTA />
-        </div>
-      )}
       <div className="px-5 sm:px-6 lg:px-10">
 
         <div className="py-12 sm:py-20">
