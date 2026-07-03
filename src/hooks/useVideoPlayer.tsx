@@ -579,18 +579,24 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
       if (!isMobile) return;
 
-      const stalledFor = now - lastProgressAtRef.current;
+      // Only intervene while the video has never actually started. Once it
+      // has produced any real progress, leave it alone — mobile buffering
+      // during playback must NOT trigger a reload (that's what caused the
+      // stutter loop).
+      if (readyRef.current && video.currentTime > 0.5) return;
+
       const exceededInitialWindow = now - loadGateOpenedAtRef.current > MOBILE_STALL_WINDOW_MS;
 
-       if ((video.paused || video.readyState < 3) && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
+      if (video.paused && playAttemptsRef.current < MAX_PLAY_ATTEMPTS && now - lastPlayAttemptRef.current > PLAY_COOLDOWN_MS) {
         tryPlay(video);
         return;
       }
 
-       if (exceededInitialWindow && (stalledFor > MOBILE_STALL_WINDOW_MS || (video.currentTime <= 0.01 && video.readyState >= 2))) {
-        hardReload(video, video.paused ? 'paused on mobile after load window' : 'currentTime stalled on mobile');
+      // Only reload if we've waited a full window AND still have no frame.
+      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2) {
+        hardReload(video, 'never started on mobile');
       }
-    }, 1200);
+    }, 2000);
 
     // Also try on user interaction (for strict autoplay policies like
     // Naver/KakaoTalk in-app browsers). Reset the attempt counter on each
