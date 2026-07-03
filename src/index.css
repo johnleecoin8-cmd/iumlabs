@@ -175,6 +175,10 @@ video {
   }
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    /* Restrained body tracking for a premium, designed feel; headings and
+       labels set their own tracking and override (ref: Vercel -0.02em body,
+       Lunar -0.03em site-wide). */
+    letter-spacing: -0.012em;
     /* iOS safe-area padding */
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);

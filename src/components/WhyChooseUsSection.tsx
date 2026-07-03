@@ -89,7 +89,7 @@ const WhyChooseUsSection = () => {
               Seoul Moves Fast.
             </motion.span>
             <motion.span
-              className="block bg-gradient-to-r from-white via-purple-300 to-purple-400 bg-clip-text text-transparent"
+              className="block text-gradient-hero"
               variants={headlineLineVariants}>
 
               We Make You Land.
@@ -100,7 +100,7 @@ const WhyChooseUsSection = () => {
           <motion.p
             className="text-white/75 leading-[1.6] text-[14px] sm:text-lg md:text-xl max-w-3xl mx-auto tracking-[-0.01em] px-3 sm:px-0"
             variants={descriptionVariants}>
-            Korea is <span className="text-purple-300 font-semibold">retail-driven, trust-first, and brutally fast</span>. We don't localize your deck, we rebuild your <span className="text-purple-300 font-semibold">narrative</span>, activate <span className="text-purple-300 font-semibold">real KOLs</span>, and run <span className="text-purple-300 font-semibold">campaigns that convert</span>. <span className="text-purple-300 font-semibold">25+ projects</span>. Zero recycled playbooks.
+            Korea is <span className="text-white font-semibold">retail-driven, trust-first, and brutally fast</span>. We don't localize your deck, we rebuild your <span className="text-white font-semibold">narrative</span>, activate <span className="text-white font-semibold">real KOLs</span>, and run <span className="text-white font-semibold">campaigns that convert</span>. <span className="text-primary font-semibold">25+ projects</span>. Zero recycled playbooks.
           </motion.p>
 
 
