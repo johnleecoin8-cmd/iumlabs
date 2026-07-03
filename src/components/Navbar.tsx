@@ -238,13 +238,13 @@ const Navbar = () => {
 
           <div className="hidden md:flex flex-1 justify-center px-2">
             <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center max-w-[420px]">
-              <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
-                {[...serviceItems, ...serviceItems].map((item, i) => (
-                  <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
-                    <Link to={item.href} className="text-[13px] sm:text-[14px] leading-none text-white/50 hover:text-white transition-colors shrink-0">
-                      {item.name}
-                    </Link>
-                    <span className="text-white/20 leading-none">·</span>
+              <div className="animate-marquee flex items-center whitespace-nowrap">
+                {[...Array(4)].map((_, i) => (
+                  <span key={i} className="flex items-center gap-0 shrink-0">
+                    <Link to="/" className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">iumlabs</Link>
+                    <span className="text-white/20 leading-[16px]">|</span>
+                    <button onClick={() => setIsLiveChatOpen(true)} className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">Start Live Chat</button>
+                    <span className="text-white/20 leading-[16px] mx-2">|</span>
                   </span>
                 ))}
               </div>
