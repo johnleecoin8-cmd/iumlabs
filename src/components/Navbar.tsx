@@ -226,7 +226,7 @@ const Navbar = () => {
     <>
       {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-3 sm:gap-4 md:gap-0">
           <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-2 sm:px-3 h-[40px] sm:h-[52px] rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
 
 
@@ -236,10 +236,10 @@ const Navbar = () => {
             <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
-          <div className="hidden md:flex flex-1 justify-center px-2">
-            <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center max-w-[420px]">
+          <div className="hidden md:flex flex-1 justify-center px-2 md:px-0 min-w-0">
+            <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center w-full min-w-0">
               <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
-                {[...serviceItems, ...serviceItems].map((item, i) => (
+                {[...serviceItems, ...serviceItems, ...serviceItems].map((item, i) => (
                   <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
                     <Link to={item.href} className="text-[13px] sm:text-[14px] leading-none text-white/50 hover:text-white transition-colors shrink-0">
                       {item.name}
