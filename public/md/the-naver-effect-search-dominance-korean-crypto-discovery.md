@@ -1,6 +1,6 @@
 # The Naver Effect: Why Search Dominance Defines Korean Crypto Discovery
 
-*ium Research — Helen, Head of Research — May 17, 2026*
+*ium Research — Helen, Head of Research — May 13, 2026*
 *Canonical: https://iumlabs.io/blog/the-naver-effect-search-dominance-korean-crypto-discovery*
 
 ## Key Takeaways

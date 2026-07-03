@@ -1,6 +1,6 @@
 # Token Launch Timing in Korea: The Quarterly Cycle That Determines Success
 
-*ium Research — James, Co-founder — May 18, 2026*
+*ium Research — James, Co-founder — May 12, 2026*
 *Canonical: https://iumlabs.io/blog/token-launch-timing-korea-quarterly-cycle*
 
 ## Key Takeaways

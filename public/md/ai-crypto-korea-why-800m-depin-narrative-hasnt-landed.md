@@ -1,6 +1,6 @@
 # AI × Crypto in Korea: Why the $800M DePIN Narrative Hasn't Landed
 
-*ium Research — James, Co-founder — May 11, 2026*
+*ium Research — James, Co-founder — May 9, 2026*
 *Canonical: https://iumlabs.io/blog/ai-crypto-korea-why-800m-depin-narrative-hasnt-landed*
 
 ## Key Takeaways

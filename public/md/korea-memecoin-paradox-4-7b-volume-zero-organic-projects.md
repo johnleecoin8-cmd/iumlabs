@@ -1,6 +1,6 @@
 # Korea's Memecoin Paradox: $4.7B Volume, Zero Organic Projects
 
-*ium Research — Tobi, Senior Analyst — May 11, 2026*
+*ium Research — Tobi, Senior Analyst — May 10, 2026*
 *Canonical: https://iumlabs.io/blog/korea-memecoin-paradox-4-7b-volume-zero-organic-projects*
 
 ## Key Takeaways

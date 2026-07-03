@@ -1,6 +1,6 @@
 # Korea's DeFi Paradox: Why the World's Most Active Traders Won't Touch On-Chain
 
-*ium Research — Helen, Head of Research — May 11, 2026*
+*ium Research — Helen, Head of Research — May 7, 2026*
 *Canonical: https://iumlabs.io/blog/korea-defi-paradox-why-active-traders-wont-touch-onchain*
 
 ## Key Takeaways

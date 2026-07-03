@@ -1,6 +1,6 @@
 # The Korean Premium Decoded: Kimchi Premium Mechanics in 2026
 
-*ium Research — Tobi, Senior Analyst — May 19, 2026*
+*ium Research — Tobi, Senior Analyst — May 20, 2026*
 *Canonical: https://iumlabs.io/blog/korean-premium-decoded-kimchi-premium-mechanics-2026*
 
 ## Key Takeaways

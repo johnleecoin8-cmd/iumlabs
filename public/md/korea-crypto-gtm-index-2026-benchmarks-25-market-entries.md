@@ -1,6 +1,6 @@
 # The Korea Crypto GTM Index: Benchmarks From 25 Market Entries (2024-2026)
 
-*ium Research — Helen, Head of Research — July 2, 2026*
+*ium Research — Helen, Head of Research — July 1, 2026*
 *Canonical: https://iumlabs.io/blog/korea-crypto-gtm-index-2026-benchmarks-25-market-entries*
 
 ## Key Takeaways

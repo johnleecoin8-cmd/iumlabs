@@ -1,6 +1,6 @@
 # The Stablecoin Siege: USDT vs USDC in Asia's $1.2T Settlement Layer
 
-*ium Research — David, CEO — May 11, 2026*
+*ium Research — David, CEO — May 8, 2026*
 *Canonical: https://iumlabs.io/blog/the-stablecoin-siege-usdt-vs-usdc-in-asia*
 
 ## Key Takeaways
