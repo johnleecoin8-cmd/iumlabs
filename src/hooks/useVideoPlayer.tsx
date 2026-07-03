@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useMobileOptimization } from './useMobileOptimization';
+import { logVideoEvent } from '@/lib/videoAnalytics';
 
 declare const __BUILD_TIMESTAMP__: string;
 
@@ -114,8 +115,11 @@ const PLAY_COOLDOWN_MS = 1500;
 const PLAY_RETRY_THROTTLE_MS = 400;
 // Mobile networks buffer for several seconds during 4G→3G handoffs or in-app
 // browsers. Keep the stall window generous so we don't nuke a healthy download.
-const MOBILE_STALL_WINDOW_MS = 12000;
-const MOBILE_RELOAD_COOLDOWN_MS = 15000;
+// Tightened based on user reports: only treat as a real stall when nothing at
+// all has downloaded (no buffered range, readyState<2) AFTER a long grace
+// period. Anything less aggressive was firing during normal mobile buffering.
+const MOBILE_STALL_WINDOW_MS = 18000;
+const MOBILE_RELOAD_COOLDOWN_MS = 30000;
 const MAX_HARD_RELOADS = 1;
 
 // Exported so the intro loader can prefetch the exact same versioned URLs the
