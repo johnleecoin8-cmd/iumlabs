@@ -236,8 +236,23 @@ const Navbar = () => {
             <span className="relative text-xs sm:text-[15px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
+          <div className="hidden md:flex flex-1 justify-center px-2">
+            <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[36px] sm:h-[40px] px-1 flex items-center max-w-[420px]">
+              <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
+                {[...serviceItems, ...serviceItems].map((item, i) => (
+                  <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
+                    <Link to={item.href} className="text-[11px] sm:text-[12px] text-white/50 hover:text-white transition-colors shrink-0">
+                      {item.name}
+                    </Link>
+                    <span className="text-white/20">·</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5">
+
             <button onClick={() => setIsLiveChatOpen(true)} aria-label="Start Live Chat" className="btn-glass hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] font-medium text-white/80">
               <Send className="w-4 h-4 text-[#229ED9]" /><span>Start Live Chat</span>
             </button>
