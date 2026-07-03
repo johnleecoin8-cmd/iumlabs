@@ -65,3 +65,10 @@ primary-<대상>-<내용>.png, 캡션에 "Source: <기관>, <문서명>, <날짜
 작성. 구조: 뭐가 나왔나(1차 사료) → 왜 다른가 → 한국 아이러니/앵글 →
 누가 갭을 먹나 → 타 프로젝트 GTM 교훈 → What Breaks It → The Radar Read.
 프로젝트 로고 coverMark + 공식 발표 캡쳐 + 공식 계정 xpost 기본 장착.
+
+## 11. 콘텐츠 파이프라인 (F1, 2026-07-03)
+글 본문의 단일 소스는 static-research-posts.ts 그대로다. 단, 앱은 이 파일을
+직접 임포트하지 않는다 — 빌드 체인 첫 단계(generate-research-index.mjs)가
+본문 없는 research-index.gen.ts(앱용)와 public/content/<slug>.json(fetch용)을
+생성한다. 글 추가·수정 후 dev/build를 돌리면 자동 재생성된다. gen 파일은
+수동 편집 금지. 새 글 추가 시 커버 OG 캡쳐(/og-render/<slug>)도 잊지 말 것.

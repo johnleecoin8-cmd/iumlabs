@@ -3,7 +3,7 @@ import { Clock } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import BlogCover from "@/components/BlogCover";
-import { staticResearchPosts } from "@/data/static-research-posts";
+import { staticResearchPosts } from "@/data/research-index.gen";
 
 const calculateReadTime = (content: string | null): string => {
   if (!content) return "5 min read";

@@ -15,7 +15,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useQuery } from "@tanstack/react-query";
-import { staticResearchPosts } from "@/data/static-research-posts";
+import { staticResearchPosts } from "@/data/research-index.gen";
 
 const categories = ["All", "Market Research", "Strategy", "DeFi", "Marketing", "Technology", "Stablecoins"];
 

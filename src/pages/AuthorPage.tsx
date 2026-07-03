@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import SEOHead from "@/components/SEOHead";
 import BlogCover from "@/components/BlogCover";
-import { staticResearchPosts } from "@/data/static-research-posts";
+import { staticResearchPosts } from "@/data/research-index.gen";
 import { AUTHORS } from "@/lib/authors";
 import { categoryAccentStyle } from "@/lib/categoryTheme";
 

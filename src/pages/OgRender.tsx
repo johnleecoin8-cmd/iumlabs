@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import BlogCover from "@/components/BlogCover";
-import { staticResearchPosts } from "@/data/static-research-posts";
+import { staticResearchPosts } from "@/data/research-index.gen";
 import { categoryAccentStyle } from "@/lib/categoryTheme";
 
 /**

@@ -17,7 +17,7 @@ import SEOHead from "@/components/SEOHead";
 import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
 import TweetEmbed from "@/components/blog/TweetEmbed";
-import { staticResearchPosts } from "@/data/static-research-posts";
+import { staticResearchPosts } from "@/data/research-index.gen";
 
 // Author avatars + roles + bios live in src/lib/authors.ts (shared with the
 // author archive pages at /blog/author/:name).
@@ -87,9 +87,22 @@ const ResearchDetail = () => {
     enabled: !!dbPost?.id,
   });
 
-  // Static posts with curated content take priority over DB
+  // Static posts with curated content take priority over DB.
+  // Bodies are externalized to /content/<slug>.json (F1) and fetched here.
   const staticPost = staticResearchPosts.find(p => p.slug === slug);
-  const useStatic = !!(staticPost && staticPost.content && staticPost.content.length > 0);
+  const useStatic = !!staticPost;
+  const { data: staticContentData } = useQuery({
+    queryKey: ['static-content', slug],
+    queryFn: async () => {
+      const res = await fetch(`/content/${slug}.json`);
+      if (!res.ok) throw new Error(`content fetch ${res.status}`);
+      return res.json() as Promise<{ content: string }>;
+    },
+    enabled: useStatic,
+    staleTime: Infinity,
+    retry: 2,
+  });
+  const staticContent = staticContentData?.content ?? '';
 
   const post = useStatic ? {
     id: staticPost!.id,
@@ -105,7 +118,7 @@ const ResearchDetail = () => {
     authorBio: (staticPost as any).authorBio || '',
     excerpt: staticPost!.excerpt,
     tags: staticPost!.tags,
-    content: staticPost!.content,
+    content: staticContent,
     chartImages: (staticPost as any).chartImages as Record<string, string> | undefined,
   } : dbPost ? {
     id: dbPost.id,
