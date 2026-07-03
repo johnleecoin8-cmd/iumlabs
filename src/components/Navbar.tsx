@@ -226,7 +226,7 @@ const Navbar = () => {
     <>
       {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-start gap-3 sm:gap-4">
           <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-2 sm:px-3 h-[40px] sm:h-[52px] rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
 
 
