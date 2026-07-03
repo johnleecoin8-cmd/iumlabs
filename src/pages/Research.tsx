@@ -260,7 +260,7 @@ const Research = () => {
                   <span className="inline-block px-2 py-0.5 rounded-[4px] bg-primary text-black font-mono text-[10px] uppercase tracking-[0.14em]">
                     Latest · {feature.category}
                   </span>
-                  <h3 className="mt-4 font-display text-2xl sm:text-4xl lg:text-[2.6rem] font-bold leading-[1.08] tracking-[-0.005em] text-white">
+                  <h3 className="mt-4 font-display text-2xl sm:text-4xl lg:text-[2.7rem] font-extrabold leading-[1.02] tracking-[-0.02em] text-white">
                     <span className="[box-decoration-break:clone] group-hover:bg-primary group-hover:text-black transition-colors duration-150 px-1 -mx-1">
                       {feature.title}
                     </span>

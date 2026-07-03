@@ -66,8 +66,8 @@ const OgRender = () => {
             style={{
               fontSize: 58,
               lineHeight: 1.04,
-              letterSpacing: "-0.005em",
-              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              fontWeight: 800,
               color: "#fff",
               maxWidth: 1000,
             }}

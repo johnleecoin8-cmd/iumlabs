@@ -21,7 +21,7 @@ const CitationPolicy = () => (
           <ArrowLeft className="w-4 h-4" /> Research
         </Link>
         <span className="block font-mono text-[11px] uppercase tracking-[0.25em] text-primary/80">ium Research</span>
-        <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold tracking-[-0.005em] text-white">
+        <h1 className="mt-2 font-display text-4xl sm:text-5xl font-extrabold tracking-[-0.02em] text-white">
           Citation Policy
         </h1>
 

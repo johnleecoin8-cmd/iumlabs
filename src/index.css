@@ -187,8 +187,8 @@ video {
 }
 
 /* ============================================
-   DISPLAY VOICE — unified across all heavy headlines (Zodiak, John-approved
-   2026-07-03: weighty, serious editorial serif). The loader wordmark and
+   DISPLAY VOICE — unified across all heavy headlines (Archivo 800,
+   John-approved 2026-07-03: hard, thick grotesk). The loader wordmark and
    every bold heading share this signature so the type reads as one system.
    Declared OUTSIDE @layer on purpose: unlayered rules beat Tailwind's
    layered utilities, so this wins the cascade for bold headings.
@@ -196,9 +196,9 @@ video {
 :is(h1, h2, h3, h4, h5, h6).font-bold,
 :is(h1, h2, h3, h4, h5, h6).font-extrabold,
 :is(h1, h2, h3, h4, h5, h6).font-black {
-  font-family: 'Zodiak', 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  letter-spacing: -0.005em;
+  font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
 }
 
 @layer components {
@@ -337,8 +337,8 @@ video {
 
   /* Headline accents — unified with site type system (was Cormorant/Playfair serif) */
   .headline-serif {
-    font-family: 'Zodiak', 'Playfair Display', Georgia, serif;
-    font-weight: 700;
+    font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
+    font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 1.1;
   }
@@ -1335,8 +1335,8 @@ body::after {
    letter-spacing -3% / line-height 0.95, footer padding 108px 0 */
 .footer-cta-type {
   font-size: clamp(3.25rem, 9.5vw, 6.75rem);
-  font-weight: 400;
-  letter-spacing: -0.01em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
   line-height: 0.95;
   text-transform: uppercase;
 }
@@ -1578,7 +1578,7 @@ body.intro-done .reveal-fade.reveal-d2 { transition-delay: 0.45s; }
    ============================================ */
 h1, h2, h3,
 .footer-cta-type {
-  font-family: 'Zodiak', 'Playfair Display', Georgia, serif;
+  font-family: 'Archivo', 'Inter', -apple-system, sans-serif;
 }
 
 /* ============================================
