@@ -74,27 +74,36 @@ const FooterLinksSection = () => {
             </span>
           </Link>
 
-          {/* Client logo wall — static marks, no names. Each links to its
-              case study; brightens from 45%→100% on hover so the wall reads
-              as "these teams already trust us". */}
-          <div className="lg:pb-2">
-            <p className="hidden lg:block text-right text-[10px] font-mono text-white/25 uppercase tracking-[0.22em] mb-5">
-              Trusted by
-            </p>
-            <div className="flex flex-wrap lg:justify-end items-center gap-x-6 gap-y-5 sm:gap-x-8 sm:gap-y-6 lg:max-w-[440px]">
+          {/* Client logo grid — the Stripe/Ramp "customers" treatment:
+              heterogeneous marks (icons + wordmarks) sit in equal cells with
+              collapsed hairline dividers, so every logo carries the same
+              visual weight regardless of aspect ratio. Framed as one module
+              in a rounded, edge-lit card; each cell lifts on hover. Fixed 4×4
+              so the grid never leaves a ragged final row. */}
+          <div className="lg:pb-1 lg:justify-self-end w-full max-w-[440px] lg:w-[440px]">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.28em]">
+                Trusted by
+              </span>
+              <span className="text-[10px] font-mono text-white/20 tracking-[0.1em] tabular-nums">
+                {clientLogos.length} teams
+              </span>
+            </div>
+            <div className="grid grid-cols-4 rounded-2xl overflow-hidden border-t border-l border-white/[0.07] surface-edge bg-white/[0.012]">
               {clientLogos.map((client) => (
                 <Link
                   key={client.slug}
                   to={`/projects/${client.slug}`}
                   aria-label={client.name}
-                  className="shrink-0"
+                  title={client.name}
+                  className="group/logo relative flex items-center justify-center h-[62px] sm:h-[74px] border-r border-b border-white/[0.07] transition-colors duration-300 hover:bg-white/[0.04]"
                 >
                   <img
                     src={client.logo}
                     alt={client.name}
                     loading="lazy"
                     decoding="async"
-                    className="h-5 sm:h-6 w-auto max-w-[92px] object-contain brightness-0 invert opacity-45 hover:opacity-100 transition-opacity duration-300"
+                    className="h-4 sm:h-[18px] w-auto max-w-[72px] object-contain brightness-0 invert opacity-50 group-hover/logo:opacity-100 transition-opacity duration-300"
                   />
                 </Link>
               ))}
