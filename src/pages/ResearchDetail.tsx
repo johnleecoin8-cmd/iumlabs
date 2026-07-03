@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { categoryAccentStyle } from '@/lib/categoryTheme';
 import { useEffect, useMemo } from "react";
-import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight, Tag, FileText } from "lucide-react";
+import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight, Tag } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
@@ -181,18 +181,6 @@ const ResearchDetail = () => {
     toast.success("Link copied to clipboard!");
   };
 
-  // FP's LLM-friendly device: copy the whole article as clean markdown
-  const handleCopyMarkdown = async () => {
-    try {
-      const res = await fetch(`/md/${slug}.md`);
-      if (!res.ok) throw new Error(String(res.status));
-      await navigator.clipboard.writeText(await res.text());
-      toast.success("Copied as Markdown — paste it into your notes or an LLM");
-    } catch {
-      toast.error("Could not copy markdown");
-    }
-  };
-
   const handleShare = (platform: string) => {
     if (!post) return;
     const url = encodeURIComponent(window.location.href);
@@ -337,15 +325,6 @@ const ResearchDetail = () => {
                     className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
                   >
                     <Copy className="w-4 h-4" />
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCopyMarkdown}
-                    title="Copy as Markdown"
-                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
-                  >
-                    <FileText className="w-4 h-4" />
                   </motion.button>
                 </div>
               </div>

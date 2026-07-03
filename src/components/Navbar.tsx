@@ -233,18 +233,18 @@ const Navbar = () => {
             <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(120px 40px at 20% 50%, rgba(52,211,153,0.18), transparent 70%)" }} />
             <span aria-hidden className="pointer-events-none absolute -inset-px rounded-full" style={{ background: "linear-gradient(120deg, rgba(52,211,153,0.35), rgba(255,255,255,0.04) 40%, rgba(66,133,244,0.28))", WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
             <img src={logoImage} alt="ium Labs" className="relative w-7 h-7 sm:w-9 sm:h-9 object-contain" />
-            <span className="relative text-xs sm:text-[14px] leading-[16px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
+            <span className="relative text-[13px] sm:text-[14px] font-semibold text-white tracking-tight drop-shadow-sm">ium Labs</span>
           </Link>
 
           <div className="hidden md:flex flex-1 justify-center px-2">
             <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center max-w-[420px]">
-              <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
-                {[...serviceItems, ...serviceItems].map((item, i) => (
-                  <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
-                    <Link to={item.href} className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">
-                      {item.name}
-                    </Link>
-                    <span className="text-white/20 leading-[16px]">·</span>
+              <div className="animate-marquee flex items-center whitespace-nowrap">
+                {[...Array(4)].map((_, i) => (
+                  <span key={i} className="flex items-center gap-0 shrink-0">
+                    <Link to="/" className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">iumlabs</Link>
+                    <span className="text-white/20 leading-[16px]">|</span>
+                    <button onClick={() => setIsLiveChatOpen(true)} className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">Start Live Chat</button>
+                    <span className="text-white/20 leading-[16px]">|</span>
                   </span>
                 ))}
               </div>
@@ -253,13 +253,13 @@ const Navbar = () => {
 
           <div className="flex items-center gap-2 sm:gap-2.5">
 
-            <button onClick={() => setIsLiveChatOpen(true)} aria-label="Start Live Chat" className="btn-glass hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] leading-[16px] font-medium text-white/80">
+            <button onClick={() => setIsLiveChatOpen(true)} aria-label="Start Live Chat" className="btn-glass hidden md:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] font-medium text-white/80">
               <Send className="w-4 h-4 text-[#229ED9]" /><span>Start Live Chat</span>
             </button>
-            <CalendlyButton aria-label="Book a Meeting" className="btn-glass hidden sm:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] leading-[16px] font-medium text-white/80">
+            <CalendlyButton aria-label="Book a Meeting" className="btn-glass hidden sm:flex items-center gap-2.5 px-5 h-[44px] sm:h-[52px] rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[13px] sm:text-[14px] font-medium text-white/80">
               <Calendar className="w-4 h-4 text-[#4285F4]" /><span>Book a Meeting</span>
             </CalendlyButton>
-            <button onClick={() => setIsMenuOpen(true)} className="btn-glass flex items-center gap-2 sm:gap-2.5 h-[40px] sm:h-[52px] px-3 sm:px-5 rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[12px] sm:text-[14px] leading-[16px] font-medium text-white/70" aria-label="Open menu">
+            <button onClick={() => setIsMenuOpen(true)} className="btn-glass flex items-center gap-2 sm:gap-2.5 h-[40px] sm:h-[52px] px-3 sm:px-5 rounded-full bg-black/70 backdrop-blur-xl hover:bg-black/80 text-[12px] sm:text-[14px] font-medium text-white/70" aria-label="Open menu">
               <span className="hidden sm:inline">menu</span>
               <div className="flex flex-col gap-[5px]">
                 <span className="block w-[20px] h-[2.5px] bg-white/80 rounded-full" />

@@ -36,7 +36,6 @@ const navSections: { title: string; wide?: boolean; links: { name: string; href:
       { name: "Terms", href: "/terms" },
       { name: "Privacy", href: "/privacy" },
       { name: "Transparency", href: "/transparency" },
-      { name: "Citation Policy", href: "/citations" },
     ],
   },
 ];

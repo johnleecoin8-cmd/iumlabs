@@ -18,7 +18,6 @@ const Contact = React.lazy(() => import("./pages/Contact"));
 const Blog = React.lazy(() => import("./pages/Research"));
 const AuthorPage = React.lazy(() => import("./pages/AuthorPage"));
 const OgRender = React.lazy(() => import("./pages/OgRender"));
-const CitationPolicy = React.lazy(() => import("./pages/CitationPolicy"));
 const BlogDetail = React.lazy(() => import("./pages/ResearchDetail"));
 const GTMService = React.lazy(() => import("./pages/GTMService"));
 const BrandingService = React.lazy(() => import("./pages/BrandingService"));
@@ -159,7 +158,6 @@ const AppRoutes = () => {
         {/* Static research articles now handled by /blog/:slug via ResearchDetail + static-research-posts.ts */}
         <Route path="/blog/author/:name" element={<AuthorPage />} />
         <Route path="/og-render/:slug" element={<OgRender />} />
-        <Route path="/citations" element={<CitationPolicy />} />
         <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/research" element={<Navigate to="/blog" replace />} />
         <Route path="/research/:slug" element={<Navigate to="/blog" replace />} />
