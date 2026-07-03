@@ -31,7 +31,7 @@ const Navbar = () => {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [serviceDropdownOpen, setServiceDropdownOpen] = useState(false);
+  
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith("/ium-admin");
 
