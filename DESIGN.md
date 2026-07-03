@@ -25,14 +25,21 @@ Premium, precise, crypto-industry professional. No visual noise — every elemen
 | `--text-muted` | `rgba(255,255,255,0.45)` | Captions, metadata, labels |
 | `--text-subtle` | `rgba(255,255,255,0.25)` | Disabled, hints |
 
-### Brand Accent (Purple)
+### Brand Accent (Green) — updated 2026-07-04 (was purple; doc now matches live)
+The global brand accent is green. Purple is NOT the site accent; it is one of the
+per-service category accents (see below).
 | Token | Value | Use |
 |-------|-------|-----|
-| `--accent` | `#b48cde` | Primary accent, gradient start |
-| `--accent-bright` | `#c084fc` | Gradient end, hover states |
-| `--accent-muted` | `#a78bfa` | Gradient mid, links |
-| `--accent-bg` | `rgba(180,140,222,0.08)` | Subtle accent backgrounds |
-| `--accent-border` | `rgba(180,140,222,0.25)` | Accent borders |
+| `--brand` / `--primary` | `hsl(158 64% 52%)` ≈ `#34D39A` | Global accent: hero CTA arrow, links, single-accent highlights |
+| `--brand` on dark | same, `opacity 0.7-1` | Accent dots, small emphasis |
+
+### Per-service category accents (secondary system)
+Each service detail page carries ONE category accent (used for its hero eyebrow,
+CTA, feature index, clean-panel glow). These are intentional, not the global brand:
+Compliance `#A855F7` (purple) · Liquidity teal · GTM `#00C8FF` · Exchange `#2DD4BF`
+· etc. Rule: one accent per page, never mixed within a page. The homepage service
+cards historically used a 12-color set; treat that as legacy, migrate toward the
+single-green + category-accent system.
 
 ### Borders
 | Token | Value | Use |
@@ -72,7 +79,7 @@ Premium, precise, crypto-industry professional. No visual noise — every elemen
 - Headlines: heavy weight (700-800) + negative tracking = compressed authority
 - Body: light weight (300-400) for reading comfort on dark backgrounds
 - Labels/Mono: uppercase + wide tracking for structural hierarchy
-- Display gradient text: `bg-gradient-to-r from-[#b48cde] via-[#a78bfa] to-[#c084fc]` with `bg-clip-text`
+- Display gradient text: monochrome `.text-gradient-hero` (white → #adadad, Vercel-style). Display face is Archivo 800 (`-0.02em`), not a colored gradient.
 
 ## 4. Component Patterns
 
@@ -200,6 +207,6 @@ These numbers must be consistent across ALL pages:
 - Don't use box-shadows for elevation on dark surfaces
 - Don't use solid colored borders — always semi-transparent white
 - Don't use pure white (#fff) for large text areas
-- Don't mix accent colors — purple is the only chromatic color
+- Don't mix accent colors within a page — green is the global accent; each service page adds exactly one category accent
 - Don't use font-weight above 800
 - Don't add visible dividers between sections — dark spacing is the separator
