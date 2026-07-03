@@ -572,6 +572,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
         clearInterval(retryInterval);
         console.warn('[VideoPlayer] play attempts exhausted, keeping poster');
+        logVideoEvent('exhausted', src, { reason: 'play-attempts' });
         setDebugTick((t) => t + 1);
         return;
       }
@@ -607,8 +608,19 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         return;
       }
 
-      // Only reload if we've waited a full window AND still have no frame.
-      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2) {
+      // Only reload if we've waited a full window AND the browser has literally
+      // downloaded nothing (no buffered range, readyState<2, currentTime≈0).
+      // If ANY bytes are buffered, we're mid-download — leave it alone.
+      let hasBuffered = false;
+      try {
+        hasBuffered = video.buffered.length > 0 && video.buffered.end(0) > 0.05;
+      } catch {}
+      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2 && !hasBuffered) {
+        logVideoEvent('stall', src, {
+          rs: video.readyState,
+          waitedMs: Math.round(now - loadGateOpenedAtRef.current),
+          buffered: 0,
+        });
         hardReload(video, 'never started on mobile');
       }
     }, 2000);
