@@ -451,16 +451,18 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     if (retryTimerRef.current) return;
 
+    logVideoEvent('error', src, { retryCount, rs: video?.readyState ?? -1 });
+
     if (retryCount < maxRetries) {
       const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff: 1s, 2s, 4s
       console.log(`Video load failed, retrying in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
-      
+
       retryTimerRef.current = setTimeout(() => {
         retryTimerRef.current = null;
         if (readyRef.current || (videoRef.current && !videoRef.current.paused && videoRef.current.currentTime > 0)) return;
         setRetryCount(prev => prev + 1);
         setHasVideoError(false);
-        
+
         // Force reload the video
         if (videoRef.current) {
           videoRef.current.load();
@@ -469,8 +471,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     } else {
       setHasVideoError(true);
       console.warn('Video load failed after max retries, falling back to poster');
+      logVideoEvent('exhausted', src, { reason: 'error-retries' });
     }
-  }, [retryCount, maxRetries]);
+  }, [retryCount, maxRetries, src]);
 
   // Manual controls
   const play = useCallback(() => {
