@@ -55,8 +55,8 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <p className="font-display text-[clamp(2.35rem,7.1vw,6.3rem)] font-extrabold leading-[0.98] sm:leading-[0.94] tracking-[-0.02em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
-            <span className="reveal-line"><span className="text-gradient-hero">Your Crypto Ecosystem</span></span>
-            <span className="reveal-line"><span className="text-gradient-hero">Growth Partner</span></span>
+            <span className="reveal-line"><span className="text-gradient-hero">We don&apos;t localize.</span></span>
+            <span className="reveal-line"><span className="text-primary">We run Korea.</span></span>
           </p>
 
           {/* Subtext */}
@@ -89,6 +89,9 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
           WebkitMaskImage: 'linear-gradient(to right, transparent 0, black 32px, black calc(100% - 32px), transparent 100%)',
         }}
       >
+        <p className="text-center text-[9px] sm:text-[10px] font-mono uppercase tracking-[0.28em] text-white/40 mb-2.5 sm:mb-4">
+          Trusted by 20+ exchanges &amp; projects entering Korea
+        </p>
         <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => <Link key={index} to={`/projects/${client.slug}`} className="flex items-center gap-1.5 sm:gap-3 mx-1 sm:mx-2 px-3 sm:px-6 py-2 sm:py-3.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 hover:bg-zinc-800/80 transition-all duration-300 flex-shrink-0">
               <img
