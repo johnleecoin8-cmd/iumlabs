@@ -63,7 +63,6 @@ const BlogGridSection = () => {
       author: p.author,
       excerpt: p.excerpt,
       tags: p.tags,
-      content: p.content,
       isFeatured: p.isFeatured,
     })),
     ...dbTransformed,
