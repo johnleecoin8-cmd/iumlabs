@@ -1,7 +1,7 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileSearch, Droplets, Landmark, TrendingUp, Handshake } from "lucide-react";
 import { Link } from "react-router-dom";
 import gtmImage from "@/assets/services/gtm-hero-night.webp";
-import communityImage from "@/assets/services/community-hero.webp";
+import communityImage from "@/assets/campaigns/event-fisheye.jpg";
 import kolImage from "@/assets/services/kol-avatars.webp";
 import prImage from "@/assets/campaigns/story-origin-summit.jpg";
 import seoAdsImage from "@/assets/services/seo-naver.jpg";
@@ -52,6 +52,7 @@ const services = [
     icon: Droplets,
     image: liquidityImage,
     accent: "#00E0B8",
+    clean: true,
     details: [
       "Liquidity strategy & order-book sizing",
       "Vetted market-maker desk matching",
@@ -187,6 +188,7 @@ const services = [
     icon: Compass,
     image: complianceImage,
     accent: "#A855F7",
+    clean: true,
     details: [
       "VASP registration & licensing guidance",
       "PIPA & personal data compliance strategy",
@@ -196,8 +198,9 @@ const services = [
   },
 ];
 
-const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
+const ServiceCard = ({ service, index }: { service: typeof services[number]; index: number }) => {
   const Icon = service.icon;
+  const isClean = (service as { clean?: boolean }).clean === true;
 
   return (
     <div
@@ -206,22 +209,38 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500"
+        className={`group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500 ${isClean ? "bg-[#0c0c0e] border border-white/[0.07] hover:border-white/[0.14]" : ""}`}
         style={{ minHeight: 'clamp(320px, 60vh, 520px)' }}
       >
-        {/* Full bleed background image - eager so PageIntro can preload them */}
-        <img
-          src={service.image}
-          alt={service.title}
-          loading="eager"
-          decoding="async"
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
-        />
-
-        {/* Multi-layer overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${service.accent}10, transparent 60%)` }} />
+        {isClean ? (
+          <>
+            {/* Photo-less card: brand-accent glow + oversized ghost icon.
+                Used where no real work photo fits (Linear/Stripe style). */}
+            <div className="absolute inset-0" style={{ background: `radial-gradient(95% 75% at 88% 4%, ${service.accent}12, transparent 58%)` }} />
+            <div className="absolute inset-0 bg-dots opacity-[0.5]" />
+            <Icon
+              className="absolute -bottom-8 -right-6 w-44 h-44 sm:w-52 sm:h-52 transition-transform duration-700 ease-out group-hover:scale-105"
+              style={{ color: service.accent, opacity: 0.06 }}
+              strokeWidth={1}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0e] via-transparent to-transparent" />
+          </>
+        ) : (
+          <>
+            {/* Full bleed background image - eager so PageIntro can preload them */}
+            <img
+              src={service.image}
+              alt={service.title}
+              loading="eager"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
+            />
+            {/* Multi-layer overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${service.accent}10, transparent 60%)` }} />
+          </>
+        )}
 
         {/* Top bar */}
         <div className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex items-center justify-between z-10">

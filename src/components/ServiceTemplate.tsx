@@ -24,7 +24,7 @@ export type ServiceTemplateProps = {
   seo: { title: string; description: string; path: string; keywords: string[] };
   schema: { name: string; description: string; serviceType: string[] };
   breadcrumb: string;
-  hero: { eyebrow: string; titleLead: ReactNode; titleAccent: string; lede: string; image: string; primaryCta?: { label: string; href: string } };
+  hero: { eyebrow: string; titleLead: ReactNode; titleAccent: string; lede: string; image?: string; clean?: boolean; primaryCta?: { label: string; href: string } };
   stats: SvcStat[];
   strip?: { label: string; items: Array<string | { name: string; logo: string }> };
   reality: { eyebrow?: string; heading: ReactNode; headingAccent?: string; body: string[] };
@@ -66,10 +66,13 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
       <Navbar />
 
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
-        <img src={p.hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-[#0A0A0A]">
+        {p.hero.image && !p.hero.clean && (
+          <img src={p.hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        )}
+        {p.hero.clean && <div className="absolute inset-0 bg-dots opacity-[0.5]" />}
         <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/55" />
-        <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 82% 8%, ${A}1f, transparent 52%)` }} />
+        <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 82% 8%, ${A}${p.hero.clean ? "26" : "1f"}, transparent 52%)` }} />
         {p.motif}
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
           <div className="max-w-4xl">
@@ -186,9 +189,21 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           return (
             <Reveal key={f.title}>
               <div className={`relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
-                <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3]">
-                  <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
+                <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3] bg-[#0c0c0e]">
+                  {f.image ? (
+                    <>
+                      <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
+                    </>
+                  ) : (
+                    <>
+                      {/* Photo-less feature: clean branded panel with the section
+                          accent and an oversized ghost icon. */}
+                      <div className="absolute inset-0" style={{ background: `radial-gradient(90% 80% at 82% 6%, ${A}18, transparent 60%)` }} />
+                      <div className="absolute inset-0 bg-dots opacity-[0.6]" />
+                      <Icon className="absolute -bottom-8 -right-6 w-52 h-52 transition-transform duration-700 ease-out group-hover:scale-105" style={{ color: A, opacity: 0.08 }} strokeWidth={1} />
+                    </>
+                  )}
                 </div>
                 <div className="relative">
                   <div className="flex items-baseline gap-4 mb-5">

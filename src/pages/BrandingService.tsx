@@ -2,10 +2,7 @@ import { ShieldCheck, Scale, FileCheck2 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 import featVaspImg from "@/assets/services/comp-vasp-travelrule.webp";
-import featDisclosureImg from "@/assets/backgrounds/seoul-ddp-night.jpg";
-import featIsmsImg from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 import auditImg from "@/assets/services/comp-audit.png";
-import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 const ACCENT = "#A855F7";
 
@@ -25,7 +22,8 @@ const BrandingService = () => (
       titleLead: <>Navigate Korea's crypto<br />regulation and security regime</>,
       titleAccent: "with confidence.",
       lede: "Korea's framework is strict, examined, and fast-changing: VASP registration, the User Protection Act, PIPA, AML and the travel rule, and the ISMS-P security certification regulators actually test. We map what applies, ready you for FSC and KISA scrutiny, and coordinate licensed counsel and accredited auditors so you meet the rules, not stumble into them.",
-      image: heroImg,
+      image: featVaspImg,
+      clean: true,
       primaryCta: { label: "Request a compliance review", href: "/contact" },
     }}
     stats={[{ v: "10+", l: "VASP Cases" }, { v: "ISMS-P", l: "Certification Ready" }, { v: "FSC·KISA", l: "Regulator Ready" }, { v: "VAUPA", l: "+ PIPA Ready" }]}
@@ -46,8 +44,8 @@ const BrandingService = () => (
     }}
     features={[
       { icon: ShieldCheck, eyebrow: "01 · Register", title: "VASP Registration & Licensing", body: "Korea's gateway is VASP registration with the KoFIU under the Specific Financial Information Act: ISMS certification, a real-name verified bank account, and a working AML program before you can operate. We map the full path and coordinate the mandatory travel-rule layer through Korea's two networks, VerifyVASP (Lambda256) and CODE (the Bithumb, Coinone, Korbit joint venture), so your filing is built the way regulators and partner exchanges expect.", points: ["KoFIU registration roadmap (Specific Financial Information Act)", "ISMS certification & real-name account guidance", "Travel-rule onboarding via VerifyVASP or CODE", "Coordinated with licensed Korean counsel"], image: featVaspImg },
-      { icon: Scale, eyebrow: "02 · Advise", title: "Korean Legal Advisory & Opinions", body: "Korea's crypto rules ultimately turn on local law, and only a licensed Korean attorney can issue an opinion that exchanges and regulators will accept. We engage and coordinate vetted Korean law firms to secure the legal interpretations and formal opinions your project needs, from token and securities classification to the domestic legal opinion KRW exchanges require before they will list.", points: ["Engagement of licensed Korean law firms", "Token & securities legal-classification opinions", "Domestic legal opinion for KRW-exchange listing", "Ongoing regulatory interpretation as rules evolve"], image: featDisclosureImg },
-      { icon: FileCheck2, eyebrow: "03 · Certify", title: "ISMS-P Certification & Regulator Readiness", body: "Korea's security regime is where crypto operators actually get tested. ISMS and ISMS-P certification is mandatory infrastructure, and it is examined, not filed and forgotten: annual IT security risk assessments and audit cycles owned by a named, accountable lead. We run the gap assessment, build the roadmap from gap to audit readiness, and coordinate the accredited consultants and the KISA certification process so it holds up under review. When the FSC, FSSC, or KISA come with questions, or during an examination or enforcement period, we help you assemble the security and data-protection narrative and the documentation regulators expect.", points: ["ISMS / ISMS-P gap assessment to audit readiness", "Annual IT security risk assessment support", "PIPA & KISA data-protection controls mapping", "FSC / FSSC / KISA examination readiness"], image: featIsmsImg },
+      { icon: Scale, eyebrow: "02 · Advise", title: "Korean Legal Advisory & Opinions", body: "Korea's crypto rules ultimately turn on local law, and only a licensed Korean attorney can issue an opinion that exchanges and regulators will accept. We engage and coordinate vetted Korean law firms to secure the legal interpretations and formal opinions your project needs, from token and securities classification to the domestic legal opinion KRW exchanges require before they will list.", points: ["Engagement of licensed Korean law firms", "Token & securities legal-classification opinions", "Domestic legal opinion for KRW-exchange listing", "Ongoing regulatory interpretation as rules evolve"], image: "" },
+      { icon: FileCheck2, eyebrow: "03 · Certify", title: "ISMS-P Certification & Regulator Readiness", body: "Korea's security regime is where crypto operators actually get tested. ISMS and ISMS-P certification is mandatory infrastructure, and it is examined, not filed and forgotten: annual IT security risk assessments and audit cycles owned by a named, accountable lead. We run the gap assessment, build the roadmap from gap to audit readiness, and coordinate the accredited consultants and the KISA certification process so it holds up under review. When the FSC, FSSC, or KISA come with questions, or during an examination or enforcement period, we help you assemble the security and data-protection narrative and the documentation regulators expect.", points: ["ISMS / ISMS-P gap assessment to audit readiness", "Annual IT security risk assessment support", "PIPA & KISA data-protection controls mapping", "FSC / FSSC / KISA examination readiness"], image: "" },
     ]}
     promise={{
       heading: "We advise and coordinate.",
