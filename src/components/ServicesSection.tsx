@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import gtmImage from "@/assets/services/gtm-hero-night.webp";
 import communityImage from "@/assets/services/community-hero.webp";
 import kolImage from "@/assets/services/kol-avatars.webp";
-import prImage from "@/assets/services/pr-hero.webp";
+import prImage from "@/assets/campaigns/story-origin-summit.jpg";
 import seoAdsImage from "@/assets/services/seo-naver.jpg";
 import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
 import listingImage from "@/assets/platforms/comp-exchange.jpg";
-import liquidityImage from "@/assets/platforms/res-market.jpg";
+import liquidityImage from "@/assets/campaigns/seoul-skyline.jpg";
 import exchangeImage from "@/assets/services/cex-paid-ads.webp";
 import capitalImage from "@/assets/platforms/res-thesis.jpg";
-import complianceImage from "@/assets/services/compliance-hero.avif";
+import complianceImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 const services = [
   {
@@ -199,9 +199,6 @@ const services = [
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
 
-  // One restrained system, not twelve neon accents: a monochrome photo grid
-  // with a single brand accent (green). Reads like a research firm, not a
-  // startup template. Reference discipline: a16z crypto / Linear / Stripe.
   return (
     <div
       className="transition-all ease-out opacity-100 translate-y-0"
@@ -209,29 +206,33 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/[0.08] surface-edge transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] hover:-translate-y-1 hover:border-white/[0.16]"
+        className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500"
         style={{ minHeight: 'clamp(320px, 60vh, 520px)' }}
       >
-        {/* Full-bleed image, unified to grayscale so twelve different photos
-            read as one editorial system; regains a touch of color on hover. */}
+        {/* Full bleed background image - eager so PageIntro can preload them */}
         <img
           src={service.image}
           alt={service.title}
           loading="eager"
           decoding="async"
-          className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.85] transition-all duration-[1.2s] ease-out group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
         />
 
-        {/* Single clean legibility gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/55 to-[#0A0A0A]/10" />
+        {/* Multi-layer overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `linear-gradient(135deg, ${service.accent}10, transparent 60%)` }} />
 
         {/* Top bar */}
         <div className="absolute top-0 left-0 right-0 p-4 sm:p-6 flex items-center justify-between z-10">
-          <span className="text-[10px] sm:text-xs font-mono tracking-[0.3em] text-white/45 tabular-nums">
+          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-[0.3em] text-white/60">
             {service.number}
           </span>
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center backdrop-blur-md bg-white/[0.06] border border-white/[0.12] transition-all duration-300 group-hover:bg-white/[0.1] group-hover:border-white/20">
-            <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white/85" />
+          <div
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center backdrop-blur-md border transition-all duration-300 group-hover:scale-110 group-hover:border-opacity-60"
+            style={{ backgroundColor: `${service.accent}15`, borderColor: `${service.accent}25` }}
+          >
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: service.accent }} />
           </div>
         </div>
 
@@ -240,7 +241,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-white mb-2 tracking-[-0.02em]">
             {service.title}
           </h3>
-          <p className="text-[13px] text-white/55 mb-4 leading-relaxed max-w-[90%] tracking-[-0.01em]">
+          <p className="text-[13px] text-white/55 mb-4 leading-relaxed max-w-[90%]">
             {service.description}
           </p>
 
@@ -249,7 +250,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             <ul className="space-y-1.5 mb-4 sm:mb-5 pt-2 sm:pt-3 border-t border-white/10">
               {service.details.map((detail, i) => (
                 <li key={i} className="flex items-start gap-3 text-[12px] sm:text-[13px] text-white/60">
-                  <span className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0 bg-primary" />
+                  <span className="w-1 h-1 rounded-full mt-1.5 flex-shrink-0" style={{ backgroundColor: service.accent }} />
                   <span>{detail}</span>
                 </li>
               ))}
@@ -257,17 +258,23 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           </div>
 
           {/* CTA */}
-          <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300 text-primary">
-            <span className="text-xs sm:text-sm font-semibold tracking-wide">
+          <div className="flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+            <span className="text-xs sm:text-sm font-semibold tracking-wide" style={{ color: service.accent }}>
               Explore
             </span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight
+              className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300"
+              style={{ color: service.accent }}
+            />
           </div>
         </div>
 
-        {/* Side accent line — the one accent in the whole grid */}
-        <div className="absolute top-0 left-0 bottom-0 w-[2px]">
-          <div className="w-full h-0 bg-primary group-hover:h-full transition-all duration-700 ease-out" />
+        {/* Side accent line */}
+        <div className="absolute top-0 left-0 bottom-0 w-[3px]">
+          <div
+            className="w-full h-0 group-hover:h-full transition-all duration-700 ease-out"
+            style={{ backgroundColor: service.accent }}
+          />
         </div>
       </Link>
     </div>

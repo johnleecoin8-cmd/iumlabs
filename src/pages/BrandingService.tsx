@@ -2,12 +2,10 @@ import { ShieldCheck, Scale, FileCheck2 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 import featVaspImg from "@/assets/services/comp-vasp-travelrule.webp";
-import featDisclosureImg from "@/assets/services/comp-legal.png";
-import featIsmsImg from "@/assets/services/vasp-compliance.jpg";
+import featDisclosureImg from "@/assets/backgrounds/seoul-ddp-night.jpg";
+import featIsmsImg from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 import auditImg from "@/assets/services/comp-audit.png";
-
-/* Hero uses the homepage "main" compliance photo (public asset). */
-const heroImg = "/images/posters/compliance-hero.avif";
+import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 const ACCENT = "#A855F7";
 

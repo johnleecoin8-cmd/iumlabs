@@ -187,7 +187,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <Reveal key={f.title}>
               <div className={`relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
                 <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3]">
-                  <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.9] transition-all duration-[1.4s] ease-out group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105" loading="lazy" />
+                  <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
                 </div>
                 <div className="relative">
@@ -262,7 +262,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                 <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: A }}>{p.deliverable.cta} <ArrowRight className="w-4 h-4" /></Link>
               </div>
               <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[16/10]">
-                <img src={p.deliverable.image} alt="" className="absolute inset-0 w-full h-full object-cover grayscale contrast-[1.05] brightness-[0.9] transition-all duration-[1.4s] group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105" loading="lazy" />
+                <img src={p.deliverable.image} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" loading="lazy" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 to-transparent" />
               </div>
             </div>
