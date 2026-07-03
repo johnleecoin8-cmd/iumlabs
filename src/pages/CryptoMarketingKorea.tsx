@@ -52,7 +52,7 @@ const services = [
   {
     icon: Globe,
     title: "Regulations & Compliance",
-    description: "Navigate Korea's crypto regulations, VASP registration, PIPA compliance, and exchange listing requirements.",
+    description: "Navigate Korea's crypto regulations: VASP registration, ISMS-P certification readiness, PIPA compliance, and FSC / KISA examination preparation.",
     link: "/services/compliance",
   },
 ];

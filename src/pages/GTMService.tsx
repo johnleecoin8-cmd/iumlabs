@@ -118,7 +118,7 @@ const services = [
     caps: ["Korea Blockchain Week Side Events","VIP Networking Dinners","Launch Parties & Meetups","Venue Sourcing & Full Logistics","Speaker & Guest Curation","Post-Event Content & Lead Capture"], href: "/services/offline-event", img: svcEventImg },
   { num: "13", title: "Regulations & Compliance", tagline: "VASP registration, VAUPA, PIPA, AML, and travel-rule advisory. Coordinated with licensed Korean counsel.",
     desc: "Korea's framework is strict and fast-changing: VASP registration, the User Protection Act, AML, and the travel rule. We map what applies and coordinate licensed Korean counsel so you meet the rules, not stumble into them.",
-    caps: ["VASP Registration Guidance","VAUPA & PIPA Compliance","AML & Travel-Rule Advisory","Exchange Listing Disclosure","Licensed Korean Counsel Coordination","Ongoing Regulatory Monitoring"], href: "/services/compliance", img: svcComplianceImg },
+    caps: ["VASP Registration Guidance","ISMS-P Certification Readiness","VAUPA & PIPA Compliance","FSC / KISA Examination Readiness","AML & Travel-Rule Advisory","Licensed Counsel & Auditor Coordination"], href: "/services/compliance", img: svcComplianceImg },
 ];
 
 const workCards = [
