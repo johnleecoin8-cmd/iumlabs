@@ -16,7 +16,7 @@ const GRAIN =
 
 export type SvcStat = { v: string; l: string };
 export type SvcStep = { t: string; title: string; body: string };
-export type SvcFeature = { icon: LucideIcon; eyebrow: string; title: string; body: string; points: string[]; image: string };
+export type SvcFeature = { icon: LucideIcon; eyebrow: string; title: string; body: string; points: string[]; image?: string; video?: string; poster?: string; mediaLabel?: string };
 export type SvcFaq = { q: string; a: string };
 
 export type ServiceTemplateProps = {
@@ -190,7 +190,28 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
             <Reveal key={f.title}>
               <div className={`relative grid lg:grid-cols-2 gap-8 lg:gap-16 items-center ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}>
                 <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[4/3] bg-[#0c0c0e]">
-                  {f.image ? (
+                  {f.video ? (
+                    <>
+                      {/* Real ad creative, self-hosted, muted autoplay loop.
+                          Poster shows on reduced-motion / mobile no-autoplay. */}
+                      <video
+                        className="absolute inset-0 w-full h-full object-cover"
+                        src={f.video}
+                        poster={f.poster}
+                        muted
+                        loop
+                        autoPlay
+                        playsInline
+                        preload="metadata"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 to-transparent pointer-events-none" />
+                      {f.mediaLabel && (
+                        <span className="absolute bottom-3 left-3 z-10 rounded-full bg-black/60 backdrop-blur-sm border border-white/15 px-3 py-1 font-mono text-[10px] tracking-[0.12em] text-white/70">
+                          {f.mediaLabel}
+                        </span>
+                      )}
+                    </>
+                  ) : f.image ? (
                     <>
                       <img src={f.image} alt={f.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" loading="lazy" />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 to-transparent" />
