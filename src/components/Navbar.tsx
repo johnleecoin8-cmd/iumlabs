@@ -241,10 +241,10 @@ const Navbar = () => {
               <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
                 {[...serviceItems, ...serviceItems].map((item, i) => (
                   <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
-                    <Link to={item.href} className="text-[13px] sm:text-[14px] leading-none text-white/50 hover:text-white transition-colors shrink-0">
+                    <Link to={item.href} className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">
                       {item.name}
                     </Link>
-                    <span className="text-white/20 leading-none">·</span>
+                    <span className="text-white/20 leading-[16px]">·</span>
                   </span>
                 ))}
               </div>
