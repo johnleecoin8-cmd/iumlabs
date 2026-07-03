@@ -238,7 +238,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex flex-1 justify-center px-2 md:px-0 min-w-0">
             <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[40px] sm:h-[52px] px-3 sm:px-4 flex items-center w-full min-w-0">
-              <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
+              <div className="animate-marquee-right flex items-center gap-5 whitespace-nowrap">
                 {[...serviceItems, ...serviceItems, ...serviceItems].map((item, i) => (
                   <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
                     <Link to={item.href} className="text-[13px] sm:text-[14px] leading-none text-white/50 hover:text-white transition-colors shrink-0">
