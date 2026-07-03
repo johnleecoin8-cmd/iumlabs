@@ -7,21 +7,21 @@ import heroVideoAsset from "@/assets/hero-background-v20260703d.mp4.asset.json";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin-mono.png";
+import kucoinLogo from "@/assets/logos/kucoin-mono-cut.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import spacecoinLogo from "@/assets/logos/spacecoin.png";
-import triaLogo from "@/assets/logos/tria-mono.png";
-import mantraLogo from "@/assets/logos/mantra-mono.png";
+import spacecoinLogo from "@/assets/logos/spacecoin-cut.png";
+import triaLogo from "@/assets/logos/tria-mono-cut.png";
+import mantraLogo from "@/assets/logos/mantra-mono-cut.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
-import fogoLogo from "@/assets/logos/fogo.png";
+import fogoLogo from "@/assets/logos/fogo-cut.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 import openledgerLogo from "@/assets/logos/openledger-wordmark.png";
-import multipliLogo from "@/assets/logos/multipli.png";
-import talusLogo from "@/assets/logos/talus.png";
-import peaqLogo from "@/assets/logos/peaq.png";
-import aptosLogo from "@/assets/logos/aptos.png";
+import multipliLogo from "@/assets/logos/multipli-cut.png";
+import talusLogo from "@/assets/logos/talus-cut.png";
+import peaqLogo from "@/assets/logos/peaq-cut.png";
+import aptosLogo from "@/assets/logos/aptos-cut.png";
 
 const clientLogos = [{
   name: "BNB",
@@ -197,7 +197,7 @@ Most agencies sell you a list. We embed operators.<br className="hidden sm:block
             alt={client.name}
             loading="lazy"
             decoding="async"
-            className={`h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+            className="h-3.5 sm:h-7 w-auto max-w-[60px] sm:max-w-[140px] object-contain flex-shrink-0 brightness-0 invert opacity-85" />
               <span className="text-white/75 text-[10px] sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
               </span>
