@@ -5,6 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import ComparisonSection from "@/components/ComparisonSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
@@ -110,6 +111,11 @@ const Index = () => {
           during PageIntro instead of waiting for scroll-into-view. */}
       <section id="why-choose-us">
         <WhyChooseUsSection />
+      </section>
+
+      {/* Why not a global agency — the competitive moat */}
+      <section id="why-ium" className="border-t border-white/[0.07]">
+        <ComparisonSection />
       </section>
 
       {/* Selected Work */}
