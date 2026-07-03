@@ -2,11 +2,7 @@ import { Search, Mic2, BarChart3, Users } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/services/kol-avatars.webp";
-import ytImg from "@/assets/platforms/kol-youtube.jpg";
-import ctImg from "@/assets/services/kol-campaign.webp";
-import perfImg from "@/assets/services/kol-performance.png";
-import naverImg from "@/assets/services/kol-multiplatform.png";
-import fraudImg from "@/assets/services/kol-roster.webp";
+import ctImg from "@/assets/campaigns/sahara-ai-event.jpg";
 
 const ACCENT = "#FACC15";
 
@@ -59,10 +55,10 @@ const InfluencerService = () => (
       ],
     }}
     features={[
-      { icon: Search, eyebrow: "01 · Source", title: "KOL Sourcing & Vetting", body: "We identify the right KOLs for your narrative, token stage, and target audience. Every KOL is verified with real engagement data: follower analysis, historical performance, and fraud screening.", points: ["Narrative and token-stage fit", "Real engagement and follower analysis", "Historical performance review", "Zero-tolerance fraud screening"], image: ytImg },
+      { icon: Search, eyebrow: "01 · Source", title: "KOL Sourcing & Vetting", body: "We identify the right KOLs for your narrative, token stage, and target audience. Every KOL is verified with real engagement data: follower analysis, historical performance, and fraud screening.", points: ["Narrative and token-stage fit", "Real engagement and follower analysis", "Historical performance review", "Zero-tolerance fraud screening"], image: "" },
       { icon: Mic2, eyebrow: "02 · Design", title: "Campaign Design & Briefing", body: "Custom briefs per KOL tailored to their style and audience. We align messaging with your GTM narrative. No copy-paste, every placement feels native.", points: ["Per-KOL custom briefs", "Messaging aligned to your GTM", "Native-feeling placements", "Format tuned per platform"], image: ctImg },
-      { icon: BarChart3, eyebrow: "03 · Track", title: "Performance Tracking", body: "Weekly reports with impressions, engagements, and click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", points: ["Weekly performance reports", "Impressions, engagement, click-throughs", "KOL-by-KOL comparison", "Mid-campaign rotation of laggards"], image: perfImg },
-      { icon: Users, eyebrow: "04 · Reach", title: "Multi-Platform Reach", body: "Korea's KOL landscape is fragmented across four platforms, each with its own culture. We orchestrate coverage so your narrative lands where your audience actually lives.", points: ["YouTube long-form and Shorts", "X (Korean CT) thread campaigns", "Telegram community seeding", "Naver Blog search authority"], image: naverImg },
+      { icon: BarChart3, eyebrow: "03 · Track", title: "Performance Tracking", body: "Weekly reports with impressions, engagements, and click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", points: ["Weekly performance reports", "Impressions, engagement, click-throughs", "KOL-by-KOL comparison", "Mid-campaign rotation of laggards"], image: "" },
+      { icon: Users, eyebrow: "04 · Reach", title: "Multi-Platform Reach", body: "Korea's KOL landscape is fragmented across four platforms, each with its own culture. We orchestrate coverage so your narrative lands where your audience actually lives.", points: ["YouTube long-form and Shorts", "X (Korean CT) thread campaigns", "Telegram community seeding", "Naver Blog search authority"], image: "" },
     ]}
     promise={{
       heading: "Real KOLs. Real engagement.",
@@ -70,7 +66,7 @@ const InfluencerService = () => (
       do: ["Vet every KOL with real engagement and fraud data", "Match the tier and platform to your actual objective", "Write native briefs and review every placement before it goes live", "Report impressions, engagement, and click-throughs every week"],
       dont: ["Sell you an inflated follower list", "Use bots or fake engagement", "Run copy-paste placements", "Hide performance behind vanity metrics"],
     }}
-    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>KOL Roster & Campaign Plan&trade;</>, body: "Every engagement starts with a vetted roster: the right KOLs for your stage and narrative, each with verified engagement data, tier, and platform, plus the custom briefs and timeline that turn names on a list into a campaign that ships.", cta: "Request your roster", image: fraudImg }}
+    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>KOL Roster & Campaign Plan&trade;</>, body: "Every engagement starts with a vetted roster: the right KOLs for your stage and narrative, each with verified engagement data, tier, and platform, plus the custom briefs and timeline that turn names on a list into a campaign that ships.", cta: "Request your roster", image: "" }}
     faq={{
       heading: "The questions founders actually ask.",
       sub: "Straight answers on vetting, budget, content, speed, and language.",

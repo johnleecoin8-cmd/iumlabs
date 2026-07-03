@@ -1,12 +1,8 @@
 import { Newspaper, Send, Megaphone, ShieldAlert } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/pr-hero.webp";
-import featNarrativeImg from "@/assets/platforms/pr-newsroom.jpg";
-import featDistributionImg from "@/assets/services/pr-distribution.webp";
-import featMainstreamImg from "@/assets/platforms/pr-mainstream.jpg";
-import featCrisisImg from "@/assets/platforms/pr-crisis.jpg";
-import deliverableImg from "@/assets/services/pr-narrative-plan.webp";
+import heroImg from "@/assets/campaigns/openledger-interview.jpg";
+import featDistributionImg from "@/assets/campaigns/ondo-seminar.jpg";
 
 const ACCENT = "#8B5CF6";
 
@@ -47,12 +43,12 @@ const PRService = () => (
       ],
     }}
     features={[
-      { icon: Newspaper, eyebrow: "01 · Narrative", title: "Narrative & Messaging", body: "Native Korean writers who understand crypto terminology and Korean media conventions. We find the newsworthy angle and craft a narrative that reads naturally to a Korean editor, not a translated corporate release.", points: ["Korean-native press materials", "Newsworthy angle development", "Crypto-fluent messaging", "Founder positioning and thought leadership"], image: featNarrativeImg },
+      { icon: Newspaper, eyebrow: "01 · Narrative", title: "Narrative & Messaging", body: "Native Korean writers who understand crypto terminology and Korean media conventions. We find the newsworthy angle and craft a narrative that reads naturally to a Korean editor, not a translated corporate release.", points: ["Korean-native press materials", "Newsworthy angle development", "Crypto-fluent messaging", "Founder positioning and thought leadership"], image: "" },
       { icon: Send, eyebrow: "02 · Distribute", title: "Korean Press Distribution", body: "Personal relationships with reporters at CoinDesk Korea, Block Media, TokenPost, BloomingBit, and Hankyung. We pitch stories with a tailored angle per outlet, then manage embargoes and coordinated timing.", points: ["Direct journalist outreach", "Per-outlet tailored angles", "Embargo and timing management", "Interview and bylined-article placement"], image: featDistributionImg },
-      { icon: Megaphone, eyebrow: "03 · Amplify", title: "Mainstream & Tier-1 Placement", body: "Coverage beyond the crypto press. For stories with broader financial relevance, we reach mainstream and Tier-1 outlets like Chosun Ilbo, Maeil Business, and MBN to put your project in front of a wider Korean audience.", points: ["Mainstream financial media reach", "Tier-1 outlet placement", "Expert commentary and op-eds", "Cross-channel social amplification"], image: featMainstreamImg },
-      { icon: ShieldAlert, eyebrow: "04 · Protect", title: "Crisis Comms", body: "Korean crypto Twitter moves fast. We stand up pre-drafted statement templates, rapid response protocols, and real-time monitoring so you can respond in Korean within hours, not days, when a story breaks.", points: ["Pre-drafted Korean statements", "Rapid response protocols", "Real-time media monitoring", "Sentiment and share-of-voice tracking"], image: featCrisisImg },
+      { icon: Megaphone, eyebrow: "03 · Amplify", title: "Mainstream & Tier-1 Placement", body: "Coverage beyond the crypto press. For stories with broader financial relevance, we reach mainstream and Tier-1 outlets like Chosun Ilbo, Maeil Business, and MBN to put your project in front of a wider Korean audience.", points: ["Mainstream financial media reach", "Tier-1 outlet placement", "Expert commentary and op-eds", "Cross-channel social amplification"], image: "" },
+      { icon: ShieldAlert, eyebrow: "04 · Protect", title: "Crisis Comms", body: "Korean crypto Twitter moves fast. We stand up pre-drafted statement templates, rapid response protocols, and real-time monitoring so you can respond in Korean within hours, not days, when a story breaks.", points: ["Pre-drafted Korean statements", "Rapid response protocols", "Real-time media monitoring", "Sentiment and share-of-voice tracking"], image: "" },
     ]}
-    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Media & Narrative Plan&trade;</>, body: "Every engagement starts with a written plan: your core narrative, the angles each outlet will care about, the journalists we will pitch, and the timeline from story development to published coverage.", cta: "Request your plan", image: deliverableImg }}
+    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Media & Narrative Plan&trade;</>, body: "Every engagement starts with a written plan: your core narrative, the angles each outlet will care about, the journalists we will pitch, and the timeline from story development to published coverage.", cta: "Request your plan", image: "" }}
     faq={{
       heading: "The questions founders actually ask.",
       sub: "Straight answers on timing, guarantees, crisis response, and language.",

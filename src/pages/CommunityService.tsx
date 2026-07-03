@@ -1,12 +1,8 @@
 import { Users, MessageCircle, Activity, Shield } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/community-hero.webp";
-import featStaffImg from "@/assets/services/community-moderation.webp";
-import featKoreanImg from "@/assets/platforms/comm-kakao.jpg";
-import featEngageImg from "@/assets/services/community-events.jpg";
-import featSentimentImg from "@/assets/platforms/comm-sentiment.jpg";
-import playbookImg from "@/assets/platforms/comm-discord.jpg";
+import heroImg from "@/assets/campaigns/bnb-hanok-event.jpg";
+import featEngageImg from "@/assets/campaigns/kucoin-party-event.jpg";
 
 const ACCENT = "#38BDF8";
 
@@ -47,10 +43,10 @@ const CommunityService = () => (
       ],
     }}
     features={[
-      { icon: Users, eyebrow: "01 · Staff", title: "Always-On Moderation", body: "Native Korean speakers keeping every channel safe, on-topic, and welcoming around the clock. Bot configuration, anti-spam, welcome flows, and daily engagement prompts, with no gap when global teams sleep.", points: ["24/7 coverage across holidays, nights, and weekends", "Telegram and Discord setup, moderation, and programming", "Bot configuration, anti-spam, and welcome flows", "Pre-approved response playbooks for fast escalation"], image: featStaffImg },
-      { icon: MessageCircle, eyebrow: "02 · Localize", title: "Native Korean Managers", body: "The channels most global projects miss entirely. KakaoTalk Open Chat and Naver Cafe are where Korean users actually gather, and they reward managers who understand the culture, not just the language.", points: ["KakaoTalk Open Chat room management and real-time Q&A", "Naver Cafe post moderation and content curation", "SEO-optimized community content that drives Naver search", "Tone and norms tuned per platform, not copy-pasted"], image: featKoreanImg },
+      { icon: Users, eyebrow: "01 · Staff", title: "Always-On Moderation", body: "Native Korean speakers keeping every channel safe, on-topic, and welcoming around the clock. Bot configuration, anti-spam, welcome flows, and daily engagement prompts, with no gap when global teams sleep.", points: ["24/7 coverage across holidays, nights, and weekends", "Telegram and Discord setup, moderation, and programming", "Bot configuration, anti-spam, and welcome flows", "Pre-approved response playbooks for fast escalation"], image: "" },
+      { icon: MessageCircle, eyebrow: "02 · Localize", title: "Native Korean Managers", body: "The channels most global projects miss entirely. KakaoTalk Open Chat and Naver Cafe are where Korean users actually gather, and they reward managers who understand the culture, not just the language.", points: ["KakaoTalk Open Chat room management and real-time Q&A", "Naver Cafe post moderation and content curation", "SEO-optimized community content that drives Naver search", "Tone and norms tuned per platform, not copy-pasted"], image: "" },
       { icon: Activity, eyebrow: "03 · Activate", title: "Engagement & Events", body: "Daily engagement, weekly events, KOL AMAs, and quest campaigns that turn a quiet channel into an active one. We build the content calendar and ambassador program that keep members coming back.", points: ["Content calendar and engagement event schedule", "KOL AMAs and quest campaign programming", "Ambassador program design and management", "2 to 3x daily active rate within the first month"], image: featEngageImg },
-      { icon: Shield, eyebrow: "04 · Monitor", title: "Sentiment Monitoring", body: "Real-time monitoring with alert systems so FUD and negative sentiment never spread unchecked. We respond within minutes, not hours, and report on community health every month.", points: ["Real-time sentiment monitoring and alerts", "Escalation protocols for serious issues", "Engagement analytics and retention optimization", "Monthly community health reports"], image: featSentimentImg },
+      { icon: Shield, eyebrow: "04 · Monitor", title: "Sentiment Monitoring", body: "Real-time monitoring with alert systems so FUD and negative sentiment never spread unchecked. We respond within minutes, not hours, and report on community health every month.", points: ["Real-time sentiment monitoring and alerts", "Escalation protocols for serious issues", "Engagement analytics and retention optimization", "Monthly community health reports"], image: "" },
     ]}
     promise={{
       heading: "We grow communities the right way.",
@@ -58,7 +54,7 @@ const CommunityService = () => (
       do: ["Staff every channel with native Korean managers around the clock", "Build the culture, calendar, and events that retain members", "Cover the Korean platforms global teams miss, KakaoTalk and Naver Cafe", "Report on real community health, sentiment, and retention every month"],
       dont: ["Inflate member counts with bots", "Leave channels unmoderated overnight", "Run generic, non-localized replies", "Vanish after launch"],
     }}
-    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Community Playbook&trade;</>, body: "Every engagement starts with a documented playbook: which platforms to run, how each channel is moderated, the engagement and event calendar, and the escalation protocols that keep your community healthy from day one.", cta: "Request your playbook", image: playbookImg }}
+    deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Community Playbook&trade;</>, body: "Every engagement starts with a documented playbook: which platforms to run, how each channel is moderated, the engagement and event calendar, and the escalation protocols that keep your community healthy from day one.", cta: "Request your playbook", image: "" }}
     faq={{
       heading: "The questions founders actually ask.",
       sub: "Straight answers on coverage, platforms, sentiment, and what really moves community engagement.",
