@@ -244,7 +244,7 @@ const Navbar = () => {
                     <Link to="/" className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">iumlabs</Link>
                     <span className="text-white/20 leading-[16px]">|</span>
                     <button onClick={() => setIsLiveChatOpen(true)} className="text-[13px] sm:text-[14px] leading-[16px] text-white/50 hover:text-white transition-colors shrink-0">Start Live Chat</button>
-                    <span className="text-white/20 leading-[16px] mx-2">|</span>
+                    <span className="text-white/20 leading-[16px]">|</span>
                   </span>
                 ))}
               </div>
