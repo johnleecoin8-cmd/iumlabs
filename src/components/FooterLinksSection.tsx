@@ -50,18 +50,61 @@ const FooterLinksSection = () => {
       <div className="px-5 sm:px-6 lg:px-10">
 
         {/* Big-type CTA — ported from cuberto.com footer "Tell us" CTA
-            (computed-style audit 2026-07-02: 108px / fw300 / uppercase /
-            ls -3% / lh 0.95 / 108px vertical padding). Underline sweep is
-            locomotive.ca's background-size pattern, scaled to display size.
-            The empty right gutter now carries a static client logo wall —
-            monochrome white marks that fill the negative space and put the
-            book of business next to the ask. */}
-        <div className="pt-16 sm:pt-24 lg:pt-[108px] pb-14 sm:pb-24 border-b border-white/[0.06] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end gap-y-12 gap-x-10">
-          <Link to="/contact" className="group block">
-            <p className="text-[10px] sm:text-[11px] font-mono text-white/30 uppercase tracking-[0.25em] mb-6 sm:mb-9">
+            (computed-style audit 2026-07-02: fw300 uppercase / ls -3% /
+            lh 0.95). Now centered over an embedded client-logo cloud: the
+            full roster tiles the background as a faint monochrome texture,
+            radially masked and darkened toward the middle so "Let's talk"
+            reads clean on top. The whole panel lifts the cloud on hover. */}
+        <Link
+          to="/contact"
+          className="group relative block overflow-hidden border-b border-white/[0.06] py-24 sm:py-36 lg:py-48"
+        >
+          {/* Background logo cloud */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          >
+            <div
+              className="grid w-full grid-cols-4 place-items-center gap-x-8 gap-y-10 px-2 opacity-[0.09] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.16] group-hover:scale-[1.03] sm:grid-cols-6 sm:gap-x-14 lg:grid-cols-8 lg:gap-x-16"
+              style={{
+                maskImage:
+                  "radial-gradient(ellipse 62% 82% at center, transparent 8%, rgba(0,0,0,0.35) 34%, black 72%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 62% 82% at center, transparent 8%, rgba(0,0,0,0.35) 34%, black 72%)",
+              }}
+            >
+              {Array.from({ length: 40 }, (_, i) => {
+                const client = clientLogos[i % clientLogos.length];
+                return (
+                  <img
+                    key={i}
+                    src={client.logo}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="h-5 w-auto max-w-[64px] object-contain brightness-0 invert sm:h-6 sm:max-w-[80px]"
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Center scrim keeps the headline legible over the cloud */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "radial-gradient(ellipse 56% 70% at center, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.55) 45%, transparent 78%)",
+            }}
+          />
+
+          {/* Centered headline */}
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <p className="text-[10px] sm:text-[11px] font-mono text-white/35 uppercase tracking-[0.3em] mb-6 sm:mb-9">
               Got a project in Korea?
             </p>
-            <span className="footer-cta-type flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-white">
+            <span className="footer-cta-type flex items-center justify-center gap-x-4 sm:gap-x-8 text-white">
               {/* buzzworthystudio.com mask-swap: brand-colored duplicate wipes
                   across on hover (500ms cubic-bezier(1,0,0,1)) */}
               <span className="mask-swap" data-text="Let's talk">
@@ -72,44 +115,11 @@ const FooterLinksSection = () => {
                 strokeWidth={1.5}
               />
             </span>
-          </Link>
-
-          {/* Client logo grid — the Stripe/Ramp "customers" treatment:
-              heterogeneous marks (icons + wordmarks) sit in equal cells with
-              collapsed hairline dividers, so every logo carries the same
-              visual weight regardless of aspect ratio. Framed as one module
-              in a rounded, edge-lit card; each cell lifts on hover. Fixed 4×4
-              so the grid never leaves a ragged final row. */}
-          <div className="lg:pb-1 lg:justify-self-end w-full max-w-[440px] lg:w-[440px]">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.28em]">
-                Trusted by
-              </span>
-              <span className="text-[10px] font-mono text-white/20 tracking-[0.1em] tabular-nums">
-                {clientLogos.length} teams
-              </span>
-            </div>
-            <div className="grid grid-cols-4 rounded-2xl overflow-hidden border-t border-l border-white/[0.07] surface-edge bg-white/[0.012]">
-              {clientLogos.map((client) => (
-                <Link
-                  key={client.slug}
-                  to={`/projects/${client.slug}`}
-                  aria-label={client.name}
-                  title={client.name}
-                  className="group/logo relative flex items-center justify-center h-[62px] sm:h-[74px] border-r border-b border-white/[0.07] transition-colors duration-300 hover:bg-white/[0.04]"
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-4 sm:h-[18px] w-auto max-w-[72px] object-contain brightness-0 invert opacity-50 group-hover/logo:opacity-100 transition-opacity duration-300"
-                  />
-                </Link>
-              ))}
-            </div>
+            <span className="mt-7 sm:mt-9 text-[10px] font-mono text-white/25 uppercase tracking-[0.28em]">
+              Trusted by {clientLogos.length}+ Web3 teams
+            </span>
           </div>
-        </div>
+        </Link>
 
         <div className="py-12 sm:py-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6">
