@@ -110,11 +110,13 @@ interface UseVideoPlayerReturn {
 // until the browser finally accepts play() (no perceptible CPU cost — bounded
 // throttle + only fires while paused).
 const MAX_PLAY_ATTEMPTS = 60;
-const PLAY_COOLDOWN_MS = 900;
-const PLAY_RETRY_THROTTLE_MS = 120;
-const MOBILE_STALL_WINDOW_MS = 1800;
-const MOBILE_RELOAD_COOLDOWN_MS = 1600;
-const MAX_HARD_RELOADS = 4;
+const PLAY_COOLDOWN_MS = 1500;
+const PLAY_RETRY_THROTTLE_MS = 400;
+// Mobile networks buffer for several seconds during 4G→3G handoffs or in-app
+// browsers. Keep the stall window generous so we don't nuke a healthy download.
+const MOBILE_STALL_WINDOW_MS = 12000;
+const MOBILE_RELOAD_COOLDOWN_MS = 15000;
+const MAX_HARD_RELOADS = 1;
 
 // Exported so the intro loader can prefetch the exact same versioned URLs the
 // <video> elements request (shared module-singleton VIDEO_VERSION = exact cache match).
@@ -392,20 +394,14 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     hardReloadCountRef.current += 1;
     lastHardReloadAtRef.current = now;
-    readyRef.current = false;
-    frameReadyRef.current = false;
-    setIsVideoReady(false);
-    setDebugTick((t) => t + 1);
-    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
+    console.warn(`[VideoPlayer] soft reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
 
-     try {
-       video.pause();
-       const currentSrc = video.currentSrc || video.src || optimizedSrc;
-       if (currentSrc) {
-         video.src = currentSrc.includes('_mr=') ? currentSrc.replace(/([?&])_mr=[^&#]*/g, '$1_mr=' + Date.now()) : `${currentSrc}${currentSrc.includes('?') ? '&' : '?'}_mr=${Date.now()}`;
-       }
-       video.load();
-     } catch {
+    // Soft reload only — DO NOT cache-bust the URL. Cache-busting on mobile
+    // forces a full re-download of the video, which is exactly what causes
+    // the "keeps reloading and stuttering" loop the user reported.
+    try {
+      video.load();
+    } catch {
       return;
     }
 
@@ -413,8 +409,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (video.isConnected) {
         tryPlay(video);
       }
-    }, 80);
-  }, [optimizedSrc, tryPlay]);
+    }, 200);
+  }, [tryPlay]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
@@ -583,42 +579,46 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
       if (!isMobile) return;
 
-      const stalledFor = now - lastProgressAtRef.current;
+      // Only intervene while the video has never actually started. Once it
+      // has produced any real progress, leave it alone — mobile buffering
+      // during playback must NOT trigger a reload (that's what caused the
+      // stutter loop).
+      if (readyRef.current && video.currentTime > 0.5) return;
+
       const exceededInitialWindow = now - loadGateOpenedAtRef.current > MOBILE_STALL_WINDOW_MS;
 
-       if ((video.paused || video.readyState < 3) && exceededInitialWindow && playAttemptsRef.current < MAX_PLAY_ATTEMPTS) {
+      if (video.paused && playAttemptsRef.current < MAX_PLAY_ATTEMPTS && now - lastPlayAttemptRef.current > PLAY_COOLDOWN_MS) {
         tryPlay(video);
         return;
       }
 
-       if (exceededInitialWindow && (stalledFor > MOBILE_STALL_WINDOW_MS || (video.currentTime <= 0.01 && video.readyState >= 2))) {
-        hardReload(video, video.paused ? 'paused on mobile after load window' : 'currentTime stalled on mobile');
+      // Only reload if we've waited a full window AND still have no frame.
+      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2) {
+        hardReload(video, 'never started on mobile');
       }
-    }, 1200);
+    }, 2000);
 
     // Also try on user interaction (for strict autoplay policies like
-    // Naver/KakaoTalk in-app browsers). Reset the attempt counter on each
-    // gesture so the retry loop gets a fresh budget once the browser unlocks.
+    // Naver/KakaoTalk in-app browsers). Only reset attempts on discrete
+    // gestures — NOT on scroll/touchmove, which fire continuously and would
+    // keep forcing play() calls that fight the browser's buffering.
     const handleUserInteraction = () => {
-      playAttemptsRef.current = 0;
-      lastPlayAttemptRef.current = 0;
-      tryPlay(video);
+      if (video.paused && playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
+        playAttemptsRef.current = 0;
+        lastPlayAttemptRef.current = 0;
+      }
+      if (video.paused) tryPlay(video);
     };
 
     const handleVisibilityResume = () => {
-      if (document.visibilityState === 'visible') {
-        playAttemptsRef.current = 0;
+      if (document.visibilityState === 'visible' && video.paused) {
         playNow();
       }
     };
 
-    document.addEventListener('touchstart', handleUserInteraction, { passive: true });
     document.addEventListener('touchend', handleUserInteraction, { passive: true });
-    document.addEventListener('touchmove', handleUserInteraction, { passive: true });
     document.addEventListener('pointerdown', handleUserInteraction, { passive: true });
     document.addEventListener('click', handleUserInteraction, { passive: true });
-    window.addEventListener('scroll', handleUserInteraction, { passive: true });
-    window.addEventListener('orientationchange', handleUserInteraction, { passive: true });
     window.addEventListener('pageshow', handleVisibilityResume, { passive: true });
     window.addEventListener('focus', handleVisibilityResume, { passive: true });
     document.addEventListener('visibilitychange', handleVisibilityResume, { passive: true });
@@ -630,13 +630,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       clearFrameReadyCallback(video);
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('playing', handlePlaying);
-      document.removeEventListener('touchstart', handleUserInteraction);
       document.removeEventListener('touchend', handleUserInteraction);
-      document.removeEventListener('touchmove', handleUserInteraction);
       document.removeEventListener('pointerdown', handleUserInteraction);
       document.removeEventListener('click', handleUserInteraction);
-      window.removeEventListener('scroll', handleUserInteraction);
-      window.removeEventListener('orientationchange', handleUserInteraction);
       window.removeEventListener('pageshow', handleVisibilityResume);
       window.removeEventListener('focus', handleVisibilityResume);
       document.removeEventListener('visibilitychange', handleVisibilityResume);
