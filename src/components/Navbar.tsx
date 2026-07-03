@@ -226,23 +226,9 @@ const Navbar = () => {
     <>
       {/* ===== NAVBAR, separate floating pills ===== */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-2.5 sm:px-5 pt-3 sm:pt-5">
-        <div className="hidden md:flex justify-center mb-2.5">
-          <div className="relative overflow-hidden rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] h-[32px] sm:h-[36px] px-1 flex items-center max-w-[520px]">
-            <div className="animate-marquee flex items-center gap-5 whitespace-nowrap">
-              {[...serviceItems, ...serviceItems].map((item, i) => (
-                <span key={`${item.href}-${i}`} className="flex items-center gap-5 shrink-0">
-                  <Link to={item.href} className="text-[11px] sm:text-[12px] text-white/50 hover:text-white transition-colors shrink-0">
-                    {item.name}
-                  </Link>
-                  <span className="text-white/20">·</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between">
+        <div className="flex items-center gap-3 sm:gap-4">
           <Link to="/" aria-label="ium Labs HQ" className="group relative flex items-center gap-2 sm:gap-3 px-2 sm:px-3 h-[40px] sm:h-[52px] rounded-full bg-black/30 backdrop-blur-xl border border-white/[0.08] hover:border-white/[0.18] transition-swift overflow-hidden">
+
 
             <span aria-hidden className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(120px 40px at 20% 50%, rgba(52,211,153,0.18), transparent 70%)" }} />
             <span aria-hidden className="pointer-events-none absolute -inset-px rounded-full" style={{ background: "linear-gradient(120deg, rgba(52,211,153,0.35), rgba(255,255,255,0.04) 40%, rgba(66,133,244,0.28))", WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)", WebkitMaskComposite: "xor", maskComposite: "exclude", padding: "1px" }} />
