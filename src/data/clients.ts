@@ -10,7 +10,7 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import spacecoinLogo from "@/assets/logos/spacecoin-cut.png";
 import triaLogo from "@/assets/logos/tria-mono-cut.png";
 import mantraLogo from "@/assets/logos/mantra-mono-cut.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai-cut.png";
 import fogoLogo from "@/assets/logos/fogo-cut.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 import openledgerLogo from "@/assets/logos/openledger-wordmark.png";

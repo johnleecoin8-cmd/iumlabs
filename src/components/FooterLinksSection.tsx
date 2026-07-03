@@ -65,7 +65,7 @@ const FooterLinksSection = () => {
             className="pointer-events-none absolute inset-0 flex items-center justify-center"
           >
             <div
-              className="grid w-full grid-cols-4 place-items-center gap-x-8 gap-y-10 px-2 opacity-[0.09] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.16] group-hover:scale-[1.03] sm:grid-cols-6 sm:gap-x-14 lg:grid-cols-8 lg:gap-x-16"
+              className="grid w-full grid-cols-4 place-items-center gap-x-8 gap-y-10 px-2 opacity-[0.15] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.24] group-hover:scale-[1.03] sm:grid-cols-6 sm:gap-x-14 lg:grid-cols-8 lg:gap-x-16"
               style={{
                 maskImage:
                   "radial-gradient(ellipse 62% 82% at center, transparent 8%, rgba(0,0,0,0.35) 34%, black 72%)",
