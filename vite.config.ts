@@ -11,6 +11,15 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    proxy: {
+      // Serve Lovable CDN assets (/__l5e/assets-v1/...) locally in dev so
+      // videos/images that live on the CDN play in the sandbox too.
+      "/__l5e": {
+        target: "https://id-preview--d044c2bb-2523-4e28-a27a-707a39f93cfa.lovable.app",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
