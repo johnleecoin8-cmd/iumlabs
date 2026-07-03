@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
 import { brand } from "@/config/content";
-import { clientLogos } from "@/data/clients";
+import LetsTalkCTA from "@/components/LetsTalkCTA";
 
 const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
   {
@@ -42,101 +41,20 @@ const navSections: { title: string; wide?: boolean; links: { name: string; href:
   },
 ];
 
-const FooterLinksSection = () => {
+// showCTA renders the big "Let's talk" panel at the top of the footer.
+// The homepage sets it false because it renders LetsTalkCTA above the
+// contact form instead; every other page keeps the footer CTA.
+const FooterLinksSection = ({ showCTA = true }: { showCTA?: boolean }) => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-[#0A0A0A] text-white border-t border-white/[0.06]" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+      {showCTA && (
+        <div className="border-b border-white/[0.06]">
+          <LetsTalkCTA />
+        </div>
+      )}
       <div className="px-5 sm:px-6 lg:px-10">
-
-        {/* Big-type CTA — ported from cuberto.com footer "Tell us" CTA
-            (computed-style audit 2026-07-02: fw300 uppercase / ls -3% /
-            lh 0.95). Now centered over an embedded client-logo cloud: the
-            full roster tiles the background as a faint monochrome texture,
-            radially masked and darkened toward the middle so "Let's talk"
-            reads clean on top. The whole panel lifts the cloud on hover. */}
-        <Link
-          to="/contact"
-          className="group relative block overflow-hidden border-b border-white/[0.06] py-14 sm:py-16 lg:py-20"
-        >
-          {/* Background logo cloud — dense monochrome tiling that reads as a
-              woven texture behind the headline. Radially masked + darkened at
-              center for legibility; the whole field brightens and drifts on
-              hover. */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 flex items-center justify-center"
-          >
-            <div
-              className="grid w-[112%] grid-cols-6 place-items-center gap-x-5 gap-y-6 opacity-[0.17] transition-all duration-700 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-[0.28] group-hover:scale-[1.04] sm:grid-cols-9 sm:gap-x-8 sm:gap-y-8 lg:grid-cols-12 lg:gap-x-10"
-              style={{
-                maskImage:
-                  "radial-gradient(ellipse 58% 78% at center, transparent 6%, rgba(0,0,0,0.3) 30%, black 70%)",
-                WebkitMaskImage:
-                  "radial-gradient(ellipse 58% 78% at center, transparent 6%, rgba(0,0,0,0.3) 30%, black 70%)",
-              }}
-            >
-              {Array.from({ length: 96 }, (_, i) => {
-                // offset the repeat each wrap so identical marks never stack
-                // vertically into obvious columns
-                const client = clientLogos[(i * 7 + Math.floor(i / 12) * 3) % clientLogos.length];
-                return (
-                  <img
-                    key={i}
-                    src={client.logo}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="h-4 w-auto max-w-[52px] object-contain brightness-0 invert sm:h-5 sm:max-w-[64px]"
-                  />
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Center scrim keeps the headline legible over the cloud */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(ellipse 52% 64% at center, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 42%, transparent 74%)",
-            }}
-          />
-
-          {/* Accent glow — a whisper of brand green blooms behind the type on
-              hover, giving the panel depth without color-washing the marks */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 opacity-40 transition-opacity duration-700 group-hover:opacity-100"
-            style={{
-              background:
-                "radial-gradient(ellipse 40% 46% at center, hsl(var(--primary) / 0.14) 0%, transparent 70%)",
-            }}
-          />
-
-          {/* Centered headline */}
-          <div className="relative z-10 flex flex-col items-center text-center">
-            <p className="text-[10px] sm:text-[11px] font-mono text-white/40 uppercase tracking-[0.3em] mb-4 sm:mb-5">
-              Got a project in Korea?
-            </p>
-            <span className="footer-cta-type flex items-center justify-center gap-x-4 sm:gap-x-8 text-white">
-              {/* buzzworthystudio.com mask-swap: brand-colored duplicate wipes
-                  across on hover (500ms cubic-bezier(1,0,0,1)) */}
-              <span className="mask-swap" data-text="Let's talk">
-                <span>Let&apos;s talk</span>
-              </span>
-              <ArrowUpRight
-                className="w-[0.8em] h-[0.8em] text-primary transition-transform duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"
-                strokeWidth={1.5}
-              />
-            </span>
-            <span className="mt-5 sm:mt-6 inline-flex items-center gap-2 text-[10px] font-mono text-white/30 uppercase tracking-[0.28em]">
-              <span className="h-1 w-1 rounded-full bg-primary/70" />
-              Trusted by {clientLogos.length}+ Web3 teams
-            </span>
-          </div>
-        </Link>
 
         <div className="py-12 sm:py-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6">
