@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import { brand } from "@/config/content";
+import { clientLogos } from "@/data/clients";
 
 const navSections: { title: string; wide?: boolean; links: { name: string; href: string }[] }[] = [
   {
@@ -51,26 +52,55 @@ const FooterLinksSection = () => {
         {/* Big-type CTA — ported from cuberto.com footer "Tell us" CTA
             (computed-style audit 2026-07-02: 108px / fw300 / uppercase /
             ls -3% / lh 0.95 / 108px vertical padding). Underline sweep is
-            locomotive.ca's background-size pattern, scaled to display size. */}
-        <Link
-          to="/contact"
-          className="group block pt-16 sm:pt-24 lg:pt-[108px] pb-14 sm:pb-24 border-b border-white/[0.06]"
-        >
-          <p className="text-[10px] sm:text-[11px] font-mono text-white/30 uppercase tracking-[0.25em] mb-6 sm:mb-9">
-            Got a project in Korea?
-          </p>
-          <span className="footer-cta-type flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-white">
-            {/* buzzworthystudio.com mask-swap: brand-colored duplicate wipes
-                across on hover (500ms cubic-bezier(1,0,0,1)) */}
-            <span className="mask-swap" data-text="Let's talk">
-              <span>Let&apos;s talk</span>
+            locomotive.ca's background-size pattern, scaled to display size.
+            The empty right gutter now carries a static client logo wall —
+            monochrome white marks that fill the negative space and put the
+            book of business next to the ask. */}
+        <div className="pt-16 sm:pt-24 lg:pt-[108px] pb-14 sm:pb-24 border-b border-white/[0.06] grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end gap-y-12 gap-x-10">
+          <Link to="/contact" className="group block">
+            <p className="text-[10px] sm:text-[11px] font-mono text-white/30 uppercase tracking-[0.25em] mb-6 sm:mb-9">
+              Got a project in Korea?
+            </p>
+            <span className="footer-cta-type flex flex-wrap items-center gap-x-4 sm:gap-x-8 gap-y-2 text-white">
+              {/* buzzworthystudio.com mask-swap: brand-colored duplicate wipes
+                  across on hover (500ms cubic-bezier(1,0,0,1)) */}
+              <span className="mask-swap" data-text="Let's talk">
+                <span>Let&apos;s talk</span>
+              </span>
+              <ArrowUpRight
+                className="w-[0.8em] h-[0.8em] text-primary transition-transform duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"
+                strokeWidth={1.5}
+              />
             </span>
-            <ArrowUpRight
-              className="w-[0.8em] h-[0.8em] text-primary transition-transform duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"
-              strokeWidth={1.5}
-            />
-          </span>
-        </Link>
+          </Link>
+
+          {/* Client logo wall — static marks, no names. Each links to its
+              case study; brightens from 45%→100% on hover so the wall reads
+              as "these teams already trust us". */}
+          <div className="lg:pb-2">
+            <p className="hidden lg:block text-right text-[10px] font-mono text-white/25 uppercase tracking-[0.22em] mb-5">
+              Trusted by
+            </p>
+            <div className="flex flex-wrap lg:justify-end items-center gap-x-6 gap-y-5 sm:gap-x-8 sm:gap-y-6 lg:max-w-[440px]">
+              {clientLogos.map((client) => (
+                <Link
+                  key={client.slug}
+                  to={`/projects/${client.slug}`}
+                  aria-label={client.name}
+                  className="shrink-0"
+                >
+                  <img
+                    src={client.logo}
+                    alt={client.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-5 sm:h-6 w-auto max-w-[92px] object-contain brightness-0 invert opacity-45 hover:opacity-100 transition-opacity duration-300"
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
 
         <div className="py-12 sm:py-20">
           <div className="grid grid-cols-2 md:grid-cols-12 gap-y-10 gap-x-6">
