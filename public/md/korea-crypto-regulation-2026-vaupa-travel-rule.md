@@ -1,0 +1,98 @@
+# Korea Crypto Regulation in 2026: VAUPA, Travel Rule, and What's Next
+
+*ium Research — Helen, Head of Research — May 16, 2026*
+*Canonical: https://iumlabs.io/blog/korea-crypto-regulation-2026-vaupa-travel-rule*
+
+## Key Takeaways
+
+- The Virtual Asset User Protection Act (VAUPA), in force since July 19, 2024, is now the baseline: exchanges must segregate customer cash at a bank and hold 80% or more of user assets in cold storage. Source: FSC, Act on the Protection of Virtual Asset Users.
+- Reserves and insurance are mandatory: VASPs must hold liability cover or reserves of at least 5% of hot-wallet assets, with a floor of KRW 3 billion for won-market exchanges. Source: FSC enforcement decree.
+- The travel rule already governs transfers: counterparty name and wallet data must move with transfers above KRW 1 million (about USD 842). Source: KoFIU / FSC, Financial Transaction Reports Act.
+- A Digital Asset Basic Act is being written on top, including a contested won stablecoin regime, after the Bank of Korea and the FSC clashed over who may issue it. Source: CoinDesk, April 8, 2026.
+
+Korea spent years treating crypto as something to monitor rather than regulate. That era is over. The rulebook now has teeth, and it arrives in layers: the Virtual Asset User Protection Act sets a hard user-protection floor, the travel rule governs how value and identity move between providers, and a Digital Asset Basic Act is being drafted on top to cover issuance, stablecoins, and tokenized real-world assets. For any project that wants to list on a Korean exchange or serve Korean users, compliance is no longer a later-stage chore. It is the entry ticket.
+
+## 1. The Regulatory Stack, Top to Bottom
+
+Korea regulates crypto through three stacked layers, not one statute. At the base is the Act on Reporting and Use of Certain Financial Transaction Information, the anti-money-laundering law forcing every virtual asset service provider (VASP) to register with the Korea Financial Intelligence Unit (KoFIU), obtain ISMS security certification, and run real-name banking. On top sits VAUPA, the user-protection law [in force since July 19, 2024](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099), whose commencement the FSC [announced the day before it took effect](https://www.fsc.go.kr/no010101/82682). The newest layer, still in draft, is the Digital Asset Basic Act, governing issuance, disclosure, market conduct, and a won-pegged stablecoin. As CoinDesk reported, Korea's current system "remains focused on investor protection and lacks a comprehensive framework covering issuance, disclosure and market structure." The Basic Act is the attempt to close that gap.
+
+The layering matters for sequencing. The base AML layer decides whether a venue can legally exist at all; VAUPA decides how it must hold and protect customer assets once it does; the Basic Act will decide what can be issued and sold on top. A foreign team reading only the headline about the Basic Act misses that the two lower layers are already live and already enforced, and those are the ones a listing has to clear today.
+
+| Layer | Statute | Status | What it governs |
+| --- | --- | --- | --- |
+| Base | Financial Transaction Reports Act (AML) | In force | VASP registration, ISMS, real-name banking, travel rule |
+| Middle | VAUPA | In force since July 19, 2024 | Asset segregation, cold storage, reserves, market-abuse rules |
+| Top | Digital Asset Basic Act | In draft | Issuance, disclosure, won stablecoin, tokenized RWAs |
+
+*[Figure: The Korea Times, Korea financial regulatory framework faces major restructuring (FSC)]*
+
+## 2. What VAUPA Requires
+
+VAUPA converts soft expectations into statutory duties. Customer cash must be kept separate from a VASP's own funds and trusted with a bank, investable only in safe assets such as government bonds. Exchanges must hold 80% or more of customer virtual assets in cold wallets, calculated monthly on economic value. To cover hacks and system failures, every VASP must carry liability insurance or reserves of at least 5% of hot-wallet assets, with hard floors below that level.
+
+| Item | Value |
+|---|---|
+| Cold wallet minimum (%) | 80 |
+| Hot-wallet insurance/reserve (%) | 5 |
+| Won-market reserve floor (KRW bn) | 3 |
+
+*VAUPA core operational thresholds for exchanges. Source: FSC, enforcement decree of the Act on the Protection of Virtual Asset Users*
+
+> **80%** — Minimum share of customer virtual assets a Korean exchange must hold in cold storage, calculated monthly on economic value (Source: FSC, Act on the Protection of Virtual Asset Users)
+
+> **KRW 3 billion** — minimum reserve/insurance floor for won-market exchanges; KRW 500 million for coin-only exchanges, wallets, and custodians (Source: FSC enforcement decree)
+
+These are not posture statements. They are capital and operational commitments that a thinly funded venue cannot fake, which is precisely why they double as a filter: a project evaluating where to list can read a counterparty's compliance with these floors as a proxy for whether the venue will still be standing in a year.
+
+VAUPA also criminalizes market abuse. It imports capital-markets logic on insider trading and manipulation, bans VASPs from arbitrarily freezing deposits and withdrawals, and obliges them to monitor and report abnormal trading to the FSC and Financial Supervisory Service, backed by criminal penalties and fines.
+
+## 3. Travel Rule Mechanics
+
+The travel rule, grounded in Article 5-3 of the [Specific Financial Information Act](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787), ties identity to value as it crosses providers, and Korea adopted it ahead of most of Asia; VASP registration itself runs through the [KoFIU process](https://www.kofiu.go.kr/kor/notification/notice_view.do?ntcnYardOrdrNo=209&seCd=0007). Under the Financial Transaction Reports Act, a VASP sending a transfer above KRW 1 million (about USD 842) must transmit originator and beneficiary name and wallet address to the receiving VASP. On request from the beneficiary VASP or authorities, the originating VASP must hand over the customer's official identity number within three business days.
+
+{{youtube:eoDtWmlaBFw}}
+
+> **"The amended act also mandated the crypto Travel Rule for international virtual asset transfers over 1 million won."**
+>
+> Notabene, Crypto Travel Rule Regulations in South Korea
+
+The thresholds are not uniform. FTRA reporting scales from KRW 1 million to KRW 3 million by transaction type, and exchanges layer their own surveillance on top: even low-risk transfers above roughly KRW 10 million can trigger suspicious-transaction reporting to the FIU. Transfers to self-hosted wallets sit in a softer zone today, exactly the gap the next legislative layer is expected to tighten.
+
+The operator consequence is interoperability. Because identity has to travel with value between providers, a venue that has not built clean travel-rule integration is a dead end for cross-venue flows even if it clears every other bar. For a token, that turns the choice of listing venue into a question of whether its book can actually connect to the rest of the Korean system, which is why this layer feeds directly into the venue read in our [exchange listing playbook](/blog/korean-exchange-listing-strategy-upbit-bithumb-2026).
+
+## 4. What This Means for Operators
+
+For a token project, listing in Korea now starts with a compliance checklist, not a business-development call. A counterparty exchange must prove ISMS certification, bank custody of customer cash, cold-wallet ratios, and reserve buffers before it can touch your asset, and travel-rule interoperability means a thinly integrated venue is a dead end for cross-venue flows. Stablecoin and tokenized-asset issuers should assume issuer-level authorization, full reserve backing, and redemption-at-par obligations on the way.
+
+{{youtube:jS0LD_l3RCg}}
+
+*[Figure: Source: CoinDesk, "South Korea proposes cryptocurrency law with bank-style rules for stablecoins"]*
+
+## 5. What Breaks It
+
+The unsettled pieces are upstream, in the Digital Asset Basic Act. The sharpest fight is over the won stablecoin: the Bank of Korea pushed for banks with majority ownership to be the only authorized issuers, while the FSC warned that bank-only issuance could choke innovation. The April 2026 draft also leaned toward folding stablecoins into the existing Foreign Exchange Transactions Act and requiring tokenized real-world assets to sit in managed trusts under the Capital Markets Act. None of that is final: the bill has slipped repeatedly, debate was pushed past elections, and lawmakers have not confirmed the reported drafts. For operators, the open risk is definitional scope. Whether your product is a payment instrument, a security-like token, or a plain virtual asset changes which regulator owns you and which capital rules apply.
+
+> Embedded post: https://x.com/CoinMarketCap/status/2026002664341786625
+
+> Embedded post: https://x.com/CoinMarketCap/status/2006075843928350908
+
+*[Figure: International Banker, Bank of Korea headquarters in Seoul]*
+
+## 6. How We Run It
+
+We treat Korean compliance as a launch precondition, not a cleanup task. Before a token goes near a Korean venue, we map it against VAUPA, the travel rule, and the emerging Basic Act, then sequence listing conversations around exchanges that already clear the custody, reserve, and travel-rule bars, with local counsel so regulatory posture and market entry move together. If you are planning a Korea listing or won-market presence, start with [compliance](/services/compliance), align it with your [go-to-market](/services/gtm) plan, and [talk to us](/contact) before committing to a timeline.
+
+## Sources
+
+- [FSC, enforcement decree of the Act on the Protection of Virtual Asset Users](https://www.fsc.go.kr/eng/pr010101/81217)
+- [Korea Law Translation Center, Act on the Protection of Virtual Asset Users](https://elaw.klri.re.kr/eng_mobile/viewer.do?hseq=63752&type=part&key=23)
+- [Notabene, Crypto Travel Rule Regulations in South Korea](https://notabene.id/world/south-korea)
+- [CoinDesk, South Korea proposes cryptocurrency law with bank-style rules for stablecoins (April 8, 2026)](https://www.coindesk.com/policy/2026/04/08/south-korea-proposes-cryptocurrency-law-with-bank-style-rules-for-stablecoins)
+- [CoinGeek, South Korea draft crypto bill covers stablecoins, RWAs (April 14, 2026)](https://coingeek.com/south-korea-draft-crypto-bill-covers-stablecoins-rwas/)
+- [The Korea Times, 17-year-old financial regulatory framework faces major restructuring](https://www.koreatimes.co.kr/economy/policy/20250604/17-year-old-financial-regulatory-framework-faces-major-restructuring)
+- [International Banker, Can New Entrants Disrupt South Korea Banking Oligopoly](https://internationalbanker.com/banking/can-impending-new-entrants-do-enough-to-disrupt-south-koreas-banking-oligopoly/)
+- [국가법령정보센터, 가상자산 이용자 보호 등에 관한 법률 전문](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=261099)
+- [국가법령정보센터, 특정 금융거래정보의 보고 및 이용 등에 관한 법률](https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=252787)
+- [금융정보분석원, 가상자산사업자 신고 안내](https://www.kofiu.go.kr/kor/notification/notice_view.do?ntcnYardOrdrNo=209&seCd=0007)
+
+*This report reflects ium Labs' operating view and is intended for general information, not legal advice.*
