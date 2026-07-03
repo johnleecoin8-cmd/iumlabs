@@ -155,7 +155,7 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-[14] px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
-          <p className="font-display text-[clamp(2.4rem,7.4vw,6.5rem)] font-semibold leading-[0.96] sm:leading-[0.92] tracking-[-0.02em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
+          <p className="font-display text-[clamp(2.3rem,7vw,6.1rem)] font-bold leading-[1.02] sm:leading-[0.98] tracking-[-0.005em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
             <span className="reveal-line"><span className="text-gradient-hero">Your Crypto Ecosystem</span></span>
             <span className="reveal-line"><span className="text-gradient-hero">Growth Partner</span></span>
           </p>

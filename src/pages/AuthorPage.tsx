@@ -61,7 +61,7 @@ const AuthorPage = () => {
               <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-primary/80">
                 Research Desk
               </span>
-              <h1 className="mt-2 font-display text-4xl sm:text-5xl font-semibold tracking-[-0.02em] text-white">
+              <h1 className="mt-2 font-display text-4xl sm:text-5xl font-bold tracking-[-0.005em] text-white">
                 {key}
               </h1>
               <p className="mt-1 text-white/50">{info.role} at ium Labs</p>
