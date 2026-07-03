@@ -7,7 +7,7 @@ import { brand, navigation } from "@/config/content";
 import CalendlyButton from "./CalendlyButton";
 
 const LiveChatModal = lazy(() => import("./LiveChatModal"));
-import logoImage from "@/assets/ium-logo-mark-white.png";
+import logoImage from "@/assets/ium-logo-transparent.png";
 
 const serviceItems = [
   { name: "GTM Strategy", href: "/services/gtm" },
