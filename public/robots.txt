@@ -5,26 +5,33 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /ium-admin/
+Disallow: /*?q=
+Disallow: /*%7Bsearch_term_string%7D
+Disallow: /*%7B
 
 # Naver
 User-agent: Yeti
 Allow: /
 Disallow: /ium-admin/
+Disallow: /*?q=
 
 # Bing
 User-agent: Bingbot
 Allow: /
 Disallow: /ium-admin/
+Disallow: /*?q=
 
 # All crawlers
 User-agent: *
 Allow: /
 Disallow: /ium-admin/
 Disallow: /*?s=
+Disallow: /*?q=
 Disallow: /*?search=
 Disallow: /*?filter=
 Disallow: /*?sort=
 Disallow: /*?page=
+Disallow: /*%7B
 
 # Sitemaps
 Sitemap: https://iumlabs.io/sitemap-index.xml
