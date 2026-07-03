@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useMobileOptimization } from './useMobileOptimization';
+import { logVideoEvent } from '@/lib/videoAnalytics';
 
 declare const __BUILD_TIMESTAMP__: string;
 
@@ -114,8 +115,11 @@ const PLAY_COOLDOWN_MS = 1500;
 const PLAY_RETRY_THROTTLE_MS = 400;
 // Mobile networks buffer for several seconds during 4G→3G handoffs or in-app
 // browsers. Keep the stall window generous so we don't nuke a healthy download.
-const MOBILE_STALL_WINDOW_MS = 12000;
-const MOBILE_RELOAD_COOLDOWN_MS = 15000;
+// Tightened based on user reports: only treat as a real stall when nothing at
+// all has downloaded (no buffered range, readyState<2) AFTER a long grace
+// period. Anything less aggressive was firing during normal mobile buffering.
+const MOBILE_STALL_WINDOW_MS = 18000;
+const MOBILE_RELOAD_COOLDOWN_MS = 30000;
 const MAX_HARD_RELOADS = 1;
 
 // Exported so the intro loader can prefetch the exact same versioned URLs the
@@ -319,7 +323,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setHasVideoError(false);
     setRetryCount(0);
     setDebugTick((t) => t + 1);
-  }, []);
+    const readyMs = loadStartRef.current != null ? performance.now() - loadStartRef.current : 0;
+    logVideoEvent('ready', src, { readyMs: Math.round(readyMs), attempts: playAttemptsRef.current });
+  }, [src]);
 
   const scheduleFrameReady = useCallback((video: HTMLVideoElement) => {
     if (frameReadyRef.current) return;
@@ -395,6 +401,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     hardReloadCountRef.current += 1;
     lastHardReloadAtRef.current = now;
     console.warn(`[VideoPlayer] soft reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
+    logVideoEvent('reload', src, {
+      reason,
+      count: hardReloadCountRef.current,
+      rs: video.readyState,
+      currentTime: video.currentTime,
+    });
 
     // Soft reload only — DO NOT cache-bust the URL. Cache-busting on mobile
     // forces a full re-download of the video, which is exactly what causes
@@ -410,7 +422,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         tryPlay(video);
       }
     }, 200);
-  }, [tryPlay]);
+  }, [tryPlay, src]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
@@ -439,16 +451,18 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     if (retryTimerRef.current) return;
 
+    logVideoEvent('error', src, { retryCount, rs: video?.readyState ?? -1 });
+
     if (retryCount < maxRetries) {
       const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff: 1s, 2s, 4s
       console.log(`Video load failed, retrying in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
-      
+
       retryTimerRef.current = setTimeout(() => {
         retryTimerRef.current = null;
         if (readyRef.current || (videoRef.current && !videoRef.current.paused && videoRef.current.currentTime > 0)) return;
         setRetryCount(prev => prev + 1);
         setHasVideoError(false);
-        
+
         // Force reload the video
         if (videoRef.current) {
           videoRef.current.load();
@@ -457,8 +471,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     } else {
       setHasVideoError(true);
       console.warn('Video load failed after max retries, falling back to poster');
+      logVideoEvent('exhausted', src, { reason: 'error-retries' });
     }
-  }, [retryCount, maxRetries]);
+  }, [retryCount, maxRetries, src]);
 
   // Manual controls
   const play = useCallback(() => {
@@ -557,6 +572,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (playAttemptsRef.current >= MAX_PLAY_ATTEMPTS) {
         clearInterval(retryInterval);
         console.warn('[VideoPlayer] play attempts exhausted, keeping poster');
+        logVideoEvent('exhausted', src, { reason: 'play-attempts' });
         setDebugTick((t) => t + 1);
         return;
       }
@@ -592,8 +608,19 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         return;
       }
 
-      // Only reload if we've waited a full window AND still have no frame.
-      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2) {
+      // Only reload if we've waited a full window AND the browser has literally
+      // downloaded nothing (no buffered range, readyState<2, currentTime≈0).
+      // If ANY bytes are buffered, we're mid-download — leave it alone.
+      let hasBuffered = false;
+      try {
+        hasBuffered = video.buffered.length > 0 && video.buffered.end(0) > 0.05;
+      } catch {}
+      if (exceededInitialWindow && video.currentTime <= 0.05 && video.readyState < 2 && !hasBuffered) {
+        logVideoEvent('stall', src, {
+          rs: video.readyState,
+          waitedMs: Math.round(now - loadGateOpenedAtRef.current),
+          buffered: 0,
+        });
         hardReload(video, 'never started on mobile');
       }
     }, 2000);
@@ -738,6 +765,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       firstByteLoggedRef.current = false;
       playLoggedRef.current = false;
       console.log('[VideoPlayer] loadstart', { src, t: 0 });
+      logVideoEvent('loadstart', src);
     },
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
       if (loadStartRef.current != null) {
@@ -835,9 +863,17 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     const stallMs = lastProgressAtRef.current > 0 ? Math.max(0, now - lastProgressAtRef.current) : 0;
     const sinceLoadMs = loadGateOpenedAtRef.current > 0 ? Math.max(0, now - loadGateOpenedAtRef.current) : 0;
     const net = networkInfo;
+    const analytics = (() => {
+      try {
+        const raw = window.localStorage.getItem('ium.videoAnalytics.v1');
+        if (!raw) return null;
+        return JSON.parse(raw) as { counts?: Record<string, number> };
+      } catch { return null; }
+    })();
+    const c = analytics?.counts ?? {};
     return (
       <div
-        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/85 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none max-w-[220px] break-all"
+        className="fixed top-2 left-2 z-[9999] rounded-md bg-black/85 px-2.5 py-1.5 text-[10px] leading-tight text-white/90 font-mono pointer-events-none max-w-[240px] break-all"
         aria-hidden
       >
         <div>rs: {rs} {rs >= 0 ? rsLabels[rs] : ''} · t: {(v?.currentTime ?? 0).toFixed(2)}s</div>
@@ -848,6 +884,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         <div>play: {playAttemptsRef.current}/{MAX_PLAY_ATTEMPTS} · retry: {retryCount}/{maxRetries}</div>
         <div>reload: {hardReloadCountRef.current}/{MAX_HARD_RELOADS} · {v?.paused ? 'paused' : 'playing'}</div>
         <div>net: {net ? `${net.effectiveType} ${net.downlink}Mb${net.saveData ? ' saver' : ''}` : 'n/a'}</div>
+        <div>Σ ready:{c.ready ?? 0} stall:{c.stall ?? 0} reload:{c.reload ?? 0} err:{c.error ?? 0}</div>
         <div>err: {hasVideoError ? 'yes' : 'no'} · tick: {debugTick}</div>
       </div>
     );
