@@ -323,7 +323,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setHasVideoError(false);
     setRetryCount(0);
     setDebugTick((t) => t + 1);
-  }, []);
+    const readyMs = loadStartRef.current != null ? performance.now() - loadStartRef.current : 0;
+    logVideoEvent('ready', src, { readyMs: Math.round(readyMs), attempts: playAttemptsRef.current });
+  }, [src]);
 
   const scheduleFrameReady = useCallback((video: HTMLVideoElement) => {
     if (frameReadyRef.current) return;
@@ -399,6 +401,12 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     hardReloadCountRef.current += 1;
     lastHardReloadAtRef.current = now;
     console.warn(`[VideoPlayer] soft reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
+    logVideoEvent('reload', src, {
+      reason,
+      count: hardReloadCountRef.current,
+      rs: video.readyState,
+      currentTime: video.currentTime,
+    });
 
     // Soft reload only — DO NOT cache-bust the URL. Cache-busting on mobile
     // forces a full re-download of the video, which is exactly what causes
@@ -414,7 +422,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         tryPlay(video);
       }
     }, 200);
-  }, [tryPlay]);
+  }, [tryPlay, src]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
