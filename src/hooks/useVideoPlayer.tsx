@@ -394,20 +394,14 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
 
     hardReloadCountRef.current += 1;
     lastHardReloadAtRef.current = now;
-    readyRef.current = false;
-    frameReadyRef.current = false;
-    setIsVideoReady(false);
-    setDebugTick((t) => t + 1);
-    console.warn(`[VideoPlayer] hard reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
+    console.warn(`[VideoPlayer] soft reload ${hardReloadCountRef.current}/${MAX_HARD_RELOADS}, ${reason}`);
 
-     try {
-       video.pause();
-       const currentSrc = video.currentSrc || video.src || optimizedSrc;
-       if (currentSrc) {
-         video.src = currentSrc.includes('_mr=') ? currentSrc.replace(/([?&])_mr=[^&#]*/g, '$1_mr=' + Date.now()) : `${currentSrc}${currentSrc.includes('?') ? '&' : '?'}_mr=${Date.now()}`;
-       }
-       video.load();
-     } catch {
+    // Soft reload only — DO NOT cache-bust the URL. Cache-busting on mobile
+    // forces a full re-download of the video, which is exactly what causes
+    // the "keeps reloading and stuttering" loop the user reported.
+    try {
+      video.load();
+    } catch {
       return;
     }
 
@@ -415,8 +409,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
       if (video.isConnected) {
         tryPlay(video);
       }
-    }, 80);
-  }, [optimizedSrc, tryPlay]);
+    }, 200);
+  }, [tryPlay]);
 
   const triggerPlaybackBurst = useCallback((video: HTMLVideoElement, immediateDelay = 0) => {
     const attempts = [immediateDelay, 80, 220, 500, 1200];
