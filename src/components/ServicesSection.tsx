@@ -1,18 +1,19 @@
 import { ArrowRight, Compass, Users, Search, Mic, Mic2, Newspaper, Rocket, FileSearch, Droplets, Landmark, TrendingUp, Handshake } from "lucide-react";
 import { Link } from "react-router-dom";
+// Homepage "What we do" card images MUST match each service's detail-page hero
+// image, so the card you click and the page you land on show the same photo.
 import gtmImage from "@/assets/services/gtm-hero-night.webp";
-import communityImage from "@/assets/services/community-hero.webp";
+import communityImage from "@/assets/campaigns/bnb-hanok-event.jpg";
 import kolImage from "@/assets/services/kol-avatars.webp";
-import prImage from "@/assets/services/pr-hero.webp";
+import prImage from "@/assets/campaigns/openledger-interview.jpg";
 import seoAdsImage from "@/assets/services/seo-naver.jpg";
 import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
 import listingImage from "@/assets/platforms/comp-exchange.jpg";
-import liquidityImage from "@/assets/platforms/res-market.jpg";
-import exchangeHeroAsset from "@/assets/services/exchange-hero-v3.png.asset.json";
-const exchangeImage = exchangeHeroAsset.url;
-import capitalImage from "@/assets/platforms/res-thesis.jpg";
-import complianceImage from "@/assets/services/compliance-hero.avif";
+import liquidityImage from "@/assets/services/liquidity-sizing.webp";
+import exchangeImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import capitalImage from "@/assets/services/capital-hero.webp";
+import complianceImage from "@/assets/services/comp-vasp-travelrule.webp";
 
 const services = [
   {
