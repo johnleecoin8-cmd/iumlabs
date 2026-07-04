@@ -1,6 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Check, ChevronDown, type LucideIcon } from "lucide-react";
+import { ArrowRight, Check, ChevronDown, FileText, type LucideIcon } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import SEOHead from "@/components/SEOHead";
 import ServiceSchema from "@/components/ServiceSchema";
@@ -286,9 +286,22 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                 <p className="text-white/65 tracking-[-0.01em] leading-relaxed mb-6">{p.deliverable.body}</p>
                 <Link to="/contact" className="inline-flex items-center gap-2 font-semibold transition-transform hover:-translate-y-0.5" style={{ color: A }}>{p.deliverable.cta} <ArrowRight className="w-4 h-4" /></Link>
               </div>
-              <div className="group relative rounded-3xl overflow-hidden border border-white/[0.08] aspect-[16/10]">
-                <img src={p.deliverable.image} alt="" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] group-hover:scale-105" loading="lazy" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/70 to-transparent" />
+              {/* Clean branded panel instead of a stock graphic: a spec-sheet
+                  feel that stays on the editorial system. */}
+              <div className="group relative rounded-3xl overflow-hidden border border-white/[0.1] aspect-[16/10] bg-[#0c0c0e]">
+                <div className="absolute inset-0" style={{ background: `radial-gradient(90% 80% at 85% 8%, ${A}16, transparent 62%)` }} />
+                <div className="absolute inset-0 bg-dots opacity-[0.55]" />
+                <FileText className="absolute -bottom-8 -right-6 w-48 h-48 sm:w-56 sm:h-56" style={{ color: A, opacity: 0.08 }} strokeWidth={1} />
+                <div className="absolute inset-0 p-7 sm:p-9 flex flex-col justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.24em] text-white/40">The output</span>
+                  <div>
+                    <div className="font-display text-xl sm:text-2xl font-bold tracking-[-0.02em]">{p.deliverable.title}</div>
+                    <div className="mt-4 flex items-center gap-2 font-mono text-[11px] text-white/45">
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: A }} />
+                      Graded, bilingual, delivered week one
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
