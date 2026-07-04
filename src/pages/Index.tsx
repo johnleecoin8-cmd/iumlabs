@@ -18,44 +18,6 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
 
-const MobileDeferredSection = ({ children, minHeight = "60vh" }: { children: ReactNode; minHeight?: string }) => {
-  const isMobile = useIsMobile();
-  const [shouldRender, setShouldRender] = useState(!isMobile);
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!isMobile) {
-      setShouldRender(true);
-      return;
-    }
-
-    const el = mountRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setShouldRender(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldRender(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "220px 0px", threshold: 0.01 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [isMobile]);
-
-  return (
-    <div ref={mountRef} style={isMobile && !shouldRender ? { minHeight } : undefined}>
-      {shouldRender ? children : null}
-    </div>
-  );
-};
-
 // One shared header for every homepage section: a small number index plus a single heading
 const SectionHeader = ({
   index,
