@@ -13,8 +13,6 @@ export interface CaseStudyContent {
   goals?: string[];
   /** Titled solution blocks under What We Did; falls back to project.strategy. */
   solutions?: { title: string; body: string }[];
-  /** Client quote. */
-  testimonial?: { quote: string; name: string; role: string };
 }
 
 export const caseStudyContent: Record<string, CaseStudyContent> = {
