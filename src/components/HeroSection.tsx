@@ -55,8 +55,8 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Massive Headline */}
           <p className="font-display text-[clamp(2.35rem,7.1vw,6.3rem)] font-extrabold leading-[0.98] sm:leading-[0.94] tracking-[-0.02em] mb-5 sm:mb-9 mt-8 sm:mt-20 text-white sm:whitespace-nowrap" role="heading" aria-level={2}>
-            <span className="reveal-line"><span className="text-gradient-hero">We don&apos;t localize.</span></span>
-            <span className="reveal-line"><span className="text-gradient-hero">We run Korea.</span></span>
+            <span className="reveal-line"><span className="text-gradient-hero">Your Crypto Ecosystem</span></span>
+            <span className="reveal-line"><span className="text-gradient-hero">Growth Partner</span></span>
           </p>
 
           {/* Subtext */}
