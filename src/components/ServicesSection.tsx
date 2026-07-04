@@ -9,7 +9,8 @@ import deepResearchImage from "@/assets/services/deep-research-blog.jpg";
 import amaImage from "@/assets/services/ama-spaces.jpg";
 import listingImage from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImage from "@/assets/platforms/res-market.jpg";
-import exchangeImage from "@/assets/services/cex-paid-ads.webp";
+import exchangeHeroAsset from "@/assets/services/exchange-hero-v3.png.asset.json";
+const exchangeImage = exchangeHeroAsset.url;
 import capitalImage from "@/assets/platforms/res-thesis.jpg";
 import complianceImage from "@/assets/services/compliance-hero.avif";
 
