@@ -3,6 +3,11 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/campaigns/bnb-hanok-event.jpg";
 import featEngageImg from "@/assets/campaigns/kucoin-party-event.jpg";
+import galFisheye from "@/assets/campaigns/event-fisheye.jpg";
+import galAptos from "@/assets/campaigns/aptos-seoul-event.jpg";
+import galMantra from "@/assets/campaigns/mantra-party.jpg";
+import galBybit from "@/assets/campaigns/bybit-event.jpg";
+import galSahara from "@/assets/campaigns/sahara-ai-event.jpg";
 
 const ACCENT = "#38BDF8";
 
@@ -48,6 +53,13 @@ const CommunityService = () => (
       { icon: Activity, eyebrow: "03 · Activate", title: "Engagement & Events", body: "Daily engagement, weekly events, KOL AMAs, and quest campaigns that turn a quiet channel into an active one. We build the content calendar and ambassador program that keep members coming back.", points: ["Content calendar and engagement event schedule", "KOL AMAs and quest campaign programming", "Ambassador program design and management", "2 to 3x daily active rate within the first month"], image: featEngageImg },
       { icon: Shield, eyebrow: "04 · Monitor", title: "Sentiment Monitoring", body: "Real-time monitoring with alert systems so FUD and negative sentiment never spread unchecked. We respond within minutes, not hours, and report on community health every month.", points: ["Real-time sentiment monitoring and alerts", "Escalation protocols for serious issues", "Engagement analytics and retention optimization", "Monthly community health reports"], image: "" },
     ]}
+    gallery={{ eyebrow: "ON THE GROUND", items: [
+      { src: galFisheye, label: "KBW side event · Seoul" },
+      { src: galAptos, label: "Aptos · Seoul" },
+      { src: galMantra, label: "Mantra · community night" },
+      { src: galBybit, label: "Bybit · meetup" },
+      { src: galSahara, label: "Sahara AI · Seoul" },
+    ] }}
     promise={{
       heading: "We grow communities the right way.",
       headingMuted: "No shortcuts, no bots.",

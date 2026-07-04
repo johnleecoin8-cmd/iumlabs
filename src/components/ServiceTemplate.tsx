@@ -31,6 +31,7 @@ export type ServiceTemplateProps = {
   types?: { eyebrow?: string; heading: ReactNode; headingAccent?: string; sub?: string; cards: { title: string; body: string }[] };
   process: { eyebrow?: string; heading: ReactNode; headingAccent?: string; steps: SvcStep[] };
   features: SvcFeature[];
+  gallery?: { eyebrow?: string; items: { src: string; type?: "image" | "video"; poster?: string; label?: string }[] };
   pullQuote?: { lead: string; accent: string };
   promise?: { heading: ReactNode; headingMuted?: string; doLabel?: string; dontLabel?: string; do: string[]; dont: string[] };
   deliverable?: { eyebrow: string; title: ReactNode; body: string; cta: string; image: string };
@@ -213,8 +214,35 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           ))}
         </div>
 
-        {/* Signature moment: the one real visual, big. */}
-        {(() => {
+        {/* Media: an asymmetric bento of real work (photos + ad video) when a
+            gallery is provided; otherwise the single signature moment. */}
+        {p.gallery && p.gallery.items.length > 0 ? (
+          <Reveal>
+            <div className="mt-14 sm:mt-20">
+              <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.gallery.eyebrow ?? "THE WORK"}</span>
+              <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 auto-rows-[130px] sm:auto-rows-[180px] gap-3 grid-flow-dense">
+                {p.gallery.items.map((g, i) => {
+                  const span = i === 0 ? "col-span-2 row-span-2" : i === 3 ? "col-span-2" : "col-span-1";
+                  return (
+                    <div key={i} className={`group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c0c0e] ${span}`}>
+                      {g.type === "video" ? (
+                        <video className="absolute inset-0 w-full h-full object-cover" src={g.src} poster={g.poster} muted loop autoPlay playsInline preload="metadata" />
+                      ) : (
+                        <img src={g.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 via-transparent to-transparent pointer-events-none" />
+                      {g.label && (
+                        <span className="absolute bottom-3 left-3 z-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 px-3 py-1 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-white/70">
+                          {g.label}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Reveal>
+        ) : (() => {
           const m = p.features.find((f) => f.video || f.image);
           if (!m) return null;
           return (

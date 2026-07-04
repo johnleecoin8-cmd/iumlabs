@@ -3,6 +3,11 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/services/kol-avatars.webp";
 import ctImg from "@/assets/campaigns/sahara-ai-event.jpg";
+import galSahara from "@/assets/campaigns/sahara-ai-event.jpg";
+import galMantra from "@/assets/campaigns/mantra-party.jpg";
+import galAptos from "@/assets/campaigns/aptos-seoul-event.jpg";
+import galKucoin from "@/assets/campaigns/kucoin-party-event.jpg";
+import galBnb from "@/assets/campaigns/bnb-hanok-event.jpg";
 
 const ACCENT = "#FACC15";
 
@@ -60,6 +65,13 @@ const InfluencerService = () => (
       { icon: BarChart3, eyebrow: "03 · Track", title: "Performance Tracking", body: "Weekly reports with impressions, engagements, and click-throughs. We compare KOL-by-KOL performance and rotate underperformers mid-campaign.", points: ["Weekly performance reports", "Impressions, engagement, click-throughs", "KOL-by-KOL comparison", "Mid-campaign rotation of laggards"], image: "" },
       { icon: Users, eyebrow: "04 · Reach", title: "Multi-Platform Reach", body: "Korea's KOL landscape is fragmented across four platforms, each with its own culture. We orchestrate coverage so your narrative lands where your audience actually lives.", points: ["YouTube long-form and Shorts", "X (Korean CT) thread campaigns", "Telegram community seeding", "Naver Blog search authority"], image: "" },
     ]}
+    gallery={{ eyebrow: "CAMPAIGNS", items: [
+      { src: galSahara, label: "Sahara AI · Seoul" },
+      { src: galMantra, label: "Mantra · community night" },
+      { src: galAptos, label: "Aptos · Seoul" },
+      { src: galKucoin, label: "KuCoin · Seoul" },
+      { src: galBnb, label: "BNB · Hanok event" },
+    ] }}
     promise={{
       heading: "Real KOLs. Real engagement.",
       headingMuted: "Real numbers.",

@@ -3,6 +3,11 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/campaigns/openledger-interview.jpg";
 import featDistributionImg from "@/assets/campaigns/ondo-seminar.jpg";
+import galSummit from "@/assets/campaigns/story-origin-summit.jpg";
+import galWorkshop from "@/assets/campaigns/story-workshop.jpg";
+import galBillboard from "@/assets/campaigns/seoul-metro-billboard-new.jpeg";
+import galPeaq from "@/assets/campaigns/peaq-summit.jpg";
+import galOpenledger from "@/assets/campaigns/openledger-event.jpg";
 
 const ACCENT = "#8B5CF6";
 
@@ -48,6 +53,13 @@ const PRService = () => (
       { icon: Megaphone, eyebrow: "03 · Amplify", title: "Mainstream & Tier-1 Placement", body: "Coverage beyond the crypto press. For stories with broader financial relevance, we reach mainstream and Tier-1 outlets like Chosun Ilbo, Maeil Business, and MBN to put your project in front of a wider Korean audience.", points: ["Mainstream financial media reach", "Tier-1 outlet placement", "Expert commentary and op-eds", "Cross-channel social amplification"], image: "" },
       { icon: ShieldAlert, eyebrow: "04 · Protect", title: "Crisis Comms", body: "Korean crypto Twitter moves fast. We stand up pre-drafted statement templates, rapid response protocols, and real-time monitoring so you can respond in Korean within hours, not days, when a story breaks.", points: ["Pre-drafted Korean statements", "Rapid response protocols", "Real-time media monitoring", "Sentiment and share-of-voice tracking"], image: "" },
     ]}
+    gallery={{ eyebrow: "IN THE PRESS", items: [
+      { src: galSummit, label: "Story · Origin Summit" },
+      { src: galWorkshop, label: "Story · press workshop" },
+      { src: galPeaq, label: "peaq · summit" },
+      { src: galBillboard, label: "Seoul Metro · OOH" },
+      { src: galOpenledger, label: "OpenLedger · Seoul" },
+    ] }}
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Media & Narrative Plan&trade;</>, body: "Every engagement starts with a written plan: your core narrative, the angles each outlet will care about, the journalists we will pitch, and the timeline from story development to published coverage.", cta: "Request your plan", image: "" }}
     faq={{
       heading: "The questions founders actually ask.",
