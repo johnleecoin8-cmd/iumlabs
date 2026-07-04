@@ -1,7 +1,7 @@
 import { Users, Target, Search } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/exchange-hero-v2.png.asset.json";
+import heroImg from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
 import delivImg from "@/assets/services/exchange-numbers.png";
 
