@@ -67,13 +67,12 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
       <Navbar />
 
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-[#0A0A0A]">
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         {p.hero.image && !p.hero.clean && (
           <img src={p.hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
         )}
         {p.hero.clean && <div className="absolute inset-0 bg-dots opacity-[0.5]" />}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/95 to-[#0A0A0A]/85" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/95 via-[#0A0A0A]/70 to-[#0A0A0A]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/55" />
         <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 82% 8%, ${A}${p.hero.clean ? "26" : "1f"}, transparent 52%)` }} />
         {p.motif}
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
