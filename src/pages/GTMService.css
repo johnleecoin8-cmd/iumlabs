@@ -83,7 +83,7 @@
 .gtm-ed .work-intro .lbl{color:var(--g2)}
 .gtm-ed .work-intro .lbl::after{background:var(--g4)}
 .gtm-ed .work-intro h2{font-family:var(--serif);font-weight:800;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-.035em;line-height:.98;max-width:600px}
-.gtm-ed .work-intro h2 strong{font-weight:800;color:var(--blue)}
+.gtm-ed .work-intro h2 strong{font-weight:800;color:var(--char)}
 .gtm-ed .work-card{width:520px;height:100vh;flex-shrink:0;display:flex;flex-direction:column;justify-content:center;padding:0 2rem;border-left:1px solid var(--g4)}
 .gtm-ed .wc-img{width:100%;aspect-ratio:16/10;overflow:hidden;margin-bottom:2rem;background:var(--off);border-radius:8px}
 .gtm-ed .wc-img img{width:100%;height:100%;object-fit:cover;transform:scale(1.15);transition:transform .8s var(--ease);filter:brightness(.9)}
@@ -99,11 +99,11 @@
 .gtm-ed .approach-ed{padding:10rem 0}
 .gtm-ed .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
 .gtm-ed .appr-l h2{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,3.8vw,3.2rem);line-height:1.0;letter-spacing:-.035em}
-.gtm-ed .appr-l h2 strong{font-weight:800;color:var(--blue)}
+.gtm-ed .appr-l h2 strong{font-weight:800;color:var(--char)}
 .gtm-ed .appr-l>p{font-size:1.05rem;color:var(--char);line-height:1.7;margin-top:2rem;font-weight:400;letter-spacing:-.01em}
 .gtm-ed .pillars .pill{padding:2.25rem 0;border-top:1px solid var(--g4)}
 .gtm-ed .pillars .pill:last-child{border-bottom:1px solid var(--g4)}
-.gtm-ed .pill-n{font-family:var(--serif);font-size:1.6rem;font-weight:800;color:var(--blue);line-height:1;letter-spacing:-.02em;margin-bottom:.75rem}
+.gtm-ed .pill-n{font-family:var(--serif);font-size:1.6rem;font-weight:800;color:var(--char);line-height:1;letter-spacing:-.02em;margin-bottom:.75rem}
 .gtm-ed .pill h4{font-weight:700;font-size:1.05rem;letter-spacing:-.02em;margin-bottom:.5rem}
 .gtm-ed .pill p{font-size:.95rem;color:var(--char);line-height:1.6;font-weight:400;letter-spacing:-.01em}
 
@@ -124,7 +124,7 @@
 /* REGIONS */
 .gtm-ed .regions-sec{padding:8rem 0}
 .gtm-ed .reg-headline{font-family:var(--serif);font-weight:800;font-size:clamp(2rem,3.8vw,3.2rem);line-height:1.0;letter-spacing:-.035em;margin-bottom:4rem}
-.gtm-ed .reg-headline strong{font-weight:800;color:var(--blue)}
+.gtm-ed .reg-headline strong{font-weight:800;color:var(--char)}
 .gtm-ed .reg-map-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:4rem;align-items:start}
 .gtm-ed .reg-map{width:100%}
 .gtm-ed .reg-countries{display:flex;flex-direction:column;gap:0}
