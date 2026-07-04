@@ -3,6 +3,10 @@ import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/platforms/comp-exchange.jpg";
 import scorecardImg from "@/assets/services/listing-scorecard.webp";
+import galUpbit from "@/assets/services/real/upbit-listings.png";
+import galBybit from "@/assets/campaigns/bybit-event.jpg";
+import galKucoin from "@/assets/campaigns/kucoin-party-event.jpg";
+import galAptos from "@/assets/campaigns/aptos-seoul-event.jpg";
 
 const ACCENT = "#22D3EE";
 
@@ -94,6 +98,12 @@ const ListingService = () => (
       { icon: Network, eyebrow: "03 · Place", title: "Exchange Relations & Venue Sequencing", body: "Warm, accountable introductions to the listing and research desks that actually decide, across Tier-1 global venues and Korea's KRW exchanges, plus the sequencing strategy: which venue first, which trading pairs, and how CEX, DEX, and hybrid listings reinforce each other.", points: ["Listing & research-desk introductions", "Venue & trading-pair sequencing", "Timing around market & narrative windows", "End-to-end submission management"], image: "" },
       { icon: ShieldCheck, eyebrow: "04 · Sustain", title: "Liquidity & Maintenance", body: "A listing is the start, not the finish. We coordinate listing-day depth with vetted market makers and stand up the disclosure, reporting, and IR cadence that keeps you in good standing and clear of caution-list or delisting risk.", points: ["Listing-day depth via vetted desks", "Ongoing disclosure & IR cadence", "DAXA maintenance-review readiness", "Multi-venue standing management"], image: "" },
     ]}
+    gallery={{ eyebrow: "ON THE BOARD", items: [
+      { src: galUpbit, label: "Upbit · new-listing notices" },
+      { src: galBybit, label: "Bybit · Seoul" },
+      { src: galKucoin, label: "KuCoin · Seoul" },
+      { src: galAptos, label: "Aptos · Seoul" },
+    ] }}
     promise={{
       heading: "We make you the best applicant.",
       headingMuted: "The exchange makes the decision.",

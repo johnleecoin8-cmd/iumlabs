@@ -48,6 +48,13 @@ const ExchangeMarketingService = () => (
       { icon: Target, eyebrow: "02 · Paid", title: "Paid Ads", body: "A full-funnel paid acquisition engine for exchanges, run across the crypto-friendly networks most agencies can't get approved on. We target by exchange, region, demographic, and intent, and optimize the whole funnel, install to sign-up to first deposit, to cost per funded account rather than CPM.", points: ["Install, sign-up, first deposit funnel", "Certified crypto channels (Google, X, Coinzilla)", "Exchange, region & demographic targeting", "Optimized to cost per funded account"], video: "/videos/ads/okx-kr-2.mp4", poster: "/videos/ads/okx-kr-2.poster.jpg", mediaLabel: "Market example · OKX, Meta Ad Library (KR)" },
       { icon: Search, eyebrow: "03 · SEO", title: "Organic SEO Setup", body: "The compounding layer most exchanges skip: owning the Korean organic search results. We place PR that ranks on Naver, run a Naver Blog content engine, and build Naver Cafe presence in the communities where Korean traders gather, so your exchange shows up everywhere a trader searches, at near-zero marginal cost. Owned search holds volume long after the paid push stops.", points: ["PR placed to rank on Naver search", "Naver Blog content & SERP ranking", "Naver Cafe community presence", "An owned search footprint that compounds"], image: featOrganicImg },
     ]}
+    gallery={{ eyebrow: "THE MARKET, LIVE", items: [
+      { src: "/videos/ads/okx-kr-welcome.mp4", type: "video", poster: "/videos/ads/okx-kr-welcome-poster.jpg", label: "Market example · OKX (KR)" },
+      { src: "/videos/ads/bitget-ad3.jpg", label: "Market example · Bitget" },
+      { src: "/videos/ads/okx-kr-2.mp4", type: "video", poster: "/videos/ads/okx-kr-2.poster.jpg", label: "Market example · OKX (KR)" },
+      { src: "/videos/ads/okx-ad1.jpg", label: "Market example · OKX" },
+      { src: "/videos/ads/bybit-ad3.jpg", label: "Market example · Bybit" },
+    ] }}
     promise={{
       heading: "We optimize for volume.",
       headingMuted: "Not vanity metrics.",
