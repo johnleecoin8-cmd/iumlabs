@@ -216,22 +216,6 @@ const CaseStudyLayout = ({
         </section>
       )}
 
-      {/* ===== TESTIMONIAL ===== */}
-      {content.testimonial && (
-        <section className="border-t border-white/10">
-          <motion.div className="mx-auto max-w-5xl px-6 md:px-10 lg:px-16 py-20 md:py-28 text-center" {...fadeUp}>
-            <p className="text-2xl font-light leading-snug text-white md:text-3xl lg:text-4xl lg:leading-[1.3]">
-              <span style={{ color: accent }}>&ldquo;</span>
-              {content.testimonial.quote}
-              <span style={{ color: accent }}>&rdquo;</span>
-            </p>
-            <div className="mt-8 text-sm text-white/45">
-              <span className="font-medium text-white/70">{content.testimonial.name}</span>, {content.testimonial.role}
-            </div>
-          </motion.div>
-        </section>
-      )}
-
       {/* ===== CTA ===== */}
       <section className="border-t border-white/10">
         <motion.div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16 py-20 md:py-28" {...fadeUp}>
