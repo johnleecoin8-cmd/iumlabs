@@ -192,26 +192,42 @@ const MobileShowcase = () => {
   return (
     <section ref={ref} className="relative bg-black py-12">
       {/* How we work — manifesto first, work below */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="px-4 mb-10 text-center"
-      >
-        <span className="text-[10px] text-white/45 tracking-[0.4em] uppercase block mb-4">How we work</span>
-        <h3 className="text-2xl font-extrabold text-white tracking-[-0.02em] leading-[1.12] mb-6 text-balance">
+      <div className="px-4 mb-10 text-center">
+        <motion.span
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.5 }}
+          className="text-[10px] text-white/45 tracking-[0.4em] uppercase block mb-4"
+        >
+          How we work
+        </motion.span>
+        <motion.h3
+          initial={{ opacity: 0, y: 22, filter: "blur(6px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="text-3xl font-extrabold text-white tracking-[-0.02em] leading-[1.1] mb-7 text-balance"
+        >
           The do-everything agency is dead.<br />
           <span className="text-white/45">We work like the team you&apos;d hire.</span>
-        </h3>
-        <div className="grid grid-cols-2 gap-x-5 gap-y-5 text-left">
-          {PRINCIPLES.map((p) => (
-            <div key={p.n}>
-              <span className="font-mono text-[10px] text-primary/70">{p.n}</span>
-              <h4 className="mt-1 text-[13px] font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
-              <p className="mt-1 text-[11px] text-white/50 leading-relaxed">{p.body}</p>
-            </div>
+        </motion.h3>
+        <div className="grid grid-cols-2 gap-x-5 gap-y-7 text-left">
+          {PRINCIPLES.map((p, i) => (
+            <motion.div
+              key={p.n}
+              initial={{ opacity: 0, y: 22 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-30px" }}
+              transition={{ duration: 0.55, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <span className="font-mono text-[11px] text-white/40">{p.n}</span>
+              <h4 className="mt-1.5 text-[15px] font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
+              <p className="mt-1 text-[12px] text-white/55 leading-relaxed">{p.body}</p>
+            </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       {/* Selected Work header */}
       <motion.div
@@ -437,38 +453,43 @@ const DesktopShowcase = () => {
       <div className="absolute inset-x-0 bottom-0 h-1/3 z-[5] pointer-events-none bg-gradient-to-t from-black/85 to-transparent" />
 
       <div className="relative z-10 h-full flex flex-col">
-        {/* CENTER — how we work manifesto */}
+        {/* CENTER — how we work manifesto (scroll-reveal, staggered) */}
         <div className="flex-1 flex flex-col items-center justify-center text-center px-5 lg:px-10 pt-16 pb-6">
           <motion.span
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            className="text-[10px] text-white/45 tracking-[0.4em] uppercase mb-6"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.5 }}
+            className="text-[11px] text-white/45 tracking-[0.45em] uppercase mb-7"
           >
             How we work
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7 }}
-            className="max-w-5xl font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-[-0.03em] leading-[1.08] text-white text-balance"
+            initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-6xl font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] leading-[1.06] text-white text-balance"
           >
             The do-everything agency is dead.<br />
             <span className="text-white/45">We work like the team you&apos;d hire.</span>
           </motion.h2>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="mt-10 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 max-w-5xl w-full"
-          >
-            {PRINCIPLES.map((p) => (
-              <div key={p.n} className="text-center">
-                <span className="font-mono text-[11px] text-primary/70">{p.n}</span>
-                <h4 className="mt-2.5 text-sm lg:text-base font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
-                <p className="mt-1.5 text-[12px] lg:text-[13px] text-white/55 leading-relaxed">{p.body}</p>
-              </div>
+          <div className="mt-12 lg:mt-16 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 max-w-6xl w-full">
+            {PRINCIPLES.map((p, i) => (
+              <motion.div
+                key={p.n}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                className="text-center"
+              >
+                <span className="font-mono text-xs text-white/40">{p.n}</span>
+                <h4 className="mt-3 text-base lg:text-xl font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
+                <p className="mt-2 text-[13px] lg:text-[15px] text-white/60 leading-relaxed">{p.body}</p>
+              </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
         {/* BOTTOM — selected work: a horizontal filmstrip you scroll left/right;
