@@ -5,6 +5,7 @@ import SEOHead from "@/components/SEOHead";
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import HowWeWorkSection from "@/components/HowWeWorkSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -70,6 +71,11 @@ const Index = () => {
           during PageIntro instead of waiting for scroll-into-view. */}
       <section id="why-choose-us">
         <WhyChooseUsSection />
+      </section>
+
+      {/* How we work — operating-model manifesto (Web3 CMO buyer criteria) */}
+      <section id="how-we-work" className="border-t border-white/[0.07]">
+        <HowWeWorkSection />
       </section>
 
       {/* Selected Work */}
