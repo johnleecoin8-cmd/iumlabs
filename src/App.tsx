@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import React, { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
-import { motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import PageIntro from "@/components/PageIntro";
 import RouteProgressBar from "@/components/RouteProgressBar";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -101,18 +101,18 @@ const ScrollToTop = () => {
 
 // Page transition: a smooth blur-and-rise on each route change (keyed remount in
 // AppRoutes), matching the section reveal aesthetic. Respects reduced-motion.
+// CSS-only opacity page transition. Two reasons it is CSS, not framer-motion:
+// (1) NO transform or filter anywhere — even a residual filter:blur(0px) makes
+//     this wrapper the containing block for position:fixed descendants, which
+//     silently breaks GSAP ScrollTrigger pins (the GTM page's horizontal
+//     "Selected Work" scroller rendered as a black void).
+// (2) A CSS keyframe always completes and settles at opacity:1; framer-motion's
+//     JS-driven enter animation intermittently stalled at opacity:0 on the
+//     heavy GTM route, leaving the whole page invisible.
+// The blur-up/rise micro-motion still lives at the section level (Reveal).
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const reduce = useReducedMotion();
-  if (reduce) return <div>{children}</div>;
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={reduce ? undefined : "page-fade-in"}>{children}</div>;
 };
 
 // Route-level loading: a thin indeterminate top bar instead of a blank black screen.
@@ -124,7 +124,7 @@ const RouteLoading = () => (
         style={{ animation: "routebar 1.1s ease-in-out infinite" }}
       />
     </div>
-    <style>{"@keyframes routebar{0%{transform:translateX(-120%)}100%{transform:translateX(420%)}}"}</style>
+    <style>{"@keyframes routebar{0%{transform:translateX(-120%)}100%{transform:translateX(420%)}}@keyframes pageFadeIn{from{opacity:0}to{opacity:1}}.page-fade-in{animation:pageFadeIn .4s cubic-bezier(.16,1,.3,1) both}"}</style>
   </div>
 );
 
