@@ -38,7 +38,8 @@ import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-coindesk.jpg";
 import listingImg from "@/assets/platforms/comp-exchange.jpg";
 import liquidityImg from "@/assets/platforms/res-market.jpg";
-import exchangeImg from "@/assets/services/cex-paid-ads.webp";
+import exchangeHeroAsset from "@/assets/services/exchange-hero-v3.png.asset.json";
+const exchangeImg = exchangeHeroAsset.url;
 import capitalImg from "@/assets/platforms/res-thesis.jpg";
 import amaImg from "@/assets/services/ama-spaces.jpg";
 
