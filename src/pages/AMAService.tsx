@@ -2,10 +2,6 @@ import { Mic, Megaphone, MessageCircle, BarChart3 } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
 import heroImg from "@/assets/services/ama-spaces.jpg";
-import featHostsImg from "@/assets/platforms/ama-telegram.jpg";
-import featPromoImg from "@/assets/platforms/ama-discord.jpg";
-import featModerationImg from "@/assets/platforms/ama-moderation.jpg";
-import featRecapImg from "@/assets/platforms/ama-content.jpg";
 import runOfShowImg from "@/assets/services/ama-runofshow.webp";
 
 const ACCENT = "#EC4899";
@@ -47,10 +43,10 @@ const AMAService = () => (
       ],
     }}
     features={[
-      { icon: Mic, eyebrow: "01 · Host", title: "Native Korean Hosts", body: "Professional hosts who speak crypto fluently in Korean, with no awkward translations and no lost nuance. They manage pacing, drive engagement, and keep a Korean audience hooked from the first minute to the last.", points: ["Native Korean, crypto-fluent hosts", "Korean, bilingual, or translated formats", "Pacing and energy management", "Deep narrative and product prep"], image: featHostsImg },
-      { icon: Megaphone, eyebrow: "02 · Promote", title: "Pre-Event Promotion", body: "Two to three weeks of promotion across Korean channels before the session goes live. Teaser content, question seeding, and community priming mean the audience is ready and engaged the moment the AMA starts.", points: ["Two to three week promotion runway", "Teaser content and announcements", "KOL and community amplification", "Question seeding and collection"], image: featPromoImg },
-      { icon: MessageCircle, eyebrow: "03 · Moderate", title: "Question Curation & Moderation", body: "We seed intelligent questions that steer the conversation toward your key narratives, then run real-time moderation so the host stays focused. No awkward silences, no off-topic tangents, no spam reaching the room.", points: ["Strategic question curation", "Real-time spam filtering", "Question prioritization and queue", "Live audience and troll management"], image: featModerationImg },
-      { icon: BarChart3, eyebrow: "04 · Amplify", title: "Post-AMA Recap & Analytics", body: "The post-AMA window is when interest peaks, so we capture it. Written recaps, video and audio highlights, quote graphics, and a full engagement report turn one live session into weeks of distributable content.", points: ["Written recaps and key quotes", "Video and audio highlight cuts", "Quote and clip graphics", "Full engagement analytics report"], image: featRecapImg },
+      { icon: Mic, eyebrow: "01 · Host", title: "Native Korean Hosts", body: "Professional hosts who speak crypto fluently in Korean, with no awkward translations and no lost nuance. They manage pacing, drive engagement, and keep a Korean audience hooked from the first minute to the last.", points: ["Native Korean, crypto-fluent hosts", "Korean, bilingual, or translated formats", "Pacing and energy management", "Deep narrative and product prep"], image: "" },
+      { icon: Megaphone, eyebrow: "02 · Promote", title: "Pre-Event Promotion", body: "Two to three weeks of promotion across Korean channels before the session goes live. Teaser content, question seeding, and community priming mean the audience is ready and engaged the moment the AMA starts.", points: ["Two to three week promotion runway", "Teaser content and announcements", "KOL and community amplification", "Question seeding and collection"], image: "" },
+      { icon: MessageCircle, eyebrow: "03 · Moderate", title: "Question Curation & Moderation", body: "We seed intelligent questions that steer the conversation toward your key narratives, then run real-time moderation so the host stays focused. No awkward silences, no off-topic tangents, no spam reaching the room.", points: ["Strategic question curation", "Real-time spam filtering", "Question prioritization and queue", "Live audience and troll management"], image: "" },
+      { icon: BarChart3, eyebrow: "04 · Amplify", title: "Post-AMA Recap & Analytics", body: "The post-AMA window is when interest peaks, so we capture it. Written recaps, video and audio highlights, quote graphics, and a full engagement report turn one live session into weeks of distributable content.", points: ["Written recaps and key quotes", "Video and audio highlight cuts", "Quote and clip graphics", "Full engagement analytics report"], image: "" },
     ]}
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>AMA Run-of-Show&trade;</>, body: "Every engagement starts with a run-of-show: the platform, the host, the curated question flow, the moderation plan, and the post-AMA content map, all timed minute by minute before you go live.", cta: "Request your run-of-show", image: runOfShowImg }}
     faq={{
