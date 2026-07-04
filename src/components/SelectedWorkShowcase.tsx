@@ -492,12 +492,12 @@ const DesktopShowcase = () => {
                   to={`/projects/${project.slug}`}
                   onMouseEnter={() => setActiveIndex(i)}
                   onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
-                  className={`group shrink-0 min-w-[150px] pt-4 border-t-2 transition-colors duration-200 ${activeIndex === i ? 'border-primary' : 'border-white/12 hover:border-white/35'}`}
+                  className={`group shrink-0 min-w-[150px] pt-4 border-t-2 transition-colors duration-200 ${activeIndex === i ? 'border-white' : 'border-white/12 hover:border-white/35'}`}
                 >
                   <div className="flex items-baseline gap-2.5">
-                    <span className={`font-mono text-[11px] transition-colors ${activeIndex === i ? 'text-primary' : 'text-white/30'}`}>{String(i + 1).padStart(2, '0')}</span>
+                    <span className={`font-mono text-[11px] transition-colors ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>{String(i + 1).padStart(2, '0')}</span>
                     <span className={`font-display text-xl lg:text-2xl font-extrabold tracking-[-0.02em] leading-none transition-colors ${activeIndex === i ? 'text-white' : 'text-white/50 group-hover:text-white'}`}>{project.name}</span>
-                    <ArrowRight className={`w-4 h-4 transition-all duration-200 ${activeIndex === i ? 'text-primary opacity-100 translate-x-0' : 'opacity-0 -translate-x-1'}`} />
+                    <ArrowRight className={`w-4 h-4 transition-all duration-200 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'opacity-0 -translate-x-1'}`} />
                   </div>
                   <span className="mt-1.5 block text-[10px] uppercase tracking-wider text-white/30">{project.category}</span>
                 </Link>
