@@ -45,7 +45,6 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
       { title: "Asset-manager partnerships & networking", body: "We partnered with Korean asset-management firms and ran networking events with financial professionals, turning a cold market entry into warm, credentialed introductions." },
       { title: "Listing groundwork", body: "We built the relationships and documentation behind a Korean CEX listing, sequencing disclosure and partner trust so the listing landed as a milestone rather than a gamble." },
     ],
-    testimonial: { quote: "Korean institutions don't move on hype. ium gave us the credibility, the rooms, and the media to be taken seriously, and the pipeline followed.", name: "Head of Marketing", role: "MANTRA" },
   },
 
   // Reused client voices (also shown on the homepage testimonials wall).
