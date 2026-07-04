@@ -18,6 +18,7 @@ import ReadingProgressBar from "@/components/blog/ReadingProgressBar";
 import TableOfContents, { slugify } from "@/components/blog/TableOfContents";
 import TweetEmbed from "@/components/blog/TweetEmbed";
 import ReportDownloadPanel from "@/components/blog/ReportDownloadPanel";
+import ArticleLeadCTA from "@/components/blog/ArticleLeadCTA";
 import { staticResearchPosts } from "@/data/research-index.gen";
 
 // Author avatars + roles + bios live in src/lib/authors.ts (shared with the
@@ -825,6 +826,9 @@ const ResearchDetail = () => {
         )}
 
       </section>
+
+      {/* Lead conversion — turn the finished read into a booked call while intent is high */}
+      <ArticleLeadCTA post={{ author: post.author, authorRole: post.authorRole, authorImage: post.authorImage, category: post.category }} />
 
       {/* Related Articles */}
       {relatedPosts.length > 0 && (

@@ -216,20 +216,33 @@ const CaseStudyLayout = ({
         </section>
       )}
 
-      {/* ===== CTA ===== */}
+      {/* ===== CTA — proof-anchored: names the client + restates the result just read ===== */}
       <section className="border-t border-white/10">
         <motion.div className="mx-auto max-w-7xl px-6 md:px-10 lg:px-16 py-20 md:py-28" {...fadeUp}>
-          <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-            <h2 className="max-w-2xl text-3xl font-light leading-tight tracking-tight text-white md:text-5xl">
-              Planning a Korea entry of your own?
-            </h2>
+          <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: accent }}>
+            Your launch, next
+          </span>
+          <div className="mt-6 flex flex-col items-start justify-between gap-10 md:flex-row md:items-end">
+            <div className="max-w-3xl">
+              <h2 className="text-3xl font-light leading-tight tracking-tight text-white md:text-5xl">
+                We did this for {project.client_name || project.name}.
+              </h2>
+              {project.result && (
+                <p className="mt-4 text-xl font-light leading-snug md:text-2xl" style={{ color: accent }}>
+                  {project.result}
+                </p>
+              )}
+              <p className="mt-4 text-base leading-relaxed text-white/55 md:text-lg">
+                Same operators, same on-the-ground playbook — pointed at your Korea entry.
+              </p>
+            </div>
             <Link
               to="/contact"
               onClick={() => window.scrollTo(0, 0)}
               className="group inline-flex shrink-0 items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
               style={{ backgroundColor: accent }}
             >
-              Start a conversation
+              Get results like these
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
