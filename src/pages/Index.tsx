@@ -11,7 +11,6 @@ import { ArrowRight } from "lucide-react";
 import earthGlobe from "@/assets/backgrounds/earth-globe.avif";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
-const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
 const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 
@@ -110,59 +109,40 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Coverage — cinematic "from orbit" backdrop: deep space, atmospheric
-          bloom around the Korea light source, starfield, vignette. */}
-      <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#050608]">
-        {/* space backdrop — the NASA earth-from-orbit render laid across the
-            bottom (deep space + stars + glowing atmospheric limb), its black top
-            faded into the section so it reads as one continuous void. */}
+      {/* Coverage — immersive earth-from-orbit: the NASA render fills the whole
+          section; the heading + market list float in the space above the limb. */}
+      <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#050608] min-h-[94vh] flex flex-col">
+        {/* NASA earth backdrop */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          <div className="absolute inset-x-0 bottom-0 h-[78%] bg-cover bg-no-repeat" style={{ backgroundImage: `url(${earthGlobe})`, backgroundPosition: "center 60%" }} />
-          <div className="absolute inset-x-0 top-0 h-[42%]" style={{ background: "linear-gradient(to bottom, #050608 25%, transparent)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-[90%] bg-cover bg-no-repeat" style={{ backgroundImage: `url(${earthGlobe})`, backgroundPosition: "center 66%" }} />
+          <div className="absolute inset-x-0 top-0 h-[42%]" style={{ background: "linear-gradient(to bottom, #050608 20%, transparent)" }} />
         </div>
 
         <div className="relative z-10">
-        <SectionHeader
-          index="04"
-          heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
-        />
-        <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl">
-            <div className="relative w-full max-w-lg lg:max-w-none mx-auto">
-              {/* atmospheric halo hugging the map — the region reads as lit from orbit */}
-              <div aria-hidden className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
-                <div className="h-[92%] w-[92%] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.24), rgba(96,165,250,0.07) 55%, transparent 76%)" }} />
-                <div className="absolute left-1/2 top-[34%] h-[38%] w-[38%] -translate-x-1/2 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(52,211,154,0.16), transparent 72%)" }} />
-              </div>
-              <div className="relative z-10">
-                <Suspense fallback={<div className="aspect-square bg-white/[0.02] rounded-xl animate-pulse" />}>
-                  <EastAsiaMap />
-                </Suspense>
-              </div>
-            </div>
-
-            <div className="space-y-0">
-              {[
-                { name: "South Korea", tag: "HOME", desc: "KOL & Influencer, Naver SEO, Kakao Community, PR & Media, Instagram Viral, Offline Events" },
-                { name: "Japan", tag: "ACTIVE", desc: "LINE Ecosystem, KOL Network, Regulated Exchange Entry, PR & Media Placement" },
-                { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL Campaigns, Exchange Partnerships, Community Management, Mandarin PR" },
-                { name: "China", tag: "ACTIVE", desc: "WeChat & Weibo Marketing, Institutional BD, Mainland KOL Network, Bilibili Content" },
-              ].map(c => (
-                <div key={c.name} className="py-5 border-t border-white/[0.08] first:border-t-0">
-                  <div className="flex items-center gap-3 mb-1.5">
-                    <span className="text-base sm:text-lg font-medium text-white">{c.name}</span>
-                    <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
-                      c.tag === "HOME"
-                        ? "bg-primary text-white"
-                        : "bg-white/[0.08] text-white/50"
-                    }`}>{c.tag}</span>
-                  </div>
-                  <p className="text-xs sm:text-sm text-white/40">{c.desc}</p>
+          <SectionHeader
+            index="04"
+            heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
+          />
+          <div className="px-5 sm:px-6 lg:px-10 pb-24 max-w-2xl">
+            {[
+              { name: "South Korea", tag: "HOME", desc: "KOL & Influencer, Naver SEO, Kakao Community, PR & Media, Instagram Viral, Offline Events" },
+              { name: "Japan", tag: "ACTIVE", desc: "LINE Ecosystem, KOL Network, Regulated Exchange Entry, PR & Media Placement" },
+              { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL Campaigns, Exchange Partnerships, Community Management, Mandarin PR" },
+              { name: "China", tag: "ACTIVE", desc: "WeChat & Weibo Marketing, Institutional BD, Mainland KOL Network, Bilibili Content" },
+            ].map(c => (
+              <div key={c.name} className="py-5 border-t border-white/[0.12] first:border-t-0">
+                <div className="flex items-center gap-3 mb-1.5">
+                  <span className="text-base sm:text-lg font-medium text-white">{c.name}</span>
+                  <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
+                    c.tag === "HOME"
+                      ? "bg-primary text-white"
+                      : "bg-white/[0.1] text-white/60"
+                  }`}>{c.tag}</span>
                 </div>
-              ))}
-            </div>
+                <p className="text-xs sm:text-sm text-white/50">{c.desc}</p>
+              </div>
+            ))}
           </div>
-        </div>
         </div>
       </section>
 
