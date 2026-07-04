@@ -112,7 +112,7 @@ const Index = () => {
       {/* Coverage — vercel.com dot-grid section background */}
       <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
-          index="05"
+          index="04"
           heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
