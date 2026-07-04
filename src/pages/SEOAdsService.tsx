@@ -49,6 +49,13 @@ const SEOAdsService = () => (
       { icon: Target, eyebrow: "02 · CEX Ads", title: "CEX Paid Ads", body: "Paid campaigns engineered to put users on an exchange, not just rack up impressions. We target by exchange, region, demographic, and gender, then optimize the full funnel, app install to sign-up to first deposit, across the crypto-friendly networks most agencies can't even get approved on.", points: ["Exchange-targeted user acquisition", "Demographic & gender-specific targeting", "Full funnel: install, sign-up, first deposit", "Certified crypto channels: Google, X, Coinzilla, Brave"], video: "/videos/ads/okx-kr-welcome.mp4", poster: "/videos/ads/okx-kr-welcome-poster.jpg", mediaLabel: "Market example · OKX, Meta Ad Library (KR)" },
       { icon: BarChart3, eyebrow: "03 · Tracking", title: "Performance Tracking & ROI", body: "Every dollar is tracked from impression to click to conversion. Weekly reporting with full attribution, campaign-level and channel-level ROAS, and actionable recommendations so budget always flows to what works.", points: ["Weekly reporting with full attribution", "Campaign & channel-level ROAS", "Impression-to-conversion tracking", "Actionable optimization recommendations"], image: featTrackImg },
     ]}
+    gallery={{ eyebrow: "THE MARKET, LIVE", items: [
+      { src: "/videos/ads/okx-kr-welcome.mp4", type: "video", poster: "/videos/ads/okx-kr-welcome-poster.jpg", label: "Market example · OKX (KR)" },
+      { src: "/videos/ads/bybit-ad3.jpg", label: "Market example · Bybit" },
+      { src: "/videos/ads/bybit-ad2.jpg", label: "Market example · Bybit" },
+      { src: "/videos/ads/okx-ad1.jpg", label: "Market example · OKX" },
+      { src: "/videos/ads/bitget-ad3.jpg", label: "Market example · Bitget" },
+    ] }}
     deliverable={{ eyebrow: "THE DELIVERABLE", title: <>Search & Paid Growth Plan&trade;</>, body: "Every engagement starts with a graded plan: where you rank on Naver and Google today, which channels accept your campaigns, the keywords and budget that will move the needle, and the exact sequence to execute it.", cta: "Request your growth plan", image: deliverableImg }}
     faq={{
       heading: "The questions founders actually ask.",
