@@ -61,7 +61,7 @@ const ArticleLeadCTA = ({ post }: ArticleLeadCTAProps) => {
             </h2>
             <p className="mt-5 max-w-2xl text-[15px] md:text-base leading-relaxed text-white/55">
               We&apos;re a small operator team, not a do-everything agency. If this research maps to a
-              launch you&apos;re planning, talk to the people who did the work — not an account manager
+              launch you&apos;re planning, talk to the people who did the work. Not an account manager
               juggling ten other accounts.
             </p>
 

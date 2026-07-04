@@ -233,7 +233,7 @@ const CaseStudyLayout = ({
                 </p>
               )}
               <p className="mt-4 text-base leading-relaxed text-white/55 md:text-lg">
-                Same operators, same on-the-ground playbook — pointed at your Korea entry.
+                Same operators, same on-the-ground playbook, pointed at your Korea entry.
               </p>
             </div>
             <Link
