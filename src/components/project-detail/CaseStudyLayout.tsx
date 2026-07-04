@@ -8,7 +8,7 @@ import { caseStudyOverrides } from "@/data/caseStudyOverrides";
 /**
  * Long-form, Coinbound-style case study used for every project.
  * Pulls from the project's own fields and layers optional hand-written depth from
- * caseStudyContent (goals grid, titled solution blocks, testimonial, richer overview).
+ * caseStudyContent (goals grid, titled solution blocks, richer overview).
  */
 
 const fadeUp = {
