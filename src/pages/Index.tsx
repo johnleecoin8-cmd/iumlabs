@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
@@ -6,57 +6,17 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
-const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
-
-const MobileDeferredSection = ({ children, minHeight = "60vh" }: { children: ReactNode; minHeight?: string }) => {
-  const isMobile = useIsMobile();
-  const [shouldRender, setShouldRender] = useState(!isMobile);
-  const mountRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!isMobile) {
-      setShouldRender(true);
-      return;
-    }
-
-    const el = mountRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") {
-      setShouldRender(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShouldRender(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "220px 0px", threshold: 0.01 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [isMobile]);
-
-  return (
-    <div ref={mountRef} style={isMobile && !shouldRender ? { minHeight } : undefined}>
-      {shouldRender ? children : null}
-    </div>
-  );
-};
 
 // One shared header for every homepage section: a small number index plus a single heading
 const SectionHeader = ({
@@ -149,23 +109,10 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="border-t border-white/[0.07]">
-        <SectionHeader
-          index="04"
-          heading={<>Partners are <span className="text-white/40">yappin&rsquo;</span></>}
-        />
-        <MobileDeferredSection minHeight="60vh">
-          <Suspense fallback={<SectionLoader />}>
-            <TestimonialsSection />
-          </Suspense>
-        </MobileDeferredSection>
-      </section>
-
       {/* Coverage — vercel.com dot-grid section background */}
       <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
-          index="05"
+          index="04"
           heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
