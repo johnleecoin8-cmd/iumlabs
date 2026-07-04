@@ -57,6 +57,17 @@ const projects = [
   }
 ];
 
+// "How we work" manifesto, folded into this section so the operating-model
+// claims stand right next to the proof (the work reel), instead of repeating
+// as a separate section. Answers the Web3 CMO buyer criteria (embedded operator
+// shop, not a do-everything agency).
+const PRINCIPLES = [
+  { n: "01", title: "Embedded, not spread thin", body: "One team that lives in your launch, not a junior juggling ten other accounts." },
+  { n: "02", title: "Operators, not account managers", body: "Ex-exchange and ex-foundation people who run Korea BD every day." },
+  { n: "03", title: "Research deeper than your interns", body: "Primary-sourced Korea intelligence and our own GTM Index." },
+  { n: "04", title: "On the ground, at Web3 speed", body: "At the Seoul meetup on a Sunday night. Replies in hours." },
+];
+
 const BUFFER_RANGE = 2;
 const MOBILE_VIDEO_MAX_ATTEMPTS = 24;
 const MOBILE_VIDEO_RETRY_MS = 750;
@@ -287,6 +298,27 @@ const MobileShowcase = () => {
           </div>
         </div>
       </div>
+
+      {/* How we work — folded into the same section as the proof reel */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="px-4 mt-10"
+      >
+        <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase block mb-3">How we work</span>
+        <h3 className="text-xl font-extrabold text-white tracking-[-0.02em] leading-[1.08] mb-5">
+          The do-everything agency is dead.{" "}
+          <span className="text-primary">We work like the team you&apos;d hire.</span>
+        </h3>
+        <div className="border-t border-white/10">
+          {PRINCIPLES.map((p) => (
+            <div key={p.n} className="py-3 border-b border-white/10">
+              <h4 className="text-sm font-bold text-white tracking-[-0.01em]">{p.title}</h4>
+              <p className="text-[12px] text-white/50 leading-relaxed mt-0.5">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 };
@@ -467,13 +499,19 @@ const DesktopShowcase = () => {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="max-w-lg ml-auto"
           >
-            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">Our Mission</span>
-            <h3 className="text-2xl xl:text-3xl 2xl:text-4xl font-extrabold mb-4 text-right leading-[1.0] tracking-[-0.025em] text-white">
-              <span>Real Results.<br />No Recycled Playbooks.</span>
+            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">How we work</span>
+            <h3 className="text-2xl xl:text-3xl font-extrabold mb-6 text-right leading-[1.02] tracking-[-0.025em] text-white">
+              The do-everything agency is dead.{" "}
+              <span className="text-primary">We work like the team you&apos;d hire.</span>
             </h3>
-            <p className="text-white/60 text-sm xl:text-base leading-relaxed tracking-[-0.01em] mb-8 text-right">
-              With a team from Binance, KuCoin, and Upbit, we engineer your success using the same logic that global exchanges and top-tier retail investors demand.
-            </p>
+            <div className="border-t border-white/10 mb-8">
+              {PRINCIPLES.map((p) => (
+                <div key={p.n} className="py-3 xl:py-3.5 border-b border-white/10 text-right">
+                  <h4 className="text-sm xl:text-base font-bold text-white tracking-[-0.01em]">{p.title}</h4>
+                  <p className="text-[12px] xl:text-[13px] text-white/50 leading-relaxed mt-0.5">{p.body}</p>
+                </div>
+              ))}
+            </div>
             <div className="flex justify-end">
               <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors border border-white/15 hover:border-white/30 rounded-full px-6 py-2.5">
                 View Our Work <ArrowRight className="w-4 h-4" />
