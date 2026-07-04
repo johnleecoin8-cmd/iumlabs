@@ -221,26 +221,37 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           <Reveal>
             <div className="mt-14 sm:mt-20">
               <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">{p.gallery.eyebrow ?? "THE WORK"}</span>
-              <div className="mt-6 grid grid-cols-2 lg:grid-cols-4 auto-rows-[130px] sm:auto-rows-[180px] gap-3 grid-flow-dense">
-                {p.gallery.items.map((g, i) => {
-                  const span = i === 0 ? "col-span-2 row-span-2" : i === 3 ? "col-span-2" : "col-span-1";
-                  return (
-                    <div key={i} className={`group relative overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0c0c0e] ${span}`}>
-                      {g.type === "video" ? (
-                        <video className="absolute inset-0 w-full h-full object-cover" src={g.src} poster={g.poster} muted loop autoPlay playsInline preload="metadata" />
-                      ) : (
-                        <img src={g.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105" />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/60 via-transparent to-transparent pointer-events-none" />
-                      {g.label && (
-                        <span className="absolute bottom-3 left-3 z-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 px-3 py-1 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-white/70">
-                          {g.label}
-                        </span>
-                      )}
-                    </div>
-                  );
-                })}
-              </div>
+              {(() => {
+                const items = p.gallery!.items;
+                const hero = items[0];
+                const rest = items.slice(1);
+                const cols = rest.length >= 4 ? "lg:grid-cols-4" : rest.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2";
+                const tile = (g: typeof items[number], cls: string, key: number) => (
+                  <div key={key} className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#0c0c0e] ${cls}`}>
+                    {g.type === "video" ? (
+                      <video className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]" src={g.src} poster={g.poster} muted loop autoPlay playsInline preload="metadata" />
+                    ) : (
+                      <img src={g.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.05]" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 via-[#0A0A0A]/5 to-transparent pointer-events-none" />
+                    {g.label && (
+                      <span className="absolute bottom-3.5 left-3.5 z-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 px-3 py-1.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-white/75">
+                        {g.label}
+                      </span>
+                    )}
+                  </div>
+                );
+                return (
+                  <div className="mt-6 flex flex-col gap-3 sm:gap-4">
+                    {tile(hero, hero.type === "video" ? "aspect-video sm:aspect-[2/1] w-full" : "aspect-[16/10] sm:aspect-[2.6/1] w-full", 0)}
+                    {rest.length > 0 && (
+                      <div className={`grid grid-cols-2 ${cols} gap-3 sm:gap-4`}>
+                        {rest.map((g, i) => tile(g, "aspect-[4/3]", i + 1))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
           </Reveal>
         ) : (() => {
