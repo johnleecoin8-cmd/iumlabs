@@ -190,8 +190,30 @@ const MobileShowcase = () => {
   }, [loadedVideos, refreshVisibleCards, setMobileVideoAttrs, tryPlay]);
 
   return (
-    <section ref={ref} className="relative bg-black py-10">
-      {/* Header */}
+    <section ref={ref} className="relative bg-black py-12">
+      {/* How we work — manifesto first, work below */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="px-4 mb-10 text-center"
+      >
+        <span className="text-[10px] text-white/45 tracking-[0.4em] uppercase block mb-4">How we work</span>
+        <h3 className="text-2xl font-extrabold text-white tracking-[-0.02em] leading-[1.08] mb-6">
+          The do-everything agency is dead.{" "}
+          <span className="text-primary">We work like the team you&apos;d hire.</span>
+        </h3>
+        <div className="grid grid-cols-2 gap-x-5 gap-y-5 text-left">
+          {PRINCIPLES.map((p) => (
+            <div key={p.n}>
+              <span className="font-mono text-[10px] text-primary/70">{p.n}</span>
+              <h4 className="mt-1 text-[13px] font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
+              <p className="mt-1 text-[11px] text-white/50 leading-relaxed">{p.body}</p>
+            </div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Selected Work header */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -298,27 +320,6 @@ const MobileShowcase = () => {
           </div>
         </div>
       </div>
-
-      {/* How we work — folded into the same section as the proof reel */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="px-4 mt-10"
-      >
-        <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase block mb-3">How we work</span>
-        <h3 className="text-xl font-extrabold text-white tracking-[-0.02em] leading-[1.08] mb-5">
-          The do-everything agency is dead.{" "}
-          <span className="text-primary">We work like the team you&apos;d hire.</span>
-        </h3>
-        <div className="border-t border-white/10">
-          {PRINCIPLES.map((p) => (
-            <div key={p.n} className="py-3 border-b border-white/10">
-              <h4 className="text-sm font-bold text-white tracking-[-0.01em]">{p.title}</h4>
-              <p className="text-[12px] text-white/50 leading-relaxed mt-0.5">{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
     </section>
   );
 };
@@ -386,7 +387,7 @@ const DesktopShowcase = () => {
 
 
   return (
-    <section ref={ref} className="relative bg-black overflow-hidden h-[100vh]">
+    <section ref={ref} className="relative bg-black overflow-hidden h-[90vh] min-h-[660px]">
       {projects.map((project, i) => {
         const isActive = i === activeIndex;
         const shouldMountVideo = mountedIndices.has(i);
@@ -429,95 +430,76 @@ const DesktopShowcase = () => {
         );
       })}
 
-      {/* Readability scrims, keep list (left) and mission (right) legible over bright footage */}
-      <div className="absolute inset-0 z-[5] pointer-events-none bg-gradient-to-r from-black/90 via-black/35 to-transparent" />
-      <div className="hidden lg:block absolute inset-0 z-[5] pointer-events-none bg-gradient-to-l from-black/70 via-transparent to-transparent" />
+      {/* Readability scrims: light center darkening for the manifesto (the slide
+          already carries a bg-black/50), heavier bottom band for the work strip.
+          Kept light so the footage reel still reads behind the text. */}
+      <div className="absolute inset-0 z-[5] pointer-events-none" style={{ background: "radial-gradient(120% 95% at 50% 45%, rgba(0,0,0,0.12), rgba(0,0,0,0.42) 100%)" }} />
+      <div className="absolute inset-x-0 bottom-0 h-1/3 z-[5] pointer-events-none bg-gradient-to-t from-black/85 to-transparent" />
 
-      <div className="relative z-10 h-full flex flex-col lg:flex-row">
-        <div
-          className="w-full lg:w-2/5 h-full flex flex-col justify-center px-5 py-6 lg:px-16 lg:py-0"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
+      <div className="relative z-10 h-full flex flex-col">
+        {/* CENTER — how we work manifesto */}
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-5 lg:px-10 pt-16 pb-6">
           <motion.span
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8"
+            className="text-[10px] text-white/45 tracking-[0.4em] uppercase mb-6"
           >
-            Selected Work
+            How we work
           </motion.span>
-
-          <div className="space-y-0">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.slug}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.08 }}
-              >
-                <Link
-                  to={`/projects/${project.slug}`}
-                  className="group block py-3 sm:py-4 px-2 -mx-2 border-b border-white/10 hover:border-transparent hover:bg-primary transition-[background-color,border-color] duration-200"
-                  onMouseEnter={() => setActiveIndex(i)}
-                  onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
-                >
-                  {/* zajno.com work-row accent-fill hover: row floods with the
-                      brand color, all inner text flips dark (their .2s ease) */}
-                  <div className="flex items-center gap-3 sm:gap-4">
-                    <span className={`text-[10px] sm:text-xs font-mono w-5 sm:w-6 transition-colors duration-200 group-hover:text-black/60 ${activeIndex === i ? 'text-primary' : 'text-white/35'}`}>
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    <span className={`flex-1 font-display text-base sm:text-2xl lg:text-3xl font-extrabold tracking-[-0.02em] leading-[1.05] transition-colors duration-200 group-hover:text-black ${activeIndex === i ? 'text-white' : 'text-white/60'}`}>
-                      {project.name}
-                    </span>
-                    <span className={`text-[10px] lg:text-xs uppercase tracking-wider transition-colors duration-200 text-left group-hover:text-black/60 ${activeIndex === i ? 'text-white/50' : 'text-white/30'}`}>
-                      {project.category}
-                    </span>
-                    <ArrowRight className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-all duration-200 group-hover:text-black group-hover:opacity-100 group-hover:translate-x-0 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-2'}`} />
-                  </div>
-                </Link>
-              </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
+            className="max-w-4xl font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-[-0.03em] leading-[1.02] text-white"
+          >
+            The do-everything agency is dead.{" "}
+            <span className="text-primary">We work like the team you&apos;d hire.</span>
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mt-10 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8 max-w-5xl w-full"
+          >
+            {PRINCIPLES.map((p) => (
+              <div key={p.n} className="text-center">
+                <span className="font-mono text-[11px] text-primary/70">{p.n}</span>
+                <h4 className="mt-2.5 text-sm lg:text-base font-bold text-white tracking-[-0.01em] leading-snug">{p.title}</h4>
+                <p className="mt-1.5 text-[12px] lg:text-[13px] text-white/55 leading-relaxed">{p.body}</p>
+              </div>
             ))}
-          </div>
-
-          {/* Mobile mission + CTA */}
-          <div className="lg:hidden mt-6 pt-5">
-            <p className="text-[13px] text-white/55 leading-relaxed tracking-[-0.01em] mb-4">
-              Former Binance, KuCoin, Upbit operators. We engineer your Korea market entry.
-            </p>
-            <Link to="/projects" className="inline-flex items-center gap-2 text-[12px] font-medium text-primary">
-              View Our Work <ArrowRight className="w-3 h-3" />
-            </Link>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right panel, clean text only */}
-        <div className="hidden lg:flex absolute bottom-0 right-0 top-0 w-[50%] z-10 flex-col justify-center p-10 xl:p-14">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="max-w-lg ml-auto"
-          >
-            <span className="text-[10px] text-white/30 tracking-[0.4em] uppercase mb-5 block text-right">How we work</span>
-            <h3 className="text-2xl xl:text-3xl font-extrabold mb-6 text-right leading-[1.02] tracking-[-0.025em] text-white">
-              The do-everything agency is dead.{" "}
-              <span className="text-primary">We work like the team you&apos;d hire.</span>
-            </h3>
-            <div className="border-t border-white/10 mb-8">
-              {PRINCIPLES.map((p) => (
-                <div key={p.n} className="py-3 xl:py-3.5 border-b border-white/10 text-right">
-                  <h4 className="text-sm xl:text-base font-bold text-white tracking-[-0.01em]">{p.title}</h4>
-                  <p className="text-[12px] xl:text-[13px] text-white/50 leading-relaxed mt-0.5">{p.body}</p>
+        {/* BOTTOM — selected work, a filmstrip that switches the backdrop */}
+        <div
+          className="border-t border-white/10 px-5 lg:px-10 pt-4 pb-5 lg:pb-6"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+        >
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Selected Work</span>
+            <Link to="/projects" className="group inline-flex items-center gap-1.5 text-xs text-white/45 hover:text-white transition-colors">
+              View All <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+          <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
+            {projects.map((project, i) => (
+              <Link
+                key={project.slug}
+                to={`/projects/${project.slug}`}
+                onMouseEnter={() => setActiveIndex(i)}
+                onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
+                className={`group flex-1 min-w-[128px] pt-3 border-t-2 transition-colors duration-200 ${activeIndex === i ? 'border-primary' : 'border-white/12 hover:border-white/35'}`}
+              >
+                <div className="flex items-baseline gap-2">
+                  <span className={`font-mono text-[10px] transition-colors ${activeIndex === i ? 'text-primary' : 'text-white/30'}`}>{String(i + 1).padStart(2, '0')}</span>
+                  <span className={`font-display text-sm lg:text-base font-extrabold tracking-[-0.02em] leading-tight transition-colors ${activeIndex === i ? 'text-white' : 'text-white/55 group-hover:text-white'}`}>{project.name}</span>
                 </div>
-              ))}
-            </div>
-            <div className="flex justify-end">
-              <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors border border-white/15 hover:border-white/30 rounded-full px-6 py-2.5">
-                View Our Work <ArrowRight className="w-4 h-4" />
+                <span className="mt-1 block text-[9px] lg:text-[10px] uppercase tracking-wider text-white/30">{project.category}</span>
               </Link>
-            </div>
-          </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
