@@ -199,7 +199,7 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           {p.features.map((f, i) => (
             <Reveal key={f.title} delay={i * 50}>
               <div
-                className="group grid grid-cols-1 lg:grid-cols-[56px_minmax(0,1fr)_minmax(0,1.05fr)] gap-3 lg:gap-12 py-8 sm:py-10 border-t border-white/[0.1] transition-colors duration-300 hover:bg-white/[0.015]"
+                className="group grid grid-cols-1 lg:grid-cols-[52px_minmax(0,0.82fr)_minmax(0,1.32fr)] gap-3 lg:gap-10 py-8 sm:py-10 border-t border-white/[0.1] transition-colors duration-300 hover:bg-white/[0.015]"
                 style={{ ['--a' as string]: A }}
               >
                 <span className="font-mono text-sm text-white/25 pt-1.5 group-hover:text-[var(--a)] transition-colors">{f.eyebrow.slice(0, 2)}</span>
@@ -257,8 +257,8 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                   </div>
                 );
                 return (
-                  <div className="mt-6 flex flex-col gap-3 sm:gap-4">
-                    {tile(hero, hero.type === "video" ? "aspect-video sm:aspect-[2/1] w-full" : "aspect-[16/10] sm:aspect-[2.6/1] w-full", 0)}
+                  <div className="mt-6 flex flex-col gap-3 sm:gap-4 lg:-mx-14">
+                    {tile(hero, hero.type === "video" ? "aspect-video sm:aspect-[2.2/1] w-full" : "aspect-[16/10] sm:aspect-[2.8/1] w-full", 0)}
                     {rest.length > 0 && (
                       <div className={`grid grid-cols-2 ${cols} gap-3 sm:gap-4`}>
                         {rest.map((g, i) => tile(g, "aspect-[4/3]", i + 1))}
@@ -304,29 +304,34 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
         </section>
       )}
 
-      {/* PROMISE */}
+      {/* PROMISE — compact paired contrast (denser than two big cards, and a
+          tighter rhythm break between the gallery and the deliverable) */}
       {p.promise && (
-        <section className="px-5 sm:px-8 lg:px-20 py-20 sm:py-24">
+        <section className="px-5 sm:px-8 lg:px-20 py-16 sm:py-20">
           <Reveal>
-            <div className="max-w-3xl mb-12">
-              <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">OUR PROMISE</span>
-              <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-[-0.03em] mt-4">{p.promise.heading} {p.promise.headingMuted && <span className="text-white/40">{p.promise.headingMuted}</span>}</h2>
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-8">
+              <div className="max-w-2xl">
+                <span className="font-mono text-xs font-bold tracking-[0.3em] text-white/30">OUR PROMISE</span>
+                <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-[-0.03em] mt-4">{p.promise.heading} {p.promise.headingMuted && <span className="text-white/40">{p.promise.headingMuted}</span>}</h2>
+              </div>
+              <div className="hidden sm:flex gap-8 font-mono text-[10px] uppercase tracking-[0.22em] shrink-0 pb-1">
+                <span style={{ color: A }}>{p.promise.doLabel ?? "We do"}</span>
+                <span className="text-white/30">{p.promise.dontLabel ?? "We never"}</span>
+              </div>
             </div>
           </Reveal>
-          <div className="grid md:grid-cols-2 gap-4">
-            <Reveal>
-              <div className="h-full rounded-3xl p-7 sm:p-8" style={{ background: "#0C0C0E", border: `1px solid ${A}33` }}>
-                <div className="text-sm font-bold uppercase tracking-wider mb-5" style={{ color: A }}>{p.promise.doLabel ?? "What we do"}</div>
-                <ul className="space-y-3">{p.promise.do.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/80"><Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: A }} /><span>{x}</span></li>))}</ul>
-              </div>
-            </Reveal>
-            <Reveal delay={80}>
-              <div className="h-full rounded-3xl border border-white/[0.08] bg-white/[0.02] p-7 sm:p-8">
-                <div className="text-sm font-bold uppercase tracking-wider mb-5 text-white/40">{p.promise.dontLabel ?? "What we never do"}</div>
-                <ul className="space-y-3">{p.promise.dont.map((x) => (<li key={x} className="flex items-start gap-3 text-[15px] text-white/60"><span className="mt-2.5 w-3 h-px bg-white/30 flex-shrink-0" /><span>{x}</span></li>))}</ul>
-              </div>
-            </Reveal>
-          </div>
+          <Reveal>
+            <div className="border-t border-white/[0.1]">
+              {p.promise.do.map((x, i) => (
+                <div key={x} className="grid md:grid-cols-2 gap-3 md:gap-10 py-4 sm:py-5 border-b border-white/[0.1]">
+                  <div className="flex items-start gap-3 text-[15px] text-white/85 tracking-[-0.01em]"><Check className="w-4 h-4 mt-0.5 shrink-0" style={{ color: A }} /><span>{x}</span></div>
+                  {p.promise.dont[i] && (
+                    <div className="flex items-start gap-3 text-[15px] text-white/40 tracking-[-0.01em]"><span className="mt-2.5 w-3 h-px bg-white/25 shrink-0" /><span>{p.promise.dont[i]}</span></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </section>
       )}
 
