@@ -200,7 +200,7 @@ const MobileShowcase = () => {
         <span className="text-[10px] text-white/45 tracking-[0.4em] uppercase block mb-4">How we work</span>
         <h3 className="text-2xl font-extrabold text-white tracking-[-0.02em] leading-[1.08] mb-6">
           The do-everything agency is dead.{" "}
-          <span className="text-primary">We work like the team you&apos;d hire.</span>
+          <span className="text-white/45">We work like the team you&apos;d hire.</span>
         </h3>
         <div className="grid grid-cols-2 gap-x-5 gap-y-5 text-left">
           {PRINCIPLES.map((p) => (
@@ -453,7 +453,7 @@ const DesktopShowcase = () => {
             className="max-w-4xl font-display text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-[-0.03em] leading-[1.02] text-white"
           >
             The do-everything agency is dead.{" "}
-            <span className="text-primary">We work like the team you&apos;d hire.</span>
+            <span className="text-white/45">We work like the team you&apos;d hire.</span>
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
