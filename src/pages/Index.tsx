@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
@@ -6,14 +6,12 @@ import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
 const ProjectCardsSection = lazy(() => import("@/components/ProjectCardsSection"));
-const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
 const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
