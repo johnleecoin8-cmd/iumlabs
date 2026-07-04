@@ -1,7 +1,7 @@
 import { Users, Target, Search } from "lucide-react";
 import ServiceTemplate from "@/components/ServiceTemplate";
 
-import heroImg from "@/assets/services/exchange-hero.webp";
+import heroImg from "@/assets/services/exchange-hero-v2.png.asset.json";
 import featOrganicImg from "@/assets/services/seo-naver.jpg";
 import delivImg from "@/assets/services/exchange-numbers.png";
 
@@ -23,7 +23,7 @@ const ExchangeMarketingService = () => (
       titleLead: <>Marketing built for<br />exchanges,</>,
       titleAccent: "measured in volume.",
       lede: "CEX or DEX, the only number that compounds is trading volume. We bring funded, repeat Korean traders through trading KOL affiliation, paid acquisition, and the organic growth that makes it last.",
-      image: heroImg,
+      image: heroImg.url,
       primaryCta: { label: "Plan your exchange launch", href: "/contact" },
     }}
     stats={[{ v: "$150M+", l: "Trading Volume Driven" }, { v: "CEX + DEX", l: "Both Covered" }, { v: "Deposit", l: "Optimized Funnel" }, { v: "Organic", l: "Built to Compound" }]}
