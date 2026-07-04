@@ -33,7 +33,8 @@ const EastAsiaMap = () => (
         </feMerge>
       </filter>
       <radialGradient id="map-home-glow">
-        <stop offset="0%" stopColor={BLUE} stopOpacity="0.35" />
+        <stop offset="0%" stopColor={BLUE_LIGHT} stopOpacity="0.55" />
+        <stop offset="45%" stopColor={BLUE} stopOpacity="0.22" />
         <stop offset="100%" stopColor={BLUE} stopOpacity="0" />
       </radialGradient>
     </defs>
@@ -98,7 +99,8 @@ const EastAsiaMap = () => (
       <Marker key={m.name} coordinates={m.coordinates}>
         {m.isHome ? (
           <>
-            <circle r={46} fill="url(#map-home-glow)" />
+            <circle r={84} fill="url(#map-home-glow)" />
+            <circle r={44} fill="url(#map-home-glow)" opacity={0.7} />
             <circle r={20} fill={BLUE} opacity={0.12}>
               <animate attributeName="r" values="20;34;20" dur="3s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.18;0.04;0.18" dur="3s" repeatCount="indefinite" />

@@ -18,6 +18,25 @@ const SectionLoader = () => <div className="h-64 flex items-center justify-cente
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
 
+// Sparse starfield for the "from orbit" coverage backdrop. Fixed positions so it
+// renders identically every paint (no Math.random at module load).
+const STARFIELD = [
+  "radial-gradient(2px 2px at 18% 18%, rgba(255,255,255,0.85), transparent)",
+  "radial-gradient(1.5px 1.5px at 32% 52%, rgba(255,255,255,0.55), transparent)",
+  "radial-gradient(1.8px 1.8px at 46% 26%, rgba(199,222,255,0.7), transparent)",
+  "radial-gradient(1.5px 1.5px at 58% 70%, rgba(255,255,255,0.5), transparent)",
+  "radial-gradient(2.4px 2.4px at 67% 32%, rgba(255,255,255,0.8), transparent)",
+  "radial-gradient(1.6px 1.6px at 76% 60%, rgba(199,222,255,0.6), transparent)",
+  "radial-gradient(1.9px 1.9px at 84% 20%, rgba(255,255,255,0.7), transparent)",
+  "radial-gradient(1.5px 1.5px at 90% 74%, rgba(255,255,255,0.5), transparent)",
+  "radial-gradient(1.4px 1.4px at 62% 88%, rgba(255,255,255,0.45), transparent)",
+  "radial-gradient(2px 2px at 72% 46%, rgba(255,255,255,0.65), transparent)",
+  "radial-gradient(1.5px 1.5px at 88% 52%, rgba(199,222,255,0.55), transparent)",
+  "radial-gradient(1.7px 1.7px at 94% 34%, rgba(255,255,255,0.6), transparent)",
+  "radial-gradient(1.3px 1.3px at 55% 16%, rgba(255,255,255,0.5), transparent)",
+  "radial-gradient(1.4px 1.4px at 80% 84%, rgba(255,255,255,0.45), transparent)",
+].join(",");
+
 // One shared header for every homepage section: a small number index plus a single heading
 const SectionHeader = ({
   index,
@@ -109,18 +128,34 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Coverage — vercel.com dot-grid section background */}
-      <section id="coverage" className="border-t border-white/[0.07] bg-dots">
+      {/* Coverage — cinematic "from orbit" backdrop: deep space, atmospheric
+          bloom around the Korea light source, starfield, vignette. */}
+      <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#050608]">
+        {/* space backdrop, behind content — starfield + distant glow + vignette */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+          <div className="absolute inset-0" style={{ backgroundImage: STARFIELD }} />
+          <div className="absolute right-[8%] top-[26%] h-[560px] w-[560px] rounded-full blur-[160px]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.10), transparent 68%)" }} />
+          <div className="absolute inset-0" style={{ background: "radial-gradient(135% 105% at 22% 58%, transparent 40%, rgba(0,0,0,0.62) 100%)" }} />
+        </div>
+
+        <div className="relative z-10">
         <SectionHeader
           index="04"
           heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
         />
         <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start max-w-7xl">
-            <div className="w-full max-w-lg lg:max-w-none mx-auto">
-              <Suspense fallback={<div className="aspect-square bg-white/[0.02] rounded-xl animate-pulse" />}>
-                <EastAsiaMap />
-              </Suspense>
+            <div className="relative w-full max-w-lg lg:max-w-none mx-auto">
+              {/* atmospheric halo hugging the map — the region reads as lit from orbit */}
+              <div aria-hidden className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
+                <div className="h-[92%] w-[92%] rounded-full blur-[110px]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.24), rgba(96,165,250,0.07) 55%, transparent 76%)" }} />
+                <div className="absolute left-1/2 top-[34%] h-[38%] w-[38%] -translate-x-1/2 rounded-full blur-[80px]" style={{ background: "radial-gradient(circle, rgba(52,211,154,0.16), transparent 72%)" }} />
+              </div>
+              <div className="relative z-10">
+                <Suspense fallback={<div className="aspect-square bg-white/[0.02] rounded-xl animate-pulse" />}>
+                  <EastAsiaMap />
+                </Suspense>
+              </div>
             </div>
 
             <div className="space-y-0">
@@ -144,6 +179,7 @@ const Index = () => {
               ))}
             </div>
           </div>
+        </div>
         </div>
       </section>
 
