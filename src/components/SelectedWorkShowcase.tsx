@@ -471,34 +471,38 @@ const DesktopShowcase = () => {
           </motion.div>
         </div>
 
-        {/* BOTTOM — selected work, a filmstrip that switches the backdrop */}
+        {/* BOTTOM — selected work: a horizontal filmstrip you scroll left/right;
+            each item switches the backdrop. Centered when it fits, scrolls when not. */}
         <div
-          className="border-t border-white/10 px-5 lg:px-10 pt-4 pb-5 lg:pb-6"
+          className="border-t border-white/10 pt-4 pb-5 lg:pb-6"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between px-5 lg:px-10 mb-3">
             <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Selected Work</span>
             <Link to="/projects" className="group inline-flex items-center gap-1.5 text-xs text-white/45 hover:text-white transition-colors">
               View All <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
-          <div className="flex gap-2 sm:gap-3 overflow-x-auto scrollbar-hide">
-            {projects.map((project, i) => (
-              <Link
-                key={project.slug}
-                to={`/projects/${project.slug}`}
-                onMouseEnter={() => setActiveIndex(i)}
-                onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
-                className={`group flex-1 min-w-[128px] pt-3 border-t-2 transition-colors duration-200 ${activeIndex === i ? 'border-primary' : 'border-white/12 hover:border-white/35'}`}
-              >
-                <div className="flex items-baseline gap-2">
-                  <span className={`font-mono text-[10px] transition-colors ${activeIndex === i ? 'text-primary' : 'text-white/30'}`}>{String(i + 1).padStart(2, '0')}</span>
-                  <span className={`font-display text-sm lg:text-base font-extrabold tracking-[-0.02em] leading-tight transition-colors ${activeIndex === i ? 'text-white' : 'text-white/55 group-hover:text-white'}`}>{project.name}</span>
-                </div>
-                <span className="mt-1 block text-[9px] lg:text-[10px] uppercase tracking-wider text-white/30">{project.category}</span>
-              </Link>
-            ))}
+          <div className="overflow-x-auto scrollbar-hide px-5 lg:px-10">
+            <div className="flex w-max mx-auto gap-6 lg:gap-10">
+              {projects.map((project, i) => (
+                <Link
+                  key={project.slug}
+                  to={`/projects/${project.slug}`}
+                  onMouseEnter={() => setActiveIndex(i)}
+                  onClick={(e) => { if (isMobile && activeIndex !== i) { e.preventDefault(); setActiveIndex(i); } }}
+                  className={`group shrink-0 min-w-[150px] pt-4 border-t-2 transition-colors duration-200 ${activeIndex === i ? 'border-primary' : 'border-white/12 hover:border-white/35'}`}
+                >
+                  <div className="flex items-baseline gap-2.5">
+                    <span className={`font-mono text-[11px] transition-colors ${activeIndex === i ? 'text-primary' : 'text-white/30'}`}>{String(i + 1).padStart(2, '0')}</span>
+                    <span className={`font-display text-xl lg:text-2xl font-extrabold tracking-[-0.02em] leading-none transition-colors ${activeIndex === i ? 'text-white' : 'text-white/50 group-hover:text-white'}`}>{project.name}</span>
+                    <ArrowRight className={`w-4 h-4 transition-all duration-200 ${activeIndex === i ? 'text-primary opacity-100 translate-x-0' : 'opacity-0 -translate-x-1'}`} />
+                  </div>
+                  <span className="mt-1.5 block text-[10px] uppercase tracking-wider text-white/30">{project.category}</span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
