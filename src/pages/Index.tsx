@@ -131,11 +131,31 @@ const Index = () => {
       {/* Coverage — cinematic "from orbit" backdrop: deep space, atmospheric
           bloom around the Korea light source, starfield, vignette. */}
       <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#050608]">
-        {/* space backdrop, behind content — starfield + distant glow + vignette */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        {/* space backdrop — earth-from-orbit: deep space, starfield, and a bright
+            blue atmospheric limb arcing across the lower section. */}
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          {/* stars */}
           <div className="absolute inset-0" style={{ backgroundImage: STARFIELD }} />
-          <div className="absolute right-[8%] top-[26%] h-[560px] w-[560px] rounded-full blur-[160px]" style={{ background: "radial-gradient(circle, rgba(59,130,246,0.10), transparent 68%)" }} />
-          <div className="absolute inset-0" style={{ background: "radial-gradient(135% 105% at 22% 58%, transparent 40%, rgba(0,0,0,0.62) 100%)" }} />
+          {/* planet body + bright atmospheric rim (one huge disc; its top arc is the horizon) */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 rounded-full"
+            style={{
+              bottom: "-128%", width: "220%", aspectRatio: "1 / 1",
+              background: "radial-gradient(circle at 50% 50%, #05070f 0%, #05070f 49.2%, rgba(160,205,255,0.95) 49.7%, rgba(86,150,255,0.55) 50.2%, rgba(59,130,246,0.14) 51.4%, transparent 54%)",
+            }}
+          />
+          {/* soft atmospheric bloom around the rim */}
+          <div
+            className="absolute left-1/2 -translate-x-1/2 rounded-full blur-[34px]"
+            style={{
+              bottom: "-128%", width: "220%", aspectRatio: "1 / 1",
+              background: "radial-gradient(circle at 50% 50%, transparent 48.4%, rgba(96,165,250,0.55) 50%, transparent 53.2%)",
+            }}
+          />
+          {/* haze rising off the horizon into space */}
+          <div className="absolute inset-x-0 bottom-0 h-[72%]" style={{ background: "radial-gradient(130% 100% at 50% 122%, rgba(59,130,246,0.30), rgba(59,130,246,0.08) 40%, transparent 66%)" }} />
+          {/* top-corner vignette to deepen the void */}
+          <div className="absolute inset-0" style={{ background: "radial-gradient(120% 95% at 50% 128%, transparent 46%, rgba(0,0,0,0.6) 100%)" }} />
         </div>
 
         <div className="relative z-10">
