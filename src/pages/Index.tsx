@@ -149,19 +149,6 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Testimonials */}
-      <section id="testimonials" className="border-t border-white/[0.07]">
-        <SectionHeader
-          index="04"
-          heading={<>Partners are <span className="text-white/40">yappin&rsquo;</span></>}
-        />
-        <MobileDeferredSection minHeight="60vh">
-          <Suspense fallback={<SectionLoader />}>
-            <TestimonialsSection />
-          </Suspense>
-        </MobileDeferredSection>
-      </section>
-
       {/* Coverage — vercel.com dot-grid section background */}
       <section id="coverage" className="border-t border-white/[0.07] bg-dots">
         <SectionHeader
