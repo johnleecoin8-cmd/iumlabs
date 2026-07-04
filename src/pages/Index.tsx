@@ -8,6 +8,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import earthGlobe from "@/assets/backgrounds/earth-globe.avif";
 
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const EastAsiaMap = lazy(() => import("@/components/EastAsiaMap"));
@@ -17,25 +18,6 @@ const BlogGridSection = lazy(() => import("@/components/BlogGridSection"));
 const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
   </div>;
-
-// Sparse starfield for the "from orbit" coverage backdrop. Fixed positions so it
-// renders identically every paint (no Math.random at module load).
-const STARFIELD = [
-  "radial-gradient(2px 2px at 18% 18%, rgba(255,255,255,0.85), transparent)",
-  "radial-gradient(1.5px 1.5px at 32% 52%, rgba(255,255,255,0.55), transparent)",
-  "radial-gradient(1.8px 1.8px at 46% 26%, rgba(199,222,255,0.7), transparent)",
-  "radial-gradient(1.5px 1.5px at 58% 70%, rgba(255,255,255,0.5), transparent)",
-  "radial-gradient(2.4px 2.4px at 67% 32%, rgba(255,255,255,0.8), transparent)",
-  "radial-gradient(1.6px 1.6px at 76% 60%, rgba(199,222,255,0.6), transparent)",
-  "radial-gradient(1.9px 1.9px at 84% 20%, rgba(255,255,255,0.7), transparent)",
-  "radial-gradient(1.5px 1.5px at 90% 74%, rgba(255,255,255,0.5), transparent)",
-  "radial-gradient(1.4px 1.4px at 62% 88%, rgba(255,255,255,0.45), transparent)",
-  "radial-gradient(2px 2px at 72% 46%, rgba(255,255,255,0.65), transparent)",
-  "radial-gradient(1.5px 1.5px at 88% 52%, rgba(199,222,255,0.55), transparent)",
-  "radial-gradient(1.7px 1.7px at 94% 34%, rgba(255,255,255,0.6), transparent)",
-  "radial-gradient(1.3px 1.3px at 55% 16%, rgba(255,255,255,0.5), transparent)",
-  "radial-gradient(1.4px 1.4px at 80% 84%, rgba(255,255,255,0.45), transparent)",
-].join(",");
 
 // One shared header for every homepage section: a small number index plus a single heading
 const SectionHeader = ({
@@ -131,31 +113,12 @@ const Index = () => {
       {/* Coverage — cinematic "from orbit" backdrop: deep space, atmospheric
           bloom around the Korea light source, starfield, vignette. */}
       <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#050608]">
-        {/* space backdrop — earth-from-orbit: deep space, starfield, and a bright
-            blue atmospheric limb arcing across the lower section. */}
+        {/* space backdrop — the NASA earth-from-orbit render laid across the
+            bottom (deep space + stars + glowing atmospheric limb), its black top
+            faded into the section so it reads as one continuous void. */}
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-          {/* stars */}
-          <div className="absolute inset-0" style={{ backgroundImage: STARFIELD }} />
-          {/* planet body + bright atmospheric rim (one huge disc; its top arc is the horizon) */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 rounded-full"
-            style={{
-              bottom: "-128%", width: "220%", aspectRatio: "1 / 1",
-              background: "radial-gradient(circle at 50% 50%, #05070f 0%, #05070f 49.2%, rgba(160,205,255,0.95) 49.7%, rgba(86,150,255,0.55) 50.2%, rgba(59,130,246,0.14) 51.4%, transparent 54%)",
-            }}
-          />
-          {/* soft atmospheric bloom around the rim */}
-          <div
-            className="absolute left-1/2 -translate-x-1/2 rounded-full blur-[34px]"
-            style={{
-              bottom: "-128%", width: "220%", aspectRatio: "1 / 1",
-              background: "radial-gradient(circle at 50% 50%, transparent 48.4%, rgba(96,165,250,0.55) 50%, transparent 53.2%)",
-            }}
-          />
-          {/* haze rising off the horizon into space */}
-          <div className="absolute inset-x-0 bottom-0 h-[72%]" style={{ background: "radial-gradient(130% 100% at 50% 122%, rgba(59,130,246,0.30), rgba(59,130,246,0.08) 40%, transparent 66%)" }} />
-          {/* top-corner vignette to deepen the void */}
-          <div className="absolute inset-0" style={{ background: "radial-gradient(120% 95% at 50% 128%, transparent 46%, rgba(0,0,0,0.6) 100%)" }} />
+          <div className="absolute inset-x-0 bottom-0 h-[78%] bg-cover bg-no-repeat" style={{ backgroundImage: `url(${earthGlobe})`, backgroundPosition: "center 60%" }} />
+          <div className="absolute inset-x-0 top-0 h-[42%]" style={{ background: "linear-gradient(to bottom, #050608 25%, transparent)" }} />
         </div>
 
         <div className="relative z-10">
