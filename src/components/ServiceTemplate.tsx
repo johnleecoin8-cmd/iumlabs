@@ -72,8 +72,8 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
           <img src={p.hero.image} alt="" className="absolute inset-0 w-full h-full object-cover" />
         )}
         {p.hero.clean && <div className="absolute inset-0 bg-dots opacity-[0.5]" />}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/85 to-[#0A0A0A]/55" />
-        <div className="absolute inset-0" style={{ background: `radial-gradient(120% 80% at 82% 8%, ${A}${p.hero.clean ? "26" : "1f"}, transparent 52%)` }} />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]/75" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/85 via-[#0A0A0A]/30 to-transparent" />
         {p.motif}
         <div className="relative z-10 w-full px-5 sm:px-8 lg:px-20 pt-28 pb-16">
           <div className="max-w-4xl">
