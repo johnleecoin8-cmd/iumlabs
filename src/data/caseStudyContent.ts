@@ -26,7 +26,6 @@ export const caseStudyContent: Record<string, CaseStudyContent> = {
       { title: "KOL Marketing", body: "We mobilized Korean trading KOLs across YouTube and crypto Twitter, the voices whose audiences actually trade, briefed to drive sign-ups and first deposits on CoinW rather than vanity impressions. Affiliate-tracked placements tied every creator to the funded traders they brought in." },
       { title: "Paid Ads", body: "We ran a full-funnel paid acquisition engine across the crypto-friendly networks most brands can't get approved on alone, optimized from click to sign-up to first deposit and measured on cost per funded account, not CPM." },
     ],
-    testimonial: { quote: "ium turned our global brand into real Korean volume. KOLs and paid, run as one funnel straight to funded traders. The numbers did the talking.", name: "Korea Growth Lead", role: "CoinW" },
   },
   mantra: {
     overviewHeading: "The security-first RWA Layer 1, entering Korea's most demanding capital market.",
