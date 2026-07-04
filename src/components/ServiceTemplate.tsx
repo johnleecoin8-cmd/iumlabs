@@ -41,8 +41,14 @@ export type ServiceTemplateProps = {
 
 const Reveal = ({ children, className = "", delay = 0 }: { children: ReactNode; className?: string; delay?: number }) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1, rootMargin: "80px", triggerOnce: true });
+  // Blur-up reveal (unseen.co): content rises from soft-focus into sharp on the
+  // cuberto --ease-reveal curve. Reads more crafted than a plain fade-up.
   return (
-    <div ref={ref} className={`${className} transition-all ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`} style={{ transitionDuration: "700ms", transitionDelay: `${delay}ms` }}>
+    <div
+      ref={ref}
+      className={`${className} transition-all will-change-[opacity,transform,filter] motion-reduce:transition-none ${isVisible ? "opacity-100 translate-y-0 blur-0" : "opacity-0 translate-y-8 blur-[5px]"}`}
+      style={{ transitionDuration: "820ms", transitionTimingFunction: "var(--ease-reveal)", transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );
@@ -226,13 +232,23 @@ const ServiceTemplate = (p: ServiceTemplateProps) => {
                 const rest = items.slice(1);
                 const cols = rest.length >= 4 ? "lg:grid-cols-4" : rest.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-2";
                 const tile = (g: typeof items[number], cls: string, key: number) => (
-                  <div key={key} className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#0c0c0e] ${cls}`}>
+                  <div
+                    key={key}
+                    onMouseMove={(e) => {
+                      const r = e.currentTarget.getBoundingClientRect();
+                      e.currentTarget.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+                      e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+                    }}
+                    className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.08] bg-[#0c0c0e] ${cls}`}
+                  >
                     {g.type === "video" ? (
                       <video className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.03]" src={g.src} poster={g.poster} muted loop autoPlay playsInline preload="metadata" />
                     ) : (
                       <img src={g.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-[1.05]" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/75 via-[#0A0A0A]/5 to-transparent pointer-events-none" />
+                    {/* cursor spotlight (Raycast): a soft light follows the pointer on hover */}
+                    <div className="pointer-events-none absolute inset-0 z-[5] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.14), transparent 62%)", mixBlendMode: "overlay" }} />
                     {g.label && (
                       <span className="absolute bottom-3.5 left-3.5 z-10 rounded-full bg-black/55 backdrop-blur-sm border border-white/15 px-3 py-1.5 font-mono text-[9px] sm:text-[10px] tracking-[0.14em] text-white/75">
                         {g.label}

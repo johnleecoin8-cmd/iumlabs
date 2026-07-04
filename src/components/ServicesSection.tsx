@@ -207,6 +207,11 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
+        onMouseMove={(e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          e.currentTarget.style.setProperty("--mx", `${((e.clientX - r.left) / r.width) * 100}%`);
+          e.currentTarget.style.setProperty("--my", `${((e.clientY - r.top) / r.height) * 100}%`);
+        }}
         className="group block relative rounded-2xl sm:rounded-3xl overflow-hidden surface-edge hover:-translate-y-1 transition-all duration-500"
         style={{ minHeight: 'clamp(320px, 60vh, 520px)' }}
       >
@@ -218,6 +223,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-110"
         />
+        {/* cursor spotlight (Raycast): soft light follows the pointer on hover */}
+        <div className="pointer-events-none absolute inset-0 z-[6] opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ background: "radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.12), transparent 62%)", mixBlendMode: "overlay" }} />
 
         {/* Multi-layer overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />

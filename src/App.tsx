@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import React, { useEffect, useState, useRef, useCallback, Suspense } from "react";
 import { HelmetProvider } from "react-helmet-async";
+import { motion, useReducedMotion } from "framer-motion";
 import PageIntro from "@/components/PageIntro";
 import RouteProgressBar from "@/components/RouteProgressBar";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
@@ -98,10 +99,19 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Lightweight page transition, quick fade/rise on route change (keyed remount in AppRoutes)
+// Page transition: a smooth blur-and-rise on each route change (keyed remount in
+// AppRoutes), matching the section reveal aesthetic. Respects reduced-motion.
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
+  const reduce = useReducedMotion();
+  if (reduce) return <div>{children}</div>;
   return (
-    <div className="animate-page-in">{children}</div>
+    <motion.div
+      initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 };
 
