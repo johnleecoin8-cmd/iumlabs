@@ -109,44 +109,40 @@ const Index = () => {
         </Suspense>
       </section>
 
-      {/* Coverage — Korea-first, Asia-wide as an actual rotating globe: Seoul is
-          home, arcs reach out to Tokyo, Taipei, Shanghai. Intuitive, not a map. */}
-      <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#04060d]">
-        {/* faint deep-space radial behind the globe */}
-        <div aria-hidden className="pointer-events-none absolute inset-0 z-0" style={{ background: "radial-gradient(60% 60% at 72% 52%, rgba(59,130,246,0.10), transparent 70%)" }} />
+      {/* Coverage — Korea-first, Asia-wide. Only the top of the Earth shows, low
+          like a horizon; dashed lines start at Seoul and reach out worldwide. */}
+      <section id="coverage" className="relative overflow-hidden border-t border-white/[0.07] bg-[#04060d] min-h-[94vh]">
+        {/* Earth, sized large and pushed down so only its top half shows */}
+        <div aria-hidden className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-0 w-[1300px] max-w-[160%] aspect-square translate-y-[46%] z-0">
+          <Suspense fallback={null}>
+            <GlobeScene />
+          </Suspense>
+        </div>
+
         <div className="relative z-10">
           <SectionHeader
             index="04"
             heading={<>Korea-first <span className="text-white/40">Asia-wide</span></>}
           />
-          <div className="px-5 sm:px-6 lg:px-10 pb-20 md:pb-28">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center max-w-7xl mx-auto">
-              <div className="order-2 lg:order-1 max-w-xl">
-                {[
-                  { name: "South Korea", tag: "HOME", desc: "KOL & Influencer, Naver SEO, Kakao Community, PR & Media, Instagram Viral, Offline Events" },
-                  { name: "Japan", tag: "ACTIVE", desc: "LINE Ecosystem, KOL Network, Regulated Exchange Entry, PR & Media Placement" },
-                  { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL Campaigns, Exchange Partnerships, Community Management, Mandarin PR" },
-                  { name: "China", tag: "ACTIVE", desc: "WeChat & Weibo Marketing, Institutional BD, Mainland KOL Network, Bilibili Content" },
-                ].map(c => (
-                  <div key={c.name} className="py-5 border-t border-white/[0.1] first:border-t-0">
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <span className="text-base sm:text-lg font-medium text-white">{c.name}</span>
-                      <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
-                        c.tag === "HOME"
-                          ? "bg-primary text-white"
-                          : "bg-white/[0.1] text-white/60"
-                      }`}>{c.tag}</span>
-                    </div>
-                    <p className="text-xs sm:text-sm text-white/50">{c.desc}</p>
-                  </div>
-                ))}
+          <div className="px-5 sm:px-6 lg:px-10 pb-24 max-w-2xl">
+            {[
+              { name: "South Korea", tag: "HOME", desc: "KOL & Influencer, Naver SEO, Kakao Community, PR & Media, Instagram Viral, Offline Events" },
+              { name: "Japan", tag: "ACTIVE", desc: "LINE Ecosystem, KOL Network, Regulated Exchange Entry, PR & Media Placement" },
+              { name: "Taiwan", tag: "ACTIVE", desc: "Local KOL Campaigns, Exchange Partnerships, Community Management, Mandarin PR" },
+              { name: "China", tag: "ACTIVE", desc: "WeChat & Weibo Marketing, Institutional BD, Mainland KOL Network, Bilibili Content" },
+            ].map(c => (
+              <div key={c.name} className="py-5 border-t border-white/[0.1] first:border-t-0">
+                <div className="flex items-center gap-3 mb-1.5">
+                  <span className="text-base sm:text-lg font-medium text-white">{c.name}</span>
+                  <span className={`text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded ${
+                    c.tag === "HOME"
+                      ? "bg-primary text-white"
+                      : "bg-white/[0.1] text-white/60"
+                  }`}>{c.tag}</span>
+                </div>
+                <p className="text-xs sm:text-sm text-white/50">{c.desc}</p>
               </div>
-              <div className="order-1 lg:order-2 relative w-full max-w-[560px] mx-auto aspect-square">
-                <Suspense fallback={<div className="absolute inset-0 rounded-full bg-white/[0.02] animate-pulse" />}>
-                  <GlobeScene />
-                </Suspense>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
