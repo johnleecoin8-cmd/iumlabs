@@ -57,6 +57,15 @@ const FooterLinksSection = () => {
               <p className="text-sm text-white/35 leading-relaxed max-w-sm mb-6">
                 Korea's leading Web3 growth partner. From strategy to execution, we engineer your market entry.
               </p>
+              <p className="text-sm text-white/45 leading-relaxed max-w-sm mb-6">
+                ium Labs is the Korea-native execution partner in the Panasia market-entry system.{" "}
+                <a
+                  href="https://www.panasia.io/?utm_source=iumlabs&utm_medium=referral&utm_campaign=panasia_launch"
+                  className="link-underline text-white/70 hover:text-white"
+                >
+                  Explore Panasia for Asia market intelligence, entry sequencing, and institutional blockchain adoption.
+                </a>
+              </p>
 
               <div className="flex items-center gap-5">
 

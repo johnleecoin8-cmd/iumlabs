@@ -94,6 +94,22 @@ const AboutSection = () => {
               With deep local expertise and proven strategies, we help you succeed in 
               one of the world's most active crypto markets.
             </motion.p>
+            <motion.p
+              className="text-foreground/60 text-sm leading-relaxed tracking-[-0.01em] mb-6 max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.25 }}
+            >
+              Panasia leads market intelligence, entry sequencing, and institutional adoption; ium Labs delivers Korea-native campaign execution.{" "}
+              <a
+                href="https://www.panasia.io/?utm_source=iumlabs&utm_medium=referral&utm_campaign=panasia_launch"
+                className="font-medium text-primary underline underline-offset-4 hover:text-primary/80"
+              >
+                Explore Panasia
+              </a>
+              .
+            </motion.p>
 
             {/* Stats with Parallax */}
             <motion.div 
